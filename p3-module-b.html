@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillar 3, Module B — The Framework — Revenue Fluent</title>
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.beat { display: none; }
+.beat.active { display: block; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
+@keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4)} }
+</style>
+</head>
+<body>
+<canvas id="matrix-canvas"></canvas>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div class="topbar">
+  <div class="topbar-breadcrumb">
+    <span>Pillar 3</span><span class="sep">/</span>
+    <span>Team Revenue Architecture</span><span class="sep">/</span>
+    <span class="current">Module B — The Framework</span>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-progress">
+      <span id="beat-counter-top">Beat 1 of 3</span>
+      <div class="prog-dots" id="prog-dots"></div>
+    </div>
+    <span class="by-badge">CRFP Track</span>
+  </div>
+</div>
+<div class="app-body"><div class="page-content">
+
+<!-- BEAT 0: REVENUE DNA MAPPING -->
+<div class="beat active" id="beat-0">
+  <div class="page-tag">Module B · Beat 1 of 3 · The Framework</div>
+  <h1 class="page-title">The Revenue DNA Mapping Methodology</h1>
+  <p class="page-desc">A 4-step process to identify your org's highest-performing team configuration and calculate the revenue cost of any structural deviation.</p>
+
+  <div style="display:flex;flex-direction:column;gap:0;margin:2rem 0" id="dna-steps">
+    <div class="method-step vis" style="display:grid;grid-template-columns:56px 1fr;gap:0;margin-bottom:0">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--teal-dim);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:0.9rem;color:var(--teal)">1</div>
+        <div style="width:2px;background:var(--border-hi);flex:1;min-height:24px"></div>
+      </div>
+      <div style="padding:0 0 2rem 1.25rem">
+        <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:6px">Map your team inventory</div>
+        <div style="font-size:0.88rem;color:var(--text-dim);line-height:1.75;margin-bottom:0.75rem">List every team in the org with: size, management ratio, decision layers, and quarterly revenue output. This is your baseline dataset.</div>
+        <div style="background:var(--bg3);border-left:2px solid var(--teal);padding:10px 14px;font-family:var(--font-mono);font-size:0.72rem;color:var(--teal);line-height:1.6">Apex: 3 production teams, 18 operators, 1 supervisor. Revenue/team/quarter: €940K average before restructures.</div>
+      </div>
+    </div>
+    <div class="method-step vis" style="display:grid;grid-template-columns:56px 1fr;gap:0;margin-bottom:0">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--teal-dim);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:0.9rem;color:var(--teal)">2</div>
+        <div style="width:2px;background:var(--border-hi);flex:1;min-height:24px"></div>
+      </div>
+      <div style="padding:0 0 2rem 1.25rem">
+        <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:6px">Identify the outlier teams</div>
+        <div style="font-size:0.88rem;color:var(--text-dim);line-height:1.75;margin-bottom:0.75rem">Which teams consistently generate above-average revenue? What do they have in common structurally? Size, management ratio, decision speed, accountability clarity.</div>
+        <div style="background:var(--bg3);border-left:2px solid var(--teal);padding:10px 14px;font-family:var(--font-mono);font-size:0.72rem;color:var(--teal);line-height:1.6">Apex DNA: Teams of 6 operators + 1 experienced supervisor → generated 112% of benchmark. This is the Revenue DNA signature.</div>
+      </div>
+    </div>
+    <div class="method-step vis" style="display:grid;grid-template-columns:56px 1fr;gap:0;margin-bottom:0">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--teal-dim);border:2px solid var(--teal);display:flex;align-items:center;justify-content:circle;font-family:var(--font-head);font-weight:700;font-size:0.9rem;color:var(--teal);justify-content:center">3</div>
+        <div style="width:2px;background:var(--border-hi);flex:1;min-height:24px"></div>
+      </div>
+      <div style="padding:0 0 2rem 1.25rem">
+        <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:6px">Measure deviation cost</div>
+        <div style="font-size:0.88rem;color:var(--text-dim);line-height:1.75;margin-bottom:0.75rem">For every team that deviates from the Revenue DNA signature, calculate the revenue gap. Use OEI and PCoB to quantify the structural cost of the deviation.</div>
+        <div style="background:var(--bg3);border-left:2px solid var(--red);padding:10px 14px;font-family:var(--font-mono);font-size:0.72rem;color:var(--red);line-height:1.6">Post-restructure: 3 supervisors for 11 operators (1:3.7 ratio). OEI indicates top-heavy → €1.1M revenue shortfall in H2.</div>
+      </div>
+    </div>
+    <div class="method-step vis" style="display:grid;grid-template-columns:56px 1fr;gap:0">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--teal-dim);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:0.9rem;color:var(--teal)">4</div>
+      </div>
+      <div style="padding:0 0 0 1.25rem">
+        <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:6px">Prescribe structural corrections</div>
+        <div style="font-size:0.88rem;color:var(--text-dim);line-height:1.75;margin-bottom:0.75rem">Present the Revenue DNA analysis to leadership. "This restructure moved us 26% away from our highest-performing configuration. To restore DNA: return to 1:6 supervisor ratio. Projected revenue recovery: €940K/quarter."</div>
+        <div style="background:var(--bg3);border-left:2px solid var(--teal);padding:10px 14px;font-family:var(--font-mono);font-size:0.72rem;color:var(--teal);line-height:1.6">This is the HR conversation that changes strategy. Not engagement. Not culture. Revenue architecture.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <span class="page-nav-info">Beat 1 of 3</span>
+    <button class="btn-primary" onclick="nextBeat()">The leadership archetypes →</button>
+  </div>
+</div>
+
+<!-- BEAT 1: LEADERSHIP ARCHETYPES -->
+<div class="beat" id="beat-1">
+  <div class="page-tag">Module B · Beat 2 of 3</div>
+  <h1 class="page-title">The 4 Leadership Archetypes</h1>
+  <p class="page-desc">Team configuration alone doesn't determine revenue. The leadership archetype running each configuration multiplies or destroys its potential. Match the wrong archetype to the wrong configuration and even Config A underperforms.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+    <div style="background:var(--bg2);border:1px solid var(--teal-glow);border-radius:var(--radius);padding:1.5rem">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Archetype 1</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:8px">The Builder</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.7;margin-bottom:10px">Creates clarity, removes blockers, trusts the team. Low ego, high output orientation. Gives autonomy before asking for it.</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--teal)">Best config: A (High-Autonomy Pod) → generates +34% revenue</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Archetype 2</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:8px">The Coordinator</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.7;margin-bottom:10px">Manages dependencies, aligns stakeholders, keeps large teams moving. Excellent in complexity, less effective in small autonomous settings.</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--amber)">Best config: B (Matrix Team) → generates +8% revenue</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Archetype 3</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:8px">The Optimiser</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.7;margin-bottom:10px">Data-driven, process-focused, incremental improvement orientation. Excels at squeezing efficiency from stable operations. Stifles innovation.</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--amber)">Best config: B or C in stable environments</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid rgba(255,71,87,0.2);border-radius:var(--radius);padding:1.5rem">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--red);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Archetype 4</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:8px">The Controller</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.7;margin-bottom:10px">Approval-seeking, risk-averse, bottleneck by design. Creates Config C dynamics regardless of team size. Revenue destroyer in high-velocity environments.</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--red)">Toxic in Config A → destroys revenue advantage immediately</div>
+    </div>
+  </div>
+
+  <div class="card-hi" style="margin:1.5rem 0">
+    <div class="tag" style="margin-bottom:10px">Apex Manufacturing — The Archetype Mismatch</div>
+    <p style="font-size:0.9rem;color:var(--text);line-height:1.8">Priya and Daniel were promoted from Operator (Builder archetype) to Supervisor. But the new supervisor role at Apex post-restructure was a Coordinator role — managing larger spans, aligning with the new director layer, attending planning meetings. <span style="color:var(--red)">Builder archetypes in Coordinator roles lose effectiveness and drain the autonomy from their teams.</span> This is why output dropped even on the teams they supervised.</p>
+  </div>
+
+  <div class="page-nav">
+    <span class="page-nav-info">Beat 2 of 3</span>
+    <button class="btn-primary" onclick="nextBeat()">Complete Module B →</button>
+  </div>
+</div>
+
+<!-- BEAT 2: BADGE -->
+<div class="beat" id="beat-2">
+  <div style="text-align:center;padding:3rem 2rem">
+    <div style="width:90px;height:90px;border-radius:50%;background:var(--teal-dim);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;animation:badgePulse 2.5s ease-in-out infinite">🗺️</div>
+    <div style="font-family:var(--font-head);font-weight:700;font-size:1.4rem;color:var(--teal);margin-bottom:0.5rem">Badge Unlocked: The DNA Map</div>
+    <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:2rem">Module B · Pillar 3 · Team Revenue Architecture</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next — Module C</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The Instruments</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">OEI, PCoB, OSI, and WGI — the 4 structural metrics that make Team Revenue Architecture calculable. Live calculators with Apex Manufacturing data pre-loaded.</div>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="p3-module-c.html" class="btn-primary">Continue to Module C →</a>
+      <a href="dashboard.html" class="btn-ghost">← Dashboard</a>
+    </div>
+  </div>
+</div>
+
+</div></div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startMatrix('matrix-canvas', 0.07);
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p3-b');
+document.querySelectorAll('.sb-pillar').forEach(el => {
+  const chev = el.querySelector('.sb-chevron');
+  if (chev) el.setAttribute('data-id', chev.id.replace('chev-',''));
+});
+let currentBeat = 0;
+function updateProgress() {
+  document.getElementById('beat-counter-top').textContent = 'Beat ' + (currentBeat+1) + ' of 3';
+  const dots = document.getElementById('prog-dots');
+  dots.innerHTML = Array(3).fill(0).map((_,i) =>
+    '<div class="prog-dot ' + (i < currentBeat ? 'done' : i === currentBeat ? 'active' : '') + '"></div>'
+  ).join('');
+}
+function nextBeat() {
+  document.getElementById('beat-' + currentBeat).classList.remove('active');
+  currentBeat++;
+  const next = document.getElementById('beat-' + currentBeat);
+  if (next) { next.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  updateProgress();
+  if (currentBeat === 3-1) RF.progress.set('p3-b');
+}
+updateProgress();
+</script>
+</body>
+</html>

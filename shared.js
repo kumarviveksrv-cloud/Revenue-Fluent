@@ -30,7 +30,7 @@ const RF = {
       },
       {
         id: 'p3', num: 'L3', label: 'Team Revenue Architecture',
-        locked: true,
+        locked: false,
         modules: [
           { id: 'p3-a', label: 'The Philosophy', file: 'p3-module-a.html' },
           { id: 'p3-b', label: 'The Framework', file: 'p3-module-b.html' },

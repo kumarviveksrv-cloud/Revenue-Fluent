@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillar 3, Module C: The Instruments — Revenue Fluent</title>
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.beat { display: none; }
+.beat.active { display: block; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
+.metric-hero { background: var(--bg2); border: 1px solid var(--border-hi); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; }
+.metric-name { font-family: var(--font-head); font-weight: 700; font-size: 1.6rem; letter-spacing: -0.02em; color: var(--text); margin-bottom: 4px; }
+.metric-sub { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-mute); margin-bottom: 1rem; }
+.metric-tagline { font-size: 0.95rem; color: var(--text-dim); line-height: 1.75; margin-bottom: 1.5rem; }
+.formula-box { background: var(--bg3); border-radius: var(--radius-sm); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.formula-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+.formula-text { font-family: var(--font-mono); font-size: 0.85rem; color: var(--teal); line-height: 1.9; }
+.bm-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.5rem; }
+.bm-cell { background: var(--bg2); padding: 0.875rem; text-align: center; }
+.bm-val { font-family: var(--font-head); font-weight: 700; font-size: 1.2rem; line-height: 1; margin-bottom: 3px; }
+.bm-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+.calc-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0; }
+.calc-row { display: grid; grid-template-columns: 1fr 160px; gap: 12px; align-items: center; margin-bottom: 10px; }
+.calc-label { font-size: 0.85rem; color: var(--text-dim); }
+.calc-input { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-family: var(--font-mono); font-size: 0.88rem; color: var(--text); width: 100%; text-align: right; }
+.calc-input:focus { outline: none; border-color: var(--teal-glow); }
+.calc-result { background: var(--teal-dim); border: 1px solid var(--border-hi); border-radius: var(--radius-sm); padding: 1.25rem; text-align: center; margin-top: 1rem; }
+.calc-result-val { font-family: var(--font-head); font-weight: 700; font-size: 2.5rem; color: var(--teal); line-height: 1; }
+.calc-result-label { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
+.calc-interp { font-size: 0.82rem; color: var(--text-dim); margin-top: 8px; line-height: 1.6; }
+.sc-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); }
+.sc-row:last-child { border-bottom: none; }
+@keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4)} }
+</style>
+</head>
+<body>
+<canvas id="matrix-canvas"></canvas>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div class="topbar">
+  <div class="topbar-breadcrumb">
+    <span>Pillar 3</span><span class="sep">/</span><span>Team Revenue Architecture</span><span class="sep">/</span>
+    <span class="current">Module C — The Instruments</span>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-progress"><span id="beat-counter-top">Beat 1 of 4</span><div class="prog-dots" id="prog-dots"></div></div>
+    <span class="by-badge">CRFP Track</span>
+  </div>
+</div>
+<div class="app-body"><div class="page-content">
+
+<!-- BEAT 0: OEI -->
+<div class="beat active" id="beat-0">
+  <div class="page-tag">Module C · Beat 1 of 4 · Instrument 1 of 4</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2rem">
+    <div class="card-hi" style="text-align:center"><div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--teal)">OEI</div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute);margin-top:4px;text-transform:uppercase">Metric #9</div></div>
+    <div class="card" style="text-align:center;opacity:0.4"><div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text-dim)">PCoB</div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute);margin-top:4px;text-transform:uppercase">Metric #1</div></div>
+    <div class="card" style="text-align:center;opacity:0.4"><div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text-dim)">OSI</div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute);margin-top:4px;text-transform:uppercase">Metric #13</div></div>
+    <div class="card" style="text-align:center;opacity:0.4"><div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text-dim)">WGI</div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute);margin-top:4px;text-transform:uppercase">Metric #17</div></div>
+  </div>
+  <div class="metric-hero">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Organizational Enablement Index</div><div class="metric-sub">ViRorah Metric #9 · Compensation Lens</div></div>
+      <span class="tag">OEI</span>
+    </div>
+    <div class="metric-tagline">The structural revenue metric. OEI measures whether your org's layer structure enables or throttles revenue generation. Too top-heavy = execution slows = revenue drops. This is the single most powerful indicator of Configuration C drift.</div>
+    <div class="formula-box">
+      <div class="formula-label">Formula</div>
+      <div class="formula-text">OEI = (Revenue-Generating Roles ÷ Total Headcount) × 100<br><br>Revenue-generating = roles with direct output accountability<br>Non-revenue = management, coordination, support layers</div>
+    </div>
+    <div class="bm-strip">
+      <div class="bm-cell"><div class="bm-val" style="color:var(--teal)">65%+</div><div class="bm-label">Healthy (lean)</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--amber)">50-65%</div><div class="bm-label">Watch zone</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--red)">Below 50%</div><div class="bm-label">Top-heavy critical</div></div>
+    </div>
+  </div>
+  <div class="calc-box">
+    <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:1.25rem;display:flex;align-items:center;gap:10px"><span class="tag">Live Calculator</span> OEI — Apex Manufacturing</div>
+    <div class="calc-row"><div class="calc-label">Total headcount</div><input class="calc-input" type="number" id="oei-total" value="18" oninput="calcOEI()"></div>
+    <div class="calc-row"><div class="calc-label">Revenue-generating roles (operators)</div><input class="calc-input" type="number" id="oei-rev" value="11" oninput="calcOEI()"></div>
+    <div class="calc-result">
+      <div class="calc-result-val" id="oei-result">61%</div>
+      <div class="calc-result-label">OEI</div>
+      <div class="calc-interp" id="oei-interp">Watch zone. Post-restructure, only 61% of Apex's team are revenue-generating operators. Before restructures: 94% (17 operators, 1 supervisor). The additional 2 supervisors shifted the balance significantly.</div>
+    </div>
+  </div>
+  <div class="page-nav"><span class="page-nav-info">Beat 1 of 4</span><button class="btn-primary" onclick="nextBeat()">Next: PCoB →</button></div>
+</div>
+
+<!-- BEAT 1: PCoB + OSI -->
+<div class="beat" id="beat-1">
+  <div class="page-tag">Module C · Beat 2 of 4 · Instruments 2 + 3</div>
+  <div class="metric-hero" style="margin-bottom:1.5rem">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Payroll Cost of Burn</div><div class="metric-sub">ViRorah Metric #1 · Cost Lens</div></div>
+      <span class="tag">PCoB</span>
+    </div>
+    <div class="metric-tagline">What % of your revenue capacity is consumed by people cost? PCoB tells HR which team configurations are revenue-efficient and which are quietly burning through margin.</div>
+    <div class="formula-box">
+      <div class="formula-label">Formula</div>
+      <div class="formula-text">PCoB = (Total People Cost ÷ Total Revenue) × 100</div>
+    </div>
+    <div class="bm-strip">
+      <div class="bm-cell"><div class="bm-val" style="color:var(--teal)">Below 35%</div><div class="bm-label">Efficient</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--amber)">35-50%</div><div class="bm-label">Watch</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--red)">Above 50%</div><div class="bm-label">Burning margin</div></div>
+    </div>
+    <div class="calc-box" style="margin-top:0">
+      <div class="calc-row"><div class="calc-label">Total quarterly people cost (€)</div><input class="calc-input" type="number" id="pcob-cost" value="520000" oninput="calcPCoB()"></div>
+      <div class="calc-row"><div class="calc-label">Total quarterly revenue (€)</div><input class="calc-input" type="number" id="pcob-rev" value="940000" oninput="calcPCoB()"></div>
+      <div class="calc-result">
+        <div class="calc-result-val" id="pcob-result">55%</div>
+        <div class="calc-result-label">Payroll Cost of Burn</div>
+        <div class="calc-interp" id="pcob-interp">Above benchmark. Post-restructure, 55% of revenue consumed by people cost — 3 additional supervisors added €120K to payroll without adding revenue. Before restructures: 42% PCoB.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-hero">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Organizational Stability Index</div><div class="metric-sub">ViRorah Metric #13 · Resilience Lens</div></div>
+      <span class="tag">OSI</span>
+    </div>
+    <div class="metric-tagline">Team stability = revenue predictability. OSI measures how stable your team configurations are over time. Two restructures in 6 months is an OSI nightmare — and a revenue predictability disaster.</div>
+    <div class="formula-box">
+      <div class="formula-label">Formula</div>
+      <div class="formula-text">OSI = 100 - (Number of Structural Changes × 10)<br><br>Structural changes: restructures, reorgs, role redesigns,<br>reporting line changes, team splits or merges</div>
+    </div>
+    <div class="bm-strip">
+      <div class="bm-cell"><div class="bm-val" style="color:var(--teal)">80+</div><div class="bm-label">Stable</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--amber)">60-80</div><div class="bm-label">Some disruption</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--red)">Below 60</div><div class="bm-label">Unstable — revenue at risk</div></div>
+    </div>
+    <div class="calc-box" style="margin-top:0">
+      <div class="calc-row"><div class="calc-label">Number of structural changes (6 months)</div><input class="calc-input" type="number" id="osi-changes" value="4" oninput="calcOSI()"></div>
+      <div class="calc-result">
+        <div class="calc-result-val" id="osi-result">60</div>
+        <div class="calc-result-label">Organizational Stability Index</div>
+        <div class="calc-interp" id="osi-interp">Warning zone. 4 structural changes in 6 months (2 restructures + 2 supervisor promotions) brought OSI to 60 — just at the edge of the danger zone. Revenue predictability compromised.</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-nav"><span class="page-nav-info">Beat 2 of 4</span><button class="btn-primary" onclick="nextBeat()">Final instrument: WGI →</button></div>
+</div>
+
+<!-- BEAT 2: WGI + SCORECARD -->
+<div class="beat" id="beat-2">
+  <div class="page-tag">Module C · Beat 3 of 4 · Instrument 4 + Scorecard</div>
+  <div class="metric-hero">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Workforce Gap Index</div><div class="metric-sub">ViRorah Metric #17 · Capacity Lens</div></div>
+      <span class="tag">WGI</span>
+    </div>
+    <div class="metric-tagline">The gap between your planned team structure and your actual team structure. WGI reveals where your Revenue DNA is being starved — where the right roles are missing, unfilled, or filled with the wrong archetype.</div>
+    <div class="formula-box">
+      <div class="formula-label">Formula</div>
+      <div class="formula-text">WGI = ((Planned Headcount - Actual Effective Headcount) ÷ Planned) × 100<br><br>Effective headcount = roles filled at full productive capacity<br>(Not just filled — productive capacity weighted)</div>
+    </div>
+    <div class="bm-strip">
+      <div class="bm-cell"><div class="bm-val" style="color:var(--teal)">Below 10%</div><div class="bm-label">Healthy gap</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--amber)">10-20%</div><div class="bm-label">Meaningful gap</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--red)">Above 20%</div><div class="bm-label">Revenue capacity hole</div></div>
+    </div>
+    <div class="calc-box" style="margin-top:0">
+      <div class="calc-row"><div class="calc-label">Planned effective headcount</div><input class="calc-input" type="number" id="wgi-plan" value="18" oninput="calcWGI()"></div>
+      <div class="calc-row"><div class="calc-label">Actual effective headcount (capacity-weighted)</div><input class="calc-input" type="number" id="wgi-actual" value="13" oninput="calcWGI()"></div>
+      <div class="calc-result">
+        <div class="calc-result-val" id="wgi-result">28%</div>
+        <div class="calc-result-label">Workforce Gap Index</div>
+        <div class="calc-interp" id="wgi-interp">Critical gap. 5 of 18 planned effective FTEs are missing (3 supervisors at 25-40% capacity + 2 ramping roles). €1.1M in planned revenue capacity is structurally unavailable.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title" style="margin-top:2rem">Apex Manufacturing — Complete Instrument Scorecard</h2>
+  <div style="background:var(--bg2);border:1px solid var(--border-hi);border-radius:var(--radius);overflow:hidden;margin:1rem 0">
+    <div style="background:var(--bg3);padding:1rem 1.5rem;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:0.62rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em">Team Revenue Architecture · Instruments · Post-Restructure 2</div>
+    <div class="sc-row"><span style="font-size:0.88rem;color:var(--text-dim)">OEI — Organizational Enablement Index</span><div style="display:flex;align-items:center;gap:12px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--amber)">61%</span><span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">vs 65%+ benchmark</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:3px 8px;border-radius:4px;background:var(--amber-dim);color:var(--amber)">Watch</span></div></div>
+    <div class="sc-row"><span style="font-size:0.88rem;color:var(--text-dim)">PCoB — Payroll Cost of Burn</span><div style="display:flex;align-items:center;gap:12px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--red)">55%</span><span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">vs 35% benchmark</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:3px 8px;border-radius:4px;background:var(--red-dim);color:var(--red)">Critical</span></div></div>
+    <div class="sc-row"><span style="font-size:0.88rem;color:var(--text-dim)">OSI — Organizational Stability Index</span><div style="display:flex;align-items:center;gap:12px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--amber)">60</span><span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">vs 80+ benchmark</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:3px 8px;border-radius:4px;background:var(--amber-dim);color:var(--amber)">Warning</span></div></div>
+    <div class="sc-row"><span style="font-size:0.88rem;color:var(--text-dim)">WGI — Workforce Gap Index</span><div style="display:flex;align-items:center;gap:12px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--red)">28%</span><span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">vs 10% benchmark</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:3px 8px;border-radius:4px;background:var(--red-dim);color:var(--red)">Critical</span></div></div>
+    <div style="background:var(--red-dim);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center"><span style="font-family:var(--font-head);font-weight:700;font-size:0.95rem;color:var(--text)">Revenue Architecture Signal</span><span style="font-family:var(--font-head);font-weight:700;font-size:1.4rem;color:var(--red)">Configuration C Drift 🔴</span></div>
+  </div>
+  <div class="page-nav"><span class="page-nav-info">Beat 3 of 4</span><button class="btn-primary" onclick="nextBeat()">Claim badge →</button></div>
+</div>
+
+<!-- BEAT 3: BADGE -->
+<div class="beat" id="beat-3">
+  <div style="text-align:center;padding:3rem 2rem">
+    <div style="width:90px;height:90px;border-radius:50%;background:var(--teal-dim);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;animation:badgePulse 2.5s ease-in-out infinite">🔧</div>
+    <div style="font-family:var(--font-head);font-weight:700;font-size:1.4rem;color:var(--teal);margin-bottom:0.5rem">Badge Unlocked: The Structure Metrics</div>
+    <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:2rem">Module C · Pillar 3 · Team Revenue Architecture</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next — Module D</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The Simulation</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">Apply Team Revenue Architecture end-to-end on Apex Manufacturing. Produce the complete architecture report. Then independently analyse a new scenario.</div>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="p3-module-d.html" class="btn-primary">Continue to Module D →</a>
+      <a href="dashboard.html" class="btn-ghost">← Dashboard</a>
+    </div>
+  </div>
+</div>
+
+</div></div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startMatrix('matrix-canvas', 0.07);
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p3-c');
+document.querySelectorAll('.sb-pillar').forEach(el => {
+  const chev = el.querySelector('.sb-chevron');
+  if (chev) el.setAttribute('data-id', chev.id.replace('chev-',''));
+});
+let currentBeat = 0;
+function updateProgress() {
+  document.getElementById('beat-counter-top').textContent = 'Beat ' + (currentBeat+1) + ' of 4';
+  const dots = document.getElementById('prog-dots');
+  dots.innerHTML = Array(4).fill(0).map((_,i) =>
+    '<div class="prog-dot ' + (i < currentBeat ? 'done' : i === currentBeat ? 'active' : '') + '"></div>'
+  ).join('');
+}
+function nextBeat() {
+  document.getElementById('beat-' + currentBeat).classList.remove('active');
+  currentBeat++;
+  const next = document.getElementById('beat-' + currentBeat);
+  if (next) { next.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  updateProgress();
+  if (currentBeat === 3) RF.progress.set('p3-c');
+}
+function calcOEI() {
+  const total = parseFloat(document.getElementById('oei-total').value)||1;
+  const rev = parseFloat(document.getElementById('oei-rev').value)||0;
+  const oei = Math.round((rev/total)*100);
+  document.getElementById('oei-result').textContent = oei + '%';
+  document.getElementById('oei-result').style.color = oei>=65?'var(--teal)':oei>=50?'var(--amber)':'var(--red)';
+  document.getElementById('oei-interp').textContent = oei>=65?'Healthy. Majority of team are revenue-generating roles — lean and effective structure.':oei>=50?'Watch zone. Management overhead is growing relative to revenue-generating capacity. Monitor for Config C drift.':'Critical. Less than 50% of team are revenue-generating. Structure is top-heavy — each management layer adds cost without adding revenue.';
+}
+function calcPCoB() {
+  const cost = parseFloat(document.getElementById('pcob-cost').value)||0;
+  const rev = parseFloat(document.getElementById('pcob-rev').value)||1;
+  const pcob = Math.round((cost/rev)*100);
+  document.getElementById('pcob-result').textContent = pcob + '%';
+  document.getElementById('pcob-result').style.color = pcob<=35?'var(--teal)':pcob<=50?'var(--amber)':'var(--red)';
+  document.getElementById('pcob-interp').textContent = pcob<=35?'Efficient. People cost is well-controlled relative to revenue — strong structural leverage.':pcob<=50?'Watch zone. People cost is consuming a meaningful share of revenue. Review management layers.':'Burning margin. Over half of revenue consumed by people cost — restructure likely required to restore efficiency.';
+}
+function calcOSI() {
+  const changes = parseFloat(document.getElementById('osi-changes').value)||0;
+  const osi = Math.max(0, 100 - (changes * 10));
+  document.getElementById('osi-result').textContent = osi;
+  document.getElementById('osi-result').style.color = osi>=80?'var(--teal)':osi>=60?'var(--amber)':'var(--red)';
+  document.getElementById('osi-interp').textContent = osi>=80?'Stable. Team structure is predictable — revenue output should be consistent.':osi>=60?'Some disruption. '+changes+' structural changes are creating instability. Revenue predictability reduced.':'Unstable. Too many structural changes — teams cannot settle into high-performance patterns. Revenue consistency severely compromised.';
+}
+function calcWGI() {
+  const plan = parseFloat(document.getElementById('wgi-plan').value)||1;
+  const actual = parseFloat(document.getElementById('wgi-actual').value)||0;
+  const wgi = Math.round(((plan-actual)/plan)*100);
+  document.getElementById('wgi-result').textContent = wgi + '%';
+  document.getElementById('wgi-result').style.color = wgi<=10?'var(--teal)':wgi<=20?'var(--amber)':'var(--red)';
+  const gap = plan - actual;
+  document.getElementById('wgi-interp').textContent = wgi<=10?'Healthy. Team is operating close to planned capacity — minimal revenue gap.':wgi<=20?gap+' FTEs below planned capacity. Meaningful revenue gap — prioritise filling or restoring these roles.':'Critical. '+gap+' FTEs below planned effective capacity — significant structural revenue hole. This is the primary driver of output shortfall.';
+}
+calcOEI(); calcPCoB(); calcOSI(); calcWGI();
+updateProgress();
+</script>
+</PAGEEOF
+echo "P3 Module C done — $(wc -l < /home/claude/rf2/p3-module-c.html) lines"
