@@ -300,15 +300,17 @@ main { position: relative; z-index: 3; min-height: 100vh; }
   overflow: hidden;
   opacity: 0;
   animation: fadeUp 0.8s ease 0.9s forwards;
+  width: 100%;
+  max-width: 560px;
 }
 
 .metric-chip {
   flex: 1;
   background: var(--bg2);
-  padding: 1rem 1.25rem;
+  padding: 1rem 0.75rem;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .metric-chip::before {
@@ -335,10 +337,11 @@ main { position: relative; z-index: 3; min-height: 100vh; }
 
 .metric-chip-label {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.52rem;
   color: var(--text-mute);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 }
 
 /* ── BUTTONS ── */
