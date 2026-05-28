@@ -141,12 +141,12 @@
           <span class="tag">Scenario Data</span>
         </div>
         <div class="bar-chart">
-          ${[88,92,95,100,97,66].map((h,i) => `
-            <div class="bar-col">
-              <div class="bar-fill" style="height:${h}px;background:${i===5?'var(--red)':'var(--teal)'};opacity:${i===5?1:0.5}"></div>
-              <div class="bar-lbl">Q${i+1}</div>
-            </div>
-          `).join('')}
+          <div class="bar-col"><div class="bar-fill" style="height:88px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q1</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:92px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q2</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:95px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q3</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:100px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q4</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:97px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q5</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:66px;background:var(--red);opacity:1"></div><div class="bar-lbl">Q6</div></div>
         </div>
         <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-align:right">Revenue index · Q7 target = 100</div>
       </div>
@@ -156,9 +156,12 @@
         <div>
           <div class="pool-title">Suspects</div>
           <div id="drag-pool" style="display:flex;flex-direction:column;gap:8px">
-            ${['Market downturn','Product failure','Wrong hire','Key attrition event','Team restructure','Competitor pricing'].map(s=>`
-              <div class="drag-item" draggable="true" data-s="${s}">${s}</div>
-            `).join('')}
+            <div class="drag-item" draggable="true" data-s="Market downturn">Market downturn</div>
+            <div class="drag-item" draggable="true" data-s="Product failure">Product failure</div>
+            <div class="drag-item" draggable="true" data-s="Wrong hire">Wrong hire</div>
+            <div class="drag-item" draggable="true" data-s="Key attrition event">Key attrition event</div>
+            <div class="drag-item" draggable="true" data-s="Team restructure">Team restructure</div>
+            <div class="drag-item" draggable="true" data-s="Competitor pricing">Competitor pricing</div>
           </div>
         </div>
         <div>
