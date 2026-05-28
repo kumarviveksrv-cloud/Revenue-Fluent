@@ -19,6 +19,7 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
   justify-content: center;
   text-align: center;
   padding: 100px 2rem 4rem;
+  background: #0F172A;
 }
 
 .hero-eyebrow {
@@ -43,13 +44,13 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
 
 .hero-title {
   font-family: var(--font-head);
-  font-weight: 700;
+  font-weight: 800;
   font-size: clamp(2.8rem, 6vw, 5rem);
   letter-spacing: -0.03em;
   line-height: 0.95;
   font-family: 'Sora', sans-serif;
   margin-bottom: 1.5rem;
-  color: var(--text);
+  color: #F8FAFC;
   opacity: 0;
   animation: fadeUp 0.8s ease 0.5s forwards;
 }
@@ -81,12 +82,12 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
   animation: fadeUp 0.8s ease 0.9s forwards;
 }
 .metric-chip {
-  background: var(--bg2);
+  background: rgba(255,255,255,0.06);
   padding: 1rem 0.5rem;
   text-align: center;
 }
 .mc-val { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; color: var(--accent); line-height: 1; margin-bottom: 4px; }
-.mc-label { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+.mc-label { font-family: var(--font-mono); font-size: 0.5rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
 
 .hero-cta {
   display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
@@ -109,7 +110,7 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
   animation: fadeUp 0.8s ease 1.3s forwards;
 }
 .pillar-cell {
-  background: var(--bg2);
+  background: rgba(255,255,255,0.05);
   padding: 1.1rem 0.75rem;
   text-align: center;
   cursor: pointer;
@@ -118,7 +119,7 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
 }
 .pillar-cell::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform 0.3s; }
 .pillar-cell:hover::after, .pillar-cell.active::after { transform: scaleX(1); }
-.pillar-cell:hover, .pillar-cell.active { background: var(--bg3); }
+.pillar-cell:hover, .pillar-cell.active { background: rgba(2,132,199,0.12); }
 .pillar-cell.active { background: var(--accent-dim); }
 .pillar-cell.locked { opacity: 0.4; cursor: default; }
 .pillar-cell.locked::after { display: none; }
@@ -134,7 +135,7 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
   position: fixed;
   top: 28px; left: 0; right: 0;
   z-index: 100;
-  background: rgba(2,4,8,0.8);
+  background: rgba(15,23,42,0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   padding: 0 2.5rem;
@@ -228,7 +229,7 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
 
 <script>
 document.getElementById('rf-css').textContent = RF.css;
-RF.startMatrix('matrix-canvas', 0.45);
+RF.startMatrix('matrix-canvas', 0.3);
 RF.startTicker('ticker');
 function countUp(id, target, dur) {
   const el = document.getElementById(id); if (!el) return;
