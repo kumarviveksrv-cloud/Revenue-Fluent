@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Revenue Fluent</title>
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 2rem; }
+.dash-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.2s; }
+.dash-card:hover { border-color: var(--border-hi); }
+.dash-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+.dash-card-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--teal-dim); border: 1px solid var(--teal-glow); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.dash-val { font-family: var(--font-head); font-weight: 700; font-size: 2rem; color: var(--teal); line-height: 1; margin-bottom: 4px; }
+.dash-val.amber { color: var(--amber); }
+.dash-val.mute { color: var(--text-dim); font-size: 1.3rem; }
+.dash-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; }
+.dash-sub { font-size: 0.78rem; color: var(--text-dim); margin-top: 6px; }
+
+.pillar-cards { display: flex; flex-direction: column; gap: 12px; margin-top: 2rem; }
+.pillar-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; display: grid; grid-template-columns: 48px 1fr auto; gap: 1rem; align-items: center; transition: all 0.2s; text-decoration: none; cursor: pointer; }
+.pillar-card:hover:not(.locked) { border-color: var(--border-hi); background: var(--bg3); transform: translateX(4px); }
+.pillar-card.active-pillar { border-color: var(--teal-glow); background: var(--teal-dim); }
+.pillar-card.locked { opacity: 0.4; cursor: default; }
+.pc-badge { width: 48px; height: 48px; border-radius: 10px; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.65rem; color: var(--teal); font-weight: 500; }
+.pillar-card.active-pillar .pc-badge { background: var(--teal-dim); border-color: var(--teal-glow); }
+.pc-info {}
+.pc-num-label { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.pc-title { font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+.pc-bar-wrap { background: var(--bg3); border-radius: 2px; height: 3px; width: 200px; max-width: 100%; }
+.pc-bar { height: 100%; border-radius: 2px; background: var(--teal); transition: width 1s ease; }
+.pc-right { text-align: right; }
+.pc-pct { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; color: var(--teal); }
+.pillar-card.locked .pc-pct { color: var(--text-mute); }
+.pc-mod-count { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-mute); margin-top: 4px; }
+.pc-start-btn { font-family: var(--font-mono); font-size: 0.6rem; padding: 5px 12px; border-radius: 4px; background: var(--teal); color: #020408; border: none; cursor: pointer; white-space: nowrap; margin-top: 6px; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-breadcrumb">
+    <span>Revenue Fluent</span>
+    <span class="sep">/</span>
+    <span class="current">Dashboard</span>
+  </div>
+  <div class="topbar-right">
+    <span class="by-badge">By Kumar Vivek</span>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="app-body">
+  <div class="page-content">
+
+    <div class="page-tag">Command Centre</div>
+    <h1 class="page-title">Your Revenue Fluent Dashboard</h1>
+    <p class="page-desc">Track your progress across all 5 pillars. Every module you complete builds toward your Certified Revenue Fluent Practitioner (CRFP) badge.</p>
+
+    <!-- STATS GRID -->
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="dash-card-top">
+          <div>
+            <div class="dash-label">Modules Complete</div>
+            <div class="dash-val" id="stat-complete">0</div>
+          </div>
+          <div class="dash-card-icon">📊</div>
+        </div>
+        <div class="dash-sub">of 22 total modules</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-top">
+          <div>
+            <div class="dash-label">HUMANCE Unlocked</div>
+            <div class="dash-val amber">₹0</div>
+          </div>
+          <div class="dash-card-icon">💡</div>
+        </div>
+        <div class="dash-sub">Grows with each level completed</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-top">
+          <div>
+            <div class="dash-label">CRFP Status</div>
+            <div class="dash-val mute">Locked</div>
+          </div>
+          <div class="dash-card-icon">🏅</div>
+        </div>
+        <div class="dash-sub">Complete all 5 pillars to certify</div>
+      </div>
+    </div>
+
+    <!-- PILLAR CARDS -->
+    <div class="label" style="margin-bottom:12px">Your Learning Path</div>
+    <div class="pillar-cards">
+
+      <a href="p1-module-a.html" class="pillar-card active-pillar">
+        <div class="pc-badge">L1</div>
+        <div class="pc-info">
+          <div class="pc-num-label">Pillar 1 — Unlocked</div>
+          <div class="pc-title">People-Revenue Connect</div>
+          <div class="pc-bar-wrap"><div class="pc-bar" style="width:0%" id="p1-bar"></div></div>
+        </div>
+        <div class="pc-right">
+          <div class="pc-pct" id="p1-pct">0%</div>
+          <div class="pc-mod-count">4 modules</div>
+          <button class="pc-start-btn">Start →</button>
+        </div>
+      </a>
+
+      <div class="pillar-card locked">
+        <div class="pc-badge" style="color:var(--text-mute)">L2</div>
+        <div class="pc-info">
+          <div class="pc-num-label">Pillar 2 — Locked</div>
+          <div class="pc-title">People Alpha</div>
+          <div class="pc-bar-wrap"><div class="pc-bar" style="width:0%"></div></div>
+        </div>
+        <div class="pc-right">
+          <div class="pc-pct">🔒</div>
+          <div class="pc-mod-count">4 modules</div>
+        </div>
+      </div>
+
+      <div class="pillar-card locked">
+        <div class="pc-badge" style="color:var(--text-mute)">L3</div>
+        <div class="pc-info">
+          <div class="pc-num-label">Pillar 3 — Locked</div>
+          <div class="pc-title">Team Revenue Architecture</div>
+          <div class="pc-bar-wrap"><div class="pc-bar" style="width:0%"></div></div>
+        </div>
+        <div class="pc-right">
+          <div class="pc-pct">🔒</div>
+          <div class="pc-mod-count">4 modules</div>
+        </div>
+      </div>
+
+      <div class="pillar-card locked">
+        <div class="pc-badge" style="color:var(--text-mute)">L4</div>
+        <div class="pc-info">
+          <div class="pc-num-label">Pillar 4 — Locked</div>
+          <div class="pc-title">Human Balance Sheet — HUMANCE</div>
+          <div class="pc-bar-wrap"><div class="pc-bar" style="width:0%"></div></div>
+        </div>
+        <div class="pc-right">
+          <div class="pc-pct">🔒</div>
+          <div class="pc-mod-count">5 modules</div>
+        </div>
+      </div>
+
+      <div class="pillar-card locked">
+        <div class="pc-badge" style="color:var(--text-mute)">L5</div>
+        <div class="pc-info">
+          <div class="pc-num-label">Pillar 5 — Locked</div>
+          <div class="pc-title">People P&L — Your Certification</div>
+          <div class="pc-bar-wrap"><div class="pc-bar" style="width:0%"></div></div>
+        </div>
+        <div class="pc-right">
+          <div class="pc-pct">🔒</div>
+          <div class="pc-mod-count">5 modules</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startMatrix('matrix-canvas', 0.08);
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('dashboard');
+document.querySelectorAll('.sb-pillar').forEach(el => {
+  const id = el.querySelector('.sb-pillar-header')?.querySelector('.sb-pillar-num')?.closest('.sb-pillar-header')?.dataset?.id;
+});
+// Fix sidebar pillar toggle
+document.querySelectorAll('.sb-pillar-header').forEach(header => {
+  const pillar = header.closest('.sb-pillar');
+  const id = header.querySelector('.sb-chevron')?.id?.replace('chev-','');
+  if (id) pillar.setAttribute('data-id', id);
+});
+
+// Load progress
+const progress = RF.progress.get();
+const p1Modules = ['p1-a','p1-b','p1-c','p1-d'];
+const p1Done = p1Modules.filter(id => progress[id]).length;
+const p1Pct = Math.round((p1Done/4)*100);
+document.getElementById('p1-bar').style.width = p1Pct + '%';
+document.getElementById('p1-pct').textContent = p1Pct + '%';
+document.getElementById('stat-complete').textContent = RF.progress.totalComplete();
+</script>
+</body>
+</html>

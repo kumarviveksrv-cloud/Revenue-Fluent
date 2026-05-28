@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module A: The Philosophy — Revenue Fluent</title>
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+/* BEAT SYSTEM */
+.beat { display: none; }
+.beat.active { display: block; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
+
+/* PROVOCATION */
+.prov-line { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.6rem,3vw,2.4rem); letter-spacing: -0.025em; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.prov-line.vis { opacity: 1; transform: translateY(0); }
+.prov-line.teal { color: var(--teal); text-shadow: 0 0 30px rgba(0,212,170,0.25); }
+.prov-line.amber { color: var(--amber); }
+.prov-line.dim { font-family: var(--font-body); font-size: clamp(0.95rem,1.8vw,1.2rem); font-weight: 300; color: var(--text-dim); }
+.prov-cta { margin-top: 3rem; opacity: 0; transition: opacity 0.6s ease; }
+.prov-cta.vis { opacity: 1; }
+
+/* DRAG */
+.drag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+.drag-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.85rem; color: var(--text); cursor: grab; transition: all 0.2s; user-select: none; }
+.drag-item:hover { border-color: var(--teal-glow); transform: translateX(3px); }
+.drag-item.dragging { opacity: 0.4; }
+.drop-zone { background: var(--bg2); border: 2px dashed var(--border-hi); border-radius: var(--radius); padding: 1.25rem; min-height: 200px; transition: all 0.2s; display: flex; flex-direction: column; gap: 8px; }
+.drop-zone.over { border-color: var(--teal); background: var(--teal-dim); box-shadow: 0 0 20px rgba(0,212,170,0.1); }
+.dz-hint { font-size: 0.78rem; color: var(--text-mute); text-align: center; margin: auto; }
+.pool-title { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mute); margin-bottom: 8px; }
+
+/* CONFESSION */
+.vote-btns { display: flex; gap: 1rem; margin: 1.5rem 0; }
+.vbtn { flex: 1; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2); color: var(--text); font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
+.vbtn.yes:hover, .vbtn.yes.sel { border-color: var(--teal); background: var(--teal-dim); color: var(--teal); }
+.vbtn.no:hover, .vbtn.no.sel { border-color: var(--red); background: var(--red-dim); color: var(--red); }
+.vote-result { display: none; }
+.vote-result.vis { display: block; animation: pageIn 0.4s ease; }
+.vote-bar-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+.vb-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); margin-bottom: 10px; }
+.vbar { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+.vbar-fill { height: 100%; background: var(--teal); border-radius: 3px; transition: width 1.4s cubic-bezier(0.4,0,0.2,1); width: 0; }
+.vpct { font-family: var(--font-head); font-weight: 700; font-size: 3rem; color: var(--teal); line-height: 1; }
+.vpct-sub { font-size: 0.82rem; color: var(--text-dim); margin-top: 6px; }
+.confession-wall { display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto; }
+.conf-card { background: var(--bg2); border: 1px solid var(--border); border-left: 2px solid var(--teal); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.65; animation: pageIn 0.4s ease; }
+.conf-org { font-family: var(--font-mono); font-size: 0.58rem; color: var(--teal); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* REVEAL */
+.rev-line { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; line-height: 1.3; color: var(--text); margin-bottom: 1.1rem; opacity: 0; transform: translateY(12px); transition: opacity 0.55s ease, transform 0.55s ease; letter-spacing: -0.02em; }
+.rev-line.vis { opacity: 1; transform: translateY(0); }
+.rev-line.punch { font-size: 2rem; color: var(--teal); text-shadow: 0 0 25px rgba(0,212,170,0.2); }
+.rev-line.sub { font-family: var(--font-body); font-size: 0.95rem; font-weight: 300; color: var(--text-dim); }
+.rev-line.impact { color: var(--amber); font-size: 1.8rem; }
+
+/* REFRAME */
+.reframe-rows { display: flex; flex-direction: column; gap: 10px; margin: 1.5rem 0; }
+.rf-row { display: grid; grid-template-columns: 1fr 32px 1fr; gap: 10px; align-items: center; cursor: pointer; }
+.rf-old { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 11px 14px; font-size: 0.83rem; color: var(--text-mute); line-height: 1.5; transition: all 0.2s; }
+.rf-row:hover .rf-old { border-color: var(--teal-glow); }
+.rf-arr { text-align: center; color: var(--teal); font-size: 1rem; }
+.rf-new { background: var(--teal-dim); border: 1px solid var(--border-hi); border-radius: var(--radius-sm); padding: 11px 14px; font-size: 0.83rem; color: var(--teal); line-height: 1.5; opacity: 0; transition: opacity 0.4s ease 0.1s; }
+.rf-row.revealed .rf-new { opacity: 1; }
+.rf-row.revealed .rf-old { color: var(--text-dim); }
+
+/* BADGE */
+.badge-wrap { text-align: center; padding: 3rem 2rem; }
+.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--teal-dim); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
+@keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4)} }
+.badge-title { font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; color: var(--teal); margin-bottom: 0.5rem; }
+.badge-sub { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; }
+.badge-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 400px; margin: 0 auto 2rem; }
+.bstat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.875rem; text-align: center; }
+.bstat-val { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--teal); }
+.bstat-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+.next-preview { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; max-width: 440px; margin: 0 auto 2rem; text-align: left; }
+.np-tag { font-family: var(--font-mono); font-size: 0.6rem; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.np-title { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 5px; }
+.np-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
+
+/* BAR CHART */
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 90px; margin-bottom: 8px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.bar-fill { width: 100%; border-radius: 3px 3px 0 0; transition: height 0.8s ease; }
+.bar-lbl { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); }
+</style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-breadcrumb">
+    <span>Pillar 1</span>
+    <span class="sep">/</span>
+    <span>People-Revenue Connect</span>
+    <span class="sep">/</span>
+    <span class="current">Module A — The Philosophy</span>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-progress">
+      <span id="beat-counter-top">Beat 1 of 5</span>
+      <div class="prog-dots" id="prog-dots"></div>
+    </div>
+    <span class="by-badge">CRFP Track</span>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="app-body">
+  <div class="page-content">
+
+    <!-- ══ BEAT 0: PROVOCATION ══ -->
+    <div class="beat active" id="beat-0">
+      <div class="page-tag">Module A · Beat 1 of 5 · The Philosophy</div>
+      <div style="min-height:60vh;display:flex;flex-direction:column;justify-content:center">
+        <div class="prov-line" id="pl-0">Every rupee of revenue your company ever made —</div>
+        <div class="prov-line teal" id="pl-1">was made by a person.</div>
+        <div class="prov-line dim" id="pl-2">HR hired that person. Developed them.<br>Retained them. Designed the team around them.</div>
+        <div class="prov-line amber" id="pl-3">So why does Finance get the credit?</div>
+        <div class="prov-cta" id="prov-cta">
+          <button class="btn-primary" onclick="nextBeat()">Let's find out →</button>
+          <p style="margin-top:1rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">Module A · 5 interactive beats · ~15 mins</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ BEAT 1: DRAG ══ -->
+    <div class="beat" id="beat-1">
+      <div class="page-tag">Module A · Beat 2 of 5</div>
+      <h2 class="page-title">What killed TechVelocity's Q3?</h2>
+      <p class="page-desc">TechVelocity hit ₹3.2Cr target every quarter for 6 quarters. Then Q3: ₹2.1Cr. A 34% miss. Before we show you the data — what do you think caused the crash?</p>
+
+      <div class="card" style="margin-bottom:1.5rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+          <span style="font-family:var(--font-head);font-weight:600;font-size:0.85rem">TechVelocity — Revenue Index</span>
+          <span class="tag">Scenario Data</span>
+        </div>
+        <div class="bar-chart">
+          ${[88,92,95,100,97,66].map((h,i) => `
+            <div class="bar-col">
+              <div class="bar-fill" style="height:${h}px;background:${i===5?'var(--red)':'var(--teal)'};opacity:${i===5?1:0.5}"></div>
+              <div class="bar-lbl">Q${i+1}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-align:right">Revenue index · Q7 target = 100</div>
+      </div>
+
+      <p style="font-size:0.88rem;color:var(--text-dim);margin-bottom:0.75rem">Drag your top suspect into the blame zone:</p>
+      <div class="drag-grid">
+        <div>
+          <div class="pool-title">Suspects</div>
+          <div id="drag-pool" style="display:flex;flex-direction:column;gap:8px">
+            ${['Market downturn','Product failure','Wrong hire','Key attrition event','Team restructure','Competitor pricing'].map(s=>`
+              <div class="drag-item" draggable="true" data-s="${s}">${s}</div>
+            `).join('')}
+          </div>
+        </div>
+        <div>
+          <div class="pool-title">Your verdict</div>
+          <div class="drop-zone" id="drop-zone"><div class="dz-hint" id="dz-hint">Drop your suspect here</div></div>
+        </div>
+      </div>
+      <div id="drag-reveal" style="display:none">
+        <div class="card-hi" style="margin-top:1.5rem">
+          <div class="tag" style="margin-bottom:10px">The Reveal</div>
+          <p style="font-size:0.92rem;color:var(--text);line-height:1.75;margin-bottom:1rem">Most people choose <strong id="chosen" style="color:var(--amber)"></strong> — because that's the answer the board accepted. But the HR data told a completely different story 9 months earlier.</p>
+          <p style="font-size:0.92rem;color:var(--teal);font-weight:500;line-height:1.75">It was a people decision. The $240K hire who lasted 11 months, triggered two senior exits, and left the team at 60% productive capacity going into Q3.</p>
+          <p style="font-size:0.8rem;color:var(--text-mute);margin-top:0.75rem">HR saw the signals. Nobody looked at the data.</p>
+        </div>
+        <div class="page-nav">
+          <span class="page-nav-info">Beat 2 of 5</span>
+          <button class="btn-primary" onclick="nextBeat()">That's alarming. Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ BEAT 2: CONFESSION WALL ══ -->
+    <div class="beat" id="beat-2">
+      <div class="page-tag">Module A · Beat 3 of 5</div>
+      <h2 class="page-title">Have you ever seen this happen?</h2>
+      <p class="page-desc">A business problem blamed on the market, the product, or competition — when you suspected it was actually a people decision?</p>
+      <div class="vote-btns">
+        <button class="vbtn yes" onclick="castVote('yes',this)">Yes — I've lived this</button>
+        <button class="vbtn no" onclick="castVote('no',this)">No — not happened to me</button>
+      </div>
+      <div class="vote-result" id="vote-result">
+        <div class="vote-bar-wrap">
+          <div class="vb-label">Revenue Fluent learners who said YES</div>
+          <div class="vbar"><div class="vbar-fill" id="vbar-fill"></div></div>
+          <div class="vpct" id="vpct">0%</div>
+          <div class="vpct-sub">of HR professionals have watched a people decision destroy revenue — while everyone else looked the wrong way.</div>
+        </div>
+        <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">From the Revenue Fluent community:</p>
+        <div class="confession-wall" id="conf-wall"></div>
+        <div class="page-nav" style="margin-top:2rem">
+          <span class="page-nav-info">Beat 3 of 5</span>
+          <button class="btn-primary" onclick="nextBeat()">I'm not alone. Keep going →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ BEAT 3: STRUCTURAL LIE ══ -->
+    <div class="beat" id="beat-3">
+      <div class="page-tag">Module A · Beat 4 of 5</div>
+      <h2 class="page-title" style="margin-bottom:2rem">The problem isn't the data.<br>It's the framing.</h2>
+      <div id="rev-lines">
+        ${[
+          {t:'The HR profession accepted a structural lie.',c:''},
+          {t:'That it must "prove" its value to the business.',c:''},
+          {t:'"Prove" is the problem.',c:'punch'},
+          {t:'It positions HR as a defendant in a courtroom.',c:'sub'},
+          {t:'Even when HR wins — it wins permission to keep existing.',c:'sub'},
+          {t:'Revenue Fluent inverts this completely.',c:''},
+          {t:"HR doesn't prove its value.",c:''},
+          {t:'HR OWNS the value.',c:'impact'},
+          {t:'And here\'s how.',c:'sub'},
+        ].map((l,i)=>`<div class="rev-line ${l.c}" id="rl-${i}">${l.t}</div>`).join('')}
+      </div>
+      <div class="page-nav" id="rev-nav" style="opacity:0;transition:opacity 0.5s ease">
+        <span class="page-nav-info">Beat 4 of 5</span>
+        <button class="btn-primary" onclick="nextBeat()">Show me how to own it →</button>
+      </div>
+    </div>
+
+    <!-- ══ BEAT 4: REFRAME ══ -->
+    <div class="beat" id="beat-4">
+      <div class="page-tag">Module A · Beat 5 of 5</div>
+      <h2 class="page-title">Stop proving.<br>Start owning.</h2>
+      <p class="page-desc">These are 5 things HR pros say every day. Click each one to see how a Revenue Fluent professional says the exact same thing — in Revenue language.</p>
+      <div class="reframe-rows">
+        ${[
+          {o:'"HR reduced attrition by 12%"',n:'"HR protected ₹2.3Cr in revenue this quarter"'},
+          {o:'"We filled 43 roles this quarter"',n:'"We activated ₹8.2Cr in revenue capacity"'},
+          {o:'"Engagement scores improved to 74%"',n:'"Team velocity is up 18% — here\'s what that\'s worth"'},
+          {o:'"L&D trained 200 employees"',n:'"L&D generated ₹1.1Cr in capability ROI"'},
+          {o:'"We retained 3 key performers"',n:'"We protected ₹4.7Cr in institutional revenue knowledge"'},
+        ].map((p,i)=>`
+          <div class="rf-row" id="rf-${i}" onclick="revealRF(${i})">
+            <div class="rf-old">${p.o}</div>
+            <div class="rf-arr">→</div>
+            <div class="rf-new">${p.n}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div id="rf-complete" style="display:none">
+        <div class="card-hi" style="text-align:center;padding:2rem;margin-top:1.5rem">
+          <div class="tag" style="margin-bottom:12px">Paradigm Shift Complete</div>
+          <p style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:0.5rem">You just made the shift most HR pros never make.</p>
+          <p style="font-size:0.88rem;color:var(--text-dim)">You stopped proving. You started owning.</p>
+        </div>
+        <div class="page-nav" style="margin-top:1.5rem">
+          <span class="page-nav-info">Beat 5 of 5</span>
+          <button class="btn-primary" onclick="completeBeat()">Claim my badge →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ BEAT 5: BADGE ══ -->
+    <div class="beat" id="beat-5">
+      <div class="badge-wrap">
+        <div class="badge-circle">⚡</div>
+        <div class="badge-title">Badge Unlocked: The Shift</div>
+        <div class="badge-sub">Module A · Pillar 1 · People-Revenue Connect</div>
+        <div class="badge-stats">
+          <div class="bstat"><div class="bstat-val">5/5</div><div class="bstat-label">Beats Done</div></div>
+          <div class="bstat"><div class="bstat-val" style="color:var(--amber)">5</div><div class="bstat-label">Shifts Made</div></div>
+          <div class="bstat"><div class="bstat-val">A ✓</div><div class="bstat-label">Module</div></div>
+        </div>
+        <div class="next-preview">
+          <div class="np-tag">Coming Next — Module B</div>
+          <div class="np-title">The Attribution Methodology</div>
+          <div class="np-desc">How to trace any people decision to a revenue outcome — with a confidence score. The intellectual framework that makes everything else possible.</div>
+        </div>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <a href="p1-module-b.html" class="btn-primary">Continue to Module B →</a>
+          <button class="btn-secondary" onclick="shareLinkedIn()">Share on LinkedIn</button>
+          <a href="dashboard.html" class="btn-ghost">← Dashboard</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startMatrix('matrix-canvas', 0.07);
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p1-a');
+
+// Fix pillar data-ids for toggle
+document.querySelectorAll('.sb-pillar').forEach((el,i) => {
+  const chev = el.querySelector('.sb-chevron');
+  if (chev) el.setAttribute('data-id', chev.id.replace('chev-',''));
+});
+
+let currentBeat = 0;
+const totalBeats = 6;
+
+function updateProgress() {
+  document.getElementById('beat-counter-top').textContent = `Beat ${currentBeat+1} of 5`;
+  const dots = document.getElementById('prog-dots');
+  dots.innerHTML = Array(5).fill(0).map((_,i) => `
+    <div class="prog-dot ${i < currentBeat ? 'done' : i === currentBeat ? 'active' : ''}"></div>
+  `).join('');
+}
+
+function nextBeat() {
+  const cur = document.getElementById('beat-' + currentBeat);
+  if (cur) cur.classList.remove('active');
+  currentBeat++;
+  const next = document.getElementById('beat-' + currentBeat);
+  if (next) {
+    next.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  updateProgress();
+  if (currentBeat === 3) startReveal();
+}
+
+function completeBeat() {
+  RF.progress.set('p1-a');
+  nextBeat();
+}
+
+// Beat 0 — provocation animation
+setTimeout(() => {
+  [0,1,2,3].forEach((i,idx) => {
+    setTimeout(() => {
+      const el = document.getElementById('pl-' + i);
+      if (el) el.classList.add('vis');
+    }, idx * 800);
+  });
+  setTimeout(() => {
+    const cta = document.getElementById('prov-cta');
+    if (cta) cta.classList.add('vis');
+  }, 3800);
+}, 300);
+
+// Beat 1 — drag and drop
+document.addEventListener('dragstart', e => {
+  if (e.target.classList.contains('drag-item')) {
+    e.target.classList.add('dragging');
+    e.dataTransfer.setData('text/plain', e.target.dataset.s);
+  }
+});
+document.addEventListener('dragend', e => {
+  if (e.target.classList.contains('drag-item')) e.target.classList.remove('dragging');
+});
+const dz = document.getElementById('drop-zone');
+if (dz) {
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault();
+    dz.classList.remove('over');
+    const s = e.dataTransfer.getData('text/plain');
+    dz.innerHTML = `<div class="drag-item" style="border-color:var(--amber);color:var(--amber);background:var(--amber-dim);cursor:default">${s}</div><p style="font-size:0.72rem;color:var(--text-mute);margin-top:8px;font-family:var(--font-mono)">Logged. Revealing truth...</p>`;
+    document.getElementById('chosen').textContent = s;
+    setTimeout(() => {
+      document.getElementById('drag-reveal').style.display = 'block';
+      document.getElementById('drag-reveal').scrollIntoView({ behavior:'smooth', block:'nearest' });
+    }, 700);
+  });
+}
+
+// Beat 2 — confession wall
+const confessions = [
+  { org: 'FMCG · 2,400 employees', text: 'Our CEO blamed supply chain for 3 quarters. It was one toxic VP destroying two teams. I had the exit interview data. Nobody asked.' },
+  { org: 'SaaS startup · 180 employees', text: '₹8Cr revenue miss. Everyone blamed the economy. I knew it was the reorg — we split the team that had generated 60% of ARR.' },
+  { org: 'Investment bank · 850 employees', text: 'Lost our biggest institutional client. Sales blamed product. Product blamed sales. HR had flagged the relationship manager\'s attrition intent 4 months earlier.' },
+  { org: 'IT services · 3,200 employees', text: 'Three quarters of missed targets. The board brought in a consultant. Their finding: exactly what HR had reported in the annual engagement survey.' },
+  { org: 'Family business · 220 employees', text: 'When the founder stepped back, we lost 40% of senior team in 18 months. Nobody traced it to the succession decision. I did.' },
+  { org: 'Pharma · 1,100 employees', text: 'A ₹12Cr product launch failed. We blamed positioning. Real reason: the product team had 73% new joiners — all still ramping. HR knew. HR wasn\'t in the room.' },
+];
+
+function castVote(v, btn) {
+  document.querySelectorAll('.vbtn').forEach(b => { b.disabled = true; });
+  btn.classList.add('sel');
+  const r = document.getElementById('vote-result');
+  r.classList.add('vis');
+  setTimeout(() => {
+    const fill = document.getElementById('vbar-fill');
+    const pct = document.getElementById('vpct');
+    fill.style.width = '94%';
+    let c = 0;
+    const t = setInterval(() => {
+      c += 2; if (c >= 94) { c = 94; clearInterval(t); }
+      pct.textContent = c + '%';
+    }, 20);
+  }, 300);
+  const wall = document.getElementById('conf-wall');
+  confessions.forEach((c, i) => {
+    setTimeout(() => {
+      const card = document.createElement('div');
+      card.className = 'conf-card';
+      card.innerHTML = `<div class="conf-org">${c.org}</div>${c.text}`;
+      wall.appendChild(card);
+    }, i * 400);
+  });
+}
+
+// Beat 3 — reveal
+function startReveal() {
+  Array.from({length:9}).forEach((_,i) => {
+    setTimeout(() => {
+      const el = document.getElementById('rl-' + i);
+      if (el) el.classList.add('vis');
+    }, i * 600);
+  });
+  setTimeout(() => {
+    const nav = document.getElementById('rev-nav');
+    if (nav) nav.style.opacity = '1';
+  }, 9 * 600 + 300);
+}
+
+// Beat 4 — reframe
+let rfRevealed = 0;
+function revealRF(i) {
+  const row = document.getElementById('rf-' + i);
+  if (row.classList.contains('revealed')) return;
+  row.classList.add('revealed');
+  rfRevealed++;
+  if (rfRevealed === 5) {
+    setTimeout(() => {
+      document.getElementById('rf-complete').style.display = 'block';
+      document.getElementById('rf-complete').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }, 300);
+  }
+}
+
+function shareLinkedIn() {
+  const text = encodeURIComponent('Just completed Module A of Revenue Fluent by Kumar Vivek.\n\nThe paradigm shift: HR doesn\'t prove its value. HR OWNS the value.\n\n#RevenueHR #RevenueFluentPractitioner #HUMANCE');
+  window.open('https://www.linkedin.com/sharing/share-offsite/?summary=' + text, '_blank');
+}
+
+updateProgress();
+</script>
+</PAGEEOF>
+echo "Module A page done"

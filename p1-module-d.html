@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module D — The Simulation — Revenue Fluent</title>
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+</head>
+<body>
+<canvas id="matrix-canvas"></canvas>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div class="topbar">
+  <div class="topbar-breadcrumb">
+    <span>Pillar 1</span><span class="sep">/</span>
+    <span class="current">Module D — The Simulation</span>
+  </div>
+  <div class="topbar-right"><span class="by-badge">Coming Soon</span></div>
+</div>
+<div class="app-body">
+  <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;text-align:center">
+    <div class="tag tag-amber" style="margin-bottom:1.5rem">In Development</div>
+    <h1 class="page-title">Module D — The Simulation</h1>
+    <p class="page-desc" style="max-width:420px;margin:0 auto 2rem">This module is being built. Complete Module A first and check back shortly.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="p1-module-a.html" class="btn-primary">← Back to Module A</a>
+      <a href="dashboard.html" class="btn-secondary">Dashboard</a>
+    </div>
+  </div>
+</div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startMatrix('matrix-canvas', 0.07);
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p1-d');
+</script>
+</body>
+</html>
