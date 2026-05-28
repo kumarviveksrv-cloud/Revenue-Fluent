@@ -299,24 +299,60 @@
       <div>Type</div>
       <div>Flag</div>
     </div>
-    ${[
-      {m:'Month 1', d:'Marcus Webb hired — VP Sales, $310K package', t:'hire', flag:true},
-      {m:'Month 2', d:'AE engagement survey: Autonomy score 3.2/5', t:'signal', flag:true},
-      {m:'Month 4', d:'Priya Sharma exit — Sr. AE, 3.2 years tenure', t:'exit', flag:true},
-      {m:'Month 5', d:'Junior replacement hired — 0 months experience', t:'hire', flag:false},
-      {m:'Month 7', d:'Daniel Osei exit — Sr. AE, 4.1 years tenure', t:'exit', flag:true},
-      {m:'Month 8', d:'Sales team engagement drops to 2.8/5', t:'signal', flag:true},
-      {m:'Month 9', d:'Team restructure — 2 juniors promoted to senior', t:'reorg', flag:true},
-      {m:'Month 11', d:'Marcus Webb resigns — "not the right fit"', t:'exit', flag:true},
-      {m:'Month 14', d:'Q3 closes: ₹2.1Cr vs ₹3.2Cr target', t:'result', flag:false},
-    ].map((r,i) => `
-      <div class="tv-log-row ${r.flag?'flagged':''}" id="tvr-${i}" onclick="flagRow(${i},${r.flag})">
-        <div class="tv-log-cell mono">${r.m}</div>
-        <div class="tv-log-cell">${r.d}</div>
-        <div class="tv-log-cell"><span class="badge badge-${r.t==='signal'?'flag':r.t}">${r.t}</span></div>
-        <div class="tv-log-cell mono" id="tv-flag-${i}">${r.flag?'⚠️ Revenue impact':''}</div>
-      </div>
-    `).join('')}
+    <div class="tv-log-row flagged" id="tvr-0" onclick="flagRow(0,true)">
+      <div class="tv-log-cell mono">Month 1</div>
+      <div class="tv-log-cell">Marcus Webb hired — VP Sales, $310K package</div>
+      <div class="tv-log-cell"><span class="badge badge-hire">hire</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-0">⚠️ Revenue impact</div>
+    </div>
+    <div class="tv-log-row flagged" id="tvr-1" onclick="flagRow(1,true)">
+      <div class="tv-log-cell mono">Month 2</div>
+      <div class="tv-log-cell">AE engagement survey: Autonomy score 3.2/5</div>
+      <div class="tv-log-cell"><span class="badge badge-flag">signal</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-1">⚠️ Revenue impact</div>
+    </div>
+    <div class="tv-log-row flagged" id="tvr-2" onclick="flagRow(2,true)">
+      <div class="tv-log-cell mono">Month 4</div>
+      <div class="tv-log-cell">Priya Sharma exit — Sr. AE, 3.2 years tenure</div>
+      <div class="tv-log-cell"><span class="badge badge-exit">exit</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-2">⚠️ Revenue impact</div>
+    </div>
+    <div class="tv-log-row" id="tvr-3" onclick="flagRow(3,false)">
+      <div class="tv-log-cell mono">Month 5</div>
+      <div class="tv-log-cell">Junior replacement hired — 0 months experience</div>
+      <div class="tv-log-cell"><span class="badge badge-hire">hire</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-3"></div>
+    </div>
+    <div class="tv-log-row flagged" id="tvr-4" onclick="flagRow(4,true)">
+      <div class="tv-log-cell mono">Month 7</div>
+      <div class="tv-log-cell">Daniel Osei exit — Sr. AE, 4.1 years tenure</div>
+      <div class="tv-log-cell"><span class="badge badge-exit">exit</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-4">⚠️ Revenue impact</div>
+    </div>
+    <div class="tv-log-row flagged" id="tvr-5" onclick="flagRow(5,true)">
+      <div class="tv-log-cell mono">Month 8</div>
+      <div class="tv-log-cell">Sales team engagement drops to 2.8/5</div>
+      <div class="tv-log-cell"><span class="badge badge-flag">signal</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-5">⚠️ Revenue impact</div>
+    </div>
+    <div class="tv-log-row flagged" id="tvr-6" onclick="flagRow(6,true)">
+      <div class="tv-log-cell mono">Month 9</div>
+      <div class="tv-log-cell">Team restructure — 2 juniors promoted to senior</div>
+      <div class="tv-log-cell"><span class="badge badge-reorg">reorg</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-6">⚠️ Revenue impact</div>
+    </div>
+    <div class="tv-log-row flagged" id="tvr-7" onclick="flagRow(7,true)">
+      <div class="tv-log-cell mono">Month 11</div>
+      <div class="tv-log-cell">Marcus Webb resigns — "not the right fit"</div>
+      <div class="tv-log-cell"><span class="badge badge-exit">exit</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-7">⚠️ Revenue impact</div>
+    </div>
+    <div class="tv-log-row" id="tvr-8" onclick="flagRow(8,false)">
+      <div class="tv-log-cell mono">Month 14</div>
+      <div class="tv-log-cell">Q3 closes: ₹2.1Cr vs ₹3.2Cr target</div>
+      <div class="tv-log-cell"><span class="badge badge-flag">result</span></div>
+      <div class="tv-log-cell mono" id="tv-flag-8"></div>
+    </div>
   </div>
 
   <div id="attr-result" style="display:none">
