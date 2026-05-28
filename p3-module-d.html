@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillar 3, Module D: The Simulation — Revenue Fluent</title>
+<title>Pillar 3, Module D: The Simulation &ndash; Revenue Fluent</title>
 <style id="rf-css"></style>
 <script src="shared.js"></script>
 <style>
@@ -12,31 +12,31 @@
 .rs { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; }
 .rs-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border); }
 .rs-header:hover { background: var(--bg3); }
-.rs-title { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; color: var(--text); }
+.rs-title { font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; color: var(--text); }
 .rs-status { font-family: var(--font-mono); font-size: 0.6rem; padding: 3px 8px; border-radius: 4px; }
 .status-locked { background: var(--bg3); color: var(--text-mute); }
-.status-ready { background: var(--teal-dim); color: var(--teal); border: 1px solid var(--teal-glow); }
+.status-ready { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--border-hi); }
 .status-done { background: var(--amber-dim); color: var(--amber); }
-.rs-body { padding: 1.5rem; display: none; }
+.rs-body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; padding: 1.5rem; display: none; }
 .rs-body.open { display: block; }
 .final-report { background: var(--bg2); border: 1px solid var(--border-hi); border-radius: var(--radius); overflow: hidden; margin: 1.5rem 0; }
 .report-header { background: var(--bg3); padding: 2rem; border-bottom: 1px solid var(--border); }
 .report-finding { display: flex; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
 .report-finding:last-child { border-bottom: none; }
-.rf-num { font-family: var(--font-head); font-weight: 700; font-size: 1.8rem; min-width: 80px; line-height: 1; }
+.rf-num { font-family: var(--font-head); font-weight: 800; font-size: 1.8rem; min-width: 80px; line-height: 1; }
 .sc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 1.5rem 0; }
 .sc-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; cursor: pointer; transition: all 0.2s; }
-.sc-card:hover { border-color: var(--teal-glow); transform: translateY(-2px); }
-.sc-card.selected { border-color: var(--teal); background: var(--teal-dim); }
+.sc-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+.sc-card.selected { border-color: var(--accent); background: var(--accent-dim); }
 .as-step { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; }
 .as-header { display: flex; align-items: center; gap: 12px; padding: 1rem 1.5rem; }
-.as-num { width: 28px; height: 28px; border-radius: 50%; background: var(--teal-dim); border: 1px solid var(--teal-glow); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--teal); flex-shrink: 0; }
+.as-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-dim); border: 1px solid var(--border-hi); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); flex-shrink: 0; }
 .as-title { font-family: var(--font-head); font-weight: 600; font-size: 0.9rem; color: var(--text); }
 .as-body { padding: 0 1.5rem 1.5rem; }
-.as-data { background: var(--bg3); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--teal); line-height: 1.9; }
+.as-data { background: var(--bg3); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); line-height: 1.9; }
 .as-row { display: grid; grid-template-columns: 1fr 160px; gap: 12px; align-items: center; margin-bottom: 10px; }
 .as-input { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text); width: 100%; text-align: right; }
-.as-input:focus { outline: none; border-color: var(--teal-glow); }
+.as-input:focus { outline: none; border-color: var(--border-hi); }
 @keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2),0 0 40px rgba(0,212,170,0.1)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4),0 0 80px rgba(0,212,170,0.2)} }
 </style>
 </head>
@@ -47,7 +47,7 @@
 <div class="topbar">
   <div class="topbar-breadcrumb">
     <span>Pillar 3</span><span class="sep">/</span><span>Team Revenue Architecture</span><span class="sep">/</span>
-    <span class="current">Module D — The Simulation</span>
+    <span class="current">Module D &ndash; The Simulation</span>
   </div>
   <div class="topbar-right">
     <div class="topbar-progress"><span id="beat-counter-top">Act 1 of 2</span><div class="prog-dots" id="prog-dots"></div></div>
@@ -63,7 +63,7 @@
   <p class="page-desc">Assemble Apex Manufacturing's complete Team Revenue Architecture Report from the components you built across Modules A-C.</p>
 
   <div class="rs">
-    <div class="rs-header" onclick="toggleRS(0)"><span class="rs-title">01 — Configuration Diagnosis</span><span class="rs-status status-ready" id="rss-0">Ready to lock</span></div>
+    <div class="rs-header" onclick="toggleRS(0)"><span class="rs-title">01 &ndash; Configuration Diagnosis</span><span class="rs-status status-ready" id="rss-0">Ready to lock</span></div>
     <div class="rs-body" id="rsb-0">
       <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-dim);line-height:2;background:var(--bg3);border-radius:var(--radius-sm);padding:1rem 1.25rem">
         Pre-restructure: Configuration A (1:9 ratio) → +12% above benchmark output<br>
@@ -76,10 +76,10 @@
   </div>
 
   <div class="rs">
-    <div class="rs-header" onclick="toggleRS(1)"><span class="rs-title">02 — Instrument Readings</span><span class="rs-status status-locked" id="rss-1">🔒 Lock 01 first</span></div>
+    <div class="rs-header" onclick="toggleRS(1)"><span class="rs-title">02 &ndash; Instrument Readings</span><span class="rs-status status-locked" id="rss-1">🔒 Lock 01 first</span></div>
     <div class="rs-body" id="rsb-1">
       <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-dim);line-height:2;background:var(--bg3);border-radius:var(--radius-sm);padding:1rem 1.25rem">
-        OEI: <span style="color:var(--amber)">61%</span> vs 65%+ (watch zone — operator ratio declining)<br>
+        OEI: <span style="color:var(--amber)">61%</span> vs 65%+ (watch zone &ndash; operator ratio declining)<br>
         PCoB: <span style="color:var(--red)">55%</span> vs 35% (supervisors add cost, not revenue)<br>
         OSI: <span style="color:var(--amber)">60</span> vs 80+ (4 structural changes in 6 months)<br>
         WGI: <span style="color:var(--red)">28%</span> vs 10% (€1.1M capacity gap)
@@ -89,9 +89,9 @@
   </div>
 
   <div class="rs">
-    <div class="rs-header" onclick="toggleRS(2)"><span class="rs-title">03 — Structural Correction Prescription</span><span class="rs-status status-locked" id="rss-2">🔒 Lock 02 first</span></div>
+    <div class="rs-header" onclick="toggleRS(2)"><span class="rs-title">03 &ndash; Structural Correction Prescription</span><span class="rs-status status-locked" id="rss-2">🔒 Lock 02 first</span></div>
     <div class="rs-body" id="rsb-2">
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--teal);line-height:2;background:var(--bg3);border-radius:var(--radius-sm);padding:1rem 1.25rem">
+      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--accent);line-height:2;background:var(--bg3);border-radius:var(--radius-sm);padding:1rem 1.25rem">
         Prescription 1: Return to 1:6 supervisor ratio → restore Revenue DNA signature<br>
         Prescription 2: Freeze structural changes for 2 quarters → allow OSI recovery<br>
         Prescription 3: Reclassify 2 supervisors to senior operator roles → improve OEI to 78%<br>
@@ -108,7 +108,7 @@
   <div id="full-report" style="display:none">
     <div class="final-report">
       <div class="report-header">
-        <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px">Apex Manufacturing Ltd · Manufacturing · 50 Employees · EUR</div>
+        <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:8px">Apex Manufacturing Ltd · Manufacturing · 50 Employees · EUR</div>
         <div style="font-family:var(--font-head);font-weight:700;font-size:1.5rem;color:var(--text);margin-bottom:6px;letter-spacing:-0.02em">Team Revenue Architecture Report</div>
         <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">Period: H2 Analysis · Prepared by: Revenue Fluent Practitioner</div>
       </div>
@@ -116,28 +116,28 @@
         <div class="report-finding">
           <div class="rf-num" style="color:var(--red)">-22%</div>
           <div>
-            <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">Finding 1 — Configuration Drift</div>
+            <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">Finding 1 &ndash; Configuration Drift</div>
             <div style="font-size:0.88rem;color:var(--text);line-height:1.7">Two restructures moved Apex from Configuration A (1:9, +12% above benchmark) to Configuration C (1:3.7, -19% vs benchmark). Output dropped 22%. The ops director blamed equipment; the Revenue DNA data tells a different story.</div>
           </div>
         </div>
         <div class="report-finding">
           <div class="rf-num" style="color:var(--red)">55%</div>
           <div>
-            <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">Finding 2 — Margin Burn</div>
+            <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">Finding 2 &ndash; Margin Burn</div>
             <div style="font-size:0.88rem;color:var(--text);line-height:1.7">PCoB rose from 42% to 55% as 3 additional supervisors added €120K to payroll without adding revenue capacity. Every structural layer above the revenue-generating operators is burning margin.</div>
           </div>
         </div>
         <div class="report-finding">
           <div class="rf-num" style="color:var(--amber)">€380K</div>
           <div>
-            <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">Finding 3 — Recovery Potential</div>
+            <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">Finding 3 &ndash; Recovery Potential</div>
             <div style="font-size:0.88rem;color:var(--text);line-height:1.7">Restoring the Revenue DNA signature (1:6 ratio, Configuration A) projects €380K/quarter recovery within 2 quarters. Immediate prescription: reclassify 2 of 3 supervisors to senior operator roles.</div>
           </div>
         </div>
       </div>
-      <div style="background:var(--teal-dim);border-top:1px solid var(--teal-glow);padding:1.5rem 2rem">
-        <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px">Architecture Statement</div>
-        <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);line-height:1.6">"Apex's H2 output shortfall of €1.1M was caused by Configuration C drift — not equipment failure, not market conditions. Two restructures broke a Revenue DNA signature that was generating 112% of benchmark. Restoring the 1:6 supervisor ratio will recover €380K/quarter. HR recommends structural correction before any capital investment in equipment."</div>
+      <div style="background:var(--accent-dim);border-top:1px solid var(--border-hi);padding:1.5rem 2rem">
+        <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px">Architecture Statement</div>
+        <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);line-height:1.6">"Apex's H2 output shortfall of €1.1M was caused by Configuration C drift &ndash; not equipment failure, not market conditions. Two restructures broke a Revenue DNA signature that was generating 112% of benchmark. Restoring the 1:6 supervisor ratio will recover €380K/quarter. HR recommends structural correction before any capital investment in equipment."</div>
       </div>
     </div>
     <div style="text-align:center;margin-top:1.5rem">
@@ -154,19 +154,19 @@
 
   <div class="sc-grid">
     <div class="sc-card" onclick="selectSc(0)" id="sc-0">
-      <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Tech Startup</div>
+      <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Tech Startup</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:0.9rem;color:var(--text);margin-bottom:6px">TechVelocity Engineering</div>
       <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.5">Eng team doubled from 10 to 20 in 6 months. 3 new team leads added. Velocity halved.</div>
       <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);margin-top:8px">20 engineers · USD · SaaS</div>
     </div>
     <div class="sc-card" onclick="selectSc(1)" id="sc-1">
-      <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Family Business</div>
+      <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Family Business</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:0.9rem;color:var(--text);margin-bottom:6px">Mehta & Sons Operations</div>
       <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.5">Founder exit. Son added 3 new management layers in 12 months. Revenue per operator down 31%.</div>
       <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);margin-top:8px">30 staff · INR · Operations</div>
     </div>
     <div class="sc-card" onclick="selectSc(2)" id="sc-2">
-      <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Consulting</div>
+      <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Consulting</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:0.9rem;color:var(--text);margin-bottom:6px">Sterling Account Teams</div>
       <div style="font-size:0.75rem;color:var(--text-dim);line-height:1.5">Partner wave created 4 new management layers. Billable ratio dropped from 82% to 61%.</div>
       <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);margin-top:8px">25 consultants · GBP · Professional Services</div>
@@ -185,9 +185,9 @@
           <div style="font-size:0.85rem;color:var(--text-dim)">Configuration type (A / B / C)</div>
           <select class="as-input" id="ind-config" style="text-align:left" oninput="checkComplete()">
             <option value="">Select...</option>
-            <option>Configuration A — High-Autonomy Pod</option>
-            <option>Configuration B — Matrix Coordination</option>
-            <option>Configuration C — Top-Heavy Hierarchy</option>
+            <option>Configuration A &ndash; High-Autonomy Pod</option>
+            <option>Configuration B &ndash; Matrix Coordination</option>
+            <option>Configuration C &ndash; Top-Heavy Hierarchy</option>
           </select>
         </div>
       </div>
@@ -214,7 +214,7 @@
     <div id="ind-done" style="display:none">
       <div class="card-hi" style="margin:1.5rem 0;text-align:center">
         <div class="tag" style="margin-bottom:12px">Independent Analysis Complete ✓</div>
-        <p style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text)">You just read an org chart as a revenue document — independently.</p>
+        <p style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text)">You just read an org chart as a revenue document &ndash; independently.</p>
       </div>
       <div style="text-align:center">
         <button class="btn-primary" style="padding:1rem 2.5rem" onclick="completePillar()">Complete Pillar 3 →</button>
@@ -226,23 +226,23 @@
 <!-- PILLAR COMPLETE -->
 <div class="beat" id="beat-2">
   <div style="text-align:center;padding:3rem 2rem">
-    <div style="width:110px;height:110px;border-radius:50%;background:var(--teal-dim);border:3px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2.5rem;animation:badgePulse 2.5s ease-in-out infinite">🏆</div>
-    <div style="font-family:var(--font-head);font-weight:700;font-size:1.6rem;color:var(--teal);margin-bottom:0.5rem">Pillar 3 Complete</div>
+    <div style="width:110px;height:110px;border-radius:50%;background:var(--accent-dim);border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2.5rem;animation:badgePulse 2.5s ease-in-out infinite">🏆</div>
+    <div style="font-family:var(--font-head);font-weight:700;font-size:1.6rem;color:var(--accent);margin-bottom:0.5rem">Pillar 3 Complete</div>
     <div style="font-size:0.88rem;color:var(--text-dim);margin-bottom:2rem">Team Revenue Architecture · All 4 Modules</div>
-    <div style="background:var(--teal-dim);border:1px solid var(--border-hi);border-radius:var(--radius);padding:2rem;max-width:520px;margin:0 auto 2rem;text-align:left">
+    <div style="background:var(--accent-dim);border:1px solid var(--border-hi);border-radius:var(--radius);padding:2rem;max-width:520px;margin:0 auto 2rem;text-align:left">
       <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:1rem">What you can now do:</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></div>Read any org chart as a revenue document</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></div>Identify Revenue DNA and calculate the cost of deviation</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></div>Use OEI, PCoB, OSI, and WGI as structural revenue instruments</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></div>Prescribe structural corrections with projected revenue recovery</div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></div>Answer "Does this restructure strengthen or weaken our Revenue DNA?"</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>Read any org chart as a revenue document</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>Identify Revenue DNA and calculate the cost of deviation</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>Use OEI, PCoB, OSI, and WGI as structural revenue instruments</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>Prescribe structural corrections with projected revenue recovery</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--text-dim)"><div style="width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>Answer "Does this restructure strengthen or weaken our Revenue DNA?"</div>
       </div>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;max-width:480px;margin:0 auto 2rem;text-align:left">
-      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Next — Pillar 4</div>
-      <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">Human Balance Sheet — HUMANCE</div>
-      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">Price the unpriced. Account for what HR builds but never claims. Introducing HUMANCE — the accounting standard HR never had.</div>
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Next &ndash; Pillar 4</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">Human Balance Sheet &ndash; HUMANCE</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">Price the unpriced. Account for what HR builds but never claims. Introducing HUMANCE &ndash; the accounting standard HR never had.</div>
     </div>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
       <button class="btn-primary" onclick="shareLinkedIn()">Share on LinkedIn 🎓</button>
@@ -254,7 +254,7 @@
 </div></div>
 <script>
 document.getElementById('rf-css').textContent = RF.css;
-RF.startMatrix('matrix-canvas', 0.07);
+RF.startMatrix('matrix-canvas', 0.45);
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p3-d');
 document.querySelectorAll('.sb-pillar').forEach(el => {
@@ -305,7 +305,7 @@ const scenarios = [
 function selectSc(idx) {
   document.querySelectorAll('.sc-card').forEach((c,i) => c.classList.toggle('selected', i===idx));
   const s = scenarios[idx];
-  document.getElementById('ind-title').textContent = 'Your Analysis — ' + s.name;
+  document.getElementById('ind-title').textContent = 'Your Analysis &ndash; ' + s.name;
   document.getElementById('ind-ctx').textContent = s.ctx;
   document.getElementById('ind-oei-data').textContent = s.oeiData;
   ['ind-config','ind-oei'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
@@ -329,10 +329,10 @@ function completePillar() {
   nextBeat();
 }
 function shareLinkedIn() {
-  const text = encodeURIComponent('Just completed Pillar 3 of Revenue Fluent by Kumar Vivek.\n\nTeam Revenue Architecture — your org chart is a revenue document.\n\n3 configurations:\n🟢 Config A (High-Autonomy Pod): +34%\n🟡 Config B (Matrix Team): +8%\n🔴 Config C (Top-Heavy Hierarchy): -19%\n\nApex Manufacturing\'s 2 restructures caused €1.1M shortfall. The ops director blamed equipment. The Revenue DNA data told a different story.\n\n#TeamRevenueArchitecture #RevenueHR #RevenueFluentPractitioner');
+  const text = encodeURIComponent('Just completed Pillar 3 of Revenue Fluent by Kumar Vivek.\n\nTeam Revenue Architecture &ndash; your org chart is a revenue document.\n\n3 configurations:\n🟢 Config A (High-Autonomy Pod): +34%\n🟡 Config B (Matrix Team): +8%\n🔴 Config C (Top-Heavy Hierarchy): -19%\n\nApex Manufacturing\'s 2 restructures caused €1.1M shortfall. The ops director blamed equipment. The Revenue DNA data told a different story.\n\n#TeamRevenueArchitecture #RevenueHR #RevenueFluentPractitioner');
   window.open('https://www.linkedin.com/sharing/share-offsite/?summary=' + text, '_blank');
 }
 updateProgress();
 </script>
 </PAGEEOF
-echo "P3 Module D done — $(wc -l < /home/claude/rf2/p3-module-d.html) lines"
+echo "P3 Module D done &ndash; $(wc -l < /home/claude/rf2/p3-module-d.html) lines"

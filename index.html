@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revenue Fluent — The HR Intelligence Program</title>
+<title>Revenue Fluent &ndash; The HR Intelligence Program</title>
 <style id="rf-css"></style>
 <script src="shared.js"></script>
 <style>
 /* LANDING SPECIFIC */
-body { overflow-x: hidden; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
 
 #view-landing {
   position: relative; z-index: 3;
@@ -27,7 +27,7 @@ body { overflow-x: hidden; }
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--accent);
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -37,22 +37,23 @@ body { overflow-x: hidden; }
 }
 .hero-eyebrow::before, .hero-eyebrow::after {
   content: ''; width: 40px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal));
+  background: linear-gradient(90deg, transparent, var(--accent));
 }
-.hero-eyebrow::after { background: linear-gradient(90deg, var(--teal), transparent); }
+.hero-eyebrow::after { background: linear-gradient(90deg, var(--accent), transparent); }
 
 .hero-title {
   font-family: var(--font-head);
   font-weight: 700;
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(2.8rem, 6vw, 5rem);
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: 0.95;
+  font-family: 'Sora', sans-serif;
   margin-bottom: 1.5rem;
   color: var(--text);
   opacity: 0;
   animation: fadeUp 0.8s ease 0.5s forwards;
 }
-.hero-title .accent { color: var(--teal); text-shadow: 0 0 40px rgba(0,212,170,0.3); }
+.hero-title .accent { color: var(--accent); text-shadow: 0 0 40px rgba(0,212,170,0.3); }
 
 .hero-sub {
   font-size: 1.05rem;
@@ -84,7 +85,7 @@ body { overflow-x: hidden; }
   padding: 1rem 0.5rem;
   text-align: center;
 }
-.mc-val { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; color: var(--teal); line-height: 1; margin-bottom: 4px; }
+.mc-val { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; color: var(--accent); line-height: 1; margin-bottom: 4px; }
 .mc-label { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; }
 
 .hero-cta {
@@ -115,13 +116,13 @@ body { overflow-x: hidden; }
   transition: background 0.2s;
   position: relative;
 }
-.pillar-cell::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--teal); transform: scaleX(0); transition: transform 0.3s; }
+.pillar-cell::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform 0.3s; }
 .pillar-cell:hover::after, .pillar-cell.active::after { transform: scaleX(1); }
 .pillar-cell:hover, .pillar-cell.active { background: var(--bg3); }
-.pillar-cell.active { background: var(--teal-dim); }
+.pillar-cell.active { background: var(--accent-dim); }
 .pillar-cell.locked { opacity: 0.4; cursor: default; }
 .pillar-cell.locked::after { display: none; }
-.pc-num { font-family: var(--font-mono); font-size: 0.58rem; color: var(--teal); margin-bottom: 6px; letter-spacing: 0.1em; }
+.pc-num { font-family: var(--font-mono); font-size: 0.58rem; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.1em; }
 .pillar-cell.locked .pc-num { color: var(--text-mute); }
 .pc-name { font-family: var(--font-head); font-size: 0.68rem; font-weight: 600; color: var(--text); line-height: 1.3; }
 .pillar-cell.locked .pc-name { color: var(--text-mute); }
@@ -152,11 +153,11 @@ body { overflow-x: hidden; }
   align-items: center;
   gap: 10px;
 }
-.landing-nav-logo strong { color: var(--teal); }
-.nav-pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); animation: pulse 2s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 8px var(--teal)}50%{opacity:0.5;box-shadow:0 0 3px var(--teal)} }
+.landing-nav-logo strong { color: var(--accent); }
+.nav-pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 8px var(--accent)}50%{opacity:0.5;box-shadow:0 0 3px var(--accent)} }
 .landing-nav-right { display: flex; align-items: center; gap: 1.5rem; }
-.nav-by { font-family: var(--font-mono); font-size: 0.6rem; padding: 3px 10px; border-radius: 4px; background: var(--teal-dim); border: 1px solid var(--teal-glow); color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; }
+.nav-by { font-family: var(--font-mono); font-size: 0.6rem; padding: 3px 10px; border-radius: 4px; background: var(--accent-dim); border: 1px solid var(--border-hi); color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
 </style>
 </head>
 <body>
@@ -186,7 +187,7 @@ body { overflow-x: hidden; }
 
   <p class="hero-sub">
     A new language for HR. The language of Revenue.<br>
-    5 pillars. Real org simulations. One certification that changes how you walk into every boardroom — forever.
+    5 pillars. Real org simulations. One certification that changes how you walk into every boardroom &ndash; forever.
   </p>
 
   <div class="metrics-grid">
@@ -197,7 +198,7 @@ body { overflow-x: hidden; }
   </div>
 
   <div class="hero-cta">
-    <a href="dashboard.html" class="btn-primary">Start Level 1 — Free →</a>
+    <a href="dashboard.html" class="btn-primary">Start Level 1 &ndash; Free →</a>
     <a href="dashboard.html" class="btn-secondary">View Dashboard</a>
   </div>
 
@@ -227,7 +228,7 @@ body { overflow-x: hidden; }
 
 <script>
 document.getElementById('rf-css').textContent = RF.css;
-RF.startMatrix('matrix-canvas', 0.15);
+RF.startMatrix('matrix-canvas', 0.45);
 RF.startTicker('ticker');
 function countUp(id, target, dur) {
   const el = document.getElementById(id); if (!el) return;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillar 2, Module B: The Alpha Methodology — Revenue Fluent</title>
+<title>Pillar 2, Module B: The Alpha Methodology &ndash; Revenue Fluent</title>
 <style id="rf-css"></style>
 <script src="shared.js"></script>
 <style>
@@ -13,34 +13,34 @@
 .method-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .method-card.vis { opacity: 1; transform: translateY(0); }
 .method-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-.method-card-dim { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); }
-.method-card-metric { font-family: var(--font-mono); font-size: 0.62rem; padding: 3px 8px; border-radius: 4px; background: var(--teal-dim); border: 1px solid var(--teal-glow); color: var(--teal); }
-.method-formula { background: var(--bg3); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--teal); line-height: 1.8; }
+.method-card-dim { font-family: var(--font-head); font-weight: 800; font-size: 1rem; color: var(--text); }
+.method-card-metric { font-family: var(--font-mono); font-size: 0.62rem; padding: 3px 8px; border-radius: 4px; background: var(--accent-dim); border: 1px solid var(--border-hi); color: var(--accent); }
+.method-formula { background: var(--bg3); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); line-height: 1.8; }
 .method-benchmark { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 1rem; }
 .bm-chip { background: var(--bg3); border-radius: var(--radius-sm); padding: 0.75rem; text-align: center; }
-.bm-chip-val { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; line-height: 1; margin-bottom: 3px; }
+.bm-chip-val { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; line-height: 1; margin-bottom: 3px; }
 .bm-chip-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; }
 .method-sterling { background: var(--red-dim); border: 1px solid rgba(255,71,87,0.2); border-radius: var(--radius-sm); padding: 0.875rem 1.25rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--red); line-height: 1.7; }
-.method-sterling.positive { background: var(--teal-dim); border-color: var(--teal-glow); color: var(--teal); }
+.method-sterling.positive { background: var(--accent-dim); border-color: var(--border-hi); color: var(--accent); }
 
 .quiz-q { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
 .quiz-q-text { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 1.25rem; font-weight: 500; }
 .quiz-options { display: flex; flex-direction: column; gap: 8px; }
 .quiz-opt { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.85rem; color: var(--text-dim); cursor: pointer; transition: all 0.2s; }
-.quiz-opt:hover { border-color: var(--teal-glow); color: var(--text); }
-.quiz-opt.correct { background: var(--teal-dim); border-color: var(--teal); color: var(--teal); }
+.quiz-opt:hover { border-color: var(--border-hi); color: var(--text); }
+.quiz-opt.correct { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
 .quiz-opt.wrong { background: var(--red-dim); border-color: var(--red); color: var(--red); }
 .quiz-feedback { margin-top: 1rem; padding: 1rem 1.25rem; background: var(--bg3); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; display: none; }
 .quiz-feedback.vis { display: block; animation: pageIn 0.3s ease; }
 
 .badge-wrap { text-align: center; padding: 3rem 2rem; }
-.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--teal-dim); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
+.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
 @keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4)} }
-.badge-title { font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; color: var(--teal); margin-bottom: 0.5rem; }
+.badge-title { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); margin-bottom: 0.5rem; }
 .badge-sub { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; }
 .badge-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 400px; margin: 0 auto 2rem; }
 .bstat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.875rem; text-align: center; }
-.bstat-val { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--teal); }
+.bstat-val { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); }
 .bstat-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 </style>
 </head>
@@ -52,7 +52,7 @@
   <div class="topbar-breadcrumb">
     <span>Pillar 2</span><span class="sep">/</span>
     <span>People Alpha</span><span class="sep">/</span>
-    <span class="current">Module B — The Alpha Methodology</span>
+    <span class="current">Module B &ndash; The Alpha Methodology</span>
   </div>
   <div class="topbar-right">
     <div class="topbar-progress">
@@ -68,7 +68,7 @@
 <div class="beat active" id="beat-0">
   <div class="page-tag">Module B · Beat 1 of 3 · The Methodology</div>
   <h1 class="page-title">How to Calculate Each Alpha</h1>
-  <p class="page-desc">Each of the 5 Alpha dimensions has a specific calculation methodology — a formula, a set of inputs, and a benchmark range. These are the methodologies that make People Alpha measurable, not just conceptual.</p>
+  <p class="page-desc">Each of the 5 Alpha dimensions has a specific calculation methodology &ndash; a formula, a set of inputs, and a benchmark range. These are the methodologies that make People Alpha measurable, not just conceptual.</p>
 
   <div id="method-cards">
 
@@ -82,7 +82,7 @@
         Where: Benchmark = industry median Year 1 revenue per equivalent role
       </div>
       <div class="method-benchmark">
-        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--teal)">+10%+</div><div class="bm-chip-label">Strong</div></div>
+        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--accent)">+10%+</div><div class="bm-chip-label">Strong</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--amber)">-5% to +10%</div><div class="bm-chip-label">Average</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--red)">Below -5%</div><div class="bm-chip-label">Weak</div></div>
       </div>
@@ -99,7 +99,7 @@
         Where: Benchmark Delta = industry average team revenue change in 6 months post-promotion
       </div>
       <div class="method-benchmark">
-        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--teal)">+8%+</div><div class="bm-chip-label">Strong</div></div>
+        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--accent)">+8%+</div><div class="bm-chip-label">Strong</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--amber)">0% to +8%</div><div class="bm-chip-label">Average</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--red)">Below 0%</div><div class="bm-chip-label">Destroying value</div></div>
       </div>
@@ -116,7 +116,7 @@
         Where: T = tenure cohort (Year 2, Year 3, Year 4+)
       </div>
       <div class="method-benchmark">
-        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--teal)">+15%+</div><div class="bm-chip-label">Strong</div></div>
+        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--accent)">+15%+</div><div class="bm-chip-label">Strong</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--amber)">0% to +15%</div><div class="bm-chip-label">Average</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--red)">Below 0%</div><div class="bm-chip-label">Culture not compounding</div></div>
       </div>
@@ -133,7 +133,7 @@
         Where: Benchmark = industry median revenue per FTE for comparable team structures
       </div>
       <div class="method-benchmark">
-        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--teal)">+10%+</div><div class="bm-chip-label">Strong</div></div>
+        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--accent)">+10%+</div><div class="bm-chip-label">Strong</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--amber)">-5% to +10%</div><div class="bm-chip-label">Average</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--red)">Below -5%</div><div class="bm-chip-label">Org design leaking value</div></div>
       </div>
@@ -150,7 +150,7 @@
         Where: Benchmark ROI = industry median revenue generated per £1 of L&D investment
       </div>
       <div class="method-benchmark">
-        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--teal)">+15%+</div><div class="bm-chip-label">Strong</div></div>
+        <div class="bm-chip"><div class="bm-chip-val" style="color:var(--accent)">+15%+</div><div class="bm-chip-label">Strong</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--amber)">0% to +15%</div><div class="bm-chip-label">Average</div></div>
         <div class="bm-chip"><div class="bm-chip-val" style="color:var(--red)">Below 0%</div><div class="bm-chip-label">L&D destroying value</div></div>
       </div>
@@ -175,10 +175,10 @@
     <div class="tag tag-amber" style="margin-bottom:10px">Question 1 of 3</div>
     <div class="quiz-q-text">Sterling's senior consultants (3yr+ tenure) generate 34% more revenue than their Year 1 baseline. The industry benchmark for the same tenure is 26%. What is Sterling's Retention Alpha?</div>
     <div class="quiz-options">
-      <div class="quiz-opt" onclick="answerQ(0,0,false)">+34% — the absolute Year 1 uplift</div>
-      <div class="quiz-opt" onclick="answerQ(0,1,true)">+8% — the delta above the industry benchmark</div>
-      <div class="quiz-opt" onclick="answerQ(0,2,false)">+26% — the industry benchmark itself</div>
-      <div class="quiz-opt" onclick="answerQ(0,3,false)">-8% — because 26% is higher than expected</div>
+      <div class="quiz-opt" onclick="answerQ(0,0,false)">+34% &ndash; the absolute Year 1 uplift</div>
+      <div class="quiz-opt" onclick="answerQ(0,1,true)">+8% &ndash; the delta above the industry benchmark</div>
+      <div class="quiz-opt" onclick="answerQ(0,2,false)">+26% &ndash; the industry benchmark itself</div>
+      <div class="quiz-opt" onclick="answerQ(0,3,false)">-8% &ndash; because 26% is higher than expected</div>
     </div>
     <div class="quiz-feedback" id="qf-0"></div>
   </div>
@@ -232,7 +232,7 @@
       <div class="bstat"><div class="bstat-val">B ✓</div><div class="bstat-label">Module</div></div>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
-      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next — Module C</div>
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next &ndash; Module C</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The Instruments</div>
       <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">Live calculators for BEE, SPEI, HCR, and HCM. Pre-loaded with Sterling Consulting's scenario data. Calculate all 4 metrics and build the complete People Alpha scorecard.</div>
     </div>
@@ -246,7 +246,7 @@
 </div></div>
 <script>
 document.getElementById('rf-css').textContent = RF.css;
-RF.startMatrix('matrix-canvas', 0.07);
+RF.startMatrix('matrix-canvas', 0.45);
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p2-b');
 document.querySelectorAll('.sb-pillar').forEach(el => {
@@ -290,9 +290,9 @@ setTimeout(() => {
 }, 300);
 
 const feedbacks = [
-  { correct: "Correct. People Alpha is always relative to benchmark — not absolute. Sterling's 34% uplift vs the 26% benchmark = +8% alpha. The delta is what matters.", wrong: "Not quite. Alpha is always relative to benchmark, not absolute. Sterling's 34% vs the 26% benchmark = +8% above market = Retention Alpha of +8%." },
+  { correct: "Correct. People Alpha is always relative to benchmark &ndash; not absolute. Sterling's 34% uplift vs the 26% benchmark = +8% alpha. The delta is what matters.", wrong: "Not quite. Alpha is always relative to benchmark, not absolute. Sterling's 34% vs the 26% benchmark = +8% above market = Retention Alpha of +8%." },
   { correct: "Exactly right. -31% Promotion Alpha means your promotions generate 31% less revenue uplift than industry peers doing equivalent promotions. It's a relative underperformance metric.", wrong: "Not quite. Promotion Alpha measures revenue impact of promotions vs. industry benchmark. -31% = 31% less revenue uplift than peers from similar promotions." },
-  { correct: "Correct. BEE (Baseline Employee Expense) gives you revenue per FTE, and HCR (Hiring Completion Rate) gives you hiring execution quality — together they calculate whether your hires generate above-market revenue returns.", wrong: "Not quite. Hiring Alpha uses BEE (revenue per FTE baseline) + HCR (hiring completion rate) to calculate whether your hiring decisions generate above or below market revenue returns." },
+  { correct: "Correct. BEE (Baseline Employee Expense) gives you revenue per FTE, and HCR (Hiring Completion Rate) gives you hiring execution quality &ndash; together they calculate whether your hires generate above-market revenue returns.", wrong: "Not quite. Hiring Alpha uses BEE (revenue per FTE baseline) + HCR (hiring completion rate) to calculate whether your hiring decisions generate above or below market revenue returns." },
 ];
 
 function answerQ(qIdx, optIdx, isCorrect) {
@@ -325,4 +325,4 @@ function answerQ(qIdx, optIdx, isCorrect) {
 updateProgress();
 </script>
 </PAGEEOF
-echo "P2 Module B done — $(wc -l < /home/claude/rf2/p2-module-b.html) lines"
+echo "P2 Module B done &ndash; $(wc -l < /home/claude/rf2/p2-module-b.html) lines"

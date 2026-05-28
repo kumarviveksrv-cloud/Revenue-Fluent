@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module A: The Philosophy — Revenue Fluent</title>
+<title>Module A: The Philosophy &ndash; Revenue Fluent</title>
 <style id="rf-css"></style>
 <script src="shared.js"></script>
 <style>
@@ -12,9 +12,9 @@
 .beat.active { display: block; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
 
 /* PROVOCATION */
-.prov-line { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.6rem,3vw,2.4rem); letter-spacing: -0.025em; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.prov-line { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.5rem,2.8vw,2.2rem); letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .prov-line.vis { opacity: 1; transform: translateY(0); }
-.prov-line.teal { color: var(--teal); text-shadow: 0 0 30px rgba(0,212,170,0.25); }
+.prov-line.teal { color: var(--accent); text-shadow: 0 0 30px rgba(0,212,170,0.25); }
 .prov-line.amber { color: var(--amber); }
 .prov-line.dim { font-family: var(--font-body); font-size: clamp(0.95rem,1.8vw,1.2rem); font-weight: 300; color: var(--text-dim); }
 .prov-cta { margin-top: 3rem; opacity: 0; transition: opacity 0.6s ease; }
@@ -23,34 +23,34 @@
 /* DRAG */
 .drag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
 .drag-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.85rem; color: var(--text); cursor: grab; transition: all 0.2s; user-select: none; }
-.drag-item:hover { border-color: var(--teal-glow); transform: translateX(3px); }
+.drag-item:hover { border-color: var(--border-hi); transform: translateX(3px); }
 .drag-item.dragging { opacity: 0.4; }
 .drop-zone { background: var(--bg2); border: 2px dashed var(--border-hi); border-radius: var(--radius); padding: 1.25rem; min-height: 200px; transition: all 0.2s; display: flex; flex-direction: column; gap: 8px; }
-.drop-zone.over { border-color: var(--teal); background: var(--teal-dim); box-shadow: 0 0 20px rgba(0,212,170,0.1); }
+.drop-zone.over { border-color: var(--accent); background: var(--accent-dim); box-shadow: 0 0 20px rgba(0,212,170,0.1); }
 .dz-hint { font-size: 0.78rem; color: var(--text-mute); text-align: center; margin: auto; }
 .pool-title { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mute); margin-bottom: 8px; }
 
 /* CONFESSION */
 .vote-btns { display: flex; gap: 1rem; margin: 1.5rem 0; }
-.vbtn { flex: 1; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2); color: var(--text); font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
-.vbtn.yes:hover, .vbtn.yes.sel { border-color: var(--teal); background: var(--teal-dim); color: var(--teal); }
+.vbtn { flex: 1; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg2); color: var(--text); font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
+.vbtn.yes:hover, .vbtn.yes.sel { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
 .vbtn.no:hover, .vbtn.no.sel { border-color: var(--red); background: var(--red-dim); color: var(--red); }
 .vote-result { display: none; }
 .vote-result.vis { display: block; animation: pageIn 0.4s ease; }
 .vote-bar-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
 .vb-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); margin-bottom: 10px; }
 .vbar { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
-.vbar-fill { height: 100%; background: var(--teal); border-radius: 3px; transition: width 1.4s cubic-bezier(0.4,0,0.2,1); width: 0; }
-.vpct { font-family: var(--font-head); font-weight: 700; font-size: 3rem; color: var(--teal); line-height: 1; }
+.vbar-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 1.4s cubic-bezier(0.4,0,0.2,1); width: 0; }
+.vpct { font-family: var(--font-head); font-weight: 800; font-size: 3rem; color: var(--accent); line-height: 1; }
 .vpct-sub { font-size: 0.82rem; color: var(--text-dim); margin-top: 6px; }
 .confession-wall { display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto; }
-.conf-card { background: var(--bg2); border: 1px solid var(--border); border-left: 2px solid var(--teal); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.65; animation: pageIn 0.4s ease; }
-.conf-org { font-family: var(--font-mono); font-size: 0.58rem; color: var(--teal); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.08em; }
+.conf-card { background: var(--bg2); border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.65; animation: pageIn 0.4s ease; }
+.conf-org { font-family: var(--font-mono); font-size: 0.58rem; color: var(--accent); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.08em; }
 
 /* REVEAL */
 .rev-line { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; line-height: 1.3; color: var(--text); margin-bottom: 1.1rem; opacity: 0; transform: translateY(12px); transition: opacity 0.55s ease, transform 0.55s ease; letter-spacing: -0.02em; }
 .rev-line.vis { opacity: 1; transform: translateY(0); }
-.rev-line.punch { font-size: 2rem; color: var(--teal); text-shadow: 0 0 25px rgba(0,212,170,0.2); }
+.rev-line.punch { font-size: 2rem; color: var(--accent); text-shadow: 0 0 25px rgba(0,212,170,0.2); }
 .rev-line.sub { font-family: var(--font-body); font-size: 0.95rem; font-weight: 300; color: var(--text-dim); }
 .rev-line.impact { color: var(--amber); font-size: 1.8rem; }
 
@@ -58,25 +58,25 @@
 .reframe-rows { display: flex; flex-direction: column; gap: 10px; margin: 1.5rem 0; }
 .rf-row { display: grid; grid-template-columns: 1fr 32px 1fr; gap: 10px; align-items: center; cursor: pointer; }
 .rf-old { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 11px 14px; font-size: 0.83rem; color: var(--text-mute); line-height: 1.5; transition: all 0.2s; }
-.rf-row:hover .rf-old { border-color: var(--teal-glow); }
-.rf-arr { text-align: center; color: var(--teal); font-size: 1rem; }
-.rf-new { background: var(--teal-dim); border: 1px solid var(--border-hi); border-radius: var(--radius-sm); padding: 11px 14px; font-size: 0.83rem; color: var(--teal); line-height: 1.5; opacity: 0; transition: opacity 0.4s ease 0.1s; }
+.rf-row:hover .rf-old { border-color: var(--border-hi); }
+.rf-arr { text-align: center; color: var(--accent); font-size: 1rem; }
+.rf-new { background: var(--accent-dim); border: 1px solid var(--border-hi); border-radius: var(--radius-sm); padding: 11px 14px; font-size: 0.83rem; color: var(--accent); line-height: 1.5; opacity: 0; transition: opacity 0.4s ease 0.1s; }
 .rf-row.revealed .rf-new { opacity: 1; }
 .rf-row.revealed .rf-old { color: var(--text-dim); }
 
 /* BADGE */
 .badge-wrap { text-align: center; padding: 3rem 2rem; }
-.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--teal-dim); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
+.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
 @keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4)} }
-.badge-title { font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; color: var(--teal); margin-bottom: 0.5rem; }
+.badge-title { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); margin-bottom: 0.5rem; }
 .badge-sub { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; }
 .badge-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 400px; margin: 0 auto 2rem; }
 .bstat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.875rem; text-align: center; }
-.bstat-val { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--teal); }
+.bstat-val { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); }
 .bstat-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 .next-preview { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; max-width: 440px; margin: 0 auto 2rem; text-align: left; }
-.np-tag { font-family: var(--font-mono); font-size: 0.6rem; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
-.np-title { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 5px; }
+.np-tag { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.np-title { font-family: var(--font-head); font-weight: 800; font-size: 1rem; color: var(--text); margin-bottom: 5px; }
 .np-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
 
 /* BAR CHART */
@@ -99,7 +99,7 @@
     <span class="sep">/</span>
     <span>People-Revenue Connect</span>
     <span class="sep">/</span>
-    <span class="current">Module A — The Philosophy</span>
+    <span class="current">Module A &ndash; The Philosophy</span>
   </div>
   <div class="topbar-right">
     <div class="topbar-progress">
@@ -118,7 +118,7 @@
     <div class="beat active" id="beat-0">
       <div class="page-tag">Module A · Beat 1 of 5 · The Philosophy</div>
       <div style="min-height:60vh;display:flex;flex-direction:column;justify-content:center">
-        <div class="prov-line" id="pl-0">Every rupee of revenue your company ever made —</div>
+        <div class="prov-line" id="pl-0">Every rupee of revenue your company ever made  &ndash; </div>
         <div class="prov-line teal" id="pl-1">was made by a person.</div>
         <div class="prov-line dim" id="pl-2">HR hired that person. Developed them.<br>Retained them. Designed the team around them.</div>
         <div class="prov-line amber" id="pl-3">So why does Finance get the credit?</div>
@@ -133,19 +133,19 @@
     <div class="beat" id="beat-1">
       <div class="page-tag">Module A · Beat 2 of 5</div>
       <h2 class="page-title">What killed TechVelocity's Q3?</h2>
-      <p class="page-desc">TechVelocity hit ₹3.2Cr target every quarter for 6 quarters. Then Q3: ₹2.1Cr. A 34% miss. Before we show you the data — what do you think caused the crash?</p>
+      <p class="page-desc">TechVelocity hit ₹3.2Cr target every quarter for 6 quarters. Then Q3: ₹2.1Cr. A 34% miss. Before we show you the data &ndash; what do you think caused the crash?</p>
 
       <div class="card" style="margin-bottom:1.5rem">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-          <span style="font-family:var(--font-head);font-weight:600;font-size:0.85rem">TechVelocity — Revenue Index</span>
+          <span style="font-family:var(--font-head);font-weight:600;font-size:0.85rem">TechVelocity &ndash; Revenue Index</span>
           <span class="tag">Scenario Data</span>
         </div>
         <div class="bar-chart">
-          <div class="bar-col"><div class="bar-fill" style="height:88px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q1</div></div>
-          <div class="bar-col"><div class="bar-fill" style="height:92px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q2</div></div>
-          <div class="bar-col"><div class="bar-fill" style="height:95px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q3</div></div>
-          <div class="bar-col"><div class="bar-fill" style="height:100px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q4</div></div>
-          <div class="bar-col"><div class="bar-fill" style="height:97px;background:var(--teal);opacity:0.5"></div><div class="bar-lbl">Q5</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:88px;background:var(--accent);opacity:0.5"></div><div class="bar-lbl">Q1</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:92px;background:var(--accent);opacity:0.5"></div><div class="bar-lbl">Q2</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:95px;background:var(--accent);opacity:0.5"></div><div class="bar-lbl">Q3</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:100px;background:var(--accent);opacity:0.5"></div><div class="bar-lbl">Q4</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:97px;background:var(--accent);opacity:0.5"></div><div class="bar-lbl">Q5</div></div>
           <div class="bar-col"><div class="bar-fill" style="height:66px;background:var(--red);opacity:1"></div><div class="bar-lbl">Q6</div></div>
         </div>
         <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-align:right">Revenue index · Q7 target = 100</div>
@@ -172,8 +172,8 @@
       <div id="drag-reveal" style="display:none">
         <div class="card-hi" style="margin-top:1.5rem">
           <div class="tag" style="margin-bottom:10px">The Reveal</div>
-          <p style="font-size:0.92rem;color:var(--text);line-height:1.75;margin-bottom:1rem">Most people choose <strong id="chosen" style="color:var(--amber)"></strong> — because that's the answer the board accepted. But the HR data told a completely different story 9 months earlier.</p>
-          <p style="font-size:0.92rem;color:var(--teal);font-weight:500;line-height:1.75">It was a people decision. The $240K hire who lasted 11 months, triggered two senior exits, and left the team at 60% productive capacity going into Q3.</p>
+          <p style="font-size:0.92rem;color:var(--text);line-height:1.75;margin-bottom:1rem">Most people choose <strong id="chosen" style="color:var(--amber)"></strong> &ndash; because that's the answer the board accepted. But the HR data told a completely different story 9 months earlier.</p>
+          <p style="font-size:0.92rem;color:var(--accent);font-weight:500;line-height:1.75">It was a people decision. The $240K hire who lasted 11 months, triggered two senior exits, and left the team at 60% productive capacity going into Q3.</p>
           <p style="font-size:0.8rem;color:var(--text-mute);margin-top:0.75rem">HR saw the signals. Nobody looked at the data.</p>
         </div>
         <div class="page-nav">
@@ -187,17 +187,17 @@
     <div class="beat" id="beat-2">
       <div class="page-tag">Module A · Beat 3 of 5</div>
       <h2 class="page-title">Have you ever seen this happen?</h2>
-      <p class="page-desc">A business problem blamed on the market, the product, or competition — when you suspected it was actually a people decision?</p>
+      <p class="page-desc">A business problem blamed on the market, the product, or competition &ndash; when you suspected it was actually a people decision?</p>
       <div class="vote-btns">
-        <button class="vbtn yes" onclick="castVote('yes',this)">Yes — I've lived this</button>
-        <button class="vbtn no" onclick="castVote('no',this)">No — not happened to me</button>
+        <button class="vbtn yes" onclick="castVote('yes',this)">Yes &ndash; I've lived this</button>
+        <button class="vbtn no" onclick="castVote('no',this)">No &ndash; not happened to me</button>
       </div>
       <div class="vote-result" id="vote-result">
         <div class="vote-bar-wrap">
           <div class="vb-label">Revenue Fluent learners who said YES</div>
           <div class="vbar"><div class="vbar-fill" id="vbar-fill"></div></div>
           <div class="vpct" id="vpct">0%</div>
-          <div class="vpct-sub">of HR professionals have watched a people decision destroy revenue — while everyone else looked the wrong way.</div>
+          <div class="vpct-sub">of HR professionals have watched a people decision destroy revenue &ndash; while everyone else looked the wrong way.</div>
         </div>
         <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">From the Revenue Fluent community:</p>
         <div class="confession-wall" id="conf-wall"></div>
@@ -218,7 +218,7 @@
           {t:'That it must "prove" its value to the business.',c:''},
           {t:'"Prove" is the problem.',c:'punch'},
           {t:'It positions HR as a defendant in a courtroom.',c:'sub'},
-          {t:'Even when HR wins — it wins permission to keep existing.',c:'sub'},
+          {t:'Even when HR wins &ndash; it wins permission to keep existing.',c:'sub'},
           {t:'Revenue Fluent inverts this completely.',c:''},
           {t:"HR doesn't prove its value.",c:''},
           {t:'HR OWNS the value.',c:'impact'},
@@ -235,12 +235,12 @@
     <div class="beat" id="beat-4">
       <div class="page-tag">Module A · Beat 5 of 5</div>
       <h2 class="page-title">Stop proving.<br>Start owning.</h2>
-      <p class="page-desc">These are 5 things HR pros say every day. Click each one to see how a Revenue Fluent professional says the exact same thing — in Revenue language.</p>
+      <p class="page-desc">These are 5 things HR pros say every day. Click each one to see how a Revenue Fluent professional says the exact same thing &ndash; in Revenue language.</p>
       <div class="reframe-rows">
         ${[
           {o:'"HR reduced attrition by 12%"',n:'"HR protected ₹2.3Cr in revenue this quarter"'},
           {o:'"We filled 43 roles this quarter"',n:'"We activated ₹8.2Cr in revenue capacity"'},
-          {o:'"Engagement scores improved to 74%"',n:'"Team velocity is up 18% — here\'s what that\'s worth"'},
+          {o:'"Engagement scores improved to 74%"',n:'"Team velocity is up 18% &ndash; here\'s what that\'s worth"'},
           {o:'"L&D trained 200 employees"',n:'"L&D generated ₹1.1Cr in capability ROI"'},
           {o:'"We retained 3 key performers"',n:'"We protected ₹4.7Cr in institutional revenue knowledge"'},
         ].map((p,i)=>`
@@ -276,9 +276,9 @@
           <div class="bstat"><div class="bstat-val">A ✓</div><div class="bstat-label">Module</div></div>
         </div>
         <div class="next-preview">
-          <div class="np-tag">Coming Next — Module B</div>
+          <div class="np-tag">Coming Next &ndash; Module B</div>
           <div class="np-title">The Attribution Methodology</div>
-          <div class="np-desc">How to trace any people decision to a revenue outcome — with a confidence score. The intellectual framework that makes everything else possible.</div>
+          <div class="np-desc">How to trace any people decision to a revenue outcome &ndash; with a confidence score. The intellectual framework that makes everything else possible.</div>
         </div>
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
           <a href="p1-module-b.html" class="btn-primary">Continue to Module B →</a>
@@ -293,7 +293,7 @@
 
 <script>
 document.getElementById('rf-css').textContent = RF.css;
-RF.startMatrix('matrix-canvas', 0.07);
+RF.startMatrix('matrix-canvas', 0.45);
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p1-a');
 
@@ -332,7 +332,7 @@ function completeBeat() {
   nextBeat();
 }
 
-// Beat 0 — provocation animation
+// Beat 0 &ndash; provocation animation
 setTimeout(() => {
   [0,1,2,3].forEach((i,idx) => {
     setTimeout(() => {
@@ -346,7 +346,7 @@ setTimeout(() => {
   }, 3800);
 }, 300);
 
-// Beat 1 — drag and drop
+// Beat 1 &ndash; drag and drop
 document.addEventListener('dragstart', e => {
   if (e.target.classList.contains('drag-item')) {
     e.target.classList.add('dragging');
@@ -373,14 +373,14 @@ if (dz) {
   });
 }
 
-// Beat 2 — confession wall
+// Beat 2 &ndash; confession wall
 const confessions = [
   { org: 'FMCG · 2,400 employees', text: 'Our CEO blamed supply chain for 3 quarters. It was one toxic VP destroying two teams. I had the exit interview data. Nobody asked.' },
-  { org: 'SaaS startup · 180 employees', text: '₹8Cr revenue miss. Everyone blamed the economy. I knew it was the reorg — we split the team that had generated 60% of ARR.' },
+  { org: 'SaaS startup · 180 employees', text: '₹8Cr revenue miss. Everyone blamed the economy. I knew it was the reorg &ndash; we split the team that had generated 60% of ARR.' },
   { org: 'Investment bank · 850 employees', text: 'Lost our biggest institutional client. Sales blamed product. Product blamed sales. HR had flagged the relationship manager\'s attrition intent 4 months earlier.' },
   { org: 'IT services · 3,200 employees', text: 'Three quarters of missed targets. The board brought in a consultant. Their finding: exactly what HR had reported in the annual engagement survey.' },
   { org: 'Family business · 220 employees', text: 'When the founder stepped back, we lost 40% of senior team in 18 months. Nobody traced it to the succession decision. I did.' },
-  { org: 'Pharma · 1,100 employees', text: 'A ₹12Cr product launch failed. We blamed positioning. Real reason: the product team had 73% new joiners — all still ramping. HR knew. HR wasn\'t in the room.' },
+  { org: 'Pharma · 1,100 employees', text: 'A ₹12Cr product launch failed. We blamed positioning. Real reason: the product team had 73% new joiners &ndash; all still ramping. HR knew. HR wasn\'t in the room.' },
 ];
 
 function castVote(v, btn) {
@@ -409,7 +409,7 @@ function castVote(v, btn) {
   });
 }
 
-// Beat 3 — reveal
+// Beat 3 &ndash; reveal
 function startReveal() {
   Array.from({length:9}).forEach((_,i) => {
     setTimeout(() => {
@@ -423,7 +423,7 @@ function startReveal() {
   }, 9 * 600 + 300);
 }
 
-// Beat 4 — reframe
+// Beat 4 &ndash; reframe
 let rfRevealed = 0;
 function revealRF(i) {
   const row = document.getElementById('rf-' + i);

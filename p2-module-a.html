@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillar 2, Module A: The Philosophy — Revenue Fluent</title>
+<title>Pillar 2, Module A: The Philosophy &ndash; Revenue Fluent</title>
 <style id="rf-css"></style>
 <script src="shared.js"></script>
 <style>
@@ -12,33 +12,33 @@
 
 /* ALPHA SCORE CARD */
 .alpha-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: all 0.2s; }
-.alpha-card:hover { border-color: var(--teal-glow); }
+.alpha-card:hover { border-color: var(--border-hi); }
 .alpha-dimension { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-.alpha-dim-name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); }
-.alpha-dim-score { font-family: var(--font-head); font-weight: 700; font-size: 1.8rem; line-height: 1; }
-.alpha-dim-score.positive { color: var(--teal); }
+.alpha-dim-name { font-family: var(--font-head); font-weight: 800; font-size: 1rem; color: var(--text); }
+.alpha-dim-score { font-family: var(--font-head); font-weight: 800; font-size: 1.8rem; line-height: 1; }
+.alpha-dim-score.positive { color: var(--accent); }
 .alpha-dim-score.negative { color: var(--red); }
 .alpha-bar-track { height: 6px; background: var(--bg3); border-radius: 3px; position: relative; margin: 8px 0; }
 .alpha-bar-zero { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--border-hi); }
 .alpha-bar-fill { position: absolute; height: 100%; border-radius: 3px; transition: width 1s ease, left 0.8s ease; }
-.alpha-bar-fill.pos { background: var(--teal); left: 50%; }
+.alpha-bar-fill.pos { background: var(--accent); left: 50%; }
 .alpha-bar-fill.neg { background: var(--red); right: 50%; }
 .alpha-dim-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
 
 /* COMPARISON TABLE */
 .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
 .compare-col { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-.compare-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); font-family: var(--font-head); font-weight: 700; font-size: 0.88rem; }
+.compare-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); font-family: var(--font-head); font-weight: 800; font-size: 0.88rem; }
 .compare-header.bad { background: var(--red-dim); color: var(--red); }
-.compare-header.good { background: var(--teal-dim); color: var(--teal); }
+.compare-header.good { background: var(--accent-dim); color: var(--accent); }
 .compare-item { padding: 10px 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.82rem; color: var(--text-dim); display: flex; align-items: center; gap: 8px; line-height: 1.5; }
 .compare-item:last-child { border-bottom: none; }
 .compare-icon { flex-shrink: 0; }
 
 /* PROV LINES */
-.prov-line { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.6rem,3vw,2.4rem); letter-spacing: -0.025em; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.prov-line { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.5rem,2.8vw,2.2rem); letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .prov-line.vis { opacity: 1; transform: translateY(0); }
-.prov-line.teal { color: var(--teal); text-shadow: 0 0 30px rgba(0,212,170,0.25); }
+.prov-line.teal { color: var(--accent); text-shadow: 0 0 30px rgba(0,212,170,0.25); }
 .prov-line.amber { color: var(--amber); }
 .prov-line.dim { font-family: var(--font-body); font-size: clamp(0.95rem,1.8vw,1.2rem); font-weight: 300; color: var(--text-dim); }
 .prov-cta { margin-top: 3rem; opacity: 0; transition: opacity 0.6s ease; }
@@ -49,21 +49,21 @@
 .sort-pool { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; min-height: 200px; }
 .sort-pool-title { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
 .sort-item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 0.82rem; color: var(--text); cursor: grab; margin-bottom: 6px; transition: all 0.2s; user-select: none; }
-.sort-item:hover { border-color: var(--teal-glow); }
+.sort-item:hover { border-color: var(--border-hi); }
 .sort-item.dragging { opacity: 0.4; }
 .drop-area { background: var(--bg2); border: 2px dashed var(--border-hi); border-radius: var(--radius); padding: 1rem; min-height: 160px; display: flex; flex-direction: column; gap: 6px; transition: all 0.2s; }
-.drop-area.over { border-color: var(--teal); background: var(--teal-dim); }
+.drop-area.over { border-color: var(--accent); background: var(--accent-dim); }
 .drop-hint { font-size: 0.78rem; color: var(--text-mute); text-align: center; margin: auto; font-family: var(--font-mono); }
 
 /* BADGE */
 .badge-wrap { text-align: center; padding: 3rem 2rem; }
-.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--teal-dim); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
+.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
 @keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4)} }
-.badge-title { font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; color: var(--teal); margin-bottom: 0.5rem; }
+.badge-title { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); margin-bottom: 0.5rem; }
 .badge-sub { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; }
 .badge-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 400px; margin: 0 auto 2rem; }
 .bstat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.875rem; text-align: center; }
-.bstat-val { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--teal); }
+.bstat-val { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); }
 .bstat-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 </style>
 </head>
@@ -75,7 +75,7 @@
   <div class="topbar-breadcrumb">
     <span>Pillar 2</span><span class="sep">/</span>
     <span>People Alpha</span><span class="sep">/</span>
-    <span class="current">Module A — The Philosophy</span>
+    <span class="current">Module A &ndash; The Philosophy</span>
   </div>
   <div class="topbar-right">
     <div class="topbar-progress">
@@ -94,7 +94,7 @@
     <div class="prov-line" id="pl-0">Every fund manager in the world is judged by one number.</div>
     <div class="prov-line teal" id="pl-1">Alpha.</div>
     <div class="prov-line dim" id="pl-2">Returns above the market benchmark. Not just good returns. Better than market returns.</div>
-    <div class="prov-line amber" id="pl-3">HR makes decisions every day that generate — or destroy — alpha. Nobody measures it.</div>
+    <div class="prov-line amber" id="pl-3">HR makes decisions every day that generate &ndash; or destroy &ndash; alpha. Nobody measures it.</div>
     <div class="prov-line dim" id="pl-4">Until now.</div>
     <div class="prov-cta" id="prov-cta">
       <button class="btn-primary" onclick="nextBeat()">Show me People Alpha →</button>
@@ -110,7 +110,7 @@
   <p class="page-desc">In finance, alpha is the return your fund generates above the market benchmark. If the market returns 12% and your fund returns 16%, your alpha is +4%. That delta is everything in asset management.</p>
 
   <div style="background:var(--bg2);border:1px solid var(--border-hi);border-radius:var(--radius);padding:1.5rem;margin:1.5rem 0">
-    <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">The Finance Analogy</div>
+    <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">The Finance Analogy</div>
     <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;text-align:center">
       <div>
         <div style="font-family:var(--font-head);font-weight:700;font-size:2rem;color:var(--text-dim)">12%</div>
@@ -118,14 +118,14 @@
       </div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:1.5rem;color:var(--border-hi)">→</div>
       <div>
-        <div style="font-family:var(--font-head);font-weight:700;font-size:2rem;color:var(--teal)">+4%</div>
+        <div style="font-family:var(--font-head);font-weight:700;font-size:2rem;color:var(--accent)">+4%</div>
         <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px">Alpha generated</div>
       </div>
     </div>
   </div>
 
-  <p class="page-desc">People Alpha applies the exact same concept to HR decisions. Every company makes roughly the same categories of people decisions — hiring, promotions, L&D investment, retention, team design. But some companies extract dramatically more revenue per decision than others.</p>
-  <p class="page-desc" style="color:var(--teal);font-weight:500">That delta is People Alpha.</p>
+  <p class="page-desc">People Alpha applies the exact same concept to HR decisions. Every company makes roughly the same categories of people decisions &ndash; hiring, promotions, L&D investment, retention, team design. But some companies extract dramatically more revenue per decision than others.</p>
+  <p class="page-desc" style="color:var(--accent);font-weight:500">That delta is People Alpha.</p>
 
   <div class="card-hi" style="margin:1.5rem 0">
     <div class="tag" style="margin-bottom:12px">The Definition</div>
@@ -143,14 +143,14 @@
 <div class="beat" id="beat-2">
   <div class="page-tag">Module A · Beat 3 of 5</div>
   <h1 class="page-title">The 5 Alpha Dimensions</h1>
-  <p class="page-desc">People Alpha isn't one number. It's a scorecard across 5 dimensions — each measuring a different category of people decision against the market benchmark. Click each dimension to explore.</p>
+  <p class="page-desc">People Alpha isn't one number. It's a scorecard across 5 dimensions &ndash; each measuring a different category of people decision against the market benchmark. Click each dimension to explore.</p>
 
   <div style="display:flex;flex-direction:column;gap:12px;margin:1.5rem 0" id="alpha-dims">
 
     <div class="alpha-card" onclick="expandDim(0)" id="dim-0" style="cursor:pointer">
       <div class="alpha-dimension">
         <div>
-          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 1</div>
+          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 1</div>
           <div class="alpha-dim-name">Hiring Alpha</div>
         </div>
         <div class="alpha-dim-score positive">+14%</div>
@@ -162,14 +162,14 @@
       <div class="alpha-dim-desc">Do your hires generate more or less revenue than the industry median for equivalent roles?</div>
       <div id="dim-detail-0" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
         <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.75">A +14% Hiring Alpha means your selection criteria, interviewing methodology, and onboarding process combine to produce hires who reach full productivity 14% faster and generate 14% more revenue per quarter than industry equivalents. This is your hiring function's ROI expressed as a market-relative metric.</p>
-        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:0.875rem 1rem;margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--teal)">Sterling Consulting benchmark: Industry average revenue per new hire in Year 1 = £142,000. Sterling actual = £108,000. Hiring Alpha = -24% 🔴</div>
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:0.875rem 1rem;margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--accent)">Sterling Consulting benchmark: Industry average revenue per new hire in Year 1 = £142,000. Sterling actual = £108,000. Hiring Alpha = -24% 🔴</div>
       </div>
     </div>
 
     <div class="alpha-card" onclick="expandDim(1)" id="dim-1" style="cursor:pointer">
       <div class="alpha-dimension">
         <div>
-          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 2</div>
+          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 2</div>
           <div class="alpha-dim-name">Promotion Alpha</div>
         </div>
         <div class="alpha-dim-score negative">-8%</div>
@@ -180,7 +180,7 @@
       </div>
       <div class="alpha-dim-desc">Do your promotions increase or decrease team revenue vs. what the industry sees from similar promotions?</div>
       <div id="dim-detail-1" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.75">A -8% Promotion Alpha means your promotions are destroying value vs. the market. Industry data shows that well-calibrated promotions increase team revenue by an average of 12% in the following quarter. Your promotions are generating only 4% uplift — an 8 percentage point gap. You're promoting the wrong people, at the wrong time, into the wrong roles.</p>
+        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.75">A -8% Promotion Alpha means your promotions are destroying value vs. the market. Industry data shows that well-calibrated promotions increase team revenue by an average of 12% in the following quarter. Your promotions are generating only 4% uplift &ndash; an 8 percentage point gap. You're promoting the wrong people, at the wrong time, into the wrong roles.</p>
         <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:0.875rem 1rem;margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--red)">Sterling Consulting: 4 simultaneous promotions to Partner track in Q1 → billable utilisation dropped 18% → £2.4M revenue miss. Classic negative Promotion Alpha. 🔴</div>
       </div>
     </div>
@@ -188,7 +188,7 @@
     <div class="alpha-card" onclick="expandDim(2)" id="dim-2" style="cursor:pointer">
       <div class="alpha-dimension">
         <div>
-          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 3</div>
+          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 3</div>
           <div class="alpha-dim-name">Retention Alpha</div>
         </div>
         <div class="alpha-dim-score positive">+22%</div>
@@ -199,15 +199,15 @@
       </div>
       <div class="alpha-dim-desc">When you retain someone, do they generate more revenue than a replacement would?</div>
       <div id="dim-detail-2" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.75">A +22% Retention Alpha means your culture is a quantifiable revenue asset. People who stay at your company generate 22% more revenue per year than industry equivalents at the same tenure — because your culture compounds their capability faster. This isn't a soft claim. It's a financial statement about your retention ROI.</p>
-        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:0.875rem 1rem;margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--teal)">High Retention Alpha companies compound talent like compound interest. Every year a person stays = 22% more than a replacement at Year 1. 🟢</div>
+        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.75">A +22% Retention Alpha means your culture is a quantifiable revenue asset. People who stay at your company generate 22% more revenue per year than industry equivalents at the same tenure &ndash; because your culture compounds their capability faster. This isn't a soft claim. It's a financial statement about your retention ROI.</p>
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:0.875rem 1rem;margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--accent)">High Retention Alpha companies compound talent like compound interest. Every year a person stays = 22% more than a replacement at Year 1. 🟢</div>
       </div>
     </div>
 
     <div class="alpha-card" onclick="expandDim(3)" id="dim-3" style="cursor:pointer">
       <div class="alpha-dimension">
         <div>
-          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 4</div>
+          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 4</div>
           <div class="alpha-dim-name">Team Design Alpha</div>
         </div>
         <div class="alpha-dim-score negative">-12%</div>
@@ -218,7 +218,7 @@
       </div>
       <div class="alpha-dim-desc">Do your team structures generate more revenue per FTE than optimal configurations?</div>
       <div id="dim-detail-3" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.75">A -12% Team Design Alpha means your org design is leaving money on the table. The way you structure teams, set spans of control, allocate senior talent, and design handoffs generates 12% less revenue per FTE than the industry benchmark for comparable team compositions. This bridges Pillar 2 and Pillar 3 — Team Revenue Architecture.</p>
+        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.75">A -12% Team Design Alpha means your org design is leaving money on the table. The way you structure teams, set spans of control, allocate senior talent, and design handoffs generates 12% less revenue per FTE than the industry benchmark for comparable team compositions. This bridges Pillar 2 and Pillar 3 &ndash; Team Revenue Architecture.</p>
         <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:0.875rem 1rem;margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--red)">Sterling: Too many partners relative to fee earners → high cost, low revenue per FTE → structural Team Design Alpha problem. 🔴</div>
       </div>
     </div>
@@ -226,7 +226,7 @@
     <div class="alpha-card" onclick="expandDim(4)" id="dim-4" style="cursor:pointer">
       <div class="alpha-dimension">
         <div>
-          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 5</div>
+          <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Dimension 5</div>
           <div class="alpha-dim-name">L&D Alpha</div>
         </div>
         <div class="alpha-dim-score positive">+18%</div>
@@ -238,7 +238,7 @@
       <div class="alpha-dim-desc">Does your training spend generate more attributable revenue than the industry median?</div>
       <div id="dim-detail-4" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
         <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.75">A +18% L&D Alpha means your training function is a revenue engine, not a cost centre. For every £1 invested in L&D, your organisation generates £1.18 more revenue than the industry median for equivalent L&D spend. Your programmes are better targeted, better designed, and better transferred to the job than competitors.</p>
-        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:0.875rem 1rem;margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--teal)">L&D Alpha companies treat training budget as a futures position. Every pound invested today generates compound returns in capability. 🟢</div>
+        <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:0.875rem 1rem;margin-top:0.75rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--accent)">L&D Alpha companies treat training budget as a futures position. Every pound invested today generates compound returns in capability. 🟢</div>
       </div>
     </div>
 
@@ -268,7 +268,7 @@
     <div class="compare-col">
       <div class="compare-header good">✅ What +Alpha Companies Do</div>
       <div class="compare-item"><span class="compare-icon">→</span> Promote based on demonstrated performance at the NEXT level, not current level</div>
-      <div class="compare-item"><span class="compare-icon">→</span> Stagger promotions — max 1-2 per quarter to maintain team stability</div>
+      <div class="compare-item"><span class="compare-icon">→</span> Stagger promotions &ndash; max 1-2 per quarter to maintain team stability</div>
       <div class="compare-item"><span class="compare-icon">→</span> Maintain 80% billable during transition with structured shadow-partnerwork</div>
       <div class="compare-item"><span class="compare-icon">→</span> Set clear 90-day revenue targets with weekly check-ins</div>
       <div class="compare-item"><span class="compare-icon">→</span> Promotion Alpha: +8% avg across industry peers who do this well</div>
@@ -276,7 +276,7 @@
   </div>
 
   <div style="background:var(--bg2);border:1px solid var(--border-hi);border-radius:var(--radius);padding:1.5rem;margin:1.5rem 0">
-    <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">Sterling People Alpha Scorecard</div>
+    <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">Sterling People Alpha Scorecard</div>
     <div style="display:grid;grid-template-columns:1fr 80px 80px;gap:0;background:var(--bg3);border-radius:var(--radius-sm);overflow:hidden">
       <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;padding:10px 14px">Dimension</div>
       <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;padding:10px 14px">Score</div>
@@ -303,7 +303,7 @@
 
   <div class="card-hi">
     <div class="tag" style="margin-bottom:10px">The Diagnosis</div>
-    <p style="font-size:0.95rem;color:var(--text);line-height:1.8">"Sterling's -12.4% overall People Alpha means their people decisions are destroying £X in revenue vs. what industry peers extract from equivalent decisions. The Promotion Alpha of -31% is the dominant driver — four simultaneous promotions without readiness assessment wiped £2.4M in billable utilisation in one quarter."</p>
+    <p style="font-size:0.95rem;color:var(--text);line-height:1.8">"Sterling's -12.4% overall People Alpha means their people decisions are destroying £X in revenue vs. what industry peers extract from equivalent decisions. The Promotion Alpha of -31% is the dominant driver &ndash; four simultaneous promotions without readiness assessment wiped £2.4M in billable utilisation in one quarter."</p>
   </div>
 
   <div class="page-nav">
@@ -327,16 +327,16 @@
     </div>
     <div class="card-hi" style="text-align:center">
       <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Company B</div>
-      <div style="font-family:var(--font-head);font-weight:700;font-size:2.5rem;color:var(--teal)">+20%</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:2.5rem;color:var(--accent)">+20%</div>
       <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute);margin-top:4px">People Alpha</div>
-      <div style="font-size:0.78rem;color:var(--text-dim);margin-top:10px;line-height:1.6">People decisions generating above-market returns. Talent compounds at 20% above market rate. This is a moat — as real as a patent portfolio.</div>
+      <div style="font-size:0.78rem;color:var(--text-dim);margin-top:10px;line-height:1.6">People decisions generating above-market returns. Talent compounds at 20% above market rate. This is a moat &ndash; as real as a patent portfolio.</div>
     </div>
   </div>
 
   <div class="card-hi" style="margin:1.5rem 0">
     <div class="tag" style="margin-bottom:12px">The Future of HR's Role</div>
     <p style="font-size:0.95rem;color:var(--text);line-height:1.8;margin-bottom:1rem">Today: CHRO presents engagement scores. Board nods politely. Budget approved reluctantly.</p>
-    <p style="font-size:0.95rem;color:var(--teal);font-weight:500;line-height:1.8">Tomorrow: CHRO presents People Alpha scorecard. "Our Hiring Alpha is +14%, generating £2.3M above market. Our Promotion Alpha is -8% — we need £400K more investment in manager calibration to close this gap." Board responds. Budget allocated immediately.</p>
+    <p style="font-size:0.95rem;color:var(--accent);font-weight:500;line-height:1.8">Tomorrow: CHRO presents People Alpha scorecard. "Our Hiring Alpha is +14%, generating £2.3M above market. Our Promotion Alpha is -8% &ndash; we need £400K more investment in manager calibration to close this gap." Board responds. Budget allocated immediately.</p>
   </div>
 
   <div class="badge-wrap" style="padding:2rem 0">
@@ -349,7 +349,7 @@
       <div class="bstat"><div class="bstat-val">A ✓</div><div class="bstat-label">Module</div></div>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
-      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next — Module B</div>
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next &ndash; Module B</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The Alpha Methodology</div>
       <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">How to calculate each of the 5 Alpha dimensions using the ViRorah metrics. The formulas, the benchmarks, and the calculation logic that makes People Alpha measurable.</div>
     </div>
@@ -364,7 +364,7 @@
 </div></div>
 <script>
 document.getElementById('rf-css').textContent = RF.css;
-RF.startMatrix('matrix-canvas', 0.07);
+RF.startMatrix('matrix-canvas', 0.45);
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p2-a');
 document.querySelectorAll('.sb-pillar').forEach(el => {
@@ -419,7 +419,7 @@ function completeBeat() {
 }
 
 function shareLinkedIn() {
-  const text = encodeURIComponent('Just completed Module A of Pillar 2 in Revenue Fluent by Kumar Vivek.\n\nPeople Alpha — the HR equivalent of financial alpha.\n\n5 dimensions:\n→ Hiring Alpha\n→ Promotion Alpha\n→ Retention Alpha\n→ Team Design Alpha\n→ L&D Alpha\n\nEvery people decision generates or destroys alpha vs. the market. Most HR pros never measure it.\n\n#RevenueHR #PeopleAlpha #RevenueFluentPractitioner #HUMANCE');
+  const text = encodeURIComponent('Just completed Module A of Pillar 2 in Revenue Fluent by Kumar Vivek.\n\nPeople Alpha &ndash; the HR equivalent of financial alpha.\n\n5 dimensions:\n→ Hiring Alpha\n→ Promotion Alpha\n→ Retention Alpha\n→ Team Design Alpha\n→ L&D Alpha\n\nEvery people decision generates or destroys alpha vs. the market. Most HR pros never measure it.\n\n#RevenueHR #PeopleAlpha #RevenueFluentPractitioner #HUMANCE');
   window.open('https://www.linkedin.com/sharing/share-offsite/?summary=' + text, '_blank');
 }
 
@@ -428,4 +428,4 @@ setTimeout(startProvocation, 300);
 updateProgress();
 </script>
 </PAGEEOF
-echo "P2 Module A done — $(wc -l < /home/claude/rf2/p2-module-a.html) lines"
+echo "P2 Module A done &ndash; $(wc -l < /home/claude/rf2/p2-module-a.html) lines"

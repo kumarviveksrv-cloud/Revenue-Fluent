@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module B: The Framework — Revenue Fluent</title>
+<title>Module B: The Framework &ndash; Revenue Fluent</title>
 <style id="rf-css"></style>
 <script src="shared.js"></script>
 <style>
@@ -15,23 +15,23 @@
 .method-step { display: grid; grid-template-columns: 56px 1fr; gap: 0; opacity: 0; transform: translateX(-20px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .method-step.vis { opacity: 1; transform: translateX(0); }
 .step-spine { display: flex; flex-direction: column; align-items: center; }
-.step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--teal-dim); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; color: var(--teal); flex-shrink: 0; }
+.step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-weight: 800; font-size: 0.9rem; color: var(--accent); flex-shrink: 0; }
 .step-line { width: 2px; background: var(--border-hi); flex: 1; min-height: 24px; }
 .method-step:last-child .step-line { display: none; }
-.step-body { padding: 0 0 2rem 1.25rem; }
-.step-title { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em; }
+.step-body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; padding: 0 0 2rem 1.25rem; }
+.step-title { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em; }
 .step-desc { font-size: 0.88rem; color: var(--text-dim); line-height: 1.75; margin-bottom: 0.75rem; }
-.step-example { background: var(--bg3); border-left: 2px solid var(--teal); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 10px 14px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--teal); line-height: 1.6; }
+.step-example { background: var(--bg3); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 10px 14px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); line-height: 1.6; }
 
 /* TIME WINDOW INTERACTIVE */
 .tw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.5rem 0; }
 .tw-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; cursor: pointer; transition: all 0.2s; text-align: center; }
-.tw-card:hover { border-color: var(--teal-glow); background: var(--bg3); }
-.tw-card.selected { border-color: var(--teal); background: var(--teal-dim); }
+.tw-card:hover { border-color: var(--border-hi); background: var(--bg3); }
+.tw-card.selected { border-color: var(--accent); background: var(--accent-dim); }
 .tw-card.wrong { border-color: var(--red); background: var(--red-dim); animation: shake 0.4s ease; }
-.tw-card.correct { border-color: var(--teal); background: var(--teal-dim); }
+.tw-card.correct { border-color: var(--accent); background: var(--accent-dim); }
 @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-.tw-window { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--teal); margin-bottom: 4px; }
+.tw-window { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); margin-bottom: 4px; }
 .tw-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; }
 .tw-result { display: none; margin-top: 1.5rem; animation: pageIn 0.4s ease; }
 .tw-result.vis { display: block; }
@@ -41,11 +41,11 @@
 .cs-factor { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
 .cs-factor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .cs-factor-name { font-family: var(--font-head); font-weight: 600; font-size: 0.88rem; color: var(--text); }
-.cs-factor-score { font-family: var(--font-mono); font-weight: 500; font-size: 0.88rem; color: var(--teal); }
-.cs-slider { width: 100%; accent-color: var(--teal); cursor: pointer; }
+.cs-factor-score { font-family: var(--font-mono); font-weight: 500; font-size: 0.88rem; color: var(--accent); }
+.cs-slider { width: 100%; accent-color: var(--accent); cursor: pointer; }
 .cs-desc { font-size: 0.78rem; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
 .cs-total { background: var(--bg3); border: 1px solid var(--border-hi); border-radius: var(--radius); padding: 1.5rem; text-align: center; margin-top: 1.5rem; }
-.cs-total-val { font-family: var(--font-head); font-weight: 700; font-size: 3.5rem; color: var(--teal); line-height: 1; text-shadow: 0 0 30px rgba(0,212,170,0.3); }
+.cs-total-val { font-family: var(--font-head); font-weight: 800; font-size: 3.5rem; color: var(--accent); line-height: 1; text-shadow: 0 0 30px rgba(0,212,170,0.3); }
 .cs-total-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
 .cs-interpretation { font-size: 0.85rem; color: var(--text-dim); margin-top: 10px; }
 
@@ -61,7 +61,7 @@
 .tv-log-cell { font-size: 0.8rem; color: var(--text-dim); padding: 10px 14px; display: flex; align-items: center; }
 .tv-log-cell.mono { font-family: var(--font-mono); font-size: 0.72rem; }
 .tv-log-cell .badge { font-family: var(--font-mono); font-size: 0.58rem; padding: 2px 7px; border-radius: 3px; }
-.badge-hire { background: var(--teal-dim); color: var(--teal); }
+.badge-hire { background: var(--accent-dim); color: var(--accent); }
 .badge-exit { background: var(--red-dim); color: var(--red); }
 .badge-reorg { background: var(--amber-dim); color: var(--amber); }
 .badge-flag { background: rgba(255,71,87,0.15); color: var(--red); }
@@ -71,22 +71,22 @@
 .attr-line:last-child { border-bottom: none; }
 .attr-line-label { font-size: 0.85rem; color: var(--text-dim); }
 .attr-line-val { font-family: var(--font-mono); font-weight: 500; font-size: 0.85rem; }
-.attr-line-val.teal { color: var(--teal); }
+.attr-line-val.teal { color: var(--accent); }
 .attr-line-val.red { color: var(--red); }
 .attr-line-val.amber { color: var(--amber); }
-.attr-total { background: var(--teal-dim); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; }
-.attr-total-label { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; color: var(--text); }
-.attr-total-val { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; color: var(--teal); }
+.attr-total { background: var(--accent-dim); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; }
+.attr-total-label { font-family: var(--font-head); font-weight: 800; font-size: 0.95rem; color: var(--text); }
+.attr-total-val { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; color: var(--accent); }
 
 /* BADGE */
 .badge-wrap { text-align: center; padding: 3rem 2rem; }
-.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--teal-dim); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
+.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
 @keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4)} }
-.badge-title { font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; color: var(--teal); margin-bottom: 0.5rem; }
+.badge-title { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); margin-bottom: 0.5rem; }
 .badge-sub { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; }
 .badge-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 400px; margin: 0 auto 2rem; }
 .bstat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.875rem; text-align: center; }
-.bstat-val { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--teal); }
+.bstat-val { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); }
 .bstat-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 </style>
 </head>
@@ -102,7 +102,7 @@
     <span class="sep">/</span>
     <span>People-Revenue Connect</span>
     <span class="sep">/</span>
-    <span class="current">Module B — The Framework</span>
+    <span class="current">Module B &ndash; The Framework</span>
   </div>
   <div class="topbar-right">
     <div class="topbar-progress">
@@ -120,19 +120,19 @@
 <div class="beat active" id="beat-0">
   <div class="page-tag">Module B · Beat 1 of 5 · The Framework</div>
   <h1 class="page-title">The Attribution Problem</h1>
-  <p class="page-desc">Every other business function already has an attribution model. Marketing has UTM tracking. Sales has CRM pipeline data. Finance has variance analysis. HR has — nothing. Until now.</p>
+  <p class="page-desc">Every other business function already has an attribution model. Marketing has UTM tracking. Sales has CRM pipeline data. Finance has variance analysis. HR has &ndash; nothing. Until now.</p>
 
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:2rem 0">
     <div class="card" style="text-align:center">
       <div style="font-size:1.5rem;margin-bottom:8px">📊</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:0.88rem;color:var(--text);margin-bottom:6px">Marketing</div>
-      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--teal)">UTM tracking</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--accent)">UTM tracking</div>
       <div style="font-size:0.75rem;color:var(--text-dim);margin-top:6px">Every rupee of ad spend traced to revenue generated</div>
     </div>
     <div class="card" style="text-align:center">
       <div style="font-size:1.5rem;margin-bottom:8px">💰</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:0.88rem;color:var(--text);margin-bottom:6px">Sales</div>
-      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--teal)">CRM pipeline</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--accent)">CRM pipeline</div>
       <div style="font-size:0.75rem;color:var(--text-dim);margin-top:6px">Every deal traced to rep, activity, and close date</div>
     </div>
     <div class="card" style="text-align:center;border-color:var(--red-dim)">
@@ -146,7 +146,7 @@
   <div class="card-hi" style="margin:2rem 0">
     <div class="tag" style="margin-bottom:12px">The Gap</div>
     <p style="font-size:0.95rem;color:var(--text);line-height:1.8;margin-bottom:1rem">Performance marketing can tell you that a specific Facebook ad generated ₹4.2Cr in revenue with 94% confidence. It took 20 years and billions in software investment to build that attribution model.</p>
-    <p style="font-size:0.95rem;color:var(--teal);font-weight:500;line-height:1.8">HR's attribution problem is harder — people decisions have longer time lags, more confounding variables, and no existing measurement infrastructure. But harder doesn't mean impossible. It means the methodology needs to be more rigorous.</p>
+    <p style="font-size:0.95rem;color:var(--accent);font-weight:500;line-height:1.8">HR's attribution problem is harder &ndash; people decisions have longer time lags, more confounding variables, and no existing measurement infrastructure. But harder doesn't mean impossible. It means the methodology needs to be more rigorous.</p>
   </div>
 
   <div class="page-nav">
@@ -170,7 +170,7 @@
       </div>
       <div class="step-body">
         <div class="step-title">Map the People Decision Log</div>
-        <div class="step-desc">Document every significant people decision affecting the business unit — hires, exits, promotions, restructures, compensation changes — with exact dates. This is your data foundation. Without it, attribution is impossible.</div>
+        <div class="step-desc">Document every significant people decision affecting the business unit &ndash; hires, exits, promotions, restructures, compensation changes &ndash; with exact dates. This is your data foundation. Without it, attribution is impossible.</div>
         <div class="step-example">TechVelocity: 10 people events across 4 quarters mapped → Month 1 hire, Month 4 exit, Month 7 exit, Month 9 restructure...</div>
       </div>
     </div>
@@ -194,7 +194,7 @@
       </div>
       <div class="step-body">
         <div class="step-title">Adjust for Confounding Variables</div>
-        <div class="step-desc">Revenue changes are never caused by a single factor. Market shifts, product launches, competitive moves, seasonal patterns — all affect revenue independently of people decisions. You must isolate the people signal from the noise.</div>
+        <div class="step-desc">Revenue changes are never caused by a single factor. Market shifts, product launches, competitive moves, seasonal patterns &ndash; all affect revenue independently of people decisions. You must isolate the people signal from the noise.</div>
         <div class="step-example">TechVelocity: Market index flat in Q3 (+1.2%). No product launches. No major competitive events. People decisions are the primary explanatory variable → high confidence signal.</div>
       </div>
     </div>
@@ -232,7 +232,7 @@
 <div class="beat" id="beat-3">
   <div class="page-tag">Module B · Beat 4 of 5</div>
   <h1 class="page-title">Build Your First Confidence Score</h1>
-  <p class="page-desc">A confidence score makes your attribution defensible. It tells a CFO: "I'm not guessing — I have a structured methodology behind this number." Use the sliders below to build TechVelocity's Q3 confidence score.</p>
+  <p class="page-desc">A confidence score makes your attribution defensible. It tells a CFO: "I'm not guessing &ndash; I have a structured methodology behind this number." Use the sliders below to build TechVelocity's Q3 confidence score.</p>
 
   <div class="cs-factors">
 
@@ -251,7 +251,7 @@
         <span class="cs-factor-score" id="sf2-val">25</span>
       </div>
       <input type="range" class="cs-slider" min="0" max="30" value="25" id="sf2" oninput="updateCS()">
-      <div class="cs-desc">How free is the signal from external noise? TechVelocity: Market was flat, no product launches, no major competitive moves in Q3. Very clean external environment — high confidence.</div>
+      <div class="cs-desc">How free is the signal from external noise? TechVelocity: Market was flat, no product launches, no major competitive moves in Q3. Very clean external environment &ndash; high confidence.</div>
     </div>
 
     <div class="cs-factor">
@@ -277,7 +277,7 @@
   <div class="cs-total">
     <div class="cs-total-val" id="cs-total">74%</div>
     <div class="cs-total-label">Confidence Score</div>
-    <div class="cs-interpretation" id="cs-interp">Strong — defensible in a board meeting. Your CFO can challenge the methodology but not dismiss it.</div>
+    <div class="cs-interpretation" id="cs-interp">Strong &ndash; defensible in a board meeting. Your CFO can challenge the methodology but not dismiss it.</div>
   </div>
 
   <div class="page-nav" style="margin-top:2rem">
@@ -301,7 +301,7 @@
     </div>
     <div class="tv-log-row flagged" id="tvr-0" onclick="flagRow(0,true)">
       <div class="tv-log-cell mono">Month 1</div>
-      <div class="tv-log-cell">Marcus Webb hired — VP Sales, $310K package</div>
+      <div class="tv-log-cell">Marcus Webb hired &ndash; VP Sales, $310K package</div>
       <div class="tv-log-cell"><span class="badge badge-hire">hire</span></div>
       <div class="tv-log-cell mono" id="tv-flag-0">⚠️ Revenue impact</div>
     </div>
@@ -313,19 +313,19 @@
     </div>
     <div class="tv-log-row flagged" id="tvr-2" onclick="flagRow(2,true)">
       <div class="tv-log-cell mono">Month 4</div>
-      <div class="tv-log-cell">Priya Sharma exit — Sr. AE, 3.2 years tenure</div>
+      <div class="tv-log-cell">Priya Sharma exit &ndash; Sr. AE, 3.2 years tenure</div>
       <div class="tv-log-cell"><span class="badge badge-exit">exit</span></div>
       <div class="tv-log-cell mono" id="tv-flag-2">⚠️ Revenue impact</div>
     </div>
     <div class="tv-log-row" id="tvr-3" onclick="flagRow(3,false)">
       <div class="tv-log-cell mono">Month 5</div>
-      <div class="tv-log-cell">Junior replacement hired — 0 months experience</div>
+      <div class="tv-log-cell">Junior replacement hired &ndash; 0 months experience</div>
       <div class="tv-log-cell"><span class="badge badge-hire">hire</span></div>
       <div class="tv-log-cell mono" id="tv-flag-3"></div>
     </div>
     <div class="tv-log-row flagged" id="tvr-4" onclick="flagRow(4,true)">
       <div class="tv-log-cell mono">Month 7</div>
-      <div class="tv-log-cell">Daniel Osei exit — Sr. AE, 4.1 years tenure</div>
+      <div class="tv-log-cell">Daniel Osei exit &ndash; Sr. AE, 4.1 years tenure</div>
       <div class="tv-log-cell"><span class="badge badge-exit">exit</span></div>
       <div class="tv-log-cell mono" id="tv-flag-4">⚠️ Revenue impact</div>
     </div>
@@ -337,13 +337,13 @@
     </div>
     <div class="tv-log-row flagged" id="tvr-6" onclick="flagRow(6,true)">
       <div class="tv-log-cell mono">Month 9</div>
-      <div class="tv-log-cell">Team restructure — 2 juniors promoted to senior</div>
+      <div class="tv-log-cell">Team restructure &ndash; 2 juniors promoted to senior</div>
       <div class="tv-log-cell"><span class="badge badge-reorg">reorg</span></div>
       <div class="tv-log-cell mono" id="tv-flag-6">⚠️ Revenue impact</div>
     </div>
     <div class="tv-log-row flagged" id="tvr-7" onclick="flagRow(7,true)">
       <div class="tv-log-cell mono">Month 11</div>
-      <div class="tv-log-cell">Marcus Webb resigns — "not the right fit"</div>
+      <div class="tv-log-cell">Marcus Webb resigns &ndash; "not the right fit"</div>
       <div class="tv-log-cell"><span class="badge badge-exit">exit</span></div>
       <div class="tv-log-cell mono" id="tv-flag-7">⚠️ Revenue impact</div>
     </div>
@@ -357,7 +357,7 @@
 
   <div id="attr-result" style="display:none">
     <div class="attr-output">
-      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">People-Revenue Attribution — TechVelocity Q3</div>
+      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">People-Revenue Attribution &ndash; TechVelocity Q3</div>
       <div class="attr-line">
         <span class="attr-line-label">Total revenue miss</span>
         <span class="attr-line-val red">-₹1,100,000</span>
@@ -380,7 +380,7 @@
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;padding:10px 0;border-top:1px solid var(--border)">
         <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim)">Confidence Score</span>
-        <span style="font-family:var(--font-head);font-weight:700;font-size:1.2rem;color:var(--teal)">74%</span>
+        <span style="font-family:var(--font-head);font-weight:700;font-size:1.2rem;color:var(--accent)">74%</span>
       </div>
     </div>
     <div class="card-hi" style="margin-top:1rem">
@@ -407,9 +407,9 @@
       <div class="bstat"><div class="bstat-val">B ✓</div><div class="bstat-label">Module</div></div>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
-      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next — Module C</div>
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next &ndash; Module C</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The Instruments</div>
-      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">The 3 metrics that make attribution calculable — Attrition Cost %, Talent Disruption Frequency, and Execution Stability Ratio. Full formulas, benchmarks, and hands-on calculation.</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">The 3 metrics that make attribution calculable &ndash; Attrition Cost %, Talent Disruption Frequency, and Execution Stability Ratio. Full formulas, benchmarks, and hands-on calculation.</div>
     </div>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
       <a href="p1-module-c.html" class="btn-primary">Continue to Module C →</a>
@@ -424,7 +424,7 @@
 
 <script>
 document.getElementById('rf-css').textContent = RF.css;
-RF.startMatrix('matrix-canvas', 0.07);
+RF.startMatrix('matrix-canvas', 0.45);
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p1-b');
 document.querySelectorAll('.sb-pillar').forEach(el => {
@@ -462,7 +462,7 @@ function completeBeat() {
   nextBeat();
 }
 
-// Beat 1 — animate method steps
+// Beat 1 &ndash; animate method steps
 function startMethodSteps() {
   setTimeout(() => {
     [0,1,2,3].forEach((i) => {
@@ -478,30 +478,30 @@ function startMethodSteps() {
   }, 200);
 }
 
-// Beat 2 — time window questions
+// Beat 2 &ndash; time window questions
 const twQuestions = [
   {
     q: 'A senior sales executive exits. When should you start measuring revenue impact?',
     options: [
-      { w: '0-1 months', wrong: true, reason: 'Too early — existing pipeline will carry revenue for 1-3 months before the gap shows.' },
+      { w: '0-1 months', wrong: true, reason: 'Too early &ndash; existing pipeline will carry revenue for 1-3 months before the gap shows.' },
       { w: '1-3 months', correct: true, reason: 'Correct. Pipeline owned by the exiting exec begins to close (or fall) within 1-3 months. Ramp gap compounds from month 4 onwards.' },
-      { w: '9-12 months', wrong: true, reason: 'Too late — by 9 months the signal is buried in other variables. You\'ve missed the clean attribution window.' },
+      { w: '9-12 months', wrong: true, reason: 'Too late &ndash; by 9 months the signal is buried in other variables. You\'ve missed the clean attribution window.' },
     ]
   },
   {
     q: 'A new VP of Engineering is hired. When does their impact on product velocity (and thus revenue) typically appear?',
     options: [
-      { w: '0-2 months', wrong: true, reason: 'Too early — a new VP is still learning the org, building trust, and assessing the team. No meaningful impact yet.' },
+      { w: '0-2 months', wrong: true, reason: 'Too early &ndash; a new VP is still learning the org, building trust, and assessing the team. No meaningful impact yet.' },
       { w: '3-6 months', correct: true, reason: 'Correct. By month 3-6 a VP has restructured priorities, influenced team composition, and their decisions start flowing into product output.' },
-      { w: '12-18 months', wrong: true, reason: 'Partially correct for long-term impact but too late for attribution — the signal gets too noisy at 12+ months.' },
+      { w: '12-18 months', wrong: true, reason: 'Partially correct for long-term impact but too late for attribution &ndash; the signal gets too noisy at 12+ months.' },
     ]
   },
   {
     q: 'A team restructure combines two product squads into one. When does revenue impact typically show?',
     options: [
-      { w: '1 week', wrong: true, reason: 'Far too early — teams need time to adjust roles, processes, and communication before output changes.' },
+      { w: '1 week', wrong: true, reason: 'Far too early &ndash; teams need time to adjust roles, processes, and communication before output changes.' },
       { w: '2-5 months', correct: true, reason: 'Correct. Post-restructure teams typically show productivity dip for 2-3 months, then stabilise. Revenue signal appears in this window.' },
-      { w: '6-9 months', wrong: true, reason: 'Possible for complex restructures but generally too late for primary attribution — most signal has appeared by month 5.' },
+      { w: '6-9 months', wrong: true, reason: 'Possible for complex restructures but generally too late for primary attribution &ndash; most signal has appeared by month 5.' },
     ]
   },
 ];
@@ -551,7 +551,7 @@ function checkTW(qIdx, optIdx) {
   } else {
     card.classList.add('wrong');
     const correctOpt = q.options.find(o => o.correct);
-    result.innerHTML = `<div class="card" style="border-color:var(--red-dim)"><div class="tag tag-red" style="margin-bottom:8px">Not quite</div><p style="font-size:0.88rem;color:var(--text-dim);line-height:1.7">${opt.reason}</p><p style="font-size:0.88rem;color:var(--teal);margin-top:8px;line-height:1.7"><strong>The right window:</strong> ${correctOpt.w} — ${correctOpt.reason}</p></div>`;
+    result.innerHTML = `<div class="card" style="border-color:var(--red-dim)"><div class="tag tag-red" style="margin-bottom:8px">Not quite</div><p style="font-size:0.88rem;color:var(--text-dim);line-height:1.7">${opt.reason}</p><p style="font-size:0.88rem;color:var(--accent);margin-top:8px;line-height:1.7"><strong>The right window:</strong> ${correctOpt.w} &ndash; ${correctOpt.reason}</p></div>`;
     // Show correct answer
     const correctIdx = q.options.findIndex(o => o.correct);
     const correctCard = document.getElementById(`tw-${qIdx}-${correctIdx}`);
@@ -567,11 +567,11 @@ function checkTW(qIdx, optIdx) {
       container.innerHTML += renderTWQuestion(twCurrent);
       document.getElementById(`tw-questions`).lastElementChild.scrollIntoView({behavior:'smooth',block:'nearest'});
     } else {
-      // All done — show proceed button
+      // All done &ndash; show proceed button
       const container = document.getElementById('tw-questions');
       container.innerHTML += `
         <div class="page-nav" style="margin-top:1rem">
-          <span class="page-nav-info">Beat 3 of 5 — Time Windows complete</span>
+          <span class="page-nav-info">Beat 3 of 5 &ndash; Time Windows complete</span>
           <button class="btn-primary" onclick="nextBeat()">Build a confidence score →</button>
         </div>
       `;
@@ -579,7 +579,7 @@ function checkTW(qIdx, optIdx) {
   }, 1200);
 }
 
-// Beat 3 — confidence score
+// Beat 3 &ndash; confidence score
 function updateCS() {
   const sf1 = parseInt(document.getElementById('sf1').value);
   const sf2 = parseInt(document.getElementById('sf2').value);
@@ -592,14 +592,14 @@ function updateCS() {
   const total = sf1 + sf2 + sf3 + sf4;
   document.getElementById('cs-total').textContent = total + '%';
   let interp = '';
-  if (total >= 80) interp = 'Very strong — publish this in your board deck with confidence.';
-  else if (total >= 65) interp = 'Strong — defensible in a board meeting. Your CFO can challenge the methodology but not dismiss it.';
-  else if (total >= 50) interp = 'Moderate — useful directionally but acknowledge the limitations.';
-  else interp = 'Weak — gather more data before presenting this attribution.';
+  if (total >= 80) interp = 'Very strong &ndash; publish this in your board deck with confidence.';
+  else if (total >= 65) interp = 'Strong &ndash; defensible in a board meeting. Your CFO can challenge the methodology but not dismiss it.';
+  else if (total >= 50) interp = 'Moderate &ndash; useful directionally but acknowledge the limitations.';
+  else interp = 'Weak &ndash; gather more data before presenting this attribution.';
   document.getElementById('cs-interp').textContent = interp;
 }
 
-// Beat 4 — flag rows
+// Beat 4 &ndash; flag rows
 let flaggedCount = 0;
 const expectedFlags = 7;
 function flagRow(idx, isImpact) {
@@ -608,8 +608,8 @@ function flagRow(idx, isImpact) {
   const flagCell = document.getElementById('tv-flag-' + idx);
   if (row.classList.contains('user-flagged')) return;
   row.classList.add('user-flagged');
-  row.style.borderLeft = '2px solid var(--teal)';
-  flagCell.innerHTML = '<span style="color:var(--teal);font-family:var(--font-mono);font-size:0.65rem">✓ Flagged</span>';
+  row.style.borderLeft = '2px solid var(--accent)';
+  flagCell.innerHTML = '<span style="color:var(--accent);font-family:var(--font-mono);font-size:0.65rem">✓ Flagged</span>';
   flaggedCount++;
   if (flaggedCount >= 5) {
     setTimeout(() => {
@@ -627,4 +627,4 @@ function shareLinkedIn() {
 updateProgress();
 </script>
 </PAGEEOF
-echo "Module B done — $(wc -l < /home/claude/rf2/p1-module-b.html) lines"
+echo "Module B done &ndash; $(wc -l < /home/claude/rf2/p1-module-b.html) lines"

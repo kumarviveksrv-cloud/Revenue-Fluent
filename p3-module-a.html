@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillar 3, Module A: The Philosophy — Revenue Fluent</title>
+<title>Pillar 3, Module A: The Philosophy &ndash; Revenue Fluent</title>
 <style id="rf-css"></style>
 <script src="shared.js"></script>
 <style>
 .beat { display: none; }
 .beat.active { display: block; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
-.prov-line { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.6rem,3vw,2.4rem); letter-spacing: -0.025em; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.prov-line { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.5rem,2.8vw,2.2rem); letter-spacing: -0.01em; line-height: 1.2; color: var(--text); margin-bottom: 0.9rem; opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .prov-line.vis { opacity: 1; transform: translateY(0); }
-.prov-line.teal { color: var(--teal); text-shadow: 0 0 30px rgba(0,212,170,0.25); }
+.prov-line.teal { color: var(--accent); text-shadow: 0 0 30px rgba(0,212,170,0.25); }
 .prov-line.amber { color: var(--amber); }
 .prov-line.dim { font-family: var(--font-body); font-size: clamp(0.95rem,1.8vw,1.2rem); font-weight: 300; color: var(--text-dim); }
 .prov-cta { margin-top: 3rem; opacity: 0; transition: opacity 0.6s ease; }
@@ -21,22 +21,22 @@
 .config-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin: 1.5rem 0; }
 .config-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
 .config-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; transition: background 0.3s; }
-.config-card.high::before { background: var(--teal); }
+.config-card.high::before { background: var(--accent); }
 .config-card.medium::before { background: var(--amber); }
 .config-card.low::before { background: var(--red); }
 .config-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-.config-card.selected { border-color: var(--teal); }
+.config-card.selected { border-color: var(--accent); }
 .config-label { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-.config-label.high { color: var(--teal); }
+.config-label.high { color: var(--accent); }
 .config-label.medium { color: var(--amber); }
 .config-label.low { color: var(--red); }
-.config-name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+.config-name { font-family: var(--font-head); font-weight: 800; font-size: 1rem; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
 .config-metrics { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
 .config-metric-row { display: flex; justify-content: space-between; align-items: center; }
 .config-metric-label { font-size: 0.75rem; color: var(--text-mute); }
 .config-metric-val { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; }
-.config-revenue { font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; line-height: 1; }
-.config-revenue.high { color: var(--teal); }
+.config-revenue { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; line-height: 1; }
+.config-revenue.high { color: var(--accent); }
 .config-revenue.medium { color: var(--amber); }
 .config-revenue.low { color: var(--red); }
 .config-detail { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
@@ -48,7 +48,7 @@
 .org-level::before { content: ''; position: absolute; bottom: -0.75rem; left: 50%; transform: translateX(-50%); width: 2px; height: 0.75rem; background: var(--border-hi); }
 .org-level:last-child::before { display: none; }
 .org-node { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.75rem 1rem; text-align: center; min-width: 100px; position: relative; }
-.org-node.revenue { border-color: var(--teal-glow); background: var(--teal-dim); }
+.org-node.revenue { border-color: var(--border-hi); background: var(--accent-dim); }
 .org-node.cost { border-color: rgba(255,71,87,0.2); background: var(--red-dim); }
 .org-node-role { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
 .org-node-name { font-size: 0.78rem; color: var(--text); font-weight: 500; margin-bottom: 4px; }
@@ -59,20 +59,20 @@
 .sg-question { font-size: 0.95rem; color: var(--text); font-weight: 500; margin-bottom: 1rem; line-height: 1.7; }
 .sg-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .sg-opt { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; cursor: pointer; transition: all 0.2s; font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
-.sg-opt:hover { border-color: var(--teal-glow); color: var(--text); }
-.sg-opt.correct { border-color: var(--teal); background: var(--teal-dim); color: var(--teal); }
+.sg-opt:hover { border-color: var(--border-hi); color: var(--text); }
+.sg-opt.correct { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
 .sg-opt.wrong { border-color: var(--red); background: var(--red-dim); color: var(--red); }
 .sg-feedback { margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; padding: 1rem 1.25rem; background: var(--bg3); border-radius: var(--radius-sm); display: none; }
 .sg-feedback.vis { display: block; }
 
 .badge-wrap { text-align: center; padding: 3rem 2rem; }
-.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--teal-dim); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
+.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
 @keyframes badgePulse { 0%,100%{box-shadow:0 0 20px rgba(0,212,170,0.2)}50%{box-shadow:0 0 50px rgba(0,212,170,0.4)} }
-.badge-title { font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; color: var(--teal); margin-bottom: 0.5rem; }
+.badge-title { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); margin-bottom: 0.5rem; }
 .badge-sub { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; }
 .badge-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 400px; margin: 0 auto 2rem; }
 .bstat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.875rem; text-align: center; }
-.bstat-val { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; color: var(--teal); }
+.bstat-val { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); }
 .bstat-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 </style>
 </head>
@@ -84,7 +84,7 @@
   <div class="topbar-breadcrumb">
     <span>Pillar 3</span><span class="sep">/</span>
     <span>Team Revenue Architecture</span><span class="sep">/</span>
-    <span class="current">Module A — The Philosophy</span>
+    <span class="current">Module A &ndash; The Philosophy</span>
   </div>
   <div class="topbar-right">
     <div class="topbar-progress">
@@ -125,15 +125,15 @@
       <div class="config-metrics">
         <div class="config-metric-row">
           <span class="config-metric-label">Team size</span>
-          <span class="config-metric-val" style="color:var(--teal)">5-8 people</span>
+          <span class="config-metric-val" style="color:var(--accent)">5-8 people</span>
         </div>
         <div class="config-metric-row">
           <span class="config-metric-label">Manager ratio</span>
-          <span class="config-metric-val" style="color:var(--teal)">1:6</span>
+          <span class="config-metric-val" style="color:var(--accent)">1:6</span>
         </div>
         <div class="config-metric-row">
           <span class="config-metric-label">Decision layers</span>
-          <span class="config-metric-val" style="color:var(--teal)">2</span>
+          <span class="config-metric-val" style="color:var(--accent)">2</span>
         </div>
       </div>
       <div class="config-revenue high">+34% revenue</div>
@@ -160,7 +160,7 @@
       </div>
       <div class="config-revenue medium">+8% revenue</div>
       <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);margin-top:4px">vs company average per team</div>
-      <div class="config-detail">A larger team with dotted-line reporting, shared ownership across functions, and coordination-heavy processes. Revenue accountability is diffused — everyone owns a piece but nobody owns the whole. Decision speed: days to weeks. Common in enterprises. Generates modest returns above average but rarely outperforms Configuration A.</div>
+      <div class="config-detail">A larger team with dotted-line reporting, shared ownership across functions, and coordination-heavy processes. Revenue accountability is diffused &ndash; everyone owns a piece but nobody owns the whole. Decision speed: days to weeks. Common in enterprises. Generates modest returns above average but rarely outperforms Configuration A.</div>
     </div>
 
     <div class="config-card low" onclick="expandConfig(2)" id="cfg-2">
@@ -182,13 +182,13 @@
       </div>
       <div class="config-revenue low">-19% revenue</div>
       <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);margin-top:4px">vs company average per team</div>
-      <div class="config-detail">A management-heavy structure where coordination costs exceed output value. Too many layers between customer and decision-maker. Revenue accountability is unclear. Senior people spend time in meetings rather than generating output. Decision speed: weeks to months. Common in over-promoted orgs — exactly what happened at Sterling Consulting and Apex Manufacturing.</div>
+      <div class="config-detail">A management-heavy structure where coordination costs exceed output value. Too many layers between customer and decision-maker. Revenue accountability is unclear. Senior people spend time in meetings rather than generating output. Decision speed: weeks to months. Common in over-promoted orgs &ndash; exactly what happened at Sterling Consulting and Apex Manufacturing.</div>
     </div>
   </div>
 
   <div class="card-hi" style="margin:1.5rem 0">
     <div class="tag" style="margin-bottom:10px">The Key Insight</div>
-    <p style="font-size:0.95rem;color:var(--text);line-height:1.8">When you deviate from your highest-performing configuration — through a restructure, a wave of promotions, a merger, or a headcount freeze — you don't just change the org chart. <span style="color:var(--teal);font-weight:600">You change the revenue output. Predictably. Measurably.</span></p>
+    <p style="font-size:0.95rem;color:var(--text);line-height:1.8">When you deviate from your highest-performing configuration &ndash; through a restructure, a wave of promotions, a merger, or a headcount freeze &ndash; you don't just change the org chart. <span style="color:var(--accent);font-weight:600">You change the revenue output. Predictably. Measurably.</span></p>
   </div>
 
   <div class="page-nav">
@@ -201,10 +201,10 @@
 <div class="beat" id="beat-2">
   <div class="page-tag">Module A · Beat 3 of 5</div>
   <h1 class="page-title">Read This Org Chart for Revenue</h1>
-  <p class="page-desc">Apex Manufacturing restructured twice in 6 months. Below is their Production Team org chart after Restructure 2. Read it as a revenue document — not a reporting structure.</p>
+  <p class="page-desc">Apex Manufacturing restructured twice in 6 months. Below is their Production Team org chart after Restructure 2. Read it as a revenue document &ndash; not a reporting structure.</p>
 
   <div class="org-chart">
-    <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem">Apex Manufacturing — Production Team Post-Restructure 2</div>
+    <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem">Apex Manufacturing &ndash; Production Team Post-Restructure 2</div>
 
     <div class="org-level">
       <div class="org-node cost">
@@ -236,24 +236,24 @@
       <div class="org-node revenue">
         <div class="org-node-role">Operator</div>
         <div class="org-node-name">Team A (4)</div>
-        <div class="org-node-rev" style="color:var(--teal)">100% output</div>
+        <div class="org-node-rev" style="color:var(--accent)">100% output</div>
       </div>
       <div class="org-node revenue">
         <div class="org-node-role">Operator</div>
         <div class="org-node-name">Team B (4)</div>
-        <div class="org-node-rev" style="color:var(--teal)">100% output</div>
+        <div class="org-node-rev" style="color:var(--accent)">100% output</div>
       </div>
       <div class="org-node revenue">
         <div class="org-node-role">Operator</div>
         <div class="org-node-name">Team C (3)</div>
-        <div class="org-node-rev" style="color:var(--teal)">100% output</div>
+        <div class="org-node-rev" style="color:var(--accent)">100% output</div>
       </div>
     </div>
 
     <div style="background:var(--red-dim);border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-top:1.5rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--red);line-height:1.9">
       Revenue nodes: 11 operators (100% output) ✓<br>
       Cost nodes: 1 director + 3 supervisors at 25-40% capacity ✗<br>
-      Management overhead ratio: 4 managers : 11 operators = 1:2.75 (Critical — benchmark 1:6)<br>
+      Management overhead ratio: 4 managers : 11 operators = 1:2.75 (Critical &ndash; benchmark 1:6)<br>
       Configuration type: C (Top-Heavy Hierarchy) → -19% vs benchmark
     </div>
   </div>
@@ -261,10 +261,10 @@
   <div class="sort-game">
     <div class="sg-question">Before Restructure 1, Apex had 1 supervisor for every 9 operators. After Restructure 2, they have 1 supervisor for every 3.7 operators. What happened to revenue output?</div>
     <div class="sg-options">
-      <div class="sg-opt" onclick="answerSG(0,true)">Revenue output dropped — more supervisors means more coordination overhead, slower decisions, and less operator autonomy.</div>
-      <div class="sg-opt" onclick="answerSG(1,false)">Revenue output increased — more supervisors means better quality control and fewer errors on the production line.</div>
-      <div class="sg-opt" onclick="answerSG(2,false)">Revenue output stayed the same — supervisor ratio doesn't affect production output directly.</div>
-      <div class="sg-opt" onclick="answerSG(3,false)">Revenue output increased then dropped — there's a brief quality improvement before overhead costs kick in.</div>
+      <div class="sg-opt" onclick="answerSG(0,true)">Revenue output dropped &ndash; more supervisors means more coordination overhead, slower decisions, and less operator autonomy.</div>
+      <div class="sg-opt" onclick="answerSG(1,false)">Revenue output increased &ndash; more supervisors means better quality control and fewer errors on the production line.</div>
+      <div class="sg-opt" onclick="answerSG(2,false)">Revenue output stayed the same &ndash; supervisor ratio doesn't affect production output directly.</div>
+      <div class="sg-opt" onclick="answerSG(3,false)">Revenue output increased then dropped &ndash; there's a brief quality improvement before overhead costs kick in.</div>
     </div>
     <div class="sg-feedback" id="sg-fb-0"></div>
   </div>
@@ -285,12 +285,12 @@
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
     <div class="card">
-      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">What Revenue DNA reveals</div>
+      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">What Revenue DNA reveals</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;gap:8px;font-size:0.83rem;color:var(--text-dim)"><span style="color:var(--teal)">→</span> Which team sizes generate the most output per FTE in YOUR org</div>
-        <div style="display:flex;gap:8px;font-size:0.83rem;color:var(--text-dim)"><span style="color:var(--teal)">→</span> Which leadership archetypes consistently outperform</div>
-        <div style="display:flex;gap:8px;font-size:0.83rem;color:var(--text-dim)"><span style="color:var(--teal)">→</span> Which spans of control create velocity vs. bottlenecks</div>
-        <div style="display:flex;gap:8px;font-size:0.83rem;color:var(--text-dim)"><span style="color:var(--teal)">→</span> Which structural changes predictably reduce output</div>
+        <div style="display:flex;gap:8px;font-size:0.83rem;color:var(--text-dim)"><span style="color:var(--accent)">→</span> Which team sizes generate the most output per FTE in YOUR org</div>
+        <div style="display:flex;gap:8px;font-size:0.83rem;color:var(--text-dim)"><span style="color:var(--accent)">→</span> Which leadership archetypes consistently outperform</div>
+        <div style="display:flex;gap:8px;font-size:0.83rem;color:var(--text-dim)"><span style="color:var(--accent)">→</span> Which spans of control create velocity vs. bottlenecks</div>
+        <div style="display:flex;gap:8px;font-size:0.83rem;color:var(--text-dim)"><span style="color:var(--accent)">→</span> Which structural changes predictably reduce output</div>
       </div>
     </div>
     <div class="card">
@@ -307,7 +307,7 @@
   <div class="card-hi" style="margin:1.5rem 0">
     <div class="tag" style="margin-bottom:12px">The Apex Manufacturing Case</div>
     <p style="font-size:0.92rem;color:var(--text);line-height:1.8;margin-bottom:1rem">Apex's Revenue DNA was simple: small autonomous operator teams (5-7 people) with one experienced supervisor per team. This generated 112% of industry benchmark output per line.</p>
-    <p style="font-size:0.92rem;color:var(--teal);font-weight:500;line-height:1.8">Two restructures broke this DNA. They went from Configuration A to Configuration C. Output dropped 22%. The ops director blamed equipment. HR had the real answer: the org chart changed. Revenue changed with it.</p>
+    <p style="font-size:0.92rem;color:var(--accent);font-weight:500;line-height:1.8">Two restructures broke this DNA. They went from Configuration A to Configuration C. Output dropped 22%. The ops director blamed equipment. HR had the real answer: the org chart changed. Revenue changed with it.</p>
   </div>
 
   <div class="page-nav">
@@ -323,8 +323,8 @@
   <p class="page-desc">The CEO asks: "Should we restructure the production team?" The CFO asks: "What will this do to our cost base?" The new Revenue Fluent CHRO asks the question nobody else thinks to ask.</p>
 
   <div class="card-hi" style="margin:1.5rem 0;text-align:center;padding:2.5rem">
-    <div style="font-family:var(--font-head);font-weight:700;font-size:1.8rem;color:var(--teal);line-height:1.3;margin-bottom:1rem">"Does this restructure strengthen or weaken our Revenue DNA?"</div>
-    <p style="font-size:0.95rem;color:var(--text-dim);line-height:1.8">The CEO can't answer that. The CFO can't answer it. Only the CHRO can — because only the CHRO has the people-decision-to-revenue data.</p>
+    <div style="font-family:var(--font-head);font-weight:700;font-size:1.8rem;color:var(--accent);line-height:1.3;margin-bottom:1rem">"Does this restructure strengthen or weaken our Revenue DNA?"</div>
+    <p style="font-size:0.95rem;color:var(--text-dim);line-height:1.8">The CEO can't answer that. The CFO can't answer it. Only the CHRO can &ndash; because only the CHRO has the people-decision-to-revenue data.</p>
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
@@ -334,9 +334,9 @@
       <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">Board response: polite nod, no action</div>
     </div>
     <div class="card-hi">
-      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">Revenue Fluent CHRO question</div>
+      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">Revenue Fluent CHRO question</div>
       <div style="font-size:0.88rem;color:var(--text);line-height:1.7;font-weight:500">"This moves us from Config A to Config C. Based on our Revenue DNA, that's a projected -19% output. Here's the revenue cost."</div>
-      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--teal)">Board response: restructure paused, alternatives explored</div>
+      <div style="margin-top:0.75rem;font-family:var(--font-mono);font-size:0.65rem;color:var(--accent)">Board response: restructure paused, alternatives explored</div>
     </div>
   </div>
 
@@ -350,9 +350,9 @@
       <div class="bstat"><div class="bstat-val">A ✓</div><div class="bstat-label">Module</div></div>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
-      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next — Module B</div>
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next &ndash; Module B</div>
       <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The Framework</div>
-      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">The Revenue DNA mapping methodology — how to identify your org's highest-performing configuration and calculate the revenue cost of deviating from it.</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">The Revenue DNA mapping methodology &ndash; how to identify your org's highest-performing configuration and calculate the revenue cost of deviating from it.</div>
     </div>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
       <a href="p3-module-b.html" class="btn-primary">Continue to Module B →</a>
@@ -365,7 +365,7 @@
 </div></div>
 <script>
 document.getElementById('rf-css').textContent = RF.css;
-RF.startMatrix('matrix-canvas', 0.07);
+RF.startMatrix('matrix-canvas', 0.45);
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p3-a');
 document.querySelectorAll('.sb-pillar').forEach(el => {
@@ -412,7 +412,7 @@ function answerSG(idx, correct) {
   if (!correct) opts[0].classList.add('correct');
   const fb = document.getElementById('sg-fb-0');
   fb.textContent = correct
-    ? '✓ Correct. More supervisors = more coordination overhead, slower decisions, less autonomy for operators. Apex went from 1:9 to 1:3.7 — nearly tripling management density — and output dropped 22% in two quarters.'
+    ? '✓ Correct. More supervisors = more coordination overhead, slower decisions, less autonomy for operators. Apex went from 1:9 to 1:3.7 &ndash; nearly tripling management density &ndash; and output dropped 22% in two quarters.'
     : '✗ Not quite. More supervisors at Apex created more layers between decision-makers and operators, slowing everything down. Output dropped 22% despite no change in operator headcount.';
   fb.classList.add('vis');
   setTimeout(() => { document.getElementById('beat2-nav').style.display = 'block'; }, 800);
@@ -427,4 +427,4 @@ setTimeout(startProv, 300);
 updateProgress();
 </script>
 </PAGEEOF
-echo "P3-A done — $(wc -l < /home/claude/rf2/p3-module-a.html) lines"
+echo "P3-A done &ndash; $(wc -l < /home/claude/rf2/p3-module-a.html) lines"
