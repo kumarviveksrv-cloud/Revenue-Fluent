@@ -20,10 +20,10 @@ const RF = {
       },
       {
         id: 'p2', num: 'L2', label: 'People Alpha',
-        locked: true,
+        locked: false,
         modules: [
           { id: 'p2-a', label: 'The Philosophy', file: 'p2-module-a.html' },
-          { id: 'p2-b', label: 'The Framework', file: 'p2-module-b.html' },
+          { id: 'p2-b', label: 'The Alpha Methodology', file: 'p2-module-b.html' },
           { id: 'p2-c', label: 'The Instruments', file: 'p2-module-c.html' },
           { id: 'p2-d', label: 'The Simulation', file: 'p2-module-d.html' },
         ]
