@@ -40,13 +40,13 @@ const RF = {
       },
       {
         id: 'p4', num: 'L4', label: 'Human Balance Sheet',
-        locked: true,
+        locked: false,
         modules: [
           { id: 'p4-a', label: 'The Philosophy', file: 'p4-module-a.html' },
-          { id: 'p4-b', label: 'The Framework', file: 'p4-module-b.html' },
+          { id: 'p4-b', label: 'The HUMANCE Framework', file: 'p4-module-b.html' },
           { id: 'p4-c', label: 'The Instruments', file: 'p4-module-c.html' },
-          { id: 'p4-d', label: 'The Simulation', file: 'p4-module-d.html' },
-          { id: 'p4-e', label: 'HUMANCE Statement', file: 'p4-module-e.html' },
+          { id: 'p4-d', label: 'The HUMANCE Statement', file: 'p4-module-d.html' },
+          { id: 'p4-e', label: 'The Simulation', file: 'p4-module-e.html' },
         ]
       },
       {
