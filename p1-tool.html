@@ -18,6 +18,40 @@
 .sc-btn-name { font-size: 0.72rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
 .sc-btn-sub { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); }
 .output-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+/* LITERATURE PANEL */
+.lit-bar { display: flex; align-items: center; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 1.25rem; cursor: pointer; transition: all 0.2s; }
+.lit-bar:hover { border-color: var(--border-accent); }
+.lit-bar.open { border-color: var(--border-accent); background: var(--accent-dim); }
+.lit-toggle { display: flex; align-items: center; gap: 8px; padding: 6px 12px; flex: 1; }
+.lit-toggle-icon { width: 20px; height: 20px; border-radius: 5px; background: var(--accent-dim); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--accent2); flex-shrink: 0; }
+.lit-toggle-text { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.04em; }
+.lit-toggle-text b { color: var(--text); font-weight: 600; }
+.lit-tabs { display: flex; gap: 2px; }
+.lit-tab-mini { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); padding: 4px 8px; border-radius: 4px; }
+.lit-chevron { margin-left: auto; padding: 0 12px; color: var(--text-mute); transition: transform 0.25s; font-size: 0.7rem; }
+.lit-bar.open .lit-chevron { transform: rotate(180deg); }
+.lit-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); margin-bottom: 0; }
+.lit-panel.open { max-height: 2000px; margin-bottom: 1.25rem; }
+.lit-content { background: var(--bg2); border: 1px solid var(--border-accent); border-radius: var(--radius); overflow: hidden; }
+.lit-tabnav { display: flex; border-bottom: 1px solid var(--border); background: var(--sidebar); }
+.lit-tabnav-btn { flex: 1; padding: 12px; font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mute); background: transparent; border: none; cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; }
+.lit-tabnav-btn:hover { color: var(--text-dim); }
+.lit-tabnav-btn.active { color: var(--accent2); border-bottom-color: var(--accent); background: var(--accent-dim); }
+.lit-tabpane { display: none; padding: 1.5rem; animation: fadeIn 0.3s; }
+.lit-tabpane.active { display: block; }
+.lit-h { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+.lit-p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 1rem; }
+.lit-p:last-child { margin-bottom: 0; }
+.lit-p b { color: var(--text); font-weight: 600; }
+.lit-callout { background: var(--bg3); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 1rem 0; font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
+.lit-instrument { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; }
+.lit-instrument:last-child { margin-bottom: 0; }
+.lit-inst-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.lit-inst-name { font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; color: var(--text); }
+.lit-inst-abbr { font-family: var(--font-mono); font-size: 0.6rem; padding: 2px 8px; border-radius: 4px; background: var(--accent-dim); color: var(--accent2); border: 1px solid var(--border-accent); }
+.lit-inst-formula { font-family: var(--font-mono); font-size: 0.68rem; color: var(--teal); background: var(--bg); border-radius: 4px; padding: 8px 10px; margin: 8px 0; line-height: 1.6; }
+.lit-inst-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+.lit-inst-bench { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); margin-top: 6px; }
 .big-metric { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; position: relative; overflow: hidden; }
 .big-metric::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
 .big-metric.red::before { background: var(--red); }
@@ -108,6 +142,64 @@
       <div id="scenario-tag" class="tag tag-accent">TechVelocity Inc.</div>
     </div>
 
+    <!-- LITERATURE PANEL -->
+    <div class="lit-bar" id="lit-bar" onclick="toggleLit()">
+      <div class="lit-toggle">
+        <div class="lit-toggle-icon">ⓘ</div>
+        <div class="lit-toggle-text"><b>Understand this pillar</b> &nbsp;·&nbsp; What it is · Why it matters · The 3 instruments</div>
+      </div>
+      <div class="lit-chevron">▼</div>
+    </div>
+    <div class="lit-panel" id="lit-panel">
+      <div class="lit-content">
+        <div class="lit-tabnav">
+          <button class="lit-tabnav-btn active" onclick="litTab(0,this)">What it is</button>
+          <button class="lit-tabnav-btn" onclick="litTab(1,this)">Why it matters</button>
+          <button class="lit-tabnav-btn" onclick="litTab(2,this)">The 3 instruments</button>
+        </div>
+
+        <div class="lit-tabpane active" id="lit-pane-0">
+          <div class="lit-h">People-Revenue Connect</div>
+          <div class="lit-p">Every other function in the business can draw a straight line from its activity to revenue. Sales closes deals. Marketing generates pipeline. Product ships features customers pay for. <b>HR has never been able to do this</b> — it reports headcount, engagement scores, and attrition percentages that sit in a world disconnected from the P&L.</div>
+          <div class="lit-p">People-Revenue Connect is the first pillar of Revenue Fluency because it builds the bridge. It takes the people events HR already tracks — exits, tenure, replacement cost — and translates them into the language the board actually cares about: <b>revenue protected, revenue at risk, and revenue lost</b>.</div>
+          <div class="lit-callout">When a senior account executive walks out the door, the cost isn't their salary. It's the pipeline that goes cold, the clients who hesitate, the ramp time before a replacement is productive, and the institutional knowledge that leaves with them. Revenue Connect quantifies all of it.</div>
+        </div>
+
+        <div class="lit-tabpane" id="lit-pane-1">
+          <div class="lit-h">Why it matters</div>
+          <div class="lit-p">The moment HR can say <b>"this attrition cost us ₹1.1Cr in revenue"</b> instead of <b>"our attrition rate is 14%,"</b> the conversation changes. One is an HR metric the CFO tolerates. The other is a business problem the CFO acts on.</div>
+          <div class="lit-p">Revenue Connect gives you three things no engagement survey ever could: <b>a defensible number</b> (revenue at risk), <b>a confidence score</b> (how strongly that number is attributable to people decisions), and <b>a narrative</b> the board understands without translation.</div>
+          <div class="lit-p">This is the foundation of every pillar that follows. People Alpha, Team Architecture, HUMANCE, and the People P&L all build on the core premise this pillar proves: <b>people decisions are revenue decisions.</b></div>
+        </div>
+
+        <div class="lit-tabpane" id="lit-pane-2">
+          <div class="lit-h">The 3 instruments</div>
+          <div class="lit-p" style="margin-bottom:1.25rem">Revenue Connect runs on three measurement instruments. Each one isolates a different way people events translate into revenue impact.</div>
+
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Attrition Cost %</span><span class="lit-inst-abbr">ATC%</span></div>
+            <div class="lit-inst-formula">ATC% = (Total replacement cost of exits ÷ Annual revenue) × 100</div>
+            <div class="lit-inst-desc">Expresses the full replacement cost of departed talent as a percentage of revenue. It reframes attrition from an HR rate into a revenue drag. A high ATC% means you're spending a meaningful slice of revenue just standing still.</div>
+            <div class="lit-inst-bench">Benchmark: healthy &lt;80% · watch 80–100% · critical &gt;100%</div>
+          </div>
+
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Talent Drag Factor</span><span class="lit-inst-abbr">TDF</span></div>
+            <div class="lit-inst-formula">TDF = Revenue capacity lost to transitions ÷ Total revenue capacity</div>
+            <div class="lit-inst-desc">Measures how much revenue-generating capacity is dragged down by people in transition — ramping, backfilling, or covering gaps. The lower the drag, the more of your headcount is actually producing revenue right now.</div>
+            <div class="lit-inst-bench">Benchmark: healthy &gt;0.5 · the higher, the less drag on capacity</div>
+          </div>
+
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Employee-Sales Ratio</span><span class="lit-inst-abbr">ESR</span></div>
+            <div class="lit-inst-formula">ESR = Revenue ÷ (Headcount × Avg fully-loaded cost) × 100</div>
+            <div class="lit-inst-desc">The efficiency instrument — how much revenue each rupee of people cost generates. When ESR drops after a people event, you can attribute the efficiency loss directly to that event with a quantified figure.</div>
+            <div class="lit-inst-bench">Benchmark: 80%+ threshold for a revenue-efficient org</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 4 BIG METRICS -->
     <div class="output-grid">
       <div class="big-metric red">
@@ -194,6 +286,19 @@
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
+
+// Literature panel
+function toggleLit() {
+  document.getElementById('lit-bar').classList.toggle('open');
+  document.getElementById('lit-panel').classList.toggle('open');
+}
+function litTab(idx, btn) {
+  event.stopPropagation();
+  document.querySelectorAll('.lit-tabnav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lit-tabpane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('lit-pane-' + idx).classList.add('active');
+}
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p1');
 document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
   ['Revenue Fluent', 'Revenue Connect'],
