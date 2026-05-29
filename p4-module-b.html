@@ -3,10 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillar 4, Module B — The HUMANCE Framework — Revenue Fluent</title>
+<title>Pillar 4, Module B: The HUMANCE Framework — Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style id="rf-css"></style>
 <script src="shared.js"></script>
+<style>
+.beat { display: none; }
+.beat.active { display: block; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
+.method-step { display: grid; grid-template-columns: 48px 1fr; gap: 0; margin-bottom: 0; opacity: 0; transform: translateX(-16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.method-step.vis { opacity: 1; transform: translateX(0); }
+.step-spine { display: flex; flex-direction: column; align-items: center; }
+.step-num { width: 38px; height: 38px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-weight: 800; font-size: 0.88rem; color: var(--accent); flex-shrink: 0; }
+.step-line { width: 2px; background: var(--border); flex: 1; min-height: 20px; }
+.method-step:last-child .step-line { display: none; }
+.step-body { padding: 0 0 1.75rem 1.25rem; }
+.step-title { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 6px; }
+.step-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.75; margin-bottom: 0.75rem; }
+.step-example { background: var(--bg3); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 10px 14px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); line-height: 1.7; }
+.asset-calc { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
+.ac-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; }
+.ac-name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); }
+.ac-class { font-family: var(--font-mono); font-size: 0.58rem; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--border-hi); padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+.ac-formula { background: var(--bg3); border-radius: var(--radius-sm); padding: 0.875rem 1.1rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); line-height: 1.8; }
+.ac-row { display: grid; grid-template-columns: 1fr 140px; gap: 10px; align-items: center; margin-bottom: 8px; }
+.ac-label { font-size: 0.82rem; color: var(--text-dim); }
+.ac-input { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 10px; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text); width: 100%; text-align: right; }
+.ac-input:focus { outline: none; border-color: var(--border-hi); }
+.ac-result { background: var(--accent-dim); border: 1px solid var(--border-hi); border-radius: var(--radius-sm); padding: 1rem; text-align: center; margin-top: 0.75rem; }
+.ac-result-val { font-family: var(--font-head); font-weight: 800; font-size: 2rem; color: var(--accent); line-height: 1; }
+.ac-result-label { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+.humance-total { background: var(--sidebar); border-radius: var(--radius); padding: 2rem; text-align: center; margin: 1.5rem 0; }
+.ht-label { font-family: var(--font-mono); font-size: 0.62rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+.ht-val { font-family: var(--font-head); font-weight: 800; font-size: 3rem; color: #38BDF8; line-height: 1; margin-bottom: 6px; }
+.ht-sub { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+.quiz-q { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+.quiz-opts { display: flex; flex-direction: column; gap: 8px; margin-top: 1rem; }
+.qopt { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.85rem; color: var(--text-dim); cursor: pointer; transition: all 0.2s; }
+.qopt:hover { border-color: var(--border-hi); color: var(--text); }
+.qopt.correct { background: var(--accent-dim); border-color: var(--border-hi); color: var(--accent); }
+.qopt.wrong { background: var(--red-dim); border-color: rgba(220,38,38,0.2); color: var(--red); }
+.qfeedback { margin-top: 1rem; padding: 1rem; background: var(--bg3); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; display: none; }
+.qfeedback.vis { display: block; }
+.badge-wrap { text-align: center; padding: 3rem 2rem; }
+.badge-circle { width: 90px; height: 90px; border-radius: 50%; background: var(--accent-dim); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; animation: badgePulse 2.5s ease-in-out infinite; }
+@keyframes badgePulse { 0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 8px transparent} }
+</style>
 </head>
 <body>
 <div id="sidebar-mount"></div>
@@ -14,25 +55,321 @@
   <div class="topbar-breadcrumb">
     <span>Pillar 4</span><span class="sep">/</span>
     <span>Human Balance Sheet</span><span class="sep">/</span>
-    <span class="current">Module B — The HUMANCE Framework</span>
+    <span class="current">Module B &mdash; The HUMANCE Framework</span>
   </div>
-  <div class="topbar-right"><span class="by-badge">Coming Soon</span></div>
+  <div class="topbar-right">
+    <div class="topbar-progress">
+      <span id="beat-counter-top">Beat 1 of 3</span>
+      <div class="prog-dots" id="prog-dots"></div>
+    </div>
+    <span class="by-badge">CRFP Track</span>
+  </div>
 </div>
-<div class="app-body">
-  <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;text-align:center">
-    <div class="tag tag-amber" style="margin-bottom:1.5rem">In Development</div>
-    <h1 class="page-title">Module B — The HUMANCE Framework</h1>
-    <p class="page-desc" style="max-width:420px;margin:0 auto 2rem">This module is being built. Complete the previous module first.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a href="p4-module-a.html" class="btn-primary">&larr; Previous Module</a>
-      <a href="dashboard.html" class="btn-secondary">Dashboard</a>
+<div class="app-body"><div class="page-content">
+
+<!-- BEAT 0: THE 4-STEP METHODOLOGY -->
+<div class="beat active" id="beat-0">
+  <div class="page-tag">Module B &middot; Beat 1 of 3</div>
+  <h1 class="page-title">How to Calculate HUMANCE</h1>
+  <p class="page-desc">HUMANCE isn't guesswork. It's a structured 4-step methodology that converts invisible HR effort into a defensible financial proxy. Each step builds on the last.</p>
+
+  <div id="method-steps" style="margin:2rem 0">
+    <div class="method-step" id="ms-0">
+      <div class="step-spine"><div class="step-num">1</div><div class="step-line"></div></div>
+      <div class="step-body">
+        <div class="step-title">Identify the asset class and its evidence</div>
+        <div class="step-desc">Which HUMANCE asset class are you measuring? What observable evidence exists that it was built or destroyed? Exit interviews, engagement data, manager feedback, tenure patterns, productivity indices.</div>
+        <div class="step-example">Mehta &amp; Sons: Trust Capital evidence &rarr; 34yr founder tenure, zero senior exits in prior 5 years, 94% engagement score. Asset existed and was strong before succession.</div>
+      </div>
+    </div>
+    <div class="method-step" id="ms-1">
+      <div class="step-spine"><div class="step-num">2</div><div class="step-line"></div></div>
+      <div class="step-body">
+        <div class="step-title">Find the revenue proxy event</div>
+        <div class="step-desc">HUMANCE is always calculated through its impact on a measurable revenue outcome. Identify the specific business event that demonstrates the asset's value or destruction — exits, productivity drops, client losses, delayed decisions.</div>
+        <div class="step-example">Mehta &amp; Sons: Trust Capital destruction &rarr; 6 senior exits in 18 months &rarr; directly attributable to succession trust collapse. Revenue proxy: attrition cost + productivity loss during transition.</div>
+      </div>
+    </div>
+    <div class="method-step" id="ms-2">
+      <div class="step-spine"><div class="step-num">3</div><div class="step-line"></div></div>
+      <div class="step-body">
+        <div class="step-title">Apply the asset class formula</div>
+        <div class="step-desc">Each asset class has its own calculation formula using the ViRorah metrics. Trust Capital uses IRD + RBC. Culture Yield uses ESR + OSI. Signal Intelligence uses prevention cost methodology. Belonging Premium uses discretionary effort multiplier.</div>
+        <div class="step-example">Trust Capital formula: (Institutional Resilience Depth &times; Revenue at Risk) + (Role Backup Coverage gap &times; Replacement cost). Applied to Mehta &amp; Sons succession data.</div>
+      </div>
+    </div>
+    <div class="method-step" id="ms-3">
+      <div class="step-spine"><div class="step-num">4</div><div class="step-line"></div></div>
+      <div class="step-body">
+        <div class="step-title">State the HUMANCE number with confidence range</div>
+        <div class="step-desc">Never present HUMANCE as a precise figure. Always present it as a defensible range with your methodology stated. "Trust Capital destruction: ₹2.4Cr to ₹3.1Cr (central estimate ₹2.8Cr). Methodology: IRD + RBC calculation on 6-exit event, 18-month window."</div>
+        <div class="step-example">This is what makes HUMANCE credible. You're not claiming false precision. You're claiming structured methodology &mdash; which a CFO can engage with.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="method-nav" style="opacity:0;transition:opacity 0.5s ease 0.3s">
+    <div class="page-nav">
+      <span class="page-nav-info">Beat 1 of 3</span>
+      <button class="btn-primary" onclick="nextBeat()">Now calculate each asset class &rarr;</button>
     </div>
   </div>
 </div>
+
+<!-- BEAT 1: LIVE CALCULATORS -->
+<div class="beat" id="beat-1">
+  <div class="page-tag">Module B &middot; Beat 2 of 3</div>
+  <h1 class="page-title">Calculate Mehta &amp; Sons' HUMANCE</h1>
+  <p class="page-desc">All 4 asset classes pre-loaded with Mehta &amp; Sons data. Adjust any input and watch the HUMANCE total update live.</p>
+
+  <!-- TRUST CAPITAL -->
+  <div class="asset-calc">
+    <div class="ac-header">
+      <div class="ac-name">Trust Capital</div>
+      <span class="ac-class">Asset Class 1</span>
+    </div>
+    <div class="ac-formula">TC HUMANCE = (IRD score &times; Revenue at risk) + (RBC gap &times; Avg replacement cost)<br>Where IRD = institutional knowledge depth, RBC = succession readiness</div>
+    <div class="ac-row"><div class="ac-label">Revenue at risk during transition (₹)</div><input class="ac-input" type="number" id="tc-rev" value="8400000" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">IRD score (0-1, how deep is institutional knowledge)</div><input class="ac-input" type="number" step="0.01" id="tc-ird" value="0.82" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">RBC gap (0-1, how unprepared are successors)</div><input class="ac-input" type="number" step="0.01" id="tc-rbc" value="0.74" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Avg senior replacement cost (₹)</div><input class="ac-input" type="number" id="tc-rep" value="1800000" oninput="calcHUMANCE()"></div>
+    <div class="ac-result">
+      <div class="ac-result-val" id="tc-result">₹0</div>
+      <div class="ac-result-label">Trust Capital HUMANCE</div>
+    </div>
+  </div>
+
+  <!-- CULTURE YIELD -->
+  <div class="asset-calc">
+    <div class="ac-header">
+      <div class="ac-name">Culture Yield</div>
+      <span class="ac-class">Asset Class 2</span>
+    </div>
+    <div class="ac-formula">CY HUMANCE = (ESR drop &times; Quarterly revenue) &times; Quarters affected<br>Where ESR drop = pre-transition ESR minus post-transition ESR</div>
+    <div class="ac-row"><div class="ac-label">Pre-transition ESR (%)</div><input class="ac-input" type="number" id="cy-esr-pre" value="94" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Post-transition ESR (%)</div><input class="ac-input" type="number" id="cy-esr-post" value="61" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Quarterly revenue (₹)</div><input class="ac-input" type="number" id="cy-rev" value="3200000" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Quarters affected</div><input class="ac-input" type="number" id="cy-quarters" value="3" oninput="calcHUMANCE()"></div>
+    <div class="ac-result">
+      <div class="ac-result-val" id="cy-result">₹0</div>
+      <div class="ac-result-label">Culture Yield HUMANCE</div>
+    </div>
+  </div>
+
+  <!-- SIGNAL INTELLIGENCE -->
+  <div class="asset-calc">
+    <div class="ac-header">
+      <div class="ac-name">Signal Intelligence</div>
+      <span class="ac-class">Asset Class 3</span>
+    </div>
+    <div class="ac-formula">SI HUMANCE = Total revenue impact of ignored HR signal<br>The value of Signal Intelligence = the cost of the crisis it could have prevented</div>
+    <div class="ac-row"><div class="ac-label">Total revenue impact of ignored signal (₹)</div><input class="ac-input" type="number" id="si-impact" value="4200000" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Signal lead time (months before crisis)</div><input class="ac-input" type="number" id="si-lead" value="8" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Prevention cost if acted on (₹)</div><input class="ac-input" type="number" id="si-prevent" value="480000" oninput="calcHUMANCE()"></div>
+    <div class="ac-result">
+      <div class="ac-result-val" id="si-result">₹0</div>
+      <div class="ac-result-label">Signal Intelligence HUMANCE (net)</div>
+    </div>
+  </div>
+
+  <!-- BELONGING PREMIUM -->
+  <div class="asset-calc">
+    <div class="ac-header">
+      <div class="ac-name">Belonging Premium</div>
+      <span class="ac-class">Asset Class 4</span>
+    </div>
+    <div class="ac-formula">BP HUMANCE = (Discretionary effort % &times; Productive hours &times; Revenue/hour) &times; Team size<br>Where Belonging Premium = output above contracted baseline</div>
+    <div class="ac-row"><div class="ac-label">Discretionary effort above baseline (%)</div><input class="ac-input" type="number" id="bp-effort" value="22" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Average productive hours per person per year</div><input class="ac-input" type="number" id="bp-hours" value="1800" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Revenue per productive hour (₹)</div><input class="ac-input" type="number" id="bp-rev-hr" value="1400" oninput="calcHUMANCE()"></div>
+    <div class="ac-row"><div class="ac-label">Team size (senior contributors)</div><input class="ac-input" type="number" id="bp-team" value="8" oninput="calcHUMANCE()"></div>
+    <div class="ac-result">
+      <div class="ac-result-val" id="bp-result">₹0</div>
+      <div class="ac-result-label">Belonging Premium HUMANCE</div>
+    </div>
+  </div>
+
+  <!-- TOTAL -->
+  <div class="humance-total">
+    <div class="ht-label">Total HUMANCE &mdash; Mehta &amp; Sons</div>
+    <div class="ht-val" id="humance-total">₹0</div>
+    <div class="ht-sub" id="humance-breakdown">Calculate all 4 asset classes above</div>
+  </div>
+
+  <div class="page-nav">
+    <span class="page-nav-info">Beat 2 of 3</span>
+    <button class="btn-primary" onclick="nextBeat()">Test my understanding &rarr;</button>
+  </div>
+</div>
+
+<!-- BEAT 2: QUIZ + BADGE -->
+<div class="beat" id="beat-2">
+  <div class="page-tag">Module B &middot; Beat 3 of 3</div>
+  <h1 class="page-title">Lock In the Methodology</h1>
+  <p class="page-desc">Three questions that test whether you can apply the HUMANCE framework to a new situation.</p>
+
+  <div class="quiz-q" id="qq-0">
+    <div class="tag tag-amber" style="margin-bottom:10px">Question 1 of 3</div>
+    <p style="font-size:0.92rem;color:var(--text);font-weight:500;line-height:1.7">A company's star sales team has been together for 4 years. The team lead exits. Within 6 months, 3 more members leave and revenue drops 28%. Which HUMANCE asset class primarily explains this?</p>
+    <div class="quiz-opts">
+      <div class="qopt" onclick="ansQ(0,0,false)">Culture Yield &mdash; the culture couldn't survive the disruption</div>
+      <div class="qopt" onclick="ansQ(0,1,true)">Trust Capital &mdash; the team lead's institutional credibility and relationship equity was the binding force</div>
+      <div class="qopt" onclick="ansQ(0,2,false)">Belonging Premium &mdash; people stopped giving discretionary effort</div>
+      <div class="qopt" onclick="ansQ(0,3,false)">Signal Intelligence &mdash; HR didn't see the exits coming</div>
+    </div>
+    <div class="qfeedback" id="qf-0"></div>
+  </div>
+
+  <div class="quiz-q" id="qq-1" style="opacity:0.3;pointer-events:none">
+    <div class="tag tag-amber" style="margin-bottom:10px">Question 2 of 3</div>
+    <p style="font-size:0.92rem;color:var(--text);font-weight:500;line-height:1.7">HR flags a flight-risk pattern in the engineering team 6 months before a product launch. Leadership ignores it. 3 senior engineers exit during the launch, delaying it by 4 months and costing ₹2.1Cr. What is the Signal Intelligence HUMANCE value?</p>
+    <div class="quiz-opts">
+      <div class="qopt" onclick="ansQ(1,0,false)">₹0 &mdash; Signal Intelligence only counts if HR acted on the signal</div>
+      <div class="qopt" onclick="ansQ(1,1,false)">The cost of the 3 exit replacements only</div>
+      <div class="qopt" onclick="ansQ(1,2,true)">₹2.1Cr &mdash; the full revenue impact of the ignored signal is the HUMANCE value</div>
+      <div class="qopt" onclick="ansQ(1,3,false)">₹2.1Cr minus the cost of whatever intervention HR would have done</div>
+    </div>
+    <div class="qfeedback" id="qf-1"></div>
+  </div>
+
+  <div class="quiz-q" id="qq-2" style="opacity:0.3;pointer-events:none">
+    <div class="tag tag-amber" style="margin-bottom:10px">Question 3 of 3</div>
+    <p style="font-size:0.92rem;color:var(--text);font-weight:500;line-height:1.7">When presenting HUMANCE to a CFO, which approach is most defensible?</p>
+    <div class="quiz-opts">
+      <div class="qopt" onclick="ansQ(2,0,false)">"Our HUMANCE is exactly ₹4.2Cr this year"</div>
+      <div class="qopt" onclick="ansQ(2,1,true)">"Our HUMANCE is estimated at ₹3.8Cr to ₹4.6Cr (central estimate ₹4.2Cr) using the 4-step attribution methodology across 3 asset classes"</div>
+      <div class="qopt" onclick="ansQ(2,2,false)">"HUMANCE is difficult to quantify but we believe it's significant"</div>
+      <div class="qopt" onclick="ansQ(2,3,false)">"Our engagement score of 78% represents approximately ₹4.2Cr in HUMANCE"</div>
+    </div>
+    <div class="qfeedback" id="qf-2"></div>
+  </div>
+
+  <div id="quiz-done" style="display:none">
+    <div class="badge-wrap">
+      <div class="badge-circle">🧮</div>
+      <div style="font-family:var(--font-head);font-weight:800;font-size:1.3rem;color:var(--accent);margin-bottom:0.5rem">Badge Unlocked: The HUMANCE Formula</div>
+      <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:2rem">Module B &middot; Pillar 4 &middot; Human Balance Sheet</div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
+        <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next &mdash; Module C</div>
+        <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The Instruments</div>
+        <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">IRD, RBC, Attrition Rate, RDT, and PVI &mdash; the 5 ViRorah metrics that power HUMANCE calculations. Live calculators with Mehta &amp; Sons data.</div>
+      </div>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a href="p4-module-c.html" class="btn-primary">Continue to Module C &rarr;</a>
+        <a href="dashboard.html" class="btn-ghost">&larr; Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div></div>
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p4-b');
+document.querySelectorAll('.sb-pillar').forEach(el => {
+  const chev = el.querySelector('.sb-chevron');
+  if (chev) el.setAttribute('data-id', chev.id.replace('chev-',''));
+});
+
+let currentBeat = 0;
+
+function updateProgress() {
+  document.getElementById('beat-counter-top').textContent = 'Beat ' + (currentBeat+1) + ' of 3';
+  const dots = document.getElementById('prog-dots');
+  dots.innerHTML = Array(3).fill(0).map((_,i) =>
+    '<div class="prog-dot ' + (i < currentBeat ? 'done' : i === currentBeat ? 'active' : '') + '"></div>'
+  ).join('');
+}
+
+function nextBeat() {
+  document.getElementById('beat-' + currentBeat).classList.remove('active');
+  currentBeat++;
+  const next = document.getElementById('beat-' + currentBeat);
+  if (next) { next.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+  updateProgress();
+  if (currentBeat === 2) RF.progress.set('p4-b');
+}
+
+// Animate method steps
+setTimeout(() => {
+  [0,1,2,3].forEach((i) => {
+    setTimeout(() => {
+      const el = document.getElementById('ms-'+i);
+      if(el) el.classList.add('vis');
+    }, i * 300);
+  });
+  setTimeout(() => {
+    const nav = document.getElementById('method-nav');
+    if(nav) nav.style.opacity = '1';
+  }, 4*300+200);
+}, 300);
+
+// HUMANCE Calculator
+function fmt(n) {
+  if (n >= 10000000) return '₹' + (n/10000000).toFixed(1) + 'Cr';
+  if (n >= 100000) return '₹' + (n/100000).toFixed(1) + 'L';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+
+function calcHUMANCE() {
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+
+  // Trust Capital
+  const tc = (g('tc-ird') * g('tc-rev')) + (g('tc-rbc') * g('tc-rep') * 6);
+  document.getElementById('tc-result').textContent = fmt(tc);
+
+  // Culture Yield
+  const esrDrop = (g('cy-esr-pre') - g('cy-esr-post')) / 100;
+  const cy = esrDrop * g('cy-rev') * g('cy-quarters');
+  document.getElementById('cy-result').textContent = fmt(cy);
+
+  // Signal Intelligence (net value = impact minus prevention cost)
+  const si = g('si-impact') - g('si-prevent');
+  document.getElementById('si-result').textContent = fmt(si);
+
+  // Belonging Premium
+  const bp = (g('bp-effort')/100) * g('bp-hours') * g('bp-rev-hr') * g('bp-team');
+  document.getElementById('bp-result').textContent = fmt(bp);
+
+  // Total
+  const total = tc + cy + si + bp;
+  document.getElementById('humance-total').textContent = fmt(total);
+  document.getElementById('humance-breakdown').textContent =
+    'TC: ' + fmt(tc) + ' + CY: ' + fmt(cy) + ' + SI: ' + fmt(si) + ' + BP: ' + fmt(bp);
+}
+
+// Quiz
+const feedbacks = [
+  { c: 'Correct. Trust Capital is the interpersonal credibility, relationship equity, and institutional confidence that a key person carries. When the team lead exited, so did the invisible bond holding the team together.', w: 'Not quite. While Culture Yield and Belonging Premium are also affected, the primary driver here is Trust Capital &mdash; the team lead\'s personal credibility was the binding force.' },
+  { c: 'Exactly right. The Signal Intelligence HUMANCE value equals the full cost of the crisis that the ignored signal could have prevented. The 6-month lead time proves HR had the information to act.', w: 'Not quite. Signal Intelligence HUMANCE is calculated as the full revenue impact of the ignored signal &mdash; not the exit costs alone, and not reduced by prevention costs (that\'s a separate calculation).' },
+  { c: 'Correct. HUMANCE must always be presented as a range with methodology stated. False precision destroys credibility. A range with clear methodology is what a CFO can actually engage with.', w: 'Not quite. CFOs respect methodology, not precision claims or vague assertions. Always present HUMANCE as a defensible range with your calculation method explicitly stated.' },
+];
+
+let quizDone = [false,false,false];
+function ansQ(qIdx, optIdx, correct) {
+  if(quizDone[qIdx]) return;
+  quizDone[qIdx] = true;
+  const opts = document.querySelectorAll('#qq-'+qIdx+' .qopt');
+  opts.forEach(o => o.style.pointerEvents='none');
+  opts[optIdx].classList.add(correct?'correct':'wrong');
+  if(!correct) opts.forEach((o,i) => { if(o.onclick.toString().includes('true')) o.classList.add('correct'); });
+  const fb = document.getElementById('qf-'+qIdx);
+  fb.textContent = (correct?'✓ ':' ✗ ') + (correct?feedbacks[qIdx].c:feedbacks[qIdx].w);
+  fb.classList.add('vis');
+  setTimeout(() => {
+    if(qIdx < 2) {
+      const nq = document.getElementById('qq-'+(qIdx+1));
+      if(nq) { nq.style.opacity='1'; nq.style.pointerEvents='auto'; nq.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+    } else {
+      document.getElementById('quiz-done').style.display='block';
+      document.getElementById('quiz-done').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  }, 1000);
+}
+
+calcHUMANCE();
+updateProgress();
 </script>
-</body>
-</html>
+</PAGEEOF
+echo "P4-B done — $(wc -l < /home/claude/rf2/p4-module-b.html) lines"

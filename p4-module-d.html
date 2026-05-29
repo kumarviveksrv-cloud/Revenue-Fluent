@@ -3,10 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillar 4, Module D — The HUMANCE Statement — Revenue Fluent</title>
+<title>Pillar 4, Module D: The HUMANCE Statement — Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style id="rf-css"></style>
 <script src="shared.js"></script>
+<style>
+.beat { display: none; }
+.beat.active { display: block; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
+.hbs-doc { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 1.5rem 0; }
+.hbs-header { background: var(--sidebar); padding: 2rem; }
+.hbs-company { font-family: var(--font-mono); font-size: 0.62rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 8px; }
+.hbs-title { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 4px; letter-spacing: -0.02em; }
+.hbs-sub { font-family: var(--font-mono); font-size: 0.62rem; color: rgba(255,255,255,0.35); }
+.hbs-section { padding: 1.5rem; border-bottom: 1px solid var(--border); }
+.hbs-section-title { font-family: var(--font-mono); font-size: 0.62rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
+.hbs-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.hbs-row:last-child { border-bottom: none; }
+.hbs-row-label { font-size: 0.85rem; color: var(--text-dim); }
+.hbs-row-val { font-family: var(--font-mono); font-weight: 500; font-size: 0.85rem; }
+.hbs-total { background: var(--accent-dim); padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.hbs-total-label { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; color: var(--text); }
+.hbs-total-val { font-family: var(--font-head); font-weight: 800; font-size: 1.8rem; color: var(--accent); }
+.hbs-destruction { background: var(--red-dim); padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.hbs-net { background: var(--sidebar); padding: 1.5rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.build-step { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; }
+.build-step:hover { border-color: var(--border-hi); }
+.build-step.locked { opacity: 0.4; cursor: default; }
+.build-step.done { border-color: var(--accent); background: var(--accent-dim); }
+.bs-header { display: flex; justify-content: space-between; align-items: center; }
+.bs-num { font-family: var(--font-mono); font-size: 0.62rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
+.bs-status { font-family: var(--font-mono); font-size: 0.62rem; padding: 2px 8px; border-radius: 3px; }
+.bs-body { margin-top: 0.875rem; display: none; }
+.build-step.done .bs-body { display: block; }
+.bs-value { font-family: var(--font-head); font-weight: 800; font-size: 1.8rem; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+.bs-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.65; }
+@keyframes badgePulse { 0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 8px transparent} }
+</style>
 </head>
 <body>
 <div id="sidebar-mount"></div>
@@ -14,25 +46,205 @@
   <div class="topbar-breadcrumb">
     <span>Pillar 4</span><span class="sep">/</span>
     <span>Human Balance Sheet</span><span class="sep">/</span>
-    <span class="current">Module D — The HUMANCE Statement</span>
+    <span class="current">Module D &mdash; The HUMANCE Statement</span>
   </div>
-  <div class="topbar-right"><span class="by-badge">Coming Soon</span></div>
+  <div class="topbar-right">
+    <div class="topbar-progress">
+      <span id="beat-counter-top">Beat 1 of 2</span>
+      <div class="prog-dots" id="prog-dots"></div>
+    </div>
+    <span class="by-badge">CRFP Track</span>
+  </div>
 </div>
-<div class="app-body">
-  <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;text-align:center">
-    <div class="tag tag-amber" style="margin-bottom:1.5rem">In Development</div>
-    <h1 class="page-title">Module D — The HUMANCE Statement</h1>
-    <p class="page-desc" style="max-width:420px;margin:0 auto 2rem">This module is being built. Complete the previous module first.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a href="p4-module-c.html" class="btn-primary">&larr; Previous Module</a>
-      <a href="dashboard.html" class="btn-secondary">Dashboard</a>
+<div class="app-body"><div class="page-content">
+
+<!-- BEAT 0: BUILD THE HUMANCE STATEMENT -->
+<div class="beat active" id="beat-0">
+  <div class="page-tag">Module D &middot; Beat 1 of 2</div>
+  <h1 class="page-title">Build the Human Balance Sheet</h1>
+  <p class="page-desc">Across Modules A, B, and C you've learned the philosophy, the framework, and the instruments. Now you build the actual Human Balance Sheet for Mehta &amp; Sons &mdash; the first financial statement of its kind.</p>
+  <p style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px">Click each section to add it to the statement &rarr;</p>
+
+  <div class="build-step" id="bs-0" onclick="lockStep(0)">
+    <div class="bs-header">
+      <span class="bs-num">Asset Class 1 &mdash; Trust Capital</span>
+      <span class="bs-status" id="bss-0" style="background:var(--accent-dim);color:var(--accent)">Click to add</span>
+    </div>
+    <div class="bs-body">
+      <div class="bs-value">&#8377;2.8Cr</div>
+      <div class="bs-desc">34 years of founder relationship equity + institutional credibility. Destroyed in succession event. Calculated via IRD (18%) &times; revenue at risk + RBC gap (80%) &times; replacement cost &times; 6 exits.</div>
+    </div>
+  </div>
+
+  <div class="build-step locked" id="bs-1" onclick="lockStep(1)">
+    <div class="bs-header">
+      <span class="bs-num">Asset Class 2 &mdash; Culture Yield</span>
+      <span class="bs-status" id="bss-1" style="background:var(--bg3);color:var(--text-mute)">&#128274; Add Asset 1 first</span>
+    </div>
+    <div class="bs-body">
+      <div class="bs-value">&#8377;1.1Cr</div>
+      <div class="bs-desc">ESR dropped from 94% to 61% over 3 quarters post-succession. Productivity continuity destroyed. Quarterly revenue impact: &#8377;1.056Cr per quarter &times; 3 quarters.</div>
+    </div>
+  </div>
+
+  <div class="build-step locked" id="bs-2" onclick="lockStep(2)">
+    <div class="bs-header">
+      <span class="bs-num">Asset Class 3 &mdash; Signal Intelligence</span>
+      <span class="bs-status" id="bss-2" style="background:var(--bg3);color:var(--text-mute)">&#128274; Add Asset 2 first</span>
+    </div>
+    <div class="bs-body">
+      <div class="bs-value">&#8377;3.7Cr</div>
+      <div class="bs-desc">HR flagged succession risk 8 months prior. Ignored. Total revenue impact of ignored signal: &#8377;4.2Cr. Prevention cost if acted on: &#8377;4.8L. Net Signal Intelligence HUMANCE: &#8377;3.7Cr.</div>
+    </div>
+  </div>
+
+  <div class="build-step locked" id="bs-3" onclick="lockStep(3)">
+    <div class="bs-header">
+      <span class="bs-num">Asset Class 4 &mdash; Belonging Premium</span>
+      <span class="bs-status" id="bss-3" style="background:var(--bg3);color:var(--text-mute)">&#128274; Add Asset 3 first</span>
+    </div>
+    <div class="bs-body">
+      <div class="bs-value">&#8377;4.5Cr</div>
+      <div class="bs-desc">8 senior contributors at 22% discretionary effort above baseline &times; 1800 hrs &times; &#8377;1400/hr. Annual Belonging Premium generated (pre-succession): &#8377;4.5Cr. Post-succession: near zero.</div>
+    </div>
+  </div>
+
+  <div id="generate-hbs" style="display:none;margin-top:1.5rem">
+    <button class="btn-primary" style="width:100%;padding:1rem;font-size:1rem" onclick="generateHBS()">Generate the Human Balance Sheet &rarr;</button>
+  </div>
+
+  <div id="hbs-document" style="display:none">
+    <div class="hbs-doc">
+      <div class="hbs-header">
+        <div class="hbs-company">Mehta &amp; Sons Enterprises &middot; Family Business &middot; 50 Employees &middot; INR</div>
+        <div class="hbs-title">Human Balance Sheet</div>
+        <div class="hbs-sub">Period: 18 months post-succession &middot; Prepared by: Revenue Fluent Practitioner</div>
+      </div>
+
+      <div class="hbs-section">
+        <div class="hbs-section-title">HUMANCE Assets (Pre-Succession)</div>
+        <div class="hbs-row"><span class="hbs-row-label">Trust Capital &mdash; Founder relationship equity</span><span class="hbs-row-val" style="color:var(--accent)">&#8377;2.8Cr</span></div>
+        <div class="hbs-row"><span class="hbs-row-label">Culture Yield &mdash; Productivity continuity asset</span><span class="hbs-row-val" style="color:var(--accent)">&#8377;1.1Cr</span></div>
+        <div class="hbs-row"><span class="hbs-row-label">Signal Intelligence &mdash; Early warning capability</span><span class="hbs-row-val" style="color:var(--accent)">&#8377;3.7Cr</span></div>
+        <div class="hbs-row"><span class="hbs-row-label">Belonging Premium &mdash; Discretionary effort value</span><span class="hbs-row-val" style="color:var(--accent)">&#8377;4.5Cr</span></div>
+        <div class="hbs-total">
+          <span class="hbs-total-label">Total HUMANCE Asset Base</span>
+          <span class="hbs-total-val">&#8377;12.1Cr</span>
+        </div>
+      </div>
+
+      <div class="hbs-section">
+        <div class="hbs-section-title">HUMANCE Destruction (Post-Succession Event)</div>
+        <div class="hbs-row"><span class="hbs-row-label">Trust Capital destroyed &mdash; succession transition</span><span class="hbs-row-val" style="color:var(--red)">-&#8377;2.8Cr</span></div>
+        <div class="hbs-row"><span class="hbs-row-label">Culture Yield destroyed &mdash; ESR collapse</span><span class="hbs-row-val" style="color:var(--red)">-&#8377;1.1Cr</span></div>
+        <div class="hbs-row"><span class="hbs-row-label">Signal Intelligence ignored &mdash; prevention failure</span><span class="hbs-row-val" style="color:var(--red)">-&#8377;3.7Cr</span></div>
+        <div class="hbs-row"><span class="hbs-row-label">Belonging Premium lost &mdash; discretionary effort collapse</span><span class="hbs-row-val" style="color:var(--red)">-&#8377;4.5Cr</span></div>
+        <div class="hbs-destruction">
+          <span style="font-family:var(--font-head);font-weight:700;font-size:0.92rem;color:var(--text)">Total HUMANCE Destroyed</span>
+          <span style="font-family:var(--font-head);font-weight:800;font-size:1.6rem;color:var(--red)">-&#8377;12.1Cr</span>
+        </div>
+      </div>
+
+      <div class="hbs-net">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Net HUMANCE Position</div>
+          <div style="font-family:var(--font-head);font-weight:800;font-size:2.2rem;color:#EF4444;line-height:1">-&#8377;12.1Cr</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:6px">Complete HUMANCE destruction event. The invisible economy was wiped out in 18 months.</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:var(--font-mono);font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Revenue Correlation</div>
+          <div style="font-family:var(--font-head);font-weight:800;font-size:1.5rem;color:#FCA5A5">-31%</div>
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:4px">Actual revenue decline</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-hi" style="margin:1.5rem 0">
+      <div class="tag" style="margin-bottom:10px">The Statement That Changes Boardrooms</div>
+      <p style="font-size:0.92rem;color:var(--text);line-height:1.85;font-style:italic">"Mehta &amp; Sons' 31% revenue decline was not caused by market conditions. The Human Balance Sheet shows &#8377;12.1Cr in HUMANCE was destroyed in 18 months following the succession event. This is not a financial problem. It's a people problem with a financial consequence. And HR had the data to prevent it 8 months before it happened."</p>
+    </div>
+
+    <div class="page-nav">
+      <span class="page-nav-info">Beat 1 of 2</span>
+      <button class="btn-primary" onclick="nextBeat()">Complete the simulation &rarr;</button>
     </div>
   </div>
 </div>
+
+<!-- BEAT 1: BADGE -->
+<div class="beat" id="beat-1">
+  <div style="text-align:center;padding:3rem 2rem">
+    <div style="width:90px;height:90px;border-radius:50%;background:var(--accent-dim);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;animation:badgePulse 2.5s ease-in-out infinite">&#9878;&#65039;</div>
+    <div style="font-family:var(--font-head);font-weight:800;font-size:1.3rem;color:var(--accent);margin-bottom:0.5rem">Badge Unlocked: The HUMANCE Statement</div>
+    <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:2rem">Module D &middot; Pillar 4 &middot; Human Balance Sheet</div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next &mdash; Module E</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The Simulation</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">Apply HUMANCE independently to a new scenario. Produce a complete Human Balance Sheet from scratch. Then claim your Pillar 4 badge.</div>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="p4-module-e.html" class="btn-primary">Continue to Module E &rarr;</a>
+      <a href="dashboard.html" class="btn-ghost">&larr; Dashboard</a>
+    </div>
+  </div>
+</div>
+
+</div></div>
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p4-d');
+document.querySelectorAll('.sb-pillar').forEach(el => {
+  const chev = el.querySelector('.sb-chevron');
+  if (chev) el.setAttribute('data-id', chev.id.replace('chev-',''));
+});
+let currentBeat = 0;
+let stepsLocked = [false,false,false,false];
+
+function updateProgress() {
+  document.getElementById('beat-counter-top').textContent = 'Beat ' + (currentBeat+1) + ' of 2';
+  const dots = document.getElementById('prog-dots');
+  dots.innerHTML = Array(2).fill(0).map((_,i) =>
+    '<div class="prog-dot ' + (i < currentBeat ? 'done' : i === currentBeat ? 'active' : '') + '"></div>'
+  ).join('');
+}
+function nextBeat() {
+  document.getElementById('beat-' + currentBeat).classList.remove('active');
+  currentBeat++;
+  const next = document.getElementById('beat-' + currentBeat);
+  if (next) { next.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+  updateProgress();
+  if (currentBeat === 1) RF.progress.set('p4-d');
+}
+function lockStep(idx) {
+  if (idx > 0 && !stepsLocked[idx-1]) return;
+  if (stepsLocked[idx]) return;
+  stepsLocked[idx] = true;
+  const step = document.getElementById('bs-'+idx);
+  step.classList.remove('locked');
+  step.classList.add('done');
+  step.style.cursor = 'default';
+  document.getElementById('bss-'+idx).textContent = '✓ Added';
+  document.getElementById('bss-'+idx).style.background = 'var(--accent-dim)';
+  document.getElementById('bss-'+idx).style.color = 'var(--accent)';
+  if (idx+1 < 4) {
+    const next = document.getElementById('bs-'+(idx+1));
+    next.classList.remove('locked');
+    document.getElementById('bss-'+(idx+1)).textContent = 'Click to add';
+    document.getElementById('bss-'+(idx+1)).style.background = 'var(--accent-dim)';
+    document.getElementById('bss-'+(idx+1)).style.color = 'var(--accent)';
+  }
+  if (stepsLocked.every(Boolean)) {
+    document.getElementById('generate-hbs').style.display = 'block';
+    document.getElementById('generate-hbs').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+}
+function generateHBS() {
+  document.getElementById('generate-hbs').style.display = 'none';
+  document.getElementById('hbs-document').style.display = 'block';
+  document.getElementById('hbs-document').scrollIntoView({behavior:'smooth',block:'start'});
+}
+updateProgress();
 </script>
-</body>
-</html>
+</PAGEEOF
+echo "P4-D done — $(wc -l < /home/claude/rf2/p4-module-d.html) lines"

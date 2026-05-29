@@ -3,10 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pillar 4, Module C — The Instruments — Revenue Fluent</title>
+<title>Pillar 4, Module C: The Instruments — Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style id="rf-css"></style>
 <script src="shared.js"></script>
+<style>
+.beat { display: none; }
+.beat.active { display: block; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
+.metric-hero { background: var(--bg2); border: 1px solid var(--border-hi); border-radius: var(--radius); padding: 1.75rem; margin-bottom: 1.5rem; }
+.metric-name { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); margin-bottom: 4px; }
+.metric-sub { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); margin-bottom: 1rem; }
+.metric-tagline { font-size: 0.92rem; color: var(--text-dim); line-height: 1.75; margin-bottom: 1.25rem; }
+.formula-box { background: var(--bg3); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-bottom: 1.25rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); line-height: 1.9; }
+.bm-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.25rem; }
+.bm-cell { background: var(--bg2); padding: 0.75rem; text-align: center; }
+.bm-val { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; line-height: 1; margin-bottom: 3px; }
+.bm-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+.calc-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin: 1rem 0; }
+.calc-row { display: grid; grid-template-columns: 1fr 150px; gap: 10px; align-items: center; margin-bottom: 8px; }
+.calc-label { font-size: 0.82rem; color: var(--text-dim); }
+.calc-input { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 10px; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text); width: 100%; text-align: right; }
+.calc-input:focus { outline: none; border-color: var(--border-hi); }
+.calc-result { background: var(--accent-dim); border: 1px solid var(--border-hi); border-radius: var(--radius-sm); padding: 1rem; text-align: center; margin-top: 0.75rem; }
+.calc-result-val { font-family: var(--font-head); font-weight: 800; font-size: 2rem; color: var(--accent); line-height: 1; }
+.calc-result-label { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+.calc-interp { font-size: 0.8rem; color: var(--text-dim); margin-top: 6px; line-height: 1.6; }
+.sc-row { display: flex; justify-content: space-between; align-items: center; padding: 0.875rem 1.25rem; border-bottom: 1px solid var(--border); }
+.sc-row:last-child { border-bottom: none; }
+@keyframes badgePulse { 0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 8px transparent} }
+</style>
 </head>
 <body>
 <div id="sidebar-mount"></div>
@@ -14,25 +39,249 @@
   <div class="topbar-breadcrumb">
     <span>Pillar 4</span><span class="sep">/</span>
     <span>Human Balance Sheet</span><span class="sep">/</span>
-    <span class="current">Module C — The Instruments</span>
+    <span class="current">Module C &mdash; The Instruments</span>
   </div>
-  <div class="topbar-right"><span class="by-badge">Coming Soon</span></div>
+  <div class="topbar-right">
+    <div class="topbar-progress">
+      <span id="beat-counter-top">Beat 1 of 3</span>
+      <div class="prog-dots" id="prog-dots"></div>
+    </div>
+    <span class="by-badge">CRFP Track</span>
+  </div>
 </div>
-<div class="app-body">
-  <div class="page-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;text-align:center">
-    <div class="tag tag-amber" style="margin-bottom:1.5rem">In Development</div>
-    <h1 class="page-title">Module C — The Instruments</h1>
-    <p class="page-desc" style="max-width:420px;margin:0 auto 2rem">This module is being built. Complete the previous module first.</p>
+<div class="app-body"><div class="page-content">
+
+<div class="beat active" id="beat-0">
+  <div class="page-tag">Module C &middot; Beat 1 of 3 &middot; Instruments 1 + 2</div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:2rem">
+    <div class="card" style="text-align:center;border-color:var(--border-hi)"><div style="font-family:var(--font-head);font-weight:800;font-size:0.9rem;color:var(--accent)">IRD</div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--text-mute);margin-top:3px;text-transform:uppercase">#14</div></div>
+    <div class="card" style="text-align:center;border-color:var(--border-hi)"><div style="font-family:var(--font-head);font-weight:800;font-size:0.9rem;color:var(--accent)">RBC</div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--text-mute);margin-top:3px;text-transform:uppercase">#15</div></div>
+    <div class="card" style="text-align:center;opacity:0.4"><div style="font-family:var(--font-head);font-weight:800;font-size:0.9rem;color:var(--text-dim)">ATR</div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--text-mute);margin-top:3px;text-transform:uppercase">#4</div></div>
+    <div class="card" style="text-align:center;opacity:0.4"><div style="font-family:var(--font-head);font-weight:800;font-size:0.9rem;color:var(--text-dim)">RDT</div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--text-mute);margin-top:3px;text-transform:uppercase">#3</div></div>
+    <div class="card" style="text-align:center;opacity:0.4"><div style="font-family:var(--font-head);font-weight:800;font-size:0.9rem;color:var(--text-dim)">PVI</div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--text-mute);margin-top:3px;text-transform:uppercase">#10</div></div>
+  </div>
+
+  <div class="metric-hero">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Institutional Resilience Depth</div><div class="metric-sub">ViRorah Metric #14 &middot; Resilience Lens</div></div>
+      <span class="tag">IRD</span>
+    </div>
+    <div class="metric-tagline">How deeply is critical knowledge embedded across your org? IRD measures whether your company's core capabilities live in a few people's heads or are genuinely distributed. Low IRD = one exit destroys institutional capability.</div>
+    <div class="formula-box">IRD = (Documented processes / Total critical processes) &times; (Cross-trained people / Total role-critical people) &times; 100</div>
+    <div class="bm-strip">
+      <div class="bm-cell"><div class="bm-val" style="color:var(--accent)">70%+</div><div class="bm-label">Resilient</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--amber)">40-70%</div><div class="bm-label">Fragile</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--red)">Below 40%</div><div class="bm-label">Critical risk</div></div>
+    </div>
+    <div class="calc-box">
+      <div class="calc-row"><div class="calc-label">Documented critical processes</div><input class="calc-input" type="number" id="ird-doc" value="8" oninput="calcIRD()"></div>
+      <div class="calc-row"><div class="calc-label">Total critical processes</div><input class="calc-input" type="number" id="ird-total" value="22" oninput="calcIRD()"></div>
+      <div class="calc-row"><div class="calc-label">Cross-trained people</div><input class="calc-input" type="number" id="ird-cross" value="4" oninput="calcIRD()"></div>
+      <div class="calc-row"><div class="calc-label">Role-critical people</div><input class="calc-input" type="number" id="ird-crit" value="14" oninput="calcIRD()"></div>
+      <div class="calc-result">
+        <div class="calc-result-val" id="ird-result">18%</div>
+        <div class="calc-result-label">IRD Score</div>
+        <div class="calc-interp" id="ird-interp">Critical. Mehta &amp; Sons had almost zero knowledge distribution. The founder and 6 senior managers were sole custodians of 82% of institutional knowledge.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-hero">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Role Backup Coverage</div><div class="metric-sub">ViRorah Metric #15 &middot; Resilience Lens</div></div>
+      <span class="tag">RBC</span>
+    </div>
+    <div class="metric-tagline">For every critical role, is there someone ready to step in? RBC measures succession readiness at the role level. A company with 0% RBC on senior roles is one resignation away from chaos.</div>
+    <div class="formula-box">RBC = (Roles with identified successor / Total critical roles) &times; 100</div>
+    <div class="bm-strip">
+      <div class="bm-cell"><div class="bm-val" style="color:var(--accent)">80%+</div><div class="bm-label">Well covered</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--amber)">50-80%</div><div class="bm-label">Partial</div></div>
+      <div class="bm-cell"><div class="bm-val" style="color:var(--red)">Below 50%</div><div class="bm-label">Exposed</div></div>
+    </div>
+    <div class="calc-box">
+      <div class="calc-row"><div class="calc-label">Critical roles with identified successor</div><input class="calc-input" type="number" id="rbc-covered" value="2" oninput="calcRBC()"></div>
+      <div class="calc-row"><div class="calc-label">Total critical roles</div><input class="calc-input" type="number" id="rbc-total" value="10" oninput="calcRBC()"></div>
+      <div class="calc-result">
+        <div class="calc-result-val" id="rbc-result">20%</div>
+        <div class="calc-result-label">Role Backup Coverage</div>
+        <div class="calc-interp" id="rbc-interp">Critical. Only 2 of 10 critical roles at Mehta &amp; Sons had succession plans. The founder&apos;s role had zero identified successor &mdash; the most catastrophic RBC failure possible.</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-nav"><span class="page-nav-info">Beat 1 of 3</span><button class="btn-primary" onclick="nextBeat()">Next: ATR + RDT + PVI &rarr;</button></div>
+</div>
+
+<div class="beat" id="beat-1">
+  <div class="page-tag">Module C &middot; Beat 2 of 3 &middot; Instruments 3, 4 + 5</div>
+
+  <div class="metric-hero" style="margin-bottom:1.25rem">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Attrition Rate</div><div class="metric-sub">ViRorah Metric #4 &middot; Leakage Lens</div></div>
+      <span class="tag">ATR</span>
+    </div>
+    <div class="metric-tagline">The foundational HUMANCE leakage metric. Every exit destroys HUMANCE — the question is how fast and how much.</div>
+    <div class="formula-box">ATR = (Exits in period / Average headcount) &times; 100</div>
+    <div class="calc-box">
+      <div class="calc-row"><div class="calc-label">Exits in 18 months</div><input class="calc-input" type="number" id="atr-exits" value="7" oninput="calcATR()"></div>
+      <div class="calc-row"><div class="calc-label">Average headcount</div><input class="calc-input" type="number" id="atr-hc" value="50" oninput="calcATR()"></div>
+      <div class="calc-row"><div class="calc-label">Period (months)</div><input class="calc-input" type="number" id="atr-months" value="18" oninput="calcATR()"></div>
+      <div class="calc-result">
+        <div class="calc-result-val" id="atr-result">0%</div>
+        <div class="calc-result-label">Annualised Attrition Rate</div>
+        <div class="calc-interp" id="atr-interp">Calculate above to see Mehta &amp; Sons attrition rate.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-hero" style="margin-bottom:1.25rem">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Runway Diagnostic Tool</div><div class="metric-sub">ViRorah Metric #3 &middot; Cost Lens</div></div>
+      <span class="tag">RDT</span>
+    </div>
+    <div class="metric-tagline">At current attrition rate and people cost trajectory, how many months before the org hits a structural people crisis? RDT gives HR a forward-looking financial warning system.</div>
+    <div class="formula-box">RDT = (Available people budget / Monthly people cost burn rate) &mdash; attrition adjustment factor</div>
+    <div class="calc-box">
+      <div class="calc-row"><div class="calc-label">Available people budget (₹)</div><input class="calc-input" type="number" id="rdt-budget" value="18000000" oninput="calcRDT()"></div>
+      <div class="calc-row"><div class="calc-label">Monthly people cost (₹)</div><input class="calc-input" type="number" id="rdt-monthly" value="1200000" oninput="calcRDT()"></div>
+      <div class="calc-row"><div class="calc-label">Attrition cost uplift per exit (₹)</div><input class="calc-input" type="number" id="rdt-uplift" value="1800000" oninput="calcRDT()"></div>
+      <div class="calc-result">
+        <div class="calc-result-val" id="rdt-result">0 months</div>
+        <div class="calc-result-label">People Budget Runway</div>
+        <div class="calc-interp" id="rdt-interp">Calculate to see runway.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-hero">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+      <div><div class="metric-name">Payroll Volatility Index</div><div class="metric-sub">ViRorah Metric #10 &middot; Volatility Lens</div></div>
+      <span class="tag">PVI</span>
+    </div>
+    <div class="metric-tagline">How much is your people cost structure fluctuating quarter to quarter? High PVI signals instability — the org is in constant hiring/exiting cycles that destroy HUMANCE and drain financial predictability.</div>
+    <div class="formula-box">PVI = Standard deviation of quarterly payroll / Average quarterly payroll &times; 100<br>Higher = more volatile. Below 10 = stable. Above 25 = chaotic.</div>
+    <div class="calc-box">
+      <div class="calc-row"><div class="calc-label">Q1 payroll (₹)</div><input class="calc-input" type="number" id="pvi-q1" value="3600000" oninput="calcPVI()"></div>
+      <div class="calc-row"><div class="calc-label">Q2 payroll (₹)</div><input class="calc-input" type="number" id="pvi-q2" value="3400000" oninput="calcPVI()"></div>
+      <div class="calc-row"><div class="calc-label">Q3 payroll (₹)</div><input class="calc-input" type="number" id="pvi-q3" value="2800000" oninput="calcPVI()"></div>
+      <div class="calc-row"><div class="calc-label">Q4 payroll (₹)</div><input class="calc-input" type="number" id="pvi-q4" value="2200000" oninput="calcPVI()"></div>
+      <div class="calc-result">
+        <div class="calc-result-val" id="pvi-result">0</div>
+        <div class="calc-result-label">Payroll Volatility Index</div>
+        <div class="calc-interp" id="pvi-interp">Calculate above.</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-nav"><span class="page-nav-info">Beat 2 of 3</span><button class="btn-primary" onclick="nextBeat()">Full instrument scorecard &rarr;</button></div>
+</div>
+
+<div class="beat" id="beat-2">
+  <div class="page-tag">Module C &middot; Beat 3 of 3</div>
+  <h1 class="page-title">Mehta &amp; Sons &mdash; Complete Instrument Scorecard</h1>
+  <div style="background:var(--bg2);border:1px solid var(--border-hi);border-radius:var(--radius);overflow:hidden;margin:1.5rem 0">
+    <div style="background:var(--bg3);padding:1rem 1.5rem;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:0.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em">Human Balance Sheet Instruments &middot; Mehta &amp; Sons</div>
+    <div class="sc-row"><span style="font-size:0.85rem;color:var(--text-dim)">IRD &mdash; Institutional Resilience Depth</span><div style="display:flex;align-items:center;gap:10px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--red)">18%</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:2px 8px;border-radius:4px;background:var(--red-dim);color:var(--red)">Critical</span></div></div>
+    <div class="sc-row"><span style="font-size:0.85rem;color:var(--text-dim)">RBC &mdash; Role Backup Coverage</span><div style="display:flex;align-items:center;gap:10px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--red)">20%</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:2px 8px;border-radius:4px;background:var(--red-dim);color:var(--red)">Critical</span></div></div>
+    <div class="sc-row"><span style="font-size:0.85rem;color:var(--text-dim)">ATR &mdash; Annualised Attrition Rate</span><div style="display:flex;align-items:center;gap:10px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--red)">9.3%</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:2px 8px;border-radius:4px;background:var(--amber-dim);color:var(--amber)">High</span></div></div>
+    <div class="sc-row"><span style="font-size:0.85rem;color:var(--text-dim)">RDT &mdash; People Budget Runway</span><div style="display:flex;align-items:center;gap:10px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--amber)">8.2 months</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:2px 8px;border-radius:4px;background:var(--amber-dim);color:var(--amber)">Watch</span></div></div>
+    <div class="sc-row"><span style="font-size:0.85rem;color:var(--text-dim)">PVI &mdash; Payroll Volatility Index</span><div style="display:flex;align-items:center;gap:10px"><span style="font-family:var(--font-mono);font-weight:500;color:var(--red)">22.4</span><span style="font-family:var(--font-mono);font-size:0.62rem;padding:2px 8px;border-radius:4px;background:var(--red-dim);color:var(--red)">Chaotic</span></div></div>
+    <div style="background:var(--red-dim);padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-family:var(--font-head);font-weight:700;font-size:0.92rem;color:var(--text)">HUMANCE Risk Signal</span>
+      <span style="font-family:var(--font-head);font-weight:800;font-size:1.3rem;color:var(--red)">Severe Destruction &#128308;</span>
+    </div>
+  </div>
+  <div class="card-hi" style="margin:1.5rem 0">
+    <div class="tag" style="margin-bottom:10px">Boardroom Statement</div>
+    <p style="font-size:0.92rem;color:var(--text);line-height:1.8;font-style:italic">"Mehta &amp; Sons enters the succession period with critical fragility across all 5 HUMANCE instruments. IRD of 18% means 82% of institutional knowledge is held by the exiting founder and 6 senior managers. RBC of 20% means 8 of 10 critical roles have no succession plan. Total HUMANCE at risk: &#8377;8.2Cr to &#8377;11.4Cr. Immediate intervention required before succession is executed."</p>
+  </div>
+  <div style="text-align:center;padding:2rem 0">
+    <div style="width:90px;height:90px;border-radius:50%;background:var(--accent-dim);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;animation:badgePulse 2.5s ease-in-out infinite">&#128202;</div>
+    <div style="font-family:var(--font-head);font-weight:800;font-size:1.3rem;color:var(--accent);margin-bottom:0.5rem">Badge Unlocked: The HUMANCE Instruments</div>
+    <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:2rem">Module C &middot; Pillar 4 &middot; Human Balance Sheet</div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:440px;margin:0 auto 2rem;text-align:left">
+      <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Coming Next &mdash; Module D</div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:5px">The HUMANCE Statement</div>
+      <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.6">Build Mehta &amp; Sons' complete Human Balance Sheet. The first time HR walks into a boardroom with a financial statement of intangible assets.</div>
+    </div>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a href="p4-module-b.html" class="btn-primary">&larr; Previous Module</a>
-      <a href="dashboard.html" class="btn-secondary">Dashboard</a>
+      <a href="p4-module-d.html" class="btn-primary">Continue to Module D &rarr;</a>
+      <a href="dashboard.html" class="btn-ghost">&larr; Dashboard</a>
     </div>
   </div>
 </div>
+
+</div></div>
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p4-c');
+document.querySelectorAll('.sb-pillar').forEach(el => {
+  const chev = el.querySelector('.sb-chevron');
+  if (chev) el.setAttribute('data-id', chev.id.replace('chev-',''));
+});
+let currentBeat = 0;
+function updateProgress() {
+  document.getElementById('beat-counter-top').textContent = 'Beat ' + (currentBeat+1) + ' of 3';
+  const dots = document.getElementById('prog-dots');
+  dots.innerHTML = Array(3).fill(0).map((_,i) =>
+    '<div class="prog-dot ' + (i < currentBeat ? 'done' : i === currentBeat ? 'active' : '') + '"></div>'
+  ).join('');
+}
+function nextBeat() {
+  document.getElementById('beat-' + currentBeat).classList.remove('active');
+  currentBeat++;
+  const next = document.getElementById('beat-' + currentBeat);
+  if (next) { next.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+  updateProgress();
+  if (currentBeat === 2) RF.progress.set('p4-c');
+}
+function calcIRD() {
+  const doc = parseFloat(document.getElementById('ird-doc').value)||0;
+  const tot = parseFloat(document.getElementById('ird-total').value)||1;
+  const crs = parseFloat(document.getElementById('ird-cross').value)||0;
+  const crit = parseFloat(document.getElementById('ird-crit').value)||1;
+  const ird = Math.round((doc/tot) * (crs/crit) * 100);
+  document.getElementById('ird-result').textContent = ird + '%';
+  document.getElementById('ird-result').style.color = ird>=70?'var(--accent)':ird>=40?'var(--amber)':'var(--red)';
+  document.getElementById('ird-interp').textContent = ird>=70?'Resilient. Knowledge is well distributed across the org.':ird>=40?'Fragile. Key knowledge concentrated in too few people — succession risk is real.':'Critical. Institutional knowledge is dangerously concentrated. One senior exit triggers cascading capability loss.';
+}
+function calcRBC() {
+  const cov = parseFloat(document.getElementById('rbc-covered').value)||0;
+  const tot = parseFloat(document.getElementById('rbc-total').value)||1;
+  const rbc = Math.round((cov/tot)*100);
+  document.getElementById('rbc-result').textContent = rbc + '%';
+  document.getElementById('rbc-result').style.color = rbc>=80?'var(--accent)':rbc>=50?'var(--amber)':'var(--red)';
+  document.getElementById('rbc-interp').textContent = rbc>=80?'Well covered. Most critical roles have succession plans.':rbc>=50?'Partial coverage. Several critical roles exposed — prioritise succession planning.':'Exposed. Most critical roles have no backup. The org is one departure away from crisis.';
+}
+function calcATR() {
+  const exits = parseFloat(document.getElementById('atr-exits').value)||0;
+  const hc = parseFloat(document.getElementById('atr-hc').value)||1;
+  const months = parseFloat(document.getElementById('atr-months').value)||1;
+  const atr = Math.round((exits/hc) * (12/months) * 100 * 10)/10;
+  document.getElementById('atr-result').textContent = atr + '%';
+  document.getElementById('atr-result').style.color = atr<=10?'var(--accent)':atr<=20?'var(--amber)':'var(--red)';
+  document.getElementById('atr-interp').textContent = atr<=10?'Healthy. Attrition within normal range.':atr<=20?'Above average. HUMANCE leakage accelerating — monitor closely.':'High attrition. Significant HUMANCE destruction in progress. Intervention required.';
+}
+function calcRDT() {
+  const budget = parseFloat(document.getElementById('rdt-budget').value)||0;
+  const monthly = parseFloat(document.getElementById('rdt-monthly').value)||1;
+  const uplift = parseFloat(document.getElementById('rdt-uplift').value)||0;
+  const runway = Math.round(budget / (monthly + uplift/6));
+  document.getElementById('rdt-result').textContent = runway + ' months';
+  document.getElementById('rdt-result').style.color = runway>=18?'var(--accent)':runway>=9?'var(--amber)':'var(--red)';
+  document.getElementById('rdt-interp').textContent = runway>=18?'Comfortable runway. People budget is healthy relative to current trajectory.':runway>=9?'Watch zone. People budget runway is narrowing — plan ahead for replacements.':'Short runway. At current trajectory, people budget pressure will force difficult decisions within the year.';
+}
+function calcPVI() {
+  const vals = ['pvi-q1','pvi-q2','pvi-q3','pvi-q4'].map(id => parseFloat(document.getElementById(id).value)||0);
+  const avg = vals.reduce((a,b)=>a+b,0)/vals.length;
+  const variance = vals.reduce((a,b)=>a+Math.pow(b-avg,2),0)/vals.length;
+  const std = Math.sqrt(variance);
+  const pvi = avg>0?Math.round((std/avg)*100):0;
+  document.getElementById('pvi-result').textContent = pvi;
+  document.getElementById('pvi-result').style.color = pvi<=10?'var(--accent)':pvi<=25?'var(--amber)':'var(--red)';
+  document.getElementById('pvi-interp').textContent = pvi<=10?'Stable. People cost structure is consistent and predictable.':pvi<=25?'Moderate volatility. Some fluctuation in people costs — monitor for structural instability.':'High volatility. People cost structure is chaotic — constant hiring/exiting cycles destroying HUMANCE and budget predictability.';
+}
+calcIRD(); calcRBC(); calcATR(); calcRDT(); calcPVI();
+updateProgress();
 </script>
 </body>
 </html>
