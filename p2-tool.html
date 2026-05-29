@@ -43,6 +43,41 @@
 .legend { display: flex; gap: 16px; margin-top: 12px; justify-content: center; }
 .legend-item { display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim); }
 .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+/* LITERATURE PANEL */
+.lit-bar { display: flex; align-items: center; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 1.25rem; cursor: pointer; transition: all 0.2s; }
+.lit-bar:hover { border-color: var(--border-accent); }
+.lit-bar.open { border-color: var(--border-accent); background: var(--accent-dim); }
+.lit-toggle { display: flex; align-items: center; gap: 8px; padding: 6px 12px; flex: 1; }
+.lit-toggle-icon { width: 20px; height: 20px; border-radius: 5px; background: var(--accent-dim); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--accent2); flex-shrink: 0; }
+.lit-toggle-text { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.04em; }
+.lit-toggle-text b { color: var(--text); font-weight: 600; }
+.lit-tabs { display: flex; gap: 2px; }
+.lit-tab-mini { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); padding: 4px 8px; border-radius: 4px; }
+.lit-chevron { margin-left: auto; padding: 0 12px; color: var(--text-mute); transition: transform 0.25s; font-size: 0.7rem; }
+.lit-bar.open .lit-chevron { transform: rotate(180deg); }
+.lit-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); margin-bottom: 0; }
+.lit-panel.open { max-height: 2000px; margin-bottom: 1.25rem; }
+.lit-content { background: var(--bg2); border: 1px solid var(--border-accent); border-radius: var(--radius); overflow: hidden; }
+.lit-tabnav { display: flex; border-bottom: 1px solid var(--border); background: var(--sidebar); }
+.lit-tabnav-btn { flex: 1; padding: 12px; font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mute); background: transparent; border: none; cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; }
+.lit-tabnav-btn:hover { color: var(--text-dim); }
+.lit-tabnav-btn.active { color: var(--accent2); border-bottom-color: var(--accent); background: var(--accent-dim); }
+.lit-tabpane { display: none; padding: 1.5rem; animation: fadeIn 0.3s; }
+.lit-tabpane.active { display: block; }
+.lit-h { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+.lit-p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 1rem; }
+.lit-p:last-child { margin-bottom: 0; }
+.lit-p b { color: var(--text); font-weight: 600; }
+.lit-callout { background: var(--bg3); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 1rem 0; font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
+.lit-instrument { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; }
+.lit-instrument:last-child { margin-bottom: 0; }
+.lit-inst-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.lit-inst-name { font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; color: var(--text); }
+.lit-inst-abbr { font-family: var(--font-mono); font-size: 0.6rem; padding: 2px 8px; border-radius: 4px; background: var(--accent-dim); color: var(--accent2); border: 1px solid var(--border-accent); }
+.lit-inst-formula { font-family: var(--font-mono); font-size: 0.68rem; color: var(--teal); background: var(--bg); border-radius: 4px; padding: 8px 10px; margin: 8px 0; line-height: 1.6; }
+.lit-inst-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+.lit-inst-bench { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -100,6 +135,66 @@
       <span id="scenario-tag" class="tag tag-teal">TechVelocity Inc.</span>
     </div>
 
+    <!-- LITERATURE PANEL -->
+    <div class="lit-bar" id="lit-bar" onclick="toggleLit()">
+      <div class="lit-toggle">
+        <div class="lit-toggle-icon">&#9432;</div>
+        <div class="lit-toggle-text"><b>Understand this pillar</b> &nbsp;&middot;&nbsp; What it is &middot; Why it matters &middot; The 4 alpha types</div>
+      </div>
+      <div class="lit-chevron">&#9660;</div>
+    </div>
+    <div class="lit-panel" id="lit-panel">
+      <div class="lit-content">
+        <div class="lit-tabnav">
+          <button class="lit-tabnav-btn active" onclick="litTab(0,this)">What it is</button>
+          <button class="lit-tabnav-btn" onclick="litTab(1,this)">Why it matters</button>
+          <button class="lit-tabnav-btn" onclick="litTab(2,this)">The 4 alpha types</button>
+          
+        </div>
+        <div class="lit-tabpane active" id="lit-pane-0">
+          <div class="lit-h">People Alpha</div>
+          <div class="lit-p">In finance, <b>alpha</b> is the return you generate <i>above</i> the market benchmark. A fund manager who beats the index produces alpha. One who merely matches it produces none. People Alpha applies this exact concept to your workforce decisions.</div>
+          <div class="lit-p">Every hire, promotion, retention save, and training investment either beats the market benchmark or falls short of it. <b>People Alpha measures the gap.</b> It turns "we hired well" into "our hiring generated +14% above-market return on talent acquisition."</div>
+          <div class="lit-callout">Two companies can spend identical amounts on people. One generates +22% People Alpha and pulls ahead; the other generates -8% and bleeds advantage. The budget was the same — the alpha was not.</div>
+        </div>
+        <div class="lit-tabpane" id="lit-pane-1">
+          <div class="lit-h">Why it matters</div>
+          <div class="lit-p">People decisions are <b>capital allocation decisions</b>. When you promote someone, you are betting capital on a return. When you invest in L&D, you expect yield. People Alpha is the only instrument that tells you whether those bets are beating the market or losing to it.</div>
+          <div class="lit-p">It also exposes the hidden destroyers. <b>Promotion Alpha</b> is the one most often negative — promoting people who aren't ready quietly erodes returns while looking like a reward. People Alpha makes that visible before it compounds.</div>
+          <div class="lit-p">For a founder or HR leader, this reframes the entire people budget from a <b>cost to be minimised</b> into a <b>portfolio to be optimised for return.</b></div>
+        </div>
+        <div class="lit-tabpane" id="lit-pane-2">
+          <div class="lit-h">The 4 alpha types</div>
+          <div class="lit-p" style="margin-bottom:1.25rem">Each instrument isolates a different way this pillar translates people decisions into revenue impact.</div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Hiring Alpha</span><span class="lit-inst-abbr">HA</span></div>
+            <div class="lit-inst-formula">HA = (Your hire quality + speed-to-productivity) − Market benchmark</div>
+            <div class="lit-inst-desc">Measures whether your hiring beats the market on quality and ramp speed combined. Positive means you acquire talent that produces more, faster, than a typical competitor hiring from the same pool.</div>
+            <div class="lit-inst-bench">Benchmark: 0% = market parity · +15% or more = strong</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Retention Alpha</span><span class="lit-inst-abbr">RA</span></div>
+            <div class="lit-inst-formula">RA = Value of voluntary exits avoided × tenure compounding</div>
+            <div class="lit-inst-desc">Captures the above-market return from keeping people who would have left. Retention isn't just cost-avoidance — retained talent compounds in value as tenure deepens institutional knowledge.</div>
+            <div class="lit-inst-bench">Benchmark: each avoided senior exit is worth multiples of salary</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">L&D Alpha</span><span class="lit-inst-abbr">LA</span></div>
+            <div class="lit-inst-formula">LA = Skills-gap closed × revenue impact per trained employee</div>
+            <div class="lit-inst-desc">The yield on learning investment. It links training directly to revenue capability gained, not hours logged or courses completed — the difference between L&D as a cost centre and L&D as a return engine.</div>
+            <div class="lit-inst-bench">Benchmark: strong programs return 50%+ on skills-gap closure</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Promotion Alpha</span><span class="lit-inst-abbr">PA</span></div>
+            <div class="lit-inst-formula">PA = (Promotion readiness − 70% threshold) × impact weight</div>
+            <div class="lit-inst-desc">The most commonly negative instrument. Promoting below the readiness threshold produces negative alpha — it looks like reward but destroys return through under-performance in the new role.</div>
+            <div class="lit-inst-bench">Benchmark: readiness below 70% produces negative alpha</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="output-grid">
       <div class="big-metric teal">
         <div class="bm-label">Hiring Alpha</div>
@@ -151,6 +246,19 @@
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
+
+// Literature panel
+function toggleLit() {
+  document.getElementById('lit-bar').classList.toggle('open');
+  document.getElementById('lit-panel').classList.toggle('open');
+}
+function litTab(idx, btn) {
+  event.stopPropagation();
+  document.querySelectorAll('.lit-tabnav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lit-tabpane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('lit-pane-' + idx).classList.add('active');
+}
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p2');
 document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
   ['Revenue Fluent', 'People Alpha'],

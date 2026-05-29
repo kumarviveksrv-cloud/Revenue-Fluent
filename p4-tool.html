@@ -38,6 +38,41 @@
 .narrative-box { background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(99,102,241,0.05)); border: 1px solid rgba(168,85,247,0.2); border-radius: var(--radius); padding: 1.25rem; }
 .nb-quote { font-family: var(--font-head); font-weight: 300; font-style: italic; font-size: 0.9rem; color: var(--text-dim); line-height: 1.8; }
 .nb-stat { font-family: var(--font-head); font-weight: 800; color: var(--purple); font-style: normal; }
+
+/* LITERATURE PANEL */
+.lit-bar { display: flex; align-items: center; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 1.25rem; cursor: pointer; transition: all 0.2s; }
+.lit-bar:hover { border-color: var(--border-accent); }
+.lit-bar.open { border-color: var(--border-accent); background: var(--accent-dim); }
+.lit-toggle { display: flex; align-items: center; gap: 8px; padding: 6px 12px; flex: 1; }
+.lit-toggle-icon { width: 20px; height: 20px; border-radius: 5px; background: var(--accent-dim); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--accent2); flex-shrink: 0; }
+.lit-toggle-text { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.04em; }
+.lit-toggle-text b { color: var(--text); font-weight: 600; }
+.lit-tabs { display: flex; gap: 2px; }
+.lit-tab-mini { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); padding: 4px 8px; border-radius: 4px; }
+.lit-chevron { margin-left: auto; padding: 0 12px; color: var(--text-mute); transition: transform 0.25s; font-size: 0.7rem; }
+.lit-bar.open .lit-chevron { transform: rotate(180deg); }
+.lit-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); margin-bottom: 0; }
+.lit-panel.open { max-height: 2000px; margin-bottom: 1.25rem; }
+.lit-content { background: var(--bg2); border: 1px solid var(--border-accent); border-radius: var(--radius); overflow: hidden; }
+.lit-tabnav { display: flex; border-bottom: 1px solid var(--border); background: var(--sidebar); }
+.lit-tabnav-btn { flex: 1; padding: 12px; font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mute); background: transparent; border: none; cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; }
+.lit-tabnav-btn:hover { color: var(--text-dim); }
+.lit-tabnav-btn.active { color: var(--accent2); border-bottom-color: var(--accent); background: var(--accent-dim); }
+.lit-tabpane { display: none; padding: 1.5rem; animation: fadeIn 0.3s; }
+.lit-tabpane.active { display: block; }
+.lit-h { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+.lit-p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 1rem; }
+.lit-p:last-child { margin-bottom: 0; }
+.lit-p b { color: var(--text); font-weight: 600; }
+.lit-callout { background: var(--bg3); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 1rem 0; font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
+.lit-instrument { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; }
+.lit-instrument:last-child { margin-bottom: 0; }
+.lit-inst-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.lit-inst-name { font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; color: var(--text); }
+.lit-inst-abbr { font-family: var(--font-mono); font-size: 0.6rem; padding: 2px 8px; border-radius: 4px; background: var(--accent-dim); color: var(--accent2); border: 1px solid var(--border-accent); }
+.lit-inst-formula { font-family: var(--font-mono); font-size: 0.68rem; color: var(--teal); background: var(--bg); border-radius: 4px; padding: 8px 10px; margin: 8px 0; line-height: 1.6; }
+.lit-inst-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+.lit-inst-bench { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -95,6 +130,66 @@
       <span id="scenario-tag" class="tag tag-purple">Mehta & Sons</span>
     </div>
 
+    <!-- LITERATURE PANEL -->
+    <div class="lit-bar" id="lit-bar" onclick="toggleLit()">
+      <div class="lit-toggle">
+        <div class="lit-toggle-icon">&#9432;</div>
+        <div class="lit-toggle-text"><b>Understand this pillar</b> &nbsp;&middot;&nbsp; What it is &middot; Why it matters &middot; The 4 asset classes</div>
+      </div>
+      <div class="lit-chevron">&#9660;</div>
+    </div>
+    <div class="lit-panel" id="lit-panel">
+      <div class="lit-content">
+        <div class="lit-tabnav">
+          <button class="lit-tabnav-btn active" onclick="litTab(0,this)">What it is</button>
+          <button class="lit-tabnav-btn" onclick="litTab(1,this)">Why it matters</button>
+          <button class="lit-tabnav-btn" onclick="litTab(2,this)">The 4 asset classes</button>
+          
+        </div>
+        <div class="lit-tabpane active" id="lit-pane-0">
+          <div class="lit-h">HUMANCE — The Human Balance Sheet</div>
+          <div class="lit-p">Finance has a balance sheet that captures intangible value — goodwill, brand, intellectual property. <b>HR has never had an equivalent.</b> The trust, culture, knowledge, and belonging that make a company work have always been invisible to the books, right up until they're destroyed.</div>
+          <div class="lit-p">HUMANCE is that missing balance sheet. It is a coined currency — a way to put a defensible rupee value on the four intangible human assets that quietly underwrite every rupee of revenue. <b>Revenue tells you what you earned. HUMANCE tells you what made earning possible.</b></div>
+          <div class="lit-callout">When a founder-led company loses its succession battle and six senior people walk, the revenue drop comes months later. HUMANCE prices the destruction the day it happens — ₹12.1Cr gone before a single sales number moves.</div>
+        </div>
+        <div class="lit-tabpane" id="lit-pane-1">
+          <div class="lit-h">Why it matters</div>
+          <div class="lit-p">You cannot protect what you cannot measure. <b>HUMANCE makes the intangible measurable</b>, which means it can finally be defended in a budget conversation, tracked over time, and factored into major people decisions before they detonate.</div>
+          <div class="lit-p">It is the deepest pillar because it explains <i>why</i> the other metrics move. A drop in People Alpha or a spike in attrition cost almost always traces back to HUMANCE destruction — eroded trust, collapsed culture yield, lost signal, vanished belonging.</div>
+          <div class="lit-p">For any leader weighing a restructure, an acquisition, or a leadership change, HUMANCE answers the question no spreadsheet could: <b>what is the human value at stake, in rupees?</b></div>
+        </div>
+        <div class="lit-tabpane" id="lit-pane-2">
+          <div class="lit-h">The 4 asset classes</div>
+          <div class="lit-p" style="margin-bottom:1.25rem">Each instrument isolates a different way this pillar translates people decisions into revenue impact.</div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Trust Capital</span><span class="lit-inst-abbr">TC</span></div>
+            <div class="lit-inst-formula">TC = f(knowledge concentration risk, succession readiness)</div>
+            <div class="lit-inst-desc">The value embedded in trusted relationships and the risk when knowledge sits with too few people. Erodes fast when key individuals leave and no one is ready to step in.</div>
+            <div class="lit-inst-bench">Driven by: IRD (knowledge depth) + RBC (succession readiness)</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Culture Yield</span><span class="lit-inst-abbr">CY</span></div>
+            <div class="lit-inst-formula">CY = (ESR pre-event − ESR post-event) × revenue base</div>
+            <div class="lit-inst-desc">The revenue yield culture produces — and what evaporates when an event damages it. A drop in employee-sales efficiency after a culture shock is Culture Yield being destroyed in real time.</div>
+            <div class="lit-inst-bench">Driven by: the ESR gap before and after a people event</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Signal Intelligence</span><span class="lit-inst-abbr">SI</span></div>
+            <div class="lit-inst-formula">SI = f(revenue at risk, exit cascade severity)</div>
+            <div class="lit-inst-desc">The value of early-warning signal embedded in your people — the ability to see problems coming. When exits cascade, you lose not just people but the intelligence network that flagged risk early.</div>
+            <div class="lit-inst-bench">Driven by: revenue at risk × severity of the exit cascade</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Belonging Premium</span><span class="lit-inst-abbr">BP</span></div>
+            <div class="lit-inst-formula">BP = exits × discretionary-effort coefficient × revenue base</div>
+            <div class="lit-inst-desc">The premium that genuine belonging adds through discretionary effort — the work people do because they want to, not because they must. It disappears quietly as belonging erodes, taking discretionary revenue with it.</div>
+            <div class="lit-inst-bench">Driven by: exit volume × discretionary-effort impact</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- 3D HERO -->
     <div class="hero-3d">
       <div class="hero-3d-label">
@@ -144,6 +239,19 @@
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
+
+// Literature panel
+function toggleLit() {
+  document.getElementById('lit-bar').classList.toggle('open');
+  document.getElementById('lit-panel').classList.toggle('open');
+}
+function litTab(idx, btn) {
+  event.stopPropagation();
+  document.querySelectorAll('.lit-tabnav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lit-tabpane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('lit-pane-' + idx).classList.add('active');
+}
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p4');
 document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
   ['Revenue Fluent', 'HUMANCE'],

@@ -39,6 +39,41 @@
 .ratio-gauge { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.25rem; }
 .gauge-track { height: 10px; background: linear-gradient(90deg, var(--red), var(--amber), var(--green)); border-radius: 5px; position: relative; margin: 16px 0 8px; }
 .gauge-marker { position: absolute; top: -4px; width: 4px; height: 18px; background: #fff; border-radius: 2px; transition: left 0.5s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 0 8px rgba(255,255,255,0.5); }
+
+/* LITERATURE PANEL */
+.lit-bar { display: flex; align-items: center; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 1.25rem; cursor: pointer; transition: all 0.2s; }
+.lit-bar:hover { border-color: var(--border-accent); }
+.lit-bar.open { border-color: var(--border-accent); background: var(--accent-dim); }
+.lit-toggle { display: flex; align-items: center; gap: 8px; padding: 6px 12px; flex: 1; }
+.lit-toggle-icon { width: 20px; height: 20px; border-radius: 5px; background: var(--accent-dim); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--accent2); flex-shrink: 0; }
+.lit-toggle-text { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.04em; }
+.lit-toggle-text b { color: var(--text); font-weight: 600; }
+.lit-tabs { display: flex; gap: 2px; }
+.lit-tab-mini { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); padding: 4px 8px; border-radius: 4px; }
+.lit-chevron { margin-left: auto; padding: 0 12px; color: var(--text-mute); transition: transform 0.25s; font-size: 0.7rem; }
+.lit-bar.open .lit-chevron { transform: rotate(180deg); }
+.lit-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); margin-bottom: 0; }
+.lit-panel.open { max-height: 2000px; margin-bottom: 1.25rem; }
+.lit-content { background: var(--bg2); border: 1px solid var(--border-accent); border-radius: var(--radius); overflow: hidden; }
+.lit-tabnav { display: flex; border-bottom: 1px solid var(--border); background: var(--sidebar); }
+.lit-tabnav-btn { flex: 1; padding: 12px; font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mute); background: transparent; border: none; cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; }
+.lit-tabnav-btn:hover { color: var(--text-dim); }
+.lit-tabnav-btn.active { color: var(--accent2); border-bottom-color: var(--accent); background: var(--accent-dim); }
+.lit-tabpane { display: none; padding: 1.5rem; animation: fadeIn 0.3s; }
+.lit-tabpane.active { display: block; }
+.lit-h { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+.lit-p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 1rem; }
+.lit-p:last-child { margin-bottom: 0; }
+.lit-p b { color: var(--text); font-weight: 600; }
+.lit-callout { background: var(--bg3); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 1rem 0; font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
+.lit-instrument { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; }
+.lit-instrument:last-child { margin-bottom: 0; }
+.lit-inst-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.lit-inst-name { font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; color: var(--text); }
+.lit-inst-abbr { font-family: var(--font-mono); font-size: 0.6rem; padding: 2px 8px; border-radius: 4px; background: var(--accent-dim); color: var(--accent2); border: 1px solid var(--border-accent); }
+.lit-inst-formula { font-family: var(--font-mono); font-size: 0.68rem; color: var(--teal); background: var(--bg); border-radius: 4px; padding: 8px 10px; margin: 8px 0; line-height: 1.6; }
+.lit-inst-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+.lit-inst-bench { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -97,6 +132,66 @@
       </div>
       <span id="scenario-tag" class="tag tag-green">TechVelocity Inc.</span>
     </div>
+
+    <!-- LITERATURE PANEL -->
+    <div class="lit-bar" id="lit-bar" onclick="toggleLit()">
+      <div class="lit-toggle">
+        <div class="lit-toggle-icon">&#9432;</div>
+        <div class="lit-toggle-text"><b>Understand this pillar</b> &nbsp;&middot;&nbsp; What it is &middot; Why it matters &middot; How it assembles</div>
+      </div>
+      <div class="lit-chevron">&#9660;</div>
+    </div>
+    <div class="lit-panel" id="lit-panel">
+      <div class="lit-content">
+        <div class="lit-tabnav">
+          <button class="lit-tabnav-btn active" onclick="litTab(0,this)">What it is</button>
+          <button class="lit-tabnav-btn" onclick="litTab(1,this)">Why it matters</button>
+          <button class="lit-tabnav-btn" onclick="litTab(2,this)">How it assembles</button>
+          
+        </div>
+        <div class="lit-tabpane active" id="lit-pane-0">
+          <div class="lit-h">The People P&L</div>
+          <div class="lit-p">This is the synthesis — the pillar that assembles everything. A profit & loss statement has one job: revenue in, cost out, net result. <b>The People P&L gives HR its own income statement</b>, built from the four pillars that came before it.</div>
+          <div class="lit-p">People Revenue (what your people generated and protected) minus People Cost (what they cost to employ and replace) equals <b>Net People ROI</b> — the single number that proves whether HR is a value creator or a cost centre, in the only language the board speaks fluently.</div>
+          <div class="lit-callout">Marketing walks into the board with "9x ROI." Sales walks in with "10.5x." HR has always walked in with headcount and engagement scores. The People P&L is HR finally walking in with "2.3x Net People ROI" — and a statement to back it.</div>
+        </div>
+        <div class="lit-tabpane" id="lit-pane-1">
+          <div class="lit-h">Why it matters</div>
+          <div class="lit-p">The People P&L is the deliverable that earns HR its strategic seat. It converts four pillars of intelligence into <b>one CFO-grade statement</b> that can be presented, defended, and tracked quarter over quarter like any other P&L.</div>
+          <div class="lit-p">It also makes the trade-offs visible. When attrition leakage or HUMANCE destruction drags the ratio below breakeven, the People P&L shows exactly where the value is leaking — and which pillar to fix.</div>
+          <div class="lit-p">This is the graduation pillar of Revenue Fluency. Once you can generate a People P&L, you can answer the ultimate question: <b>for every rupee this company spends on people, how many rupees come back?</b></div>
+        </div>
+        <div class="lit-tabpane" id="lit-pane-2">
+          <div class="lit-h">How it assembles</div>
+          <div class="lit-p" style="margin-bottom:1.25rem">Each instrument isolates a different way this pillar translates people decisions into revenue impact.</div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">People Revenue</span><span class="lit-inst-abbr">PR</span></div>
+            <div class="lit-inst-formula">PR = P1 Protected + P2 Alpha + P3 Architecture + P4 HUMANCE</div>
+            <div class="lit-inst-desc">The total revenue your people generated and protected, assembled from all four upstream pillars. This is the line HR has never been able to report — and the one that changes the board conversation.</div>
+            <div class="lit-inst-bench">Sourced from: Pillars 1 through 4 combined</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">People Cost</span><span class="lit-inst-abbr">PC</span></div>
+            <div class="lit-inst-formula">PC = Total payroll (PCoB) + Attrition leakage</div>
+            <div class="lit-inst-desc">The full cost of the workforce — not just payroll, but the revenue that leaks out through attrition. Costing only payroll understates the true number and hides where value is lost.</div>
+            <div class="lit-inst-bench">Includes: payroll plus the hidden cost of attrition</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">Net People ROI</span><span class="lit-inst-abbr">NPR</span></div>
+            <div class="lit-inst-formula">NPR = Total People Revenue − Total People Cost</div>
+            <div class="lit-inst-desc">The bottom line. A positive Net People ROI proves people are a net value creator; negative proves the opposite. This is the number that ends the "HR is just a cost" argument permanently.</div>
+            <div class="lit-inst-bench">Benchmark: positive = value creator · negative = value destroyer</div>
+          </div>
+          <div class="lit-instrument">
+            <div class="lit-inst-head"><span class="lit-inst-name">People ROI Ratio</span><span class="lit-inst-abbr">PRR</span></div>
+            <div class="lit-inst-formula">PRR = Total People Revenue ÷ Total People Cost</div>
+            <div class="lit-inst-desc">How many rupees of People Revenue each rupee of People Cost generates. The single most quotable number in the entire framework — the people equivalent of marketing's "9x."</div>
+            <div class="lit-inst-bench">Benchmark: 1x breakeven · 2x healthy · 3x+ value creator</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <div class="output-grid">
       <div class="big-metric teal"><div class="bm-label">People Revenue</div><div class="bm-val teal" id="out-rev">—</div></div>
@@ -157,6 +252,19 @@
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
+
+// Literature panel
+function toggleLit() {
+  document.getElementById('lit-bar').classList.toggle('open');
+  document.getElementById('lit-panel').classList.toggle('open');
+}
+function litTab(idx, btn) {
+  event.stopPropagation();
+  document.querySelectorAll('.lit-tabnav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lit-tabpane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('lit-pane-' + idx).classList.add('active');
+}
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p5');
 document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
   ['Revenue Fluent', 'People P&L'],
