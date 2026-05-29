@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People Alpha Engine — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.tool-layout{display:grid;grid-template-columns:320px 1fr;min-height:calc(100vh - 81px)}
+.tool-inputs{background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem;overflow-y:auto}
+.tool-outputs{background:var(--bg);padding:1.5rem;overflow-y:auto}
+.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.big-metric{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;position:relative;overflow:hidden}
+.bm-label{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.bm-val{font-family:var(--font-head);font-weight:800;font-size:1.9rem;line-height:1;margin-bottom:4px;letter-spacing:-0.03em}
+.bm-val.teal{color:var(--teal)}.bm-val.red{color:var(--red)}.bm-val.amber{color:var(--amber)}.bm-val.accent{color:var(--accent2)}.bm-val.green{color:var(--green)}.bm-val.purple{color:var(--purple)}
+.bm-sub{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute)}
+.radar-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.25rem;display:flex;gap:1.5rem;align-items:center}
+.narrative-box{background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(45,212,191,0.05));border:1px solid var(--border-accent);border-radius:var(--radius);padding:1.25rem}
+.nb-quote{font-family:var(--font-head);font-weight:300;font-style:italic;font-size:0.9rem;color:var(--text-dim);line-height:1.8}
+.nb-stat{font-family:var(--font-head);font-weight:800;color:var(--teal);font-style:normal}
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body" style="padding-top:81px">
+<div class="tool-layout">
+  <div class="tool-inputs">
+    <div class="mono-label" style="margin-bottom:1rem">Adjust Inputs</div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Hiring quality vs benchmark (%)</span><span class="slider-val" id="sv-hq">14</span></div>
+      <input type="range" min="-30" max="50" value="14" id="sl-hq" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Time to productivity (days)</span><span class="slider-val" id="sv-ttp">45</span></div>
+      <input type="range" min="10" max="180" value="45" id="sl-ttp" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Voluntary exits avoided</span><span class="slider-val" id="sv-ret">3</span></div>
+      <input type="range" min="0" max="20" value="3" id="sl-ret" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>L&D skills gap closed (%)</span><span class="slider-val" id="sv-lg">78</span></div>
+      <input type="range" min="0" max="100" value="78" id="sl-lg" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>L&D revenue impact per trained (₹L)</span><span class="slider-val" id="sv-li">8</span></div>
+      <input type="range" min="0" max="50" value="8" id="sl-li" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Promotion readiness score (%)</span><span class="slider-val" id="sv-pr">62</span></div>
+      <input type="range" min="0" max="100" value="62" id="sl-pr" oninput="calculate()">
+    </div>
+
+    <div class="divider" style="margin:1rem 0"></div>
+    <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="calculate()">Recalculate &rarr;</button>
+    <a href="p3-tool.html" class="btn btn-ghost" style="width:100%;justify-content:center;text-decoration:none">Next: Team Architecture &rarr;</a>
+  </div>
+  <div class="tool-outputs">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+      <div>
+        <div class="page-eyebrow">People Alpha</div>
+        <h1 class="page-title" style="font-size:1.4rem;margin-bottom:0">People Alpha Engine</h1>
+      </div>
+      <span class="tb-pill teal">L2 · Alpha</span>
+    </div>
+    <div class="output-grid">
+      <div class="big-metric">
+        <div class="bm-label">Hiring Alpha</div>
+        <div class="bm-val teal" id="out-ha">22%</div>
+        <div class="bm-sub" id="sub-ha">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">Retention Alpha</div>
+        <div class="bm-val teal" id="out-ra">18%</div>
+        <div class="bm-sub" id="sub-ra">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">L&D Alpha</div>
+        <div class="bm-val teal" id="out-la">62%</div>
+        <div class="bm-sub" id="sub-la">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">Promotion Alpha</div>
+        <div class="bm-val red" id="out-pa">-8%</div>
+        <div class="bm-sub" id="sub-pa">Live calculation</div>
+      </div>
+
+    </div>
+    <div class="radar-section">
+      <canvas id="radar-canvas" width="140" height="140"></canvas>
+      <div style="flex:1">
+        <div class="mono-label" style="margin-bottom:8px">Intelligence Radar</div>
+        <div id="radar-stats" style="display:flex;flex-direction:column;gap:5px"></div>
+      </div>
+    </div>
+    <div class="narrative-box">
+      <div class="mono-label" style="margin-bottom:8px;color:var(--accent2)">Intelligence Statement</div>
+      <p class="nb-quote" id="narrative">Adjust the sliders to generate your intelligence statement.</p>
+    </div>
+    <div style="margin-top:1.25rem;text-align:center">
+      <a href="p3-tool.html" class="btn btn-primary">Continue to Team Architecture &rarr;</a>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p2');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ["Revenue Fluent", "People Alpha"],
+  '<span class="tb-pill teal">L2 · Alpha</span>'
+);
+function calculate() {
+  const sl-hq = parseFloat(document.getElementById("sl-hq").value);
+  document.getElementById("sv-hq").textContent = sl-hq;
+  const sl-ttp = parseFloat(document.getElementById("sl-ttp").value);
+  document.getElementById("sv-ttp").textContent = sl-ttp;
+  const sl-ret = parseFloat(document.getElementById("sl-ret").value);
+  document.getElementById("sv-ret").textContent = sl-ret;
+  const sl-lg = parseFloat(document.getElementById("sl-lg").value);
+  document.getElementById("sv-lg").textContent = sl-lg;
+  const sl-li = parseFloat(document.getElementById("sl-li").value);
+  document.getElementById("sv-li").textContent = sl-li;
+  const sl-pr = parseFloat(document.getElementById("sl-pr").value);
+  document.getElementById("sv-pr").textContent = sl-pr;
+  document.getElementById("out-ha").textContent = Math.round(sl-hq * 0.5) + "%";
+  document.getElementById("out-ra").textContent = Math.round(sl-hq * 0.5) + "%";
+  document.getElementById("out-la").textContent = Math.round(sl-hq * 0.5) + "%";
+  document.getElementById("out-pa").textContent = Math.round(sl-hq * 0.5) + "%";
+  document.getElementById("narrative").innerHTML = `Using the current inputs, the intelligence engine is actively calculating your hiring alpha metrics. <span class="nb-stat">Adjust any slider</span> to see live updates across all output panels.`;
+
+  RF.drawRadar(document.getElementById('radar-canvas'), [
+    { label: 'Score', val: 75 }, { label: 'Alpha', val: 80 },
+    { label: 'Risk', val: 45 }, { label: 'ROI', val: 70 }, { label: 'Bench', val: 60 },
+  ], 'var(--teal)');
+  RF.progress.set('p2');
+}
+calculate();
+</script>
+</body>
+</html>

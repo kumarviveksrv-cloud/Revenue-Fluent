@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario Library — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.sc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.sc-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; cursor: pointer; transition: all 0.25s; text-decoration: none; display: block;
+}
+.sc-card:hover { border-color: var(--border-accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(99,102,241,0.15); }
+.sc-visual {
+  height: 90px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 12px;
+}
+.sc-mini-chart { display: flex; align-items: flex-end; gap: 3px; height: 50px; }
+.sc-mini-bar { border-radius: 2px 2px 0 0; min-width: 8px; }
+.sc-body { padding: 1rem; }
+.sc-level { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; padding: 3px 8px; border-radius: 3px; display: inline-block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em; }
+.sc-level.beginner { background: var(--green-dim); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
+.sc-level.intermediate { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+.sc-level.advanced { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.sc-industry-badge { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-mute); float: right; margin-top: 2px; }
+.sc-name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+.sc-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.55; margin-bottom: 10px; }
+.sc-stats { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.sc-stat { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-mute); background: var(--bg3); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); }
+.sc-cta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent2); display: flex; align-items: center; gap: 5px; }
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap">
+  <div class="anim-slide" style="margin-bottom:1.75rem">
+    <div class="page-eyebrow">Scenario Library</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem">
+      <div>
+        <h1 class="page-title">Explore real-world org <em>scenarios</em></h1>
+        <p class="page-desc">Pre-built company scenarios with 50 employees across industries. Pick any scenario and run all 5 intelligence tools instantly.</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <div class="tag tag-teal">3 scenarios</div>
+        <div class="tag tag-accent">50 employees each</div>
+        <div class="tag tag-muted">5 pillars</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sc-grid">
+
+    <a href="p1-tool.html" class="sc-card anim-slide anim-delay-1">
+      <div class="sc-visual" style="background:linear-gradient(135deg,rgba(99,102,241,0.15),rgba(45,212,191,0.08))">
+        <div class="sc-mini-chart">
+          <div class="sc-mini-bar" style="height:30%;background:var(--accent);width:12px"></div>
+          <div class="sc-mini-bar" style="height:55%;background:var(--accent);width:12px"></div>
+          <div class="sc-mini-bar" style="height:40%;background:var(--red);width:12px"></div>
+          <div class="sc-mini-bar" style="height:80%;background:var(--red);width:12px"></div>
+          <div class="sc-mini-bar" style="height:60%;background:var(--amber);width:12px"></div>
+          <div class="sc-mini-bar" style="height:45%;background:var(--amber);width:12px"></div>
+        </div>
+        <div style="margin-left:auto;font-family:var(--font-head);font-weight:800;font-size:1.8rem;color:var(--red);opacity:0.9">141%</div>
+      </div>
+      <div class="sc-body">
+        <div><span class="sc-level intermediate">Intermediate</span><span class="sc-industry-badge">Technology · SaaS</span></div>
+        <div class="sc-name">TechVelocity Inc.</div>
+        <div class="sc-desc">Series B SaaS startup, 50 employees. VP Sales hire triggered team trust collapse. 2 senior AE exits. Revenue miss ₹1.1Cr. ATC% critical at 141%.</div>
+        <div class="sc-stats">
+          <span class="sc-stat">50 employees</span>
+          <span class="sc-stat">USD</span>
+          <span class="sc-stat">ATC% 141%</span>
+          <span class="sc-stat">ESR 60.5%</span>
+        </div>
+        <div class="sc-cta">Explore scenario →</div>
+      </div>
+    </a>
+
+    <a href="p1-tool.html" class="sc-card anim-slide anim-delay-2">
+      <div class="sc-visual" style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(249,115,22,0.08))">
+        <div class="sc-mini-chart">
+          <div class="sc-mini-bar" style="height:70%;background:var(--amber);width:12px"></div>
+          <div class="sc-mini-bar" style="height:85%;background:var(--amber);width:12px"></div>
+          <div class="sc-mini-bar" style="height:40%;background:var(--red);width:12px"></div>
+          <div class="sc-mini-bar" style="height:55%;background:var(--red);width:12px"></div>
+          <div class="sc-mini-bar" style="height:30%;background:var(--red);width:12px"></div>
+          <div class="sc-mini-bar" style="height:20%;background:var(--red);width:12px"></div>
+        </div>
+        <div style="margin-left:auto;font-family:var(--font-head);font-weight:800;font-size:1.8rem;color:var(--amber);opacity:0.9">-12.4%</div>
+      </div>
+      <div class="sc-body">
+        <div><span class="sc-level advanced">Advanced</span><span class="sc-industry-badge">Consulting</span></div>
+        <div class="sc-name">Sterling Consulting Group</div>
+        <div class="sc-desc">50-person consulting firm. 4 simultaneous promotions destroyed People Alpha. Billable utilisation crashed from 78% to 60%. Revenue miss £2.4M.</div>
+        <div class="sc-stats">
+          <span class="sc-stat">50 employees</span>
+          <span class="sc-stat">GBP</span>
+          <span class="sc-stat">Alpha -12.4%</span>
+          <span class="sc-stat">Util 60%</span>
+        </div>
+        <div class="sc-cta">Explore scenario →</div>
+      </div>
+    </a>
+
+    <a href="p1-tool.html" class="sc-card anim-slide anim-delay-3">
+      <div class="sc-visual" style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(99,102,241,0.08))">
+        <div class="sc-mini-chart">
+          <div class="sc-mini-bar" style="height:90%;background:var(--teal);width:12px"></div>
+          <div class="sc-mini-bar" style="height:70%;background:var(--teal);width:12px"></div>
+          <div class="sc-mini-bar" style="height:45%;background:var(--amber);width:12px"></div>
+          <div class="sc-mini-bar" style="height:30%;background:var(--red);width:12px"></div>
+          <div class="sc-mini-bar" style="height:25%;background:var(--red);width:12px"></div>
+          <div class="sc-mini-bar" style="height:20%;background:var(--red);width:12px"></div>
+        </div>
+        <div style="margin-left:auto;font-family:var(--font-head);font-weight:800;font-size:1.8rem;color:var(--purple);opacity:0.9">-31%</div>
+      </div>
+      <div class="sc-body">
+        <div><span class="sc-level advanced">Advanced</span><span class="sc-industry-badge">Family Business</span></div>
+        <div class="sc-name">Mehta &amp; Sons Enterprises</div>
+        <div class="sc-desc">50-person family business. Founder succession triggered ₹12.1Cr HUMANCE destruction. 6 senior exits in 18 months. Revenue dropped 31%.</div>
+        <div class="sc-stats">
+          <span class="sc-stat">50 employees</span>
+          <span class="sc-stat">INR</span>
+          <span class="sc-stat">HUMANCE -₹12.1Cr</span>
+          <span class="sc-stat">IRD 18%</span>
+        </div>
+        <div class="sc-cta">Explore scenario →</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+</div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('scenarios');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ['Revenue Fluent', 'Scenario Library'],
+  '<span class="tb-pill green">3 scenarios live</span>'
+);
+</script>
+</body>
+</html>

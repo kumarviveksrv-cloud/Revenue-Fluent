@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue DNA Analyser — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.tool-layout{display:grid;grid-template-columns:320px 1fr;min-height:calc(100vh - 81px)}
+.tool-inputs{background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem;overflow-y:auto}
+.tool-outputs{background:var(--bg);padding:1.5rem;overflow-y:auto}
+.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.big-metric{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;position:relative;overflow:hidden}
+.bm-label{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.bm-val{font-family:var(--font-head);font-weight:800;font-size:1.9rem;line-height:1;margin-bottom:4px;letter-spacing:-0.03em}
+.bm-val.teal{color:var(--teal)}.bm-val.red{color:var(--red)}.bm-val.amber{color:var(--amber)}.bm-val.accent{color:var(--accent2)}.bm-val.green{color:var(--green)}.bm-val.purple{color:var(--purple)}
+.bm-sub{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute)}
+.radar-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.25rem;display:flex;gap:1.5rem;align-items:center}
+.narrative-box{background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(45,212,191,0.05));border:1px solid var(--border-accent);border-radius:var(--radius);padding:1.25rem}
+.nb-quote{font-family:var(--font-head);font-weight:300;font-style:italic;font-size:0.9rem;color:var(--text-dim);line-height:1.8}
+.nb-stat{font-family:var(--font-head);font-weight:800;color:var(--teal);font-style:normal}
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body" style="padding-top:81px">
+<div class="tool-layout">
+  <div class="tool-inputs">
+    <div class="mono-label" style="margin-bottom:1rem">Adjust Inputs</div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Total headcount</span><span class="slider-val" id="sv-hc3">50</span></div>
+      <input type="range" min="5" max="200" value="50" id="sl-hc3" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Revenue-generating roles</span><span class="slider-val" id="sv-rg3">37</span></div>
+      <input type="range" min="0" max="200" value="37" id="sl-rg3" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Management layers</span><span class="slider-val" id="sv-layers">2</span></div>
+      <input type="range" min="1" max="8" value="2" id="sl-layers" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Avg team size</span><span class="slider-val" id="sv-ts">6</span></div>
+      <input type="range" min="2" max="20" value="6" id="sl-ts" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Structural changes (6 months)</span><span class="slider-val" id="sv-chg">1</span></div>
+      <input type="range" min="0" max="10" value="1" id="sl-chg" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Quarterly revenue (₹Cr)</span><span class="slider-val" id="sv-qr">21</span></div>
+      <input type="range" min="1" max="200" value="21" id="sl-qr" oninput="calculate()">
+    </div>
+
+    <div class="divider" style="margin:1rem 0"></div>
+    <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="calculate()">Recalculate &rarr;</button>
+    <a href="p4-tool.html" class="btn btn-ghost" style="width:100%;justify-content:center;text-decoration:none">Next: HUMANCE &rarr;</a>
+  </div>
+  <div class="tool-outputs">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+      <div>
+        <div class="page-eyebrow">Team Revenue Architecture</div>
+        <h1 class="page-title" style="font-size:1.4rem;margin-bottom:0">Revenue DNA Analyser</h1>
+      </div>
+      <span class="tb-pill amber">L3 · Architecture</span>
+    </div>
+    <div class="output-grid">
+      <div class="big-metric">
+        <div class="bm-label">OEI Score</div>
+        <div class="bm-val teal" id="out-oei">74%</div>
+        <div class="bm-sub" id="sub-oei">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">PCoB</div>
+        <div class="bm-val amber" id="out-pcob">42%</div>
+        <div class="bm-sub" id="sub-pcob">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">OSI Score</div>
+        <div class="bm-val teal" id="out-osi">82</div>
+        <div class="bm-sub" id="sub-osi">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">Config Type</div>
+        <div class="bm-val green" id="out-cfg">A</div>
+        <div class="bm-sub" id="sub-cfg">Live calculation</div>
+      </div>
+
+    </div>
+    <div class="radar-section">
+      <canvas id="radar-canvas" width="140" height="140"></canvas>
+      <div style="flex:1">
+        <div class="mono-label" style="margin-bottom:8px">Intelligence Radar</div>
+        <div id="radar-stats" style="display:flex;flex-direction:column;gap:5px"></div>
+      </div>
+    </div>
+    <div class="narrative-box">
+      <div class="mono-label" style="margin-bottom:8px;color:var(--accent2)">Intelligence Statement</div>
+      <p class="nb-quote" id="narrative">Adjust the sliders to generate your intelligence statement.</p>
+    </div>
+    <div style="margin-top:1.25rem;text-align:center">
+      <a href="p4-tool.html" class="btn btn-primary">Continue to HUMANCE &rarr;</a>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p3');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ["Revenue Fluent", "Team Architecture"],
+  '<span class="tb-pill amber">L3 · Architecture</span>'
+);
+function calculate() {
+  const sl-hc3 = parseFloat(document.getElementById("sl-hc3").value);
+  document.getElementById("sv-hc3").textContent = sl-hc3;
+  const sl-rg3 = parseFloat(document.getElementById("sl-rg3").value);
+  document.getElementById("sv-rg3").textContent = sl-rg3;
+  const sl-layers = parseFloat(document.getElementById("sl-layers").value);
+  document.getElementById("sv-layers").textContent = sl-layers;
+  const sl-ts = parseFloat(document.getElementById("sl-ts").value);
+  document.getElementById("sv-ts").textContent = sl-ts;
+  const sl-chg = parseFloat(document.getElementById("sl-chg").value);
+  document.getElementById("sv-chg").textContent = sl-chg;
+  const sl-qr = parseFloat(document.getElementById("sl-qr").value);
+  document.getElementById("sv-qr").textContent = sl-qr;
+  document.getElementById("out-oei").textContent = Math.round(sl-hc3 * 0.5) + "%";
+  document.getElementById("out-pcob").textContent = Math.round(sl-hc3 * 0.5) + "%";
+  document.getElementById("out-osi").textContent = "82";
+  // document.getElementById("out-cfg").textContent = "A";
+  document.getElementById("narrative").innerHTML = `Using the current inputs, the intelligence engine is actively calculating your oei score metrics. <span class="nb-stat">Adjust any slider</span> to see live updates across all output panels.`;
+
+  RF.drawRadar(document.getElementById('radar-canvas'), [
+    { label: 'Score', val: 75 }, { label: 'Alpha', val: 80 },
+    { label: 'Risk', val: 45 }, { label: 'ROI', val: 70 }, { label: 'Bench', val: 60 },
+  ], 'var(--teal)');
+  RF.progress.set('p3');
+}
+calculate();
+</script>
+</body>
+</html>

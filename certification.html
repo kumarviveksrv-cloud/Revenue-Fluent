@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRFP Certification — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.cert-gate { max-width: 720px; margin: 0 auto; }
+.pillar-check { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px; transition: all 0.2s; }
+.pillar-check.done { border-color: rgba(16,185,129,0.25); background: var(--green-dim); }
+.pillar-check.pending { opacity: 0.5; }
+.pc-left { display: flex; align-items: center; gap: 12px; }
+.pc-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+.pc-name { font-family: var(--font-head); font-weight: 600; font-size: 0.9rem; color: var(--text); }
+.pc-sub { font-size: 0.75rem; color: var(--text-mute); margin-top: 2px; }
+.pc-check { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--border-hi); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--text-mute); }
+.pillar-check.done .pc-check { background: var(--green); border-color: var(--green); color: #0B0D14; font-weight: 700; }
+.cert-doc { background: var(--card); border: 2px solid var(--border-accent); border-radius: var(--radius-lg); overflow: hidden; margin-top: 2rem; animation: certReveal 0.8s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes certReveal { from{opacity:0;transform:scale(0.95)translateY(20px)} to{opacity:1;transform:scale(1)translateY(0)} }
+.cert-header { background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(45,212,191,0.08)); border-bottom: 1px solid var(--border-accent); padding: 2.5rem; text-align: center; }
+.cert-body { padding: 2.5rem; text-align: center; }
+.cert-footer { background: var(--bg3); border-top: 1px solid var(--border); padding: 1.5rem 2.5rem; display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: end; }
+.cert-sig-line { height: 1px; background: var(--border-hi); margin-bottom: 8px; }
+.cert-stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 1.5rem 0; }
+.cert-stat { background: var(--bg3); border-radius: var(--radius-sm); padding: 0.875rem; text-align: center; }
+.cert-stat-val { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; color: var(--accent2); line-height: 1; }
+.cert-stat-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+@keyframes confetti-fall { 0%{transform:translateY(0)rotate(0deg);opacity:1} 100%{transform:translateY(100vh)rotate(720deg);opacity:0} }
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap">
+
+<div id="cert-gate-view" class="cert-gate">
+  <div class="anim-slide" style="margin-bottom:1.75rem">
+    <div class="page-eyebrow">Certification</div>
+    <h1 class="page-title">Certified Revenue <em>Fluent</em> Practitioner</h1>
+    <p class="page-desc">Complete all 5 pillar tools to unlock your CRFP certification. Each tool must be run at least once.</p>
+  </div>
+
+  <div id="pillar-checks">
+    <div class="pillar-check" id="pc-p1">
+      <div class="pc-left"><div class="pc-icon" style="background:var(--accent-dim)">⟳</div><div><div class="pc-name">L1 — Revenue Connect</div><div class="pc-sub">People-Revenue Attribution Engine</div></div></div>
+      <div class="pc-check" id="chk-p1">?</div>
+    </div>
+    <div class="pillar-check" id="pc-p2">
+      <div class="pc-left"><div class="pc-icon" style="background:var(--teal-dim)">◈</div><div><div class="pc-name">L2 — People Alpha</div><div class="pc-sub">Above-Market Returns Engine</div></div></div>
+      <div class="pc-check" id="chk-p2">?</div>
+    </div>
+    <div class="pillar-check" id="pc-p3">
+      <div class="pc-left"><div class="pc-icon" style="background:var(--amber-dim)">⬡</div><div><div class="pc-name">L3 — Team Architecture</div><div class="pc-sub">Revenue DNA Analyser</div></div></div>
+      <div class="pc-check" id="chk-p3">?</div>
+    </div>
+    <div class="pillar-check" id="pc-p4">
+      <div class="pc-left"><div class="pc-icon" style="background:var(--purple-dim)">◎</div><div><div class="pc-name">L4 — HUMANCE</div><div class="pc-sub">Human Balance Sheet Intelligence</div></div></div>
+      <div class="pc-check" id="chk-p4">?</div>
+    </div>
+    <div class="pillar-check" id="pc-p5">
+      <div class="pc-left"><div class="pc-icon" style="background:var(--green-dim)">◑</div><div><div class="pc-name">L5 — People P&L</div><div class="pc-sub">Net People ROI Generator</div></div></div>
+      <div class="pc-check" id="chk-p5">?</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
+    <div class="mono-label" style="margin-bottom:8px">Completion</div>
+    <div style="height:8px;background:var(--bg4);border-radius:4px;overflow:hidden;margin-bottom:8px">
+      <div id="cert-prog-bar" style="height:100%;background:linear-gradient(90deg,var(--accent),var(--teal));border-radius:4px;width:0%;transition:width 0.6s ease"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)" id="cert-prog-text">0 of 5 pillars complete</div>
+      <div id="cert-prog-pct" style="font-family:var(--font-head);font-weight:800;font-size:1.2rem;color:var(--accent2)">0%</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;display:flex;gap:10px">
+    <div id="cert-generate-btn" style="display:none;flex:1">
+      <button class="btn btn-primary" style="width:100%;padding:1rem;font-size:1rem" onclick="showCert()">Generate My CRFP Certificate 🏆</button>
+    </div>
+    <a href="p1-tool.html" class="btn btn-ghost" style="flex:1;justify-content:center;text-decoration:none" id="cert-cta-btn">Start with L1 →</a>
+  </div>
+</div>
+
+<div id="cert-doc-view" style="display:none;max-width:720px;margin:0 auto">
+  <div class="cert-doc">
+    <div class="cert-header">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1.5rem">
+        <div style="width:32px;height:32px;border-radius:8px;background:var(--accent-dim);border:1px solid var(--border-accent);display:flex;align-items:center;justify-content:center"><div style="width:10px;height:10px;border-radius:50%;background:var(--accent2)"></div></div>
+        <div style="font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--text)">Revenue<em style="font-weight:300;font-style:italic;color:var(--accent2)">Fluent</em></div>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:6px">This certifies that</div>
+      <div style="font-family:var(--font-head);font-weight:800;font-size:0.82rem;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em">Certified Revenue Fluent Practitioner</div>
+    </div>
+    <div class="cert-body">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:10px">Has successfully demonstrated mastery of</div>
+      <div style="font-family:var(--font-head);font-weight:800;font-size:2.5rem;color:var(--text);letter-spacing:-0.03em;line-height:1.1;margin-bottom:4px" id="cert-name-display">Your Name</div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)" id="cert-org-display"></div>
+      <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.15em;margin:1.5rem 0 6px">The designation of</div>
+      <div style="font-family:var(--font-head);font-weight:800;font-size:1.6rem;color:var(--teal);letter-spacing:-0.02em;margin-bottom:2px">Certified Revenue <em style="font-weight:300;font-style:italic">Fluent</em> Practitioner</div>
+      <div style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-mute);letter-spacing:0.1em">CRFP</div>
+      <div class="cert-stat-row">
+        <div class="cert-stat"><div class="cert-stat-val">5</div><div class="cert-stat-label">Pillars</div></div>
+        <div class="cert-stat"><div class="cert-stat-val">18</div><div class="cert-stat-label">Metrics</div></div>
+        <div class="cert-stat"><div class="cert-stat-val">3</div><div class="cert-stat-label">Simulations</div></div>
+        <div class="cert-stat"><div class="cert-stat-val">CRFP</div><div class="cert-stat-label">Certified</div></div>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute);line-height:1.9">
+        People-Revenue Connect &middot; People Alpha &middot; Team Revenue Architecture &middot; Human Balance Sheet (HUMANCE) &middot; People P&L
+      </div>
+    </div>
+    <div class="cert-footer">
+      <div>
+        <div class="cert-sig-line"></div>
+        <div style="font-family:var(--font-head);font-weight:700;font-size:0.88rem;color:var(--text)">Kumar Vivek</div>
+        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.08em">Creator, Revenue Fluent</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:70px;height:70px;border-radius:50%;background:var(--accent-dim);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:1.8rem;animation:glow 2.5s ease-in-out infinite">🏆</div>
+        <div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute);margin-top:6px" id="cert-id">CRFP-000000</div>
+      </div>
+      <div style="text-align:right">
+        <div class="cert-sig-line"></div>
+        <div style="font-family:var(--font-head);font-weight:700;font-size:0.88rem;color:var(--text)" id="cert-date"></div>
+        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.08em">Date Issued</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:1.5rem;flex-wrap:wrap">
+    <button class="btn btn-primary" onclick="shareLinkedIn()">Share on LinkedIn 🎓</button>
+    <button class="btn btn-ghost" onclick="printCert()">Print Certificate</button>
+    <a href="dashboard.html" class="btn btn-ghost">Back to Dashboard</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div id="confetti-wrap" style="position:fixed;inset:0;pointer-events:none;z-index:999"></div>
+
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('cert');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ['Revenue Fluent', 'CRFP Certification'],
+  '<span class="tb-pill amber">Certification Track</span>'
+);
+
+function checkProgress() {
+  const p = RF.progress.get();
+  const pillars = ['p1','p2','p3','p4','p5'];
+  let done = 0;
+  pillars.forEach(pk => {
+    const el = document.getElementById('pc-' + pk);
+    const chk = document.getElementById('chk-' + pk);
+    if (p[pk]) {
+      el.classList.add('done');
+      chk.textContent = '✓';
+      done++;
+    } else {
+      el.classList.add('pending');
+    }
+  });
+  const pct = Math.round((done/5)*100);
+  document.getElementById('cert-prog-bar').style.width = pct + '%';
+  document.getElementById('cert-prog-text').textContent = done + ' of 5 pillars complete';
+  document.getElementById('cert-prog-pct').textContent = pct + '%';
+  if (done >= 5) {
+    document.getElementById('cert-generate-btn').style.display = 'block';
+    document.getElementById('cert-cta-btn').style.display = 'none';
+  } else if (done > 0) {
+    document.getElementById('cert-cta-btn').textContent = 'Continue →';
+    const nextPillar = pillars.find(pk => !p[pk]);
+    document.getElementById('cert-cta-btn').href = nextPillar + '-tool.html';
+  }
+}
+
+function showCert() {
+  const name = prompt('Enter your full name for the certificate:') || 'Revenue Fluent Practitioner';
+  const org = prompt('Your organisation (optional, press Enter to skip):') || '';
+  document.getElementById('cert-name-display').textContent = name;
+  document.getElementById('cert-org-display').textContent = org;
+  document.getElementById('cert-id').textContent = 'CRFP-' + Math.random().toString(36).substr(2,6).toUpperCase();
+  document.getElementById('cert-date').textContent = new Date().toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('cert-gate-view').style.display = 'none';
+  document.getElementById('cert-doc-view').style.display = 'block';
+  launchConfetti();
+}
+
+function launchConfetti() {
+  const wrap = document.getElementById('confetti-wrap');
+  const colors = ['#6366F1','#2DD4BF','#F59E0B','#A855F7','#10B981','#fff'];
+  for (let i = 0; i < 100; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      const size = Math.random() * 8 + 4;
+      el.style.cssText = `position:absolute;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}%;top:-10px;border-radius:${Math.random()>0.5?'50%':'2px'};animation:confetti-fall ${Math.random()*2+1.5}s linear forwards;opacity:${Math.random()*0.8+0.2}`;
+      wrap.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }, i * 30);
+  }
+}
+
+function shareLinkedIn() {
+  const name = document.getElementById('cert-name-display').textContent;
+  const id = document.getElementById('cert-id').textContent;
+  const text = encodeURIComponent(`I just earned my CRFP — Certified Revenue Fluent Practitioner.\n\n5 pillars. 18 metrics. 3 real org simulations.\n\n"Revenue tells you what you earned. HUMANCE tells you what made earning possible."\n\nRevenue Fluent by Kumar Vivek has permanently changed how I see HR's relationship with business revenue.\n\nCert ID: ${id}\n\n#CRFP #RevenueFluentPractitioner #HUMANCE #RevenueHR #PeopleAnalytics`);
+  window.open('https://www.linkedin.com/sharing/share-offsite/?summary=' + text, '_blank');
+}
+
+function printCert() {
+  window.print();
+}
+
+checkProgress();
+</script>
+</body>
+</html>

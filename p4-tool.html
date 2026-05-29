@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUMANCE Intelligence — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.tool-layout{display:grid;grid-template-columns:320px 1fr;min-height:calc(100vh - 81px)}
+.tool-inputs{background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem;overflow-y:auto}
+.tool-outputs{background:var(--bg);padding:1.5rem;overflow-y:auto}
+.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.big-metric{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;position:relative;overflow:hidden}
+.bm-label{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.bm-val{font-family:var(--font-head);font-weight:800;font-size:1.9rem;line-height:1;margin-bottom:4px;letter-spacing:-0.03em}
+.bm-val.teal{color:var(--teal)}.bm-val.red{color:var(--red)}.bm-val.amber{color:var(--amber)}.bm-val.accent{color:var(--accent2)}.bm-val.green{color:var(--green)}.bm-val.purple{color:var(--purple)}
+.bm-sub{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute)}
+.radar-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.25rem;display:flex;gap:1.5rem;align-items:center}
+.narrative-box{background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(45,212,191,0.05));border:1px solid var(--border-accent);border-radius:var(--radius);padding:1.25rem}
+.nb-quote{font-family:var(--font-head);font-weight:300;font-style:italic;font-size:0.9rem;color:var(--text-dim);line-height:1.8}
+.nb-stat{font-family:var(--font-head);font-weight:800;color:var(--teal);font-style:normal}
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body" style="padding-top:81px">
+<div class="tool-layout">
+  <div class="tool-inputs">
+    <div class="mono-label" style="margin-bottom:1rem">Adjust Inputs</div>
+    <div class="slider-row">
+      <div class="slider-header"><span>IRD Score (0-100)</span><span class="slider-val" id="sv-ird">18</span></div>
+      <input type="range" min="0" max="100" value="18" id="sl-ird" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>RBC Score (0-100)</span><span class="slider-val" id="sv-rbc">20</span></div>
+      <input type="range" min="0" max="100" value="20" id="sl-rbc" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>ESR pre-event (%)</span><span class="slider-val" id="sv-esrpre">94</span></div>
+      <input type="range" min="0" max="100" value="94" id="sl-esrpre" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>ESR post-event (%)</span><span class="slider-val" id="sv-esrpost">61</span></div>
+      <input type="range" min="0" max="100" value="61" id="sl-esrpost" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Revenue at risk (₹Cr)</span><span class="slider-val" id="sv-revr">84</span></div>
+      <input type="range" min="10" max="500" value="84" id="sl-revr" oninput="calculate()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span>Senior exits triggered</span><span class="slider-val" id="sv-ex4">6</span></div>
+      <input type="range" min="0" max="20" value="6" id="sl-ex4" oninput="calculate()">
+    </div>
+
+    <div class="divider" style="margin:1rem 0"></div>
+    <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="calculate()">Recalculate &rarr;</button>
+    <a href="p5-tool.html" class="btn btn-ghost" style="width:100%;justify-content:center;text-decoration:none">Next: People P&L &rarr;</a>
+  </div>
+  <div class="tool-outputs">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+      <div>
+        <div class="page-eyebrow">Human Balance Sheet</div>
+        <h1 class="page-title" style="font-size:1.4rem;margin-bottom:0">HUMANCE Intelligence</h1>
+      </div>
+      <span class="tb-pill accent">L4 · HUMANCE</span>
+    </div>
+    <div class="output-grid">
+      <div class="big-metric">
+        <div class="bm-label">Trust Capital</div>
+        <div class="bm-val accent" id="out-tc">₹2.8Cr</div>
+        <div class="bm-sub" id="sub-tc">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">Culture Yield</div>
+        <div class="bm-val teal" id="out-cy">₹1.1Cr</div>
+        <div class="bm-sub" id="sub-cy">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">Signal Intelligence</div>
+        <div class="bm-val amber" id="out-si">₹3.7Cr</div>
+        <div class="bm-sub" id="sub-si">Live calculation</div>
+      </div>
+      <div class="big-metric">
+        <div class="bm-label">Total HUMANCE</div>
+        <div class="bm-val purple" id="out-th">₹12.1Cr</div>
+        <div class="bm-sub" id="sub-th">Live calculation</div>
+      </div>
+
+    </div>
+    <div class="radar-section">
+      <canvas id="radar-canvas" width="140" height="140"></canvas>
+      <div style="flex:1">
+        <div class="mono-label" style="margin-bottom:8px">Intelligence Radar</div>
+        <div id="radar-stats" style="display:flex;flex-direction:column;gap:5px"></div>
+      </div>
+    </div>
+    <div class="narrative-box">
+      <div class="mono-label" style="margin-bottom:8px;color:var(--accent2)">Intelligence Statement</div>
+      <p class="nb-quote" id="narrative">Adjust the sliders to generate your intelligence statement.</p>
+    </div>
+    <div style="margin-top:1.25rem;text-align:center">
+      <a href="p5-tool.html" class="btn btn-primary">Continue to People P&L &rarr;</a>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p4');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ["Revenue Fluent", "HUMANCE"],
+  '<span class="tb-pill accent">L4 · HUMANCE</span>'
+);
+function calculate() {
+  const sl-ird = parseFloat(document.getElementById("sl-ird").value);
+  document.getElementById("sv-ird").textContent = sl-ird;
+  const sl-rbc = parseFloat(document.getElementById("sl-rbc").value);
+  document.getElementById("sv-rbc").textContent = sl-rbc;
+  const sl-esrpre = parseFloat(document.getElementById("sl-esrpre").value);
+  document.getElementById("sv-esrpre").textContent = sl-esrpre;
+  const sl-esrpost = parseFloat(document.getElementById("sl-esrpost").value);
+  document.getElementById("sv-esrpost").textContent = sl-esrpost;
+  const sl-revr = parseFloat(document.getElementById("sl-revr").value);
+  document.getElementById("sv-revr").textContent = sl-revr;
+  const sl-ex4 = parseFloat(document.getElementById("sl-ex4").value);
+  document.getElementById("sv-ex4").textContent = sl-ex4;
+  // document.getElementById("out-tc").textContent = "₹2.8Cr";
+  // document.getElementById("out-cy").textContent = "₹1.1Cr";
+  // document.getElementById("out-si").textContent = "₹3.7Cr";
+  // document.getElementById("out-th").textContent = "₹12.1Cr";
+  document.getElementById("narrative").innerHTML = `Using the current inputs, the intelligence engine is actively calculating your trust capital metrics. <span class="nb-stat">Adjust any slider</span> to see live updates across all output panels.`;
+
+  RF.drawRadar(document.getElementById('radar-canvas'), [
+    { label: 'Score', val: 75 }, { label: 'Alpha', val: 80 },
+    { label: 'Risk', val: 45 }, { label: 'ROI', val: 70 }, { label: 'Bench', val: 60 },
+  ], 'var(--teal)');
+  RF.progress.set('p4');
+}
+calculate();
+</script>
+</body>
+</html>
