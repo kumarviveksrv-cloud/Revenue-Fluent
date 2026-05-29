@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+/* SIMULATION LIBRARY */
+.sim-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:2rem; }
+.sim-card {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  overflow:hidden; cursor:pointer; transition:all 0.25s; position:relative;
+}
+.sim-card:hover { border-color:var(--border-accent); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.3); }
+.sc-header { padding:1.5rem; border-bottom:1px solid var(--border); position:relative; }
+.sc-emoji { font-size:2rem; margin-bottom:0.75rem; display:block; }
+.sc-title { font-family:var(--font-head); font-weight:700; font-size:1rem; color:var(--text); margin-bottom:4px; }
+.sc-subtitle { font-size:0.8rem; color:var(--text-dim); line-height:1.55; }
+.sc-footer { padding:1rem 1.5rem; display:flex; justify-content:space-between; align-items:center; }
+.sc-meta { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); }
+.sc-badge { font-family:var(--font-mono); font-size:0.58rem; padding:3px 9px; border-radius:4px; }
+
+/* SIMULATION ENGINE */
+.sim-engine { display:none; }
+.sim-engine.active { display:block; animation:pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
+.sim-layout { display:grid; grid-template-columns:1fr 280px; gap:1.75rem; align-items:start; }
+
+/* LIVE P&L TRACKER */
+.ppl-tracker { background:var(--sidebar); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; margin-bottom:12px; }
+.ppl-line { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); font-size:0.8rem; }
+.ppl-line:last-child { border-bottom:none; }
+.ppl-key { color:var(--text-dim); }
+.ppl-val { font-family:var(--font-mono); font-size:0.8rem; transition:color 0.3s; }
+.ppl-net-row { display:flex; justify-content:space-between; align-items:center; padding-top:10px; margin-top:6px; border-top:1px solid var(--border-hi); }
+.ppl-net-val { font-family:var(--font-head); font-weight:800; font-size:1.4rem; transition:color 0.3s; }
+.ppl-ratio { font-family:var(--font-mono); font-size:0.72rem; }
+
+/* STAGE SYSTEM */
+.stage-progress { display:flex; gap:6px; margin-bottom:1.75rem; align-items:center; }
+.sp-dot { height:4px; flex:1; border-radius:2px; background:var(--border-hi); transition:all 0.4s; }
+.sp-dot.done { background:var(--green); }
+.sp-dot.active { background:var(--accent); }
+.sp-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--text-mute); white-space:nowrap; }
+
+.stage { display:none; }
+.stage.active { display:block; animation:pageIn 0.35s cubic-bezier(0.22,1,0.36,1); }
+
+.stage-context { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; margin-bottom:1.25rem; }
+.sc-context-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px; }
+.sc-situation { font-size:0.95rem; color:var(--text-dim); line-height:1.85; margin-bottom:1rem; }
+.sc-situation b { color:var(--text); font-weight:600; }
+.sc-situation em { font-style:italic; }
+.sc-data-chips { display:flex; gap:6px; flex-wrap:wrap; }
+.sc-chip { font-family:var(--font-mono); font-size:0.62rem; padding:4px 10px; border-radius:5px; }
+.sc-chip.red { background:var(--red-dim); color:var(--red); border:1px solid rgba(239,68,68,0.2); }
+.sc-chip.amber { background:var(--amber-dim); color:var(--amber); border:1px solid rgba(245,158,11,0.2); }
+.sc-chip.teal { background:var(--teal-dim); color:var(--teal); border:1px solid rgba(45,212,191,0.2); }
+.sc-chip.neutral { background:rgba(255,255,255,0.04); color:var(--text-mute); border:1px solid var(--border); }
+
+.decision-stage { background:var(--card); border:1px solid var(--border-accent); border-radius:var(--radius); padding:1.5rem; margin-bottom:1.25rem; }
+.ds-question { font-family:var(--font-head); font-weight:700; font-size:1.05rem; color:var(--text); line-height:1.3; margin-bottom:1.25rem; letter-spacing:-0.01em; }
+.ds-options { display:flex; flex-direction:column; gap:8px; }
+.ds-option {
+  background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:12px 16px; cursor:pointer; transition:all 0.2s; text-align:left; width:100%;
+  display:flex; gap:12px; align-items:flex-start;
+}
+.ds-option:hover:not(:disabled) { border-color:var(--border-hi); background:var(--bg3); transform:translateX(3px); }
+.ds-option:disabled { cursor:not-allowed; opacity:0.7; }
+.ds-option.selected-optimal { border-color:var(--green); background:var(--green-dim); }
+.ds-option.selected-suboptimal { border-color:var(--amber); background:var(--amber-dim); }
+.ds-option.selected-poor { border-color:var(--red); background:var(--red-dim); }
+.ds-option.reveal-optimal { border-color:rgba(16,185,129,0.3); }
+.ds-opt-icon { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; flex-shrink:0; margin-top:1px; background:rgba(255,255,255,0.05); color:var(--text-mute); }
+.ds-option.selected-optimal .ds-opt-icon { background:var(--green); color:#0B0D14; }
+.ds-option.selected-suboptimal .ds-opt-icon { background:var(--amber); color:#0B0D14; }
+.ds-option.selected-poor .ds-opt-icon { background:var(--red); color:#fff; }
+.ds-opt-text { flex:1; font-size:0.88rem; color:var(--text-dim); line-height:1.6; }
+.ds-option.selected-optimal .ds-opt-text,
+.ds-option.selected-suboptimal .ds-opt-text,
+.ds-option.selected-poor .ds-opt-text { color:var(--text); }
+.ds-opt-impact { font-family:var(--font-mono); font-size:0.6rem; margin-top:3px; }
+
+.consequence-panel { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; margin-top:1rem; animation:pageIn 0.4s ease; display:none; }
+.consequence-panel.open { display:block; }
+.cp-header { display:flex; align-items:center; gap:10px; margin-bottom:1rem; }
+.cp-impact-val { font-family:var(--font-head); font-weight:800; font-size:1.8rem; line-height:1; }
+.cp-impact-label { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.1em; }
+.cp-explanation { font-size:0.88rem; color:var(--text-dim); line-height:1.8; }
+.cp-explanation b { color:var(--text); font-weight:600; }
+.cp-pillars-used { display:flex; gap:6px; margin-top:0.875rem; flex-wrap:wrap; }
+.cp-pillar { font-family:var(--font-mono); font-size:0.55rem; padding:2px 8px; border-radius:4px; background:var(--accent-dim); color:var(--accent2); border:1px solid var(--border-accent); }
+
+.next-stage-btn { width:100%; padding:0.875rem; background:var(--accent); color:#fff; border:none; border-radius:var(--radius-sm); font-family:var(--font-head); font-weight:600; font-size:0.9rem; cursor:pointer; transition:all 0.2s; margin-top:1rem; display:none; }
+.next-stage-btn.visible { display:block; }
+.next-stage-btn:hover { background:#5558E3; transform:translateY(-1px); }
+
+/* RESULTS SCREEN */
+.results-screen { display:none; }
+.results-screen.active { display:block; animation:pageIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.result-grade { font-family:var(--font-head); font-weight:800; font-size:4rem; line-height:1; text-align:center; margin-bottom:6px; }
+.decision-log { display:flex; flex-direction:column; gap:8px; margin:1.25rem 0; }
+.dl-item { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; background:var(--bg2); border-radius:var(--radius-sm); border:1px solid var(--border); }
+.dl-stage { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); white-space:nowrap; }
+.dl-choice { font-size:0.82rem; color:var(--text-dim); flex:1; }
+.dl-impact { font-family:var(--font-mono); font-size:0.75rem; font-weight:500; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap" style="max-width:1100px;padding-bottom:4rem">
+
+  <!-- LIBRARY -->
+  <div id="sim-library">
+    <div class="anim-slide" style="margin-bottom:1.75rem">
+      <div class="page-eyebrow">Simulation</div>
+      <h1 class="page-title">Make the call. <em>See the revenue.</em></h1>
+      <p class="page-desc" style="max-width:620px">You are the HR decision-maker. Six stages. Real scenarios. Every choice you make updates the live People P&L in real time. At the end, you'll see how your decisions compare to the Revenue Fluent path — and what each decision cost or earned.</p>
+    </div>
+    <div class="sim-grid">
+      <div class="sim-card" onclick="startSim('techvelocity')">
+        <div class="sc-header" style="background:linear-gradient(135deg,rgba(99,102,241,0.15),rgba(45,212,191,0.08))">
+          <span class="sc-emoji">🚀</span>
+          <div class="sc-title">The Series B Sprint</div>
+          <div class="sc-subtitle">TechVelocity is scaling fast. You have 6 hiring, promotion, and retention decisions to make. Each one updates your People P&L in real time.</div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-meta">6 stages · ~15 min</div>
+          <span class="sc-badge" style="background:var(--accent-dim);color:var(--accent2);border:1px solid var(--border-accent)">Intermediate</span>
+        </div>
+      </div>
+      <div class="sim-card" onclick="startSim('sterling')">
+        <div class="sc-header" style="background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(249,115,22,0.08))">
+          <span class="sc-emoji">📊</span>
+          <div class="sc-title">The Consulting Crisis</div>
+          <div class="sc-subtitle">Sterling's utilisation is collapsing. You have 6 decisions to make about promotions, team architecture, and L&D investment. How much alpha can you generate?</div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-meta">6 stages · ~18 min</div>
+          <span class="sc-badge" style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(245,158,11,0.2)">Advanced</span>
+        </div>
+      </div>
+      <div class="sim-card" onclick="startSim('mehta')">
+        <div class="sc-header" style="background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(99,102,241,0.08))">
+          <span class="sc-emoji">🏛️</span>
+          <div class="sc-title">The Succession Decision</div>
+          <div class="sc-subtitle">Mehta & Sons. The founder is retiring. Six decisions about succession, trust transfer, and HUMANCE protection will determine whether ₹12Cr survives the handover.</div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-meta">6 stages · ~20 min</div>
+          <span class="sc-badge" style="background:var(--purple-dim);color:var(--purple);border:1px solid rgba(168,85,247,0.2)">Expert</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIM ENGINE -->
+  <div class="sim-engine" id="sim-engine">
+    <div id="sim-back-row" style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem">
+      <button onclick="exitSim()" class="btn btn-ghost btn-sm">← Simulations</button>
+      <div style="flex:1"></div>
+      <div id="sim-title-tag" class="tag tag-accent"></div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="stage-progress" id="stage-progress">
+      <span class="sp-label" id="stage-label">Stage 1 of 6</span>
+      <div class="sp-dot active" id="sp-0"></div>
+      <div class="sp-dot" id="sp-1"></div>
+      <div class="sp-dot" id="sp-2"></div>
+      <div class="sp-dot" id="sp-3"></div>
+      <div class="sp-dot" id="sp-4"></div>
+      <div class="sp-dot" id="sp-5"></div>
+    </div>
+
+    <div class="sim-layout">
+      <div id="stages-wrap">
+        <!-- Stages injected by JS -->
+      </div>
+      <!-- SIDEBAR -->
+      <div>
+        <div class="ppl-tracker">
+          <div class="mono-label" style="margin-bottom:0.875rem">Live People P&L</div>
+          <div class="ppl-line"><span class="ppl-key">Revenue Protected</span><span class="ppl-val" id="ppl-p1" style="color:var(--teal)">₹0</span></div>
+          <div class="ppl-line"><span class="ppl-key">People Alpha</span><span class="ppl-val" id="ppl-p2" style="color:var(--teal)">₹0</span></div>
+          <div class="ppl-line"><span class="ppl-key">Architecture Value</span><span class="ppl-val" id="ppl-p3" style="color:var(--teal)">₹0</span></div>
+          <div class="ppl-line"><span class="ppl-key">HUMANCE</span><span class="ppl-val" id="ppl-p4" style="color:var(--teal)">₹0</span></div>
+          <div class="ppl-line"><span class="ppl-key">People Cost</span><span class="ppl-val" id="ppl-cost" style="color:var(--red)">-₹0</span></div>
+          <div class="ppl-net-row">
+            <div class="mono-label">Net ROI</div>
+            <div>
+              <div class="ppl-net-val" id="ppl-net" style="color:var(--teal)">₹0</div>
+              <div class="ppl-ratio" id="ppl-ratio-display" style="color:var(--text-mute)">0x ratio</div>
+            </div>
+          </div>
+        </div>
+        <div class="ls-card">
+          <div class="mono-label" style="margin-bottom:8px">Your decisions</div>
+          <div id="decision-log-sidebar" style="display:flex;flex-direction:column;gap:5px">
+            <div style="font-size:0.75rem;color:var(--text-mute)">Make your first decision →</div>
+          </div>
+        </div>
+        <div class="ls-card" style="background:var(--bg3)">
+          <div class="mono-label" style="margin-bottom:6px;color:var(--text-mute)">Score</div>
+          <div style="font-family:var(--font-head);font-weight:800;font-size:2rem;color:var(--accent2)" id="running-score">0</div>
+          <div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute)">pts / 300 max</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div class="results-screen" id="results-screen">
+    <div style="max-width:700px;margin:0 auto">
+      <div class="page-eyebrow" style="margin-bottom:1rem;justify-content:center">Simulation complete</div>
+      <div class="result-grade" id="result-grade" style="color:var(--accent2)">B+</div>
+      <div style="text-align:center;margin-bottom:2rem">
+        <div id="result-title" style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:4px"></div>
+        <div id="result-sub" style="font-size:0.88rem;color:var(--text-dim)"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.75rem" id="result-stats"></div>
+      <div class="ls-card" style="margin-bottom:1.5rem">
+        <div class="mono-label" style="margin-bottom:1rem">Final People P&L</div>
+        <div id="result-ppl"></div>
+      </div>
+      <div class="ls-card" style="margin-bottom:1.75rem">
+        <div class="mono-label" style="margin-bottom:1rem">Your decision log</div>
+        <div class="decision-log" id="result-decision-log"></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button onclick="retrySim()" class="btn btn-ghost">Try again</button>
+        <a href="certification.html" class="btn btn-primary">Earn CRFP →</a>
+        <button onclick="exitResults()" class="btn btn-ghost">← All simulations</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('simulate');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ['Revenue Fluent', 'Simulation'],
+  '<span class="tb-pill">3 scenarios</span>'
+);
+
+// ─── SIMULATION DATA ───────────────────────────────────────────────
+const SIMS = {
+
+techvelocity: {
+  title: '🚀 The Series B Sprint',
+  tag: 'tag-accent',
+  base: { p1:0, p2:0, p3:5.1, p4:4.2, cost:16.5 },
+  stages: [
+    {
+      title: 'Stage 1 — The VP Sales Hire',
+      context: 'TechVelocity is 50 people, ₹84Cr revenue. You need a VP Sales to scale. You have two candidates: <b>Candidate A</b> — brilliant SaaS experience, but comes from a command-and-control culture, very different from TechVelocity\'s autonomous team. <b>Candidate B</b> — slightly less experienced, but cultural alignment is strong and the existing AE team has given positive signals.',
+      chips: [{ text:'ATC% 141%', cls:'red' },{ text:'ESR 60.5%', cls:'amber' },{ text:'2 AEs at flight risk', cls:'red' }],
+      question: 'Which candidate do you hire?',
+      options: [
+        { text:'Hire Candidate A. The experience outweighs the culture risk. We\'ll manage the integration.', quality:'poor', impact:-1.8, impactLabel:'-₹1.8Cr HUMANCE risk', explanation:'<b>Experience without cultural fit destroys Trust Capital.</b> The 2 flight-risk AEs are flagging a trust signal. Candidate A\'s command-and-control style will likely trigger the exits. ATC% of 141% means each exit costs ₹21L+ in replacement. And the revenue capacity gap will compress P1 further. Revenue Connect predicts 88% attribution to this decision if AEs leave.' },
+        { text:'Hire Candidate B. Cultural alignment protects the existing team\'s Trust Capital. We build experience from there.', quality:'optimal', impact:+1.4, impactLabel:'+₹1.4Cr People Alpha', explanation:'<b>Cultural fit protects HUMANCE and generates Hiring Alpha.</b> Candidate B\'s alignment with the autonomous culture means existing AEs are less likely to exit. Trust Capital is preserved. The slightly lower experience is offset by avoiding ₹1.8Cr in likely attrition cost. People Alpha contribution: +₹1.4Cr from reduced flight risk and faster team activation.' },
+        { text:'Delay the hire by one quarter. Run the sales function from existing leadership while the search continues.', quality:'suboptimal', impact:-0.4, impactLabel:'-₹0.4Cr capacity gap', explanation:'<b>Delay has a cost too.</b> Revenue capacity runs below full for another quarter. TDF increases. The right hire is always better than the fastest hire — but delay without a plan extends the revenue gap without solving it.' },
+      ],
+      pillar: 'P2 · Hiring Alpha'
+    },
+    {
+      title: 'Stage 2 — The Flight-Risk AE',
+      context: 'Three months after the VP hire (whichever you chose), one of the senior AEs — responsible for ₹14Cr of the annual pipeline — signals dissatisfaction. Their manager flags it. You have a window to act.',
+      chips: [{ text:'₹14Cr pipeline at risk', cls:'red' },{ text:'ESR dropped 8pts', cls:'red' },{ text:'Culture Yield erosion signal', cls:'amber' }],
+      question: 'What do you do about the at-risk AE?',
+      options: [
+        { text:'Wait and watch. High performers threaten to leave regularly. Intervening signals weakness.', quality:'poor', impact:-2.1, impactLabel:'-₹2.1Cr attrition cost', explanation:'<b>This is the most expensive inaction in HR.</b> The ESR drop is a measurable Culture Yield signal — it means something has changed. The ₹14Cr pipeline AE is not bluffing. Revenue Connect calculates: if this person leaves, ATC% rises by 18 points and TDF drag adds ₹600K in transition costs. Inaction here costs ₹2.1Cr.' },
+        { text:'Immediate retention conversation + compensation review + role scope expansion. Make them feel valued.', quality:'suboptimal', impact:+0.6, impactLabel:'+₹0.6Cr retention', explanation:'<b>Good instinct, partial execution.</b> The retention conversation and comp review help. But the root cause is cultural — the ESR drop is a Culture Yield signal, not a compensation signal. Fixing pay without addressing the culture dynamic is a short-term stabiliser, not a solution. You retain them for 6 months but the underlying issue remains.' },
+        { text:'Revenue Fluent response: diagnose the Culture Yield signal first. Run an ESR-before/after analysis. Identify whether this is a compensation, culture, or role issue — then intervene precisely.', quality:'optimal', impact:+1.2, impactLabel:'+₹1.2Cr HUMANCE protection', explanation:'<b>Diagnose before you prescribe.</b> The ESR drop tells you something changed — but the P4 HUMANCE framework separates Trust Capital erosion from Culture Yield decline from Belonging Premium loss. Each has a different intervention. Running the diagnosis first means the intervention is targeted, cheaper, and more likely to work permanently.' },
+      ],
+      pillar: 'P1 · Revenue Connect + P4 · HUMANCE'
+    },
+    {
+      title: 'Stage 3 — The Promotion Decision',
+      context: 'Two senior engineers are performing exceptionally. The team wants to promote both to Lead Engineer. Their readiness scores: <b>Engineer A: 82%</b> (above threshold). <b>Engineer B: 58%</b> (below threshold). Promoting both simultaneously is politically easier.',
+      chips: [{ text:'A: readiness 82%', cls:'teal' },{ text:'B: readiness 58%', cls:'red' },{ text:'Promo Alpha threshold: 70%', cls:'neutral' }],
+      question: 'How do you handle the two promotions?',
+      options: [
+        { text:'Promote both now. The team expects it and holding back B will damage morale.', quality:'poor', impact:-1.1, impactLabel:'-₹1.1Cr Promotion Alpha', explanation:'<b>Promotion Alpha: -11% from Engineer B\'s premature promotion.</b> At 58% readiness, the Promotion Alpha framework predicts under-performance in the new role. The damage to the team they lead — slower delivery, lower output quality — compounds over the 6–9 months it takes B to develop. Meanwhile A\'s positive alpha is diluted by the shared narrative.' },
+        { text:'Promote A now. Create a structured 2-quarter readiness programme for B with a clear promotion date. Frame it as investment, not delay.', quality:'optimal', impact:+1.6, impactLabel:'+₹1.6Cr Promotion Alpha', explanation:'<b>This is the Revenue Fluent response.</b> A generates positive Promotion Alpha immediately (+18% from readiness 82%). B\'s programme closes the readiness gap in 2 quarters — and when B is promoted at 78%+ readiness, they generate positive alpha too. Total Promotion Alpha: significantly higher than promoting both at once. And B is grateful for the investment.' },
+        { text:'Delay both promotions until next cycle. Consistency is fairness.', quality:'suboptimal', impact:-0.3, impactLabel:'-₹0.3Cr People Alpha', explanation:'<b>Delaying A is a hidden cost.</b> A is at 82% readiness — above threshold. Waiting costs you positive Promotion Alpha you could be generating right now, and risks A looking elsewhere if they see their performance isn\'t being recognised.' },
+      ],
+      pillar: 'P2 · Promotion Alpha'
+    },
+    {
+      title: 'Stage 4 — The L&D Investment',
+      context: 'The CFO has approved ₹40L for people development this year. You have three options. The company\'s largest skills gap is in enterprise sales methodology (the AE team is strong technically but weak on large-deal closing).',
+      chips: [{ text:'₹40L L&D budget', cls:'teal' },{ text:'Enterprise skills gap: HIGH', cls:'red' },{ text:'AE team size: 12', cls:'neutral' }],
+      question: 'Where does the ₹40L go?',
+      options: [
+        { text:'Broad programme: 5 different initiatives for all 50 employees. Maximum coverage, maximum cultural signal.', quality:'suboptimal', impact:+0.4, impactLabel:'+₹0.4Cr L&D Alpha', explanation:'<b>Broad L&D has low L&D Alpha.</b> ₹40L spread across 5 programmes for 50 people means ₹80K per head per programme. Below the threshold for meaningful skills transformation. The cultural signal is positive but the revenue yield is low. L&D Alpha: approximately +12% — positive but thin.' },
+        { text:'Enterprise sales methodology for the 12-person AE team only. Deep, targeted, revenue-linked.', quality:'optimal', impact:+2.2, impactLabel:'+₹2.2Cr L&D Alpha', explanation:'<b>Deep targeted L&D generates maximum L&D Alpha.</b> ₹40L for 12 AEs = ₹3.3L per person — enough for a serious programme. The skills gap closed: enterprise deal closing. Revenue impact per trained AE at 8% improvement in close rate on a ₹84Cr base: ₹7M per point of close rate improvement. <b>L&D Alpha: +62%</b>. The CFO will ask for this programme to be doubled.' },
+        { text:'Executive leadership development for the 8-person senior team. Invest in the multipliers.', quality:'suboptimal', impact:+0.8, impactLabel:'+₹0.8Cr L&D Alpha', explanation:'<b>Leadership development is valuable but not your highest-yield use here.</b> The skills gap is in AE performance. Leadership development has a longer payback curve and doesn\'t directly address the revenue gap. Right investment, wrong priority right now.' },
+      ],
+      pillar: 'P2 · L&D Alpha'
+    },
+    {
+      title: 'Stage 5 — The Restructure Proposal',
+      context: 'TechVelocity\'s investors are pushing for a reorganisation. They want to add a "Revenue Operations" layer between the AE team and VP Sales. This would add 2 management positions and a new reporting layer — moving the structure from Config A toward Config B.',
+      chips: [{ text:'Current: Config A +34%', cls:'teal' },{ text:'Proposed: Config B +8%', cls:'amber' },{ text:'OSI impact: -15pts', cls:'red' }],
+      question: 'How do you respond to the investor pressure?',
+      options: [
+        { text:'Accept. Investors know scaling. Add the Revenue Operations layer as proposed.', quality:'poor', impact:-1.6, impactLabel:'-₹1.6Cr Architecture value', explanation:'<b>Moving from Config A to Config B costs 26 percentage points of revenue premium.</b> On a ₹84Cr base, that\'s ₹2.2Cr in structural revenue lost — before counting the OSI drop of 15 points from the reorganisation disruption. The investors are right that RevOps adds value — but the layer structure they\'re proposing destroys more than it creates.' },
+        { text:'Negotiate. Agree to a RevOps function but embed it within the existing Config A spans — not as a new management layer. RevOps as capability, not hierarchy.', quality:'optimal', impact:+0.9, impactLabel:'+₹0.9Cr Architecture protected', explanation:'<b>Revenue Architecture thinking finds the third option.</b> RevOps capability is valuable. A new management layer is not. Embedding RevOps expertise within existing structure gives the investors what they want (systematic revenue operations) without destroying the Config A premium that\'s generating the growth they invested in.' },
+        { text:'Decline. Protect Config A at all costs. No new layers.', quality:'suboptimal', impact:+0.2, impactLabel:'+₹0.2Cr Architecture protected', explanation:'<b>Right direction, wrong relationship management.</b> Protecting Config A is correct. But flatly declining investor input without offering an alternative damages the relationship and the board dynamic. The Revenue Architecture data should be used to make the case — not just to say no.' },
+      ],
+      pillar: 'P3 · Team Architecture'
+    },
+    {
+      title: 'Stage 6 — The Year-End People P&L',
+      context: 'Year-end review. The board has asked you to present the People function\'s contribution to the business. You have two approaches: the traditional HR report or the Revenue Fluent People P&L.',
+      chips: [{ text:'Net People ROI calculated', cls:'teal' },{ text:'Board presentation', cls:'neutral' },{ text:'CFO in the room', cls:'neutral' }],
+      question: 'How do you present to the board?',
+      options: [
+        { text:'Traditional HR report: headcount, retention rate, engagement score, training hours. Professional and familiar.', quality:'poor', impact:-0.5, impactLabel:'-₹0.5Cr strategic influence', explanation:'<b>The format you choose signals what you believe HR is worth.</b> Traditional HR metrics tell the board HR is an admin function. They\'ll nod, move on, and ask you about headcount plans. You will not be in the strategy conversation.' },
+        { text:'People P&L only. Revenue side. Cost side. Net People ROI. Ratio. Two pages. No HR jargon.', quality:'optimal', impact:+1.0, impactLabel:'+₹1.0Cr strategic influence', explanation:'<b>This is the moment Revenue Fluency pays off.</b> The CFO reads a P&L every month. Presenting in P&L format means HR data is processed in the same cognitive framework as finance. The questions that follow are different. The decisions that follow are different. You are now in the room when strategy is made.' },
+        { text:'Both: the traditional HR report for completeness, with the People P&L as an appendix for those who want to dig deeper.', quality:'suboptimal', impact:+0.4, impactLabel:'+₹0.4Cr partial influence', explanation:'<b>Hedging dilutes the impact.</b> Including the traditional report signals you\'re not fully committed to the Revenue Fluent framing. The CFO will read the traditional section and move on. Lead with the P&L — the data you want them to act on should be front and centre, not in an appendix.' },
+      ],
+      pillar: 'P5 · People P&L'
+    },
+  ]
+},
+
+sterling: {
+  title: '📊 The Consulting Crisis',
+  tag: 'tag-amber',
+  base: { p1:4.2, p2:0, p3:0, p4:3.8, cost:22.0 },
+  stages: [
+    { title:'Stage 1 — The Utilisation Crisis', context:'Sterling\'s billable utilisation dropped from 78% to 60% in Q3. The MD thinks it\'s a market slowdown. You have the People Alpha data. <b>Four promotions happened simultaneously this quarter.</b> Average readiness: 62%.', chips:[{text:'Utilisation: 78%→60%',cls:'red'},{text:'4 promotions last quarter',cls:'amber'},{text:'Avg readiness: 62%',cls:'red'}], question:'What do you tell the MD?', options:[{text:'Agree — it\'s probably market. Wait for Q4 data before drawing conclusions.',quality:'poor',impact:-1.2,impactLabel:'-₹1.2Cr diagnostic delay',explanation:'<b>Delaying the diagnosis is the most expensive choice.</b> Every quarter of continued -8% Promotion Alpha at £12M revenue costs £960K. The data is clear: four under-ready promotions causing structural performance degradation. Waiting for more data means one more quarter of preventable loss.'},{text:'Present the People Alpha data. The utilisation drop correlates precisely with the four promotions. Promotion Alpha is -8% — the promotions are the cause.',quality:'optimal',impact:+1.8,impactLabel:'+₹1.8Cr accurate diagnosis',explanation:'<b>Revenue Fluent diagnosis changes the response.</b> The MD\'s instinct is to look outside. The data says look inside. Presenting the Promotion Alpha correlation — timing, magnitude, team-by-team breakdown — makes the case undeniable. The intervention that follows is targeted, fast, and 24× ROI.'},{text:'Suggest a client satisfaction survey to understand whether the utilisation drop is internal or external.',quality:'suboptimal',impact:-0.3,impactLabel:'-₹0.3Cr indirect evidence',explanation:'<b>Client data is useful but indirect.</b> It will confirm what the People Alpha data already shows — 6 weeks later, at consulting cost. The Promotion Alpha signal is direct and immediate. Use it.'}], pillar:'P2 · Promotion Alpha' },
+    { title:'Stage 2 — The Recovery Investment', context:'The MD accepts your diagnosis. The four promoted ADs are struggling in three specific areas. You have a budget of £60K for an intervention. The MD wants to see a business case.', chips:[{text:'£60K available',cls:'teal'},{text:'Utilisation target: 72% (year-end)',cls:'amber'},{text:'Revenue base: £12M',cls:'neutral'}], question:'How do you present the business case?', options:[{text:'Frame it as a management development programme. Soft skills, leadership competencies, 360 feedback.',quality:'suboptimal',impact:+0.6,impactLabel:'+₹0.6Cr partial recovery',explanation:'<b>Right activity, wrong framing.</b> The MD approved a business problem, not an HR programme. Framing as "management development" loses the business case clarity. The intervention should be framed as: utilisation recovery, not leadership development.'},{text:'Business case: £60K investment → close identified skills gaps → utilisation recovers from 60% to 72% → £1.44M annual revenue recovery. L&D Alpha: 24×. Present the ROI, not the programme.',quality:'optimal',impact:+2.0,impactLabel:'+₹2.0Cr L&D Alpha',explanation:'<b>The 24× ROI is the business case.</b> £60K → £1.44M revenue recovery. That\'s not an HR initiative — that\'s a capital allocation decision with exceptional return. The MD will approve it in minutes. This is Revenue Fluent L&D thinking.'},{text:'Propose external coaching for each AD. One-to-one, prestigious, signals investment.',quality:'poor',impact:+0.3,impactLabel:'+₹0.3Cr marginal impact',explanation:'<b>Executive coaching is expensive and slow.</b> £60K across 4 people is £15K each — enough for a few coaching sessions that won\'t close the specific skills gaps identified. The intervention needs to be targeted at the three gaps (client management, commercial negotiation, team performance) not generic development.'}], pillar:'P2 · L&D Alpha' },
+    { title:'Stage 3 — The Architecture Question', context:'As utilisation recovers, the MD proposes a restructure to "fix the management ratio problem." He wants to add 2 senior directors above the 4 ADs to provide oversight. OEI is currently 74%.', chips:[{text:'OEI: 74%',cls:'teal'},{text:'Proposed: add 2 senior directors',cls:'amber'},{text:'PCoB would rise 8pts',cls:'red'}], question:'Should Sterling add the two senior directors?', options:[{text:'Yes. The ADs need oversight while they develop. Two SDs provides stability.',quality:'suboptimal',impact:-0.8,impactLabel:'-₹0.8Cr PCoB increase',explanation:'<b>Adding structure when you\'re already Config B moves you toward Config C.</b> The OEI drops from 74% to 66% — closer to the 65% boundary. PCoB rises 8 points. The ADs need development, not oversight. This is the management-layer trap: responding to performance issues with hierarchy rather than capability.'},{text:'No new layers. Instead, assign each AD a senior mentor from the existing partnership — development through proximity, not hierarchy.',quality:'optimal',impact:+1.0,impactLabel:'+₹1.0Cr Architecture protected',explanation:'<b>Revenue Architecture thinking finds the non-structural solution.</b> Mentorship preserves Config B\'s structure while providing the support the ADs need. No OEI impact. No PCoB increase. OSI stays stable because there\'s no structural change event.'},{text:'Compromise: hire one senior director instead of two.',quality:'suboptimal',impact:-0.3,impactLabel:'-₹0.3Cr PCoB increase',explanation:'<b>Half a bad idea is still a bad idea.</b> One SD is less damaging than two, but it still adds a layer that wasn\'t needed. The mentorship solution costs nothing and delivers the same developmental support.'}], pillar:'P3 · Team Architecture' },
+    { title:'Stage 4 — The Retention Risk', context:'One of the four ADs — your highest performer, now developing well — has received an outside offer 20% above their current compensation. They\'ve told you informally. Retention Alpha calculation shows they represent ₹1.8M in annual Retention Alpha.', chips:[{text:'Outside offer: +20%',cls:'red'},{text:'Retention Alpha: £1.8M',cls:'teal'},{text:'Counter-offer cost: £18K',cls:'neutral'}], question:'How do you handle the retention case?', options:[{text:'Let them go. Matching offers sets a bad precedent and signals weakness.',quality:'poor',impact:-2.2,impactLabel:'-₹2.2Cr Retention Alpha',explanation:'<b>The precedent argument ignores the Retention Alpha math.</b> This person represents £1.8M in annual Retention Alpha — the compounding value of their tenure, client relationships, and institutional knowledge. The counter-offer costs £18K. The departure costs £1.8M annually plus ₹90K replacement cost. The "precedent" costs 100× less than the departure.'},{text:'Match the offer immediately, no conversation needed.',quality:'suboptimal',impact:+0.9,impactLabel:'+₹0.9Cr retention',explanation:'<b>Match is better than losing them, but misses the full play.</b> Pure compensation matching retains the body but doesn\'t address the underlying motivation to look. A Revenue Fluent retention conversation includes the compensation match AND a role expansion, AND presents the person\'s own Retention Alpha value back to them — making them feel seen, not just paid.'},{text:'Revenue Fluent retention: present the Retention Alpha calculation to them. Show them their value to the firm. Match the offer AND expand scope. Make it personal and financial simultaneously.',quality:'optimal',impact:+1.8,impactLabel:'+₹1.8Cr Retention Alpha',explanation:'<b>Making the Retention Alpha visible changes the dynamic entirely.</b> Most high performers don\'t fully understand how much value they create through tenure and relationships — not just output. Showing them their Retention Alpha data is one of the most powerful retention tools available. Combined with the match and scope expansion, the conversion rate is very high.'}], pillar:'P2 · Retention Alpha' },
+    { title:'Stage 5 — The HUMANCE Risk', context:'The MD announces he\'s considering selling the firm in 3–4 years. Sterling\'s value will include a people premium. You need to identify what HUMANCE is currently worth — and what would destroy it in an acquisition.', chips:[{text:'IRD score: 55%',cls:'amber'},{text:'RBC score: 40%',cls:'red'},{text:'Acquisition horizon: 3-4 years',cls:'neutral'}], question:'What do you tell the MD about the people premium?', options:[{text:'Focus on talent retention. High retention rate = high people premium.',quality:'suboptimal',impact:+0.5,impactLabel:'+₹0.5Cr HUMANCE awareness',explanation:'<b>Retention rate is a proxy, not the asset.</b> The acquirer will want to know what walks out the door when key people leave — and whether the value is transferable. Retention rate doesn\'t answer that. IRD and RBC do.'},{text:'Run a HUMANCE audit. Calculate Trust Capital, Culture Yield, Signal Intelligence, Belonging Premium. Present the acquirer with a defensible human asset valuation alongside the financial accounts.',quality:'optimal',impact:+1.4,impactLabel:'+₹1.4Cr HUMANCE premium',explanation:'<b>A HUMANCE audit increases the acquisition multiple.</b> An acquirer who receives a ₹X HUMANCE valuation alongside the accounts is paying for something quantified and protected. It also reveals: RBC of 40% means succession coverage is thin — a 24-month RBC improvement programme before the sale increases Trust Capital and the acquisition price.'},{text:'The people premium will take care of itself. Focus on revenue growth in the lead-up to the sale.',quality:'poor',impact:-0.8,impactLabel:'-₹0.8Cr HUMANCE unprotected',explanation:'<b>Unquantified HUMANCE is discounted in acquisitions.</b> Acquirers who can\'t see the HUMANCE will either discount it or miss it entirely. The people assets that would have commanded a premium become invisible — or are destroyed in post-acquisition integration because nobody knew to protect them.'}], pillar:'P4 · HUMANCE' },
+    { title:'Stage 6 — The Year-End P&L', context:'Year-end. Utilisation has recovered to 71%. The MD asks for your assessment of the People function\'s year. You have the full data.', chips:[{text:'Utilisation: 60%→71%',cls:'teal'},{text:'L&D Alpha: 24×',cls:'teal'},{text:'Retention: 1 key AD saved',cls:'teal'}], question:'How do you summarise the year?', options:[{text:'"Utilisation is recovering, the AD development is working, and morale is good." Qualitative summary.',quality:'poor',impact:-0.3,impactLabel:'-₹0.3Cr influence',explanation:'<b>Qualitative summaries are forgotten before the next agenda item.</b> You have data. Use it. "Morale is good" is not a CFO statement.'},{text:'"People P&L: £3.8M People Revenue. £2.6M People Cost. Net People ROI: +£1.2M. L&D Alpha on AD programme: 24×. Retention Alpha protected: £1.8M. Three HUMANCE risks identified for the acquisition programme." That\'s the year.',quality:'optimal',impact:+1.2,impactLabel:'+₹1.2Cr strategic outcome',explanation:'<b>This is Revenue Fluency in action.</b> Every number is defensible. Every claim is quantified. The MD and board hear a function that measures its own return — and delivers it. This is how HR earns strategic standing that persists beyond the current year.'},{text:'Present a detailed report covering all HR initiatives, satisfaction scores, and a 12-page year-in-review document.',quality:'suboptimal',impact:+0.2,impactLabel:'+₹0.2Cr partial influence',explanation:'<b>Volume dilutes impact.</b> A 12-page document says "I don\'t know what matters." The People P&L says "this is the number." Lead with the number.'}], pillar:'P5 · People P&L' },
+  ]
+},
+
+mehta: {
+  title: '🏛️ The Succession Decision',
+  tag: 'tag-purple',
+  base: { p1:3.4, p2:2.1, p3:2.8, p4:0, cost:14.4 },
+  stages: [
+    { title:'Stage 1 — The Succession Announcement', context:'Rajesh Mehta announces retirement in 18 months. His son Arjun will take over. You are the company\'s first HR professional, hired specifically for this transition. Your first job: assess the HUMANCE exposure.', chips:[{text:'IRD: 18% (critical)',cls:'red'},{text:'RBC: 20% (critical)',cls:'red'},{text:'Revenue: ₹84Cr',cls:'neutral'}], question:'What is your first action?', options:[{text:'Congratulate the family on the succession plan and begin drafting an org chart for Arjun\'s leadership team.',quality:'poor',impact:-0.8,impactLabel:'-₹0.8Cr HUMANCE undiagnosed',explanation:'<b>The org chart is not the problem.</b> An IRD of 18% means Rajesh\'s relationships are dangerously concentrated — they did not build with the company, they built around him personally. A new org chart doesn\'t transfer those relationships. The HUMANCE risk is not visible to Arjun or the board yet. Your first job is to make it visible.'},{text:'Run a full HUMANCE audit. Map Trust Capital concentration (which relationships are personal to Rajesh vs institutional). Calculate what happens to each asset class if those relationships don\'t transfer.',quality:'optimal',impact:+1.6,impactLabel:'+₹1.6Cr HUMANCE diagnosed',explanation:'<b>This is the only intervention that can prevent the ₹12.1Cr destruction.</b> The HUMANCE audit maps exactly where the risk sits: 62% of revenue comes from 3 client relationships that are personal to Rajesh. IRD of 18% means they\'re not institutionalised. RBC of 20% means Arjun has no established relationship with those clients yet. Now you know what to protect — and how.'},{text:'Set up a formal knowledge transfer programme — document all processes, client contact details, and business intelligence.',quality:'suboptimal',impact:+0.4,impactLabel:'+₹0.4Cr knowledge captured',explanation:'<b>Documentation captures explicit knowledge — not Trust Capital.</b> The process documentation is useful. But the real risk is implicit: the trust Rajesh\'s clients have in him personally, the informal intelligence network that knows which supplier to call, the culture of accountability that Rajesh modelled every day. None of that is in a document.'}], pillar:'P4 · HUMANCE' },
+    { title:'Stage 2 — The Trust Transfer Programme', context:'Your HUMANCE audit confirms: 3 key clients represent ₹52Cr of ₹84Cr annual revenue. All three relationships are IRD-concentrated in Rajesh. RBC for Arjun with these clients: effectively 0. You have 18 months.', chips:[{text:'₹52Cr client relationships at risk',cls:'red'},{text:'18 months to transfer',cls:'amber'},{text:'Arjun: zero client RBC',cls:'red'}], question:'How do you structure the trust transfer?', options:[{text:'Have Arjun attend key client meetings as an observer for 6 months, then take the lead gradually.',quality:'suboptimal',impact:+0.8,impactLabel:'+₹0.8Cr partial transfer',explanation:'<b>Observer status doesn\'t build Trust Capital.</b> Clients notice when the founder\'s child is "present but not leading." It signals transition anxiety rather than capable succession. Trust transfer requires Arjun to demonstrate competence in front of clients, not observe from the back of the room.'},{text:'Structured co-leadership: Rajesh and Arjun jointly manage all key client relationships for 12 months. Arjun leads on specific deliverables. Rajesh endorses and stays accountable. In month 13 the handover happens with demonstrated competence already established.',quality:'optimal',impact:+2.2,impactLabel:'+₹2.2Cr Trust Capital transferred',explanation:'<b>Co-leadership is the only mechanism that transfers Trust Capital.</b> The 12-month co-leadership programme means: clients have 12 months of Arjun performing before Rajesh steps back. The trust transfer is visible, competence-demonstrated, and endorsed by the founder. RBC moves from 0% to approximately 60–70% — enough to protect the majority of the revenue relationship.'},{text:'Bring in an experienced external MD to run the business for 2 years while Arjun develops in a functional role.',quality:'poor',impact:-1.2,impactLabel:'-₹1.2Cr HUMANCE disruption',explanation:'<b>An external MD signals the family is not ready.</b> Key employees and clients will see this as instability — a leadership vacuum, not a succession. The external MD has no Trust Capital with existing clients or staff. IRD re-concentrates around the external MD. In 2 years, the problem is the same but ₹1.2Cr more expensive.'}], pillar:'P4 · Trust Capital' },
+    { title:'Stage 3 — The Senior Team Risk', context:'Your HUMANCE audit also reveals: 6 senior employees have tenure averaging 14 years and are personally loyal to Rajesh rather than to the company. If they leave after the succession, Signal Intelligence worth ₹3.7Cr leaves with them.', chips:[{text:'6 seniors: 14yr avg tenure',cls:'amber'},{text:'Signal Intel: ₹3.7Cr',cls:'red'},{text:'Loyalty: personal not institutional',cls:'red'}], question:'How do you protect the Signal Intelligence?', options:[{text:'Offer retention bonuses tied to 2-year post-succession continuity.',quality:'suboptimal',impact:+0.9,impactLabel:'+₹0.9Cr partial retention',explanation:'<b>Money retains the person — not the knowledge.</b> A retention bonus keeps them in their seat, but if they\'re only there for the money while disengaged, the Signal Intelligence network has already degraded. Belonging Premium collapses and the informal early-warning network stops working even while they\'re technically employed.'},{text:'Create a formal Senior Council — Arjun chairs it, the 6 seniors are members with genuine advisory authority. They become institutionally important, not just personally loyal to Rajesh.',quality:'optimal',impact:+1.8,imtLabel:'+₹1.8Cr Signal Intelligence protected',impactLabel:'+₹1.8Cr Signal Intel protected',explanation:'<b>Institutionalising their importance transfers their loyalty from Rajesh to the company.</b> The Senior Council makes their Signal Intelligence a formal company asset — not an informal personal one. They feel genuinely valued by Arjun, not just retained. Belonging Premium is protected because they have a stake in the new era, not just a bonus to wait out.'},{text:'Document everything they know. Run structured knowledge extraction sessions over 6 months.',quality:'poor',impact:+0.2,impactLabel:'+₹0.2Cr explicit knowledge only',explanation:'<b>Signal Intelligence is not in documents.</b> The informal network — who to call, what signals mean trouble, when to escalate — exists in relationships and pattern recognition developed over 14 years. A document captures none of it. They need to stay and use it actively, not hand it over and leave.'}], pillar:'P4 · Signal Intelligence' },
+    { title:'Stage 4 — The Culture Continuity Question', context:'Mehta & Sons has a culture of radical ownership — employees routinely go beyond their job descriptions. Belonging Premium is estimated at ₹4.5Cr annually. Arjun has a more formal, process-driven leadership style.', chips:[{text:'Belonging Premium: ₹4.5Cr',cls:'teal'},{text:'Arjun: formal style',cls:'amber'},{text:'Current culture: radical ownership',cls:'teal'}], question:'How do you brief Arjun on the cultural risk?', options:[{text:'Brief Arjun on the data: the current culture generates ₹4.5Cr in Belonging Premium annually. His formal management style is a risk to that number. Recommend a 6-month coaching programme focused on the ownership culture.',quality:'optimal',impact:+1.4,impactLabel:'+₹1.4Cr Belonging Protected',explanation:'<b>Framing culture as a financial asset changes how Arjun hears it.</b> "Your style is a culture risk" is personal criticism. "Your style is a ₹4.5Cr financial risk" is a business conversation. Arjun is a business person. The data changes the conversation — and the receptiveness to coaching.'},{text:'Advise Arjun to change his management style to match Rajesh\'s.',quality:'poor',impact:-0.6,impactLabel:'-₹0.6Cr authenticity risk',explanation:'<b>Asking a leader to perform a style they don\'t believe in destroys trust faster than having their own style.</b> Arjun needs to be himself while understanding the cultural values to protect. The goal is not to replicate Rajesh — it\'s to preserve the outcomes (ownership, accountability) through Arjun\'s authentic version of those values.'},{text:'Let Arjun find his own leadership voice. Culture evolves naturally.',quality:'poor',impact:-1.8,impactLabel:'-₹1.8Cr Belonging at risk',explanation:'<b>"Culture evolves naturally" is how ₹4.5Cr disappears.</b> Culture does evolve — but in the absence of intentional preservation, it degrades toward the new leader\'s default style. Radical ownership requires active demonstration, not passive inheritance. Without a preservation plan, Belonging Premium collapses within 12 months.'}], pillar:'P4 · Belonging Premium' },
+    { title:'Stage 5 — Post-Succession: The ESR Signal', context:'Six months after the handover, ESR has dropped from 94% to 78% — a 16-point decline. Two senior employees have resigned. The trust transfer programme is working for clients but internal culture is wobbling.', chips:[{text:'ESR: 94%→78% (-16pts)',cls:'red'},{text:'2 senior resignations',cls:'red'},{text:'Client relationships: stable',cls:'teal'}], question:'What does the ESR signal tell you and what do you do?', options:[{text:'The culture needs time to settle. Normal post-succession adjustment. Monitor for another quarter.',quality:'poor',impact:-1.4,impactLabel:'-₹1.4Cr diagnostic delay',explanation:'<b>A 16-point ESR drop is not "settling." It\'s Culture Yield destruction in progress.</b> At ₹84Cr revenue, each 10-point ESR drop is ₹8.4Cr of efficiency destroyed. Waiting another quarter means watching ₹8.4Cr flow away while calling it "adjustment." The Revenue Fluent response is immediate diagnosis, not patience.'},{text:'Immediate HUMANCE re-audit. The ESR drop pinpoints which asset class is eroding — is it Trust Capital (Arjun\'s relationships with staff), Culture Yield (ownership culture degrading), or Belonging Premium (discretionary effort collapsing)? The intervention depends on the diagnosis.',quality:'optimal',impact:+1.6,impactLabel:'+₹1.6Cr Culture Yield protected',explanation:'<b>Revenue Fluent triage: ESR drop → HUMANCE diagnosis → targeted intervention.</b> The audit reveals: Belonging Premium is the primary erosion (Arjun\'s formal style is reducing discretionary effort). Trust Capital with the 6 seniors is holding. The intervention is targeted: Arjun\'s coaching programme accelerated, Senior Council given more visible authority, 2 cultural wins celebrated publicly. Culture Yield stabilises within 60 days.'},{text:'Hire a Chief Culture Officer to manage the cultural transition.',quality:'suboptimal',impact:+0.3,impactLabel:'+₹0.3Cr indirect',explanation:'<b>A hire is not a diagnosis.</b> A CCO can help — but not if the specific HUMANCE leaks haven\'t been identified. Hiring a person to solve an undiagnosed problem is expensive and slow. Diagnose first, then decide whether the intervention requires a new hire or a programme.'}], pillar:'P4 · Culture Yield' },
+    { title:'Stage 6 — The Year-End Board Presentation', context:'Eighteen months after the succession. Revenue has stabilised at ₹78Cr — a 7% decline vs the 31% that happened in the alternative timeline. The HUMANCE protection programme has worked. The board wants an assessment.', chips:[{text:'Revenue: ₹84Cr→₹78Cr',cls:'amber'},{text:'HUMANCE protected: ₹9.1Cr',cls:'teal'},{text:'Alternative timeline: -31%',cls:'neutral'}], question:'How do you frame the People function\'s contribution?', options:[{text:'Report the revenue stabilisation as a business win, without specifically attributing it to the HUMANCE programme.',quality:'suboptimal',impact:+0.4,impactLabel:'+₹0.4Cr credit not claimed',explanation:'<b>Not claiming the credit means the next HUMANCE investment won\'t be approved.</b> If the board doesn\'t see the causal link between the ₹45L succession programme and the ₹6Cr revenue protected, the investment won\'t be replicated for future succession or acquisition events.'},{text:'People P&L with full HUMANCE attribution: "Without the succession HUMANCE programme, our Revenue Fluent model projected a 31% revenue decline (₹26Cr loss) based on IRD and RBC scores at succession. We invested ₹45L. Revenue declined 7% (₹6Cr) instead. HUMANCE ROI: 57×. The ₹20Cr difference is the return on this programme."',quality:'optimal',impact:+2.0,impactLabel:'+₹2.0Cr strategic standing',explanation:'<b>The 57× ROI is the most powerful number in the room.</b> The board invested ₹45L on an HR programme and got ₹20Cr in protected revenue. That number changes the entire relationship between the board and the people function — permanently. Every future people investment will be evaluated differently because this one was quantified.'},{text:'Present a detailed succession retrospective documenting all the activities, decisions, and cultural interventions of the past 18 months.',quality:'poor',impact:+0.1,impactLabel:'+₹0.1Cr documentation only',explanation:'<b>Activity documentation is the old HR.</b> The board doesn\'t need to know what you did. They need to know what you returned. The 57× HUMANCE ROI is the story. Everything else is supporting evidence.'}], pillar:'P5 · People P&L' },
+  ]
+}
+};
+
+// ─── SIM STATE ─────────────────────────────────────────────
+let currentSim = null;
+let currentStage = 0;
+let pplState = { p1:0, p2:0, p3:0, p4:0, cost:0 };
+let score = 0;
+let decisions = [];
+let activeSimKey = null;
+
+function startSim(key) {
+  activeSimKey = key;
+  currentSim = SIMS[key];
+  currentStage = 0;
+  score = 0;
+  decisions = [];
+  pplState = { ...currentSim.base };
+
+  document.getElementById('sim-library').style.display = 'none';
+  document.getElementById('sim-engine').classList.add('active');
+  document.getElementById('sim-title-tag').textContent = currentSim.title;
+  document.getElementById('sim-title-tag').className = 'tag ' + currentSim.tag;
+
+  updatePPLDisplay();
+  renderStage(0);
+}
+
+function exitSim() {
+  document.getElementById('sim-engine').classList.remove('active');
+  document.getElementById('sim-library').style.display = 'block';
+  document.getElementById('stages-wrap').innerHTML = '';
+}
+
+function exitResults() {
+  document.getElementById('results-screen').classList.remove('active');
+  document.getElementById('sim-library').style.display = 'block';
+}
+
+function retrySim() {
+  document.getElementById('results-screen').classList.remove('active');
+  startSim(activeSimKey);
+}
+
+function renderStage(idx) {
+  const s = currentSim.stages[idx];
+  const wrap = document.getElementById('stages-wrap');
+
+  wrap.innerHTML = `
+    <div class="stage active" id="stage-${idx}">
+      <div class="stage-context">
+        <div class="sc-context-label">${s.title}</div>
+        <div class="sc-situation">${s.context}</div>
+        <div class="sc-data-chips">
+          ${s.chips.map(c => `<span class="sc-chip ${c.cls}">${c.text}</span>`).join('')}
+        </div>
+      </div>
+      <div class="decision-stage">
+        <div class="ds-question">${s.question}</div>
+        <div class="ds-options">
+          ${s.options.map((o,i) => `
+            <button class="ds-option" onclick="chooseOption(${idx},${i})">
+              <div class="ds-opt-icon">${String.fromCharCode(65+i)}</div>
+              <div>
+                <div class="ds-opt-text">${o.text}</div>
+                <div class="ds-opt-impact" style="color:var(--text-mute)">${o.impactLabel}</div>
+              </div>
+            </button>
+          `).join('')}
+        </div>
+        <div class="consequence-panel" id="consequence-${idx}"></div>
+        <button class="next-stage-btn" id="next-btn-${idx}" onclick="nextStage(${idx})">
+          ${idx < currentSim.stages.length-1 ? 'Next stage →' : 'See your results →'}
+        </button>
+      </div>
+      <div style="margin-top:0.875rem"><span class="tag tag-muted">Pillar: ${s.pillar}</span></div>
+    </div>
+  `;
+
+  // Update progress bar
+  document.getElementById('stage-label').textContent = `Stage ${idx+1} of ${currentSim.stages.length}`;
+  for(let i=0;i<6;i++){
+    const dot = document.getElementById('sp-'+i);
+    dot.className = 'sp-dot' + (i<idx?' done':i===idx?' active':'');
+  }
+}
+
+function chooseOption(stageIdx, optIdx) {
+  const s = currentSim.stages[stageIdx];
+  const opt = s.options[optIdx];
+  const btns = document.querySelectorAll(`#stage-${stageIdx} .ds-option`);
+
+  btns.forEach((b,i) => {
+    b.disabled = true;
+    if (i === optIdx) {
+      b.classList.add('selected-' + opt.quality);
+      b.querySelector('.ds-opt-icon').textContent = opt.quality==='optimal'?'✓':opt.quality==='suboptimal'?'~':'×';
+    } else if (s.options[i].quality === 'optimal') {
+      b.classList.add('reveal-optimal');
+    }
+  });
+
+  // Update P&L
+  const pts = opt.quality==='optimal'?50:opt.quality==='suboptimal'?25:0;
+  score += pts;
+  document.getElementById('running-score').textContent = score;
+
+  if (opt.quality === 'optimal') pplState.p2 = Math.max(0, pplState.p2 + Math.abs(opt.impact));
+  else if (opt.quality === 'poor') pplState.cost = Math.max(0, pplState.cost + Math.abs(opt.impact));
+  else pplState.p1 = Math.max(0, pplState.p1 + opt.impact * 0.3);
+
+  updatePPLDisplay();
+
+  // Decision log
+  decisions.push({ stage: stageIdx+1, title: s.title.split('—')[1]?.trim() || s.title, choice: opt.text.substring(0,60)+'...', impact: opt.impactLabel, quality: opt.quality });
+  updateDecisionLog();
+
+  // Consequence panel
+  const panel = document.getElementById('consequence-'+stageIdx);
+  const color = opt.quality==='optimal'?'var(--green)':opt.quality==='suboptimal'?'var(--amber)':'var(--red)';
+  const icon = opt.quality==='optimal'?'✓':opt.quality==='suboptimal'?'~':'×';
+  panel.innerHTML = `
+    <div class="cp-header">
+      <div style="width:36px;height:36px;border-radius:50%;background:${color === 'var(--green)' ? 'var(--green-dim)' : color === 'var(--amber)' ? 'var(--amber-dim)' : 'var(--red-dim)'};display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:1rem;color:${color};flex-shrink:0">${icon}</div>
+      <div>
+        <div class="cp-impact-val" style="color:${color}">${opt.impactLabel}</div>
+        <div class="cp-impact-label">${pts} pts</div>
+      </div>
+    </div>
+    <div class="cp-explanation">${opt.explanation}</div>
+    <div class="cp-pillars-used"><span class="cp-pillar">${s.pillar}</span></div>
+  `;
+  panel.classList.add('open');
+  document.getElementById('next-btn-'+stageIdx).classList.add('visible');
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function nextStage(currentIdx) {
+  if (currentIdx < currentSim.stages.length - 1) {
+    renderStage(currentIdx + 1);
+    window.scrollTo({top:0, behavior:'smooth'});
+  } else {
+    showResults();
+  }
+}
+
+function updatePPLDisplay() {
+  const totRev = pplState.p1 + pplState.p2 + pplState.p3 + pplState.p4;
+  const net = totRev - pplState.cost;
+  const ratio = pplState.cost > 0 ? (totRev/pplState.cost).toFixed(1) : '0';
+
+  const fmtC = n => '₹' + n.toFixed(1) + 'Cr';
+  document.getElementById('ppl-p1').textContent = fmtC(pplState.p1);
+  document.getElementById('ppl-p2').textContent = fmtC(pplState.p2);
+  document.getElementById('ppl-p3').textContent = fmtC(pplState.p3);
+  document.getElementById('ppl-p4').textContent = fmtC(pplState.p4);
+  document.getElementById('ppl-cost').textContent = '-' + fmtC(pplState.cost);
+
+  const netEl = document.getElementById('ppl-net');
+  netEl.textContent = (net>=0?'+':'-') + fmtC(Math.abs(net));
+  netEl.style.color = net >= 0 ? 'var(--teal)' : 'var(--red)';
+
+  const ratioEl = document.getElementById('ppl-ratio-display');
+  ratioEl.textContent = ratio + 'x ratio';
+  ratioEl.style.color = parseFloat(ratio)>=2 ? 'var(--teal)' : parseFloat(ratio)>=1 ? 'var(--amber)' : 'var(--red)';
+}
+
+function updateDecisionLog() {
+  const log = document.getElementById('decision-log-sidebar');
+  log.innerHTML = decisions.slice(-3).reverse().map(d => `
+    <div style="padding:6px 8px;background:var(--bg3);border-radius:5px;border-left:2px solid ${d.quality==='optimal'?'var(--green)':d.quality==='suboptimal'?'var(--amber)':'var(--red)'}">
+      <div style="font-family:var(--font-mono);font-size:0.52rem;color:var(--text-mute);margin-bottom:2px">Stage ${d.stage}</div>
+      <div style="font-family:var(--font-mono);font-size:0.62rem;color:${d.quality==='optimal'?'var(--green)':d.quality==='suboptimal'?'var(--amber)':'var(--red)'}">${d.impact}</div>
+    </div>
+  `).join('');
+}
+
+function showResults() {
+  document.getElementById('sim-engine').classList.remove('active');
+  const results = document.getElementById('results-screen');
+  results.classList.add('active');
+
+  const maxScore = currentSim.stages.length * 50;
+  const pct = Math.round((score/maxScore)*100);
+  let grade, title, sub;
+  if(pct>=90){grade='A+';title='Revenue Fluent Master';sub='Every decision optimised for People Revenue. The board would give you a permanent seat at the strategy table.';}
+  else if(pct>=75){grade='A';title='Revenue Fluent Practitioner';sub='Strong Revenue Fluent thinking throughout. One or two decisions cost People Alpha that could have been generated.';}
+  else if(pct>=55){grade='B+';title='Revenue Aware HR Pro';sub='Solid instincts, but some decisions defaulted to traditional HR thinking when the Revenue Fluent path was available.';}
+  else if(pct>=40){grade='B';title='Developing Revenue Fluency';sub='Good foundation. The suboptimal decisions reveal where traditional HR intuition overrides Revenue Fluent analysis.';}
+  else{grade='C';title='Revenue Fluency in Progress';sub='The Revenue Fluent path was consistently different from your instincts. Study the explanations — each one is a lesson.';}
+
+  document.getElementById('result-grade').textContent = grade;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-sub').textContent = sub;
+
+  const totRev = pplState.p1 + pplState.p2 + pplState.p3 + pplState.p4;
+  const net = totRev - pplState.cost;
+  const ratio = pplState.cost > 0 ? (totRev/pplState.cost).toFixed(1) : '0';
+
+  document.getElementById('result-stats').innerHTML = `
+    <div class="stat-card teal"><div class="stat-label">Your Score</div><div class="stat-val teal">${score}/${maxScore}</div></div>
+    <div class="stat-card accent"><div class="stat-label">People ROI Ratio</div><div class="stat-val accent">${ratio}x</div></div>
+    <div class="stat-card ${net>=0?'teal':'red'}"><div class="stat-label">Net People ROI</div><div class="stat-val ${net>=0?'teal':'red'}">${net>=0?'+':''} ₹${Math.abs(net).toFixed(1)}Cr</div></div>
+  `;
+
+  const fC = n => '₹' + n.toFixed(1) + 'Cr';
+  document.getElementById('result-ppl').innerHTML = `
+    <div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-dim)">Total People Revenue</span><span style="font-family:var(--font-mono);color:var(--teal)">${fC(totRev)}</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-dim)">Total People Cost</span><span style="font-family:var(--font-mono);color:var(--red)">-${fC(pplState.cost)}</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:0.95rem;padding:10px 0;font-family:var(--font-head);font-weight:700"><span>Net People ROI</span><span style="color:${net>=0?'var(--teal)':'var(--red)'}">${net>=0?'+':'-'}${fC(Math.abs(net))}</span></div>
+  `;
+
+  document.getElementById('result-decision-log').innerHTML = decisions.map(d => `
+    <div class="dl-item">
+      <div class="dl-stage">Stage ${d.stage}</div>
+      <div class="dl-choice">${d.choice}</div>
+      <div class="dl-impact" style="color:${d.quality==='optimal'?'var(--green)':d.quality==='suboptimal'?'var(--amber)':'var(--red)'}">${d.impact}</div>
+    </div>
+  `).join('');
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
