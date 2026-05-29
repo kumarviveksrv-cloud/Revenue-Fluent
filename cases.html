@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+/* CASE LIBRARY */
+.case-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:2.5rem; }
+.case-card {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  overflow:hidden; cursor:pointer; transition:all 0.25s; position:relative;
+}
+.case-card:hover { border-color:var(--border-accent); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.35); }
+.case-card.active { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-dim); }
+.cc-banner { height:72px; display:flex; align-items:flex-end; padding:12px; position:relative; overflow:hidden; }
+.cc-country { position:absolute; top:10px; right:10px; font-size:1.4rem; }
+.cc-difficulty { font-family:var(--font-mono); font-size:0.55rem; padding:3px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.08em; }
+.diff-intermediate { background:var(--amber-dim); color:var(--amber); border:1px solid rgba(245,158,11,0.2); }
+.diff-advanced { background:var(--red-dim); color:var(--red); border:1px solid rgba(239,68,68,0.2); }
+.diff-expert { background:var(--purple-dim); color:var(--purple); border:1px solid rgba(168,85,247,0.2); }
+.cc-body { padding:1rem; }
+.cc-company { font-family:var(--font-head); font-weight:700; font-size:0.95rem; color:var(--text); margin-bottom:4px; }
+.cc-tagline { font-size:0.78rem; color:var(--text-dim); line-height:1.5; margin-bottom:10px; }
+.cc-pillars { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:10px; }
+.cc-pillar { font-family:var(--font-mono); font-size:0.55rem; padding:2px 7px; border-radius:3px; background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--text-mute); }
+.cc-stats { display:flex; gap:12px; }
+.cc-stat { display:flex; flex-direction:column; gap:2px; }
+.cc-stat-val { font-family:var(--font-mono); font-size:0.75rem; font-weight:500; color:var(--teal); }
+.cc-stat-label { font-family:var(--font-mono); font-size:0.5rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.06em; }
+
+/* CASE READER */
+.case-reader { display:none; }
+.case-reader.active { display:block; animation:pageIn 0.4s cubic-bezier(0.22,1,0.36,1); }
+.case-layout { display:grid; grid-template-columns:1fr 260px; gap:1.75rem; align-items:start; }
+.case-body { min-width:0; }
+.case-sticky { position:sticky; top:calc(29px+52px+1.5rem); }
+
+/* CHAPTER SYSTEM */
+.chapter { margin-bottom:0; }
+.chapter-header {
+  display:flex; align-items:center; gap:12px; padding:1.1rem 1.25rem;
+  background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  cursor:pointer; transition:all 0.15s; margin-bottom:8px; user-select:none;
+}
+.chapter-header:hover { border-color:var(--border-hi); }
+.chapter-header.unlocked { border-color:var(--border-accent); background:var(--accent-dim); }
+.chapter-header.completed { border-color:rgba(16,185,129,0.25); background:var(--green-dim); }
+.ch-num { width:28px; height:28px; border-radius:50%; background:var(--bg3); border:1px solid var(--border-hi); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:0.62rem; color:var(--text-mute); flex-shrink:0; }
+.chapter-header.unlocked .ch-num { background:var(--accent-dim); border-color:var(--border-accent); color:var(--accent2); }
+.chapter-header.completed .ch-num { background:var(--green); border-color:var(--green); color:#0B0D14; font-weight:700; }
+.ch-title { font-family:var(--font-head); font-weight:600; font-size:0.88rem; color:var(--text-dim); flex:1; }
+.chapter-header.unlocked .ch-title, .chapter-header.completed .ch-title { color:var(--text); }
+.ch-lock { font-size:0.7rem; color:var(--text-mute); }
+.chapter-header.completed .ch-lock { color:var(--green); }
+.chapter-content { display:none; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; margin-bottom:12px; animation:pageIn 0.3s ease; }
+.chapter-content.open { display:block; }
+.chapter-p { font-size:0.9rem; color:var(--text-dim); line-height:1.9; margin-bottom:1rem; }
+.chapter-p b { color:var(--text); font-weight:600; }
+.chapter-p em { color:var(--text-dim); font-style:italic; }
+
+/* DATA REVEAL */
+.data-reveal { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-sm); margin:1rem 0; overflow:hidden; }
+.dr-header { padding:0.875rem 1.25rem; display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+.dr-header:hover { background:rgba(255,255,255,0.02); }
+.dr-label { font-family:var(--font-mono); font-size:0.62rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.1em; }
+.dr-hint { font-family:var(--font-mono); font-size:0.6rem; color:var(--accent2); }
+.dr-body { padding:1rem 1.25rem; border-top:1px solid var(--border); display:none; animation:fadeIn 0.3s; }
+.dr-body.open { display:block; }
+.dr-stat-row { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:0.75rem; }
+.dr-stat { display:flex; flex-direction:column; gap:3px; }
+.dr-val { font-family:var(--font-head); font-weight:800; font-size:1.4rem; line-height:1; }
+.dr-lbl { font-family:var(--font-mono); font-size:0.52rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.08em; }
+.dr-finding { font-size:0.85rem; color:var(--text-dim); line-height:1.7; margin-top:0.5rem; }
+.dr-finding b { color:var(--text); font-weight:600; }
+
+/* DECISION POINT */
+.decision-point { background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(45,212,191,0.05)); border:1px solid var(--border-accent); border-radius:var(--radius); padding:1.5rem; margin:1.25rem 0; }
+.dp-q { font-family:var(--font-head); font-weight:700; font-size:1rem; color:var(--text); margin-bottom:1rem; letter-spacing:-0.01em; }
+.dp-options { display:flex; flex-direction:column; gap:8px; margin-bottom:1rem; }
+.dp-option { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px; cursor:pointer; transition:all 0.15s; font-size:0.85rem; color:var(--text-dim); text-align:left; width:100%; }
+.dp-option:hover { border-color:var(--border-hi); color:var(--text); }
+.dp-option.selected { border-color:var(--accent); background:var(--accent-dim); color:var(--text); }
+.dp-option.correct { border-color:var(--green); background:var(--green-dim); color:var(--text); }
+.dp-option.wrong { border-color:var(--red); background:var(--red-dim); opacity:0.6; }
+.dp-reveal { display:none; margin-top:1rem; padding:1rem; background:var(--bg3); border-radius:var(--radius-sm); font-size:0.85rem; color:var(--text-dim); line-height:1.7; border-left:2px solid var(--teal); }
+.dp-reveal.open { display:block; animation:fadeIn 0.3s; }
+.dp-reveal b { color:var(--teal); font-weight:600; }
+
+/* CHAPTER UNLOCK */
+.unlock-btn { width:100%; padding:0.875rem; background:var(--accent); color:#fff; border:none; border-radius:var(--radius-sm); font-family:var(--font-head); font-weight:600; font-size:0.88rem; cursor:pointer; transition:all 0.2s; margin-top:1rem; }
+.unlock-btn:hover { background:#5558E3; transform:translateY(-1px); }
+.unlock-btn:disabled { background:var(--bg4); color:var(--text-mute); cursor:not-allowed; transform:none; }
+
+/* SIDEBAR PROGRESS */
+.cs-chapter-nav { display:flex; flex-direction:column; gap:6px; }
+.csn-item { display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:6px; cursor:pointer; transition:all 0.15s; }
+.csn-item.locked { opacity:0.4; cursor:not-allowed; }
+.csn-num { width:20px; height:20px; border-radius:50%; background:var(--border-hi); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:0.55rem; color:var(--text-mute); flex-shrink:0; }
+.csn-item.done .csn-num { background:var(--green); color:#0B0D14; font-weight:700; }
+.csn-item.current .csn-num { background:var(--accent); color:#fff; }
+.csn-label { font-size:0.78rem; color:var(--text-mute); }
+.csn-item.current .csn-label { color:var(--text); }
+.csn-item.done .csn-label { color:var(--text-dim); }
+.score-display { text-align:center; padding:1rem; }
+.score-val { font-family:var(--font-head); font-weight:800; font-size:2.5rem; color:var(--accent2); line-height:1; }
+.score-label { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap" style="max-width:1100px;padding-bottom:4rem">
+
+  <!-- LIBRARY VIEW -->
+  <div id="library-view">
+    <div class="anim-slide" style="margin-bottom:1.75rem">
+      <div class="page-eyebrow">Case Studies</div>
+      <h1 class="page-title">Walk through real <em>org decisions.</em></h1>
+      <p class="page-desc" style="max-width:620px">Three interactive case studies, each built from the scenarios you know. Work through the analysis chapter by chapter, make decisions at key moments, and see how the Revenue Fluent framework diagnoses — and solves — real business problems.</p>
+    </div>
+    <div class="case-grid">
+
+      <div class="case-card" onclick="openCase('techvelocity')">
+        <div class="cc-banner" style="background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(45,212,191,0.1))">
+          <div class="cc-country">🇮🇳</div>
+          <span class="cc-difficulty diff-intermediate">Intermediate</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-company">TechVelocity Inc.</div>
+          <div class="cc-tagline">A VP Sales hire triggers a trust collapse. Two AEs exit. ₹1.1Cr revenue miss. How do you diagnose it?</div>
+          <div class="cc-pillars"><span class="cc-pillar">P1 Revenue Connect</span><span class="cc-pillar">P2 People Alpha</span></div>
+          <div class="cc-stats">
+            <div class="cc-stat"><div class="cc-stat-val">5</div><div class="cc-stat-label">chapters</div></div>
+            <div class="cc-stat"><div class="cc-stat-val">4</div><div class="cc-stat-label">decisions</div></div>
+            <div class="cc-stat"><div class="cc-stat-val">~20 min</div><div class="cc-stat-label">walkthrough</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card" onclick="openCase('sterling')">
+        <div class="cc-banner" style="background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(249,115,22,0.1))">
+          <div class="cc-country">🇬🇧</div>
+          <span class="cc-difficulty diff-advanced">Advanced</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-company">Sterling Consulting Group</div>
+          <div class="cc-tagline">Four simultaneous promotions destroy People Alpha. Utilisation crashes. £2.4M miss. The Promotion Alpha trap.</div>
+          <div class="cc-pillars"><span class="cc-pillar">P2 People Alpha</span><span class="cc-pillar">P3 Architecture</span></div>
+          <div class="cc-stats">
+            <div class="cc-stat"><div class="cc-stat-val">5</div><div class="cc-stat-label">chapters</div></div>
+            <div class="cc-stat"><div class="cc-stat-val">4</div><div class="cc-stat-label">decisions</div></div>
+            <div class="cc-stat"><div class="cc-stat-val">~22 min</div><div class="cc-stat-label">walkthrough</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card" onclick="openCase('mehta')">
+        <div class="cc-banner" style="background:linear-gradient(135deg,rgba(168,85,247,0.2),rgba(99,102,241,0.1))">
+          <div class="cc-country">🇮🇳</div>
+          <span class="cc-difficulty diff-expert">Expert</span>
+        </div>
+        <div class="cc-body">
+          <div class="cc-company">Mehta &amp; Sons Enterprises</div>
+          <div class="cc-tagline">Founder succession destroys ₹12.1Cr in HUMANCE. Six senior exits. Revenue falls 31%. The hardest diagnosis.</div>
+          <div class="cc-pillars"><span class="cc-pillar">P4 HUMANCE</span><span class="cc-pillar">P5 People P&L</span></div>
+          <div class="cc-stats">
+            <div class="cc-stat"><div class="cc-stat-val">5</div><div class="cc-stat-label">chapters</div></div>
+            <div class="cc-stat"><div class="cc-stat-val">4</div><div class="cc-stat-label">decisions</div></div>
+            <div class="cc-stat"><div class="cc-stat-val">~25 min</div><div class="cc-stat-label">walkthrough</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TECHVELOCITY CASE -->
+  <div class="case-reader" id="case-techvelocity">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem">
+      <button onclick="closeCase()" class="btn btn-ghost btn-sm">← All cases</button>
+      <div style="flex:1"></div>
+      <span class="tag tag-accent">🇮🇳 TechVelocity Inc.</span>
+      <span class="tag tag-muted">Intermediate</span>
+    </div>
+    <div class="case-layout">
+      <div class="case-body">
+        <div class="page-eyebrow">Case Study 1</div>
+        <h1 class="page-title" style="margin-bottom:0.5rem">The VP Hire That <em>Cost ₹1.1Cr</em></h1>
+        <p class="page-desc" style="margin-bottom:2rem">Work through TechVelocity's attrition crisis chapter by chapter. Analyse the data, diagnose the causes, and decide what you would have done differently.</p>
+
+        <!-- CHAPTER 1 -->
+        <div class="chapter">
+          <div class="chapter-header unlocked" onclick="toggleChapter('tv-c1')">
+            <div class="ch-num">1</div>
+            <div class="ch-title">The situation: Q2 numbers are wrong</div>
+            <div class="ch-lock">▼</div>
+          </div>
+          <div class="chapter-content open" id="tv-c1">
+            <div class="chapter-p">TechVelocity Inc. is a Series B SaaS startup based in Bengaluru. 50 employees. Annual revenue target: ₹84Cr. The Q2 board review has flagged a ₹1.1Cr revenue miss — the first miss in the company's three-year history.</div>
+            <div class="chapter-p">The CEO calls the VP HR into her office. She wants an explanation. The VP Sales joined 4 months ago. Two of the senior Account Executives left in the same period. The pipeline has a gap. <b>The CEO's question: "Is this a people problem or a market problem?"</b></div>
+            <div class="data-reveal">
+              <div class="dr-header" onclick="toggleReveal(this)">
+                <span class="dr-label">Q2 People Data</span>
+                <span class="dr-hint">Click to reveal →</span>
+              </div>
+              <div class="dr-body">
+                <div class="dr-stat-row">
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">7</div><div class="dr-lbl">exits this year</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--amber)">₹14L</div><div class="dr-lbl">avg salary</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">141%</div><div class="dr-lbl">ATC%</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--teal)">60.5%</div><div class="dr-lbl">ESR</div></div>
+                </div>
+                <div class="dr-finding">ATC% of 141% means the company is spending ₹1.41 in replacement cost for every ₹1 of annual revenue. The two AE exits alone represent <b>₹28L in direct replacement cost + ₹38L in revenue capacity gap</b> — a total of ₹66L before productivity drag is counted.</div>
+              </div>
+            </div>
+            <div class="decision-point">
+              <div class="dp-q">The CEO asks: "Is this a people problem or a market problem?" What's your diagnosis?</div>
+              <div class="dp-options">
+                <button class="dp-option" onclick="selectOption(this,'tv-d1','wrong')">Market problem — Q2 is a seasonal dip. The pipeline miss is a demand issue, not a people issue.</button>
+                <button class="dp-option" onclick="selectOption(this,'tv-d1','correct')">People problem — the ATC% and ESR data show the revenue miss has a clear people signature at 88.6% attribution confidence.</button>
+                <button class="dp-option" onclick="selectOption(this,'tv-d1','wrong')">Both equally — impossible to separate people and market factors without more data.</button>
+              </div>
+              <div class="dp-reveal" id="tv-d1">
+                <b>Correct answer: People problem — attribution confidence 88.6%.</b> The ATC% of 141% and ESR of 60.5% (against an 80% benchmark) give a clear people signature. The timing correlation — VP hire, 2 AE exits, pipeline gap — further confirms causation. Revenue Connect calculates the attribution confidence at 88.6%, which is high enough to act on decisively.
+              </div>
+            </div>
+            <button class="unlock-btn" onclick="unlockChapter('tv-c2', this)">Continue to Chapter 2 →</button>
+          </div>
+        </div>
+
+        <!-- CHAPTER 2 -->
+        <div class="chapter">
+          <div class="chapter-header" id="tv-c2-header" onclick="toggleChapter('tv-c2')">
+            <div class="ch-num">2</div>
+            <div class="ch-title">The diagnosis: what Revenue Connect reveals</div>
+            <div class="ch-lock">🔒</div>
+          </div>
+          <div class="chapter-content" id="tv-c2">
+            <div class="chapter-p">Running the Revenue Connect analysis on TechVelocity's Q2 data reveals a three-layer cost structure that the initial ₹1.1Cr revenue miss only partially captures.</div>
+            <div class="data-reveal">
+              <div class="dr-header" onclick="toggleReveal(this)">
+                <span class="dr-label">Full Revenue Connect Breakdown</span>
+                <span class="dr-hint">Click to reveal →</span>
+              </div>
+              <div class="dr-body">
+                <div class="dr-stat-row">
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">₹42L</div><div class="dr-lbl">Replacement cost</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--amber)">₹38L</div><div class="dr-lbl">Revenue capacity lost</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--purple)">₹24L</div><div class="dr-lbl">Productivity drag</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--teal)">₹18L</div><div class="dr-lbl">Knowledge loss</div></div>
+                </div>
+                <div class="dr-finding">Total Revenue at Risk: <b>₹1.22Cr</b>. The ₹1.1Cr revenue miss is the visible tip. The full people-attributed revenue impact is ₹1.22Cr — and if the ESR doesn't recover, this compounds quarterly.</div>
+              </div>
+            </div>
+            <div class="chapter-p">The TDF (Talent Drag Factor) analysis adds another dimension: with 7 exits this year and an average ramp time of 4 months, TechVelocity has been running at approximately 8% below full revenue capacity for most of the year. <b>That's ₹6.7Cr of annual revenue permanently impaired by transition drag</b> — a number that never appeared on any management report.</div>
+            <div class="decision-point">
+              <div class="dp-q">The board wants to know the root cause. What does the data point to?</div>
+              <div class="dp-options">
+                <button class="dp-option" onclick="selectOption(this,'tv-d2','wrong')">Poor hiring process — the company hired the wrong VP Sales who triggered the exits.</button>
+                <button class="dp-option" onclick="selectOption(this,'tv-d2','wrong')">Compensation problem — the AEs left for better offers. Pay market rate and solve it.</button>
+                <button class="dp-option" onclick="selectOption(this,'tv-d2','correct')">Trust event — the VP hire disrupted existing team trust, triggering a cascade. ATC% and ESR both moved in the same quarter the VP joined. This is a HUMANCE event masked as attrition.</button>
+              </div>
+              <div class="dp-reveal" id="tv-d2">
+                <b>Correct: Trust event — a HUMANCE signal masked as attrition.</b> The timing tells the story: both AEs left within 8 weeks of the VP joining. Their exit interviews cited "direction" and "management style" — classic Trust Capital erosion. This isn't a compensation problem or a bad hire problem. It's a culture disruption that destroyed belonging and triggered exits. P4 (HUMANCE) is the correct diagnostic lens.
+              </div>
+            </div>
+            <button class="unlock-btn" onclick="unlockChapter('tv-c3', this)">Continue to Chapter 3 →</button>
+          </div>
+        </div>
+
+        <!-- CHAPTER 3 -->
+        <div class="chapter">
+          <div class="chapter-header" id="tv-c3-header" onclick="toggleChapter('tv-c3')">
+            <div class="ch-num">3</div>
+            <div class="ch-title">The intervention: what should have happened</div>
+            <div class="ch-lock">🔒</div>
+          </div>
+          <div class="chapter-content" id="tv-c3">
+            <div class="chapter-p">Knowing what Revenue Connect reveals, let's rewind. What would a Revenue Fluent HR professional have done differently — and at what stage?</div>
+            <div class="chapter-p"><b>Stage 1: At VP hire.</b> A Revenue Fluent practitioner would have calculated the HUMANCE exposure before the hire: how much Trust Capital was embedded in the existing AE team's relationship with their previous manager? IRD score: high. RBC (Relationship Bridge Coverage): low — no succession plan for the team leadership relationship. This alone flags the hire as high-HUMANCE-risk and triggers a 90-day trust onboarding protocol.</div>
+            <div class="chapter-p"><b>Stage 2: At the first flight-risk signal.</b> The ESR began dropping in Month 2 after the VP joined — from 85% to 72%. A Revenue Fluent practitioner tracks ESR monthly and flags any drop above 8 points in a single period as a Culture Yield erosion signal. The intervention window was there. It wasn't used.</div>
+            <div class="data-reveal">
+              <div class="dr-header" onclick="toggleReveal(this)">
+                <span class="dr-label">What early intervention would have cost vs what silence cost</span>
+                <span class="dr-hint">Click to reveal →</span>
+              </div>
+              <div class="dr-body">
+                <div class="dr-stat-row">
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--teal)">₹6L</div><div class="dr-lbl">Cost of early intervention</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">₹1.22Cr</div><div class="dr-lbl">Cost of inaction</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--amber)">20×</div><div class="dr-lbl">ROI of acting early</div></div>
+                </div>
+                <div class="dr-finding">A structured 90-day onboarding programme for the VP + a culture health check at Month 2 would have cost approximately ₹6L. The inaction cost ₹1.22Cr. <b>Revenue Connect makes this calculation possible before the decision — not after.</b></div>
+              </div>
+            </div>
+            <button class="unlock-btn" onclick="unlockChapter('tv-c4', this)">Continue to Chapter 4 →</button>
+          </div>
+        </div>
+
+        <!-- CHAPTER 4 -->
+        <div class="chapter">
+          <div class="chapter-header" id="tv-c4-header" onclick="toggleChapter('tv-c4')">
+            <div class="ch-num">4</div>
+            <div class="ch-title">The People P&L: assembling the full picture</div>
+            <div class="ch-lock">🔒</div>
+          </div>
+          <div class="chapter-content" id="tv-c4">
+            <div class="chapter-p">Now let's assemble TechVelocity's full People P&L for the year. The Revenue Connect analysis feeds P1. The alpha analysis feeds P2. The HUMANCE destruction feeds P4.</div>
+            <div class="data-reveal">
+              <div class="dr-header" onclick="toggleReveal(this)">
+                <span class="dr-label">TechVelocity People P&L — Annual</span>
+                <span class="dr-hint">Click to reveal →</span>
+              </div>
+              <div class="dr-body">
+                <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">PEOPLE REVENUE</div>
+                <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px">
+                  <div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-dim)">P1 Revenue Protected</span><span style="font-family:var(--font-mono);color:var(--teal)">+₹8.3Cr</span></div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-dim)">P2 People Alpha</span><span style="font-family:var(--font-mono);color:var(--teal)">+₹9.1Cr</span></div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-dim)">P3 Architecture Value</span><span style="font-family:var(--font-mono);color:var(--teal)">+₹5.1Cr</span></div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:5px 0"><span style="color:var(--text-dim)">P4 HUMANCE (net of destruction)</span><span style="font-family:var(--font-mono);color:var(--amber)">+₹3.4Cr</span></div>
+                </div>
+                <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--red);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">PEOPLE COST</div>
+                <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px">
+                  <div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-dim)">Payroll</span><span style="font-family:var(--font-mono);color:var(--red)">-₹14.4Cr</span></div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.82rem;padding:5px 0"><span style="color:var(--text-dim)">Attrition Leakage (inc. VP hire event)</span><span style="font-family:var(--font-mono);color:var(--red)">-₹2.1Cr</span></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border-hi)">
+                  <span style="font-family:var(--font-head);font-weight:700;color:var(--text)">Net People ROI</span>
+                  <span style="font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--teal)">+₹9.4Cr</span>
+                </div>
+                <div style="margin-top:8px;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">People ROI Ratio: 1.6x — positive but below 2x. The VP hire event cost TechVelocity 0.7x on the ratio.</div>
+              </div>
+            </div>
+            <div class="decision-point">
+              <div class="dp-q">The People P&L shows a 1.6x ROI. The CEO asks: "Is that good?" What's the right answer?</div>
+              <div class="dp-options">
+                <button class="dp-option" onclick="selectOption(this,'tv-d4','wrong')">Yes — positive ROI means HR is creating value. The board should be satisfied.</button>
+                <button class="dp-option" onclick="selectOption(this,'tv-d4','correct')">Positive but not healthy — 1.6x is above breakeven but below the 2x threshold. The VP hire event cost 0.7x on the ratio. Without it, TechVelocity would be at 2.3x. That's the number to present alongside the current figure.</button>
+                <button class="dp-option" onclick="selectOption(this,'tv-d4','wrong')">The ratio doesn't matter — absolute Net People ROI of ₹9.4Cr is what counts, not the ratio.</button>
+              </div>
+              <div class="dp-reveal" id="tv-d4">
+                <b>Correct: Positive but not healthy — and the delta is the story.</b> 1.6x is above breakeven. But a Revenue Fluent HR practitioner presents the full picture: "Without the VP hire HUMANCE event, our ratio would be 2.3x. We lost 0.7x — ₹5.9Cr in People Revenue — from one decision. Here's the intervention that prevents it next time." That's not just a P&L. That's a strategic recommendation backed by numbers.
+              </div>
+            </div>
+            <button class="unlock-btn" onclick="unlockChapter('tv-c5', this)">Continue to Chapter 5 →</button>
+          </div>
+        </div>
+
+        <!-- CHAPTER 5 -->
+        <div class="chapter">
+          <div class="chapter-header" id="tv-c5-header" onclick="toggleChapter('tv-c5')">
+            <div class="ch-num">5</div>
+            <div class="ch-title">The verdict: what a Revenue Fluent HR pro does differently</div>
+            <div class="ch-lock">🔒</div>
+          </div>
+          <div class="chapter-content" id="tv-c5">
+            <div class="chapter-p">You've worked through the TechVelocity case. Here's the complete picture of what a Revenue Fluent practitioner does differently at each stage — and why it matters.</div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin:1.25rem 0">
+              <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:1rem;border-left:2px solid var(--accent)">
+                <div style="font-family:var(--font-head);font-weight:600;font-size:0.88rem;color:var(--text);margin-bottom:4px">Before the VP hire</div>
+                <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.65">Calculates HUMANCE exposure of existing team. Identifies high IRD concentration around team-manager relationships. Triggers 90-day trust onboarding protocol as a condition of the hire.</div>
+              </div>
+              <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:1rem;border-left:2px solid var(--amber)">
+                <div style="font-family:var(--font-head);font-weight:600;font-size:0.88rem;color:var(--text);margin-bottom:4px">Month 2: ESR drops 8 points</div>
+                <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.65">Revenue Fluent practitioner flags this as a Culture Yield erosion signal and initiates a culture health intervention before the exits happen. Cost: ₹6L. Return: ₹1.22Cr of prevented damage.</div>
+              </div>
+              <div style="background:var(--bg3);border-radius:var(--radius-sm);padding:1rem;border-left:2px solid var(--red)">
+                <div style="font-family:var(--font-head);font-weight:600;font-size:0.88rem;color:var(--text);margin-bottom:4px">Post-exit: presenting to the board</div>
+                <div style="font-size:0.82rem;color:var(--text-dim);line-height:1.65">Presents the full People P&L showing 1.6x actual vs 2.3x potential. Quantifies the ₹5.9Cr cost of the event. Proposes the intervention protocol for future senior hires. Turns a miss into a methodology.</div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(45,212,191,0.05));border:1px solid var(--border-accent);border-radius:var(--radius);padding:1.5rem;text-align:center">
+              <div style="font-family:var(--font-head);font-weight:800;font-size:1.2rem;color:var(--accent2);margin-bottom:6px">Case complete. Score: 3/4 decisions</div>
+              <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:1.25rem">You've completed the TechVelocity case study. Ready for the next one?</div>
+              <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+                <button onclick="closeCase()" class="btn btn-ghost btn-sm">← Case library</button>
+                <button onclick="openCase('sterling')" class="btn btn-primary btn-sm">Next case: Sterling →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- STICKY SIDEBAR -->
+      <div class="case-sticky">
+        <div class="ls-card">
+          <div class="mono-label" style="margin-bottom:10px">Case Progress</div>
+          <div class="cs-chapter-nav" id="tv-chapter-nav">
+            <div class="csn-item current" onclick="scrollToChapter('tv-c1')"><div class="csn-num">1</div><div class="csn-label">The situation</div></div>
+            <div class="csn-item locked" id="tv-nav-2"><div class="csn-num">2</div><div class="csn-label">The diagnosis</div></div>
+            <div class="csn-item locked" id="tv-nav-3"><div class="csn-num">3</div><div class="csn-label">The intervention</div></div>
+            <div class="csn-item locked" id="tv-nav-4"><div class="csn-num">4</div><div class="csn-label">The P&L</div></div>
+            <div class="csn-item locked" id="tv-nav-5"><div class="csn-num">5</div><div class="csn-label">The verdict</div></div>
+          </div>
+        </div>
+        <div class="ls-card">
+          <div class="mono-label" style="margin-bottom:8px">Pillars used</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <a href="p1-tool.html" style="text-decoration:none"><div style="background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;padding:8px 10px;font-size:0.78rem;color:var(--accent2)">⟳ P1 Revenue Connect</div></a>
+            <a href="p4-tool.html" style="text-decoration:none"><div style="background:var(--purple-dim);border:1px solid rgba(168,85,247,0.2);border-radius:6px;padding:8px 10px;font-size:0.78rem;color:var(--purple)">◎ P4 HUMANCE</div></a>
+            <a href="p5-tool.html" style="text-decoration:none"><div style="background:var(--green-dim);border:1px solid rgba(16,185,129,0.2);border-radius:6px;padding:8px 10px;font-size:0.78rem;color:var(--green)">◑ P5 People P&L</div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STERLING CASE (abbreviated structure — same system) -->
+  <div class="case-reader" id="case-sterling">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem">
+      <button onclick="closeCase()" class="btn btn-ghost btn-sm">← All cases</button>
+      <div style="flex:1"></div>
+      <span class="tag tag-amber">🇬🇧 Sterling Consulting Group</span>
+      <span class="tag tag-muted">Advanced</span>
+    </div>
+    <div class="case-layout">
+      <div class="case-body">
+        <div class="page-eyebrow">Case Study 2</div>
+        <h1 class="page-title" style="margin-bottom:0.5rem">The Promotions That <em>Cost £2.4M</em></h1>
+        <p class="page-desc" style="margin-bottom:2rem">Sterling Consulting promoted four senior consultants simultaneously. Billable utilisation crashed. Revenue missed. Work through the People Alpha diagnosis.</p>
+        <div class="chapter">
+          <div class="chapter-header unlocked" onclick="toggleChapter('sc-c1')">
+            <div class="ch-num">1</div><div class="ch-title">The situation: utilisation has collapsed</div><div class="ch-lock">▼</div>
+          </div>
+          <div class="chapter-content open" id="sc-c1">
+            <div class="chapter-p">Sterling Consulting Group is a 50-person management consulting firm in London. Their revenue model is simple: billable hours multiplied by day rate. For four years, utilisation had sat at a stable 78%. Then Q3 arrived and it was 60%.</div>
+            <div class="chapter-p">In the same quarter, four senior consultants had been promoted to Associate Director. The promotions were celebrated. The firm's Managing Partner described them as "overdue recognition of outstanding performers." <b>Nobody connected the promotions to the utilisation drop.</b></div>
+            <div class="data-reveal">
+              <div class="dr-header" onclick="toggleReveal(this)">
+                <span class="dr-label">Sterling Q3 People Alpha data</span>
+                <span class="dr-hint">Click to reveal →</span>
+              </div>
+              <div class="dr-body">
+                <div class="dr-stat-row">
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">62%</div><div class="dr-lbl">Avg readiness score</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">-8%</div><div class="dr-lbl">Promotion Alpha</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">78→60%</div><div class="dr-lbl">Utilisation drop</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">£2.4M</div><div class="dr-lbl">Revenue miss</div></div>
+                </div>
+                <div class="dr-finding">All four promotions were made at an average readiness score of 62% — below the 70% threshold. Promotion Alpha: -8%. The revenue consequence of 4 under-ready promotions managing teams for the first time: <b>£2.4M in annual billing capacity destroyed.</b></div>
+              </div>
+            </div>
+            <div class="decision-point">
+              <div class="dp-q">The Managing Partner says the promotions were earned. Is he wrong?</div>
+              <div class="dp-options">
+                <button class="dp-option" onclick="selectOption(this,'sc-d1','wrong')">Yes — the promotions should be reversed. The people weren't ready.</button>
+                <button class="dp-option" onclick="selectOption(this,'sc-d1','correct')">Not wrong about the people — wrong about the timing. All four consultants are high-performers. The problem is readiness, not quality. They should have been promoted 2 quarters later with 6 months of management preparation. The recognition was right; the timing generated negative alpha.</button>
+                <button class="dp-option" onclick="selectOption(this,'sc-d1','wrong')">The promotions are unrelated to utilisation — it's a market slowdown affecting billable hours.</button>
+              </div>
+              <div class="dp-reveal" id="sc-d1">
+                <b>Correct: right people, wrong timing — readiness was at 62%, below the 70% threshold.</b> People Alpha doesn't say don't promote these people. It says don't promote them before they're ready. 8 percentage points below threshold generated -8% Promotion Alpha and destroyed £2.4M in annual revenue. The same promotions 2 quarters later, with preparation, would have generated positive alpha.
+              </div>
+            </div>
+            <button class="unlock-btn" onclick="unlockChapter('sc-c2', this)">Continue →</button>
+          </div>
+        </div>
+        <div class="chapter">
+          <div class="chapter-header" id="sc-c2-header" onclick="toggleChapter('sc-c2')">
+            <div class="ch-num">2</div><div class="ch-title">The recovery: restoring People Alpha</div><div class="ch-lock">🔒</div>
+          </div>
+          <div class="chapter-content" id="sc-c2">
+            <div class="chapter-p">The question is now: what does a Revenue Fluent practitioner do to restore People Alpha after four simultaneous under-ready promotions?</div>
+            <div class="chapter-p">The four newly promoted ADs aren't failing — they're struggling in specific dimensions: <b>client management at senior level</b> (all four), <b>commercial negotiation</b> (three of four), and <b>team performance management</b> (two of four). These are identifiable skills gaps, not character flaws.</div>
+            <div class="chapter-p">A targeted 3-month accelerated readiness programme — focused on the specific gaps — would cost approximately £60K. The revenue recovery from restoring utilisation from 60% to 72% (not all the way to 78% — realistic for mid-year) on a £12M revenue base: <b>+£1.44M.</b> L&D Alpha on this investment: 24×.</div>
+            <div class="decision-point">
+              <div class="dp-q">What's the correct intervention proposal to bring to the Managing Partner?</div>
+              <div class="dp-options">
+                <button class="dp-option" onclick="selectOption(this,'sc-d2','wrong')">Hire two senior ADs externally to stabilise the teams while the four develop into their roles over 12 months.</button>
+                <button class="dp-option" onclick="selectOption(this,'sc-d2','correct')">A targeted £60K readiness acceleration programme for the four ADs. Present it as an L&D Alpha investment with a 24× projected return — not as remediation. "We promoted fast; now we equip fast."</button>
+                <button class="dp-option" onclick="selectOption(this,'sc-d2','wrong')">Roll back the promotions and rerun them with a 6-month preparation programme from scratch.</button>
+              </div>
+              <div class="dp-reveal" id="sc-d2">
+                <b>Correct: targeted L&D Alpha investment framed as acceleration, not remediation.</b> Rolling back promotions destroys morale and trust. External hires are expensive and slow. The £60K programme addresses the specific gaps identified by the readiness analysis and is presented to the MP as a business case with a 24× return — which it is. The People Alpha lens converts an embarrassing situation into a smart investment.
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(99,102,241,0.04));border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius);padding:1.5rem;margin-top:1.25rem;text-align:center">
+              <div style="font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--amber);margin-bottom:6px">Sterling Case complete — 2 of 2 decisions</div>
+              <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:1.25rem">Ready for the expert-level case?</div>
+              <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+                <button onclick="closeCase()" class="btn btn-ghost btn-sm">← Case library</button>
+                <button onclick="openCase('mehta')" class="btn btn-primary btn-sm">Expert case: Mehta & Sons →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-sticky">
+        <div class="ls-card">
+          <div class="mono-label" style="margin-bottom:10px">Pillars used</div>
+          <a href="p2-tool.html" style="text-decoration:none"><div style="background:var(--teal-dim);border:1px solid rgba(45,212,191,0.2);border-radius:6px;padding:8px 10px;font-size:0.78rem;color:var(--teal);margin-bottom:6px">◈ P2 People Alpha</div></a>
+          <a href="p3-tool.html" style="text-decoration:none"><div style="background:var(--amber-dim);border:1px solid rgba(245,158,11,0.2);border-radius:6px;padding:8px 10px;font-size:0.78rem;color:var(--amber)">⬡ P3 Team Architecture</div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEHTA CASE -->
+  <div class="case-reader" id="case-mehta">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem">
+      <button onclick="closeCase()" class="btn btn-ghost btn-sm">← All cases</button>
+      <div style="flex:1"></div>
+      <span class="tag tag-purple">🇮🇳 Mehta &amp; Sons Enterprises</span>
+      <span class="tag tag-muted">Expert</span>
+    </div>
+    <div class="case-layout">
+      <div class="case-body">
+        <div class="page-eyebrow">Case Study 3 — Expert</div>
+        <h1 class="page-title" style="margin-bottom:0.5rem">The HUMANCE <em>Implosion</em></h1>
+        <p class="page-desc" style="margin-bottom:2rem">The hardest case in the platform. A succession event destroys ₹12.1Cr in HUMANCE across four asset classes. Work through the diagnosis and build the recovery People P&L.</p>
+        <div class="chapter">
+          <div class="chapter-header unlocked" onclick="toggleChapter('mt-c1')">
+            <div class="ch-num">1</div><div class="ch-title">The situation: revenue fell 31% and nobody knows why</div><div class="ch-lock">▼</div>
+          </div>
+          <div class="chapter-content open" id="mt-c1">
+            <div class="chapter-p">Mehta & Sons Enterprises is a 50-person industrial components business in Hyderabad, operating for 35 years. Annual revenue: ₹84Cr. Rajesh Mehta, the founder, retired 18 months ago. His son Arjun took over. Revenue is now ₹58Cr — a 31% decline.</div>
+            <div class="chapter-p">The board is asking what happened. There is no market explanation — the sector has grown 4% in the same period. Three competitors have grown. <b>Mehta & Sons is the only company in their peer group to have declined. And nobody has connected the revenue drop to the succession event.</b></div>
+            <div class="data-reveal">
+              <div class="dr-header" onclick="toggleReveal(this)">
+                <span class="dr-label">Mehta & Sons HUMANCE audit</span>
+                <span class="dr-hint">Click to reveal →</span>
+              </div>
+              <div class="dr-body">
+                <div class="dr-stat-row">
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">6</div><div class="dr-lbl">Senior exits in 18M</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">18%</div><div class="dr-lbl">IRD score (critical)</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">20%</div><div class="dr-lbl">RBC score (critical)</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">₹12.1Cr</div><div class="dr-lbl">HUMANCE destroyed</div></div>
+                </div>
+                <div class="dr-finding">The succession event destroyed HUMANCE across all four asset classes: Trust Capital ₹2.8Cr (Rajesh's relationships proved non-transferable), Culture Yield ₹1.1Cr (ESR 94%→61%), Signal Intelligence ₹3.7Cr (early-warning network left with 6 seniors), Belonging Premium ₹4.5Cr (discretionary effort collapsed). <b>Total: ₹12.1Cr — 14.4% of annual revenue — destroyed in 18 months.</b></div>
+              </div>
+            </div>
+            <div class="decision-point">
+              <div class="dp-q">The board asks: is the revenue decline recoverable? What's the honest answer?</div>
+              <div class="dp-options">
+                <button class="dp-option" onclick="selectOption(this,'mt-d1','wrong')">Yes, fully recoverable — hire a new sales team, launch new marketing, fix the pipeline.</button>
+                <button class="dp-option" onclick="selectOption(this,'mt-d1','correct')">Partially recoverable over 3–5 years. Trust Capital and Signal Intelligence are destroyed — they require time to rebuild, not money. Culture Yield can be rebuilt faster with the right interventions. Belonging Premium requires consistent culture investment. There is no quick fix for HUMANCE destruction of this scale.</button>
+                <button class="dp-option" onclick="selectOption(this,'mt-d1','wrong')">Not recoverable — the business model is broken and should be restructured or sold.</button>
+              </div>
+              <div class="dp-reveal" id="mt-d1">
+                <b>Correct: partially recoverable, 3–5 year horizon.</b> This is the hardest truth HUMANCE delivers. Trust Capital is relationship-based — it is rebuilt through Arjun demonstrating sustained reliability over time, not through a programme or a spend. Signal Intelligence rebuilds as new senior people develop tenure. The honest answer to the board is: "We have a 3–5 year recovery road, not a 1-year fix. Here's what it looks like and what it costs to accelerate."
+              </div>
+            </div>
+            <button class="unlock-btn" onclick="unlockChapter('mt-c2', this)">Continue →</button>
+          </div>
+        </div>
+        <div class="chapter">
+          <div class="chapter-header" id="mt-c2-header" onclick="toggleChapter('mt-c2')">
+            <div class="ch-num">2</div><div class="ch-title">The recovery People P&L: what should have been done</div><div class="ch-lock">🔒</div>
+          </div>
+          <div class="chapter-content" id="mt-c2">
+            <div class="chapter-p">The question is no longer "what happened?" — that's answered. The question is: <b>what would a Revenue Fluent practitioner have done before the succession that would have protected the HUMANCE?</b></div>
+            <div class="chapter-p"><b>Before the handover:</b> A HUMANCE audit would have flagged IRD of 18% and RBC of 20% as critical — Rajesh's relationships were dangerously concentrated with no succession coverage. The intervention: a structured 24-month succession programme where Rajesh and Arjun jointly managed key client relationships, gradually transferring trust before the handover.</div>
+            <div class="chapter-p"><b>The cost of a proper succession programme:</b> ₹45L over 24 months — consulting support, structured client introductions, leadership coaching. <b>The cost of not doing it: ₹12.1Cr in HUMANCE destruction and ₹26Cr in annual revenue loss.</b></div>
+            <div class="data-reveal">
+              <div class="dr-header" onclick="toggleReveal(this)">
+                <span class="dr-label">Prevention vs damage: the HUMANCE ROI</span>
+                <span class="dr-hint">Click to reveal →</span>
+              </div>
+              <div class="dr-body">
+                <div class="dr-stat-row">
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--teal)">₹45L</div><div class="dr-lbl">Prevention cost</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">₹12.1Cr</div><div class="dr-lbl">HUMANCE destroyed</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--red)">₹26Cr</div><div class="dr-lbl">Annual revenue lost</div></div>
+                  <div class="dr-stat"><div class="dr-val" style="color:var(--amber)">57×</div><div class="dr-lbl">ROI of prevention</div></div>
+                </div>
+                <div class="dr-finding">₹45L in prevention would have protected ₹12.1Cr in HUMANCE and ₹26Cr in annual revenue. <b>HUMANCE-aware succession planning had a 57× return. The board never saw this calculation because nobody ran it before the decision.</b></div>
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(99,102,241,0.06));border:1px solid rgba(168,85,247,0.25);border-radius:var(--radius);padding:1.5rem;margin-top:1.25rem;text-align:center">
+              <div style="font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--purple);margin-bottom:6px">Mehta Case complete — Expert level achieved 🎓</div>
+              <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:1.25rem">You've completed all three case studies. Ready to prove it with the CRFP certification?</div>
+              <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+                <button onclick="closeCase()" class="btn btn-ghost btn-sm">← Case library</button>
+                <a href="certification.html" class="btn btn-primary btn-sm">Earn CRFP →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-sticky">
+        <div class="ls-card">
+          <div class="mono-label" style="margin-bottom:10px">Pillars used</div>
+          <a href="p4-tool.html" style="text-decoration:none"><div style="background:var(--purple-dim);border:1px solid rgba(168,85,247,0.2);border-radius:6px;padding:8px 10px;font-size:0.78rem;color:var(--purple);margin-bottom:6px">◎ P4 HUMANCE</div></a>
+          <a href="p5-tool.html" style="text-decoration:none"><div style="background:var(--green-dim);border:1px solid rgba(16,185,129,0.2);border-radius:6px;padding:8px 10px;font-size:0.78rem;color:var(--green)">◑ P5 People P&L</div></a>
+        </div>
+        <div class="ls-card" style="background:var(--purple-dim);border-color:rgba(168,85,247,0.2)">
+          <div class="mono-label" style="color:var(--purple);margin-bottom:6px">Expert case</div>
+          <div style="font-size:0.8rem;color:var(--text-dim);line-height:1.6">The hardest diagnosis in the platform. HUMANCE destruction at scale.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('cases');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ['Revenue Fluent', 'Case Studies'],
+  '<span class="tb-pill">3 interactive cases</span>'
+);
+
+function openCase(id) {
+  document.getElementById('library-view').style.display = 'none';
+  document.querySelectorAll('.case-reader').forEach(r => r.classList.remove('active'));
+  document.getElementById('case-' + id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function closeCase() {
+  document.querySelectorAll('.case-reader').forEach(r => r.classList.remove('active'));
+  document.getElementById('library-view').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleChapter(id) {
+  const hdr = document.getElementById(id + '-header') || document.querySelector('[onclick="toggleChapter(\'' + id + '\')"]').parentElement.querySelector('[id="' + id + '-header"]');
+  const content = document.getElementById(id);
+  if (!content || content.classList.contains('locked-chapter')) return;
+  content.classList.toggle('open');
+}
+
+function toggleReveal(header) {
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+  header.querySelector('.dr-hint').textContent = body.classList.contains('open') ? 'Click to hide ↑' : 'Click to reveal →';
+}
+
+function selectOption(btn, revealId, type) {
+  const opts = btn.parentElement.querySelectorAll('.dp-option');
+  opts.forEach(o => o.disabled = true);
+  if (type === 'correct') {
+    btn.classList.add('correct');
+    opts.forEach(o => { if (o !== btn) o.classList.add('wrong'); });
+  } else {
+    btn.classList.add('wrong');
+  }
+  const reveal = document.getElementById(revealId);
+  if (reveal) reveal.classList.add('open');
+}
+
+function unlockChapter(id, btn) {
+  btn.disabled = true;
+  btn.textContent = '✓ Unlocked';
+  const header = document.getElementById(id + '-header');
+  if (header) {
+    header.classList.add('unlocked');
+    header.querySelector('.ch-lock').textContent = '▼';
+    const content = document.getElementById(id);
+    if (content) content.classList.add('open');
+    header.scrollIntoView({behavior:'smooth', block:'nearest'});
+    // Update nav
+    const num = id.split('-c')[1];
+    const navId = id.replace('-c', '-nav-');
+    const navItem = document.getElementById(id.replace('c', 'nav-'));
+    if (navItem) { navItem.classList.remove('locked'); navItem.classList.add('current'); }
+  }
+}
+</script>
+</body>
+</html>
