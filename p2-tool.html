@@ -3,24 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>People Alpha Engine — Revenue Fluent</title>
+<title>People Alpha — Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style id="rf-css"></style>
 <script src="shared.js"></script>
 <style>
-.tool-layout{display:grid;grid-template-columns:320px 1fr;min-height:calc(100vh - 81px)}
-.tool-inputs{background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem;overflow-y:auto}
-.tool-outputs{background:var(--bg);padding:1.5rem;overflow-y:auto}
-.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
-.big-metric{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;position:relative;overflow:hidden}
-.bm-label{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
-.bm-val{font-family:var(--font-head);font-weight:800;font-size:1.9rem;line-height:1;margin-bottom:4px;letter-spacing:-0.03em}
-.bm-val.teal{color:var(--teal)}.bm-val.red{color:var(--red)}.bm-val.amber{color:var(--amber)}.bm-val.accent{color:var(--accent2)}.bm-val.green{color:var(--green)}.bm-val.purple{color:var(--purple)}
-.bm-sub{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute)}
-.radar-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.25rem;display:flex;gap:1.5rem;align-items:center}
-.narrative-box{background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(45,212,191,0.05));border:1px solid var(--border-accent);border-radius:var(--radius);padding:1.25rem}
-.nb-quote{font-family:var(--font-head);font-weight:300;font-style:italic;font-size:0.9rem;color:var(--text-dim);line-height:1.8}
-.nb-stat{font-family:var(--font-head);font-weight:800;color:var(--teal);font-style:normal}
+.tool-layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 81px); }
+.tool-inputs { background: var(--bg2); border-right: 1px solid var(--border); padding: 1.5rem; overflow-y: auto; }
+.tool-outputs { background: var(--bg); padding: 1.5rem; overflow-y: auto; }
+.scenario-selector { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 1.25rem; }
+.sc-btn { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px; cursor: pointer; text-align: center; transition: all 0.15s; }
+.sc-btn:hover { border-color: var(--border-hi); }
+.sc-btn.active { background: var(--teal-dim); border-color: rgba(45,212,191,0.3); }
+.sc-btn-name { font-size: 0.72rem; font-weight: 600; color: var(--text); }
+.sc-btn-sub { font-family: var(--font-mono); font-size: 0.52rem; color: var(--text-mute); }
+.output-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+.big-metric { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; position: relative; overflow: hidden; }
+.big-metric::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.big-metric.teal::before { background: var(--teal); }
+.big-metric.red::before { background: var(--red); }
+.big-metric.amber::before { background: var(--amber); }
+.big-metric.accent::before { background: var(--accent); }
+.bm-label { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.bm-val { font-family: var(--font-head); font-weight: 800; font-size: 2.1rem; line-height: 1; margin-bottom: 4px; letter-spacing: -0.03em; }
+.bm-val.teal { color: var(--teal); } .bm-val.red { color: var(--red); } .bm-val.amber { color: var(--amber); } .bm-val.accent { color: var(--accent2); }
+.bm-status { font-family: var(--font-mono); font-size: 0.62rem; display: flex; align-items: center; gap: 5px; }
+.bm-bar { height: 4px; background: var(--bg4); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+.bm-fill { height: 100%; border-radius: 2px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.alpha-chart { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.25rem; }
+.ac-bars { display: flex; align-items: flex-end; gap: 16px; height: 140px; padding-top: 20px; }
+.ac-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+.ac-bar-pair { display: flex; gap: 4px; align-items: flex-end; height: 100%; width: 100%; justify-content: center; }
+.ac-bar { width: 22px; border-radius: 3px 3px 0 0; transition: height 0.6s cubic-bezier(0.34,1.56,0.64,1); position: relative; }
+.ac-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-align: center; }
+.ac-val { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 500; }
+.narrative-box { background: linear-gradient(135deg, rgba(45,212,191,0.08), rgba(99,102,241,0.05)); border: 1px solid rgba(45,212,191,0.2); border-radius: var(--radius); padding: 1.25rem; }
+.nb-quote { font-family: var(--font-head); font-weight: 300; font-style: italic; font-size: 0.9rem; color: var(--text-dim); line-height: 1.8; }
+.nb-stat { font-family: var(--font-head); font-weight: 800; color: var(--teal); font-style: normal; }
+.legend { display: flex; gap: 16px; margin-top: 12px; justify-content: center; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim); }
+.legend-dot { width: 8px; height: 8px; border-radius: 2px; }
 </style>
 </head>
 <body>
@@ -29,119 +51,201 @@
 <div id="topbar-mount"></div>
 <div class="app-body" style="padding-top:81px">
 <div class="tool-layout">
+
   <div class="tool-inputs">
+    <div class="mono-label" style="margin-bottom:0.75rem">Scenario</div>
+    <div class="scenario-selector">
+      <div class="sc-btn active" onclick="loadScenario(0,this)"><div class="sc-btn-name">TechVelocity</div><div class="sc-btn-sub">SaaS</div></div>
+      <div class="sc-btn" onclick="loadScenario(1,this)"><div class="sc-btn-name">Sterling</div><div class="sc-btn-sub">Consulting</div></div>
+      <div class="sc-btn" onclick="loadScenario(2,this)"><div class="sc-btn-name">Apex Mfg</div><div class="sc-btn-sub">Manuf</div></div>
+    </div>
+    <div class="divider" style="margin:1rem 0"></div>
     <div class="mono-label" style="margin-bottom:1rem">Adjust Inputs</div>
+
     <div class="slider-row">
-      <div class="slider-header"><span>Hiring quality vs benchmark (%)</span><span class="slider-val" id="sv-hq">14</span></div>
-      <input type="range" min="-30" max="50" value="14" id="sl-hq" oninput="calculate()">
+      <div class="slider-header"><span>Hiring quality vs benchmark</span><span class="slider-val" id="sv-hq">+14%</span></div>
+      <input type="range" min="-30" max="50" value="14" id="sl-hq" class="teal" oninput="update()">
     </div>
     <div class="slider-row">
       <div class="slider-header"><span>Time to productivity (days)</span><span class="slider-val" id="sv-ttp">45</span></div>
-      <input type="range" min="10" max="180" value="45" id="sl-ttp" oninput="calculate()">
+      <input type="range" min="10" max="180" value="45" id="sl-ttp" oninput="update()">
     </div>
     <div class="slider-row">
       <div class="slider-header"><span>Voluntary exits avoided</span><span class="slider-val" id="sv-ret">3</span></div>
-      <input type="range" min="0" max="20" value="3" id="sl-ret" oninput="calculate()">
+      <input type="range" min="0" max="20" value="3" id="sl-ret" class="teal" oninput="update()">
     </div>
     <div class="slider-row">
-      <div class="slider-header"><span>L&D skills gap closed (%)</span><span class="slider-val" id="sv-lg">78</span></div>
-      <input type="range" min="0" max="100" value="78" id="sl-lg" oninput="calculate()">
+      <div class="slider-header"><span>Promotion readiness score</span><span class="slider-val" id="sv-pr">62%</span></div>
+      <input type="range" min="0" max="100" value="62" id="sl-pr" class="amber" oninput="update()">
     </div>
     <div class="slider-row">
-      <div class="slider-header"><span>L&D revenue impact per trained (₹L)</span><span class="slider-val" id="sv-li">8</span></div>
-      <input type="range" min="0" max="50" value="8" id="sl-li" oninput="calculate()">
+      <div class="slider-header"><span>L&D skills gap closed</span><span class="slider-val" id="sv-lg">78%</span></div>
+      <input type="range" min="0" max="100" value="78" id="sl-lg" class="teal" oninput="update()">
     </div>
     <div class="slider-row">
-      <div class="slider-header"><span>Promotion readiness score (%)</span><span class="slider-val" id="sv-pr">62</span></div>
-      <input type="range" min="0" max="100" value="62" id="sl-pr" oninput="calculate()">
+      <div class="slider-header"><span>Revenue per employee (₹L)</span><span class="slider-val" id="sv-rpe">168</span></div>
+      <input type="range" min="20" max="500" value="168" id="sl-rpe" oninput="update()">
     </div>
 
     <div class="divider" style="margin:1rem 0"></div>
-    <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="calculate()">Recalculate &rarr;</button>
-    <a href="p3-tool.html" class="btn btn-ghost" style="width:100%;justify-content:center;text-decoration:none">Next: Team Architecture &rarr;</a>
+    <a href="p3-tool.html" class="btn btn-ghost" style="width:100%;justify-content:center;text-decoration:none">Next: Team Architecture →</a>
   </div>
+
   <div class="tool-outputs">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
       <div>
         <div class="page-eyebrow">People Alpha</div>
-        <h1 class="page-title" style="font-size:1.4rem;margin-bottom:0">People Alpha Engine</h1>
+        <h1 class="page-title" style="font-size:1.4rem;margin-bottom:0">People Alpha <em>Engine</em></h1>
       </div>
-      <span class="tb-pill teal">L2 · Alpha</span>
+      <span id="scenario-tag" class="tag tag-teal">TechVelocity Inc.</span>
     </div>
-    <div class="output-grid">
-      <div class="big-metric">
-        <div class="bm-label">Hiring Alpha</div>
-        <div class="bm-val teal" id="out-ha">22%</div>
-        <div class="bm-sub" id="sub-ha">Live calculation</div>
-      </div>
-      <div class="big-metric">
-        <div class="bm-label">Retention Alpha</div>
-        <div class="bm-val teal" id="out-ra">18%</div>
-        <div class="bm-sub" id="sub-ra">Live calculation</div>
-      </div>
-      <div class="big-metric">
-        <div class="bm-label">L&D Alpha</div>
-        <div class="bm-val teal" id="out-la">62%</div>
-        <div class="bm-sub" id="sub-la">Live calculation</div>
-      </div>
-      <div class="big-metric">
-        <div class="bm-label">Promotion Alpha</div>
-        <div class="bm-val red" id="out-pa">-8%</div>
-        <div class="bm-sub" id="sub-pa">Live calculation</div>
-      </div>
 
-    </div>
-    <div class="radar-section">
-      <canvas id="radar-canvas" width="140" height="140"></canvas>
-      <div style="flex:1">
-        <div class="mono-label" style="margin-bottom:8px">Intelligence Radar</div>
-        <div id="radar-stats" style="display:flex;flex-direction:column;gap:5px"></div>
+    <div class="output-grid">
+      <div class="big-metric teal">
+        <div class="bm-label">Hiring Alpha</div>
+        <div class="bm-val teal" id="out-ha">—</div>
+        <div class="bm-status"><span id="ha-status" style="color:var(--teal)">● Above market</span></div>
+        <div class="bm-bar"><div class="bm-fill" id="ha-bar" style="background:var(--teal);width:0%"></div></div>
+      </div>
+      <div class="big-metric amber">
+        <div class="bm-label">Retention Alpha</div>
+        <div class="bm-val amber" id="out-ra">—</div>
+        <div class="bm-status"><span id="ra-status" style="color:var(--amber)">● Calculating</span></div>
+        <div class="bm-bar"><div class="bm-fill" id="ra-bar" style="background:var(--amber);width:0%"></div></div>
+      </div>
+      <div class="big-metric accent">
+        <div class="bm-label">L&D Alpha</div>
+        <div class="bm-val accent" id="out-la">—</div>
+        <div class="bm-status"><span id="la-status" style="color:var(--accent2)">● Strong ROI</span></div>
+        <div class="bm-bar"><div class="bm-fill" id="la-bar" style="background:var(--accent);width:0%"></div></div>
+      </div>
+      <div class="big-metric red">
+        <div class="bm-label">Promotion Alpha</div>
+        <div class="bm-val red" id="out-pa">—</div>
+        <div class="bm-status"><span id="pa-status" style="color:var(--red)">● Below market</span></div>
+        <div class="bm-bar"><div class="bm-fill" id="pa-bar" style="background:var(--red);width:0%"></div></div>
       </div>
     </div>
-    <div class="narrative-box">
-      <div class="mono-label" style="margin-bottom:8px;color:var(--accent2)">Intelligence Statement</div>
-      <p class="nb-quote" id="narrative">Adjust the sliders to generate your intelligence statement.</p>
+
+    <div class="alpha-chart">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+        <div class="mono-label">Alpha vs Market Benchmark</div>
+        <div style="font-family:var(--font-head);font-weight:800;font-size:1.3rem;color:var(--teal)" id="total-alpha">+22%</div>
+      </div>
+      <div class="ac-bars" id="alpha-bars"></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--text-mute)"></div>Market</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Your org</div>
+      </div>
     </div>
-    <div style="margin-top:1.25rem;text-align:center">
-      <a href="p3-tool.html" class="btn btn-primary">Continue to Team Architecture &rarr;</a>
+
+    <div class="narrative-box">
+      <div class="mono-label" style="margin-bottom:8px;color:var(--teal)">People Alpha Statement</div>
+      <p class="nb-quote" id="narrative">Adjust the sliders to generate your People Alpha statement.</p>
     </div>
   </div>
+
 </div>
 </div>
+
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p2');
 document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
-  ["Revenue Fluent", "People Alpha"],
-  '<span class="tb-pill teal">L2 · Alpha</span>'
+  ['Revenue Fluent', 'People Alpha'],
+  '<span class="tb-pill green">Live Calculator</span>'
 );
-function calculate() {
-  const sl-hq = parseFloat(document.getElementById("sl-hq").value);
-  document.getElementById("sv-hq").textContent = sl-hq;
-  const sl-ttp = parseFloat(document.getElementById("sl-ttp").value);
-  document.getElementById("sv-ttp").textContent = sl-ttp;
-  const sl-ret = parseFloat(document.getElementById("sl-ret").value);
-  document.getElementById("sv-ret").textContent = sl-ret;
-  const sl-lg = parseFloat(document.getElementById("sl-lg").value);
-  document.getElementById("sv-lg").textContent = sl-lg;
-  const sl-li = parseFloat(document.getElementById("sl-li").value);
-  document.getElementById("sv-li").textContent = sl-li;
-  const sl-pr = parseFloat(document.getElementById("sl-pr").value);
-  document.getElementById("sv-pr").textContent = sl-pr;
-  document.getElementById("out-ha").textContent = Math.round(sl-hq * 0.5) + "%";
-  document.getElementById("out-ra").textContent = Math.round(sl-hq * 0.5) + "%";
-  document.getElementById("out-la").textContent = Math.round(sl-hq * 0.5) + "%";
-  document.getElementById("out-pa").textContent = Math.round(sl-hq * 0.5) + "%";
-  document.getElementById("narrative").innerHTML = `Using the current inputs, the intelligence engine is actively calculating your hiring alpha metrics. <span class="nb-stat">Adjust any slider</span> to see live updates across all output panels.`;
 
-  RF.drawRadar(document.getElementById('radar-canvas'), [
-    { label: 'Score', val: 75 }, { label: 'Alpha', val: 80 },
-    { label: 'Risk', val: 45 }, { label: 'ROI', val: 70 }, { label: 'Bench', val: 60 },
-  ], 'var(--teal)');
-  RF.progress.set('p2');
+const scenarios = [
+  { name:'TechVelocity Inc.', hq:14, ttp:45, ret:3, pr:62, lg:78, rpe:168 },
+  { name:'Sterling Consulting', hq:8, ttp:60, ret:1, pr:40, lg:55, rpe:240 },
+  { name:'Apex Manufacturing', hq:-5, ttp:90, ret:0, pr:75, lg:62, rpe:112 },
+];
+
+function loadScenario(idx, el) {
+  document.querySelectorAll('.sc-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  const s = scenarios[idx];
+  document.getElementById('sl-hq').value = s.hq;
+  document.getElementById('sl-ttp').value = s.ttp;
+  document.getElementById('sl-ret').value = s.ret;
+  document.getElementById('sl-pr').value = s.pr;
+  document.getElementById('sl-lg').value = s.lg;
+  document.getElementById('sl-rpe').value = s.rpe;
+  document.getElementById('scenario-tag').textContent = s.name;
+  update();
 }
-calculate();
+
+function update() {
+  const hq = parseInt(document.getElementById('sl-hq').value);
+  const ttp = parseInt(document.getElementById('sl-ttp').value);
+  const ret = parseInt(document.getElementById('sl-ret').value);
+  const pr = parseInt(document.getElementById('sl-pr').value);
+  const lg = parseInt(document.getElementById('sl-lg').value);
+  const rpe = parseInt(document.getElementById('sl-rpe').value);
+
+  document.getElementById('sv-hq').textContent = (hq>=0?'+':'') + hq + '%';
+  document.getElementById('sv-ttp').textContent = ttp;
+  document.getElementById('sv-ret').textContent = ret;
+  document.getElementById('sv-pr').textContent = pr + '%';
+  document.getElementById('sv-lg').textContent = lg + '%';
+  document.getElementById('sv-rpe').textContent = rpe;
+
+  // Hiring Alpha: quality adjusted by speed of productivity
+  const speedBonus = Math.round((90 - ttp) / 90 * 12);
+  const hiringAlpha = Math.round(hq + speedBonus);
+  // Retention Alpha: exits avoided * value
+  const retentionAlpha = Math.round(ret * 6 + (ret > 0 ? 4 : 0));
+  // L&D Alpha: skills gap closed compounded
+  const ldAlpha = Math.round(lg * 0.8);
+  // Promotion Alpha: readiness below 70 = negative
+  const promoAlpha = Math.round((pr - 70) * 0.4);
+  // Total
+  const totalAlpha = Math.round((hiringAlpha + retentionAlpha + ldAlpha + promoAlpha) / 4);
+
+  setMetric('ha', hiringAlpha, 'teal');
+  setMetric('ra', retentionAlpha, 'amber');
+  setMetric('la', ldAlpha, 'accent');
+  setMetric('pa', promoAlpha, 'red');
+
+  document.getElementById('total-alpha').textContent = (totalAlpha>=0?'+':'') + totalAlpha + '%';
+  document.getElementById('total-alpha').style.color = totalAlpha >= 0 ? 'var(--teal)' : 'var(--red)';
+
+  // Bars
+  const dims = [
+    { label: 'Hiring', market: 50, you: 50 + hiringAlpha },
+    { label: 'Retention', market: 50, you: 50 + retentionAlpha },
+    { label: 'L&D', market: 50, you: 50 + ldAlpha },
+    { label: 'Promotion', market: 50, you: 50 + promoAlpha },
+    { label: 'Team', market: 50, you: 50 + Math.round((hiringAlpha+retentionAlpha)/2) },
+  ];
+  const maxV = 110;
+  document.getElementById('alpha-bars').innerHTML = dims.map(d => `
+    <div class="ac-col">
+      <div class="ac-bar-pair">
+        <div class="ac-bar" style="background:var(--text-mute);height:${d.market/maxV*100}%"></div>
+        <div class="ac-bar" style="background:${d.you>=d.market?'var(--teal)':'var(--red)'};height:${Math.max(2,d.you)/maxV*100}%"></div>
+      </div>
+      <div class="ac-label">${d.label}</div>
+    </div>
+  `).join('');
+
+  const scenarioName = document.getElementById('scenario-tag').textContent;
+  document.getElementById('narrative').innerHTML = `${scenarioName} is generating <span class="nb-stat">${totalAlpha>=0?'+':''}${totalAlpha}% blended People Alpha</span> against market benchmark. Hiring Alpha of <span class="nb-stat">${hiringAlpha>=0?'+':''}${hiringAlpha}%</span> ${hiringAlpha>=0?'shows above-market talent acquisition':'signals hiring below market efficiency'}, while Promotion Alpha of <span class="nb-stat">${promoAlpha>=0?'+':''}${promoAlpha}%</span> reflects ${pr<70?'promotion readiness gaps':'strong promotion calibration'}. Every point of People Alpha compounds into revenue advantage.`;
+}
+
+function setMetric(id, val, color) {
+  const el = document.getElementById('out-'+id);
+  el.textContent = (val>=0?'+':'') + val + '%';
+  el.className = 'bm-val ' + (val >= 0 ? color : 'red');
+  document.getElementById(id+'-bar').style.width = Math.min(100, Math.abs(val)*2) + '%';
+  const status = document.getElementById(id+'-status');
+  status.textContent = val >= 15 ? '● Strong' : val >= 0 ? '● Positive' : '● Below market';
+  status.style.color = val >= 15 ? 'var(--teal)' : val >= 0 ? 'var(--amber)' : 'var(--red)';
+}
+
+update();
 </script>
 </body>
 </html>

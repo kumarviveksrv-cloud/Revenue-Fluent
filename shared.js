@@ -549,7 +549,8 @@ const RF = {
 
   nav: {
     items: [
-      { id: 'home', icon: '⌂', label: 'Command Centre', file: 'dashboard.html' },
+      { id: 'home', icon: '⌂', label: 'Home', file: 'index.html' },
+      { id: 'dashboard', icon: '▦', label: 'Command Centre', file: 'dashboard.html' },
       { id: 'divider' },
       { id: 'p1', icon: '⟳', label: 'Revenue Connect', file: 'p1-tool.html', badge: 'L1', pillar: true },
       { id: 'p2', icon: '◈', label: 'People Alpha', file: 'p2-tool.html', badge: 'L2', pillar: true },
@@ -557,7 +558,12 @@ const RF = {
       { id: 'p4', icon: '◎', label: 'HUMANCE', file: 'p4-tool.html', badge: 'L4', pillar: true },
       { id: 'p5', icon: '◑', label: 'People P&L', file: 'p5-tool.html', badge: 'L5', pillar: true },
       { id: 'divider' },
-      { id: 'scenarios', icon: '▦', label: 'Scenario Library', file: 'scenarios.html' },
+      { id: 'learn', icon: '✸', label: 'Learning Hub', file: 'learn.html' },
+      { id: 'cases', icon: '⌕', label: 'Case Studies', file: 'cases.html' },
+      { id: 'simulate', icon: '▶', label: 'Simulation', file: 'simulate.html' },
+      { id: 'game', icon: '◆', label: 'Challenge', file: 'game.html' },
+      { id: 'divider' },
+      { id: 'scenarios', icon: '▤', label: 'Scenario Library', file: 'scenarios.html' },
       { id: 'cert', icon: '✦', label: 'Certification', file: 'certification.html' },
     ]
   },
@@ -680,6 +686,16 @@ const RF = {
       ctx.stroke();
     }
 
+    // Resolve color to hex (handle var() and named)
+    const hexColor = (color && color.startsWith('#')) ? color : '#6366F1';
+    const fillRgba = (hex) => {
+      const h = hex.replace('#','');
+      const r2 = parseInt(h.substring(0,2),16);
+      const g2 = parseInt(h.substring(2,4),16);
+      const b2 = parseInt(h.substring(4,6),16);
+      return `rgba(${r2},${g2},${b2},0.15)`;
+    };
+
     // Data polygon
     ctx.beginPath();
     data.forEach((d, i) => {
@@ -689,9 +705,9 @@ const RF = {
       i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     });
     ctx.closePath();
-    ctx.fillStyle = color.replace(')', ', 0.15)').replace('rgb', 'rgba');
+    ctx.fillStyle = fillRgba(hexColor);
     ctx.fill();
-    ctx.strokeStyle = color;
+    ctx.strokeStyle = hexColor;
     ctx.lineWidth = 2;
     ctx.stroke();
 
@@ -702,7 +718,7 @@ const RF = {
       const y = cy + r * (d.val / 100) * Math.sin(angle);
       ctx.beginPath();
       ctx.arc(x, y, 4, 0, Math.PI * 2);
-      ctx.fillStyle = color;
+      ctx.fillStyle = hexColor;
       ctx.fill();
 
       // Labels
