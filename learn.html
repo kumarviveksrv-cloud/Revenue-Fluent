@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Hub — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.hub-hero { padding: 2.5rem 0 2rem; }
+.hub-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 2rem; }
+.hub-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.5rem 1.25rem; text-decoration: none; display: flex; flex-direction: column;
+  gap: 12px; transition: all 0.25s; position: relative; overflow: hidden; cursor: pointer;
+}
+.hub-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.hub-card.p1::before { background: var(--accent); }
+.hub-card.p2::before { background: var(--teal); }
+.hub-card.p3::before { background: var(--amber); }
+.hub-card.p4::before { background: var(--purple); }
+.hub-card.p5::before { background: var(--green); }
+.hub-card:hover { transform:translateY(-5px); border-color:var(--border-hi); box-shadow:0 16px 40px rgba(0,0,0,0.35); }
+.hc-badge { font-family:var(--font-mono); font-size:0.55rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.1em; }
+.hc-icon { font-size:1.6rem; }
+.hc-name { font-family:var(--font-head); font-weight:700; font-size:0.95rem; color:var(--text); }
+.hc-desc { font-size:0.76rem; color:var(--text-mute); line-height:1.5; }
+.hc-time { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); margin-top:auto; padding-top:8px; border-top:1px solid var(--border); }
+.hc-cta { font-family:var(--font-mono); font-size:0.62rem; color:var(--accent2); display:flex; align-items:center; gap:5px; }
+.why-strip { background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(45,212,191,0.04)); border:1px solid var(--border-accent); border-radius:var(--radius); padding:2rem; margin-bottom:2rem; }
+.what-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.what-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; }
+.wc-h { font-family:var(--font-head); font-weight:700; font-size:0.92rem; color:var(--text); margin-bottom:6px; }
+.wc-p { font-size:0.8rem; color:var(--text-dim); line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap" style="max-width:1100px">
+
+  <div class="hub-hero anim-slide">
+    <div class="page-eyebrow">Learning Hub</div>
+    <h1 class="page-title">Five pillars. Studied <em>deeply.</em></h1>
+    <p class="page-desc" style="max-width:640px">Each page is a complete intellectual deep-dive — the intellectual case, real stories from India and around the world, the instruments with worked examples, and a practitioner's playbook you can use on Monday morning.</p>
+  </div>
+
+  <div class="hub-grid">
+    <a href="learn-p1.html" class="hub-card p1 anim-slide anim-delay-1">
+      <div class="hc-badge">Pillar 1</div>
+      <div class="hc-icon">⟳</div>
+      <div class="hc-name">Revenue Connect</div>
+      <div class="hc-desc">The bridge between people events and revenue outcomes. ATC%, TDF, ESR.</div>
+      <div class="hc-time">~8 min read</div>
+      <div class="hc-cta">Read deep-dive →</div>
+    </a>
+    <a href="learn-p2.html" class="hub-card p2 anim-slide anim-delay-2">
+      <div class="hc-badge">Pillar 2</div>
+      <div class="hc-icon">◈</div>
+      <div class="hc-name">People Alpha</div>
+      <div class="hc-desc">Above-market returns on every hire, promotion, retention and L&D investment.</div>
+      <div class="hc-time">~9 min read</div>
+      <div class="hc-cta">Read deep-dive →</div>
+    </a>
+    <a href="learn-p3.html" class="hub-card p3 anim-slide anim-delay-3">
+      <div class="hc-badge">Pillar 3</div>
+      <div class="hc-icon">⬡</div>
+      <div class="hc-name">Team Architecture</div>
+      <div class="hc-desc">Your org chart is a revenue document. Config A, B, C. OEI, PCoB, OSI.</div>
+      <div class="hc-time">~8 min read</div>
+      <div class="hc-cta">Read deep-dive →</div>
+    </a>
+    <a href="learn-p4.html" class="hub-card p4 anim-slide anim-delay-4">
+      <div class="hc-badge">Pillar 4</div>
+      <div class="hc-icon">◎</div>
+      <div class="hc-name">HUMANCE</div>
+      <div class="hc-desc">The accounting standard HR never had. Price trust, culture, signal, belonging.</div>
+      <div class="hc-time">~10 min read</div>
+      <div class="hc-cta">Read deep-dive →</div>
+    </a>
+    <a href="learn-p5.html" class="hub-card p5 anim-slide anim-delay-4">
+      <div class="hc-badge">Pillar 5</div>
+      <div class="hc-icon">◑</div>
+      <div class="hc-name">People P&L</div>
+      <div class="hc-desc">The synthesis. HR's complete income statement. Net People ROI.</div>
+      <div class="hc-time">~9 min read</div>
+      <div class="hc-cta">Read deep-dive →</div>
+    </a>
+  </div>
+
+  <div class="why-strip anim-slide">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap">
+      <div style="max-width:420px">
+        <div class="page-eyebrow" style="margin-bottom:10px">Why study this</div>
+        <h2 style="font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--text);letter-spacing:-0.025em;margin-bottom:10px">The world's most important professionals don't know how to speak the board's language.</h2>
+        <p style="font-size:0.88rem;color:var(--text-dim);line-height:1.8;">HR manages the single largest cost and the single largest value-creator in most organisations. Yet the profession has never had the vocabulary to say so in numbers. These five pillars fix that — permanently.</p>
+      </div>
+      <div class="what-row" style="flex:1;min-width:300px">
+        <div class="what-card">
+          <div class="wc-h">Stories</div>
+          <div class="wc-p">Every pillar has real (fictionalised) narratives from India and global markets that make the concepts visceral.</div>
+        </div>
+        <div class="what-card">
+          <div class="wc-h">Instruments</div>
+          <div class="wc-p">Every metric explained with its formula, worked example, and benchmark — so you can use it immediately.</div>
+        </div>
+        <div class="what-card">
+          <div class="wc-h">Playbook</div>
+          <div class="wc-p">Five Monday-morning moves per pillar. Not theory — specific actions you take in your org next week.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('learn');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ['Revenue Fluent', 'Learning Hub'],
+  '<span class="tb-pill">5 deep-dives</span>'
+);
+</script>
+</body>
+</html>

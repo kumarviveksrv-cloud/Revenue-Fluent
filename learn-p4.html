@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HUMANCE — Learning Hub — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style><script src="shared.js"></script>
+<style>
+.learn-layout{display:grid;grid-template-columns:1fr 280px;gap:2rem;align-items:start}
+.learn-body{min-width:0}.learn-sidebar{position:sticky;top:calc(29px + 52px + 2rem)}
+.ls-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:12px}
+.ls-nav{display:flex;flex-direction:column;gap:2px}
+.ls-nav-item{font-size:0.78rem;color:var(--text-mute);padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.15s;text-decoration:none;display:block;border-left:2px solid transparent}
+.ls-nav-item:hover{color:var(--text-dim);background:rgba(255,255,255,0.03)}
+.ls-nav-item.active{color:var(--accent2);background:var(--accent-dim);border-left-color:var(--accent)}
+.provocation{border-radius:var(--radius-lg);padding:2rem 2.5rem;margin-bottom:2.5rem}
+.prov-q{font-family:var(--font-head);font-weight:800;font-size:clamp(1.3rem,2.5vw,1.8rem);color:var(--text);line-height:1.3;letter-spacing:-0.02em;margin-bottom:1rem}
+.prov-a{font-size:0.92rem;color:var(--text-dim);line-height:1.8}
+.beat{margin-bottom:2.5rem}
+.beat-label{font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.beat-label::before{content:'';width:20px;height:1px;background:var(--accent)}
+.beat-h{font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--text);letter-spacing:-0.025em;margin-bottom:1rem;line-height:1.25}
+.beat-h em{font-weight:300;font-style:italic;color:var(--accent2)}
+.beat-p{font-size:0.92rem;color:var(--text-dim);line-height:1.9;margin-bottom:1rem}
+.beat-p b{color:var(--text);font-weight:600}
+.story{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;margin-bottom:2.5rem;position:relative;overflow:hidden}
+.story::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--teal),var(--accent))}
+.story-flag{display:flex;align-items:center;gap:8px;margin-bottom:1.25rem}
+.story-country{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em}
+.story-tag{font-family:var(--font-mono);font-size:0.58rem;padding:2px 8px;border-radius:4px;background:var(--teal-dim);color:var(--teal);border:1px solid rgba(45,212,191,0.2)}
+.story-h{font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:1rem;letter-spacing:-0.02em;line-height:1.3}
+.story-p{font-size:0.9rem;color:var(--text-dim);line-height:1.9;margin-bottom:1rem}
+.story-p b{color:var(--text);font-weight:600}.story-p em{font-style:italic;color:var(--text-dim)}
+.story-stat{background:var(--bg3);border-radius:var(--radius-sm);padding:12px 16px;margin:1.25rem 0;display:flex;gap:1.5rem;flex-wrap:wrap}
+.ss-item{display:flex;flex-direction:column;gap:3px}
+.ss-val{font-family:var(--font-head);font-weight:800;font-size:1.2rem;color:var(--teal);line-height:1}
+.ss-label{font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.08em}
+.story-lesson{font-family:var(--font-head);font-weight:700;font-style:italic;font-size:0.92rem;color:var(--teal);border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem;line-height:1.6}
+.instruments-section{margin-bottom:2.5rem}
+.inst-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:12px}
+.inst-card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
+.inst-name{font-family:var(--font-head);font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:2px}
+.inst-abbr{font-family:var(--font-mono);font-size:0.62rem;padding:3px 10px;border-radius:5px;background:var(--accent-dim);color:var(--accent2);border:1px solid var(--border-accent);flex-shrink:0}
+.inst-formula{font-family:var(--font-mono);font-size:0.72rem;color:var(--teal);background:var(--bg3);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:1rem;line-height:1.7}
+.inst-p{font-size:0.88rem;color:var(--text-dim);line-height:1.8;margin-bottom:0.75rem}
+.inst-p b{color:var(--text);font-weight:600}
+.inst-example{background:linear-gradient(135deg,rgba(45,212,191,0.06),transparent);border:1px solid rgba(45,212,191,0.15);border-radius:var(--radius-sm);padding:12px 16px;font-size:0.85rem;color:var(--text-dim);line-height:1.7;margin-bottom:0.75rem}
+.inst-example b{color:var(--teal);font-weight:600}
+.inst-bench{font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute)}
+.playbook{background:var(--card);border:1px solid var(--border-accent);border-radius:var(--radius);padding:1.75rem;margin-bottom:2.5rem}
+.pb-intro{font-size:0.9rem;color:var(--text-dim);line-height:1.8;margin-bottom:1.5rem}
+.pb-move{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)}
+.pb-move:last-child{border-bottom:none;padding-bottom:0}
+.pb-num{width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--border-accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.65rem;color:var(--accent2);flex-shrink:0;margin-top:1px}
+.pb-content{flex:1}
+.pb-move-h{font-family:var(--font-head);font-weight:600;font-size:0.88rem;color:var(--text);margin-bottom:3px}
+.pb-move-p{font-size:0.82rem;color:var(--text-dim);line-height:1.65}
+.vocab{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:2.5rem}
+.vocab-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.vocab-item:last-child{border-bottom:none;padding-bottom:0}
+.vocab-term{font-family:var(--font-mono);font-size:0.72rem;color:var(--accent2);font-weight:500;min-width:140px;flex-shrink:0;padding-top:2px}
+.vocab-def{font-size:0.85rem;color:var(--text-dim);line-height:1.65}
+.next-pill{background:var(--card);border:1px solid var(--border-hi);border-radius:var(--radius);padding:1.5rem;display:flex;justify-content:space-between;align-items:center;text-decoration:none;transition:all 0.2s}
+.next-pill:hover{border-color:var(--accent);transform:translateX(4px)}
+.reading-progress{height:2px;background:var(--accent);position:fixed;top:29px;left:var(--sidebar-w);right:0;z-index:210;transform-origin:left;transform:scaleX(0);transition:transform 0.1s}
+</style>
+</head>
+<body>
+<div class="reading-progress" id="read-prog"></div>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div><div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap" style="max-width:1100px;padding-bottom:4rem">
+<div class="learn-layout">
+<div class="learn-body">
+  <div style="margin-bottom:2rem" class="anim-slide">
+    <div class="page-eyebrow">Learning Hub · Pillar 4</div>
+    <h1 class="page-title"><em>HUMANCE</em></h1>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span class="tag tag-purple">Human Balance Sheet</span>
+      <span class="tag tag-muted">~10 min read</span>
+      <span class="tag tag-muted">4 instruments</span>
+      <span class="tag tag-teal">&#127470;&#127475; India + &#127758; Global stories</span>
+    </div>
+  </div>
+  <div class="provocation" style="background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(99,102,241,0.06));border:1px solid rgba(168,85,247,0.2)">
+    <div class="prov-q">A company's most important asset is its people. Why doesn't it appear on the balance sheet?</div>
+    <div class="prov-a">Because no one has ever developed an accounting standard for it. Goodwill, brand equity, and intellectual property are on the balance sheet — but the trust that keeps clients loyal, the culture that drives discretionary effort, the signal intelligence that flags risk before it becomes a crisis? <b>All of it invisible to the books. Until HUMANCE.</b></div>
+  </div>
+  <div class="beat" id="section-before">
+    <div class="beat-label">Beat 1 · The world before</div>
+    <div class="beat-h">Finance can price everything except <em>what matters most.</em></div>
+    <div class="beat-p">The accounting profession has spent 150 years developing increasingly sophisticated methods to capture intangible value on the balance sheet. Goodwill was formalised in the late 19th century. Brand valuation became standard in the 1980s. Intellectual property accounting frameworks emerged in the 1990s. <b>In every case, the impetus was the same: a material asset was being destroyed and created without showing up in the financials.</b></div>
+<div class="beat-p">The same problem has existed with human capital for the entire history of business — and has never been solved. The trust a founding team built over a decade. The cultural practices that produce discretionary effort. The informal intelligence networks that surface problems before they become crises. The belonging that keeps exceptional people committed when a competitor offers more. All of it has always been invisible to the books — right up until it's destroyed, at which point the revenue impact is undeniable but untraceable to its cause.</div>
+  </div>
+  <div class="story" id="section-story1">
+    <div class="story-flag"><span style="font-size:1.1rem">🇮🇳</span><span class="story-country">Hyderabad, India</span><span class="story-tag">HUMANCE · Story 1</span></div>
+    <div class="story-h">The family business that couldn't see its own net worth</div>
+    <div class="story-p">The Mehta family had built a 50-person components business over three decades. The financials looked straightforward: ₹84Cr in revenue, ₹9Cr in tangible assets, ₹48Cr in payroll and operating costs. On paper, a healthy business. <b>What didn't appear anywhere on those financials was the ₹12.1Cr in HUMANCE assets that underpinned every rupee of that revenue.</b></div>
+<div class="story-p">The Trust Capital — Rajesh Mehta's 30-year relationships with the three largest clients, which collectively represented 62% of revenue. The Signal Intelligence — the informal network of senior employees who had navigated every supply chain crisis of the past decade and knew things about the business that weren't written anywhere. The Belonging Premium — a culture of radical ownership where employees routinely went beyond their job descriptions because they felt genuinely part of something.</div>
+<div class="story-p">When Rajesh announced his retirement and his son Arjun took over, none of this was measured, priced, or protected. It was assumed it would transfer with the title. <em>It did not.</em> Six senior employees left within 18 months — not because of anything Arjun did wrong, but because the trust they'd had in Rajesh was personal and non-transferable. Revenue fell 31% before anyone understood why.</div>
+    <div class="story-stat"><div class="ss-item"><div class="ss-val">₹12.1Cr</div><div class="ss-label">HUMANCE destroyed</div></div>
+<div class="ss-item"><div class="ss-val">6</div><div class="ss-label">senior exits in 18 months</div></div>
+<div class="ss-item"><div class="ss-val">-31%</div><div class="ss-label">revenue decline</div></div>
+<div class="ss-item"><div class="ss-val">₹0</div><div class="ss-label">visible on balance sheet</div></div></div>
+    <div class="story-lesson">"The business was worth ₹12.1Cr more than our balance sheet said. We found out the hard way — when we lost it." — Arjun Mehta, two years after the succession</div>
+  </div>
+  <div class="beat" id="section-insight">
+    <div class="beat-label">Beat 2 · The insight</div>
+    <div class="beat-h">HUMANCE prices what finance has always <em>left blank.</em></div>
+    <div class="beat-p">HUMANCE is not a metaphor. It is a measurement framework with four discrete asset classes, each with a calculable value tied to observable business metrics. <b>Trust Capital</b> is priced through knowledge concentration risk and succession readiness — what is the cost when key relationships prove non-transferable? <b>Culture Yield</b> is priced through the efficiency gap before and after a culture-disrupting event. <b>Signal Intelligence</b> is priced through the value of early-warning capacity that exits represent. <b>Belonging Premium</b> is priced through the discretionary effort coefficient — the revenue that occurs only because people want to, not because they must.</div>
+<div class="beat-p">The total HUMANCE figure is not a guess or a benchmark. It is a calculated value grounded in the same metrics that flow through the other four pillars — ESR, exit data, revenue at risk. <b>Revenue tells you what you earned. HUMANCE tells you what made earning possible.</b></div>
+  </div>
+  <div class="story" id="section-story2">
+    <div class="story-flag"><span style="font-size:1.1rem">🇺🇸</span><span class="story-country">San Francisco, USA</span><span class="story-tag">HUMANCE · Story 2</span></div>
+    <div class="story-h">The acquisition that paid $40M for a company and got $12M of it</div>
+    <div class="story-p">A Bay Area enterprise software company acquired a 60-person product team in 2019 for $40M. The deal was justified by the product roadmap, the client base, and the team — particularly three senior architects whose relationships with the four largest enterprise clients were described as "irreplaceable" in the acquisition memo.</div>
+<div class="story-p">Standard due diligence was done. Technical debt was assessed. Client contracts were reviewed. <b>HUMANCE was never calculated.</b> The Trust Capital embedded in those three senior architects — the relationship depth built over years of enterprise delivery — was valued at precisely $0 in the deal structure.</div>
+<div class="story-p"><em>Within 14 months, all three architects had left.</em> The earn-out structure had been tied to product milestones, not retention. Without specific financial incentives to stay, and without the culture they'd built being preserved through the integration, they left for a startup. Two of the four enterprise clients followed them. Revenue from those accounts: $8.4M annually.</div>
+<div class="story-p">Post-acquisition review found that $12M of the $40M valuation had been attributable to HUMANCE assets that evaporated in the integration. The acquirer paid full price for a partial business.</div>
+    <div class="story-stat"><div class="ss-item"><div class="ss-val">$40M</div><div class="ss-label">acquisition price</div></div>
+<div class="ss-item"><div class="ss-val">$12M</div><div class="ss-label">HUMANCE destroyed</div></div>
+<div class="ss-item"><div class="ss-val">3</div><div class="ss-label">architects who left in 14M</div></div>
+<div class="ss-item"><div class="ss-val">$8.4M</div><div class="ss-label">enterprise revenue at risk</div></div></div>
+    <div class="story-lesson">"We did thorough due diligence on everything we could see. Nobody priced what we couldn't." — Board member, post-acquisition review</div>
+  </div>
+  <div class="beat" id="section-after">
+    <div class="beat-label">Beat 3 · The world after</div>
+    <div class="beat-h">HUMANCE makes the invisible <em>financially legible.</em></div>
+    <div class="beat-p">When HUMANCE is calculated and tracked, three things change permanently. First, people decisions are made with full cost visibility — the HUMANCE consequences of a succession event, an acquisition integration, or a culture change are priced before the decision, not discovered after. Second, the balance sheet argument for people investment becomes defensible — "this retention programme costs ₹8L and protects ₹3.2Cr in Trust Capital" is a CFO-grade investment case. Third, leadership can answer the question they've never been able to answer: <b>what is this company really worth if you strip out its human assets?</b></div>
+<div class="beat-p">For founders, CHROs, and HR professionals who have always known that their people are their most valuable asset but have never been able to prove it numerically — HUMANCE is the proof.</div>
+  </div>
+  <div class="instruments-section" id="section-instruments">
+    <div class="beat-label">The instruments</div>
+    <h2 style="font-family:var(--font-head);font-weight:800;font-size:1.3rem;color:var(--text);letter-spacing:-0.02em;margin-bottom:1.25rem">The 4 HUMANCE <em>asset classes.</em></h2>
+      <div class="inst-card">
+    <div class="inst-card-head"><div><div class="inst-name">Trust Capital</div><div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute)">Relationship depth and knowledge concentration risk</div></div><div class="inst-abbr">TC</div></div>
+    <div class="inst-formula">TC = f(IRD score, RBC score) × revenue at risk coefficient</div>
+    <div class="inst-p">Trust Capital prices the value embedded in trusted relationships and the risk when knowledge is concentrated in too few people. The IRD (Institutional Relationship Depth) score measures how deeply embedded key relationships are — and how transferable they are. The RBC (Relationship Bridge Coverage) score measures succession readiness for those relationships.</div>
+    <div class="inst-example"><b>Worked example:</b> Mehta & Sons: IRD 18% (dangerously concentrated), RBC 20% (minimal succession coverage), revenue at risk ₹84Cr. <b>Trust Capital destroyed: ₹2.8Cr</b> — the value of relationships that proved non-transferable in the succession.</div>
+    <div class="inst-bench">Driven by: IRD concentration + RBC readiness + revenue exposure of key relationships</div>
+  </div>  <div class="inst-card">
+    <div class="inst-card-head"><div><div class="inst-name">Culture Yield</div><div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute)">Revenue efficiency produced by cultural practices</div></div><div class="inst-abbr">CY</div></div>
+    <div class="inst-formula">CY = (ESR pre-event − ESR post-event) × annual revenue base</div>
+    <div class="inst-p">Culture Yield prices the revenue-producing efficiency of cultural practices — and what evaporates when a culture-disrupting event occurs. It links culture directly to the Employee-Sales Ratio: when culture degrades, ESR drops, and the delta is the Culture Yield destroyed.</div>
+    <div class="inst-example"><b>Worked example:</b> Mehta & Sons: ESR 94% before succession, 61% after. Revenue base ₹84Cr. ESR drop: 33 points. <b>Culture Yield destroyed: ₹27.7Cr</b> — the efficiency loss from a culture that took 30 years to build and 18 months to partially dismantle.</div>
+    <div class="inst-bench">Driven by: the ESR gap before and after a culture-disrupting people event</div>
+  </div>  <div class="inst-card">
+    <div class="inst-card-head"><div><div class="inst-name">Signal Intelligence</div><div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute)">Early-warning capacity and institutional knowledge value</div></div><div class="inst-abbr">SI</div></div>
+    <div class="inst-formula">SI = f(revenue at risk, exit cascade severity, knowledge concentration)</div>
+    <div class="inst-p">Signal Intelligence prices the value of the informal early-warning network embedded in experienced people — the institutional knowledge that surfaces supply chain problems before they become crises, client dissatisfaction before it becomes churn, team dynamics before they become attrition. When that network exits, the signal disappears.</div>
+    <div class="inst-example"><b>Worked example:</b> When Mehta's 6 senior employees left, the company lost its informal supply chain intelligence network. Within 6 months, a sourcing problem that would previously have been flagged 8 weeks early caused a production delay worth ₹3.7Cr. <b>Signal Intelligence value: ₹3.7Cr.</b></div>
+    <div class="inst-bench">Driven by: exit volume × revenue at risk × institutional knowledge depth score</div>
+  </div>  <div class="inst-card">
+    <div class="inst-card-head"><div><div class="inst-name">Belonging Premium</div><div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute)">Discretionary effort value above employment contract obligations</div></div><div class="inst-abbr">BP</div></div>
+    <div class="inst-formula">BP = exits × discretionary-effort coefficient × revenue base per FTE</div>
+    <div class="inst-p">Belonging Premium prices the revenue generated by people doing more than their job description requires — the call made after hours, the problem solved proactively, the client relationship deepened beyond scope. This discretionary effort is only possible when belonging is genuine. When belonging erodes, performance falls to the floor of the contract.</div>
+    <div class="inst-example"><b>Worked example:</b> Mehta & Sons: culture of radical ownership meant employees routinely delivered 20–30% above contracted output. Post-succession, discretionary effort fell to near-zero. Revenue impact of lost Belonging Premium: <b>₹4.5Cr annually.</b></div>
+    <div class="inst-bench">Driven by: cultural belonging depth × discretionary effort coefficient × revenue per FTE</div>
+  </div>
+  </div>
+  <div class="playbook" id="section-playbook">
+    <div class="beat-label">Practitioner's Playbook</div>
+    <h2 style="font-family:var(--font-head);font-weight:800;font-size:1.2rem;color:var(--text);letter-spacing:-0.02em;margin-bottom:0.75rem">Five moves for <em>Monday morning.</em></h2>
+    <div class="pb-intro">HUMANCE is the hardest pillar to measure — and the most important to protect. Here's how to start making it visible in your organisation.</div>
+    <div class="pb-move"><div class="pb-num">1</div><div class="pb-content"><div class="pb-move-h">Map your knowledge concentration risk this week</div><div class="pb-move-p">Ask one question: if three specific people left tomorrow, what revenue would be at risk? Not headcount — specific people. Name them. Identify the client relationships, institutional knowledge, and team chemistry that sits with them. That map is your Trust Capital risk register.</div></div></div><div class="pb-move"><div class="pb-num">2</div><div class="pb-content"><div class="pb-move-h">Calculate your Culture Yield before and after your last major event</div><div class="pb-move-p">Take a significant people event from the past 2 years — a leadership change, a restructure, a merger. Calculate ESR before and 6-12 months after. Multiply the delta by annual revenue. That's how much Culture Yield the event cost. This number will surprise most leaders.</div></div></div><div class="pb-move"><div class="pb-num">3</div><div class="pb-content"><div class="pb-move-h">Build a succession coverage score for your top 10 roles</div><div class="pb-move-p">For each of your 10 most revenue-critical roles, score succession readiness 0-100. How ready is the next person? The weighted average of these scores is your RBC. Below 40% means Trust Capital is dangerously concentrated. This is your acquisition risk, your succession risk, and your retention investment priority.</div></div></div><div class="pb-move"><div class="pb-num">4</div><div class="pb-content"><div class="pb-move-h">Identify your Signal Intelligence sources</div><div class="pb-move-p">Which people in your organisation consistently surface problems before they escalate? These are your signal intelligence nodes. They are rarely the most senior or highest-paid. Map them. They carry HUMANCE value far above their compensation — and their exit destroys it without appearing in any cost centre.</div></div></div><div class="pb-move"><div class="pb-num">5</div><div class="pb-content"><div class="pb-move-h">Present HUMANCE as a balance sheet item at the next senior meeting</div><div class="pb-move-p">Run a rough HUMANCE calculation for your organisation — even directional numbers work. Present the four asset classes with estimated values. The purpose is not precision; it is to make the conversation happen. The question "what are our human assets worth?" needs to be in the room.</div></div></div>
+  </div>
+  <div class="vocab" id="section-vocab">
+    <div class="beat-label" style="margin-bottom:1rem">Key vocabulary</div>
+    <div class="vocab-item"><div class="vocab-term">HUMANCE</div><div class="vocab-def">A coined currency representing the total value of an organisation's four human intangible asset classes: Trust Capital, Culture Yield, Signal Intelligence, and Belonging Premium.</div></div><div class="vocab-item"><div class="vocab-term">Trust Capital (TC)</div><div class="vocab-def">The value embedded in trusted relationships and institutional knowledge depth — priced through knowledge concentration risk and succession readiness.</div></div><div class="vocab-item"><div class="vocab-term">Culture Yield (CY)</div><div class="vocab-def">The revenue efficiency produced by cultural practices — measured through the ESR gap before and after a culture-disrupting event.</div></div><div class="vocab-item"><div class="vocab-term">Signal Intelligence (SI)</div><div class="vocab-def">The value of the informal early-warning intelligence network embedded in experienced people — quantified through exit cascade severity and institutional knowledge depth.</div></div><div class="vocab-item"><div class="vocab-term">Belonging Premium (BP)</div><div class="vocab-def">The revenue generated through discretionary effort above employment contract obligations — only possible when belonging is genuine.</div></div><div class="vocab-item"><div class="vocab-term">IRD</div><div class="vocab-def">Institutional Relationship Depth. A 0-100 score measuring how deeply embedded and concentrated key business relationships are.</div></div><div class="vocab-item"><div class="vocab-term">RBC</div><div class="vocab-def">Relationship Bridge Coverage. A 0-100 score measuring succession readiness for key relationships — the inverse of Trust Capital concentration risk.</div></div>
+  </div>
+  <a href="p4-tool.html" class="next-pill" style="margin-bottom:1rem">
+    <div><div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px">Ready to apply it?</div>
+    <div style="font-family:var(--font-head);font-weight:700;font-size:0.95rem;color:var(--text)">Open the HUMANCE Intelligence Tool &#8594;</div></div>
+    <span class="tag tag-accent">Live tool</span>
+  </a>
+  <a href="learn-p5.html" class="next-pill">
+    <div><div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px">Next pillar</div>
+    <div style="font-family:var(--font-head);font-weight:700;font-size:0.95rem;color:var(--text)">Pillar 5 — People P&L &#8594;</div></div>
+    <span class="tag tag-green">Continue &#8594;</span>
+  </a>
+</div>
+<div class="learn-sidebar">
+  <div class="ls-card">
+    <div class="mono-label" style="margin-bottom:10px">On this page</div>
+    <div class="ls-nav"><a href="#section-before" class="ls-nav-item active" onclick="setActive(this)">The world before</a>
+<a href="#section-story1" class="ls-nav-item" onclick="setActive(this)">Story: Hyderabad</a>
+<a href="#section-insight" class="ls-nav-item" onclick="setActive(this)">The insight</a>
+<a href="#section-story2" class="ls-nav-item" onclick="setActive(this)">Story: San Francisco</a>
+<a href="#section-after" class="ls-nav-item" onclick="setActive(this)">The world after</a>
+<a href="#section-instruments" class="ls-nav-item" onclick="setActive(this)">The 4 asset classes</a>
+<a href="#section-playbook" class="ls-nav-item" onclick="setActive(this)">Playbook</a>
+<a href="#section-vocab" class="ls-nav-item" onclick="setActive(this)">Vocabulary</a>
+</div>
+  </div>
+  <div class="ls-card">
+    <div class="mono-label" style="margin-bottom:10px">All pillars</div>
+    <div class="ls-nav"><a href="learn-p1.html" class="ls-nav-item">L1 — Revenue Connect</a>
+<a href="learn-p2.html" class="ls-nav-item">L2 — People Alpha</a>
+<a href="learn-p3.html" class="ls-nav-item">L3 — Team Architecture</a>
+<a href="learn-p4.html" class="ls-nav-item active">L4 — HUMANCE</a>
+<a href="learn-p5.html" class="ls-nav-item">L5 — People P&L</a>
+</div>
+  </div>
+  <div class="ls-card" style="background:var(--accent-dim);border-color:var(--border-accent)">
+    <div class="mono-label" style="color:var(--accent2);margin-bottom:8px">Ready to calculate?</div>
+    <div style="font-size:0.8rem;color:var(--text-dim);line-height:1.6;margin-bottom:12px">Put the theory to work on real org data.</div>
+    <a href="p4-tool.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;text-decoration:none">Open Tool &#8594;</a>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('learn');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(['Learning Hub','Pillar 4 — HUMANCE'
+],'<span class="tb-pill">~10 min read</span>');
+function setActive(el){document.querySelectorAll('.ls-nav-item').forEach(i=>i.classList.remove('active'));el.classList.add('active');}
+window.addEventListener('scroll',()=>{
+  const body=document.body,html=document.documentElement;
+  const total=Math.max(body.scrollHeight,html.scrollHeight)-window.innerHeight;
+  document.getElementById('read-prog').style.transform='scaleX('+(window.scrollY/total)+')';
+});
+</script>
+</body></html>
