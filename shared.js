@@ -51,7 +51,7 @@ const RF = {
       },
       {
         id: 'p5', num: 'L5', label: 'People P&L',
-        locked: true,
+        locked: false,
         modules: [
           { id: 'p5-a', label: 'The Philosophy', file: 'p5-module-a.html' },
           { id: 'p5-b', label: 'The Framework', file: 'p5-module-b.html' },

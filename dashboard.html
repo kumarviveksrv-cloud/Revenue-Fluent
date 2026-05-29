@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0F172A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RevFluent">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard &ndash; Revenue Fluent</title>
 <style id="rf-css"></style>
 <script src="shared.js"></script>
@@ -156,18 +163,19 @@
         </div>
       </div>
 
-      <div class="pillar-card locked">
-        <div class="pc-badge" style="color:var(--text-mute)">L5</div>
+      <a href="p5-module-a.html" class="pillar-card" style="border-color:var(--border-hi)">
+        <div class="pc-badge" style="color:var(--accent)">L5</div>
         <div class="pc-info">
-          <div class="pc-num-label">Pillar 5 &ndash; Locked</div>
-          <div class="pc-title">People P&L &ndash; Your Certification</div>
-          <div class="pc-bar-wrap"><div class="pc-bar" style="width:0%"></div></div>
+          <div class="pc-num-label" style="color:var(--accent)">Pillar 5 &ndash; Final Pillar</div>
+          <div class="pc-title">People P&L &ndash; CRFP Certification</div>
+          <div class="pc-bar-wrap"><div class="pc-bar" style="width:0%" id="p5-bar"></div></div>
         </div>
         <div class="pc-right">
-          <div class="pc-pct">🔒</div>
+          <div class="pc-pct" id="p5-pct">0%</div>
           <div class="pc-mod-count">5 modules</div>
+          <button class="pc-start-btn">Start &rarr;</button>
         </div>
-      </div>
+      </a>
 
     </div>
 
@@ -197,6 +205,16 @@ const p1Pct = Math.round((p1Done/4)*100);
 document.getElementById('p1-bar').style.width = p1Pct + '%';
 document.getElementById('p1-pct').textContent = p1Pct + '%';
 document.getElementById('stat-complete').textContent = RF.progress.totalComplete();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('SW registered:', reg.scope))
+      .catch(err => console.log('SW error:', err));
+  });
+}
 </script>
 </body>
 </html>
