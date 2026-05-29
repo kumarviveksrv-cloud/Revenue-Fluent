@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Fluent Challenge — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+/* LOBBY */
+.lobby { max-width:700px; margin:0 auto; }
+.lobby-hero { text-align:center; padding:2.5rem 0 2rem; }
+.pts-badge { display:inline-flex; align-items:center; gap:8px; background:var(--bg2); border:1px solid var(--border-accent); border-radius:var(--radius-lg); padding:0.75rem 1.5rem; margin-bottom:1.75rem; }
+.pts-val { font-family:var(--font-head); font-weight:800; font-size:3rem; color:var(--accent2); line-height:1; }
+.pts-label { font-family:var(--font-mono); font-size:0.62rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.12em; }
+.mode-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:1.5rem 0; }
+.mode-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; cursor:pointer; transition:all 0.2s; text-align:center; position:relative; overflow:hidden; }
+.mode-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.mode-card.sprint::before { background:var(--teal); }
+.mode-card.endurance::before { background:var(--amber); }
+.mode-card.expert::before { background:var(--purple); }
+.mode-card:hover { border-color:var(--border-hi); transform:translateY(-3px); }
+.mode-card.selected { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-dim); }
+.mc-icon { font-size:2rem; margin-bottom:0.75rem; }
+.mc-name { font-family:var(--font-head); font-weight:700; font-size:0.95rem; color:var(--text); margin-bottom:4px; }
+.mc-desc { font-size:0.78rem; color:var(--text-dim); line-height:1.5; margin-bottom:0.75rem; }
+.mc-stats { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+.mc-stat { font-family:var(--font-mono); font-size:0.55rem; color:var(--text-mute); padding:2px 7px; border-radius:3px; background:rgba(255,255,255,0.04); border:1px solid var(--border); }
+.pillars-select { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:1rem 0; }
+.pillar-toggle { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:7px 14px; cursor:pointer; font-family:var(--font-mono); font-size:0.65rem; color:var(--text-mute); transition:all 0.15s; }
+.pillar-toggle.active { background:var(--accent-dim); border-color:var(--border-accent); color:var(--accent2); }
+.high-scores { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; margin-top:1.5rem; }
+.hs-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.85rem; }
+.hs-row:last-child { border-bottom:none; }
+.hs-rank { font-family:var(--font-mono); font-size:0.65rem; color:var(--text-mute); width:24px; }
+.hs-name { color:var(--text-dim); flex:1; margin:0 10px; }
+.hs-score { font-family:var(--font-mono); font-weight:500; color:var(--accent2); }
+.hs-grade { font-family:var(--font-mono); font-size:0.62rem; padding:2px 7px; border-radius:4px; }
+
+/* GAME ENGINE */
+.game-engine { display:none; }
+.game-engine.active { display:block; }
+.game-hud { display:grid; grid-template-columns:auto 1fr auto auto; gap:1rem; align-items:center; background:var(--sidebar); border:1px solid var(--border); border-radius:var(--radius); padding:0.875rem 1.25rem; margin-bottom:1.5rem; }
+.hud-timer { font-family:var(--font-head); font-weight:800; font-size:1.6rem; color:var(--text); line-height:1; letter-spacing:-0.02em; }
+.hud-timer.warning { color:var(--amber); }
+.hud-timer.critical { color:var(--red); animation:pulse 0.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.hud-progress { display:flex; flex-direction:column; gap:4px; }
+.hud-prog-bar { height:5px; background:var(--bg4); border-radius:3px; overflow:hidden; }
+.hud-prog-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--teal)); border-radius:3px; transition:width 0.3s; }
+.hud-prog-label { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); }
+.hud-score { text-align:right; }
+.hud-score-val { font-family:var(--font-head); font-weight:800; font-size:1.6rem; color:var(--accent2); line-height:1; }
+.hud-score-label { font-family:var(--font-mono); font-size:0.52rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.08em; }
+.hud-streak { text-align:center; }
+.streak-val { font-family:var(--font-head); font-weight:800; font-size:1.2rem; color:var(--amber); }
+.streak-label { font-family:var(--font-mono); font-size:0.52rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.06em; }
+
+/* QUESTION CARD */
+.q-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; margin-bottom:1.25rem; animation:pageIn 0.3s ease; }
+.q-meta { display:flex; align-items:center; gap:8px; margin-bottom:1rem; }
+.q-pillar { font-family:var(--font-mono); font-size:0.58rem; padding:3px 9px; border-radius:4px; background:var(--accent-dim); color:var(--accent2); border:1px solid var(--border-accent); }
+.q-difficulty { font-family:var(--font-mono); font-size:0.58rem; padding:3px 9px; border-radius:4px; }
+.q-diff-easy { background:var(--green-dim); color:var(--green); }
+.q-diff-medium { background:var(--amber-dim); color:var(--amber); }
+.q-diff-hard { background:var(--red-dim); color:var(--red); }
+.q-pts { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); margin-left:auto; }
+.q-text { font-family:var(--font-head); font-weight:700; font-size:1.05rem; color:var(--text); line-height:1.4; margin-bottom:1.25rem; letter-spacing:-0.01em; }
+.q-options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.q-opt { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px; cursor:pointer; transition:all 0.15s; text-align:left; font-size:0.85rem; color:var(--text-dim); line-height:1.5; }
+.q-opt:hover:not(:disabled) { border-color:var(--border-hi); color:var(--text); transform:scale(1.01); }
+.q-opt:disabled { cursor:not-allowed; }
+.q-opt.correct { border-color:var(--green); background:var(--green-dim); color:var(--text); }
+.q-opt.wrong { border-color:var(--red); background:var(--red-dim); }
+.q-opt.reveal { border-color:rgba(16,185,129,0.3); }
+
+/* FEEDBACK FLASH */
+.feedback-flash { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:500; pointer-events:none; font-family:var(--font-head); font-weight:800; font-size:2.5rem; letter-spacing:-0.03em; animation:flashAnim 0.8s ease forwards; }
+@keyframes flashAnim { 0%{opacity:1;transform:translate(-50%,-60%) scale(1.1)} 100%{opacity:0;transform:translate(-50%,-80%) scale(0.9)} }
+
+/* EXPLANATION */
+.q-explanation { background:var(--bg3); border-radius:var(--radius-sm); padding:1rem 1.25rem; margin-top:1rem; font-size:0.85rem; color:var(--text-dim); line-height:1.75; animation:fadeIn 0.3s; border-left:2px solid var(--teal); display:none; }
+.q-explanation.open { display:block; }
+.q-explanation b { color:var(--teal); font-weight:600; }
+.q-next-btn { width:100%; padding:0.75rem; background:var(--accent); color:#fff; border:none; border-radius:var(--radius-sm); font-family:var(--font-head); font-weight:600; font-size:0.88rem; cursor:pointer; margin-top:1rem; transition:all 0.2s; display:none; }
+.q-next-btn.visible { display:block; }
+.q-next-btn:hover { background:#5558E3; }
+
+/* RESULTS */
+.game-results { display:none; max-width:600px; margin:0 auto; }
+.game-results.active { display:block; animation:pageIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.final-score { text-align:center; padding:2.5rem 0 1.5rem; }
+.fs-grade { font-family:var(--font-head); font-weight:800; font-size:5rem; line-height:1; margin-bottom:0.5rem; letter-spacing:-0.04em; }
+.fs-pts { font-family:var(--font-mono); font-size:0.65rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.5rem; }
+.fs-title { font-family:var(--font-head); font-weight:700; font-size:1.2rem; color:var(--text); }
+.fs-sub { font-size:0.88rem; color:var(--text-dim); margin-top:4px; }
+.breakdown-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:1.5rem 0; }
+.bd-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1rem; text-align:center; }
+.bd-val { font-family:var(--font-head); font-weight:800; font-size:1.4rem; color:var(--accent2); line-height:1; }
+.bd-lbl { font-family:var(--font-mono); font-size:0.52rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px; }
+.answer-log { display:flex; flex-direction:column; gap:5px; margin:1rem 0; }
+.al-item { display:flex; align-items:flex-start; gap:10px; padding:8px 12px; background:var(--bg2); border-radius:var(--radius-sm); }
+.al-icon { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:700; flex-shrink:0; margin-top:1px; }
+.al-icon.c { background:var(--green); color:#0B0D14; }
+.al-icon.w { background:var(--red); color:#fff; }
+.al-q { font-size:0.8rem; color:var(--text-dim); flex:1; }
+.al-pts { font-family:var(--font-mono); font-size:0.65rem; font-weight:500; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap" style="max-width:900px;padding-bottom:4rem">
+
+  <!-- LOBBY -->
+  <div id="game-lobby">
+    <div class="lobby">
+      <div class="lobby-hero anim-slide">
+        <div class="page-eyebrow" style="justify-content:center">Revenue Fluent Challenge</div>
+        <h1 class="page-title" style="text-align:center">Test your <em>Revenue Fluency.</em></h1>
+        <p class="page-desc" style="text-align:center;margin:0 auto 1.75rem">Timed. Scored. Unforgiving. Answer revenue intelligence questions across all 5 pillars. Every correct answer earns points. Streaks multiply them. Wrong answers dock your time.</p>
+        <div style="display:inline-flex;gap:10px;margin-bottom:2rem;flex-wrap:wrap;justify-content:center">
+          <span class="tag tag-teal">Timed pressure</span>
+          <span class="tag tag-accent">Streak multipliers</span>
+          <span class="tag tag-amber">Instant scoring</span>
+          <span class="tag tag-muted">25 questions</span>
+        </div>
+      </div>
+
+      <!-- MODE SELECT -->
+      <div class="mono-label" style="margin-bottom:0.75rem;text-align:center">Choose your mode</div>
+      <div class="mode-grid">
+        <div class="mode-card sprint selected" onclick="selectMode('sprint',this)" id="mode-sprint">
+          <div class="mc-icon">⚡</div>
+          <div class="mc-name">Sprint</div>
+          <div class="mc-desc">10 questions. 90 seconds. Pure intensity.</div>
+          <div class="mc-stats"><span class="mc-stat">10 questions</span><span class="mc-stat">90 sec</span><span class="mc-stat">100 pts max</span></div>
+        </div>
+        <div class="mode-card endurance" onclick="selectMode('endurance',this)" id="mode-endurance">
+          <div class="mc-icon">🎯</div>
+          <div class="mc-name">Endurance</div>
+          <div class="mc-desc">20 questions. 4 minutes. All 5 pillars.</div>
+          <div class="mc-stats"><span class="mc-stat">20 questions</span><span class="mc-stat">4 min</span><span class="mc-stat">200 pts max</span></div>
+        </div>
+        <div class="mode-card expert" onclick="selectMode('expert',this)" id="mode-expert">
+          <div class="mc-icon">💎</div>
+          <div class="mc-name">Expert</div>
+          <div class="mc-desc">25 hard questions. 6 minutes. CRFP level.</div>
+          <div class="mc-stats"><span class="mc-stat">25 questions</span><span class="mc-stat">6 min</span><span class="mc-stat">300 pts max</span></div>
+        </div>
+      </div>
+
+      <!-- PILLAR SELECT -->
+      <div class="mono-label" style="margin-bottom:0.75rem;text-align:center">Focus pillars (all selected)</div>
+      <div class="pillars-select" id="pillar-toggles">
+        <div class="pillar-toggle active" onclick="togglePillar(this,'p1')">L1 · Revenue Connect</div>
+        <div class="pillar-toggle active" onclick="togglePillar(this,'p2')">L2 · People Alpha</div>
+        <div class="pillar-toggle active" onclick="togglePillar(this,'p3')">L3 · Team Architecture</div>
+        <div class="pillar-toggle active" onclick="togglePillar(this,'p4')">L4 · HUMANCE</div>
+        <div class="pillar-toggle active" onclick="togglePillar(this,'p5')">L5 · People P&L</div>
+      </div>
+
+      <!-- HIGH SCORES -->
+      <div class="high-scores" id="high-scores-panel">
+        <div class="mono-label" style="margin-bottom:0.75rem">Your best scores</div>
+        <div id="hs-list">
+          <div style="font-size:0.82rem;color:var(--text-mute);text-align:center;padding:1rem">No scores yet. Play your first game →</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:1.5rem">
+        <button onclick="startGame()" class="btn btn-primary" style="padding:1rem 3rem;font-size:1rem">Start Challenge →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div id="game-countdown" style="display:none;text-align:center;padding:4rem 0">
+    <div style="font-family:var(--font-head);font-weight:800;font-size:6rem;color:var(--accent2);line-height:1;margin-bottom:1rem" id="countdown-num">3</div>
+    <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.2em" id="countdown-label">Get ready</div>
+  </div>
+
+  <!-- GAME ENGINE -->
+  <div class="game-engine" id="game-engine">
+    <div class="game-hud">
+      <div class="hud-timer" id="hud-timer">1:30</div>
+      <div class="hud-progress">
+        <div class="hud-prog-bar"><div class="hud-prog-fill" id="hud-prog-fill" style="width:0%"></div></div>
+        <div class="hud-prog-label" id="hud-prog-label">Question 1 of 10</div>
+      </div>
+      <div class="hud-streak">
+        <div class="streak-val" id="hud-streak">0×</div>
+        <div class="streak-label">streak</div>
+      </div>
+      <div class="hud-score">
+        <div class="hud-score-val" id="hud-score">0</div>
+        <div class="hud-score-label">points</div>
+      </div>
+    </div>
+    <div id="q-wrap"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="game-results" id="game-results">
+    <div class="final-score">
+      <div class="fs-grade" id="fs-grade">A</div>
+      <div class="fs-pts" id="fs-pts">0 / 0 pts</div>
+      <div class="fs-title" id="fs-title">Revenue Fluent Master</div>
+      <div class="fs-sub" id="fs-sub"></div>
+    </div>
+    <div class="breakdown-grid" id="breakdown-grid"></div>
+    <div class="ls-card" style="margin-bottom:1rem">
+      <div class="mono-label" style="margin-bottom:0.875rem">Answer breakdown</div>
+      <div class="answer-log" id="answer-log"></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button onclick="playAgain()" class="btn btn-primary">Play again →</button>
+      <a href="certification.html" class="btn btn-ghost">Earn CRFP →</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('game');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ['Revenue Fluent', 'Challenge'],
+  '<span class="tb-pill amber">⚡ Timed</span>'
+);
+
+// ─── QUESTION BANK ────────────────────────────────────────
+const QUESTIONS = [
+  // P1 — Revenue Connect
+  { pillar:'P1', tag:'Revenue Connect', difficulty:'easy', pts:10,
+    q:'What does ATC% (Attrition Cost Percentage) measure?',
+    opts:['How fast you hire replacements','Total replacement cost as a % of annual revenue','Employee satisfaction after exits','The speed of talent acquisition'],
+    correct:1, explanation:'ATC% converts attrition from a headcount rate into a revenue drag rate — total replacement cost divided by annual revenue. It reframes exits as financial events, not just HR statistics.' },
+  { pillar:'P1', tag:'Revenue Connect', difficulty:'medium', pts:15,
+    q:'TechVelocity has ATC% of 141%. What does this mean in practical terms?',
+    opts:['14.1% of employees left','Replacement costs exceed annual revenue','For every ₹100 of revenue, ₹141 is spent replacing talent','141 people were hired this year'],
+    correct:2, explanation:'ATC% of 141% means replacement cost exceeds the revenue benchmark threshold. The company spends ₹1.41 in talent replacement for every ₹1 of revenue — a critical signal that attrition is consuming more than it can afford.' },
+  { pillar:'P1', tag:'Revenue Connect', difficulty:'medium', pts:15,
+    q:'The Talent Drag Factor (TDF) primarily measures:',
+    opts:['How slowly managers make decisions','Revenue capacity impaired by people in transition','The cost of bad hires','Time taken to fill open roles'],
+    correct:1, explanation:'TDF measures what share of your revenue-generating capacity is currently impaired because people are ramping, backfilling, or covering for exits. Low TDF = healthy · High TDF = structural revenue drag.' },
+  { pillar:'P1', tag:'Revenue Connect', difficulty:'hard', pts:20,
+    q:'ESR drops from 94% to 61% after a succession event. Revenue base is ₹84Cr. What is the Culture Yield destroyed?',
+    opts:['₹2.8Cr','₹5.6Cr','₹27.7Cr','₹84Cr'],
+    correct:2, explanation:'Culture Yield destroyed = (ESR drop ÷ 100) × Revenue base = (33 ÷ 100) × ₹84Cr = ₹27.7Cr. The 33-point efficiency drop translates directly into destroyed Culture Yield — one of the 4 HUMANCE asset classes.' },
+  { pillar:'P1', tag:'Revenue Connect', difficulty:'easy', pts:10,
+    q:'When HR presents "attrition is 14%" versus "attrition cost us ₹1.1Cr in revenue" — what is the key difference?',
+    opts:['One is more accurate','One uses a rupee amount the board can act on','One is harder to calculate','One shows fewer exits'],
+    correct:1, explanation:'Percentages tell a CFO nothing useful — they describe a rate, not a consequence. Rupee amounts trigger decisions. Revenue Connect converts attrition from a ratio into a financial event with a defensible number.' },
+
+  // P2 — People Alpha
+  { pillar:'P2', tag:'People Alpha', difficulty:'easy', pts:10,
+    q:'In finance, "alpha" means return above the market benchmark. In People Alpha, what is the equivalent benchmark?',
+    opts:['Your company\'s previous year performance','Industry average performance for the same role/investment','Your competitors\' headcount','HR industry best practice'],
+    correct:1, explanation:'People Alpha uses the industry benchmark as the baseline — the same way a fund manager uses the market index. Any return above benchmark is positive alpha. Matching benchmark = zero alpha. Below benchmark = negative alpha.' },
+  { pillar:'P2', tag:'People Alpha', difficulty:'medium', pts:15,
+    q:'Sterling Consulting had 4 simultaneous promotions at average readiness of 62%. The threshold is 70%. What is the expected Promotion Alpha?',
+    opts:['Positive — they promoted high performers','+8% alpha','Neutral — readiness doesn\'t affect alpha','-8% alpha — negative'],
+    correct:3, explanation:'Promotions below the 70% readiness threshold reliably generate negative Promotion Alpha. At 62% readiness — 8 points below threshold — Promotion Alpha was -8%. This drove billable utilisation from 78% to 60%, costing £2.4M in annual revenue.' },
+  { pillar:'P2', tag:'People Alpha', difficulty:'hard', pts:20,
+    q:'Ritu\'s L&D programme cost ₹45L and generated ₹1.9Cr in revenue uplift for 28 managers. What is the L&D Alpha ratio?',
+    opts:['1.9x','4.2x','42x','0.42x'],
+    correct:1, explanation:'L&D Alpha ratio = Revenue uplift ÷ Programme cost = ₹1.9Cr ÷ ₹45L = 4.2x. For every rupee invested in the programme, ₹4.2 came back in People Revenue. This is L&D Alpha of +62%.' },
+  { pillar:'P2', tag:'People Alpha', difficulty:'medium', pts:15,
+    q:'Which type of People Alpha is most commonly negative — and why?',
+    opts:['Hiring Alpha — poor screening','Retention Alpha — everyone leaves eventually','Promotion Alpha — people are promoted before they\'re ready','L&D Alpha — training rarely works'],
+    correct:2, explanation:'Promotion Alpha is the most commonly negative dimension. Companies promote good people too early — the person is excellent in their previous role but set up to fail in the new one. The damage is to both the individual and the team they now lead.' },
+  { pillar:'P2', tag:'People Alpha', difficulty:'hard', pts:20,
+    q:'An AE reaches quota attainment in 45 days vs the market average of 72 days. Quality score: 14% above benchmark. What metric does this calculate?',
+    opts:['Retention Alpha','L&D Alpha','Hiring Alpha','Promotion Alpha'],
+    correct:2, explanation:'Hiring Alpha measures quality and speed-to-productivity above the market benchmark. Speed premium (72 vs 45 days = +38%) combined with quality premium (+14%) produces positive Hiring Alpha. This is why hiring decisions are capital allocation decisions, not just headcount decisions.' },
+
+  // P3 — Team Architecture
+  { pillar:'P3', tag:'Team Architecture', difficulty:'easy', pts:10,
+    q:'Configuration A (high-autonomy pods) produces what revenue premium vs Configuration C (top-heavy hierarchy)?',
+    opts:['+8% vs -8%','+34% vs -19%','+19% vs -8%','+12% vs -12%'],
+    correct:1, explanation:'Config A = +34% revenue premium. Config B = +8%. Config C = -19%. The 53-point gap between A and C on the same headcount is why org chart decisions are revenue decisions — not just structural preferences.' },
+  { pillar:'P3', tag:'Team Architecture', difficulty:'medium', pts:15,
+    q:'OEI (Org Enablement Index) measures:',
+    opts:['Employee engagement','Revenue-generating roles as % of total headcount','Management quality','Profit per employee'],
+    correct:1, explanation:'OEI = Revenue-generating roles ÷ Total headcount × 100. It measures what share of your payroll is pointed at the market vs pointing at itself through coordination and management. Below 50% = structurally top-heavy.' },
+  { pillar:'P3', tag:'Team Architecture', difficulty:'medium', pts:15,
+    q:'Mei\'s Singapore fintech went from Config A to Config B by adding management layers post-Series B. Revenue per head dropped 28%. What caused this?',
+    opts:['The market slowed down','She hired the wrong people','Structure changed — the same people in Config B produce less revenue per head than in Config A','Investors took too much equity'],
+    correct:2, explanation:'The people didn\'t change. The market didn\'t change. The configuration changed. Config A → Config B cost 26 percentage points of revenue premium on the same headcount. This is why revenue architecture matters: structure determines output ceiling.' },
+  { pillar:'P3', tag:'Team Architecture', difficulty:'hard', pts:20,
+    q:'The OSI (Org Stability Index) is 60. What does this indicate?',
+    opts:['60% of employees are engaged','The org has had too many structural changes — Revenue DNA is being destroyed','Revenue is at 60% of target','60 employees are at flight risk'],
+    correct:1, explanation:'OSI below 60 signals destructive structural churn. Every reorganisation resets team chemistry, ownership clarity, and momentum — the Revenue DNA that underpins Config A performance. High OSI = stable and compounding. Low OSI = structure never settles enough to perform.' },
+  { pillar:'P3', tag:'Team Architecture', difficulty:'easy', pts:10,
+    q:'PCoB (Payroll Cost of Burn) rises when:',
+    opts:['Revenue grows faster than payroll','Management layers increase and span of control narrows','More revenue-generating roles are added','Employee satisfaction improves'],
+    correct:1, explanation:'PCoB measures management overhead cost as % of total payroll. It rises when you add management layers (more managers per team) and when spans narrow (each manager oversees fewer people). Rising PCoB = structural tax on revenue production.' },
+
+  // P4 — HUMANCE
+  { pillar:'P4', tag:'HUMANCE', difficulty:'easy', pts:10,
+    q:'"Revenue tells you what you earned. HUMANCE tells you ___"',
+    opts:['How much you paid in salaries','What made earning possible','How many people you employ','Your market share'],
+    correct:1, explanation:'The HUMANCE mantra. Revenue is the output. HUMANCE is the human infrastructure that makes the output possible — trust, culture, signal intelligence, and belonging. It\'s the balance sheet item that\'s been missing from every company\'s accounts.' },
+  { pillar:'P4', tag:'HUMANCE', difficulty:'medium', pts:15,
+    q:'Mehta & Sons had IRD of 18% and RBC of 20%. What do these scores predict?',
+    opts:['Healthy succession — low scores mean low risk','Dangerous HUMANCE concentration — relationships are personal to the founder, not institutionalised','Excellent culture — below-average scores signal stability','Strong revenue growth expected'],
+    correct:1, explanation:'IRD of 18% = knowledge and relationships dangerously concentrated (low institutional depth, high personal dependency). RBC of 20% = minimal succession coverage for those relationships. Together they predict Trust Capital destruction if the key person leaves — exactly what happened at Mehta & Sons.' },
+  { pillar:'P4', tag:'HUMANCE', difficulty:'hard', pts:20,
+    q:'The San Francisco acquisition paid $40M. $12M was attributable to HUMANCE that evaporated post-acquisition. What was the HUMANCE protection failure?',
+    opts:['The price paid was too high','HUMANCE was never calculated or protected in the deal structure — earn-outs were product-based, not retention-based','The acquired team wasn\'t talented enough','The acquirer\'s culture was too different'],
+    correct:1, explanation:'The deal structure had no HUMANCE protection. Standard due diligence assessed technical debt and contracts but not Trust Capital concentration (3 architects held all key client relationships). With no retention-based earn-outs, the architects had no financial incentive to stay. $12M of HUMANCE — and $8.4M in annual enterprise revenue — walked out in 14 months.' },
+  { pillar:'P4', tag:'HUMANCE', difficulty:'medium', pts:15,
+    q:'Belonging Premium prices the revenue generated by:',
+    opts:['Employees who earn above-market salaries','Discretionary effort above employment contract obligations','Employees who have worked longest','The HR team\'s culture programmes'],
+    correct:1, explanation:'Belonging Premium = the revenue generated when people do more than their job description requires — the call made after hours, the proactive problem-solving, the relationship deepened beyond scope. This only happens when belonging is genuine. When belonging erodes, performance falls to the floor of the contract.' },
+  { pillar:'P4', tag:'HUMANCE', difficulty:'hard', pts:20,
+    q:'Which intervention best protects Trust Capital during a founder succession?',
+    opts:['Immediate full handover — clean break is better for the business','Document all the founder\'s knowledge before they leave','12-month co-leadership: founder and successor jointly manage key relationships, successor leads specific deliverables, founder endorses','Hire an experienced external CEO for 2 years while successor develops'],
+    correct:2, explanation:'Co-leadership is the only mechanism that transfers Trust Capital by demonstration. Clients see the successor performing before the founder steps back. Trust transfers because it has been earned — not assumed. RBC moves from near-zero to 60–70% over 12 months.' },
+
+  // P5 — People P&L
+  { pillar:'P5', tag:'People P&L', difficulty:'easy', pts:10,
+    q:'The People ROI Ratio is calculated as:',
+    opts:['Net People ROI ÷ Number of employees','Total People Revenue ÷ Total People Cost','Annual revenue ÷ Total payroll','People Cost ÷ People Revenue'],
+    correct:1, explanation:'People ROI Ratio = Total People Revenue ÷ Total People Cost. It answers the CFO\'s question: "For every rupee we spend on people, how many rupees come back?" 1x = breakeven. 2x+ = value creator. 3x+ = exceptional.' },
+  { pillar:'P5', tag:'People P&L', difficulty:'medium', pts:15,
+    q:'Deepika\'s People P&L showed 2.1x People ROI Ratio. Why did this change her relationship with the board?',
+    opts:['2.1x is higher than the previous year','The board finally understood HR metrics','The P&L format means HR data is processed the same way as finance data — triggering decisions, not just acknowledgement','She had better slide design'],
+    correct:2, explanation:'Format matters as much as data. A CFO reads a P&L every month — the cognitive framework is automatic. When HR data arrives in P&L format (revenue line, cost line, net line, ratio), it triggers the same questions and decisions as the finance team\'s output. This is why People P&L is more than a calculation — it\'s a communication strategy.' },
+  { pillar:'P5', tag:'People P&L', difficulty:'hard', pts:20,
+    q:'James\'s Sydney firm had People ROI Ratio of 0.93x despite 15% annual revenue growth. What does this mean?',
+    opts:['HR is performing well — below 1x is normal for professional services','The company is growing despite destroying People value — not because of creating it','Revenue growth always produces a positive ratio','0.93x is above the industry benchmark'],
+    correct:1, explanation:'A ratio below 1x means People Cost exceeds People Revenue — the organisation is a net people value destroyer. Growing revenue can mask this: the business grows for other reasons while an invisible people efficiency problem compounds. James\'s 0.93x with 15% growth meant the scaling was adding cost faster than it was adding People Revenue.' },
+  { pillar:'P5', tag:'People P&L', difficulty:'medium', pts:15,
+    q:'Which component is most commonly missing from a traditional HR headcount cost calculation?',
+    opts:['Training costs','Recruitment fees','Attrition leakage — the revenue that leaks through transitions, not just replacement costs','Benefits and perks'],
+    correct:2, explanation:'Traditional people cost = payroll. Full People Cost = payroll + attrition leakage (ATC%, TDF drag, institutional knowledge loss). The leakage is often 15–30% of the total cost — and it\'s entirely invisible in standard financial reporting. Including it is what makes the People P&L honest.' },
+  { pillar:'P5', tag:'People P&L', difficulty:'hard', pts:20,
+    q:'If the People ROI Ratio is 2.3x, what is the single most important action?',
+    opts:['Celebrate and maintain — 2.3x is excellent','Find which pillar is capping the ratio and invest to increase it','Reduce People Cost to improve the ratio','Report 2.3x to the board and move on'],
+    correct:1, explanation:'The People P&L is a diagnostic, not just a scorecard. 2.3x is good — but the Revenue Fluent practitioner immediately asks: which pillar is the binding constraint? Is Promotion Alpha dragging P2? Is attrition leakage bloating cost? The ratio tells you where you are; the diagnostic tells you where to go next.' },
+];
+
+// ─── GAME STATE ─────────────────────
+let selectedMode = 'sprint';
+let selectedPillars = new Set(['p1','p2','p3','p4','p5']);
+let gameQuestions = [];
+let currentQ = 0;
+let score = 0;
+let streak = 0;
+let maxStreak = 0;
+let correct = 0;
+let timerInterval = null;
+let timeLeft = 90;
+let answered = [];
+const MODES = { sprint:{count:10,time:90}, endurance:{count:20,time:240}, expert:{count:25,time:360} };
+
+function selectMode(mode, el) {
+  selectedMode = mode;
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function togglePillar(el, pid) {
+  if (selectedPillars.has(pid) && selectedPillars.size <= 1) return;
+  if (selectedPillars.has(pid)) { selectedPillars.delete(pid); el.classList.remove('active'); }
+  else { selectedPillars.add(pid); el.classList.add('active'); }
+}
+
+function shuffleArr(arr) { return [...arr].sort(()=>Math.random()-0.5); }
+
+function startGame() {
+  const mode = MODES[selectedMode];
+  const filtered = QUESTIONS.filter(q => selectedPillars.has(q.pillar.toLowerCase()));
+  gameQuestions = shuffleArr(filtered).slice(0, mode.count);
+  gameQuestions.forEach(q => { q.shuffledOpts = shuffleArr(q.opts.map((o,i)=>({text:o,orig:i}))); });
+
+  currentQ = 0; score = 0; streak = 0; maxStreak = 0; correct = 0; answered = [];
+  timeLeft = mode.time;
+
+  document.getElementById('game-lobby').style.display = 'none';
+  document.getElementById('game-countdown').style.display = 'block';
+  let count = 3;
+  document.getElementById('countdown-num').textContent = count;
+  const cd = setInterval(() => {
+    count--;
+    if (count > 0) {
+      document.getElementById('countdown-num').textContent = count;
+      document.getElementById('countdown-label').textContent = 'Get ready';
+    } else if (count === 0) {
+      document.getElementById('countdown-num').textContent = 'GO!';
+      document.getElementById('countdown-label').textContent = '';
+    } else {
+      clearInterval(cd);
+      document.getElementById('game-countdown').style.display = 'none';
+      document.getElementById('game-engine').classList.add('active');
+      startTimer();
+      renderQuestion();
+    }
+  }, 700);
+}
+
+function startTimer() {
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) { clearInterval(timerInterval); endGame(); }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const mins = Math.floor(timeLeft/60);
+  const secs = timeLeft % 60;
+  const display = `${mins}:${secs.toString().padStart(2,'0')}`;
+  const el = document.getElementById('hud-timer');
+  el.textContent = display;
+  el.className = 'hud-timer' + (timeLeft <= 15 ? ' critical' : timeLeft <= 30 ? ' warning' : '');
+}
+
+function renderQuestion() {
+  if (currentQ >= gameQuestions.length) { clearInterval(timerInterval); endGame(); return; }
+  const q = gameQuestions[currentQ];
+  const mode = MODES[selectedMode];
+  const pct = Math.round((currentQ / mode.count) * 100);
+  document.getElementById('hud-prog-fill').style.width = pct + '%';
+  document.getElementById('hud-prog-label').textContent = `Question ${currentQ+1} of ${mode.count}`;
+  document.getElementById('hud-score').textContent = score;
+  document.getElementById('hud-streak').textContent = streak + '×';
+
+  const streakBonus = streak >= 5 ? 3 : streak >= 3 ? 2 : 1;
+
+  document.getElementById('q-wrap').innerHTML = `
+    <div class="q-card" id="q-card-current">
+      <div class="q-meta">
+        <span class="q-pillar">${q.tag}</span>
+        <span class="q-difficulty q-diff-${q.difficulty}">${q.difficulty}</span>
+        <span class="q-pts">${q.pts}pts${streakBonus>1?' × '+streakBonus+'× streak':''}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">
+        ${q.shuffledOpts.map((o,i) => `
+          <button class="q-opt" onclick="answerQ(${i})">
+            <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute);margin-right:6px">${String.fromCharCode(65+i)}.</span>${o.text}
+          </button>
+        `).join('')}
+      </div>
+      <div class="q-explanation" id="q-explanation">${q.explanation}</div>
+      <button class="q-next-btn" id="q-next-btn" onclick="nextQuestion()">Next question →</button>
+    </div>
+  `;
+}
+
+function answerQ(optIdx) {
+  const q = gameQuestions[currentQ];
+  const selected = q.shuffledOpts[optIdx];
+  const isCorrect = selected.orig === q.correct;
+  const btns = document.querySelectorAll('.q-opt');
+  btns.forEach((b,i) => {
+    b.disabled = true;
+    if (q.shuffledOpts[i].orig === q.correct) b.classList.add('correct');
+    else if (i === optIdx && !isCorrect) b.classList.add('wrong');
+  });
+
+  if (isCorrect) {
+    streak++;
+    maxStreak = Math.max(maxStreak, streak);
+    correct++;
+    const multiplier = streak >= 5 ? 3 : streak >= 3 ? 2 : 1;
+    const earned = q.pts * multiplier;
+    score += earned;
+    showFlash('+' + earned, '#10B981');
+    if (streak >= 3) showFlash('🔥 ' + streak + '× STREAK!', '#F59E0B', 400);
+  } else {
+    streak = 0;
+    timeLeft = Math.max(0, timeLeft - 8);
+    showFlash('-8s', '#EF4444');
+  }
+
+  answered.push({ q: q.q.substring(0,60)+'...', correct: isCorrect, pts: isCorrect ? q.pts : 0, pillar: q.tag });
+  document.getElementById('q-explanation').classList.add('open');
+  document.getElementById('q-next-btn').classList.add('visible');
+  document.getElementById('hud-score').textContent = score;
+  document.getElementById('hud-streak').textContent = streak + '×';
+}
+
+function showFlash(text, color, delay=0) {
+  setTimeout(() => {
+    const el = document.createElement('div');
+    el.className = 'feedback-flash';
+    el.textContent = text;
+    el.style.color = color;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 800);
+  }, delay);
+}
+
+function nextQuestion() {
+  currentQ++;
+  renderQuestion();
+}
+
+function endGame() {
+  clearInterval(timerInterval);
+  document.getElementById('game-engine').classList.remove('active');
+  const results = document.getElementById('game-results');
+  results.classList.add('active');
+
+  const maxPts = gameQuestions.reduce((s,q)=>s+q.pts,0);
+  const pct = maxPts > 0 ? Math.round((score/maxPts)*100) : 0;
+  let grade, title, sub, gradeColor;
+  if(pct>=90){grade='A+';title='Revenue Fluent Master';sub='Exceptional Revenue Fluency across all pillars.';gradeColor='var(--teal)';}
+  else if(pct>=80){grade='A';title='Revenue Fluent Practitioner';sub='Strong Revenue Intelligence. CRFP-ready.';gradeColor='var(--teal)';}
+  else if(pct>=70){grade='B+';title='Revenue Aware';sub='Solid foundation. A few gaps to close.';gradeColor='var(--accent2)';}
+  else if(pct>=55){grade='B';title='Developing Fluency';sub='Good instincts. Study the explanations.';gradeColor='var(--amber)';}
+  else if(pct>=40){grade='C+';title='Revenue Fluency in Progress';sub='Keep studying. Every wrong answer is a lesson.';gradeColor='var(--amber)';}
+  else{grade='C';title='Start with the Learning Hub';sub='The fundamentals need strengthening. Try Learn first.';gradeColor='var(--red)';}
+
+  document.getElementById('fs-grade').textContent = grade;
+  document.getElementById('fs-grade').style.color = gradeColor;
+  document.getElementById('fs-pts').textContent = score + ' / ' + maxPts + ' pts  (' + pct + '%)';
+  document.getElementById('fs-title').textContent = title;
+  document.getElementById('fs-sub').textContent = sub;
+
+  document.getElementById('breakdown-grid').innerHTML = `
+    <div class="bd-card"><div class="bd-val" style="color:var(--teal)">${correct}</div><div class="bd-lbl">Correct</div></div>
+    <div class="bd-card"><div class="bd-val" style="color:var(--red)">${answered.length-correct}</div><div class="bd-lbl">Wrong</div></div>
+    <div class="bd-card"><div class="bd-val" style="color:var(--amber)">${maxStreak}×</div><div class="bd-lbl">Best Streak</div></div>
+    <div class="bd-card"><div class="bd-val" style="color:${gradeColor}">${grade}</div><div class="bd-lbl">Grade</div></div>
+  `;
+
+  document.getElementById('answer-log').innerHTML = answered.map(a => `
+    <div class="al-item">
+      <div class="al-icon ${a.correct?'c':'w'}">${a.correct?'✓':'×'}</div>
+      <div class="al-q">${a.q}</div>
+      <div class="al-pts" style="color:${a.correct?'var(--teal)':'var(--red)'}">${a.correct?'+'+a.pts+'pts':'-8s'}</div>
+    </div>
+  `).join('');
+
+  // Save high score
+  const key = 'rf_scores_' + selectedMode;
+  try {
+    const scores = JSON.parse(localStorage.getItem(key)||'[]');
+    scores.push({ score, grade, date: new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short'}) });
+    scores.sort((a,b)=>b.score-a.score);
+    localStorage.setItem(key, JSON.stringify(scores.slice(0,5)));
+  } catch(e){}
+
+  loadHighScores();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function playAgain() {
+  document.getElementById('game-results').classList.remove('active');
+  document.getElementById('game-lobby').style.display = 'block';
+  loadHighScores();
+}
+
+function loadHighScores() {
+  try {
+    const allScores = [];
+    ['sprint','endurance','expert'].forEach(m => {
+      const s = JSON.parse(localStorage.getItem('rf_scores_'+m)||'[]');
+      s.forEach(sc => allScores.push({...sc, mode:m}));
+    });
+    allScores.sort((a,b)=>b.score-a.score);
+    if (allScores.length === 0) return;
+    document.getElementById('hs-list').innerHTML = allScores.slice(0,5).map((s,i) => `
+      <div class="hs-row">
+        <div class="hs-rank">${i+1}</div>
+        <div class="hs-name">${s.mode} · ${s.date}</div>
+        <div class="hs-score">${s.score}pts</div>
+        <div class="hs-grade" style="background:${s.grade.startsWith('A')?'var(--green-dim)':s.grade.startsWith('B')?'var(--amber-dim)':'var(--red-dim)'};color:${s.grade.startsWith('A')?'var(--green)':s.grade.startsWith('B')?'var(--amber)':'var(--red)'};">${s.grade}</div>
+      </div>
+    `).join('');
+  } catch(e){}
+}
+
+loadHighScores();
+</script>
+</body>
+</html>
