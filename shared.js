@@ -605,7 +605,7 @@ const RF = {
     const prog = this.progress.getPercent();
     let html = `
       <div class="sidebar">
-        <a href="dashboard.html" class="sb-brand">
+        <a href="landing.html" class="sb-brand">
           <div class="sb-logo"><div class="sb-logo-dot"></div></div>
           <div class="sb-brand-text">Revenue<em>Fluent</em></div>
         </a>
