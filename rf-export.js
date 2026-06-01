@@ -63,7 +63,7 @@ const RF_PDF = {
 
     // Brand logo area
     doc.setFillColor(...c.accent);
-    doc.roundedRect(14, 9, 10, 10, 2, 2, 'F');
+    doc.rect(14, 9, 10, 10, 'F');
     doc.setFillColor(255, 255, 255);
     doc.circle(19, 14, 2.5, 'F');
 
@@ -78,7 +78,7 @@ const RF_PDF = {
 
     // Pillar badge
     doc.setFillColor(...c.accent);
-    doc.roundedRect(W - 60, 9, 46, 10, 2, 2, 'F');
+    doc.rect(W - 60, 9, 46, 10, 'F');
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(7);
     doc.setTextColor(255, 255, 255);
@@ -129,7 +129,7 @@ const RF_PDF = {
 
       // Card background
       doc.setFillColor(...c.bg2);
-      doc.roundedRect(x, y, cardW, cardH, 2, 2, 'F');
+      doc.rect(x, y, cardW, cardH, 'F');
 
       // Accent top border
       const lineColor = m.color || c.accent;
@@ -197,9 +197,9 @@ const RF_PDF = {
     doc.text(label, 14, ctx.y + 3.5);
 
     doc.setFillColor(...c.bg3);
-    doc.roundedRect(14, ctx.y + 5, barMaxW, 3, 0.5, 0.5, 'F');
+    doc.rect(14, ctx.y + 5, barMaxW, 3, 'F');
     doc.setFillColor(...(color || c.accent));
-    doc.roundedRect(14, ctx.y + 5, fillW, 3, 0.5, 0.5, 'F');
+    doc.rect(14, ctx.y + 5, fillW, 3, 'F');
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(8);
@@ -217,7 +217,7 @@ const RF_PDF = {
     const boxH = lines.length * 5 + 10;
 
     doc.setFillColor(20, 22, 45);
-    doc.roundedRect(14, ctx.y, W - 28, boxH, 2, 2, 'F');
+    doc.rect(14, ctx.y, W - 28, boxH, 'F');
     doc.setFillColor(...c.accent);
     doc.rect(14, ctx.y, 2, boxH, 'F');
 
