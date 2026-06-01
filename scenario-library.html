@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Scenario Library — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+ --bg:#0E0F12; --bg2:#1A1A22; --bg3:#141418; --bg4:#22222C;
+ --copper:#B87333; --copper-lt:#E8C87A; --copper-dim:rgba(184,115,51,.12);
+ --sig-red:#E05C3A; --sig-amber:#E8C87A; --sig-teal:#5CC8A0; --sig-mute:#4A4A5A;
+ --text:#E8E6E0; --text-dim:#8A8A9A; --text-mute:#4A4A5A;
+ --border:#2A2A35; --border-hi:#3A3A48; --border-accent:#B87333;
+ --font:'Sora',sans-serif; --mono:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:48px 32px 80px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);margin-bottom:14px}
+h1{font-size:2.4rem;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.lede{font-size:1.02rem;color:var(--text-dim);max-width:640px;font-weight:300}
+.lede b{color:var(--copper-lt);font-weight:500}
+.statbar{display:flex;gap:34px;margin:30px 0 38px;flex-wrap:wrap;padding-bottom:30px;border-bottom:1px solid var(--border)}
+.statbar .s{display:flex;flex-direction:column;gap:3px}
+.statbar .n{font-size:1.5rem;font-weight:600;color:var(--text);font-family:var(--mono)}
+.statbar .l{font-size:.72rem;color:var(--text-dim);font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.filters{margin-bottom:30px}
+.frow{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.flabel{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute);min-width:84px}
+.chip{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--text-dim);background:var(--bg2);border:1px solid var(--border);
+ padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .16s ease;user-select:none}
+.chip:hover{border-color:var(--border-hi);color:var(--text)}
+.chip.on{background:var(--copper-dim);border-color:var(--copper);color:var(--copper-lt)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px 22px 20px;cursor:pointer;
+ transition:border-color .18s ease,transform .18s ease;position:relative;overflow:hidden}
+.card:hover{border-color:var(--copper);transform:translateY(-3px)}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.card h3{font-size:1.12rem;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);
+ border:1px solid var(--border);border-radius:5px;padding:2px 7px}
+.cur{font-family:var(--mono);font-size:.92rem;color:var(--copper-lt);font-weight:500;white-space:nowrap}
+.hook{font-family:Georgia,serif;font-style:italic;font-size:.92rem;line-height:1.5;color:var(--text-dim);
+ border-left:2px solid var(--copper);padding-left:13px;margin:14px 0 18px;min-height:42px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:16px;border-top:1px solid var(--border)}
+.m{display:flex;flex-direction:column;gap:2px}
+.m .v{font-family:var(--mono);font-size:1.05rem;font-weight:500}
+.m .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+.v.teal{color:var(--sig-teal)} .v.red{color:var(--sig-red)} .v.cop{color:var(--copper-lt)}
+.empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--text-mute);font-family:var(--mono);font-size:.85rem}
+.foot{margin-top:36px;font-family:var(--mono);font-size:.7rem;color:var(--text-mute);letter-spacing:.06em}
+</style></head>
+<body><div class="wrap">
+ <div class="eyebrow">Revenue Fluent · Scenario Library</div>
+ <h1>Fifteen companies. Seven currencies. One language.</h1>
+ <p class="lede">Every scenario is a real organizational shape — <b>750 people</b> across SaaS, BFSI, healthcare, manufacturing, hospitality, government and more. Pick the one that looks like your world.</p>
+ <div class="statbar">
+  <div class="s"><span class="n">15</span><span class="l">Scenarios</span></div>
+  <div class="s"><span class="n">750</span><span class="l">People modelled</span></div>
+  <div class="s"><span class="n">7</span><span class="l">Currencies</span></div>
+  <div class="s"><span class="n">13</span><span class="l">Cities</span></div>
+  <div class="s"><span class="n">10</span><span class="l">Industries</span></div>
+ </div>
+ <div class="filters">
+  <div class="frow"><span class="flabel">Industry</span><span id="fi"></span></div>
+  <div class="frow"><span class="flabel">Geography</span><span id="fg"></span></div>
+  <div class="frow"><span class="flabel">Currency</span><span id="fc"></span></div>
+ </div>
+ <div class="grid" id="grid"></div>
+ <div class="foot">Data: Virorah PMS master export · v5.0-rf · 750 employees validated</div>
+</div>
+<script>
+const DATA=[{"name": "High-Growth Tech Startup", "industry": "SaaS", "geo": "San Francisco", "currency": "USD", "symbol": "$", "headcount": 50, "totalComp": 6659000, "stars": 20, "atRisk": 2, "avgPerf": 3.7, "depts": 6}, {"name": "Professional Services Firm", "industry": "Consulting", "geo": "London", "currency": "GBP", "symbol": "£", "headcount": 50, "totalComp": 5470000, "stars": 12, "atRisk": 10, "avgPerf": 3.04, "depts": 4}, {"name": "Enterprise Healthcare", "industry": "Healthcare", "geo": "Boston", "currency": "USD", "symbol": "$", "headcount": 50, "totalComp": 6785000, "stars": 0, "atRisk": 32, "avgPerf": 2.36, "depts": 7}, {"name": "Remote-First SaaS", "industry": "SaaS", "geo": "Global", "currency": "USD", "symbol": "$", "headcount": 50, "totalComp": 5363000, "stars": 12, "atRisk": 0, "avgPerf": 3.56, "depts": 4}, {"name": "Financial Services", "industry": "BFSI", "geo": "Singapore", "currency": "SGD", "symbol": "S$", "headcount": 50, "totalComp": 9234000, "stars": 7, "atRisk": 4, "avgPerf": 3.96, "depts": 6}, {"name": "Manufacturing Firm", "industry": "Manufacturing", "geo": "Stuttgart", "currency": "EUR", "symbol": "€", "headcount": 50, "totalComp": 2974553, "stars": 0, "atRisk": 43, "avgPerf": 2.04, "depts": 5}, {"name": "Sales Organization", "industry": "Sales", "geo": "New York", "currency": "USD", "symbol": "$", "headcount": 50, "totalComp": 6929999, "stars": 17, "atRisk": 15, "avgPerf": 3.1, "depts": 5}, {"name": "Consulting Firm", "industry": "Consulting", "geo": "Dubai", "currency": "USD", "symbol": "$", "headcount": 50, "totalComp": 6380450, "stars": 17, "atRisk": 10, "avgPerf": 3.24, "depts": 3}, {"name": "Family Business", "industry": "Manufacturing", "geo": "Mumbai", "currency": "INR", "symbol": "₹", "headcount": 50, "totalComp": 31198000, "stars": 8, "atRisk": 10, "avgPerf": 3.18, "depts": 6}, {"name": "MNC in Asia", "industry": "Manufacturing", "geo": "Tokyo", "currency": "JPY", "symbol": "¥", "headcount": 50, "totalComp": 363666409, "stars": 0, "atRisk": 20, "avgPerf": 2.52, "depts": 5}, {"name": "Hospitality", "industry": "Hospitality", "geo": "Dubai", "currency": "AED", "symbol": "د.إ", "headcount": 50, "totalComp": 6614498, "stars": 16, "atRisk": 10, "avgPerf": 3.38, "depts": 6}, {"name": "Corporate America", "industry": "Manufacturing", "geo": "Chicago", "currency": "USD", "symbol": "$", "headcount": 50, "totalComp": 4231152, "stars": 8, "atRisk": 5, "avgPerf": 3.16, "depts": 5}, {"name": "Government Agency", "industry": "Public Sector", "geo": "Washington DC", "currency": "USD", "symbol": "$", "headcount": 50, "totalComp": 5048514, "stars": 19, "atRisk": 3, "avgPerf": 4.02, "depts": 5}, {"name": "Higher Education", "industry": "Academia", "geo": "Global", "currency": "USD", "symbol": "$", "headcount": 50, "totalComp": 6504609, "stars": 17, "atRisk": 8, "avgPerf": 3.34, "depts": 8}, {"name": "Social Enterprise", "industry": "NGO / Impact", "geo": "Amsterdam", "currency": "EUR", "symbol": "€", "headcount": 50, "totalComp": 3089320, "stars": 18, "atRisk": 5, "avgPerf": 3.68, "depts": 5}];
+const HOOK={"High-Growth Tech Startup": "40% of revenue rides on 20 people. Most boards never see that line.", "Professional Services Firm": "When a partner walks, the client relationship often walks with them.", "Enterprise Healthcare": "850 staff, zero Stars flagged — and the board calls it stable.", "Remote-First SaaS": "A team spread across 23 countries. One spreadsheet can’t hold it.", "Financial Services": "Every analyst lost is two years of deal memory gone.", "Manufacturing Firm": "Two decades of floor knowledge, walking out the door one retirement at a time.", "Sales Organization": "The quota is hit. The pipeline behind it is quietly thinning.", "Consulting Firm": "Utilization looks healthy — until you map who actually wins the work.", "Family Business": "Loyalty kept the mill running. Succession is the question no one asks aloud.", "MNC in Asia": "Lifetime employment meets a workforce that no longer assumes it.", "Hospitality": "Guests remember the people. The P&L only counts the rooms.", "Corporate America": "A supervisor on the floor 13 years holds more line uptime than any system.", "Government Agency": "Institutional memory measured in decades, with no replacement bench.", "Higher Education": "A distinguished chair retires and a research lineage ends with them.", "Social Enterprise": "Mission attracts them. Pay can’t always keep them."};
+const fmt=n=>n>=1e7?(n/1e7).toFixed(2)+'Cr':n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(0)+'K':n;
+const F={industry:null,geo:null,currency:null};
+function facets(k){return [...new Set(DATA.map(d=>d[k]))].sort();}
+function chips(elId,key){
+  const el=document.getElementById(elId);
+  el.innerHTML='';
+  const all=document.createElement('span');all.className='chip on';all.textContent='All';
+  all.onclick=()=>{F[key]=null;render();paint();};
+  el.appendChild(all);
+  facets(key).forEach(v=>{
+    const c=document.createElement('span');c.className='chip';c.textContent=v;
+    c.onclick=()=>{F[key]=F[key]===v?null:v;render();paint();};
+    el.appendChild(c);
+  });
+}
+function paint(){
+  [['fi','industry'],['fg','geo'],['fc','currency']].forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    [...el.children].forEach((c,i)=>{
+      if(i===0){c.classList.toggle('on',F[key]===null);}
+      else{c.classList.toggle('on',F[key]===c.textContent);}
+    });
+  });
+}
+function render(){
+  const g=document.getElementById('grid');
+  const rows=DATA.filter(d=>(!F.industry||d.industry===F.industry)&&(!F.geo||d.geo===F.geo)&&(!F.currency||d.currency===F.currency));
+  if(!rows.length){g.innerHTML='<div class="empty">No scenarios match these filters.</div>';return;}
+  g.innerHTML=rows.map(d=>`
+   <div class="card" onclick="pick('${d.name.replace(/'/g,"\\'")}')">
+     <div class="top">
+       <div><h3>${d.name}</h3>
+         <div class="tags"><span class="tag">${d.industry}</span><span class="tag">${d.geo}</span></div>
+       </div>
+       <div class="cur">${d.symbol} ${d.currency}</div>
+     </div>
+     <div class="hook">${HOOK[d.name]||''}</div>
+     <div class="metrics">
+       <div class="m"><span class="v">${d.headcount}</span><span class="k">Headcount</span></div>
+       <div class="m"><span class="v cop">${d.symbol}${fmt(d.totalComp)}</span><span class="k">Comp base</span></div>
+       <div class="m"><span class="v">${d.depts}</span><span class="k">Depts</span></div>
+       <div class="m"><span class="v teal">${d.stars}</span><span class="k">Stars</span></div>
+       <div class="m"><span class="v red">${d.atRisk}</span><span class="k">At risk</span></div>
+       <div class="m"><span class="v">${d.avgPerf}</span><span class="k">Avg perf</span></div>
+     </div>
+   </div>`).join('');
+}
+function pick(name){
+  // In platform: routes to tool with ?scenario=. Standalone: announce.
+  const u=new URL(window.location);u.searchParams.set('scenario',name);
+  history.replaceState({},'',u);
+  document.querySelectorAll('.card').forEach(c=>{
+    if(c.querySelector('h3').textContent===name){c.style.borderColor='var(--copper)';c.style.boxShadow='0 0 0 1px var(--copper)';}
+    else{c.style.boxShadow='none';}
+  });
+}
+chips('fi','industry');chips('fg','geo');chips('fc','currency');
+render();
+</script>
+</body></html>
