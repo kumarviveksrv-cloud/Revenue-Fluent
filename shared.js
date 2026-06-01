@@ -545,6 +545,12 @@ const RF = {
 
   startTicker(id) {
     this.injectFavicon();
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/Revenue-Fluent/sw.js', { scope: '/Revenue-Fluent/' })
+        .then(reg => console.log('[RF] SW registered:', reg.scope))
+        .catch(err => console.log('[RF] SW failed:', err));
+    }
     const el = document.getElementById(id);
     if (!el) return;
     const items = [...this.ticker_data, ...this.ticker_data];
