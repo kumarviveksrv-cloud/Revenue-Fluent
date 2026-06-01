@@ -3,6 +3,15 @@
 
 const RF = {
 
+  injectFavicon() {
+    if (!document.querySelector('link[rel="icon"]')) {
+      const link = document.createElement('link');
+      link.rel = 'icon'; link.type = 'image/x-icon';
+      link.href = '/Revenue-Fluent/favicon.ico';
+      document.head.appendChild(link);
+    }
+  },
+
   css: `
     @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
 
@@ -535,6 +544,7 @@ const RF = {
   ],
 
   startTicker(id) {
+    this.injectFavicon();
     const el = document.getElementById(id);
     if (!el) return;
     const items = [...this.ticker_data, ...this.ticker_data];
