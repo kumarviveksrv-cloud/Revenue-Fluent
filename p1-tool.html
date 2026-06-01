@@ -65,7 +65,7 @@ h2 .step{font-family:var(--mono);font-size:.7rem;color:var(--copper);border:1px 
 @media(max-width:680px){.cards{grid-template-columns:1fr}}
 </style></head>
 <body><div class="wrap">
- <div class="crumb"><a href="scenario-library.html">&larr; Scenario Library</a><span>/</span><span>Revenue Connect</span></div>
+ <div class="crumb"><a href="scenario-library.html">&larr; Scenario Library</a><span>/</span><span>/</span><a href="#" id="navP1">Revenue Connect</a><span style="color:var(--text-mute)">·</span><a href="#" id="navP2">People Alpha</a></div>
  <div class="eyebrow">Revenue Fluent · L1 · Revenue Connect</div>
 
  <div class="switch">
@@ -120,6 +120,13 @@ h2 .step{font-family:var(--mono);font-size:.7rem;color:var(--copper);border:1px 
     };
   }
 
+
+  function wireToolNav(){
+    var sc=encodeURIComponent(current);
+    var p1=document.getElementById('navP1'), p2=document.getElementById('navP2');
+    if(p1){p1.href='p1-tool.html?scenario='+sc; p1.style.fontWeight=(location.pathname.indexOf('p1')>=0)?'500':'300'; if(location.pathname.indexOf('p1')>=0)p1.style.color='var(--text)';}
+    if(p2){p2.href='p2-tool.html?scenario='+sc; p2.style.fontWeight=(location.pathname.indexOf('p2')>=0)?'500':'300'; if(location.pathname.indexOf('p2')>=0)p2.style.color='var(--text)';}
+  }
   function render(name){
     var s=RF.scenario(name), sum=RF.summary(name), m=compute(name);
     document.getElementById('meta').innerHTML='<b>'+m.n+'</b> people · <b>'+sum.geo+'</b> · base <b>'+fmtMoney(m.sym,m.total)+'</b>';
@@ -165,6 +172,7 @@ h2 .step{font-family:var(--mono);font-size:.7rem;color:var(--copper);border:1px 
     + '</div>';
 
     // wire sliders
+    wireToolNav();
     document.getElementById('s1').oninput=function(e){state.exitCost=+e.target.value;document.getElementById('v1').textContent=state.exitCost.toFixed(1)+'×';render(name);};
     document.getElementById('s2').oninput=function(e){state.riskWeight=+e.target.value;document.getElementById('v2').textContent=state.riskWeight.toFixed(2);render(name);};
   }

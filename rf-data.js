@@ -24,3 +24,35 @@ window.RF = {
 
 window.RF_METRICS = {"High-Growth Tech Startup":{"atc_pct":5.9,"ar_pct":4.0,"tdf":0,"esr":0.96,"atc_cost":390000,"total":6659000,"at_risk_n":2,"stars_n":20},"Professional Services Firm":{"atc_pct":31.7,"ar_pct":20.0,"tdf":1,"esr":0.8,"atc_cost":1736000,"total":5470000,"at_risk_n":10,"stars_n":12},"Enterprise Healthcare":{"atc_pct":110.9,"ar_pct":64.0,"tdf":12,"esr":0.36,"atc_cost":7524000,"total":6785000,"at_risk_n":32,"stars_n":0},"Remote-First SaaS":{"atc_pct":0.0,"ar_pct":0.0,"tdf":0,"esr":1.0,"atc_cost":0,"total":5363000,"at_risk_n":0,"stars_n":12},"Financial Services":{"atc_pct":11.1,"ar_pct":8.0,"tdf":0,"esr":0.92,"atc_cost":1024000,"total":9234000,"at_risk_n":4,"stars_n":7},"Manufacturing Firm":{"atc_pct":174.3,"ar_pct":86.0,"tdf":5,"esr":0.14,"atc_cost":5183306,"total":2974553,"at_risk_n":43,"stars_n":0},"Sales Organization":{"atc_pct":52.8,"ar_pct":30.0,"tdf":3,"esr":0.7,"atc_cost":3656198,"total":6929999,"at_risk_n":15,"stars_n":17},"Consulting Firm":{"atc_pct":34.8,"ar_pct":20.0,"tdf":4,"esr":0.8,"atc_cost":2217700,"total":6380450,"at_risk_n":10,"stars_n":17},"Family Business":{"atc_pct":32.8,"ar_pct":20.0,"tdf":2,"esr":0.8,"atc_cost":10242000,"total":31198000,"at_risk_n":10,"stars_n":8},"MNC in Asia":{"atc_pct":81.7,"ar_pct":40.0,"tdf":7,"esr":0.6,"atc_cost":297001416,"total":363666409,"at_risk_n":20,"stars_n":0},"Hospitality":{"atc_pct":33.9,"ar_pct":20.0,"tdf":1,"esr":0.8,"atc_cost":2242400,"total":6614498,"at_risk_n":10,"stars_n":16},"Corporate America":{"atc_pct":15.4,"ar_pct":10.0,"tdf":1,"esr":0.9,"atc_cost":653360,"total":4231152,"at_risk_n":5,"stars_n":8},"Government Agency":{"atc_pct":17.5,"ar_pct":6.0,"tdf":0,"esr":0.94,"atc_cost":881238,"total":5048514,"at_risk_n":3,"stars_n":19},"Higher Education":{"atc_pct":30.2,"ar_pct":16.0,"tdf":0,"esr":0.84,"atc_cost":1961902,"total":6504609,"at_risk_n":8,"stars_n":17},"Social Enterprise":{"atc_pct":18.9,"ar_pct":10.0,"tdf":1,"esr":0.9,"atc_cost":583920,"total":3089320,"at_risk_n":5,"stars_n":18}};
 window.RF.metrics = function(name){ return window.RF_METRICS[name] || null; };
+
+window.RF.alphas = function(name, difficulty){
+  difficulty = difficulty || 1.0;
+  var s = this.scenario(name); if(!s) return null;
+  var emps = s.employees, n = emps.length;
+  var gp = {};
+  emps.forEach(function(e){ (gp[e.grade]=gp[e.grade]||[]).push(e.perfScore); });
+  var bench = {};
+  Object.keys(gp).forEach(function(g){ bench[g] = (gp[g].reduce(function(a,b){return a+b;},0)/gp[g].length)*difficulty; });
+  var orgMean = (emps.reduce(function(a,e){return a+e.perfScore;},0)/n)*difficulty;
+  var avgBench = Object.keys(bench).reduce(function(a,g){return a+bench[g];},0)/Object.keys(bench).length;
+  var SENIOR = ['C-Suite','VP','Director','Partner','Senior','M3','Manager'];
+
+  var recent = emps.filter(function(e){return e.tenure<=2;});
+  var ha = recent.length? recent.reduce(function(a,e){return a+(e.perfScore-bench[e.grade]);},0)/recent.length/avgBench*100 : 0;
+
+  var keepers = emps.filter(function(e){return ['Star','High Performer','High Potential'].indexOf(e.placement)>=0;});
+  var ra = 0;
+  if(keepers.length){
+    var num = keepers.reduce(function(a,e){return a+(e.perfScore-bench[e.grade])*e.salary;},0);
+    var den = keepers.reduce(function(a,e){return a+bench[e.grade]*e.salary;},0);
+    ra = num/den*100;
+  }
+  var senior = emps.filter(function(e){return SENIOR.indexOf(e.grade)>=0;});
+  var pa = senior.length? senior.reduce(function(a,e){return a+(e.perfScore-orgMean);},0)/senior.length/orgMean*100 : 0;
+
+  var tenured = emps.filter(function(e){return e.tenure>=3;});
+  var la = tenured.length? tenured.reduce(function(a,e){return a+(e.perfScore-bench[e.grade]);},0)/tenured.length/avgBench*100 : 0;
+
+  var r = function(x){return Math.round(x*10)/10;};
+  return {hiring:r(ha), retention:r(ra), promotion:r(pa), ld:r(la), overall:r((ha+ra+pa+la)/4)};
+};
