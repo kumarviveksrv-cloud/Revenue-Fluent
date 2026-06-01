@@ -1,7 +1,7 @@
 // Revenue Fluent — Service Worker v3
 // Enables offline access + PWA install
 
-const CACHE_NAME = 'revenue-fluent-v3';
+const CACHE_NAME = 'revenue-fluent-v4';
 
 const CACHE_URLS = [
   '/Revenue-Fluent/',
