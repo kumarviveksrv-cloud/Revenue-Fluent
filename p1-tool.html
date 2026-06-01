@@ -6,280 +6,454 @@
 <title>Revenue Connect — Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style id="rf-css"></style>
-<script src="shared.js?v=4"></script>
+<script src="shared.js?v=5"></script>
 <script src="rf-export.js?v=4"></script>
 <style>
-.tool-layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 81px); }
-.tool-inputs { background: var(--bg2); border-right: 1px solid var(--border); padding: 1.5rem; overflow-y: auto; }
-.tool-outputs { background: var(--bg); padding: 1.5rem; overflow-y: auto; }
-.scenario-selector { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 1.25rem; }
-.sc-btn { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; cursor: pointer; text-align: center; transition: all 0.15s; }
-.sc-btn:hover { border-color: var(--border-hi); }
-.sc-btn.active { background: var(--accent-dim); border-color: var(--border-accent); }
-.sc-btn-name { font-size: 0.72rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-.sc-btn-sub { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); }
-.output-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+/* ── STORY HOOK ── */
+.story-hook {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:2rem; margin-bottom:1.75rem;
+  position:relative; overflow:hidden;
+}
+.story-hook::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+.sh-eyebrow {
+  font-family:var(--font-mono); font-size:0.6rem; color:var(--accent);
+  text-transform:uppercase; letter-spacing:0.15em; margin-bottom:0.875rem;
+  display:flex; align-items:center; gap:8px;
+}
+.sh-eyebrow::before { content:'——'; }
+.sh-quote {
+  font-family:Georgia,serif; font-weight:400; font-style:italic;
+  font-size:clamp(1.1rem,2.5vw,1.5rem); color:var(--text); line-height:1.4;
+  letter-spacing:-0.01em; margin-bottom:1rem;
+}
+.sh-quote em { color:var(--accent2); font-style:italic; }
+.sh-body { font-size:0.88rem; color:var(--text-dim); line-height:1.85; margin-bottom:1.25rem; }
+.sh-body b { color:var(--text); font-weight:600; }
+.sh-what-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--accent); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.5rem; }
+.sh-what { font-size:0.88rem; color:var(--text-dim); line-height:1.75; }
+.sh-what b { color:var(--accent2); font-weight:600; }
+.sh-start { display:inline-flex; align-items:center; gap:8px; margin-top:1.25rem; background:var(--accent); color:#fff; border:none; border-radius:var(--radius-sm); padding:10px 20px; font-family:var(--font-head); font-weight:600; font-size:0.85rem; cursor:pointer; transition:all 0.2s; }
+.sh-start:hover { background:#C8883D; transform:translateY(-1px); }
+
+/* ── TOOL LAYOUT ── */
+.tool-wrap { display:grid; grid-template-columns:300px 1fr; gap:1.5rem; align-items:start; }
+
+/* ── GUIDED INPUTS ── */
+.inputs-panel { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
+.ip-header { padding:1rem 1.25rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+.ip-title { font-family:var(--font-head); font-weight:700; font-size:0.9rem; color:var(--text); }
+.ip-subtitle { font-size:0.75rem; color:var(--text-mute); }
+.scenario-tabs { display:flex; gap:6px; padding:1rem 1.25rem 0; }
+.sc-tab { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:7px 12px; cursor:pointer; transition:all 0.15s; flex:1; text-align:center; }
+.sc-tab:hover { border-color:var(--border-hi); }
+.sc-tab.active { background:var(--accent-dim); border-color:var(--border-accent); }
+.sc-tab-name { font-family:var(--font-head); font-weight:600; font-size:0.78rem; color:var(--text-dim); }
+.sc-tab.active .sc-tab-name { color:var(--accent2); }
+.sc-tab-sub { font-family:var(--font-mono); font-size:0.52rem; color:var(--text-mute); margin-top:2px; }
+.guided-sliders { padding:1rem 1.25rem; display:flex; flex-direction:column; gap:0; }
+.g-slider { padding:0.875rem 0; border-bottom:1px solid var(--border); }
+.g-slider:last-child { border-bottom:none; }
+.gs-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:2px; }
+.gs-label { font-size:0.82rem; color:var(--text-dim); font-weight:500; }
+.gs-val { font-family:var(--font-mono); font-size:0.82rem; color:var(--accent2); font-weight:500; min-width:40px; text-align:right; }
+.gs-why { font-family:var(--font-mono); font-size:0.58rem; color:var(--accent); line-height:1.5; margin-bottom:6px; }
+.gs-slider { width:100%; height:3px; accent-color:var(--accent); cursor:pointer; }
+input[type=range] { width:100%; height:3px; -webkit-appearance:none; background:var(--bg4); border-radius:2px; outline:none; cursor:pointer; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--accent); cursor:pointer; transition:transform 0.15s; }
+input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.2); }
+.input-actions { padding:0.875rem 1.25rem; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:6px; }
+
+/* ── OUTPUTS ── */
+.outputs-panel { display:flex; flex-direction:column; gap:12px; }
+
+/* PILLAR INTRO */
+.pillar-intro { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.25rem; }
+.pi-header { display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+.pi-left { display:flex; align-items:center; gap:10px; }
+.pi-icon { width:32px; height:32px; border-radius:8px; background:var(--accent-dim); border:1px solid var(--border-accent); display:flex; align-items:center; justify-content:center; font-size:0.9rem; }
+.pi-name { font-family:var(--font-head); font-weight:700; font-size:0.88rem; color:var(--text); }
+.pi-sub { font-size:0.72rem; color:var(--text-mute); }
+.pi-toggle { font-size:0.7rem; color:var(--text-mute); transition:transform 0.2s; }
+.pi-body { font-size:0.82rem; color:var(--text-dim); line-height:1.75; margin-top:0.875rem; display:none; }
+.pi-body.open { display:block; animation:fadeIn 0.3s; }
+.pi-body b { color:var(--text); font-weight:600; }
+
+/* METRIC CARDS */
+.metric-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.metric-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; position:relative; transition:border-color 0.2s; }
+.metric-card:hover { border-color:var(--border-hi); }
+.mc-accent-bar { height:2px; }
+.mc-body { padding:1rem; }
+.mc-label { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.5rem; }
+.mc-value { font-family:var(--font-head); font-weight:800; font-size:1.8rem; line-height:1; letter-spacing:-0.03em; margin-bottom:0.375rem; }
+.mc-status { display:flex; align-items:center; gap:5px; }
+.mc-status-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.mc-status-text { font-family:var(--font-mono); font-size:0.6rem; color:var(--text-mute); }
+.mc-bench { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); margin-top:4px; }
+.mc-bar-wrap { height:3px; background:var(--bg4); border-radius:2px; margin-top:8px; overflow:hidden; }
+.mc-bar-fill { height:100%; border-radius:2px; transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+
+/* WHY THIS MATTERS */
+.mc-why { display:none; padding:0 1rem 0.875rem; font-size:0.78rem; color:var(--text-mute); line-height:1.65; border-top:1px solid var(--border); padding-top:0.75rem; }
+.metric-card:hover .mc-why { display:block; animation:fadeIn 0.2s; }
+
+/* REVENUE AT RISK — HERO CARD */
+.risk-hero { background:var(--bg2); border:1px solid var(--border-accent); border-radius:var(--radius); overflow:hidden; }
+.rh-bar { height:3px; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+.rh-body { padding:1.25rem; }
+.rh-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--accent); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.75rem; }
+.rh-amount { font-family:var(--font-head); font-weight:800; font-size:2.8rem; line-height:1; letter-spacing:-0.04em; color:var(--accent2); margin-bottom:0.375rem; }
+.rh-sub { font-family:var(--font-mono); font-size:0.65rem; color:var(--text-mute); }
+
+/* CONFIDENCE METER */
+.confidence-section { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; }
+.conf-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+.conf-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.12em; }
+.conf-val { font-family:var(--font-head); font-weight:800; font-size:1.6rem; color:var(--accent2); }
+.conf-track { height:6px; background:var(--bg4); border-radius:3px; overflow:hidden; margin-bottom:0.5rem; }
+.conf-fill { height:100%; border-radius:3px; transition:width 0.6s cubic-bezier(0.34,1.56,0.64,1); background:linear-gradient(90deg,var(--signal-red),var(--accent),var(--accent2)); }
+.conf-scale { display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.52rem; color:var(--text-mute); }
+
+/* ATTRIBUTION BREAKDOWN */
+.attribution { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; }
+.attr-header { font-family:var(--font-mono); font-size:0.6rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:1rem; }
+.attr-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.attr-label { font-size:0.78rem; color:var(--text-dim); width:180px; flex-shrink:0; }
+.attr-bar-wrap { flex:1; height:4px; background:var(--bg4); border-radius:2px; overflow:hidden; }
+.attr-bar { height:100%; border-radius:2px; transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.attr-val { font-family:var(--font-mono); font-size:0.72rem; font-weight:500; width:60px; text-align:right; }
+
+/* NARRATIVE */
+.narrative-box { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; }
+.nb-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--accent); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.75rem; display:flex; align-items:center; gap:6px; }
+.nb-label::before { content:''; width:16px; height:1px; background:var(--accent); }
+.nb-text { font-family:Georgia,serif; font-size:0.9rem; color:var(--text-dim); line-height:1.85; font-style:italic; }
+.nb-text b { font-style:normal; color:var(--accent2); font-weight:600; }
+
 /* LITERATURE PANEL */
-.lit-bar { display: flex; align-items: center; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 1.25rem; cursor: pointer; transition: all 0.2s; }
-.lit-bar:hover { border-color: var(--border-accent); }
-.lit-bar.open { border-color: var(--border-accent); background: var(--accent-dim); }
-.lit-toggle { display: flex; align-items: center; gap: 8px; padding: 6px 12px; flex: 1; }
-.lit-toggle-icon { width: 20px; height: 20px; border-radius: 5px; background: var(--accent-dim); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--accent2); flex-shrink: 0; }
-.lit-toggle-text { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.04em; }
-.lit-toggle-text b { color: var(--text); font-weight: 600; }
-.lit-tabs { display: flex; gap: 2px; }
-.lit-tab-mini { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); padding: 4px 8px; border-radius: 4px; }
-.lit-chevron { margin-left: auto; padding: 0 12px; color: var(--text-mute); transition: transform 0.25s; font-size: 0.7rem; }
-.lit-bar.open .lit-chevron { transform: rotate(180deg); }
-.lit-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); margin-bottom: 0; }
-.lit-panel.open { max-height: 2000px; margin-bottom: 1.25rem; }
-.lit-content { background: var(--bg2); border: 1px solid var(--border-accent); border-radius: var(--radius); overflow: hidden; }
-.lit-tabnav { display: flex; border-bottom: 1px solid var(--border); background: var(--sidebar); }
-.lit-tabnav-btn { flex: 1; padding: 12px; font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mute); background: transparent; border: none; cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; }
-.lit-tabnav-btn:hover { color: var(--text-dim); }
-.lit-tabnav-btn.active { color: var(--accent2); border-bottom-color: var(--accent); background: var(--accent-dim); }
-.lit-tabpane { display: none; padding: 1.5rem; animation: fadeIn 0.3s; }
-.lit-tabpane.active { display: block; }
-.lit-h { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
-.lit-p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 1rem; }
-.lit-p:last-child { margin-bottom: 0; }
-.lit-p b { color: var(--text); font-weight: 600; }
-.lit-callout { background: var(--bg3); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 1rem 0; font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
-.lit-instrument { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; }
-.lit-instrument:last-child { margin-bottom: 0; }
-.lit-inst-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-.lit-inst-name { font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; color: var(--text); }
-.lit-inst-abbr { font-family: var(--font-mono); font-size: 0.6rem; padding: 2px 8px; border-radius: 4px; background: var(--accent-dim); color: var(--accent2); border: 1px solid var(--border-accent); }
-.lit-inst-formula { font-family: var(--font-mono); font-size: 0.68rem; color: var(--teal); background: var(--bg); border-radius: 4px; padding: 8px 10px; margin: 8px 0; line-height: 1.6; }
-.lit-inst-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
-.lit-inst-bench { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); margin-top: 6px; }
-.big-metric { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; position: relative; overflow: hidden; }
-.big-metric::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-.big-metric.red::before { background: var(--red); }
-.big-metric.amber::before { background: var(--amber); }
-.big-metric.teal::before { background: var(--teal); }
-.big-metric.accent::before { background: var(--accent); }
-.bm-label { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
-.bm-val { font-family: var(--font-head); font-weight: 800; font-size: 2.2rem; line-height: 1; margin-bottom: 4px; letter-spacing: -0.03em; }
-.bm-val.red { color: var(--red); }
-.bm-val.amber { color: var(--amber); }
-.bm-val.teal { color: var(--teal); }
-.bm-val.accent { color: var(--accent2); }
-.bm-status { font-family: var(--font-mono); font-size: 0.62rem; display: flex; align-items: center; gap: 5px; }
-.bm-bar { height: 4px; background: var(--bg4); border-radius: 2px; margin-top: 10px; overflow: hidden; }
-.bm-fill { height: 100%; border-radius: 2px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1); }
-.confidence-meter { background: var(--bg2); border: 1px solid var(--border-accent); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
-.cm-track { height: 12px; background: var(--bg3); border-radius: 6px; overflow: hidden; margin: 12px 0; }
-.cm-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--red), var(--amber), var(--green)); transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); }
-.attribution-breakdown { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.25rem; }
-.ab-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
-.ab-row:last-child { border-bottom: none; }
-.ab-bar-wrap { width: 80px; height: 4px; background: var(--bg4); border-radius: 2px; overflow: hidden; }
-.ab-bar-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
-.narrative-box { background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(45,212,191,0.05)); border: 1px solid var(--border-accent); border-radius: var(--radius); padding: 1.25rem; }
-.nb-quote { font-family: var(--font-head); font-weight: 300; font-style: italic; font-size: 0.9rem; color: var(--text-dim); line-height: 1.8; }
-.nb-stat { font-family: var(--font-head); font-weight: 800; color: var(--teal); font-style: normal; }
+.lit-bar { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-top:1rem; }
+.lit-header { display:flex; align-items:center; gap:10px; padding:0.875rem 1.25rem; cursor:pointer; }
+.lit-icon { font-size:0.8rem; }
+.lit-title { font-size:0.82rem; color:var(--text-dim); flex:1; }
+.lit-toggle { font-size:0.65rem; color:var(--text-mute); transition:transform 0.2s; }
+.lit-body { display:none; padding:0 1.25rem 1.25rem; }
+.lit-body.open { display:block; }
+.lit-section { font-family:var(--font-mono); font-size:0.6rem; color:var(--accent); text-transform:uppercase; letter-spacing:0.12em; margin:1rem 0 0.5rem; }
+.lit-p { font-size:0.82rem; color:var(--text-dim); line-height:1.8; margin-bottom:0.75rem; }
+.lit-p b { color:var(--text); font-weight:600; }
+.lit-formula { background:var(--bg3); border-radius:var(--radius-sm); padding:0.875rem 1rem; font-family:var(--font-mono); font-size:0.72rem; color:var(--accent2); margin:0.5rem 0; line-height:1.7; }
+
+/* SIGNALS */
+.signal-red { color:#E05C3A; }
+.signal-amber { color:var(--accent2); }
+.signal-green { color:#5CC8A0; }
+:root {
+  --signal-red: #E05C3A;
+  --signal-amber: #E8C87A;
+  --signal-teal: #5CC8A0;
+}
 </style>
 </head>
 <body>
 <div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
 <div id="sidebar-mount"></div>
 <div id="topbar-mount"></div>
-<div class="app-body" style="padding-top:81px">
-<div class="tool-layout">
+<div class="app-body">
+<div class="page-wrap" style="max-width:1100px;padding-bottom:4rem">
 
-  <!-- LEFT: INPUTS -->
-  <div class="tool-inputs">
-    <div class="mono-label" style="margin-bottom:0.75rem">Scenario</div>
-    <div class="scenario-selector">
-      <div class="sc-btn active" onclick="loadScenario(0,this)"><div class="sc-btn-name">TechVelocity</div><div class="sc-btn-sub">SaaS · 50 emp</div></div>
-      <div class="sc-btn" onclick="loadScenario(1,this)"><div class="sc-btn-name">Sterling</div><div class="sc-btn-sub">Consulting · 50</div></div>
-      <div class="sc-btn" onclick="loadScenario(2,this)"><div class="sc-btn-name">Apex Mfg</div><div class="sc-btn-sub">Manuf · 50</div></div>
+  <!-- STORY HOOK -->
+  <div class="story-hook anim-slide">
+    <div class="sh-eyebrow">People-Revenue Connect · Pillar 1</div>
+    <div class="sh-quote">
+      The board saw <em>14% attrition.</em><br>
+      Revenue Fluent saw <em>₹1.1Cr at risk.</em>
     </div>
-
-    <div class="divider" style="margin:1rem 0"></div>
-    <div id="csv-panel-mount-p1"></div>
-    <div class="divider" style="margin:0.75rem 0"></div>
-    <div class="mono-label" style="margin-bottom:1rem">Adjust Inputs</div>
-
-    <div class="slider-row">
-      <div class="slider-header"><span>Annual headcount exits</span><span class="slider-val" id="sv-exits">7</span></div>
-      <input type="range" min="0" max="20" value="7" id="sl-exits" oninput="update()">
+    <div class="sh-body">
+      TechVelocity's VP HR walked into the quarterly review with a headcount percentage. The CFO nodded and moved on. <b>The same data, run through Revenue Connect, showed ₹595K in replacement cost and ₹1.1Cr in annual revenue at risk.</b> That number got a budget allocation. The percentage never did.
     </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Avg annual salary (₹L)</span><span class="slider-val" id="sv-salary">14</span></div>
-      <input type="range" min="5" max="50" value="14" id="sl-salary" oninput="update()">
+    <div class="sh-what-label">What Revenue Connect does</div>
+    <div class="sh-what">
+      It converts your attrition from a headcount rate into a <b>revenue consequence</b>. Every exit, every vacant role, every person in transition — each one has a rupee cost that never appears on any traditional HR report. <b>ATC% tells you the cost. TDF tells you the drag. AR% tells you the rate. Revenue Connect tells you the number your board will act on.</b>
     </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Annual revenue (₹Cr)</span><span class="slider-val" id="sv-rev">84</span></div>
-      <input type="range" min="10" max="500" value="84" id="sl-rev" oninput="update()">
-    </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Total headcount</span><span class="slider-val" id="sv-hc">50</span></div>
-      <input type="range" min="10" max="200" value="50" id="sl-hc" oninput="update()">
-    </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Revenue-generating roles (%)</span><span class="slider-val" id="sv-rev-roles">60</span></div>
-      <input type="range" min="10" max="100" value="60" id="sl-rev-roles" class="teal" oninput="update()">
-    </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Avg tenure at exit (months)</span><span class="slider-val" id="sv-tenure">18</span></div>
-      <input type="range" min="1" max="60" value="18" id="sl-tenure" oninput="update()">
-    </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Involuntary exit ratio (%)</span><span class="slider-val" id="sv-involuntary">65</span></div>
-      <input type="range" min="0" max="100" value="65" id="sl-involuntary" class="amber" oninput="update()">
-    </div>
-
-    <div class="divider" style="margin:1rem 0"></div>
-    <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="exportPDF()">↓ Download Attribution Report (PDF)</button>
   </div>
 
-  <!-- RIGHT: LIVE OUTPUT -->
-  <div class="tool-outputs">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
-      <div>
-        <div class="page-eyebrow">People-Revenue Connect</div>
-        <h1 class="page-title" style="font-size:1.4rem;margin-bottom:0">Revenue Attribution <em>Engine</em></h1>
+  <!-- TOOL -->
+  <div class="tool-wrap">
+
+    <!-- INPUTS -->
+    <div class="inputs-panel">
+      <div class="ip-header">
+        <div>
+          <div class="ip-title">Your org's inputs</div>
+          <div class="ip-subtitle">Adjust for your scenario or use real numbers</div>
+        </div>
+        <span id="scenario-tag" class="tag tag-accent" style="font-size:0.6rem">TechVelocity</span>
       </div>
-      <div id="scenario-tag" class="tag tag-accent">TechVelocity Inc.</div>
-    </div>
 
-    <!-- LITERATURE PANEL -->
-    <div class="lit-bar" id="lit-bar" onclick="toggleLit()">
-      <div class="lit-toggle">
-        <div class="lit-toggle-icon">ⓘ</div>
-        <div class="lit-toggle-text"><b>Understand this pillar</b> &nbsp;·&nbsp; What it is · Why it matters · The 3 instruments</div>
+      <!-- SCENARIOS -->
+      <div class="scenario-tabs">
+        <div class="sc-tab active" onclick="loadScenario('techvelocity',this)">
+          <div class="sc-tab-name">TechVelocity</div>
+          <div class="sc-tab-sub">SaaS · 50 emp</div>
+        </div>
+        <div class="sc-tab" onclick="loadScenario('sterling',this)">
+          <div class="sc-tab-name">Sterling</div>
+          <div class="sc-tab-sub">Consulting · 50</div>
+        </div>
+        <div class="sc-tab" onclick="loadScenario('mehta',this)">
+          <div class="sc-tab-name">Mehta & Sons</div>
+          <div class="sc-tab-sub">Industry · 50</div>
+        </div>
       </div>
-      <div class="lit-chevron">▼</div>
-    </div>
-    <div class="lit-panel" id="lit-panel">
-      <div class="lit-content">
-        <div class="lit-tabnav">
-          <button class="lit-tabnav-btn active" onclick="litTab(0,this)">What it is</button>
-          <button class="lit-tabnav-btn" onclick="litTab(1,this)">Why it matters</button>
-          <button class="lit-tabnav-btn" onclick="litTab(2,this)">The 3 instruments</button>
-        </div>
 
-        <div class="lit-tabpane active" id="lit-pane-0">
-          <div class="lit-h">People-Revenue Connect</div>
-          <div class="lit-p">Every other function in the business can draw a straight line from its activity to revenue. Sales closes deals. Marketing generates pipeline. Product ships features customers pay for. <b>HR has never been able to do this</b> — it reports headcount, engagement scores, and attrition percentages that sit in a world disconnected from the P&L.</div>
-          <div class="lit-p">People-Revenue Connect is the first pillar of Revenue Fluency because it builds the bridge. It takes the people events HR already tracks — exits, tenure, replacement cost — and translates them into the language the board actually cares about: <b>revenue protected, revenue at risk, and revenue lost</b>.</div>
-          <div class="lit-callout">When a senior account executive walks out the door, the cost isn't their salary. It's the pipeline that goes cold, the clients who hesitate, the ramp time before a replacement is productive, and the institutional knowledge that leaves with them. Revenue Connect quantifies all of it.</div>
-        </div>
+      <div id="csv-panel-mount-p1" style="padding:0.75rem 1.25rem 0"></div>
 
-        <div class="lit-tabpane" id="lit-pane-1">
-          <div class="lit-h">Why it matters</div>
-          <div class="lit-p">The moment HR can say <b>"this attrition cost us ₹1.1Cr in revenue"</b> instead of <b>"our attrition rate is 14%,"</b> the conversation changes. One is an HR metric the CFO tolerates. The other is a business problem the CFO acts on.</div>
-          <div class="lit-p">Revenue Connect gives you three things no engagement survey ever could: <b>a defensible number</b> (revenue at risk), <b>a confidence score</b> (how strongly that number is attributable to people decisions), and <b>a narrative</b> the board understands without translation.</div>
-          <div class="lit-p">This is the foundation of every pillar that follows. People Alpha, Team Architecture, HUMANCE, and the People P&L all build on the core premise this pillar proves: <b>people decisions are revenue decisions.</b></div>
-        </div>
+      <!-- GUIDED SLIDERS -->
+      <div class="guided-sliders">
 
-        <div class="lit-tabpane" id="lit-pane-2">
-          <div class="lit-h">The 3 instruments</div>
-          <div class="lit-p" style="margin-bottom:1.25rem">Revenue Connect runs on three measurement instruments. Each one isolates a different way people events translate into revenue impact.</div>
-
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name">Attrition Cost %</span><span class="lit-inst-abbr">ATC%</span></div>
-            <div class="lit-inst-formula">ATC% = (Total replacement cost of exits ÷ Annual revenue) × 100</div>
-            <div class="lit-inst-desc">Expresses the full replacement cost of departed talent as a percentage of revenue. It reframes attrition from an HR rate into a revenue drag. A high ATC% means you're spending a meaningful slice of revenue just standing still.</div>
-            <div class="lit-inst-bench">Benchmark: healthy &lt;80% · watch 80–100% · critical &gt;100%</div>
+        <div class="g-slider">
+          <div class="gs-top">
+            <div class="gs-label">Annual headcount exits</div>
+            <div class="gs-val" id="v-exits">7</div>
           </div>
+          <div class="gs-why">→ How many people left this year? Each exit triggers replacement cost + revenue drag.</div>
+          <input type="range" id="sl-exits" min="1" max="30" value="7" oninput="syncVal('v-exits',this.value);update()">
+        </div>
 
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name">Talent Drag Factor</span><span class="lit-inst-abbr">TDF</span></div>
-            <div class="lit-inst-formula">TDF = Revenue capacity lost to transitions ÷ Total revenue capacity</div>
-            <div class="lit-inst-desc">Measures how much revenue-generating capacity is dragged down by people in transition — ramping, backfilling, or covering gaps. The lower the drag, the more of your headcount is actually producing revenue right now.</div>
-            <div class="lit-inst-bench">Benchmark: healthy &gt;0.5 · the higher, the less drag on capacity</div>
+        <div class="g-slider">
+          <div class="gs-top">
+            <div class="gs-label">Avg annual salary (₹L)</div>
+            <div class="gs-val" id="v-salary">14</div>
           </div>
+          <div class="gs-why">→ Higher salary = higher ATC%. Each exit costs ~2× annual salary in total impact.</div>
+          <input type="range" id="sl-salary" min="3" max="60" value="14" oninput="syncVal('v-salary',this.value);update()">
+        </div>
 
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name">Employee-Sales Ratio</span><span class="lit-inst-abbr">ESR</span></div>
-            <div class="lit-inst-formula">ESR = Revenue ÷ (Headcount × Avg fully-loaded cost) × 100</div>
-            <div class="lit-inst-desc">The efficiency instrument — how much revenue each rupee of people cost generates. When ESR drops after a people event, you can attribute the efficiency loss directly to that event with a quantified figure.</div>
-            <div class="lit-inst-bench">Benchmark: 80%+ threshold for a revenue-efficient org</div>
+        <div class="g-slider">
+          <div class="gs-top">
+            <div class="gs-label">Annual revenue (₹Cr)</div>
+            <div class="gs-val" id="v-rev">84</div>
           </div>
+          <div class="gs-why">→ Your revenue base. ATC% = replacement cost ÷ this number. Higher revenue = lower ATC%.</div>
+          <input type="range" id="sl-rev" min="5" max="500" value="84" oninput="syncVal('v-rev',this.value);update()">
         </div>
+
+        <div class="g-slider">
+          <div class="gs-top">
+            <div class="gs-label">Total headcount</div>
+            <div class="gs-val" id="v-hc">50</div>
+          </div>
+          <div class="gs-why">→ Total team size. Used to calculate your Attrition Rate % (AR%) and OEI.</div>
+          <input type="range" id="sl-hc" min="5" max="500" value="50" oninput="syncVal('v-hc',this.value);update()">
+        </div>
+
+        <div class="g-slider">
+          <div class="gs-top">
+            <div class="gs-label">Revenue-generating roles (%)</div>
+            <div class="gs-val" id="v-rr">60</div>
+          </div>
+          <div class="gs-why">→ What % of your team directly drives revenue? Feeds the OEI structural score.</div>
+          <input type="range" id="sl-rr" min="10" max="95" value="60" oninput="syncVal('v-rr',this.value);update()">
+        </div>
+
+        <div class="g-slider">
+          <div class="gs-top">
+            <div class="gs-label">Avg tenure at exit (months)</div>
+            <div class="gs-val" id="v-tenure">18</div>
+          </div>
+          <div class="gs-why">→ Longer tenure = more knowledge loss per exit. Feeds the TDF score.</div>
+          <input type="range" id="sl-tenure" min="1" max="60" value="18" oninput="syncVal('v-tenure',this.value);update()">
+        </div>
+
+        <div class="g-slider">
+          <div class="gs-top">
+            <div class="gs-label">Involuntary exit ratio (%)</div>
+            <div class="gs-val" id="v-inv">65</div>
+          </div>
+          <div class="gs-why">→ High involuntary = managed exits (quality control). High voluntary = culture signal.</div>
+          <input type="range" id="sl-inv" min="0" max="100" value="65" oninput="syncVal('v-inv',this.value);update()">
+        </div>
+
+      </div>
+
+      <div class="input-actions">
+        <button class="btn btn-primary" style="width:100%" onclick="exportPDF()">↓ Download Attribution Report (PDF)</button>
+        <a href="p2-tool.html" class="btn btn-ghost" style="width:100%;text-align:center;text-decoration:none">Next: People Alpha →</a>
       </div>
     </div>
 
-    <!-- 4 BIG METRICS -->
-    <div class="output-grid">
-      <div class="big-metric red">
-        <div class="bm-label">Attrition Cost % (ATC%)</div>
-        <div class="bm-val red" id="out-atc">—</div>
-        <div class="bm-status"><span id="atc-status" style="color:var(--red)">● Critical</span><span style="color:var(--text-mute);margin-left:4px">bench: &lt;80%</span></div>
-        <div class="bm-bar"><div class="bm-fill" id="atc-bar" style="background:var(--red);width:0%"></div></div>
-      </div>
-      <div class="big-metric amber">
-        <div class="bm-label">Talent Drag Factor (TDF)</div>
-        <div class="bm-val amber" id="out-tdf">—</div>
-        <div class="bm-status"><span id="tdf-status" style="color:var(--amber)">● High drag</span><span style="color:var(--text-mute);margin-left:4px">bench: &gt;0.5</span></div>
-        <div class="bm-bar"><div class="bm-fill" id="tdf-bar" style="background:var(--amber);width:0%"></div></div>
-      </div>
-      <div class="big-metric teal">
-        <div class="bm-label">Employee-Sales Ratio (ESR)</div>
-        <div class="bm-val teal" id="out-esr">—</div>
-        <div class="bm-status"><span id="esr-status" style="color:var(--amber)">● Below 80%</span><span style="color:var(--text-mute);margin-left:4px">threshold</span></div>
-        <div class="bm-bar"><div class="bm-fill" id="esr-bar" style="background:var(--teal);width:0%"></div></div>
-      </div>
-      <div class="big-metric accent">
-        <div class="bm-label">Revenue at Risk (₹)</div>
-        <div class="bm-val accent" id="out-rev-risk">—</div>
-        <div class="bm-status"><span id="risk-status" style="color:var(--accent2)">● Calculated</span></div>
-        <div class="bm-bar"><div class="bm-fill" id="risk-bar" style="background:var(--accent);width:0%"></div></div>
-      </div>
-    </div>
+    <!-- OUTPUTS -->
+    <div class="outputs-panel">
 
-    <!-- CONFIDENCE METER -->
-    <div class="confidence-meter">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div class="mono-label">Attribution Confidence Score</div>
-        <div style="font-family:var(--font-head);font-weight:800;font-size:1.8rem;color:var(--teal)" id="out-confidence">—</div>
+      <!-- PILLAR INTRO (collapsible) -->
+      <div class="pillar-intro">
+        <div class="pi-header" onclick="togglePillarIntro()">
+          <div class="pi-left">
+            <div class="pi-icon">⟳</div>
+            <div>
+              <div class="pi-name">Revenue Connect</div>
+              <div class="pi-sub">What it is · Why it matters · The 4 instruments</div>
+            </div>
+          </div>
+          <span class="pi-toggle" id="pi-toggle">▼</span>
+        </div>
+        <div class="pi-body" id="pi-body">
+          <b>What it is:</b> Revenue Connect is the first of 5 Revenue Fluent pillars. It converts people movement — exits, vacancies, transitions — from a headcount percentage into a precise rupee consequence. ATC% measures the cost of exits relative to revenue. AR% measures the rate. TDF measures the drag. Together they tell you what attrition is actually doing to your business.<br><br>
+          <b>Why it matters:</b> Every board responds to rupees. "14% attrition" triggers a nod. "₹1.1Cr in revenue at risk" triggers a budget decision. Revenue Connect gives HR professionals the number that changes the conversation permanently.<br><br>
+          <b>The 4 instruments:</b> ATC% (Attrition Cost %), AR% (Attrition Rate), TDF (Talent Disruption Frequency), ESR (Execution Stability Ratio).
+        </div>
       </div>
-      <div class="cm-track"><div class="cm-fill" id="conf-bar" style="width:0%"></div></div>
-      <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute)">
-        <span>0% — Speculative</span><span>50% — Moderate</span><span>100% — Definitive</span>
-      </div>
-    </div>
 
-    <!-- ATTRIBUTION BREAKDOWN -->
-    <div class="attribution-breakdown">
-      <div class="mono-label" style="margin-bottom:0.75rem">Attribution Breakdown</div>
-      <div class="ab-row">
-        <span style="font-size:0.82rem;color:var(--text-dim)">Direct exit replacement cost</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div class="ab-bar-wrap"><div class="ab-bar-fill" id="ab1" style="background:var(--red);width:0%"></div></div>
-          <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--red);min-width:60px;text-align:right" id="ab1-val">₹0</span>
-        </div>
-      </div>
-      <div class="ab-row">
-        <span style="font-size:0.82rem;color:var(--text-dim)">Revenue capacity lost</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div class="ab-bar-wrap"><div class="ab-bar-fill" id="ab2" style="background:var(--amber);width:0%"></div></div>
-          <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--amber);min-width:60px;text-align:right" id="ab2-val">₹0</span>
-        </div>
-      </div>
-      <div class="ab-row">
-        <span style="font-size:0.82rem;color:var(--text-dim)">Productivity drag (transition)</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div class="ab-bar-wrap"><div class="ab-bar-fill" id="ab3" style="background:var(--purple);width:0%"></div></div>
-          <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--purple);min-width:60px;text-align:right" id="ab3-val">₹0</span>
-        </div>
-      </div>
-      <div class="ab-row">
-        <span style="font-size:0.82rem;color:var(--text-dim)">Institutional knowledge loss</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div class="ab-bar-wrap"><div class="ab-bar-fill" id="ab4" style="background:var(--teal);width:0%"></div></div>
-          <span style="font-family:var(--font-mono);font-size:0.75rem;color:var(--teal);min-width:60px;text-align:right" id="ab4-val">₹0</span>
-        </div>
-      </div>
-    </div>
+      <!-- METRIC CARDS — 4 METRICS -->
+      <div class="metric-grid">
 
-    <!-- NARRATIVE -->
-    <div class="narrative-box">
-      <div class="mono-label" style="margin-bottom:8px;color:var(--accent2)">Attribution Statement</div>
-      <p class="nb-quote" id="narrative">Adjust the sliders on the left to generate your attribution statement.</p>
+        <div class="metric-card">
+          <div class="mc-accent-bar" style="background:#E05C3A"></div>
+          <div class="mc-body">
+            <div class="mc-label">Attrition Cost % (ATC%)</div>
+            <div class="mc-value signal-red" id="out-atc">—</div>
+            <div class="mc-status">
+              <div class="mc-status-dot" id="dot-atc" style="background:#E05C3A"></div>
+              <div class="mc-status-text" id="status-atc">Calculating...</div>
+            </div>
+            <div class="mc-bench">Benchmark: &lt;80% · Critical: &gt;140%</div>
+            <div class="mc-bar-wrap"><div class="mc-bar-fill" id="bar-atc" style="background:#E05C3A;width:0%"></div></div>
+          </div>
+          <div class="mc-why">Total replacement cost ÷ Annual revenue. Converts attrition from a headcount rate into a financial burden on revenue. A 141% ATC means you spend ₹1.41 replacing talent for every ₹1 of annual revenue.</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="mc-accent-bar" style="background:var(--accent2)"></div>
+          <div class="mc-body">
+            <div class="mc-label">Attrition Rate % (AR%)</div>
+            <div class="mc-value signal-amber" id="out-ar">—</div>
+            <div class="mc-status">
+              <div class="mc-status-dot" id="dot-ar" style="background:var(--accent2)"></div>
+              <div class="mc-status-text" id="status-ar">Calculating...</div>
+            </div>
+            <div class="mc-bench">Healthy: &lt;10% · Warning: &gt;20%</div>
+            <div class="mc-bar-wrap"><div class="mc-bar-fill" id="bar-ar" style="background:var(--accent2);width:0%"></div></div>
+          </div>
+          <div class="mc-why">Exits ÷ Average headcount. Your headline attrition rate — but unlike a raw number, Revenue Connect connects this rate directly to its revenue consequence via ATC%.</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="mc-accent-bar" style="background:var(--accent)"></div>
+          <div class="mc-body">
+            <div class="mc-label">Talent Disruption Freq. (TDF)</div>
+            <div class="mc-value" id="out-tdf" style="color:var(--accent)">—</div>
+            <div class="mc-status">
+              <div class="mc-status-dot" id="dot-tdf" style="background:var(--accent)"></div>
+              <div class="mc-status-text" id="status-tdf">Calculating...</div>
+            </div>
+            <div class="mc-bench">Healthy: &lt;5% · High: &gt;10%</div>
+            <div class="mc-bar-wrap"><div class="mc-bar-fill" id="bar-tdf" style="background:var(--accent);width:0%"></div></div>
+          </div>
+          <div class="mc-why">Frequency of unexpected talent disruptions as % of headcount — unplanned exits, offer drops, early exits. Your early warning system for execution momentum fragility.</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="mc-accent-bar" style="background:#5CC8A0"></div>
+          <div class="mc-body">
+            <div class="mc-label">Execution Stability Ratio (ESR)</div>
+            <div class="mc-value signal-green" id="out-esr">—</div>
+            <div class="mc-status">
+              <div class="mc-status-dot" id="dot-esr" style="background:#5CC8A0"></div>
+              <div class="mc-status-text" id="status-esr">Calculating...</div>
+            </div>
+            <div class="mc-bench">Target: &gt;80% · Critical: &lt;65%</div>
+            <div class="mc-bar-wrap"><div class="mc-bar-fill" id="bar-esr" style="background:#5CC8A0;width:0%"></div></div>
+          </div>
+          <div class="mc-why">% of workforce in a stable, execution-ready state. When too many people are ramping, in notice, or in transition — ESR drops and your real execution capacity falls below your headcount count.</div>
+        </div>
+
+      </div>
+
+      <!-- REVENUE AT RISK — HERO -->
+      <div class="risk-hero">
+        <div class="rh-bar"></div>
+        <div class="rh-body">
+          <div class="rh-label">Revenue at Risk</div>
+          <div class="rh-amount" id="out-rev-risk">₹—</div>
+          <div class="rh-sub" id="rh-sub">Adjust sliders to calculate</div>
+        </div>
+      </div>
+
+      <!-- ATTRIBUTION CONFIDENCE -->
+      <div class="confidence-section">
+        <div class="conf-header">
+          <div class="conf-label">Attribution Confidence Score</div>
+          <div class="conf-val" id="out-confidence">—</div>
+        </div>
+        <div class="conf-track">
+          <div class="conf-fill" id="conf-fill" style="width:0%"></div>
+        </div>
+        <div class="conf-scale">
+          <span>0% — Speculative</span>
+          <span>50% — Moderate</span>
+          <span>100% — Definitive</span>
+        </div>
+      </div>
+
+      <!-- ATTRIBUTION BREAKDOWN -->
+      <div class="attribution">
+        <div class="attr-header">Cost Attribution Breakdown</div>
+        <div class="attr-row">
+          <div class="attr-label">Direct replacement cost</div>
+          <div class="attr-bar-wrap"><div class="attr-bar" id="ab1-bar" style="background:#E05C3A;width:0%"></div></div>
+          <div class="attr-val signal-red" id="ab1-val">—</div>
+        </div>
+        <div class="attr-row">
+          <div class="attr-label">Revenue capacity lost</div>
+          <div class="attr-bar-wrap"><div class="attr-bar" id="ab2-bar" style="background:var(--accent2);width:0%"></div></div>
+          <div class="attr-val signal-amber" id="ab2-val">—</div>
+        </div>
+        <div class="attr-row">
+          <div class="attr-label">Productivity drag</div>
+          <div class="attr-bar-wrap"><div class="attr-bar" id="ab3-bar" style="background:var(--accent);width:0%"></div></div>
+          <div class="attr-val" id="ab3-val" style="color:var(--accent)">—</div>
+        </div>
+        <div class="attr-row" style="margin-bottom:0">
+          <div class="attr-label">Knowledge loss</div>
+          <div class="attr-bar-wrap"><div class="attr-bar" id="ab4-bar" style="background:#5CC8A0;width:0%"></div></div>
+          <div class="attr-val signal-green" id="ab4-val">—</div>
+        </div>
+      </div>
+
+      <!-- NARRATIVE -->
+      <div class="narrative-box">
+        <div class="nb-label">Intelligence Statement</div>
+        <div class="nb-text" id="narrative">Adjust the sliders on the left to generate your attribution statement.</div>
+      </div>
+
+      <!-- LITERATURE -->
+      <div class="lit-bar">
+        <div class="lit-header" onclick="toggleLit(this)">
+          <span class="lit-icon">📖</span>
+          <span class="lit-title">Understand this pillar — What it is · Why it matters · How to calculate it</span>
+          <span class="lit-toggle">▼</span>
+        </div>
+        <div class="lit-body">
+          <div class="lit-section">The Core Problem</div>
+          <p class="lit-p">Every HR professional knows attrition is expensive. But "expensive" without a number is just noise in a boardroom that runs on spreadsheets. <b>ATC% converts attrition from a rate into a revenue burden.</b> When TechVelocity's CHRO walked in with "14% attrition," the CFO nodded and moved on. When she ran Revenue Connect and returned with "₹1.1Cr in revenue at risk with 88% attribution confidence," she got a headcount budget increase.</p>
+          <div class="lit-section">The Formulas</div>
+          <div class="lit-formula">
+            ATC% = (Exits × Avg Salary × 2.0 multiplier) ÷ Annual Revenue × 100<br>
+            AR%  = Exits ÷ Average Headcount × 100<br>
+            TDF  = Disruption Events ÷ Headcount × 100<br>
+            ESR  = Stable Employees ÷ Total Employees × 100
+          </div>
+          <div class="lit-section">The 2× Multiplier</div>
+          <p class="lit-p">Every exit costs approximately 2× the annual salary of the person who left. This breaks down as: 1× notice period at reduced productivity + 0.25× hiring cost + 0.75× new hire ramp at 50% productivity for 1.5 months. For senior or highly specialised roles, this multiplier rises to 3×.</p>
+          <div class="lit-section">What Good Looks Like</div>
+          <p class="lit-p"><b>ATC% below 80%</b> — healthy. Replacement cost is a manageable share of revenue. <b>ATC% 80-140%</b> — watch carefully. <b>ATC% above 140%</b> — critical. You are spending more replacing talent than the revenue benchmark can absorb. ESR below 65% signals execution fragility — too many people in transition to execute predictably.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -289,137 +463,176 @@
 <script>
 document.getElementById('rf-css').textContent = RF.css;
 RF.startTicker('ticker');
-
-// Literature panel
-function toggleLit() {
-  document.getElementById('lit-bar').classList.toggle('open');
-  document.getElementById('lit-panel').classList.toggle('open');
-}
-function litTab(idx, btn) {
-  event.stopPropagation();
-  document.querySelectorAll('.lit-tabnav-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.lit-tabpane').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('lit-pane-' + idx).classList.add('active');
-}
 document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p1');
 document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
   ['Revenue Fluent', 'Revenue Connect'],
-  `<span class="tb-pill green">Live Calculator</span>`
+  '<span class="tb-pill" style="background:rgba(184,115,51,0.15);color:#E8C87A;border-color:rgba(184,115,51,0.3)">LIVE CALCULATOR</span>'
 );
 
-const scenarios = [
-  { name:'TechVelocity Inc.', exits:7, salary:14, rev:84, hc:50, revRoles:60, tenure:18, involuntary:65 },
-  { name:'Sterling Consulting', exits:5, salary:22, rev:120, hc:50, revRoles:75, tenure:24, involuntary:40 },
-  { name:'Apex Manufacturing', exits:4, salary:9, rev:56, hc:50, revRoles:55, tenure:30, involuntary:80 },
-];
+// Init CSV panel
+document.getElementById('csv-panel-mount-p1').innerHTML = RF_CSV.renderPanel('p1');
 
-function loadScenario(idx, el) {
-  document.querySelectorAll('.sc-btn').forEach(b => b.classList.remove('active'));
+const SCENARIOS = {
+  techvelocity: { exits:7, salary:14, rev:84, hc:50, rr:60, tenure:18, inv:65, name:'TechVelocity' },
+  sterling:     { exits:9, salary:18, rev:120, hc:50, rr:72, tenure:24, inv:40, name:'Sterling' },
+  mehta:        { exits:12, salary:16, rev:84, hc:50, rr:55, tenure:36, inv:50, name:'Mehta & Sons' },
+};
+
+function syncVal(id, val) { document.getElementById(id).textContent = val; }
+
+function loadScenario(key, el) {
+  document.querySelectorAll('.sc-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  const s = scenarios[idx];
-  document.getElementById('sl-exits').value = s.exits;
-  document.getElementById('sl-salary').value = s.salary;
-  document.getElementById('sl-rev').value = s.rev;
-  document.getElementById('sl-hc').value = s.hc;
-  document.getElementById('sl-rev-roles').value = s.revRoles;
-  document.getElementById('sl-tenure').value = s.tenure;
-  document.getElementById('sl-involuntary').value = s.involuntary;
+  const s = SCENARIOS[key];
+  const set = (id, v) => {
+    document.getElementById(id).value = v;
+    document.getElementById('v-' + id.replace('sl-','').replace('sl-','') ).textContent = v;
+  };
+  document.getElementById('sl-exits').value = s.exits; document.getElementById('v-exits').textContent = s.exits;
+  document.getElementById('sl-salary').value = s.salary; document.getElementById('v-salary').textContent = s.salary;
+  document.getElementById('sl-rev').value = s.rev; document.getElementById('v-rev').textContent = s.rev;
+  document.getElementById('sl-hc').value = s.hc; document.getElementById('v-hc').textContent = s.hc;
+  document.getElementById('sl-rr').value = s.rr; document.getElementById('v-rr').textContent = s.rr;
+  document.getElementById('sl-tenure').value = s.tenure; document.getElementById('v-tenure').textContent = s.tenure;
+  document.getElementById('sl-inv').value = s.inv; document.getElementById('v-inv').textContent = s.inv;
   document.getElementById('scenario-tag').textContent = s.name;
   update();
 }
 
-function fmt(n) {
-  if (n >= 10000000) return '₹' + (n/10000000).toFixed(1) + 'Cr';
-  if (n >= 100000) return '₹' + (n/100000).toFixed(1) + 'L';
-  if (n >= 1000) return '₹' + Math.round(n/1000) + 'K';
-  return '₹' + Math.round(n);
+function fmtCr(v) {
+  if (v >= 10000000) return '₹' + (v/10000000).toFixed(1) + 'Cr';
+  if (v >= 100000) return '₹' + (v/100000).toFixed(1) + 'L';
+  return '₹' + Math.round(v/1000) + 'K';
 }
 
 function update() {
-  const exits = parseInt(document.getElementById('sl-exits').value);
-  const salary = parseInt(document.getElementById('sl-salary').value) * 100000;
-  const rev = parseInt(document.getElementById('sl-rev').value) * 10000000;
-  const hc = parseInt(document.getElementById('sl-hc').value);
-  const revRoles = parseInt(document.getElementById('sl-rev-roles').value) / 100;
-  const tenure = parseInt(document.getElementById('sl-tenure').value);
-  const involuntary = parseInt(document.getElementById('sl-involuntary').value) / 100;
+  const exits   = +document.getElementById('sl-exits').value;
+  const salL    = +document.getElementById('sl-salary').value;
+  const revCr   = +document.getElementById('sl-rev').value;
+  const hc      = +document.getElementById('sl-hc').value;
+  const rrPct   = +document.getElementById('sl-rr').value;
+  const tenMo   = +document.getElementById('sl-tenure').value;
+  const invPct  = +document.getElementById('sl-inv').value;
 
-  // Update display values
-  document.getElementById('sv-exits').textContent = exits;
-  document.getElementById('sv-salary').textContent = parseInt(document.getElementById('sl-salary').value);
-  document.getElementById('sv-rev').textContent = parseInt(document.getElementById('sl-rev').value);
-  document.getElementById('sv-hc').textContent = hc;
-  document.getElementById('sv-rev-roles').textContent = parseInt(document.getElementById('sl-rev-roles').value);
-  document.getElementById('sv-tenure').textContent = tenure;
-  document.getElementById('sv-involuntary').textContent = parseInt(document.getElementById('sl-involuntary').value);
+  const salRs   = salL * 100000;
+  const revRs   = revCr * 10000000;
+  const avgHC   = hc;
 
-  // Calculations
-  const replacementCost = salary * 1.5;
-  const totalReplacementCost = exits * replacementCost;
-  const revPerEmployee = rev / hc;
-  const revCapacityLost = exits * revPerEmployee * (tenure / 12) * 0.4;
-  const productivityDrag = exits * salary * 0.6 * (tenure / 12);
-  const knowledgeLoss = exits * salary * (tenure / 24) * 0.3;
-  const totalRevRisk = totalReplacementCost + revCapacityLost + productivityDrag + knowledgeLoss;
-  const atc = Math.round((totalReplacementCost / rev) * 100);
-  const tdf = Math.round(((revPerEmployee * exits) / rev) * 1000) / 100;
-  const esr = Math.round((rev / (hc * salary)) * 100);
-  const confidence = Math.min(95, 40 + (exits * 4) + (involuntary * 30) + (revRoles * 15));
+  // ATC% — Attrition Cost % of Revenue
+  const replCost = exits * salRs * 2.0;
+  const atcPct   = Math.round((replCost / revRs) * 100);
 
-  // Attribution breakdown
-  const maxCost = totalRevRisk;
-  document.getElementById('ab1-bar').style.width = Math.min(100, (totalReplacementCost/maxCost*100)) + '%';
-  document.getElementById('ab2-bar').style.width = Math.min(100, (revCapacityLost/maxCost*100)) + '%';
-  document.getElementById('ab3-bar').style.width = Math.min(100, (productivityDrag/maxCost*100)) + '%';
-  document.getElementById('ab4-bar').style.width = Math.min(100, (knowledgeLoss/maxCost*100)) + '%';
-  document.getElementById('ab1-val').textContent = fmt(totalReplacementCost);
-  document.getElementById('ab2-val').textContent = fmt(revCapacityLost);
-  document.getElementById('ab3-val').textContent = fmt(productivityDrag);
-  document.getElementById('ab4-val').textContent = fmt(knowledgeLoss);
+  // AR% — Attrition Rate
+  const arPct = Math.round((exits / avgHC) * 100 * 10) / 10;
 
-  // ATC
-  document.getElementById('out-atc').textContent = atc + '%';
-  document.getElementById('out-atc').className = 'bm-val ' + (atc > 100 ? 'red' : atc > 60 ? 'amber' : 'teal');
-  document.getElementById('atc-bar').style.width = Math.min(100, atc/2) + '%';
-  document.getElementById('atc-status').textContent = atc > 100 ? '● Critical' : atc > 60 ? '● Watch' : '● Healthy';
-  document.getElementById('atc-status').style.color = atc > 100 ? 'var(--red)' : atc > 60 ? 'var(--amber)' : 'var(--green)';
+  // TDF — Talent Disruption Frequency (approx: exits + 20% for offer drops/early exits)
+  const disruptionEvents = exits * 1.3;
+  const tdfPct = Math.round((disruptionEvents / avgHC) * 100 * 10) / 10;
+
+  // ESR — Execution Stability Ratio
+  // Stable = not ramping, not in notice. Approx: hc - (exits * rampMonths/12 * 2)
+  const rampOverlap = Math.min(exits * 2, hc * 0.4);
+  const stableHC = Math.max(0, hc - rampOverlap);
+  const esrPct = Math.round((stableHC / hc) * 100);
+
+  // Revenue at Risk
+  const revCapLost = exits * (salRs / 12) * 3; // 3 months capacity gap
+  const productDrag = exits * salRs * 0.5;
+  const knowledgeLoss = exits * salRs * (tenMo / 24) * 0.3;
+  const directRepl = replCost;
+  const totalRisk = directRepl + revCapLost + productDrag + knowledgeLoss;
+
+  // Attribution confidence
+  const conf = Math.min(98, 40 + (arPct * 1.5) + (atcPct > 100 ? 20 : 0) + (esrPct < 70 ? 15 : 0));
+
+  // Attribution bars (% of total)
+  const total4 = directRepl + revCapLost + productDrag + knowledgeLoss;
+  const b1pct = Math.round((directRepl/total4)*100);
+  const b2pct = Math.round((revCapLost/total4)*100);
+  const b3pct = Math.round((productDrag/total4)*100);
+  const b4pct = 100 - b1pct - b2pct - b3pct;
+
+  // ── UPDATE DOM ──
+  // ATC%
+  const atcEl = document.getElementById('out-atc');
+  atcEl.textContent = atcPct + '%';
+  atcEl.className = 'mc-value ' + (atcPct > 140 ? 'signal-red' : atcPct > 80 ? 'signal-amber' : 'signal-green');
+  document.getElementById('status-atc').textContent = atcPct > 140 ? 'Critical — above threshold' : atcPct > 80 ? 'Watch — approaching limit' : 'Healthy';
+  document.getElementById('bar-atc').style.width = Math.min(100, atcPct/2) + '%';
+
+  // AR%
+  document.getElementById('out-ar').textContent = arPct + '%';
+  document.getElementById('status-ar').textContent = arPct > 20 ? 'High attrition' : arPct > 10 ? 'Moderate' : 'Healthy range';
+  document.getElementById('bar-ar').style.width = Math.min(100, arPct * 3) + '%';
 
   // TDF
-  document.getElementById('out-tdf').textContent = tdf.toFixed(2);
-  document.getElementById('tdf-bar').style.width = Math.min(100, tdf * 20) + '%';
+  document.getElementById('out-tdf').textContent = tdfPct + '%';
+  document.getElementById('status-tdf').textContent = tdfPct > 10 ? 'High disruption frequency' : tdfPct > 5 ? 'Moderate disruption' : 'Stable';
+  document.getElementById('bar-tdf').style.width = Math.min(100, tdfPct * 5) + '%';
 
   // ESR
-  document.getElementById('out-esr').textContent = esr + '%';
-  document.getElementById('out-esr').className = 'bm-val ' + (esr >= 80 ? 'teal' : esr >= 60 ? 'amber' : 'red');
-  document.getElementById('esr-bar').style.width = Math.min(100, esr) + '%';
+  const esrEl = document.getElementById('out-esr');
+  esrEl.textContent = esrPct + '%';
+  esrEl.className = 'mc-value ' + (esrPct < 65 ? 'signal-red' : esrPct < 80 ? 'signal-amber' : 'signal-green');
+  document.getElementById('status-esr').textContent = esrPct < 65 ? 'Fragile — below threshold' : esrPct < 80 ? 'Below target' : 'Execution-ready';
+  document.getElementById('bar-esr').style.width = esrPct + '%';
 
-  // Revenue at risk
-  document.getElementById('out-rev-risk').textContent = fmt(totalRevRisk);
-  document.getElementById('risk-bar').style.width = Math.min(100, (totalRevRisk/rev)*100) + '%';
+  // Revenue at Risk
+  document.getElementById('out-rev-risk').textContent = fmtCr(totalRisk);
+  document.getElementById('rh-sub').textContent = 'Based on ' + exits + ' exits · ' + conf.toFixed(0) + '% attribution confidence · ' + revCr + '₹Cr revenue base';
 
   // Confidence
-  const conf = Math.round(confidence);
-  document.getElementById('out-confidence').textContent = conf + '%';
-  document.getElementById('conf-bar').style.width = conf + '%';
+  document.getElementById('out-confidence').textContent = conf.toFixed(0) + '%';
+  document.getElementById('conf-fill').style.width = conf + '%';
+
+  // Attribution breakdown
+  document.getElementById('ab1-val').textContent = fmtCr(directRepl);
+  document.getElementById('ab2-val').textContent = fmtCr(revCapLost);
+  document.getElementById('ab3-val').textContent = fmtCr(productDrag);
+  document.getElementById('ab4-val').textContent = fmtCr(knowledgeLoss);
+  document.getElementById('ab1-bar').style.width = b1pct + '%';
+  document.getElementById('ab2-bar').style.width = b2pct + '%';
+  document.getElementById('ab3-bar').style.width = b3pct + '%';
+  document.getElementById('ab4-bar').style.width = b4pct + '%';
 
   // Narrative
+  const vol = 100 - invPct;
   const scenarioName = document.getElementById('scenario-tag').textContent;
-  document.getElementById('narrative').innerHTML = `With <span class="nb-stat">${exits} exits</span> at an average salary of <span class="nb-stat">₹${parseInt(document.getElementById('sl-salary').value)}L</span>, ${scenarioName} is carrying <span class="nb-stat">${fmt(totalRevRisk)}</span> in total revenue-attributed people cost. The Attrition Cost % of <span class="nb-stat">${atc}%</span> means every rupee spent replacing talent costs <span class="nb-stat">₹${(atc/100).toFixed(2)}</span> against each rupee of revenue. Attribution confidence: <span class="nb-stat">${conf}%</span>.`;
+  const narrative = atcPct > 140
+    ? `<b>${scenarioName}</b> is in a critical attrition zone. ATC% of <b>${atcPct}%</b> means replacement spend exceeds revenue benchmarks. With an ESR of <b>${esrPct}%</b>, only ${stableHC} of ${hc} people are execution-ready. Total revenue at risk: <b>${fmtCr(totalRisk)}</b> — attributable with <b>${conf.toFixed(0)}% confidence</b>. The ${vol.toFixed(0)}% voluntary exit component signals a culture or leadership trigger, not a compensation issue.`
+    : atcPct > 80
+    ? `<b>${scenarioName}</b> is approaching a critical attrition threshold. ATC% of <b>${atcPct}%</b> and an attrition rate of <b>${arPct}%</b> place this organisation in the watch zone. ESR of <b>${esrPct}%</b> reflects ${exits} people in various stages of transition. Revenue at risk: <b>${fmtCr(totalRisk)}</b>. Intervention now costs a fraction of inaction.`
+    : `<b>${scenarioName}</b> is operating in a healthy attrition range. ATC% of <b>${atcPct}%</b> and attrition rate of <b>${arPct}%</b> are within benchmark. ESR of <b>${esrPct}%</b> indicates the execution engine is stable. Revenue risk is contained at <b>${fmtCr(totalRisk)}</b>. Attribution confidence: <b>${conf.toFixed(0)}%</b>.`;
+
+  document.getElementById('narrative').innerHTML = narrative;
+
+  // Mark tool as explored
+  RF.progress.set('p1');
 }
 
-// Init CSV panel
-document.getElementById('csv-panel-mount-p1').innerHTML = RF_CSV.renderPanel('p1');
+function togglePillarIntro() {
+  const body = document.getElementById('pi-body');
+  const toggle = document.getElementById('pi-toggle');
+  body.classList.toggle('open');
+  toggle.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+function toggleLit(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.lit-toggle');
+  body.classList.toggle('open');
+  toggle.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
 
 function exportPDF() {
   const data = {
     scenario: document.getElementById('scenario-tag').textContent,
     atc: document.getElementById('out-atc').textContent,
-    atcColor: document.getElementById('out-atc').classList.contains('red') ? [239,68,68] : [45,212,191],
+    atcColor: document.getElementById('out-atc').classList.contains('signal-red') ? [224,92,58] : [92,200,160],
     tdf: document.getElementById('out-tdf').textContent,
-    tdfColor: [245,158,11],
+    tdfColor: [184,115,51],
     esr: document.getElementById('out-esr').textContent,
-    esrColor: document.getElementById('out-esr').classList.contains('teal') ? [45,212,191] : [239,68,68],
+    esrColor: document.getElementById('out-esr').classList.contains('signal-green') ? [92,200,160] : [224,92,58],
     revRisk: document.getElementById('out-rev-risk').textContent,
     confidence: document.getElementById('out-confidence').textContent,
     ab1: document.getElementById('ab1-val').textContent,
@@ -429,12 +642,11 @@ function exportPDF() {
     narrative: document.getElementById('narrative').textContent,
   };
   RF.progress.set('p1');
-  RF_PDF.generateP1(data).catch(e => {
-    alert('PDF generation failed: ' + e.message + '. Please check your internet connection.');
-  });
+  RF_PDF.generateP1(data).catch(e => alert('PDF generation error: ' + e.message));
 }
 
+// Initial render
 update();
 </script>
-</PAGEEOF
-echo "P1 Tool done — $(wc -l < /home/claude/rf2/p1-tool.html) lines"
+</body>
+</html>
