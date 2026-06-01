@@ -572,6 +572,7 @@ const RF = {
   nav: {
     items: [
       { id: 'home', icon: '⌂', label: 'Home', file: 'index.html' },
+      { id: 'framework', icon: '◫', label: 'The Framework', file: 'framework.html' },
       { id: 'dashboard', icon: '▦', label: 'Command Centre', file: 'dashboard.html' },
       { id: 'divider' },
       { id: 'p1', icon: '⟳', label: 'Revenue Connect', file: 'p1-tool.html', badge: 'L1', pillar: true },

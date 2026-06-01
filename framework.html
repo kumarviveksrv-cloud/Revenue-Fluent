@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Framework — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js?v=4"></script>
+<style>
+/* HERO */
+.fw-hero { padding:3rem 0 2.5rem; max-width:780px; }
+.fw-hero-pill { display:inline-flex; align-items:center; gap:6px; background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.25); border-radius:20px; padding:4px 14px; font-family:var(--font-mono); font-size:0.6rem; color:var(--accent2); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:1.5rem; }
+.fw-hero-pill::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--accent2); }
+.fw-hero h1 { font-family:var(--font-head); font-weight:300; font-style:italic; font-size:clamp(1.8rem,4vw,3rem); color:rgba(236,238,255,0.6); line-height:1.15; letter-spacing:-0.03em; margin-bottom:0.25rem; }
+.fw-hero h1 strong { font-weight:800; font-style:normal; color:var(--text); display:block; }
+.fw-hero p { font-size:0.95rem; color:var(--text-dim); line-height:1.85; margin-top:1rem; max-width:640px; font-weight:300; }
+.fw-hero p b { color:var(--text); font-weight:600; }
+
+/* PROBLEM SECTION */
+.problem-band { background:linear-gradient(135deg,rgba(239,68,68,0.06),rgba(245,158,11,0.04)); border:1px solid rgba(239,68,68,0.15); border-radius:var(--radius-lg); padding:2.5rem; margin-bottom:3rem; }
+.pb-eyebrow { font-family:var(--font-mono); font-size:0.6rem; color:var(--red); text-transform:uppercase; letter-spacing:0.15em; margin-bottom:1rem; display:flex; align-items:center; gap:8px; }
+.pb-eyebrow::before { content:'——'; color:var(--red); }
+.pb-h { font-family:var(--font-head); font-weight:800; font-size:clamp(1.3rem,3vw,2rem); color:var(--text); letter-spacing:-0.025em; line-height:1.2; margin-bottom:0.875rem; }
+.pb-h em { color:var(--red); font-weight:300; font-style:italic; }
+.pb-p { font-size:0.92rem; color:var(--text-dim); line-height:1.85; margin-bottom:1.5rem; }
+.pb-p b { color:var(--text); font-weight:600; }
+.contrast-row { display:grid; grid-template-columns:1fr auto 1fr; gap:1rem; align-items:center; margin-top:1.5rem; }
+.contrast-col { background:var(--bg2); border-radius:var(--radius); padding:1.25rem; border:1px solid var(--border); }
+.contrast-col.bad { border-color:rgba(239,68,68,0.2); }
+.contrast-col.good { border-color:rgba(45,212,191,0.2); }
+.cc-label { font-family:var(--font-mono); font-size:0.55rem; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.875rem; }
+.contrast-col.bad .cc-label { color:var(--red); }
+.contrast-col.good .cc-label { color:var(--teal); }
+.cc-item { display:flex; align-items:flex-start; gap:8px; padding:6px 0; border-bottom:1px solid var(--border); font-size:0.82rem; color:var(--text-dim); }
+.cc-item:last-child { border-bottom:none; }
+.cc-icon { font-size:0.7rem; margin-top:2px; flex-shrink:0; }
+.contrast-arrow { font-family:var(--font-mono); font-size:1.2rem; color:var(--border-hi); text-align:center; }
+
+/* SECTION HEADERS */
+.fw-section { margin-bottom:3rem; }
+.fw-eyebrow { font-family:var(--font-mono); font-size:0.6rem; color:var(--accent2); text-transform:uppercase; letter-spacing:0.15em; margin-bottom:1rem; display:flex; align-items:center; gap:8px; }
+.fw-eyebrow::before { content:'——'; }
+.fw-h2 { font-family:var(--font-head); font-weight:300; font-style:italic; font-size:clamp(1.4rem,3vw,2.2rem); color:rgba(236,238,255,0.6); letter-spacing:-0.03em; line-height:1.15; margin-bottom:0.25rem; }
+.fw-h2 strong { font-weight:800; font-style:normal; color:var(--text); }
+.fw-h2 em.acc { color:var(--accent2); font-style:italic; }
+.fw-lead { font-size:0.92rem; color:var(--text-dim); line-height:1.85; margin-top:0.875rem; max-width:640px; }
+
+/* 5 PILLAR CARDS */
+.pillar-stack { display:flex; flex-direction:column; gap:12px; margin-top:2rem; }
+.pillar-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; cursor:pointer; transition:all 0.2s; }
+.pillar-card:hover { border-color:var(--border-hi); }
+.pillar-card.open { border-color:var(--border-accent); }
+.pc-header { display:flex; align-items:center; gap:1rem; padding:1.25rem 1.5rem; }
+.pc-num { font-family:var(--font-head); font-weight:800; font-size:2rem; line-height:1; letter-spacing:-0.05em; min-width:40px; }
+.pc-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+.pc-meta { flex:1; }
+.pc-name { font-family:var(--font-head); font-weight:700; font-size:1rem; color:var(--text); margin-bottom:2px; }
+.pc-tagline { font-size:0.8rem; color:var(--text-dim); line-height:1.5; }
+.pc-badge { font-family:var(--font-mono); font-size:0.6rem; padding:3px 10px; border-radius:4px; white-space:nowrap; }
+.pc-chevron { color:var(--text-mute); font-size:0.7rem; transition:transform 0.2s; }
+.pillar-card.open .pc-chevron { transform:rotate(180deg); }
+.pc-body { display:none; padding:0 1.5rem 1.5rem; border-top:1px solid var(--border); animation:fadeIn 0.3s ease; }
+.pillar-card.open .pc-body { display:block; }
+.pc-insight { background:var(--bg2); border-radius:var(--radius-sm); padding:1rem 1.25rem; margin:1.25rem 0; border-left:2px solid var(--accent); }
+.pc-insight-label { font-family:var(--font-mono); font-size:0.55rem; color:var(--accent2); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px; }
+.pc-insight-text { font-size:0.88rem; color:var(--text-dim); line-height:1.75; }
+.pc-insight-text b { color:var(--text); font-weight:600; }
+.pc-metrics-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:1rem; }
+.pc-metric-chip { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px 12px; }
+.pcm-name { font-family:var(--font-mono); font-size:0.62rem; color:var(--text-dim); margin-bottom:2px; }
+.pcm-desc { font-family:var(--font-mono); font-size:0.55rem; color:var(--text-mute); line-height:1.5; }
+.pc-story { font-size:0.88rem; color:var(--text-dim); line-height:1.8; margin-top:1rem; }
+.pc-story b { color:var(--text); font-weight:600; }
+.pc-story em { font-style:italic; color:var(--text-dim); }
+.pc-cta { display:inline-flex; align-items:center; gap:6px; margin-top:1.25rem; font-family:var(--font-mono); font-size:0.65rem; color:var(--accent2); text-decoration:none; border:1px solid var(--border-accent); border-radius:5px; padding:5px 12px; transition:all 0.15s; }
+.pc-cta:hover { background:var(--accent-dim); }
+
+/* METRICS GLOSSARY */
+.metrics-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:2rem; }
+.metric-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; transition:border-color 0.15s; }
+.metric-card:hover { border-color:var(--border-hi); }
+.mc-pillar { font-family:var(--font-mono); font-size:0.52rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px; }
+.mc-name { font-family:var(--font-head); font-weight:700; font-size:0.92rem; color:var(--text); margin-bottom:6px; letter-spacing:-0.01em; }
+.mc-full { font-family:var(--font-mono); font-size:0.6rem; color:var(--text-mute); margin-bottom:8px; }
+.mc-what { font-size:0.82rem; color:var(--text-dim); line-height:1.65; margin-bottom:8px; }
+.mc-bench-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+.mc-bench { font-family:var(--font-mono); font-size:0.58rem; padding:2px 8px; border-radius:3px; }
+.mc-bench.good { background:var(--green-dim); color:var(--green); border:1px solid rgba(16,185,129,0.2); }
+.mc-bench.bad { background:var(--red-dim); color:var(--red); border:1px solid rgba(239,68,68,0.2); }
+.mc-bench.neutral { background:rgba(255,255,255,0.04); color:var(--text-mute); border:1px solid var(--border); }
+
+/* HOW THEY CONNECT */
+.connect-flow { display:flex; flex-direction:column; gap:1px; margin-top:2rem; }
+.cf-row { display:grid; grid-template-columns:120px 1fr 140px; gap:1rem; align-items:center; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1rem 1.25rem; }
+.cf-pillar { font-family:var(--font-mono); font-size:0.6rem; color:var(--text-mute); text-transform:uppercase; }
+.cf-desc { font-size:0.85rem; color:var(--text-dim); line-height:1.55; }
+.cf-desc b { color:var(--text); font-weight:600; }
+.cf-output { font-family:var(--font-mono); font-size:0.72rem; font-weight:500; text-align:right; }
+.cf-arrow { display:flex; justify-content:center; padding:2px 0; }
+.cf-line { width:1px; height:16px; background:linear-gradient(to bottom,var(--border-hi),var(--accent)); margin:0 auto; }
+.pnl-assembly { background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(45,212,191,0.04)); border:1px solid var(--border-accent); border-radius:var(--radius); padding:1.5rem; margin-top:1.5rem; }
+.pna-h { font-family:var(--font-head); font-weight:700; font-size:0.95rem; color:var(--text); margin-bottom:1rem; }
+.pna-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); font-size:0.85rem; }
+.pna-row:last-child { border-bottom:none; }
+.pna-label { color:var(--text-dim); }
+.pna-val { font-family:var(--font-mono); font-size:0.82rem; font-weight:500; }
+.pna-total { display:flex; justify-content:space-between; align-items:center; padding-top:1rem; margin-top:0.5rem; border-top:2px solid var(--border-hi); }
+.pna-total-label { font-family:var(--font-head); font-weight:700; color:var(--text); }
+.pna-total-val { font-family:var(--font-head); font-weight:800; font-size:1.4rem; color:var(--teal); }
+
+/* FINAL CTA */
+.fw-cta-band { background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(45,212,191,0.05)); border:1px solid var(--border-accent); border-radius:var(--radius-lg); padding:2.5rem; text-align:center; margin-bottom:2rem; }
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap" style="max-width:900px;padding-bottom:4rem">
+
+  <!-- HERO -->
+  <div class="fw-hero anim-slide">
+    <div class="fw-hero-pill">The Revenue Fluent Framework</div>
+    <h1>5 pillars. 18 metrics.<br><strong>One complete intelligence system.</strong></h1>
+    <p>Most of these concepts don't exist anywhere else. <b>We coined them.</b> Before you touch a single calculator, read this page — it will fundamentally change how you think about the relationship between people and revenue. This is the intellectual architecture behind everything on this platform.</p>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="problem-band anim-slide">
+    <div class="pb-eyebrow">Why this exists</div>
+    <div class="pb-h">Every function speaks revenue.<br><em>HR has never had to.</em></div>
+    <p class="pb-p">Marketing walks into the board with a <b>9x ROAS</b>. Sales walks in with a <b>10.5x pipeline multiplier</b>. Finance walks in with a <b>EBITDA margin</b>. And HR walks in with an engagement score of <b>74%</b> — and wonders why nobody takes the people budget seriously.</p>
+    <p class="pb-p">The problem isn't that HR work isn't valuable. <b>The problem is that HR has never had the language to prove it in numbers the board actually responds to.</b> Until now.</p>
+    <div class="contrast-row">
+      <div class="contrast-col bad">
+        <div class="cc-label">The old language</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--red)">✗</span> "Attrition is 14% this year"</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--red)">✗</span> "Engagement score is up 6 points"</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--red)">✗</span> "We filled 23 open roles in Q2"</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--red)">✗</span> "Training hours per employee: 18"</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--red)">✗</span> "ESAT scores improved by 8%"</div>
+      </div>
+      <div class="contrast-arrow">→</div>
+      <div class="contrast-col good">
+        <div class="cc-label">The Revenue Fluent language</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--teal)">✓</span> "Attrition cost us ₹1.1Cr in revenue"</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--teal)">✓</span> "Our People Alpha is +22% above market"</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--teal)">✓</span> "Hiring Alpha on those 23 roles: +18%"</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--teal)">✓</span> "L&D Alpha on that programme: 4.2x ROI"</div>
+        <div class="cc-item"><span class="cc-icon" style="color:var(--teal)">✓</span> "Net People ROI this year: 2.3x"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE 5 PILLARS -->
+  <div class="fw-section anim-slide">
+    <div class="fw-eyebrow">The 5 pillars</div>
+    <h2 class="fw-h2">Five lenses. Each one shows you<br><em class="acc">a different dimension of people-revenue.</em></h2>
+    <p class="fw-lead">Revenue Fluent is not a single metric. It's a five-pillar intelligence system — each pillar measuring a different way people create (or destroy) revenue. Together, they assemble into a complete People P&L.</p>
+
+    <div class="pillar-stack">
+
+      <!-- P1 -->
+      <div class="pillar-card" onclick="togglePillar(this)">
+        <div class="pc-header">
+          <div class="pc-num" style="color:rgba(239,68,68,0.4)">01</div>
+          <div class="pc-icon" style="background:rgba(99,102,241,0.12)">⟳</div>
+          <div class="pc-meta">
+            <div class="pc-name">Revenue Connect</div>
+            <div class="pc-tagline">What does people movement cost in revenue? Not in headcount. In rupees.</div>
+          </div>
+          <span class="pc-badge" style="background:var(--accent-dim);color:var(--accent2);border:1px solid var(--border-accent)">L1</span>
+          <span class="pc-chevron">▼</span>
+        </div>
+        <div class="pc-body">
+          <div class="pc-insight">
+            <div class="pc-insight-label">The core insight</div>
+            <div class="pc-insight-text">Every HR professional reports attrition as a <b>percentage</b>. "We lost 14% of our headcount this year." But a percentage tells a CFO nothing actionable. Revenue Connect converts that percentage into a <b>rupee consequence</b> — the actual cost to revenue of every exit, every transition, every vacant role. <b>This is not a cost metric. It is a revenue attribution metric.</b></div>
+          </div>
+          <div class="pc-story">The CFO at TechVelocity knew attrition was 14%. Nobody had calculated that those 7 exits cost <b>₹595K</b> in replacement cost and destroyed <b>₹1.1Cr in annual revenue capacity</b>. That number — not the 14% — is what changed the conversation at the board level. The 14% got a nod. The ₹1.1Cr got a budget allocation.</div>
+          <div class="pc-metrics-row">
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--red)">ATC%</div><div class="pcm-desc">Attrition Cost as % of Revenue</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--amber)">TDF</div><div class="pcm-desc">Talent Drag Factor — capacity impaired</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--teal)">ESR</div><div class="pcm-desc">Employee-Sales Ratio — efficiency signal</div></div>
+          </div>
+          <a href="p1-tool.html" class="pc-cta">Run Revenue Connect →</a>
+        </div>
+      </div>
+
+      <!-- P2 -->
+      <div class="pillar-card" onclick="togglePillar(this)">
+        <div class="pc-header">
+          <div class="pc-num" style="color:rgba(45,212,191,0.3)">02</div>
+          <div class="pc-icon" style="background:rgba(45,212,191,0.1)">◈</div>
+          <div class="pc-meta">
+            <div class="pc-name">People Alpha</div>
+            <div class="pc-tagline">Are your people decisions generating above-market returns — or destroying them?</div>
+          </div>
+          <span class="pc-badge" style="background:var(--teal-dim);color:var(--teal);border:1px solid rgba(45,212,191,0.25)">L2</span>
+          <span class="pc-chevron">▼</span>
+        </div>
+        <div class="pc-body">
+          <div class="pc-insight">
+            <div class="pc-insight-label">The core insight</div>
+            <div class="pc-insight-text">In finance, "alpha" means return above the market benchmark. A fund that beats the index by 3% is generating alpha. Revenue Fluent applies the same logic to people decisions. <b>Every hire, retention intervention, L&D programme, and promotion either generates above-market return (positive alpha) or destroys value (negative alpha).</b> People Alpha measures which one yours is doing — in percentage terms, against the industry benchmark.</div>
+          </div>
+          <div class="pc-story">Sterling Consulting promoted four senior consultants simultaneously. All four were high performers. The MD was proud of the decision. But the People Alpha framework revealed: all four promotions happened at an average readiness score of 62% — below the 70% threshold. <b>Promotion Alpha: -8%.</b> Billable utilisation crashed from 78% to 60%. Revenue miss: £2.4M. The same promotions 6 months later, with preparation, would have generated <em>positive</em> alpha.</div>
+          <div class="pc-metrics-row">
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--teal)">Hiring Alpha</div><div class="pcm-desc">Quality + speed vs market benchmark</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--teal)">Retention Alpha</div><div class="pcm-desc">Tenure value above market average</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--accent2)">L&D Alpha</div><div class="pcm-desc">Revenue return on learning investment</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--amber)">Promotion Alpha</div><div class="pcm-desc">Performance vs readiness threshold</div></div>
+          </div>
+          <a href="p2-tool.html" class="pc-cta">Run People Alpha Engine →</a>
+        </div>
+      </div>
+
+      <!-- P3 -->
+      <div class="pillar-card" onclick="togglePillar(this)">
+        <div class="pc-header">
+          <div class="pc-num" style="color:rgba(245,158,11,0.3)">03</div>
+          <div class="pc-icon" style="background:rgba(245,158,11,0.1)">⬡</div>
+          <div class="pc-meta">
+            <div class="pc-name">Team Revenue Architecture</div>
+            <div class="pc-tagline">Your org chart is a revenue decision. Most companies don't know which configuration they're in.</div>
+          </div>
+          <span class="pc-badge" style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(245,158,11,0.25)">L3</span>
+          <span class="pc-chevron">▼</span>
+        </div>
+        <div class="pc-body">
+          <div class="pc-insight">
+            <div class="pc-insight-label">The core insight</div>
+            <div class="pc-insight-text">The same 50 people, in three different structural configurations, produce <b>wildly different revenue outcomes</b> — a 53-percentage-point gap between the best and worst configuration. Configuration A (high-autonomy pods) generates a <b>+34% revenue premium</b>. Configuration C (top-heavy hierarchy) generates a <b>-19% revenue drag</b>. The people haven't changed. The structure has. <b>Org chart decisions are revenue decisions.</b></div>
+          </div>
+          <div class="pc-story">Mei Lin's Singapore fintech had 40 people generating SGD 12M in revenue in a Config A structure. After a Series B, investors pushed for a "proper management layer." Two new Director roles. Three new Senior Manager roles. The company moved to Config B — same 50 people, new structure. Revenue per head dropped 28% in 18 months. <b>The investors who pushed for the structure change didn't connect it to the revenue drop. The Revenue Architecture analysis did.</b></div>
+          <div class="pc-metrics-row">
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--teal)">OEI</div><div class="pcm-desc">Org Enablement Index — revenue-gen ratio</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--amber)">PCoB</div><div class="pcm-desc">Payroll Cost of Bureaucracy</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--accent2)">OSI</div><div class="pcm-desc">Org Stability Index — structural churn</div></div>
+          </div>
+          <a href="p3-tool.html" class="pc-cta">Run Architecture Analyser →</a>
+        </div>
+      </div>
+
+      <!-- P4 -->
+      <div class="pillar-card" onclick="togglePillar(this)">
+        <div class="pc-header">
+          <div class="pc-num" style="color:rgba(168,85,247,0.3)">04</div>
+          <div class="pc-icon" style="background:rgba(168,85,247,0.1)">◎</div>
+          <div class="pc-meta">
+            <div class="pc-name">HUMANCE Intelligence</div>
+            <div class="pc-tagline">Revenue tells you what you earned. HUMANCE tells you what made earning possible.</div>
+          </div>
+          <span class="pc-badge" style="background:var(--purple-dim);color:var(--purple);border:1px solid rgba(168,85,247,0.25)">L4</span>
+          <span class="pc-chevron">▼</span>
+        </div>
+        <div class="pc-body">
+          <div class="pc-insight">
+            <div class="pc-insight-label">The core insight — a world first</div>
+            <div class="pc-insight-text">Every company has a balance sheet. It lists assets: cash, property, equipment. But the most valuable assets most companies own — the trust their clients have, the culture that drives performance, the informal knowledge network, the belonging that makes people go beyond their job descriptions — <b>appear nowhere on any balance sheet.</b> HUMANCE is the first framework that turns these invisible assets into a measurable, monetisable intelligence system. <b>It is a new asset class.</b></div>
+          </div>
+          <div class="pc-story">Rajesh Mehta built a ₹84Cr industrial business over 35 years. When he retired, his son Arjun took over. Revenue fell 31% in 18 months. The board blamed the market. The HUMANCE analysis told the real story: <b>₹12.1Cr of invisible human assets had been destroyed</b> across four asset classes — Trust Capital that clients had in Rajesh personally, Culture Yield that his daily presence maintained, Signal Intelligence held by 6 senior employees who left, and Belonging Premium that evaporated when the culture changed. No market explanation. A pure HUMANCE event.</div>
+          <div class="pc-metrics-row">
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--accent2)">Trust Capital</div><div class="pcm-desc">Client + team relationship value</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--teal)">Culture Yield</div><div class="pcm-desc">Revenue generated by cultural efficiency</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--amber)">Signal Intelligence</div><div class="pcm-desc">Early-warning network value</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--purple)">Belonging Premium</div><div class="pcm-desc">Discretionary effort above contract</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--text-mute)">IRD</div><div class="pcm-desc">Institutional Relationship Depth</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--text-mute)">RBC</div><div class="pcm-desc">Relationship Bridge Coverage</div></div>
+          </div>
+          <a href="p4-tool.html" class="pc-cta">Run HUMANCE Intelligence →</a>
+        </div>
+      </div>
+
+      <!-- P5 -->
+      <div class="pillar-card" onclick="togglePillar(this)">
+        <div class="pc-header">
+          <div class="pc-num" style="color:rgba(16,185,129,0.3)">05</div>
+          <div class="pc-icon" style="background:rgba(16,185,129,0.1)">◑</div>
+          <div class="pc-meta">
+            <div class="pc-name">People P&L</div>
+            <div class="pc-tagline">The CFO reads a P&L every month. Now HR has one too.</div>
+          </div>
+          <span class="pc-badge" style="background:var(--green-dim);color:var(--green);border:1px solid rgba(16,185,129,0.25)">L5</span>
+          <span class="pc-chevron">▼</span>
+        </div>
+        <div class="pc-body">
+          <div class="pc-insight">
+            <div class="pc-insight-label">The core insight</div>
+            <div class="pc-insight-text">A P&L has a revenue line, a cost line, and a net. Ours has: <b>People Revenue</b> (what people generate across all 4 pillars), <b>People Cost</b> (payroll + attrition leakage), and <b>Net People ROI</b> (the number that answers "what did HR contribute to the business this year?" in the only language that matters). When you present this to a CFO, they read it the same way they read the finance team's output — because the format is identical. <b>That is not a coincidence. That is the point.</b></div>
+          </div>
+          <div class="pc-story">Deepika Menon was the VP HR at a 200-person Delhi fintech. She had never presented to the board. Her first Revenue Fluent People P&L showed a 2.1x People ROI Ratio. The CFO asked three questions. The CEO asked her to present quarterly. The board allocated a ₹40L people development budget that had been rejected for two years. <b>The work hadn't changed. The language had.</b></div>
+          <div class="pc-metrics-row">
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--teal)">Net People ROI</div><div class="pcm-desc">Revenue − Cost in absolute rupees</div></div>
+            <div class="pc-metric-chip"><div class="pcm-name" style="color:var(--accent2)">People ROI Ratio</div><div class="pcm-desc">Revenue ÷ Cost · 1x=breakeven · 2x+=strong</div></div>
+          </div>
+          <a href="p5-tool.html" class="pc-cta">Generate People P&L →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 18 METRICS GLOSSARY -->
+  <div class="fw-section anim-slide">
+    <div class="fw-eyebrow">The 18 metrics</div>
+    <h2 class="fw-h2">Every metric. <strong>Precisely defined.</strong></h2>
+    <p class="fw-lead">These are not industry-standard HR metrics. Most of them don't exist in any textbook, any software, or any framework that predates Revenue Fluent. Here is each one — what it measures, how to read it, and what the benchmark means.</p>
+
+    <div class="metrics-grid">
+      <!-- P1 METRICS -->
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--accent2)">P1 — Revenue Connect</div>
+        <div class="mc-name">ATC% — Attrition Cost Percentage</div>
+        <div class="mc-full">Total replacement cost ÷ Annual revenue × 100</div>
+        <div class="mc-what">Converts attrition from a headcount rate into a revenue drag rate. Answers: "For every ₹100 of annual revenue, how much are we spending replacing talent?" A percentage of headcount tells a CFO nothing. ATC% tells them everything.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Healthy: &lt;80%</span>
+          <span class="mc-bench bad">Critical: &gt;140%</span>
+          <span class="mc-bench neutral">TechVelocity: 141%</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--accent2)">P1 — Revenue Connect</div>
+        <div class="mc-name">TDF — Talent Drag Factor</div>
+        <div class="mc-full">Revenue capacity impaired by people in transition ÷ Total revenue capacity</div>
+        <div class="mc-what">Measures what share of your revenue-generating capacity is currently running below full power because people are ramping, backfilling, or covering. High TDF means your org is structurally running below its revenue ceiling — and nobody is measuring it.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Healthy: &lt;0.2</span>
+          <span class="mc-bench bad">High drag: &gt;0.5</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--accent2)">P1 — Revenue Connect</div>
+        <div class="mc-name">ESR — Employee-Sales Ratio</div>
+        <div class="mc-full">Revenue-generating employees ÷ Total headcount × 100</div>
+        <div class="mc-what">Measures what share of your payroll is pointed at the market versus pointing at itself. A declining ESR is a culture signal — before engagement surveys catch it. When ESR drops 8+ points in a single quarter, a culture intervention is required.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Benchmark: 80%+</span>
+          <span class="mc-bench bad">Warning: &lt;65%</span>
+          <span class="mc-bench neutral">Mehta post-succession: 61%</span>
+        </div>
+      </div>
+
+      <!-- P2 METRICS -->
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--teal)">P2 — People Alpha</div>
+        <div class="mc-name">Hiring Alpha</div>
+        <div class="mc-full">Your hire's performance vs industry benchmark for same role</div>
+        <div class="mc-what">Measures how much better (or worse) your hiring process performs than the market average. Combines time-to-productivity premium and quality premium. A +18% Hiring Alpha means your hires ramp faster and perform better than the market standard — generating measurable additional revenue per head.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Positive: above 0%</span>
+          <span class="mc-bench bad">Negative: below 0%</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--teal)">P2 — People Alpha</div>
+        <div class="mc-name">Retention Alpha</div>
+        <div class="mc-full">Value of tenure above market average tenure for the role</div>
+        <div class="mc-what">Longer tenure compounds. A person in their 4th year at a company generates more revenue per unit of cost than someone in their 1st year — through institutional knowledge, client relationships, and reduced onboarding drag. Retention Alpha monetises that compounding effect.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Strong: +15%+</span>
+          <span class="mc-bench neutral">Market: 0%</span>
+          <span class="mc-bench bad">Negative: tenure gaps</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--teal)">P2 — People Alpha</div>
+        <div class="mc-name">L&D Alpha</div>
+        <div class="mc-full">Revenue uplift from learning investment ÷ Programme cost</div>
+        <div class="mc-what">The only L&D metric that matters to a CFO. Not "training hours per employee" — but "for every rupee we spent on development, how many rupees came back in revenue?" A 24× L&D Alpha (like Sterling's AD programme) is not an HR metric. It's a capital allocation decision with exceptional return.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Strong: 10x+</span>
+          <span class="mc-bench neutral">Acceptable: 3-10x</span>
+          <span class="mc-bench bad">Poor: &lt;2x</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--teal)">P2 — People Alpha</div>
+        <div class="mc-name">Promotion Alpha</div>
+        <div class="mc-full">Post-promotion performance vs readiness threshold benchmark</div>
+        <div class="mc-what">The most commonly negative dimension of People Alpha. When someone is promoted before they're ready (below 70% readiness score), they generate negative alpha — performing below the benchmark in their new role, and dragging the team they now lead. Timing is everything.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Positive: readiness 70%+</span>
+          <span class="mc-bench bad">Negative: readiness &lt;70%</span>
+          <span class="mc-bench neutral">Sterling: -8% at 62%</span>
+        </div>
+      </div>
+
+      <!-- P3 METRICS -->
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--amber)">P3 — Team Architecture</div>
+        <div class="mc-name">OEI — Org Enablement Index</div>
+        <div class="mc-full">Revenue-generating roles ÷ Total headcount × 100</div>
+        <div class="mc-what">Measures what share of your total payroll is actually pointed at the market. Below 50% means more than half your payroll is pointed at itself — through coordination, management, and internal operations. OEI is the single most revealing structural metric in the framework.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Config A: 75%+</span>
+          <span class="mc-bench neutral">Config B: 55-75%</span>
+          <span class="mc-bench bad">Config C: &lt;55%</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--amber)">P3 — Team Architecture</div>
+        <div class="mc-name">PCoB — Payroll Cost of Bureaucracy</div>
+        <div class="mc-full">Management + coordination payroll ÷ Total payroll × 100</div>
+        <div class="mc-what">Measures the structural tax on revenue production. Every layer of management and coordination has a cost — not just in salary, but in the decision-making overhead it creates. Rising PCoB is the leading indicator of a company about to miss revenue targets for structural reasons.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Lean: &lt;30%</span>
+          <span class="mc-bench bad">Heavy: &gt;45%</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--amber)">P3 — Team Architecture</div>
+        <div class="mc-name">OSI — Org Stability Index</div>
+        <div class="mc-full">Structural consistency score based on reorganisation frequency</div>
+        <div class="mc-what">Every reorganisation resets team chemistry, ownership clarity, and the informal networks that make Config A work. Low OSI means your org never settles enough to compound. High OSI means structure is stable enough to develop the Revenue DNA that generates the +34% premium.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Stable: 75+</span>
+          <span class="mc-bench bad">Destructive: &lt;50</span>
+        </div>
+      </div>
+
+      <!-- P4 METRICS -->
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--purple)">P4 — HUMANCE</div>
+        <div class="mc-name">Trust Capital</div>
+        <div class="mc-full">Monetised value of relationship trust held in the organisation</div>
+        <div class="mc-what">The revenue that flows because clients trust specific people — not the company brand. Trust Capital is the most fragile HUMANCE asset: it can take years to build and dissolve in weeks. When a key person leaves without a trust transfer plan, Trust Capital walks out with them.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench neutral">Measured via IRD + RBC scores</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--purple)">P4 — HUMANCE</div>
+        <div class="mc-name">Culture Yield</div>
+        <div class="mc-full">Revenue generated by cultural efficiency above baseline</div>
+        <div class="mc-what">Culture is not a feeling. It is a revenue multiplier. Culture Yield measures how much additional output your culture generates above the contractual baseline — the speed of decisions, the quality of execution, the willingness to collaborate without being asked. ESR is its proxy signal.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench neutral">Proxy: ESR score trending</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--purple)">P4 — HUMANCE</div>
+        <div class="mc-name">Signal Intelligence</div>
+        <div class="mc-full">Value of the informal early-warning network</div>
+        <div class="mc-what">In every organisation, certain people know things before the formal systems do. They know which client is at risk, which deal is stalling, which team member is about to leave. Signal Intelligence monetises this informal network — and reveals how much revenue protection it provides. When these people leave, the early-warning system goes with them.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench neutral">Rises with tenure + seniority</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--purple)">P4 — HUMANCE</div>
+        <div class="mc-name">Belonging Premium</div>
+        <div class="mc-full">Revenue generated by discretionary effort above employment contract</div>
+        <div class="mc-what">The call made after hours. The client problem solved without being asked. The junior colleague mentored because someone cared. Belonging Premium is the revenue generated by people doing more than their job description requires — because they feel genuinely invested in the organisation. This only happens when belonging is real.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Strong: 15%+ above floor</span>
+          <span class="mc-bench bad">Collapsed: performance at contract floor</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--purple)">P4 — HUMANCE</div>
+        <div class="mc-name">IRD — Institutional Relationship Depth</div>
+        <div class="mc-full">% of key relationships that are institutionalised vs personally held</div>
+        <div class="mc-what">Measures how much of your client and partner trust is held by the organisation itself versus specific individuals. Low IRD is a succession risk, an acquisition risk, and an attrition risk. When IRD is low and a key person leaves, the revenue doesn't stay — it leaves with the person.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Safe: 60%+</span>
+          <span class="mc-bench bad">Critical: &lt;30%</span>
+          <span class="mc-bench neutral">Mehta pre-succession: 18%</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--purple)">P4 — HUMANCE</div>
+        <div class="mc-name">RBC — Relationship Bridge Coverage</div>
+        <div class="mc-full">% of key relationships with a named successor/second contact</div>
+        <div class="mc-what">Measures how many of your revenue-critical relationships have a succession plan. RBC of 20% means 80% of your most important client relationships have no coverage if the primary contact leaves. This is the metric that should be reviewed before every succession event, acquisition, and key departure.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Protected: 70%+</span>
+          <span class="mc-bench bad">Exposed: &lt;40%</span>
+        </div>
+      </div>
+
+      <!-- P5 METRICS -->
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--green)">P5 — People P&L</div>
+        <div class="mc-name">Net People ROI</div>
+        <div class="mc-full">Total People Revenue − Total People Cost</div>
+        <div class="mc-what">The bottom line of the People P&L. In absolute rupees. Total People Revenue (everything generated across P1-P4) minus Total People Cost (payroll + attrition leakage). This is the number you bring to the board. Not a percentage. Not a score. A rupee amount that says: this is what the people function contributed to this organisation.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Positive: above ₹0</span>
+          <span class="mc-bench bad">Negative: people destroy value</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="mc-pillar" style="color:var(--green)">P5 — People P&L</div>
+        <div class="mc-name">People ROI Ratio</div>
+        <div class="mc-full">Total People Revenue ÷ Total People Cost</div>
+        <div class="mc-what">For every rupee spent on people, how many rupees come back? 1x is breakeven. 2x means for every ₹100 of people cost, ₹200 of revenue is generated. 3x+ is exceptional. Below 1x means the organisation is a net people value destroyer — even if revenue is growing. This ratio is your seat at the CFO's table.</div>
+        <div class="mc-bench-row">
+          <span class="mc-bench good">Strong: 2x+</span>
+          <span class="mc-bench neutral">Adequate: 1.5-2x</span>
+          <span class="mc-bench bad">Weak: &lt;1.5x</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW THEY CONNECT -->
+  <div class="fw-section anim-slide">
+    <div class="fw-eyebrow">How it assembles</div>
+    <h2 class="fw-h2">Five pillars. <strong>One People P&L.</strong></h2>
+    <p class="fw-lead">The 5 pillars are not independent. Each one feeds a line item in the People P&L. This is the assembly — how the intelligence system becomes the financial statement.</p>
+
+    <div class="connect-flow">
+      <div class="cf-row">
+        <div class="cf-pillar" style="color:var(--accent2)">P1 · Revenue Connect</div>
+        <div class="cf-desc">Calculates <b>revenue at risk</b> from attrition — and the revenue protected through retention interventions. Feeds directly into the revenue side of the P&L.</div>
+        <div class="cf-output" style="color:var(--teal)">→ Revenue Protected</div>
+      </div>
+      <div class="cf-arrow"><div class="cf-line"></div></div>
+      <div class="cf-row">
+        <div class="cf-pillar" style="color:var(--teal)">P2 · People Alpha</div>
+        <div class="cf-desc">Calculates <b>above-market returns</b> from hiring, retention, L&D, and promotion decisions. Positive alpha = revenue above baseline; negative alpha = revenue destroyed.</div>
+        <div class="cf-output" style="color:var(--teal)">→ People Alpha</div>
+      </div>
+      <div class="cf-arrow"><div class="cf-line"></div></div>
+      <div class="cf-row">
+        <div class="cf-pillar" style="color:var(--amber)">P3 · Architecture</div>
+        <div class="cf-desc">Calculates the <b>structural revenue premium or drag</b> from the org configuration. Config A adds 34%; Config C subtracts 19%. The structure tax or premium goes into the P&L.</div>
+        <div class="cf-output" style="color:var(--teal)">→ Architecture Value</div>
+      </div>
+      <div class="cf-arrow"><div class="cf-line"></div></div>
+      <div class="cf-row">
+        <div class="cf-pillar" style="color:var(--purple)">P4 · HUMANCE</div>
+        <div class="cf-desc">Calculates the <b>combined value of all 4 human asset classes</b> — Trust Capital, Culture Yield, Signal Intelligence, and Belonging Premium. The human balance sheet total.</div>
+        <div class="cf-output" style="color:var(--teal)">→ HUMANCE Base</div>
+      </div>
+      <div class="cf-arrow"><div class="cf-line"></div></div>
+      <div class="cf-row" style="background:var(--accent-dim);border-color:var(--border-accent)">
+        <div class="cf-pillar" style="color:var(--accent2)">P5 · People P&L</div>
+        <div class="cf-desc">Assembles all 4 revenue lines. Subtracts People Cost (payroll + attrition leakage). Outputs <b>Net People ROI and the People ROI Ratio</b> — the two numbers that change every boardroom conversation.</div>
+        <div class="cf-output" style="color:var(--accent2)">→ Net People ROI</div>
+      </div>
+    </div>
+
+    <!-- LIVE P&L PREVIEW -->
+    <div class="pnl-assembly">
+      <div class="pna-h">TechVelocity Inc. — People P&L (Annual)</div>
+      <div class="pna-row"><span class="pna-label">P1 — Revenue Protected</span><span class="pna-val" style="color:var(--teal)">+₹8.3Cr</span></div>
+      <div class="pna-row"><span class="pna-label">P2 — People Alpha</span><span class="pna-val" style="color:var(--teal)">+₹9.1Cr</span></div>
+      <div class="pna-row"><span class="pna-label">P3 — Architecture Value</span><span class="pna-val" style="color:var(--teal)">+₹5.1Cr</span></div>
+      <div class="pna-row"><span class="pna-label">P4 — HUMANCE Asset Base</span><span class="pna-val" style="color:var(--teal)">+₹15.5Cr</span></div>
+      <div class="pna-row" style="padding-top:8px"><span class="pna-label">Total People Revenue</span><span class="pna-val" style="color:var(--accent2);font-weight:700">₹38.0Cr</span></div>
+      <div class="pna-row"><span class="pna-label">Total People Cost</span><span class="pna-val" style="color:var(--red)">-₹16.5Cr</span></div>
+      <div class="pna-total">
+        <div class="pna-total-label">Net People ROI</div>
+        <div class="pna-total-val">+₹21.5Cr</div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:6px">
+        <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute)">People ROI Ratio: <span style="color:var(--teal);font-weight:500">2.3x</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="fw-cta-band anim-slide">
+    <div style="font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--text);letter-spacing:-0.025em;margin-bottom:0.5rem">You now understand the system. <em style="font-weight:300;font-style:italic;color:var(--accent2)">Now use it.</em></div>
+    <p style="font-size:0.88rem;color:var(--text-dim);max-width:480px;margin:0 auto 1.5rem;line-height:1.7">Run each tool with the TechVelocity scenario first. Then use your own numbers. Complete all 5 tools to unlock your CRFP certification.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a href="p1-tool.html" class="btn btn-primary">Start with Revenue Connect →</a>
+      <a href="dashboard.html" class="btn btn-ghost">Go to Command Centre</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('framework');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ['Revenue Fluent', 'The Framework'],
+  '<span class="tb-pill">5 pillars · 18 metrics</span>'
+);
+
+function togglePillar(card) {
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.pillar-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+// Animate metric cards on scroll
+const cards = document.querySelectorAll('.metric-card, .pillar-card, .cf-row');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold: 0.05 });
+cards.forEach((c, i) => {
+  c.style.opacity='0'; c.style.transform='translateY(16px)';
+  c.style.transition=`opacity 0.5s ease ${i*0.04}s, transform 0.5s cubic-bezier(0.22,1,0.36,1) ${i*0.04}s`;
+  obs.observe(c);
+});
+</script>
+</body>
+</html>
