@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style id="rf-css"></style>
 <script src="shared.js"></script>
+<script src="rf-export.js"></script>
 <style>
 .tool-layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 81px); }
 .tool-inputs { background: var(--bg2); border-right: 1px solid var(--border); padding: 1.5rem; overflow-y: auto; }
@@ -97,6 +98,8 @@
     </div>
 
     <div class="divider" style="margin:1rem 0"></div>
+    <div id="csv-panel-mount-p1"></div>
+    <div class="divider" style="margin:0.75rem 0"></div>
     <div class="mono-label" style="margin-bottom:1rem">Adjust Inputs</div>
 
     <div class="slider-row">
@@ -129,7 +132,7 @@
     </div>
 
     <div class="divider" style="margin:1rem 0"></div>
-    <button class="btn btn-primary" style="width:100%" onclick="generateReport()">Generate Attribution Report →</button>
+    <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="exportPDF()">↓ Download Attribution Report (PDF)</button>
   </div>
 
   <!-- RIGHT: LIVE OUTPUT -->
@@ -405,9 +408,30 @@ function update() {
   document.getElementById('narrative').innerHTML = `With <span class="nb-stat">${exits} exits</span> at an average salary of <span class="nb-stat">₹${parseInt(document.getElementById('sl-salary').value)}L</span>, ${scenarioName} is carrying <span class="nb-stat">${fmt(totalRevRisk)}</span> in total revenue-attributed people cost. The Attrition Cost % of <span class="nb-stat">${atc}%</span> means every rupee spent replacing talent costs <span class="nb-stat">₹${(atc/100).toFixed(2)}</span> against each rupee of revenue. Attribution confidence: <span class="nb-stat">${conf}%</span>.`;
 }
 
-function generateReport() {
+// Init CSV panel
+document.getElementById('csv-panel-mount-p1').innerHTML = RF_CSV.renderPanel('p1');
+
+function exportPDF() {
+  const data = {
+    scenario: document.getElementById('scenario-tag').textContent,
+    atc: document.getElementById('out-atc').textContent,
+    atcColor: document.getElementById('out-atc').classList.contains('red') ? [239,68,68] : [45,212,191],
+    tdf: document.getElementById('out-tdf').textContent,
+    tdfColor: [245,158,11],
+    esr: document.getElementById('out-esr').textContent,
+    esrColor: document.getElementById('out-esr').classList.contains('teal') ? [45,212,191] : [239,68,68],
+    revRisk: document.getElementById('out-rev-risk').textContent,
+    confidence: document.getElementById('out-confidence').textContent,
+    ab1: document.getElementById('ab1-val').textContent,
+    ab2: document.getElementById('ab2-val').textContent,
+    ab3: document.getElementById('ab3-val').textContent,
+    ab4: document.getElementById('ab4-val').textContent,
+    narrative: document.getElementById('narrative').textContent,
+  };
   RF.progress.set('p1');
-  alert('Attribution Report generated. In the full platform, this would download as a PDF.');
+  RF_PDF.generateP1(data).catch(e => {
+    alert('PDF generation failed: ' + e.message + '. Please check your internet connection.');
+  });
 }
 
 update();
