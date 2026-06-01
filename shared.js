@@ -565,6 +565,8 @@ const RF = {
       { id: 'divider' },
       { id: 'scenarios', icon: '▤', label: 'Scenario Library', file: 'scenarios.html' },
       { id: 'cert', icon: '✦', label: 'Certification', file: 'certification.html' },
+      { id: 'divider' },
+      { id: 'pricing', icon: '◎', label: 'Pricing', file: 'pricing.html' },
     ]
   },
 

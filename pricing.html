@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="rf-css"></style>
+<script src="shared.js"></script>
+<style>
+.pricing-hero { text-align:center; padding:3rem 0 2.5rem; max-width:780px; margin:0 auto; }
+.ph-eyebrow { font-family:var(--font-mono); font-size:0.62rem; color:var(--accent2); text-transform:uppercase; letter-spacing:0.18em; margin-bottom:1rem; display:flex; align-items:center; gap:8px; justify-content:center; }
+.ph-eyebrow::before,.ph-eyebrow::after { content:''; width:24px; height:1px; background:var(--accent); }
+.ph-title { font-family:var(--font-head); font-weight:800; font-size:clamp(2rem,4vw,3rem); letter-spacing:-0.04em; line-height:1.1; color:var(--text); margin-bottom:1.25rem; }
+.ph-title em { font-weight:300; font-style:italic; color:var(--accent2); }
+.ph-sub { font-size:1rem; color:var(--text-dim); line-height:1.8; font-weight:300; margin-bottom:2rem; }
+.ph-sub b { color:var(--text); font-weight:600; }
+
+/* WORLD FIRST BANNER */
+.world-first { background:linear-gradient(135deg,rgba(99,102,241,0.12),rgba(45,212,191,0.06)); border:1px solid var(--border-accent); border-radius:var(--radius-lg); padding:2rem 2.5rem; margin-bottom:3rem; text-align:center; }
+.wf-label { font-family:var(--font-mono); font-size:0.6rem; color:var(--teal); text-transform:uppercase; letter-spacing:0.18em; margin-bottom:0.75rem; }
+.wf-h { font-family:var(--font-head); font-weight:800; font-size:clamp(1.3rem,2.5vw,1.8rem); color:var(--text); letter-spacing:-0.025em; line-height:1.3; margin-bottom:0.875rem; }
+.wf-h em { font-weight:300; font-style:italic; color:var(--teal); }
+.wf-p { font-size:0.92rem; color:var(--text-dim); line-height:1.85; max-width:600px; margin:0 auto; }
+.wf-p b { color:var(--text); font-weight:600; }
+
+/* COMPARISON ROW */
+.compare-row { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:0.75rem; }
+.compare-item { background:var(--bg3); border-radius:var(--radius-sm); padding:8px 12px; font-size:0.82rem; color:var(--text-dim); display:flex; align-items:center; gap:8px; }
+.compare-item.bad { background:var(--red-dim); border:1px solid rgba(239,68,68,0.15); }
+.compare-item.good { background:var(--green-dim); border:1px solid rgba(16,185,129,0.15); }
+.ci-icon { font-size:0.8rem; flex-shrink:0; }
+
+/* PRICING CARDS */
+.pricing-grid { display:grid; grid-template-columns:1fr 1.1fr 1fr; gap:14px; margin-bottom:3rem; align-items:start; }
+.plan-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; position:relative; }
+.plan-card.featured { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent-dim), 0 20px 60px rgba(99,102,241,0.2); }
+.plan-badge { position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; font-family:var(--font-mono); font-size:0.58rem; text-transform:uppercase; letter-spacing:0.1em; padding:4px 14px; border-radius:0 0 8px 8px; white-space:nowrap; }
+.plan-header { padding:1.75rem 1.5rem 1.25rem; border-bottom:1px solid var(--border); }
+.plan-name { font-family:var(--font-head); font-weight:800; font-size:1.05rem; color:var(--text); margin-bottom:4px; }
+.plan-tagline { font-size:0.78rem; color:var(--text-mute); line-height:1.5; margin-bottom:1.25rem; }
+.plan-price { margin-bottom:0.5rem; }
+.plan-amount { font-family:var(--font-head); font-weight:800; font-size:2.5rem; color:var(--text); line-height:1; letter-spacing:-0.04em; }
+.plan-amount.free { color:var(--teal); }
+.plan-amount.featured { color:var(--accent2); }
+.plan-amount.monthly { color:var(--amber); }
+.plan-period { font-family:var(--font-mono); font-size:0.65rem; color:var(--text-mute); margin-left:4px; }
+.plan-original { font-family:var(--font-mono); font-size:0.7rem; color:var(--text-mute); text-decoration:line-through; margin-top:2px; }
+.plan-global { font-family:var(--font-mono); font-size:0.65rem; color:var(--text-mute); margin-top:4px; }
+.plan-cta { display:block; width:100%; padding:0.875rem; border:none; border-radius:var(--radius-sm); font-family:var(--font-head); font-weight:600; font-size:0.88rem; cursor:pointer; transition:all 0.2s; text-decoration:none; text-align:center; margin-top:1.25rem; }
+.plan-cta.free-cta { background:var(--bg3); color:var(--text-dim); border:1px solid var(--border); }
+.plan-cta.free-cta:hover { border-color:var(--border-hi); color:var(--text); }
+.plan-cta.paid-cta { background:var(--accent); color:#fff; }
+.plan-cta.paid-cta:hover { background:#5558E3; transform:translateY(-1px); box-shadow:0 6px 24px rgba(99,102,241,0.35); }
+.plan-cta.monthly-cta { background:var(--amber); color:#0B0D14; }
+.plan-cta.monthly-cta:hover { background:#D97706; transform:translateY(-1px); }
+.plan-body { padding:1.25rem 1.5rem; }
+.plan-section { font-family:var(--font-mono); font-size:0.55rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.12em; margin:1rem 0 0.5rem; }
+.plan-feature { display:flex; align-items:flex-start; gap:8px; padding:5px 0; font-size:0.82rem; color:var(--text-dim); line-height:1.5; }
+.pf-icon { flex-shrink:0; margin-top:2px; font-size:0.7rem; }
+.pf-icon.yes { color:var(--green); }
+.pf-icon.no { color:var(--border-hi); }
+.pf-icon.partial { color:var(--amber); }
+.pf-text.locked { color:var(--text-mute); }
+.early-badge { display:inline-flex; align-items:center; gap:5px; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.2); border-radius:4px; font-family:var(--font-mono); font-size:0.58rem; color:var(--red); padding:2px 8px; margin-top:4px; }
+
+/* VALUE SECTION */
+.value-section { margin-bottom:3rem; }
+.value-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:1.5rem; }
+.value-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; }
+.vc-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; margin-bottom:1rem; }
+.vc-h { font-family:var(--font-head); font-weight:700; font-size:0.95rem; color:var(--text); margin-bottom:6px; }
+.vc-p { font-size:0.82rem; color:var(--text-dim); line-height:1.7; }
+
+/* SEAT TABLE */
+.seat-table { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:3rem; }
+.st-header { display:grid; grid-template-columns:1fr repeat(3,100px); background:var(--sidebar); padding:0.875rem 1.25rem; border-bottom:1px solid var(--border); }
+.st-col { font-family:var(--font-mono); font-size:0.6rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.1em; text-align:center; }
+.st-col:first-child { text-align:left; }
+.st-row { display:grid; grid-template-columns:1fr repeat(3,100px); padding:0.75rem 1.25rem; border-bottom:1px solid var(--border); align-items:center; }
+.st-row:last-child { border-bottom:none; }
+.st-label { font-size:0.85rem; color:var(--text-dim); }
+.st-val { text-align:center; font-family:var(--font-mono); font-size:0.8rem; }
+.st-yes { color:var(--green); }
+.st-no { color:var(--border-hi); }
+.st-partial { color:var(--amber); }
+
+/* FAQ */
+.faq { margin-bottom:3rem; }
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-q { display:flex; justify-content:space-between; align-items:center; padding:1.1rem 0; cursor:pointer; font-family:var(--font-head); font-weight:600; font-size:0.92rem; color:var(--text); }
+.faq-q:hover { color:var(--accent2); }
+.faq-icon { color:var(--text-mute); transition:transform 0.2s; font-size:0.8rem; }
+.faq-a { display:none; padding:0 0 1.1rem; font-size:0.88rem; color:var(--text-dim); line-height:1.8; }
+.faq-a.open { display:block; animation:fadeIn 0.25s; }
+.faq-a b { color:var(--text); font-weight:600; }
+
+/* EMAIL CAPTURE */
+.email-band { background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(45,212,191,0.05)); border:1px solid var(--border-accent); border-radius:var(--radius-lg); padding:2.5rem; text-align:center; margin-bottom:2rem; }
+.eb-h { font-family:var(--font-head); font-weight:800; font-size:1.4rem; color:var(--text); letter-spacing:-0.025em; margin-bottom:0.5rem; }
+.eb-h em { font-weight:300; font-style:italic; color:var(--accent2); }
+.eb-p { font-size:0.88rem; color:var(--text-dim); margin-bottom:1.5rem; line-height:1.7; }
+.email-form { display:flex; gap:8px; max-width:440px; margin:0 auto; }
+.email-input { flex:1; background:var(--bg2); border:1px solid var(--border-hi); border-radius:var(--radius-sm); padding:10px 16px; font-family:var(--font-body); font-size:0.88rem; color:var(--text); outline:none; }
+.email-input:focus { border-color:var(--accent); }
+.email-input::placeholder { color:var(--text-mute); }
+.email-submit { background:var(--accent); color:#fff; border:none; border-radius:var(--radius-sm); padding:10px 20px; font-family:var(--font-head); font-weight:600; font-size:0.88rem; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.email-submit:hover { background:#5558E3; }
+.email-note { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
+<div id="sidebar-mount"></div>
+<div id="topbar-mount"></div>
+<div class="app-body">
+<div class="page-wrap" style="max-width:1000px;padding-bottom:4rem">
+
+  <!-- HERO -->
+  <div class="pricing-hero anim-slide">
+    <div class="ph-eyebrow">Pricing</div>
+    <h1 class="ph-title">The seat at the table has a <em>price.</em><br>It's less than you think.</h1>
+    <p class="ph-sub">No platform in the world teaches HR professionals to speak the language of revenue — the only language that <b>forces the CFO and board to take HR seriously.</b> Revenue Fluent does. One price. Lifetime access.</p>
+  </div>
+
+  <!-- WORLD FIRST BANNER -->
+  <div class="world-first anim-slide">
+    <div class="wf-label">A world first</div>
+    <h2 class="wf-h">HR has never had a <em>seat at the strategy table.</em><br>Not because the work isn't valuable. Because the language was wrong.</h2>
+    <p class="wf-p">Every other function walks into the board with revenue numbers. Marketing: "9x ROI." Sales: "10.5x." HR walks in with engagement scores and attrition percentages. <b>Revenue Fluent is the only platform on earth that teaches HR professionals to build a People P&L</b> — the complete income statement that changes every conversation, every budget decision, and every strategic seat.</p>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:1.25rem">
+      <span class="tag tag-teal">No equivalent platform exists</span>
+      <span class="tag tag-accent">5 live intelligence tools</span>
+      <span class="tag tag-muted">Built by an HR practitioner</span>
+      <span class="tag tag-amber">CRFP certification</span>
+    </div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div style="margin-bottom:3rem" class="anim-slide">
+    <div class="page-eyebrow" style="margin-bottom:1rem">What changes when you become Revenue Fluent</div>
+    <div class="compare-row">
+      <div class="compare-item bad"><span class="ci-icon">✗</span>"Our attrition is 14%"</div>
+      <div class="compare-item bad"><span class="ci-icon">✗</span>"Engagement is up 6 points"</div>
+      <div class="compare-item bad"><span class="ci-icon">✗</span>"We filled 23 roles this quarter"</div>
+    </div>
+    <div style="text-align:center;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);padding:8px 0">becomes</div>
+    <div class="compare-row">
+      <div class="compare-item good"><span class="ci-icon">✓</span>"Attrition cost us ₹1.1Cr in revenue"</div>
+      <div class="compare-item good"><span class="ci-icon">✓</span>"Our People Alpha is +22%"</div>
+      <div class="compare-item good"><span class="ci-icon">✓</span>"Net People ROI this year: 2.3x"</div>
+    </div>
+    <div style="text-align:center;margin-top:1rem">
+      <div style="display:inline-block;background:var(--bg2);border:1px solid var(--border-accent);border-radius:var(--radius-sm);padding:8px 20px;font-size:0.85rem;color:var(--text-dim)">The board doesn't act on percentages. <b style="color:var(--teal)">It acts on rupees.</b></div>
+    </div>
+  </div>
+
+  <!-- PRICING CARDS -->
+  <div class="pricing-grid anim-slide">
+
+    <!-- FREE -->
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-name">Free</div>
+        <div class="plan-tagline">Enough to understand the language. Not enough to become fluent.</div>
+        <div class="plan-price">
+          <span class="plan-amount free">₹0</span>
+          <span class="plan-period">forever</span>
+        </div>
+        <div class="plan-global" style="color:var(--teal)">$0 globally</div>
+        <a href="p1-tool.html" class="plan-cta free-cta">Start for free →</a>
+      </div>
+      <div class="plan-body">
+        <div class="plan-section">What's included</div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>P1 Revenue Connect tool</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>TechVelocity scenario only</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Learning Hub — read all 5 pillars</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Home + Command Centre</span></div>
+        <div class="plan-section">Locked</div>
+        <div class="plan-feature"><span class="pf-icon no">○</span><span class="pf-text locked">P2–P5 intelligence tools</span></div>
+        <div class="plan-feature"><span class="pf-icon no">○</span><span class="pf-text locked">Case Studies</span></div>
+        <div class="plan-feature"><span class="pf-icon no">○</span><span class="pf-text locked">Simulation engine</span></div>
+        <div class="plan-feature"><span class="pf-icon no">○</span><span class="pf-text locked">Challenge / Game</span></div>
+        <div class="plan-feature"><span class="pf-icon no">○</span><span class="pf-text locked">CRFP Certification</span></div>
+      </div>
+    </div>
+
+    <!-- CRFP INDIVIDUAL — FEATURED -->
+    <div class="plan-card featured">
+      <div class="plan-badge">Most popular</div>
+      <div class="plan-header">
+        <div class="plan-name">CRFP Individual</div>
+        <div class="plan-tagline">Full access. One payment. Your certification. For life.</div>
+        <div class="plan-price">
+          <span class="plan-amount featured">₹3,999</span>
+          <span class="plan-period">one-time</span>
+        </div>
+        <div class="plan-original">Regular price: ₹4,999</div>
+        <div class="plan-global">$49 globally (regular: $69)</div>
+        <div class="early-badge">⚡ Early Access pricing — limited time</div>
+        <a href="https://gumroad.com/dashboard" target="_blank" class="plan-cta paid-cta">Get full access →</a>
+      </div>
+      <div class="plan-body">
+        <div class="plan-section">Everything in Free, plus</div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span><b>All 5 pillar intelligence tools</b></span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>All 3 org scenarios (TechVelocity, Sterling, Mehta)</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>3 interactive Case Studies</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Simulation engine — 3 scenarios, 18 decisions</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Challenge / Game — timed, scored, graded</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span><b>CRFP Certification — LinkedIn shareable</b></span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>3D HUMANCE sphere visualisation</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>New scenarios when added (sporadic)</span></div>
+        <div class="plan-section">What you walk away with</div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Can build a complete People P&L</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Can present HR in revenue language</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>CRFP credential on LinkedIn</span></div>
+      </div>
+    </div>
+
+    <!-- PRO MONTHLY -->
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-name">PRO Monthly</div>
+        <div class="plan-tagline">Everything in CRFP. Cancel anytime. No annual commitment.</div>
+        <div class="plan-price">
+          <span class="plan-amount monthly">₹499</span>
+          <span class="plan-period">/month</span>
+        </div>
+        <div class="plan-global">$9/month globally</div>
+        <a href="https://gumroad.com/dashboard" target="_blank" class="plan-cta monthly-cta">Start monthly →</a>
+      </div>
+      <div class="plan-body">
+        <div class="plan-section">Everything in CRFP Individual</div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>All 5 tools + all scenarios</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Cases + Simulation + Challenge</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>CRFP Certification</span></div>
+        <div class="plan-section">Plus</div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Access to new scenarios as they drop</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>No annual lock-in — cancel any month</span></div>
+        <div class="plan-feature"><span class="pf-icon yes">✓</span><span>Priority access to new content</span></div>
+        <div class="plan-section">Best for</div>
+        <div class="plan-feature"><span class="pf-icon partial">→</span><span>CHROs / VPs who want ongoing access</span></div>
+        <div class="plan-feature"><span class="pf-icon partial">→</span><span>Consultants using it with clients</span></div>
+        <div class="plan-feature"><span class="pf-icon partial">→</span><span>Those who prefer monthly over one-time</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FEATURE COMPARISON TABLE -->
+  <div class="anim-slide" style="margin-bottom:3rem">
+    <div class="page-eyebrow" style="margin-bottom:1rem">Full feature comparison</div>
+    <div class="seat-table">
+      <div class="st-header">
+        <div class="st-col">Feature</div>
+        <div class="st-col">Free</div>
+        <div class="st-col" style="color:var(--accent2)">CRFP</div>
+        <div class="st-col" style="color:var(--amber)">PRO</div>
+      </div>
+      <div class="st-row"><div class="st-label">P1 Revenue Connect tool</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">P2–P5 intelligence tools</div><div class="st-val st-no">—</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">All 3 org scenarios</div><div class="st-val st-partial">1 only</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">Learning Hub (5 deep-dives)</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">Interactive Case Studies</div><div class="st-val st-no">—</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">Simulation engine</div><div class="st-val st-no">—</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">Challenge / Game</div><div class="st-val st-no">—</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">3D HUMANCE sphere</div><div class="st-val st-no">—</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">CRFP Certification</div><div class="st-val st-no">—</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">New scenarios (sporadic)</div><div class="st-val st-no">—</div><div class="st-val st-yes">✓</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row"><div class="st-label">Cancel anytime</div><div class="st-val">—</div><div class="st-val">N/A</div><div class="st-val st-yes">✓</div></div>
+      <div class="st-row" style="background:var(--bg3)">
+        <div class="st-label" style="font-weight:600;color:var(--text)">Price</div>
+        <div class="st-val" style="color:var(--teal);font-weight:600">₹0</div>
+        <div class="st-val" style="color:var(--accent2);font-weight:600">₹3,999</div>
+        <div class="st-val" style="color:var(--amber);font-weight:600">₹499/mo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUE SECTION -->
+  <div class="value-section anim-slide">
+    <div class="page-eyebrow" style="margin-bottom:0.5rem">Why this pricing is a no-brainer</div>
+    <h2 style="font-family:var(--font-head);font-weight:800;font-size:1.6rem;color:var(--text);letter-spacing:-0.025em;margin-bottom:0.5rem">Compare to the <em>alternatives.</em></h2>
+    <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.8;margin-bottom:1.5rem">There is no direct alternative. But here's what HR professionals typically spend to develop comparable capability:</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="vc-icon" style="background:var(--red-dim)">📚</div>
+        <div class="vc-h">HR Analytics Course<br><span style="color:var(--text-mute);font-weight:400">Coursera / LinkedIn Learning</span></div>
+        <div class="vc-p">₹15,000–₹40,000. Teaches data analysis. Does not teach you to build a People P&L or speak revenue language to a CFO.</div>
+        <div style="margin-top:10px;font-family:var(--font-mono);font-size:0.65rem;color:var(--red)">No revenue language. No certification recognised by boards.</div>
+      </div>
+      <div class="value-card" style="border-color:var(--border-accent)">
+        <div class="vc-icon" style="background:var(--accent-dim)">🏢</div>
+        <div class="vc-h">Enterprise HRMS Platform<br><span style="color:var(--text-mute);font-weight:400">Keka / Zoho People / Darwinbox</span></div>
+        <div class="vc-p">₹2L–₹10L per year for an org licence. Operational tools. Zero intelligence on revenue attribution, People Alpha, or HUMANCE.</div>
+        <div style="margin-top:10px;font-family:var(--font-mono);font-size:0.65rem;color:var(--accent2)">Revenue Fluent does what they don't — for ₹3,999.</div>
+      </div>
+      <div class="value-card">
+        <div class="vc-icon" style="background:var(--green-dim)">🎓</div>
+        <div class="vc-h">Revenue Fluent CRFP<br><span style="color:var(--text-mute);font-weight:400">This platform</span></div>
+        <div class="vc-p">₹3,999 one-time. 5 live tools. 18 metrics. 12 real org stories. 3 simulations. CRFP certification. The only platform that teaches HR to speak revenue.</div>
+        <div style="margin-top:10px;font-family:var(--font-mono);font-size:0.65rem;color:var(--green)">One salary review conversation pays for this 50× over.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL CAPTURE -->
+  <div class="email-band anim-slide">
+    <div class="eb-h">Not ready to buy yet? <em>Stay in the loop.</em></div>
+    <p class="eb-p">Get notified when new scenarios drop, when the price goes up, and when Revenue Fluent launches publicly. No spam — just signal.</p>
+    <div class="email-form">
+      <input type="email" class="email-input" placeholder="your@email.com" id="email-input">
+      <button class="email-submit" onclick="submitEmail()">Notify me →</button>
+    </div>
+    <div class="email-note" id="email-note">Early access pricing ends when the public launch happens.</div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq anim-slide">
+    <div class="page-eyebrow" style="margin-bottom:1.5rem">Frequently asked</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Is this a course or a tool?</span><span class="faq-icon">▼</span></div>
+      <div class="faq-a">It's both — deliberately. <b>The tools are live calculators</b> you use on your real org data. <b>The learning is deep</b> — each pillar has its intellectual case, real stories from India and global markets, worked examples, and a practitioner's playbook. The Simulation and Case Studies make you practice decisions under pressure. Nothing about this platform is passive.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>I'm not a data person. Can I use this?</span><span class="faq-icon">▼</span></div>
+      <div class="faq-a">Yes. Revenue Fluent was built for HR practitioners, not data scientists. Every tool has a plain-English narrative that explains what the numbers mean. The Learning Hub doesn't assume any prior analytics knowledge. If you can read a P&L, you can use this.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>What does "one-time" actually mean?</span><span class="faq-icon">▼</span></div>
+      <div class="faq-a">Pay once, access forever. No subscription, no renewal, no surprise charges. The CRFP Individual plan is a single payment that gives you lifetime access to everything — including new scenarios when they're added sporadically. If this platform ever shuts down (it won't, but if it did), you'd have had full access for as long as it existed.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>What's the difference between CRFP Individual and PRO Monthly?</span><span class="faq-icon">▼</span></div>
+      <div class="faq-a">The content is identical. The difference is payment model. <b>CRFP Individual is ₹3,999 once — done, access forever.</b> PRO Monthly is ₹499/month — useful if you prefer spreading the cost, or if you want to cancel after a month. If you're planning to actually use this, CRFP Individual is better value within 8 months.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Is CRFP a recognised certification?</span><span class="faq-icon">▼</span></div>
+      <div class="faq-a">CRFP (Certified Revenue Fluent Practitioner) is a Revenue Fluent certification — not a university or professional body credential. What it signals is specific: you can build a People P&L, you understand 18 revenue metrics, and you can present HR's contribution in the language of the CFO. In a board meeting or job interview, that capability speaks for itself — regardless of who issued the certificate.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Can I use this for my team or org?</span><span class="faq-icon">▼</span></div>
+      <div class="faq-a">Individual licences are for individual use. If you want to put your whole HR team through Revenue Fluent, reach out directly — team pricing can be arranged. The tools are designed to work on real org data, so a team going through this together with your actual numbers is genuinely powerful.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>What currency do international users pay in?</span><span class="faq-icon">▼</span></div>
+      <div class="faq-a">Gumroad handles currency conversion automatically. International users see prices in USD ($49 early access / $9/month). Indian users pay in INR (₹3,999 / ₹499/month). Gumroad processes payments in 190+ countries.</div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div style="text-align:center;padding:2rem 0">
+    <div style="font-family:var(--font-head);font-weight:800;font-size:1.6rem;color:var(--text);letter-spacing:-0.025em;margin-bottom:0.75rem">One conversation pays for this <em>fifty times over.</em></div>
+    <p style="font-size:0.9rem;color:var(--text-dim);max-width:480px;margin:0 auto 1.75rem;line-height:1.7">The next time a CFO asks what HR contributed to revenue — and you answer with a number, a ratio, and a People P&L — that's the moment ₹3,999 becomes irrelevant.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="https://gumroad.com/dashboard" target="_blank" class="btn btn-primary" style="padding:1rem 2.5rem;font-size:1rem">Get full access — ₹3,999 →</a>
+      <a href="p1-tool.html" class="btn btn-ghost">Try free first</a>
+    </div>
+    <div style="margin-top:1rem;font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute)">Early access pricing. No annual commitment. Lifetime access.</div>
+  </div>
+
+</div>
+</div>
+
+<script>
+document.getElementById('rf-css').textContent = RF.css;
+RF.startTicker('ticker');
+document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('pricing');
+document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
+  ['Revenue Fluent', 'Pricing'],
+  '<span class="tb-pill amber">⚡ Early Access</span>'
+);
+
+function toggleFaq(el) {
+  const answer = el.nextElementSibling;
+  const icon = el.querySelector('.faq-icon');
+  answer.classList.toggle('open');
+  icon.style.transform = answer.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+function submitEmail() {
+  const val = document.getElementById('email-input').value.trim();
+  if (!val || !val.includes('@')) {
+    document.getElementById('email-note').textContent = 'Please enter a valid email address.';
+    document.getElementById('email-note').style.color = 'var(--red)';
+    return;
+  }
+  // In production: POST to your email service (ConvertKit, Mailchimp etc.)
+  // For now: mailto fallback
+  window.location.href = 'mailto:info@revenuefluent.com?subject=Early Access Waitlist&body=Please add me to the Revenue Fluent early access list: ' + val;
+  document.getElementById('email-note').textContent = '✓ Opening your email client to confirm. We\'ll be in touch.';
+  document.getElementById('email-note').style.color = 'var(--teal)';
+}
+</script>
+</body>
+</html>
