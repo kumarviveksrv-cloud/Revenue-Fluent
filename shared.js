@@ -173,8 +173,14 @@ const RF = {
       background: var(--accent-dim); color: var(--accent2);
       border: 1px solid var(--border-accent);
     }
-    .sb-badge.done { background: var(--green-dim); color: var(--green); border-color: rgba(16,185,129,0.25); }
+    .sb-badge.done { background: var(--accent-dim); color: var(--accent2); border-color: var(--border-accent); }
     .sb-badge.locked { background: transparent; color: var(--text-mute); border-color: var(--border); }
+    .sb-active-dot {
+      display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--teal); margin-left: 4px; vertical-align: middle;
+      animation: activePulse 2s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes activePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
 
     .sb-divider { height: 1px; background: var(--border); margin: 0.5rem 0; }
 
@@ -620,7 +626,9 @@ const RF = {
       const progress = this.progress.get();
       const isDone = progress[item.id];
       const badgeClass = isDone ? 'done' : (item.pillar ? 'accent' : 'muted');
-      const badge = item.badge ? `<span class="sb-badge ${badgeClass}">${isDone ? '✓' : item.badge}</span>` : '';
+      const badge = item.badge
+        ? `<span class="sb-badge ${badgeClass}">${item.badge}</span>${isDone ? '<span class="sb-active-dot"></span>' : ''}`
+        : '';
       html += `
         <a href="${item.file || '#'}" class="sb-item ${active}">
           <div class="sb-item-icon">${item.icon}</div>
@@ -631,11 +639,14 @@ const RF = {
 
     html += `</div>
         <div class="sb-footer">
-          <div class="sb-progress-label">CRFP Progress</div>
+          <div class="sb-progress-label">Tools explored</div>
           <div class="sb-progress-bar">
             <div class="sb-progress-fill" style="width:${prog}%"></div>
           </div>
-          <div class="sb-progress-pct">${prog}%</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+            <div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute)">${Math.round(prog/20)}/5 pillars</div>
+            <a href="certification.html" style="font-family:var(--font-mono);font-size:0.55rem;color:var(--accent2);text-decoration:none;opacity:0.7">Get CRFP →</a>
+          </div>
         </div>
       </div>`;
     return html;
