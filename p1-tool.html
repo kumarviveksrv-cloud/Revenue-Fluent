@@ -15,17 +15,13 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:980px;margin:0 auto;padding:36px 32px 80px}
-
-/* NAV */
 .crumb{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--text-mute);margin-bottom:30px;flex-wrap:wrap}
 .crumb a{color:var(--copper-lt);text-decoration:none}
 .crumb a:hover{text-decoration:underline}
 .crumb .sep{color:var(--text-mute)}
-.crumb .tool-nav{display:flex;gap:4px;margin-left:4px}
-.crumb .tool-nav a{padding:3px 8px;border-radius:5px;border:1px solid var(--border);color:var(--text-dim);font-size:.68rem}
+.crumb .tool-nav{display:flex;gap:4px;margin-left:4px;flex-wrap:wrap}
+.crumb .tool-nav a{padding:3px 8px;border-radius:5px;border:1px solid var(--border);color:var(--text-dim);font-size:.68rem;text-decoration:none}
 .crumb .tool-nav a.active{background:var(--copper-dim);border-color:var(--copper);color:var(--copper-lt)}
-
-/* EYEBROW + SWITCH */
 .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);margin-bottom:14px}
 .switch{display:flex;align-items:center;gap:12px;margin-bottom:34px;flex-wrap:wrap}
 .switch label{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute)}
@@ -34,41 +30,77 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .scen-meta{font-family:var(--mono);font-size:.74rem;color:var(--text-dim)}
 .scen-meta b{color:var(--copper-lt)}
 
+/* INTRO */
+.intro-panel{margin-bottom:36px}
+.intro-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg2);border:1px solid var(--copper);border-radius:12px;cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden}
+.intro-toggle.glowing{box-shadow:0 0 0 1px var(--copper),0 0 18px rgba(184,115,51,.35),0 0 36px rgba(184,115,51,.15);animation:pulse-glow 2.5s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 1px var(--copper),0 0 18px rgba(184,115,51,.35),0 0 36px rgba(184,115,51,.15)}50%{box-shadow:0 0 0 1px var(--copper-lt),0 0 28px rgba(232,200,122,.5),0 0 52px rgba(184,115,51,.25)}}
+.intro-toggle-left{display:flex;align-items:center;gap:12px}
+.intro-icon{width:28px;height:28px;border-radius:50%;background:var(--copper);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;font-weight:700;color:var(--bg);font-family:var(--mono)}
+.intro-title{font-size:.94rem;font-weight:500;color:var(--text)}
+.intro-sub{font-family:var(--mono);font-size:.68rem;color:var(--copper-lt);letter-spacing:.06em;margin-top:2px}
+.intro-chevron{font-family:var(--mono);font-size:.72rem;color:var(--text-mute)}
+.intro-body{background:var(--bg2);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:28px 28px 24px;display:none}
+.intro-body.open{display:block}
+.intro-sec{margin-bottom:26px}
+.intro-sec:last-child{margin-bottom:0}
+.intro-sec-label{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);margin-bottom:10px}
+.intro-sec-text{font-size:.94rem;color:var(--text-dim);line-height:1.7;font-weight:300}
+.intro-sec-text b{color:var(--text);font-weight:500}
+.intro-story{background:var(--bg3);border-left:3px solid var(--copper);padding:16px 20px;border-radius:0 10px 10px 0;margin-top:12px;font-family:Georgia,serif;font-style:italic;font-size:.94rem;line-height:1.6;color:var(--text-dim)}
+.intro-story b{color:var(--copper-lt);font-style:normal}
+.ex-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:12px}
+.ex-head{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:8px 16px;background:var(--bg4)}
+.ex-head span{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+.ex-head span:nth-child(3),.ex-head span:nth-child(4),.ex-head span:nth-child(5){text-align:right}
+.ex-row{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:14px 16px;align-items:start}
+.ex-date{font-family:var(--mono);font-size:.74rem;color:var(--text-mute)}
+.ex-action{font-size:.88rem;color:var(--text);margin-bottom:3px}
+.ex-note{font-size:.74rem;color:var(--text-mute);font-style:italic;line-height:1.4;margin-bottom:6px}
+.ex-badge{display:inline-block;font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:rgba(184,115,51,.12);color:var(--copper-lt);border:1px solid rgba(184,115,51,.3)}
+.ex-cost{font-family:var(--mono);font-size:.86rem;color:var(--text-dim);text-align:right;white-space:nowrap;padding-left:8px}
+.ex-ret{font-family:var(--mono);font-size:.86rem;color:var(--sig-teal);font-weight:500;text-align:right;white-space:nowrap;padding-left:8px}
+.ex-net{font-family:var(--mono);font-size:.86rem;font-weight:700;color:var(--sig-teal);text-align:right;white-space:nowrap;padding-left:8px}
+.ex-ann{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:10px 16px;background:var(--copper-dim);border-top:1px solid var(--border)}
+.ann{font-family:var(--mono);font-size:.6rem;color:var(--copper-lt);line-height:1.4}
+.ann:nth-child(3),.ann:nth-child(4),.ann:nth-child(5){text-align:right}
+.intro-transition{font-family:Georgia,serif;font-style:italic;font-size:.9rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:16px;margin-top:4px;line-height:1.5}
+.intro-transition b{color:var(--copper-lt);font-style:normal}
+
 /* STORY */
-.story{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--copper);border-radius:0 14px 14px 0;padding:28px 32px;margin-bottom:40px}
-.story .hook{font-family:Georgia,serif;font-style:italic;font-size:1.28rem;line-height:1.55;color:var(--text);margin-bottom:14px}
+.story{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--copper);border-radius:0 14px 14px 0;padding:28px 32px;margin-bottom:32px}
+.story .hook{font-family:Georgia,serif;font-style:italic;font-size:1.28rem;line-height:1.55;color:var(--text);margin-bottom:12px}
 .story .context{font-size:.94rem;color:var(--text-dim);font-weight:300;line-height:1.6}
 .story .context b{color:var(--copper-lt);font-weight:500}
 
-/* RATIO HERO */
+/* RATIO */
 .ratio-hero{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.ratio-hero .left .label{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-mute);margin-bottom:8px}
-.ratio-hero .left .ratio{font-family:var(--mono);font-size:3.2rem;font-weight:700;letter-spacing:-.03em;line-height:1}
-.ratio-hero .left .sub{font-size:.86rem;color:var(--text-dim);margin-top:8px;font-weight:300}
-.ratio-hero .right{text-align:right}
-.ratio-hero .right .rlabel{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:6px}
-.ratio-hero .right .rval{font-family:var(--mono);font-size:1.4rem;font-weight:600;color:var(--copper-lt)}
-.ratio-hero .right .rval2{font-family:var(--mono);font-size:.9rem;color:var(--text-dim);margin-top:4px}
+.ratio-hero .rl .rlabel{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-mute);margin-bottom:8px}
+.ratio-hero .rl .ratio{font-family:var(--mono);font-size:3.2rem;font-weight:700;letter-spacing:-.03em;line-height:1}
+.ratio-hero .rl .rsub{font-size:.86rem;color:var(--text-dim);margin-top:8px;font-weight:300}
+.ratio-hero .rl .rnote{font-family:var(--mono);font-size:.68rem;color:var(--text-mute);margin-top:10px;font-style:italic}
+.ratio-hero .rr{text-align:right}
+.ratio-hero .rr .rrl{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:6px}
+.ratio-hero .rr .rrv{font-family:var(--mono);font-size:1.4rem;font-weight:600;color:var(--copper-lt)}
+.ratio-hero .rr .rrv2{font-family:var(--mono);font-size:.9rem;color:var(--text-dim);margin-top:4px}
 .ratio.pos{color:var(--sig-teal)}.ratio.flat{color:var(--copper-lt)}.ratio.neg{color:var(--sig-red)}
-.incomplete-note{font-family:var(--mono);font-size:.68rem;color:var(--text-mute);margin-top:10px;font-style:italic}
 
-/* SECTION HEADERS */
-.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+/* LEDGER */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .section-head h2{font-size:1.0rem;font-weight:500;display:flex;align-items:center;gap:10px}
 .section-head h2 .step{font-family:var(--mono);font-size:.7rem;color:var(--copper);border:1px solid var(--copper);border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
 .section-head .sh-sub{font-size:.84rem;color:var(--text-dim)}
-
-/* LEDGER */
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.legend-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.64rem;color:var(--text-dim)}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .ledger{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:32px}
-.ledger-header{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;gap:0;padding:12px 20px;background:var(--bg3);border-bottom:1px solid var(--border)}
+.ledger-header{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;padding:12px 20px;background:var(--bg3);border-bottom:1px solid var(--border)}
 .ledger-header span{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);white-space:nowrap}
 .ledger-header span:nth-child(3),.ledger-header span:nth-child(4),.ledger-header span:nth-child(5){text-align:right;padding-left:8px}
-.ledger-body{}
-.ledger-entry{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;gap:0;padding:14px 20px;border-bottom:1px solid var(--border);transition:background .15s;align-items:start}
+.ledger-entry{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;padding:14px 20px;border-bottom:1px solid var(--border);transition:background .15s;align-items:start}
 .ledger-entry:last-child{border-bottom:none}
 .ledger-entry:hover{background:var(--bg3)}
 .entry-date{font-family:var(--mono);font-size:.74rem;color:var(--text-mute);padding-top:2px}
-.entry-main{}
 .entry-id{font-family:var(--mono);font-size:.62rem;color:var(--text-mute);margin-bottom:3px}
 .entry-action{font-size:.9rem;font-weight:400;color:var(--text);margin-bottom:4px}
 .entry-note{font-size:.76rem;color:var(--text-mute);font-style:italic;line-height:1.4}
@@ -82,9 +114,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .entry-return{font-family:var(--mono);font-size:.88rem;color:var(--sig-teal);font-weight:500;text-align:right;padding-top:2px;white-space:nowrap;padding-left:8px}
 .entry-net{font-family:var(--mono);font-size:.84rem;font-weight:600;text-align:right;padding-top:2px;white-space:nowrap;padding-left:8px}
 .entry-net.pos{color:var(--sig-teal)}.entry-net.neg{color:var(--sig-red)}
-
-/* LEDGER TOTALS */
-.ledger-total{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;gap:0;padding:14px 20px;background:var(--bg3);border-top:2px solid var(--border-hi)}
+.ledger-total{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;padding:14px 20px;background:var(--bg3);border-top:2px solid var(--border-hi)}
 .ledger-total .lt-label{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--text);grid-column:1/3}
 .ledger-total .lt-cost{font-family:var(--mono);font-size:.88rem;color:var(--text-dim);text-align:right;font-weight:500;white-space:nowrap;padding-left:8px}
 .ledger-total .lt-return{font-family:var(--mono);font-size:.88rem;color:var(--sig-teal);text-align:right;font-weight:600;white-space:nowrap;padding-left:8px}
@@ -92,82 +122,41 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .lt-net.pos{color:var(--sig-teal)}.lt-net.neg{color:var(--sig-red)}
 
 /* ADD ENTRY */
-.add-section{margin-bottom:40px}
 .add-btn{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;background:var(--copper-dim);border:1px solid var(--copper);color:var(--copper-lt);padding:10px 18px;border-radius:8px;cursor:pointer;transition:all .15s}
 .add-btn:hover{background:var(--copper);color:var(--bg)}
 .add-form{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-top:16px;display:none}
 .add-form.visible{display:block}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-group.full{grid-column:1/-1}
-.form-group label{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
-.form-group input,.form-group select,.form-group textarea{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 12px;font-family:var(--font);font-size:.9rem;transition:border-color .15s}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--copper)}
-.form-group textarea{resize:vertical;min-height:60px}
+.fg{display:flex;flex-direction:column;gap:6px}
+.fg.full{grid-column:1/-1}
+.fg label{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 12px;font-family:var(--font);font-size:.9rem;transition:border-color .15s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--copper)}
+.fg textarea{resize:vertical;min-height:60px}
 .why-hint{font-family:Georgia,serif;font-style:italic;font-size:.8rem;color:var(--text-mute);margin-top:4px;line-height:1.4}
 .form-actions{display:flex;gap:10px}
-.btn-add{background:var(--copper);color:var(--bg);border:none;padding:10px 20px;border-radius:8px;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-weight:500}
-.btn-add:hover{background:var(--copper-lt)}
-.btn-cancel{background:transparent;color:var(--text-dim);border:1px solid var(--border);padding:10px 16px;border-radius:8px;font-family:var(--mono);font-size:.78rem;cursor:pointer}
+.btn-primary{background:var(--copper);color:var(--bg);border:none;padding:10px 20px;border-radius:8px;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-weight:500}
+.btn-primary:hover{background:var(--copper-lt)}
+.btn-secondary{background:transparent;color:var(--text-dim);border:1px solid var(--border);padding:10px 16px;border-radius:8px;font-family:var(--mono);font-size:.78rem;cursor:pointer}
 
-/* INTELLIGENCE STATEMENT */
+/* STATEMENT */
 .statement{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:26px 30px}
 .statement .slabel{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);margin-bottom:12px}
 .statement .stext{font-family:Georgia,serif;font-style:italic;font-size:1.12rem;line-height:1.65;color:var(--text)}
 .statement .stext b{color:var(--copper-lt);font-style:normal;font-weight:500}
 
-/* CATEGORY LEGEND */
-.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.legend-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.64rem;color:var(--text-dim)}
-.legend-dot{width:8px;height:8px;border-radius:50%}
-
 .err{background:var(--bg2);border:1px solid var(--sig-red);border-radius:10px;padding:18px;color:var(--sig-red);font-family:var(--mono);font-size:.82rem}
-@media(max-width:700px){.ledger-header,.ledger-entry,.ledger-total{grid-template-columns:1fr 1fr;}.entry-date,.entry-id,.entry-note{display:none}.ledger-header span:nth-child(3),.ledger-header span:nth-child(4){display:none}.entry-cost,.lt-cost{display:none}.form-grid{grid-template-columns:1fr}}
-
-/* INTRO PANEL */
-.intro-panel{margin-bottom:36px}
-.intro-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg2);border:1px solid var(--copper);border-radius:12px;cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden}
-.intro-toggle::before{content:'';position:absolute;inset:0;background:var(--copper-dim);opacity:0;transition:opacity .3s}
-.intro-toggle:hover::before{opacity:1}
-.intro-toggle.glowing{box-shadow:0 0 0 1px var(--copper), 0 0 18px rgba(184,115,51,.35), 0 0 36px rgba(184,115,51,.15);animation:pulse-glow 2.5s ease-in-out infinite}
-@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 1px var(--copper),0 0 18px rgba(184,115,51,.35),0 0 36px rgba(184,115,51,.15);}50%{box-shadow:0 0 0 1px var(--copper-lt),0 0 28px rgba(232,200,122,.5),0 0 52px rgba(184,115,51,.25);}}
-.intro-toggle-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
-.intro-toggle-icon{width:28px;height:28px;border-radius:50%;background:var(--copper);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;font-weight:700;color:var(--bg);font-family:var(--mono)}
-.intro-toggle-label{font-size:.94rem;font-weight:500;color:var(--text)}
-.intro-toggle-sub{font-family:var(--mono);font-size:.68rem;color:var(--copper-lt);letter-spacing:.06em;margin-top:2px}
-.intro-toggle-right{font-family:var(--mono);font-size:.72rem;color:var(--text-mute);position:relative;z-index:1;transition:color .2s}
-.intro-toggle:hover .intro-toggle-right{color:var(--copper-lt)}
-.intro-body{background:var(--bg2);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:28px 28px 24px;display:none}
-.intro-body.open{display:block}
-.intro-section{margin-bottom:28px}
-.intro-section:last-child{margin-bottom:0}
-.intro-section-label{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);margin-bottom:10px}
-.intro-section-text{font-size:.94rem;color:var(--text-dim);line-height:1.7;font-weight:300}
-.intro-section-text b{color:var(--text);font-weight:500}
-.intro-story{background:var(--bg3);border-left:3px solid var(--copper);padding:16px 20px;border-radius:0 10px 10px 0;margin-top:12px}
-.intro-story p{font-family:Georgia,serif;font-style:italic;font-size:.94rem;line-height:1.6;color:var(--text-dim)}
-.intro-story p b{color:var(--copper-lt);font-style:normal}
-/* EXAMPLE ENTRY */
-.example-entry{background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:12px}
-.example-header{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:8px 16px;background:var(--bg4)}
-.example-header span{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
-.example-header span:nth-child(3),.example-header span:nth-child(4),.example-header span:nth-child(5){text-align:right}
-.example-row{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:14px 16px;align-items:start}
-.ex-date{font-family:var(--mono);font-size:.74rem;color:var(--text-mute)}
-.ex-main{}
-.ex-action{font-size:.88rem;color:var(--text);margin-bottom:3px}
-.ex-note{font-size:.74rem;color:var(--text-mute);font-style:italic;line-height:1.4;margin-bottom:6px}
-.ex-cat{display:inline-block;font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:rgba(184,115,51,.12);color:var(--copper-lt);border:1px solid rgba(184,115,51,.3)}
-.ex-cost{font-family:var(--mono);font-size:.86rem;color:var(--text-dim);text-align:right;white-space:nowrap;padding-left:8px}
-.ex-return{font-family:var(--mono);font-size:.86rem;color:var(--sig-teal);font-weight:500;text-align:right;white-space:nowrap;padding-left:8px}
-.ex-net{font-family:var(--mono);font-size:.86rem;font-weight:700;color:var(--sig-teal);text-align:right;white-space:nowrap;padding-left:8px}
-.example-annotations{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:10px 16px;background:var(--copper-dim);border-top:1px solid var(--border)}
-.ann{font-family:var(--mono);font-size:.6rem;color:var(--copper-lt);line-height:1.4}
-.ann:nth-child(3),.ann:nth-child(4),.ann:nth-child(5){text-align:right}
-.intro-transition{font-family:Georgia,serif;font-style:italic;font-size:.9rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:16px;margin-top:4px;line-height:1.5}
-.intro-transition b{color:var(--copper-lt);font-style:normal}
+@media(max-width:700px){
+  .ledger-header,.ledger-entry,.ledger-total{grid-template-columns:1fr 1fr}
+  .entry-date,.entry-id,.entry-note{display:none}
+  .ledger-header span:nth-child(3),.ledger-header span:nth-child(4){display:none}
+  .entry-cost,.lt-cost{display:none}
+  .form-grid{grid-template-columns:1fr}
+  .ex-head,.ex-row,.ex-ann{grid-template-columns:1fr 1fr}
+}
 </style></head>
 <body><div class="wrap">
+
 <div class="crumb">
   <a href="scenario-library.html">&larr; Scenario Library</a>
   <span class="sep">/</span>
@@ -179,332 +168,407 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
     <a href="p5-tool.html" id="navP5">Human P&L</a>
   </div>
 </div>
-<div class="eyebrow">Revenue Fluent · L1 · The Value Ledger</div>
+
+<div class="eyebrow">Revenue Fluent &middot; L1 &middot; The Value Ledger</div>
 <div class="switch">
   <label for="scen">Scenario</label>
   <select id="scen"></select>
   <span class="scen-meta" id="meta"></span>
 </div>
 <div id="app"></div>
-</div>
 
+</div>
 <script src="rf-data.js"></script>
 <script>
 (function(){
-  var app=document.getElementById('app');
-  if(!window.RF){app.innerHTML='<div class="err">rf-data.js not found. Keep rf-data.js in the same folder.</div>';return;}
 
-  var sel=document.getElementById('scen');
-  RF.list().forEach(function(n){var o=document.createElement('option');o.value=n;o.textContent=n;sel.appendChild(o);});
-  var current=RF.current(); sel.value=current;
+var app = document.getElementById('app');
+if (!window.RF || !window.RF_DATA) {
+  app.innerHTML = '<div class="err">rf-data.js not found. Keep rf-data.js in the same folder as this page.</div>';
+  return;
+}
 
-  // Custom entries added by user this session
-  var customEntries={};
-  RF.list().forEach(function(n){customEntries[n]=[];});
+// Populate scenario selector
+var sel = document.getElementById('scen');
+RF.list().forEach(function(n) {
+  var o = document.createElement('option');
+  o.value = n; o.textContent = n;
+  sel.appendChild(o);
+});
+var current = RF.current();
+sel.value = current;
 
-  var CAT_COLORS={'Revenue-Generating':'cat-rev','Cost-Saving':'cat-cost','Development':'cat-dev','Culture & Engagement':'cat-culture','Risk & Compliance':'cat-risk'};
+// Per-session custom entries
+var customEntries = {};
+RF.list().forEach(function(n) { customEntries[n] = []; });
 
-  var HOOKS={
-    'High-Growth Tech Startup':'40% of your revenue rides on 20 people. Most boards never see that line.',
-    'Professional Services Firm':'When a partner walks, the client relationship often walks with them.',
-    'Enterprise Healthcare':'850 staff. Zero Stars. And the board calls it stable.',
-    'Remote-First SaaS':'23 countries. One spreadsheet. Neither can hold what this org is worth.',
-    'Financial Services':'Every analyst lost is two years of deal memory gone.',
-    'Manufacturing Firm':'Two decades of floor knowledge, walking out one retirement at a time.',
-    'Sales Organization':'The quota is hit. The pipeline behind it is quietly thinning.',
-    'Consulting Firm':'Utilisation looks healthy — until you map who actually wins the work.',
-    'Family Business':'Loyalty kept the mill running. Succession is the question no one asks aloud.',
-    'MNC in Asia':'Lifetime employment meets a workforce that no longer assumes it.',
-    'Hospitality':'Guests remember the people. The P&L only counts the rooms.',
-    'Corporate America':'A supervisor with 13 years on the floor holds more uptime than any system.',
-    'Government Agency':'Institutional memory measured in decades, with no replacement bench.',
-    'Higher Education':'A distinguished chair retires and a research lineage ends with them.',
-    'Social Enterprise':'Mission attracts them. Pay cannot always keep them.'
-  };
+var CAT_CSS = {
+  'Revenue-Generating': 'cat-rev',
+  'Cost-Saving': 'cat-cost',
+  'Development': 'cat-dev',
+  'Culture & Engagement': 'cat-culture',
+  'Risk & Compliance': 'cat-risk'
+};
 
-  function fmt(sym,n){
-    if(n>=10000000) return sym+(n/10000000).toFixed(2)+'Cr';
-    if(n>=100000) return sym+(n/100000).toFixed(1)+'L';
-    if(n>=1000) return sym+Math.round(n/1000)+'K';
-    return sym+Math.round(n);
+var HOOKS = {
+  'High-Growth Tech Startup': '40% of your revenue rides on 20 people. Most boards never see that line.',
+  'Professional Services Firm': 'When a partner walks, the client relationship often walks with them.',
+  'Enterprise Healthcare': '850 staff. Zero Stars. And the board calls it stable.',
+  'Remote-First SaaS': '23 countries. One spreadsheet. Neither can hold what this org is worth.',
+  'Financial Services': 'Every analyst lost is two years of deal memory gone.',
+  'Manufacturing Firm': 'Two decades of floor knowledge, walking out one retirement at a time.',
+  'Sales Organization': 'The quota is hit. The pipeline behind it is quietly thinning.',
+  'Consulting Firm': 'Utilisation looks healthy — until you map who actually wins the work.',
+  'Family Business': 'Loyalty kept the mill running. Succession is the question no one asks aloud.',
+  'MNC in Asia': 'Lifetime employment meets a workforce that no longer assumes it.',
+  'Hospitality': 'Guests remember the people. The P&L only counts the rooms.',
+  'Corporate America': 'A supervisor with 13 years on the floor holds more uptime than any system.',
+  'Government Agency': 'Institutional memory measured in decades, with no replacement bench.',
+  'Higher Education': 'A distinguished chair retires and a research lineage ends with them.',
+  'Social Enterprise': 'Mission attracts them. Pay cannot always keep them.'
+};
+
+function fmt(sym, n) {
+  if (n >= 10000000) return sym + (n/10000000).toFixed(2) + 'Cr';
+  if (n >= 100000)   return sym + (n/100000).toFixed(1) + 'L';
+  if (n >= 1000)     return sym + Math.round(n/1000) + 'K';
+  return sym + Math.round(n);
+}
+
+function fmtNet(sym, n) {
+  return (n >= 0 ? '+' : '-') + fmt(sym, Math.abs(n));
+}
+
+function buildAutoEntries(name) {
+  var s = RF.scenario(name);
+  if (!s) return [];
+  var emps = s.employees, sym = s.symbol;
+  var n = emps.length;
+  var totalComp = emps.reduce(function(a,e){ return a + e.salary; }, 0);
+  var avgSal = Math.round(totalComp / n);
+  var stars    = emps.filter(function(e){ return e.placement === 'Star'; });
+  var atRisk   = emps.filter(function(e){ return e.placement === 'Inconsistent Performer'; });
+  var emerging = emps.filter(function(e){ return e.placement === 'Emerging Talent'; });
+  var tenured  = emps.filter(function(e){ return e.tenure >= 5; });
+  var revDepts = ['Sales','Business Dev','Customer Success','Investment Banking','M&A'];
+  var revHires = emps.filter(function(e){ return e.tenure <= 1 && revDepts.indexOf(e.dept) >= 0; });
+  var entries = [];
+
+  if (stars.length > 0) {
+    var starSal = stars.reduce(function(a,e){ return a + e.salary; }, 0);
+    entries.push({
+      id:'E001', date:'2026-Q1', category:'Cost-Saving',
+      action:'Retention of ' + stars.length + ' Star performers',
+      cost: Math.round(starSal * 0.05),
+      ret:  Math.round(starSal * 1.8),
+      note: 'Replacement cost avoided — 1.8x annual salary per Star retained',
+      auto: true
+    });
   }
-
-  function fmtNet(sym,n){
-    var sign=n>=0?'+':'-';
-    return sign+fmt(sym,Math.abs(n));
+  if (revHires.length > 0) {
+    var rhSal = revHires.reduce(function(a,e){ return a + e.salary; }, 0);
+    entries.push({
+      id:'E002', date:'2026-Q1', category:'Revenue-Generating',
+      action:'New hires in revenue-bearing roles (' + revHires.length + ' people)',
+      cost: Math.round(rhSal * 0.15),
+      ret:  Math.round(rhSal * 1.4),
+      note: 'Estimated revenue ramp at 1.4x first-year salary contribution',
+      auto: true
+    });
   }
-
-  function buildEntries(name){
-    var s=RF.scenario(name); if(!s) return [];
-    var emps=s.employees, sym=s.symbol, n=emps.length;
-    var totalComp=emps.reduce(function(a,e){return a+e.salary;},0);
-    var avgSal=Math.round(totalComp/n);
-    var stars=emps.filter(function(e){return e.placement==='Star';});
-    var atRisk=emps.filter(function(e){return e.placement==='Inconsistent Performer';});
-    var emerging=emps.filter(function(e){return e.placement==='Emerging Talent';});
-    var tenured=emps.filter(function(e){return e.tenure>=5;});
-    var revHires=emps.filter(function(e){return e.tenure<=1&&['Sales','Business Dev','Customer Success','Investment Banking','M&A'].indexOf(e.dept)>=0;});
-    var entries=[];
-    if(stars.length>0){
-      var retVal=Math.round(stars.reduce(function(a,e){return a+e.salary;},0)*1.8);
-      entries.push({id:'E001',date:'2026-Q1',category:'Cost-Saving',action:'Retention of '+stars.length+' Star performers',cost:Math.round(stars.reduce(function(a,e){return a+e.salary;},0)*0.05),return:retVal,note:'Replacement cost avoided — 1.8x annual salary per Star retained',auto:true});
-    }
-    if(revHires.length>0){
-      var rampVal=Math.round(revHires.reduce(function(a,e){return a+e.salary;},0)*1.4);
-      entries.push({id:'E002',date:'2026-Q1',category:'Revenue-Generating',action:'New hires in revenue-bearing roles ('+revHires.length+' people)',cost:Math.round(revHires.reduce(function(a,e){return a+e.salary;},0)*0.15),return:rampVal,note:'Estimated revenue ramp at 1.4x first-year salary contribution',auto:true});
-    }
-    if(emerging.length>0){
-      var devCost=Math.round(emerging.reduce(function(a,e){return a+e.salary;},0)*0.04);
-      entries.push({id:'E003',date:'2026-Q1',category:'Development',action:'Development investment in '+emerging.length+' Emerging Talent',cost:devCost,return:Math.round(devCost*2.8),note:'DRI: development cost recovered at 2.8x through performance uplift',auto:true});
-    }
-    if(tenured.length>0){
-      var engCost=Math.round(tenured.length*avgSal*0.01);
-      entries.push({id:'E004',date:'2026-Q1',category:'Culture & Engagement',action:'Engagement maintenance — '+tenured.length+' tenured employees',cost:engCost,return:Math.round(tenured.reduce(function(a,e){return a+e.salary;},0)*0.08),note:'EEI: 8% productivity premium from sustained engagement in long-tenure staff',auto:true});
-    }
-    if(atRisk.length>0){
-      var riskCost=Math.round(atRisk.length*avgSal*0.02);
-      entries.push({id:'E005',date:'2026-Q1',category:'Risk & Compliance',action:'Performance risk management — '+atRisk.length+' at-risk employees',cost:riskCost,return:Math.round(atRisk.reduce(function(a,e){return a+e.salary;},0)*0.6),note:'RMV: exposure contained — unmanaged exits at 2x salary each',auto:true});
-    }
-    return entries;
+  if (emerging.length > 0) {
+    var devCost = Math.round(emerging.reduce(function(a,e){ return a + e.salary; }, 0) * 0.04);
+    entries.push({
+      id:'E003', date:'2026-Q1', category:'Development',
+      action:'Development investment in ' + emerging.length + ' Emerging Talent',
+      cost: devCost,
+      ret:  Math.round(devCost * 2.8),
+      note: 'DRI: development cost recovered at 2.8x through performance uplift',
+      auto: true
+    });
   }
-
-  function catClass(cat){return CAT_COLORS[cat]||'cat-cost';}
-
-  function entryRow(e,sym){
-    var net=e.return-e.cost;
-    var netCls=net>=0?'pos':'neg';
-    return '<div class="ledger-entry">'
-      +'<div class="entry-date">'+e.date+'</div>'
-      +'<div class="entry-main">'
-        +'<div class="entry-id">'+e.id+(e.auto?'':' · custom')+'</div>'
-        +'<div class="entry-action">'+e.action+'</div>'
-        +'<div class="entry-note">'+e.note+'</div>'
-        +'<span class="entry-cat '+catClass(e.category)+'">'+e.category+'</span>'
-      +'</div>'
-      +'<div class="entry-cost">'+fmt(sym,e.cost)+'</div>'
-      +'<div class="entry-return">'+fmt(sym,e.return)+'</div>'
-      +'<div class="entry-net '+netCls+'">'+fmtNet(sym,net)+'</div>'
-      +'</div>';
+  if (tenured.length > 0) {
+    var tenSal = tenured.reduce(function(a,e){ return a + e.salary; }, 0);
+    entries.push({
+      id:'E004', date:'2026-Q1', category:'Culture & Engagement',
+      action:'Engagement maintenance — ' + tenured.length + ' tenured employees',
+      cost: Math.round(tenured.length * avgSal * 0.01),
+      ret:  Math.round(tenSal * 0.08),
+      note: 'EEI: 8% productivity premium from sustained engagement in long-tenure staff',
+      auto: true
+    });
   }
-
-  function statement(name,ratio,totalReturn,totalComp,sym,entryCount){
-    var sum=RF.summary(name);
-    if(ratio<1)
-      return 'This ledger is <b>incomplete</b> — only '+entryCount+' entries recorded for Q1 2026. Even so, HR activity has returned <b>'+fmt(sym,totalReturn)+'</b> against a <b>'+fmt(sym,totalComp)+'</b> comp base. Add your own entries to build the full picture. Every contribution deserves a line.';
-    if(ratio<2)
-      return 'A <b>'+ratio.toFixed(1)+'x return</b> on the comp base. The ledger is building. The entries recorded so far show HR generating <b>'+fmt(sym,totalReturn)+'</b> in documented value. The full picture — when every contribution is entered — will be the number you take into the boardroom.';
-    return 'For every '+sym+'1 this organisation invests in HR, it receives <b>'+sym+ratio.toFixed(1)+'</b> back. That is not an HR metric. That is a <b>return on investment</b>. The Value Ledger is the document that proves it — line by line, entry by entry, in the language the board already speaks.';
+  if (atRisk.length > 0) {
+    var arSal = atRisk.reduce(function(a,e){ return a + e.salary; }, 0);
+    entries.push({
+      id:'E005', date:'2026-Q1', category:'Risk & Compliance',
+      action:'Performance risk management — ' + atRisk.length + ' at-risk employees',
+      cost: Math.round(atRisk.length * avgSal * 0.02),
+      ret:  Math.round(arSal * 0.6),
+      note: 'RMV: exposure contained — unmanaged exits at 2x salary each',
+      auto: true
+    });
   }
+  return entries;
+}
 
+function entryRow(e, sym) {
+  var net = e.ret - e.cost;
+  return '<div class="ledger-entry">'
+    + '<div class="entry-date">' + e.date + '</div>'
+    + '<div>'
+      + '<div class="entry-id">' + e.id + (e.auto ? '' : ' &middot; custom') + '</div>'
+      + '<div class="entry-action">' + e.action + '</div>'
+      + '<div class="entry-note">' + e.note + '</div>'
+      + '<span class="entry-cat ' + (CAT_CSS[e.category]||'cat-cost') + '">' + e.category + '</span>'
+    + '</div>'
+    + '<div class="entry-cost">' + fmt(sym, e.cost) + '</div>'
+    + '<div class="entry-return">' + fmt(sym, e.ret) + '</div>'
+    + '<div class="entry-net ' + (net>=0?'pos':'neg') + '">' + fmtNet(sym, net) + '</div>'
+    + '</div>';
+}
 
-  function introPanel(sym){
-    var stored = localStorage.getItem('rf_intro_seen');
-    var isOpen = !stored;
-    return '<div class="intro-panel">'
-      +'<div class="intro-toggle '+(isOpen?'':'glowing')+'" id="introToggle" onclick="toggleIntro()">'
-        +'<div class="intro-toggle-left">'
-          +'<div class="intro-toggle-icon">?</div>'
-          +'<div><div class="intro-toggle-label">What is The Value Ledger?</div>'
-          +'<div class="intro-toggle-sub">Read this first &mdash; it takes 2 minutes</div></div>'
-        +'</div>'
-        +'<div class="intro-toggle-right" id="introChevron">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
-      +'</div>'
-      +'<div class="intro-body '+(isOpen?'open':'')+'" id="introBody">'
+function introHTML(sym) {
+  var seen = false;
+  try { seen = !!localStorage.getItem('rf_intro_seen'); } catch(e) {}
+  var isOpen = !seen;
+  return '<div class="intro-panel">'
+    + '<div class="intro-toggle' + (isOpen ? '' : ' glowing') + '" id="introToggle">'
+      + '<div class="intro-toggle-left">'
+        + '<div class="intro-icon">?</div>'
+        + '<div>'
+          + '<div class="intro-title">What is The Value Ledger?</div>'
+          + '<div class="intro-sub">Read this first &mdash; it takes 2 minutes</div>'
+        + '</div>'
+      + '</div>'
+      + '<div class="intro-chevron" id="introChevron">' + (isOpen ? 'Hide &uarr;' : 'Show &darr;') + '</div>'
+    + '</div>'
+    + '<div class="intro-body' + (isOpen ? ' open' : '') + '" id="introBody">'
 
-        // SECTION 1: What it is
-        +'<div class="intro-section">'
-          +'<div class="intro-section-label">What is the Value Ledger?</div>'
-          +'<div class="intro-section-text">The Value Ledger is a <b>financial record of everything HR does</b> — written in the language your CEO and CFO already speak. Not engagement scores. Not headcount charts. Actual numbers, in actual currency, that show what HR contributed to the business.<br><br>Every hire, every retention save, every training programme, every risk resolved — each one gets a line. Each line has a cost and a return. Together they answer the question every HR professional deserves to answer with confidence: <b>what did we actually contribute, and what did it return?</b></div>'
-        +'</div>'
+      + '<div class="intro-sec">'
+        + '<div class="intro-sec-label">What is the Value Ledger?</div>'
+        + '<div class="intro-sec-text">The Value Ledger is a <b>financial record of everything HR does</b> — written in the language your CEO and CFO already speak. Not engagement scores. Not headcount charts. Actual numbers, in actual currency, showing what HR contributed to the business.<br><br>Every hire, every retention save, every training programme, every risk resolved — each one gets a line in the ledger. Each line has a cost and a return. Together they answer the question every HR professional deserves to answer with confidence: <b>what did we actually contribute, and what did it return?</b></div>'
+      + '</div>'
 
-        // SECTION 2: Why it matters — the story
-        +'<div class="intro-section">'
-          +'<div class="intro-section-label">Why does this exist?</div>'
-          +'<div class="intro-section-text">Most HR professionals do work that has enormous financial value — but they have no way to prove it. The board sees costs. HR knows there's a return. The gap between those two realities is what the Value Ledger closes.</div>'
-          +'<div class="intro-story"><p>An HR manager at a growing tech company spent two months coaching a high-potential engineer who was close to resigning. The engineer stayed. A year later, she led the product that drove 40% of that year's revenue. The HR manager never got credit — because there was no record.<br><br>The Value Ledger would have captured that retention save the day it happened. <b>Cost: the time invested. Return: the replacement cost avoided, plus the revenue impact of keeping the right person in the right role.</b> By the time the revenue landed, the contribution was already documented, already quantified, already in the language the board respects.</p></div>'
-        +'</div>'
+      + '<div class="intro-sec">'
+        + '<div class="intro-sec-label">Why does this exist?</div>'
+        + '<div class="intro-sec-text">Most HR professionals do work that has enormous financial value — but they have no way to prove it. The board sees costs. HR knows there is a return. The gap between those two realities is what the Value Ledger closes.</div>'
+        + '<div class="intro-story">An HR manager at a growing company spent two months coaching a high-potential engineer who was close to resigning. The engineer stayed. A year later, she led the product that drove 40% of that year\'s revenue. The HR manager never got credit — because there was no record.<br><br>The Value Ledger would have captured that retention save the day it happened. <b>Cost: the time invested. Return: the replacement cost avoided, plus the revenue impact of keeping the right person in the right role.</b> By the time the revenue landed, the contribution was already documented, already quantified, already in the language the board respects.</div>'
+      + '</div>'
 
-        // SECTION 3: How an entry works
-        +'<div class="intro-section">'
-          +'<div class="intro-section-label">How does a ledger entry work?</div>'
-          +'<div class="intro-section-text">Every HR action becomes an entry. Each entry has five elements: when it happened, what HR did, what it cost, what it returned, and the net value. Here is what one looks like:</div>'
-          +'<div class="example-entry">'
-            +'<div class="example-header"><span>Period</span><span>Action</span><span>HR Cost</span><span>Return</span><span>Net</span></div>'
-            +'<div class="example-row">'
-              +'<div class="ex-date">2026-Q1</div>'
-              +'<div class="ex-main"><div class="ex-action">Retention of 3 senior engineers at flight risk</div><div class="ex-note">Structured retention conversations + compensation review. Replacement cost avoided at 1.8x annual salary each.</div><span class="ex-cat">Cost-Saving</span></div>'
-              +'<div class="ex-cost">'+sym+'45K</div>'
-              +'<div class="ex-return">'+sym+'810K</div>'
-              +'<div class="ex-net">+'+sym+'765K</div>'
-            +'</div>'
-            +'<div class="example-annotations">'
-              +'<div class="ann">When</div>'
-              +'<div class="ann">What HR did &amp; how the return was calculated</div>'
-              +'<div class="ann">What HR spent</div>'
-              +'<div class="ann">Value returned</div>'
-              +'<div class="ann">Net impact</div>'
-            +'</div>'
-          +'</div>'
-          +'<div class="intro-section-text" style="margin-top:12px">The return figure is always <b>calculated with transparent workings</b> — not guessed, not inflated. Every entry has a methodology behind it that you can explain and defend in any room.</div>'
-        +'</div>'
+      + '<div class="intro-sec">'
+        + '<div class="intro-sec-label">How does a ledger entry work?</div>'
+        + '<div class="intro-sec-text">Every HR action becomes an entry. Each entry has five elements: when it happened, what HR did, what it cost, what it returned, and the net value. Here is what one looks like:</div>'
+        + '<div class="ex-wrap">'
+          + '<div class="ex-head"><span>Period</span><span>Action</span><span>HR Cost</span><span>Return</span><span>Net</span></div>'
+          + '<div class="ex-row">'
+            + '<div class="ex-date">2026-Q1</div>'
+            + '<div>'
+              + '<div class="ex-action">Retention of 3 senior engineers at flight risk</div>'
+              + '<div class="ex-note">Structured retention conversations and compensation review. Replacement cost avoided at 1.8x annual salary each.</div>'
+              + '<span class="ex-badge">Cost-Saving</span>'
+            + '</div>'
+            + '<div class="ex-cost">' + sym + '45K</div>'
+            + '<div class="ex-ret">' + sym + '810K</div>'
+            + '<div class="ex-net">+' + sym + '765K</div>'
+          + '</div>'
+          + '<div class="ex-ann">'
+            + '<div class="ann">When it happened</div>'
+            + '<div class="ann">What HR did and how the return was calculated</div>'
+            + '<div class="ann">What HR spent</div>'
+            + '<div class="ann">Value returned</div>'
+            + '<div class="ann">Net impact</div>'
+          + '</div>'
+        + '</div>'
+        + '<div class="intro-sec-text" style="margin-top:12px">The return figure is always <b>calculated with transparent workings</b> — not guessed, not inflated. Every entry has a methodology behind it that you can explain and defend in any room.</div>'
+      + '</div>'
 
-        // SECTION 4: Transition
-        +'<div class="intro-transition">Below is your organisation's Value Ledger, <b>pre-populated with what the data already tells us</b>. Each entry is computed from your scenario's real people and real salaries. Add your own entries to build the complete picture &mdash; every contribution deserves a line.</div>'
+      + '<div class="intro-transition">Below is your organisation\'s Value Ledger, <b>pre-populated with what the data already tells us</b>. Each entry is computed from your scenario\'s real people and real salaries. Add your own entries to build the complete picture — every contribution deserves a line.</div>'
 
-      +'</div>'
-    +'</div>';
+    + '</div>'
+  + '</div>';
+}
+
+function intelligenceStatement(sym, ratio, totalReturn, totalComp, entryCount) {
+  if (ratio < 1) {
+    return 'This ledger is <b>incomplete</b> — only ' + entryCount + ' entries recorded for Q1 2026. Even so, HR activity has returned <b>' + fmt(sym, totalReturn) + '</b> against a <b>' + fmt(sym, totalComp) + '</b> comp base. Add your own entries to build the full picture. Every contribution deserves a line.';
   }
+  if (ratio < 2) {
+    return 'A <b>' + ratio.toFixed(1) + 'x return</b> on the comp base — the ledger is building. The entries recorded so far show HR generating <b>' + fmt(sym, totalReturn) + '</b> in documented value. The full picture, when every contribution is entered, is the number you take into the boardroom.';
+  }
+  return 'For every ' + sym + '1 this organisation invests in HR, it receives <b>' + sym + ratio.toFixed(1) + '</b> back. That is not an HR metric. That is a <b>return on investment</b>. The Value Ledger is the document that proves it — line by line, entry by entry, in the language the board already speaks.';
+}
 
-  window.toggleIntro = function(){
-    var body = document.getElementById('introBody');
-    var toggle = document.getElementById('introToggle');
-    var chevron = document.getElementById('introChevron');
-    var isOpen = body.classList.contains('open');
-    if(isOpen){
+function render(name) {
+  var s = RF.scenario(name);
+  var sum = RF.summary(name);
+  if (!s || !sum) return;
+
+  var sym = s.symbol;
+  var totalComp = s.employees.reduce(function(a,e){ return a + e.salary; }, 0);
+
+  document.getElementById('meta').innerHTML =
+    '<b>' + s.employeeCount + '</b> people &middot; <b>' + sum.geo + '</b> &middot; comp base <b>' + fmt(sym, totalComp) + '</b>';
+
+  // Update tool nav links
+  var tools = ['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'];
+  ['navP1','navP2','navP3','navP4','navP5'].forEach(function(id, i) {
+    var el = document.getElementById(id);
+    if (el) el.href = tools[i] + '?scenario=' + encodeURIComponent(name);
+  });
+
+  var autoEntries = buildAutoEntries(name);
+  var custom = customEntries[name] || [];
+  var all = autoEntries.concat(custom);
+
+  var totalCost   = all.reduce(function(a,e){ return a + e.cost; }, 0);
+  var totalReturn = all.reduce(function(a,e){ return a + e.ret;  }, 0);
+  var totalNet    = totalReturn - totalCost;
+  var ratio       = totalComp > 0 ? totalReturn / totalComp : 0;
+  var ratioClass  = ratio >= 2 ? 'pos' : ratio >= 1 ? 'flat' : 'neg';
+
+  var html = '';
+
+  // INTRO
+  html += introHTML(sym);
+
+  // STORY
+  html += '<div class="story">'
+    + '<div class="hook">' + (HOOKS[name] || 'Every HR decision has a financial entry. Most organisations just never wrote it down.') + '</div>'
+    + '<div class="context">The Value Ledger records every HR contribution in the language the board already speaks. <b>' + all.length + ' entries</b> recorded for this organisation. <b>' + fmt(sym, totalReturn) + '</b> in documented HR value. Add your own entries below to build the full picture.</div>'
+    + '</div>';
+
+  // RATIO HERO
+  html += '<div class="ratio-hero">'
+    + '<div class="rl">'
+      + '<div class="rlabel">Return on HR investment</div>'
+      + '<div class="ratio ' + ratioClass + '">' + sym + ratio.toFixed(1) + '</div>'
+      + '<div class="rsub">returned for every ' + sym + '1 invested in HR</div>'
+      + (ratio < 1 ? '<div class="rnote">Ledger is partial — add your own entries to see the full return</div>' : '')
+    + '</div>'
+    + '<div class="rr">'
+      + '<div class="rrl">Total HR return</div>'
+      + '<div class="rrv">' + fmt(sym, totalReturn) + '</div>'
+      + '<div class="rrl" style="margin-top:12px">Net ledger value</div>'
+      + '<div class="rrv2">' + fmtNet(sym, totalNet) + '</div>'
+    + '</div>'
+    + '</div>';
+
+  // LEDGER
+  html += '<div class="section-head">'
+    + '<h2><span class="step">1</span> The Ledger</h2>'
+    + '<div class="sh-sub">Q1 2026 &middot; auto-populated from scenario data</div>'
+    + '</div>';
+
+  html += '<div class="legend">'
+    + '<div class="legend-item"><div class="legend-dot" style="background:#5CC8A0"></div>Revenue-Generating</div>'
+    + '<div class="legend-item"><div class="legend-dot" style="background:#E8C87A"></div>Cost-Saving</div>'
+    + '<div class="legend-item"><div class="legend-dot" style="background:#9aA8FF"></div>Development</div>'
+    + '<div class="legend-item"><div class="legend-dot" style="background:rgba(232,200,122,.6)"></div>Culture &amp; Engagement</div>'
+    + '<div class="legend-item"><div class="legend-dot" style="background:#E05C3A"></div>Risk &amp; Compliance</div>'
+    + '</div>';
+
+  html += '<div class="ledger">'
+    + '<div class="ledger-header"><span>Period</span><span>Action</span><span>HR Cost</span><span>Return</span><span>Net</span></div>'
+    + '<div id="ledger-rows">' + all.map(function(e){ return entryRow(e, sym); }).join('') + '</div>'
+    + '<div class="ledger-total">'
+      + '<div class="lt-label">TOTAL &mdash; ' + all.length + ' entries</div>'
+      + '<div class="lt-cost">' + fmt(sym, totalCost) + '</div>'
+      + '<div class="lt-return">' + fmt(sym, totalReturn) + '</div>'
+      + '<div class="lt-net ' + (totalNet>=0?'pos':'neg') + '">' + fmtNet(sym, totalNet) + '</div>'
+    + '</div>'
+    + '</div>';
+
+  // ADD ENTRY
+  html += '<div style="margin-bottom:40px">'
+    + '<div class="section-head"><h2><span class="step">2</span> Add an Entry</h2><div class="sh-sub">Record a contribution not yet in the ledger</div></div>'
+    + '<button class="add-btn" id="toggleAdd">+ Add Entry</button>'
+    + '<div class="add-form" id="addForm">'
+      + '<div class="form-grid">'
+        + '<div class="fg"><label>Category</label>'
+          + '<select id="f-cat">'
+            + '<option value="Revenue-Generating">Revenue-Generating</option>'
+            + '<option value="Cost-Saving">Cost-Saving</option>'
+            + '<option value="Development">Development</option>'
+            + '<option value="Culture &amp; Engagement">Culture &amp; Engagement</option>'
+            + '<option value="Risk &amp; Compliance">Risk &amp; Compliance</option>'
+          + '</select>'
+        + '</div>'
+        + '<div class="fg"><label>Period</label><input id="f-date" type="text" value="2026-Q1" placeholder="e.g. 2026-Q1"/></div>'
+        + '<div class="fg full"><label>What did HR do?</label><input id="f-action" type="text" placeholder="e.g. Resolved senior leadership conflict before escalation"/><div class="why-hint">&rarr; Be specific. &ldquo;Resolved&rdquo; is better than &ldquo;managed&rdquo;. The ledger works when entries are precise.</div></div>'
+        + '<div class="fg"><label>HR Cost (' + sym + ')</label><input id="f-cost" type="number" placeholder="e.g. 50000"/></div>'
+        + '<div class="fg"><label>Estimated Return (' + sym + ')</label><input id="f-return" type="number" placeholder="e.g. 300000"/></div>'
+        + '<div class="fg full"><label>How did you arrive at the return figure?</label><textarea id="f-note" placeholder="e.g. Risk of tribunal at 40% probability x settlement cost = estimated exposure contained"></textarea><div class="why-hint">&rarr; This is your workings. The board will ask. Have the answer ready.</div></div>'
+      + '</div>'
+      + '<div class="form-actions"><button class="btn-primary" id="submitEntry">Add to Ledger</button><button class="btn-secondary" id="cancelAdd">Cancel</button></div>'
+    + '</div>'
+    + '</div>';
+
+  // INTELLIGENCE STATEMENT
+  html += '<div class="statement">'
+    + '<div class="slabel">Intelligence Statement</div>'
+    + '<div class="stext">' + intelligenceStatement(sym, ratio, totalReturn, totalComp, all.length) + '</div>'
+    + '</div>';
+
+  app.innerHTML = html;
+
+  // Wire intro toggle
+  document.getElementById('introToggle').addEventListener('click', function() {
+    var body     = document.getElementById('introBody');
+    var toggle   = document.getElementById('introToggle');
+    var chevron  = document.getElementById('introChevron');
+    var isOpen   = body.classList.contains('open');
+    if (isOpen) {
       body.classList.remove('open');
       toggle.classList.add('glowing');
       chevron.innerHTML = 'Show &darr;';
-      localStorage.setItem('rf_intro_seen','1');
+      try { localStorage.setItem('rf_intro_seen','1'); } catch(e) {}
     } else {
       body.classList.add('open');
       toggle.classList.remove('glowing');
       chevron.innerHTML = 'Hide &uarr;';
     }
-  };
-  function render(name){
-    var s=RF.scenario(name), sum=RF.summary(name);
-    if(!s||!sum) return;
-    var sym=s.symbol;
-    var totalComp=s.employees.reduce(function(a,e){return a+e.salary;},0);
-    document.getElementById('meta').innerHTML='<b>'+s.employeeCount+'</b> people &middot; <b>'+sum.geo+'</b> &middot; comp base <b>'+fmt(sym,totalComp)+'</b>';
+  });
 
-    var autoEntries=buildEntries(name);
-    var custom=customEntries[name]||[];
-    var allEntries=autoEntries.concat(custom);
+  // Wire add entry toggle
+  document.getElementById('toggleAdd').addEventListener('click', function() {
+    var f = document.getElementById('addForm');
+    f.classList.toggle('visible');
+    this.textContent = f.classList.contains('visible') ? '— Close' : '+ Add Entry';
+  });
 
-    var totalCost=allEntries.reduce(function(a,e){return a+e.cost;},0);
-    var totalReturn=allEntries.reduce(function(a,e){return a+e.return;},0);
-    var totalNet=totalReturn-totalCost;
-    var ratio=totalComp>0?totalReturn/totalComp:0;
-    var ratioClass=ratio>=2?'pos':ratio>=1?'flat':'neg';
+  document.getElementById('cancelAdd').addEventListener('click', function() {
+    document.getElementById('addForm').classList.remove('visible');
+    document.getElementById('toggleAdd').textContent = '+ Add Entry';
+  });
 
-    // update tool nav links
-    ['P1','P2','P3','P4','P5'].forEach(function(t,i){
-      var el=document.getElementById('nav'+t);
-      if(el){
-        var files=['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'];
-        el.href=files[i]+'?scenario='+encodeURIComponent(name);
-      }
-    });
+  document.getElementById('submitEntry').addEventListener('click', function() {
+    var cat    = document.getElementById('f-cat').value;
+    var date   = document.getElementById('f-date').value || '2026-Q1';
+    var action = document.getElementById('f-action').value.trim();
+    var cost   = parseInt(document.getElementById('f-cost').value) || 0;
+    var ret    = parseInt(document.getElementById('f-return').value) || 0;
+    var note   = document.getElementById('f-note').value.trim() || 'User-entered entry';
+    if (!action) { alert('Please describe what HR did.'); return; }
+    if (!ret)    { alert('Please enter an estimated return.'); return; }
+    var existing = customEntries[name] || [];
+    var newId = 'C' + (existing.length + 1).toString().padStart(3,'0');
+    existing.push({ id:newId, date:date, category:cat, action:action, cost:cost, ret:ret, note:note, auto:false });
+    customEntries[name] = existing;
+    render(name);
+  });
+}
 
-    app.innerHTML=''
-    // INTRO PANEL
-    +introPanel(sym)
-    // STORY
-    +'<div class="story">'
-      +'<div class="hook">'+(HOOKS[name]||'Every HR decision has a financial entry. Most organisations just never wrote it down.')+'</div>'
-      +'<div class="context">The Value Ledger records every HR contribution in the language the board already speaks. <b>'+allEntries.length+' entries</b> recorded for this organisation. <b>'+fmt(sym,totalReturn)+'</b> in documented HR value. Add your own entries below to build the full picture.</div>'
-    +'</div>'
-
-    // RATIO HERO
-    +'<div class="ratio-hero">'
-      +'<div class="left">'
-        +'<div class="label">Return on HR investment</div>'
-        +'<div class="ratio '+ratioClass+'">'+sym+ratio.toFixed(1)+'</div>'
-        +'<div class="sub">returned for every '+sym+'1 invested in HR</div>'
-        +(ratio<1?'<div class="incomplete-note">Ledger is partial — add entries to see the full return</div>':'')
-      +'</div>'
-      +'<div class="right">'
-        +'<div class="rlabel">Total HR return</div>'
-        +'<div class="rval">'+fmt(sym,totalReturn)+'</div>'
-        +'<div class="rlabel" style="margin-top:12px">Net ledger value</div>'
-        +'<div class="rval2 '+(totalNet>=0?'':'')+'">'+fmtNet(sym,totalNet)+'</div>'
-      +'</div>'
-    +'</div>'
-
-    // LEDGER
-    +'<div class="section-head">'
-      +'<h2><span class="step">1</span> The Ledger</h2>'
-      +'<div class="sh-sub">Q1 2026 · auto-populated from scenario data</div>'
-    +'</div>'
-    +'<div class="legend">'
-      +'<div class="legend-item"><div class="legend-dot" style="background:#5CC8A0"></div>Revenue-Generating</div>'
-      +'<div class="legend-item"><div class="legend-dot" style="background:#E8C87A"></div>Cost-Saving</div>'
-      +'<div class="legend-item"><div class="legend-dot" style="background:#9aA8FF"></div>Development</div>'
-      +'<div class="legend-item"><div class="legend-dot" style="background:#E8C87A;opacity:.6"></div>Culture & Engagement</div>'
-      +'<div class="legend-item"><div class="legend-dot" style="background:#E05C3A"></div>Risk & Compliance</div>'
-    +'</div>'
-    +'<div class="ledger">'
-      +'<div class="ledger-header"><span>Period</span><span>Action</span><span>HR Cost</span><span>Return</span><span>Net</span></div>'
-      +'<div class="ledger-body" id="ledger-rows">'
-        +allEntries.map(function(e){return entryRow(e,sym);}).join('')
-      +'</div>'
-      +'<div class="ledger-total">'
-        +'<div class="lt-label">TOTAL — '+allEntries.length+' entries</div>'
-        +'<div class="lt-cost">'+fmt(sym,totalCost)+'</div>'
-        +'<div class="lt-return">'+fmt(sym,totalReturn)+'</div>'
-        +'<div class="lt-net '+(totalNet>=0?'pos':'neg')+'">'+fmtNet(sym,totalNet)+'</div>'
-      +'</div>'
-    +'</div>'
-
-    // ADD ENTRY
-    +'<div class="add-section">'
-      +'<div class="section-head"><h2><span class="step">2</span> Add an Entry</h2><div class="sh-sub">Record a contribution not yet in the ledger</div></div>'
-      +'<button class="add-btn" id="toggleAdd">+ Add Entry</button>'
-      +'<div class="add-form" id="addForm">'
-        +'<div class="form-grid">'
-          +'<div class="form-group"><label>Category</label>'
-            +'<select id="f-cat"><option value="Revenue-Generating">Revenue-Generating</option><option value="Cost-Saving">Cost-Saving</option><option value="Development">Development</option><option value="Culture & Engagement">Culture &amp; Engagement</option><option value="Risk & Compliance">Risk &amp; Compliance</option></select>'
-          +'</div>'
-          +'<div class="form-group"><label>Period</label><input id="f-date" type="text" value="2026-Q1" placeholder="e.g. 2026-Q1"/></div>'
-          +'<div class="form-group full"><label>What did HR do?</label><input id="f-action" type="text" placeholder="e.g. Resolved senior leadership conflict before escalation"/><div class="why-hint">&rarr; Be specific. &ldquo;Resolved&rdquo; is better than &ldquo;managed&rdquo;. The ledger works when entries are precise.</div></div>'
-          +'<div class="form-group"><label>HR Cost ('+sym+')</label><input id="f-cost" type="number" placeholder="e.g. 50000"/></div>'
-          +'<div class="form-group"><label>Estimated Return ('+sym+')</label><input id="f-return" type="number" placeholder="e.g. 300000"/></div>'
-          +'<div class="form-group full"><label>How did you arrive at the return figure?</label><textarea id="f-note" placeholder="e.g. Risk of tribunal estimated at 40% probability x ₹7.5L average settlement = ₹3L RMV. Conservative estimate."></textarea><div class="why-hint">&rarr; This is your workings. The board will ask. Have an answer ready.</div></div>'
-        +'</div>'
-        +'<div class="form-actions"><button class="btn-add" id="submitEntry">Add to Ledger</button><button class="btn-cancel" id="cancelAdd">Cancel</button></div>'
-      +'</div>'
-    +'</div>'
-
-    // INTELLIGENCE STATEMENT
-    +'<div class="statement">'
-      +'<div class="slabel">Intelligence Statement</div>'
-      +'<div class="stext">'+statement(name,ratio,totalReturn,totalComp,sym,allEntries.length)+'</div>'
-    +'</div>';
-
-    // Wire add entry form
-    document.getElementById('toggleAdd').onclick=function(){
-      var f=document.getElementById('addForm');
-      f.classList.toggle('visible');
-      this.textContent=f.classList.contains('visible')?'— Close':'+ Add Entry';
-    };
-    document.getElementById('cancelAdd').onclick=function(){
-      document.getElementById('addForm').classList.remove('visible');
-      document.getElementById('toggleAdd').textContent='+ Add Entry';
-    };
-    document.getElementById('submitEntry').onclick=function(){
-      var cat=document.getElementById('f-cat').value;
-      var date=document.getElementById('f-date').value||'2026-Q1';
-      var action=document.getElementById('f-action').value.trim();
-      var cost=parseInt(document.getElementById('f-cost').value)||0;
-      var ret=parseInt(document.getElementById('f-return').value)||0;
-      var note=document.getElementById('f-note').value.trim();
-      if(!action){alert('Please describe what HR did.');return;}
-      if(!ret){alert('Please enter an estimated return.');return;}
-      var existing=customEntries[name]||[];
-      var newId='C'+(existing.length+1).toString().padStart(3,'0');
-      existing.push({id:newId,date:date,category:cat,action:action,cost:cost,return:ret,note:note||'User-entered entry',auto:false});
-      customEntries[name]=existing;
-      render(name);
-    };
-  }
-
-  sel.onchange=function(){
-    current=sel.value;
-    var u=new URL(location);u.searchParams.set('scenario',current);history.replaceState({},'',u);
-    render(current);
-  };
+sel.addEventListener('change', function() {
+  current = sel.value;
+  var u = new URL(location.href);
+  u.searchParams.set('scenario', current);
+  history.replaceState({}, '', u);
   render(current);
+});
+
+render(current);
+
 })();
 </script>
 </body></html>
