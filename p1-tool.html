@@ -123,6 +123,49 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 
 .err{background:var(--bg2);border:1px solid var(--sig-red);border-radius:10px;padding:18px;color:var(--sig-red);font-family:var(--mono);font-size:.82rem}
 @media(max-width:700px){.ledger-header,.ledger-entry,.ledger-total{grid-template-columns:1fr 1fr;}.entry-date,.entry-id,.entry-note{display:none}.ledger-header span:nth-child(3),.ledger-header span:nth-child(4){display:none}.entry-cost,.lt-cost{display:none}.form-grid{grid-template-columns:1fr}}
+
+/* INTRO PANEL */
+.intro-panel{margin-bottom:36px}
+.intro-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg2);border:1px solid var(--copper);border-radius:12px;cursor:pointer;transition:all .3s ease;position:relative;overflow:hidden}
+.intro-toggle::before{content:'';position:absolute;inset:0;background:var(--copper-dim);opacity:0;transition:opacity .3s}
+.intro-toggle:hover::before{opacity:1}
+.intro-toggle.glowing{box-shadow:0 0 0 1px var(--copper), 0 0 18px rgba(184,115,51,.35), 0 0 36px rgba(184,115,51,.15);animation:pulse-glow 2.5s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 1px var(--copper),0 0 18px rgba(184,115,51,.35),0 0 36px rgba(184,115,51,.15);}50%{box-shadow:0 0 0 1px var(--copper-lt),0 0 28px rgba(232,200,122,.5),0 0 52px rgba(184,115,51,.25);}}
+.intro-toggle-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.intro-toggle-icon{width:28px;height:28px;border-radius:50%;background:var(--copper);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;font-weight:700;color:var(--bg);font-family:var(--mono)}
+.intro-toggle-label{font-size:.94rem;font-weight:500;color:var(--text)}
+.intro-toggle-sub{font-family:var(--mono);font-size:.68rem;color:var(--copper-lt);letter-spacing:.06em;margin-top:2px}
+.intro-toggle-right{font-family:var(--mono);font-size:.72rem;color:var(--text-mute);position:relative;z-index:1;transition:color .2s}
+.intro-toggle:hover .intro-toggle-right{color:var(--copper-lt)}
+.intro-body{background:var(--bg2);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:28px 28px 24px;display:none}
+.intro-body.open{display:block}
+.intro-section{margin-bottom:28px}
+.intro-section:last-child{margin-bottom:0}
+.intro-section-label{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);margin-bottom:10px}
+.intro-section-text{font-size:.94rem;color:var(--text-dim);line-height:1.7;font-weight:300}
+.intro-section-text b{color:var(--text);font-weight:500}
+.intro-story{background:var(--bg3);border-left:3px solid var(--copper);padding:16px 20px;border-radius:0 10px 10px 0;margin-top:12px}
+.intro-story p{font-family:Georgia,serif;font-style:italic;font-size:.94rem;line-height:1.6;color:var(--text-dim)}
+.intro-story p b{color:var(--copper-lt);font-style:normal}
+/* EXAMPLE ENTRY */
+.example-entry{background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:12px}
+.example-header{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:8px 16px;background:var(--bg4)}
+.example-header span{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+.example-header span:nth-child(3),.example-header span:nth-child(4),.example-header span:nth-child(5){text-align:right}
+.example-row{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:14px 16px;align-items:start}
+.ex-date{font-family:var(--mono);font-size:.74rem;color:var(--text-mute)}
+.ex-main{}
+.ex-action{font-size:.88rem;color:var(--text);margin-bottom:3px}
+.ex-note{font-size:.74rem;color:var(--text-mute);font-style:italic;line-height:1.4;margin-bottom:6px}
+.ex-cat{display:inline-block;font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:rgba(184,115,51,.12);color:var(--copper-lt);border:1px solid rgba(184,115,51,.3)}
+.ex-cost{font-family:var(--mono);font-size:.86rem;color:var(--text-dim);text-align:right;white-space:nowrap;padding-left:8px}
+.ex-return{font-family:var(--mono);font-size:.86rem;color:var(--sig-teal);font-weight:500;text-align:right;white-space:nowrap;padding-left:8px}
+.ex-net{font-family:var(--mono);font-size:.86rem;font-weight:700;color:var(--sig-teal);text-align:right;white-space:nowrap;padding-left:8px}
+.example-annotations{display:grid;grid-template-columns:90px minmax(0,1fr) 110px 110px 100px;padding:10px 16px;background:var(--copper-dim);border-top:1px solid var(--border)}
+.ann{font-family:var(--mono);font-size:.6rem;color:var(--copper-lt);line-height:1.4}
+.ann:nth-child(3),.ann:nth-child(4),.ann:nth-child(5){text-align:right}
+.intro-transition{font-family:Georgia,serif;font-style:italic;font-size:.9rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:16px;margin-top:4px;line-height:1.5}
+.intro-transition b{color:var(--copper-lt);font-style:normal}
 </style></head>
 <body><div class="wrap">
 <div class="crumb">
@@ -253,6 +296,81 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
     return 'For every '+sym+'1 this organisation invests in HR, it receives <b>'+sym+ratio.toFixed(1)+'</b> back. That is not an HR metric. That is a <b>return on investment</b>. The Value Ledger is the document that proves it — line by line, entry by entry, in the language the board already speaks.';
   }
 
+
+  function introPanel(sym){
+    var stored = localStorage.getItem('rf_intro_seen');
+    var isOpen = !stored;
+    return '<div class="intro-panel">'
+      +'<div class="intro-toggle '+(isOpen?'':'glowing')+'" id="introToggle" onclick="toggleIntro()">'
+        +'<div class="intro-toggle-left">'
+          +'<div class="intro-toggle-icon">?</div>'
+          +'<div><div class="intro-toggle-label">What is The Value Ledger?</div>'
+          +'<div class="intro-toggle-sub">Read this first &mdash; it takes 2 minutes</div></div>'
+        +'</div>'
+        +'<div class="intro-toggle-right" id="introChevron">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
+      +'</div>'
+      +'<div class="intro-body '+(isOpen?'open':'')+'" id="introBody">'
+
+        // SECTION 1: What it is
+        +'<div class="intro-section">'
+          +'<div class="intro-section-label">What is the Value Ledger?</div>'
+          +'<div class="intro-section-text">The Value Ledger is a <b>financial record of everything HR does</b> — written in the language your CEO and CFO already speak. Not engagement scores. Not headcount charts. Actual numbers, in actual currency, that show what HR contributed to the business.<br><br>Every hire, every retention save, every training programme, every risk resolved — each one gets a line. Each line has a cost and a return. Together they answer the question every HR professional deserves to answer with confidence: <b>what did we actually contribute, and what did it return?</b></div>'
+        +'</div>'
+
+        // SECTION 2: Why it matters — the story
+        +'<div class="intro-section">'
+          +'<div class="intro-section-label">Why does this exist?</div>'
+          +'<div class="intro-section-text">Most HR professionals do work that has enormous financial value — but they have no way to prove it. The board sees costs. HR knows there's a return. The gap between those two realities is what the Value Ledger closes.</div>'
+          +'<div class="intro-story"><p>An HR manager at a growing tech company spent two months coaching a high-potential engineer who was close to resigning. The engineer stayed. A year later, she led the product that drove 40% of that year's revenue. The HR manager never got credit — because there was no record.<br><br>The Value Ledger would have captured that retention save the day it happened. <b>Cost: the time invested. Return: the replacement cost avoided, plus the revenue impact of keeping the right person in the right role.</b> By the time the revenue landed, the contribution was already documented, already quantified, already in the language the board respects.</p></div>'
+        +'</div>'
+
+        // SECTION 3: How an entry works
+        +'<div class="intro-section">'
+          +'<div class="intro-section-label">How does a ledger entry work?</div>'
+          +'<div class="intro-section-text">Every HR action becomes an entry. Each entry has five elements: when it happened, what HR did, what it cost, what it returned, and the net value. Here is what one looks like:</div>'
+          +'<div class="example-entry">'
+            +'<div class="example-header"><span>Period</span><span>Action</span><span>HR Cost</span><span>Return</span><span>Net</span></div>'
+            +'<div class="example-row">'
+              +'<div class="ex-date">2026-Q1</div>'
+              +'<div class="ex-main"><div class="ex-action">Retention of 3 senior engineers at flight risk</div><div class="ex-note">Structured retention conversations + compensation review. Replacement cost avoided at 1.8x annual salary each.</div><span class="ex-cat">Cost-Saving</span></div>'
+              +'<div class="ex-cost">'+sym+'45K</div>'
+              +'<div class="ex-return">'+sym+'810K</div>'
+              +'<div class="ex-net">+'+sym+'765K</div>'
+            +'</div>'
+            +'<div class="example-annotations">'
+              +'<div class="ann">When</div>'
+              +'<div class="ann">What HR did &amp; how the return was calculated</div>'
+              +'<div class="ann">What HR spent</div>'
+              +'<div class="ann">Value returned</div>'
+              +'<div class="ann">Net impact</div>'
+            +'</div>'
+          +'</div>'
+          +'<div class="intro-section-text" style="margin-top:12px">The return figure is always <b>calculated with transparent workings</b> — not guessed, not inflated. Every entry has a methodology behind it that you can explain and defend in any room.</div>'
+        +'</div>'
+
+        // SECTION 4: Transition
+        +'<div class="intro-transition">Below is your organisation's Value Ledger, <b>pre-populated with what the data already tells us</b>. Each entry is computed from your scenario's real people and real salaries. Add your own entries to build the complete picture &mdash; every contribution deserves a line.</div>'
+
+      +'</div>'
+    +'</div>';
+  }
+
+  window.toggleIntro = function(){
+    var body = document.getElementById('introBody');
+    var toggle = document.getElementById('introToggle');
+    var chevron = document.getElementById('introChevron');
+    var isOpen = body.classList.contains('open');
+    if(isOpen){
+      body.classList.remove('open');
+      toggle.classList.add('glowing');
+      chevron.innerHTML = 'Show &darr;';
+      localStorage.setItem('rf_intro_seen','1');
+    } else {
+      body.classList.add('open');
+      toggle.classList.remove('glowing');
+      chevron.innerHTML = 'Hide &uarr;';
+    }
+  };
   function render(name){
     var s=RF.scenario(name), sum=RF.summary(name);
     if(!s||!sum) return;
@@ -280,6 +398,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
     });
 
     app.innerHTML=''
+    // INTRO PANEL
+    +introPanel(sym)
     // STORY
     +'<div class="story">'
       +'<div class="hook">'+(HOOKS[name]||'Every HR decision has a financial entry. Most organisations just never wrote it down.')+'</div>'
