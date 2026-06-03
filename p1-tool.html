@@ -60,10 +60,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 
 /* LEDGER */
 .ledger{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:32px}
-.ledger-header{display:grid;grid-template-columns:90px 1fr 130px 130px 110px;gap:0;padding:12px 20px;background:var(--bg3);border-bottom:1px solid var(--border)}
-.ledger-header span{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+.ledger-header{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;gap:0;padding:12px 20px;background:var(--bg3);border-bottom:1px solid var(--border)}
+.ledger-header span{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);white-space:nowrap}
+.ledger-header span:nth-child(3),.ledger-header span:nth-child(4),.ledger-header span:nth-child(5){text-align:right;padding-left:8px}
 .ledger-body{}
-.ledger-entry{display:grid;grid-template-columns:90px 1fr 130px 130px 110px;gap:0;padding:14px 20px;border-bottom:1px solid var(--border);transition:background .15s;align-items:start}
+.ledger-entry{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;gap:0;padding:14px 20px;border-bottom:1px solid var(--border);transition:background .15s;align-items:start}
 .ledger-entry:last-child{border-bottom:none}
 .ledger-entry:hover{background:var(--bg3)}
 .entry-date{font-family:var(--mono);font-size:.74rem;color:var(--text-mute);padding-top:2px}
@@ -77,17 +78,17 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .cat-dev{background:rgba(100,120,220,.12);color:#9aA8FF;border:1px solid rgba(100,120,220,.3)}
 .cat-culture{background:rgba(232,200,122,.12);color:var(--sig-amber);border:1px solid rgba(232,200,122,.3)}
 .cat-risk{background:rgba(224,92,58,.12);color:var(--sig-red);border:1px solid rgba(224,92,58,.3)}
-.entry-cost{font-family:var(--mono);font-size:.88rem;color:var(--text-dim);text-align:right;padding-top:2px}
-.entry-return{font-family:var(--mono);font-size:.88rem;color:var(--sig-teal);font-weight:500;text-align:right;padding-top:2px}
-.entry-net{font-family:var(--mono);font-size:.84rem;font-weight:600;text-align:right;padding-top:2px}
+.entry-cost{font-family:var(--mono);font-size:.88rem;color:var(--text-dim);text-align:right;padding-top:2px;white-space:nowrap;padding-left:8px}
+.entry-return{font-family:var(--mono);font-size:.88rem;color:var(--sig-teal);font-weight:500;text-align:right;padding-top:2px;white-space:nowrap;padding-left:8px}
+.entry-net{font-family:var(--mono);font-size:.84rem;font-weight:600;text-align:right;padding-top:2px;white-space:nowrap;padding-left:8px}
 .entry-net.pos{color:var(--sig-teal)}.entry-net.neg{color:var(--sig-red)}
 
 /* LEDGER TOTALS */
-.ledger-total{display:grid;grid-template-columns:90px 1fr 130px 130px 110px;gap:0;padding:14px 20px;background:var(--bg3);border-top:2px solid var(--border-hi)}
+.ledger-total{display:grid;grid-template-columns:90px minmax(0,1fr) 120px 120px 110px;gap:0;padding:14px 20px;background:var(--bg3);border-top:2px solid var(--border-hi)}
 .ledger-total .lt-label{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--text);grid-column:1/3}
-.ledger-total .lt-cost{font-family:var(--mono);font-size:.88rem;color:var(--text-dim);text-align:right;font-weight:500}
-.ledger-total .lt-return{font-family:var(--mono);font-size:.88rem;color:var(--sig-teal);text-align:right;font-weight:600}
-.ledger-total .lt-net{font-family:var(--mono);font-size:.88rem;text-align:right;font-weight:700}
+.ledger-total .lt-cost{font-family:var(--mono);font-size:.88rem;color:var(--text-dim);text-align:right;font-weight:500;white-space:nowrap;padding-left:8px}
+.ledger-total .lt-return{font-family:var(--mono);font-size:.88rem;color:var(--sig-teal);text-align:right;font-weight:600;white-space:nowrap;padding-left:8px}
+.ledger-total .lt-net{font-family:var(--mono);font-size:.88rem;text-align:right;font-weight:700;white-space:nowrap;padding-left:8px}
 .lt-net.pos{color:var(--sig-teal)}.lt-net.neg{color:var(--sig-red)}
 
 /* ADD ENTRY */
