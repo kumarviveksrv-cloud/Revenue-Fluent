@@ -189,8 +189,96 @@ body{
   .dna-grid{grid-template-columns:1fr}
   .sim-metrics{grid-template-columns:1fr 1fr}
 }
+
+.top-nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 36px;height:52px;
+  background:rgba(4,6,14,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(30,80,200,.18);
+}
+.tn-brand{display:flex;align-items:center;gap:8px;text-decoration:none}
+.tn-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
+.tn-name{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#DCE8F8;font-weight:500}
+.tn-tools{display:flex;align-items:center;gap:2px}
+.tn-tool{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:#9AB8D8;padding:5px 10px;border-radius:5px;text-decoration:none;transition:all .15s;border:1px solid transparent;white-space:nowrap}
+.tn-tool:hover{color:#B8C8E8;border-color:rgba(30,80,200,.18);background:rgba(30,80,200,.08)}
+.tn-tool.active{color:#3A7ADB;background:rgba(30,80,200,.12);border-color:rgba(30,80,200,.25)}
+.tn-right{display:flex;align-items:center;gap:8px}
+.tn-lib{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#9AB8D8;padding:5px 12px;border-radius:5px;text-decoration:none;border:1px solid rgba(30,80,200,.18);transition:all .15s}
+.tn-lib:hover{color:#B8C8E8;border-color:rgba(58,122,219,.35)}
+body{padding-top:52px}
+@media(max-width:760px){.tn-tools{display:none}}
+
+
+/* PERSISTENT SIDEBAR */
+:root{--sidebar:220px}
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);
+  background:rgba(4,6,14,.95);backdrop-filter:blur(16px);
+  border-right:1px solid var(--cobalt-border);
+  z-index:200;display:flex;flex-direction:column;
+  padding:0 0 20px;overflow-y:auto;
+}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--cobalt-border);border-radius:2px}
+.sb-brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid var(--cobalt-border);text-decoration:none;flex-shrink:0}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
+.sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#DCE8F8;font-weight:500}
+.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mute)}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:#9AB8D8;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(30,80,200,.08);color:#B8C8E8;border-color:rgba(30,80,200,.18)}
+.sb-item.active{background:rgba(58,122,219,.12);color:#5A9AEB;border-color:rgba(58,122,219,.25)}
+.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(58,122,219,.15);color:#5A9AEB;padding:2px 5px;border-radius:3px}
+.sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mute)}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:#9AB8D8;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(30,80,200,.08);color:#B8C8E8;border-color:rgba(30,80,200,.18)}
+.sb-tool.active{background:rgba(58,122,219,.12);color:#5A9AEB;border-color:rgba(58,122,219,.25)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(58,122,219,.1);color:rgba(90,154,235,.5);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-tool.active .sb-tool-num{background:rgba(58,122,219,.2);color:#5A9AEB}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--cobalt-border)}
+.sb-by{padding:8px 18px;font-family:var(--mono);font-size:.56rem;color:var(--text-mute);letter-spacing:.08em}
+.sb-by b{color:rgba(184,115,51,.5)}
+.wrap{margin-left:var(--sidebar)}
+body{padding-top:0}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
+
 </style></head>
-<body><div class="wrap">
+<body>
+<aside class="sidebar" id="mainSidebar">
+  <a href="index.html" class="sb-brand"><div class="sb-dot"></div><div class="sb-name">Revenue Fluent</div></a>
+  <div class="sb-section">Platform</div>
+  <a href="index.html" class="sb-item">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+  <a href="scenario-library.html" class="sb-item" id="sbLib">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+  <div class="sb-tools-section">The Five Pillars</div>
+  <a href="p1-tool.html" class="sb-tool" id="sb_p1_tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+<a href="p2-tool.html" class="sb-tool" id="sb_p2_tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+<a href="p3-tool.html" class="sb-tool active" id="sb_p3_tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+<a href="p4-tool.html" class="sb-tool" id="sb_p4_tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+<a href="p5-tool.html" class="sb-tool" id="sb_p5_tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+
+  <div class="sb-section">More</div>
+  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Learning Hub<span class="sb-badge">Soon</span></a>
+  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
+  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+  <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+</aside>
+<script>
+(function(){
+  var params=new URLSearchParams(location.search);
+  var scen=params.get('scenario')||'';
+  if(!scen)return;
+  document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){
+    var h=a.getAttribute('href');
+    if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0){
+      a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(scen);
+    }
+  });
+})();
+</script>
+<div class="wrap">
 
 <div class="crumb">
   <a href="scenario-library.html">&larr; Library</a>
