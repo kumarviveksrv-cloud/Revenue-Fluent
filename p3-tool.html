@@ -1,359 +1,736 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Team Architecture — Revenue Fluent</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style id="rf-css"></style>
-<script src="shared.js?v=4"></script>
-<script src="rf-export.js?v=4"></script>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Org Vitals — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
-.tool-layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 81px); }
-.tool-inputs { background: var(--bg2); border-right: 1px solid var(--border); padding: 1.5rem; overflow-y: auto; }
-.tool-outputs { background: var(--bg); padding: 1.5rem; overflow-y: auto; }
-.scenario-selector { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 1.25rem; }
-.sc-btn { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px; cursor: pointer; text-align: center; transition: all 0.15s; }
-.sc-btn:hover { border-color: var(--border-hi); }
-.sc-btn.active { background: var(--amber-dim); border-color: rgba(245,158,11,0.3); }
-.sc-btn-name { font-size: 0.72rem; font-weight: 600; color: var(--text); }
-.sc-btn-sub { font-family: var(--font-mono); font-size: 0.52rem; color: var(--text-mute); }
-.config-display { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; text-align: center; position: relative; overflow: hidden; }
-.config-badge { display: inline-block; font-family: var(--font-head); font-weight: 800; font-size: 3rem; line-height: 1; margin-bottom: 8px; letter-spacing: -0.04em; }
-.config-name { font-family: var(--font-head); font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 4px; }
-.config-delta { font-family: var(--font-mono); font-size: 0.85rem; }
-.output-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
-.big-metric { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; position: relative; overflow: hidden; }
-.big-metric::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-.big-metric.teal::before { background: var(--teal); } .big-metric.amber::before { background: var(--amber); } .big-metric.red::before { background: var(--red); }
-.bm-label { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
-.bm-val { font-family: var(--font-head); font-weight: 800; font-size: 1.7rem; line-height: 1; margin-bottom: 4px; }
-.bm-val.teal { color: var(--teal); } .bm-val.amber { color: var(--amber); } .bm-val.red { color: var(--red); }
-.bm-sub { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); }
-.bm-bar { height: 3px; background: var(--bg4); border-radius: 2px; margin-top: 8px; overflow: hidden; }
-.bm-fill { height: 100%; border-radius: 2px; transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1); }
-.org-viz { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; }
-.org-level { display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; position: relative; }
-.org-node { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 14px; text-align: center; min-width: 64px; transition: all 0.3s; }
-.org-node.cost { border-color: rgba(239,68,68,0.25); background: var(--red-dim); }
-.org-node.rev { border-color: rgba(45,212,191,0.25); background: var(--teal-dim); }
-.org-node-label { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-mute); text-transform: uppercase; }
-.org-node-count { font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; color: var(--text); }
-.narrative-box { background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(99,102,241,0.05)); border: 1px solid rgba(245,158,11,0.2); border-radius: var(--radius); padding: 1.25rem; }
-.nb-quote { font-family: var(--font-head); font-weight: 300; font-style: italic; font-size: 0.9rem; color: var(--text-dim); line-height: 1.8; }
-.nb-stat { font-family: var(--font-head); font-weight: 800; color: var(--amber); font-style: normal; }
+:root{
+  --bg:#04060E;--bg2:#0A0C14;--bg3:#060810;--bg4:#080A18;
+  --cobalt:#3A7ADB;--cobalt-dim:rgba(30,80,200,.15);--cobalt-glow:rgba(30,80,200,.08);
+  --cobalt-border:rgba(30,80,200,.18);
+  --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
+  --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
+  --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
+  --text-mute:rgba(30,80,200,.25);--border:rgba(30,80,200,.15);--border-hi:rgba(30,80,200,.3);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--serif:'Playfair Display',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--font);
+  font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 70% 40% at 50% 0%,rgba(20,60,160,.18) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 30% at 10% 80%,rgba(160,80,20,.06) 0%,transparent 50%),
+    linear-gradient(rgba(20,60,180,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,60,180,.025) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,52px 52px,52px 52px;
+  min-height:100vh;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:36px 40px 80px}
 
-/* LITERATURE PANEL */
-.lit-bar { display: flex; align-items: center; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 1.25rem; cursor: pointer; transition: all 0.2s; }
-.lit-bar:hover { border-color: var(--border-accent); }
-.lit-bar.open { border-color: var(--border-accent); background: var(--accent-dim); }
-.lit-toggle { display: flex; align-items: center; gap: 8px; padding: 6px 12px; flex: 1; }
-.lit-toggle-icon { width: 20px; height: 20px; border-radius: 5px; background: var(--accent-dim); border: 1px solid var(--border-accent); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--accent2); flex-shrink: 0; }
-.lit-toggle-text { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.04em; }
-.lit-toggle-text b { color: var(--text); font-weight: 600; }
-.lit-tabs { display: flex; gap: 2px; }
-.lit-tab-mini { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-mute); padding: 4px 8px; border-radius: 4px; }
-.lit-chevron { margin-left: auto; padding: 0 12px; color: var(--text-mute); transition: transform 0.25s; font-size: 0.7rem; }
-.lit-bar.open .lit-chevron { transform: rotate(180deg); }
-.lit-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); margin-bottom: 0; }
-.lit-panel.open { max-height: 2000px; margin-bottom: 1.25rem; }
-.lit-content { background: var(--bg2); border: 1px solid var(--border-accent); border-radius: var(--radius); overflow: hidden; }
-.lit-tabnav { display: flex; border-bottom: 1px solid var(--border); background: var(--sidebar); }
-.lit-tabnav-btn { flex: 1; padding: 12px; font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-mute); background: transparent; border: none; cursor: pointer; transition: all 0.15s; border-bottom: 2px solid transparent; }
-.lit-tabnav-btn:hover { color: var(--text-dim); }
-.lit-tabnav-btn.active { color: var(--accent2); border-bottom-color: var(--accent); background: var(--accent-dim); }
-.lit-tabpane { display: none; padding: 1.5rem; animation: fadeIn 0.3s; }
-.lit-tabpane.active { display: block; }
-.lit-h { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
-.lit-p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 1rem; }
-.lit-p:last-child { margin-bottom: 0; }
-.lit-p b { color: var(--text); font-weight: 600; }
-.lit-callout { background: var(--bg3); border-left: 2px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 1rem 0; font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
-.lit-instrument { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; }
-.lit-instrument:last-child { margin-bottom: 0; }
-.lit-inst-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-.lit-inst-name { font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; color: var(--text); }
-.lit-inst-abbr { font-family: var(--font-mono); font-size: 0.6rem; padding: 2px 8px; border-radius: 4px; background: var(--accent-dim); color: var(--accent2); border: 1px solid var(--border-accent); }
-.lit-inst-formula { font-family: var(--font-mono); font-size: 0.68rem; color: var(--teal); background: var(--bg); border-radius: 4px; padding: 8px 10px; margin: 8px 0; line-height: 1.6; }
-.lit-inst-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
-.lit-inst-bench { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-mute); margin-top: 6px; }
-</style>
-</head>
-<body>
-<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
-<div id="sidebar-mount"></div>
-<div id="topbar-mount"></div>
-<div class="app-body" style="padding-top:81px">
-<div class="tool-layout">
+/* NAV */
+.crumb{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:32px;flex-wrap:wrap}
+.crumb a{color:var(--text-dim);text-decoration:none;transition:color .15s}
+.crumb a:hover{color:var(--cobalt)}
+.crumb .sep{color:var(--text-mute)}
+.tool-nav{display:flex;gap:3px;flex-wrap:wrap}
+.tool-nav a{padding:3px 9px;border-radius:5px;border:1px solid var(--border);color:var(--text-dim);font-size:.66rem;text-decoration:none;transition:all .15s}
+.tool-nav a:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
+.tool-nav a.active{background:var(--cobalt-dim);border-color:var(--cobalt);color:var(--cobalt)}
 
-  <div class="tool-inputs">
-    <div class="mono-label" style="margin-bottom:0.75rem">Scenario</div>
-    <div class="scenario-selector">
-      <div class="sc-btn active" onclick="loadScenario(0,this)"><div class="sc-btn-name">Apex Mfg</div><div class="sc-btn-sub">Config C</div></div>
-      <div class="sc-btn" onclick="loadScenario(1,this)"><div class="sc-btn-name">TechVel</div><div class="sc-btn-sub">Config A</div></div>
-      <div class="sc-btn" onclick="loadScenario(2,this)"><div class="sc-btn-name">Sterling</div><div class="sc-btn-sub">Config B</div></div>
-    </div>
-    <div class="divider" style="margin:1rem 0"></div>
-    <div class="mono-label" style="margin-bottom:1rem">Adjust Structure</div>
+.eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#5A9AEB;margin-bottom:16px}
+.switch{display:flex;align-items:center;gap:12px;margin-bottom:36px;flex-wrap:wrap}
+.switch label{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
+.switch select{background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-family:var(--font);font-size:.9rem;cursor:pointer;min-width:260px;transition:border-color .15s}
+.switch select:hover,.switch select:focus{outline:none;border-color:var(--cobalt)}
+.scen-meta{font-family:var(--mono);font-size:.72rem;color:var(--text-dim)}
+.scen-meta b{color:#7AABDB}
 
-    <div class="slider-row">
-      <div class="slider-header"><span>Total headcount</span><span class="slider-val" id="sv-hc">50</span></div>
-      <input type="range" min="10" max="200" value="50" id="sl-hc" oninput="update()">
-    </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Management layers</span><span class="slider-val" id="sv-layers">2</span></div>
-      <input type="range" min="1" max="8" value="2" id="sl-layers" class="amber" oninput="update()">
-    </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Avg team size (span of control)</span><span class="slider-val" id="sv-span">8</span></div>
-      <input type="range" min="2" max="20" value="8" id="sl-span" oninput="update()">
-    </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Structural changes (6 months)</span><span class="slider-val" id="sv-changes">1</span></div>
-      <input type="range" min="0" max="10" value="1" id="sl-changes" class="red" oninput="update()">
-    </div>
-    <div class="slider-row">
-      <div class="slider-header"><span>Quarterly revenue (₹Cr)</span><span class="slider-val" id="sv-qrev">21</span></div>
-      <input type="range" min="1" max="100" value="21" id="sl-qrev" oninput="update()">
-    </div>
+/* PULSE ANIMATION */
+@keyframes hero-pulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(58,122,219,.2),0 0 16px rgba(30,80,200,.1),0 0 40px rgba(30,80,200,.05)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.45),0 0 32px rgba(58,122,219,.2),0 0 64px rgba(30,80,200,.1)}
+}
+@keyframes cobalt-pulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(58,122,219,.3),0 0 8px rgba(30,80,200,.15),0 0 20px rgba(30,80,200,.06)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.7),0 0 20px rgba(58,122,219,.4),0 0 40px rgba(30,80,200,.18)}
+}
 
-    <div class="divider" style="margin:1rem 0"></div>
-    <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="exportPDF()">↓ Download Report (PDF)</button>
-    <a href="p4-tool.html" class="btn btn-ghost" style="width:100%;justify-content:center;text-decoration:none">Next: HUMANCE →</a>
+/* INTRO */
+.intro-panel{margin-bottom:32px}
+.intro-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;cursor:pointer;animation:cobalt-pulse 3s ease-in-out infinite}
+.intro-tl{display:flex;align-items:center;gap:12px}
+.intro-icon{width:26px;height:26px;border-radius:50%;background:var(--cobalt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.66rem;font-weight:700;color:#fff;font-family:var(--mono)}
+.intro-title{font-size:.9rem;font-weight:500;color:var(--text-cool)}
+.intro-sub{font-family:var(--mono);font-size:.64rem;color:#5A9AEB;margin-top:2px}
+.intro-chevron{font-family:var(--mono);font-size:.66rem;color:var(--text-dim)}
+.intro-body{background:var(--bg2);border:1px solid var(--cobalt-border);border-top:none;border-radius:0 0 12px 12px;padding:28px;display:none}
+.intro-body.open{display:block}
+.intro-sec{margin-bottom:22px}
+.intro-sec:last-child{margin-bottom:0}
+.intro-sec-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#5A9AEB;margin-bottom:8px}
+.intro-sec-txt{font-size:.9rem;color:var(--text-mid);line-height:1.7}
+.intro-sec-txt b{color:var(--text-cool);font-weight:500}
+.intro-story{background:var(--bg3);border-left:2px solid var(--cobalt);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:10px;font-family:var(--serif);font-style:italic;font-size:.9rem;line-height:1.6;color:var(--text-mid)}
+.intro-transition{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:14px;margin-top:16px;line-height:1.5}
+.intro-transition b{color:var(--gold);font-style:normal}
+
+/* HERO */
+.hero{padding:40px 48px;margin-bottom:32px;background:linear-gradient(135deg,rgba(8,16,48,.8),rgba(4,6,14,.95));border:1px solid var(--cobalt-border);border-radius:20px;position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(30,80,200,.5),rgba(224,184,48,.3),rgba(30,80,200,.5),transparent)}
+.hero-inner{position:relative;z-index:1}
+.hero-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#5A9AEB;margin-bottom:12px}
+.hero-hook{font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1.5;color:#EEF4FF;margin-bottom:12px}
+.hero-context{font-size:.88rem;color:#C8D8F0;line-height:1.7}
+.hero-context b{color:var(--text-cool);font-weight:500}
+
+/* VITAL SIGNS GRID */
+.vitals-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:32px}
+.vital-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;padding:18px;cursor:pointer;transition:all .2s;animation:hero-pulse 3s ease-in-out infinite;position:relative;overflow:hidden}
+.vital-card:hover{border-color:rgba(90,154,235,.4);transform:translateY(-2px)}
+.vital-card.active{border-color:var(--cobalt)}
+.vital-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 14px 14px}
+.vital-card.healthy::after{background:var(--teal)}
+.vital-card.warning::after{background:var(--amber)}
+.vital-card.critical::after{background:var(--red)}
+.vital-card.unanswered::after{background:rgba(30,80,200,.2)}
+.vc-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#5A9AEB;margin-bottom:8px}
+.vc-name{font-size:.9rem;font-weight:500;color:var(--text-cool);margin-bottom:4px}
+.vc-sub{font-size:.72rem;color:var(--text-dim);line-height:1.4;margin-bottom:12px}
+.vc-status{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.08em}
+.vc-status.healthy{color:var(--teal)}
+.vc-status.warning{color:var(--amber)}
+.vc-status.critical{color:var(--red)}
+.vc-status.unanswered{color:var(--text-mute)}
+.vc-score{font-family:var(--mono);font-size:.64rem;color:var(--text-dim);margin-top:3px}
+
+/* SIGNAL PANEL */
+.signal-panel{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;padding:28px;margin-bottom:28px;animation:hero-pulse 3s ease-in-out infinite}
+.sp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+.sp-title{font-size:1.0rem;font-weight:500;color:var(--text-cool);display:flex;align-items:center;gap:10px}
+.sp-pulse{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:#5A9AEB}
+.sp-sub{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5}
+.signal-list{display:flex;flex-direction:column;gap:12px}
+.signal-item{display:flex;align-items:flex-start;gap:14px;padding:14px;background:var(--bg3);border-radius:10px;border:1px solid var(--border);transition:border-color .15s}
+.signal-item:hover{border-color:var(--cobalt-border)}
+.signal-q{flex:1;font-size:.88rem;color:var(--text-mid);line-height:1.5}
+.signal-btns{display:flex;gap:6px;flex-shrink:0}
+.sig-btn{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;padding:6px 14px;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-dim);transition:all .15s}
+.sig-btn:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
+.sig-btn.yes.active{background:rgba(56,196,144,.12);border-color:var(--teal);color:var(--teal)}
+.sig-btn.no.active{background:rgba(224,92,58,.12);border-color:var(--red);color:var(--red)}
+.signal-num{font-family:var(--mono);font-size:.62rem;color:var(--text-mute);flex-shrink:0;padding-top:2px;min-width:20px}
+
+/* DIAGNOSIS */
+.diagnosis-section{margin-bottom:28px}
+.diag-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;padding:20px;margin-bottom:12px;animation:hero-pulse 3s ease-in-out infinite}
+.diag-signal{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.diag-signal.warning{color:var(--amber)}
+.diag-row{margin-bottom:8px}
+.diag-row:last-child{margin-bottom:0}
+.diag-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#5A9AEB;margin-bottom:3px}
+.diag-text{font-size:.88rem;color:var(--text-mid);line-height:1.55}
+
+/* DNA TYPE CARD */
+.dna-card{padding:36px 40px;margin-bottom:28px;background:linear-gradient(135deg,rgba(8,16,48,.8),rgba(4,6,14,.95));border:1px solid var(--cobalt-border);border-radius:20px;position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
+.dna-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(30,80,200,.5),rgba(224,184,48,.3),rgba(30,80,200,.5),transparent)}
+.dna-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#5A9AEB;margin-bottom:8px}
+.dna-type{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;line-height:.9;letter-spacing:.02em;background:linear-gradient(135deg,#F0C840 0%,#D4900A 30%,#F5D060 60%,#C48000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.dna-desc{font-family:var(--serif);font-style:italic;font-size:1.08rem;color:#C8D8F0;line-height:1.6;margin-bottom:20px}
+.dna-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dna-cell{background:rgba(8,16,48,.5);border:1px solid var(--border);border-radius:10px;padding:14px}
+.dna-cell-lbl{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#5A9AEB;margin-bottom:6px}
+.dna-cell-txt{font-size:.84rem;color:var(--text-mid);line-height:1.5}
+.dna-fin-signal{font-family:var(--mono);font-size:.72rem;color:var(--amber);margin-top:16px;padding-top:14px;border-top:1px solid var(--border);line-height:1.5}
+
+/* SIMULATION — LAYER 5 */
+.sim-section{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;padding:28px;margin-bottom:28px;animation:hero-pulse 3s ease-in-out infinite}
+.sim-header{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.sim-title{font-size:.96rem;font-weight:500;color:var(--text-cool);margin-bottom:4px}
+.sim-sub{font-size:.84rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5}
+.sim-slider-group{margin-bottom:18px}
+.sim-slider-label{display:flex;justify-content:space-between;margin-bottom:6px}
+.sim-slider-name{font-size:.86rem;color:var(--text-mid)}
+.sim-slider-val{font-family:var(--mono);font-size:.82rem;color:var(--gold);font-weight:500}
+.sim-slider{width:100%;-webkit-appearance:none;height:4px;background:var(--border);border-radius:2px;outline:none}
+.sim-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--cobalt);cursor:pointer;border:3px solid var(--bg)}
+.sim-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--cobalt);cursor:pointer;border:3px solid var(--bg)}
+.sim-slider-hint{font-size:.76rem;color:var(--text-mute);margin-top:5px;font-style:italic}
+.sim-result{background:rgba(8,16,48,.5);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:20px}
+.sim-result-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#5A9AEB;margin-bottom:12px}
+.sim-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.sim-metric .sv{font-family:var(--mono);font-size:1.2rem;font-weight:600;color:var(--teal);margin-bottom:3px}
+.sim-metric .sl{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
+.sim-nothing{font-size:.84rem;color:var(--red);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5}
+.sim-nothing b{font-weight:500}
+
+/* STATEMENT */
+.statement{padding:26px 30px;background:rgba(8,16,48,.5);border:1px solid var(--cobalt-border);border-radius:14px;border-left:3px solid var(--cobalt);position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
+.statement::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#5A9AEB,var(--copper))}
+.stmt-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.stmt-txt{font-family:var(--serif);font-style:italic;font-size:1.06rem;line-height:1.65;color:#D0E0F4}
+.stmt-txt b{color:var(--gold);font-style:normal}
+
+/* RESET */
+.reset-btn{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid var(--border);color:var(--text-dim);padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .15s;margin-top:16px}
+.reset-btn:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
+
+/* SEC HEAD */
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.sec-head h2{font-size:.92rem;font-weight:500;color:#B8C8E8;display:flex;align-items:center;gap:10px}
+.sec-head h2 .step{font-family:var(--mono);font-size:.64rem;color:#5A9AEB;border:1px solid rgba(90,154,235,.35);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec-sub{font-family:var(--mono);font-size:.62rem;color:#9AB8D8}
+
+.err{background:var(--bg2);border:1px solid var(--red);border-radius:10px;padding:18px;color:var(--red);font-family:var(--mono);font-size:.82rem}
+
+@media(max-width:760px){
+  .wrap{padding:24px 20px 60px}
+  .vitals-grid{grid-template-columns:repeat(2,1fr)}
+  .dna-grid{grid-template-columns:1fr}
+  .sim-metrics{grid-template-columns:1fr 1fr}
+}
+</style></head>
+<body><div class="wrap">
+
+<div class="crumb">
+  <a href="scenario-library.html">&larr; Library</a>
+  <span class="sep">/</span>
+  <div class="tool-nav">
+    <a href="p1-tool.html" id="navP1">Value Ledger</a>
+    <a href="p2-tool.html" id="navP2">Talent Premium</a>
+    <a href="p3-tool.html" class="active" id="navP3">Org Vitals</a>
+    <a href="p4-tool.html" id="navP4">Human P&L</a>
+    <a href="p5-tool.html" id="navP5">Human B/S</a>
   </div>
-
-  <div class="tool-outputs">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
-      <div>
-        <div class="page-eyebrow">Team Revenue Architecture</div>
-        <h1 class="page-title" style="font-size:1.4rem;margin-bottom:0">Revenue DNA <em>Analyser</em></h1>
-      </div>
-      <span id="scenario-tag" class="tag tag-amber">Apex Manufacturing</span>
-    </div>
-
-    <!-- LITERATURE PANEL -->
-    <div class="lit-bar" id="lit-bar" onclick="toggleLit()">
-      <div class="lit-toggle">
-        <div class="lit-toggle-icon">&#9432;</div>
-        <div class="lit-toggle-text"><b>Understand this pillar</b> &nbsp;&middot;&nbsp; What it is &middot; Why it matters &middot; The instruments</div>
-      </div>
-      <div class="lit-chevron">&#9660;</div>
-    </div>
-    <div class="lit-panel" id="lit-panel">
-      <div class="lit-content">
-        <div class="lit-tabnav">
-          <button class="lit-tabnav-btn active" onclick="litTab(0,this)">What it is</button>
-          <button class="lit-tabnav-btn" onclick="litTab(1,this)">Why it matters</button>
-          <button class="lit-tabnav-btn" onclick="litTab(2,this)">The instruments</button>
-          <button class="lit-tabnav-btn" onclick="litTab(3,this)">The 3 configurations</button>
-        </div>
-        <div class="lit-tabpane active" id="lit-pane-0">
-          <div class="lit-h">Team Revenue Architecture</div>
-          <div class="lit-p">Your org chart is not an HR document. <b>It is a revenue document.</b> The way teams are structured — how many layers, how wide the span of control, how much autonomy sits where the work happens — directly determines how much revenue the same headcount can generate.</div>
-          <div class="lit-p">Team Revenue Architecture reads your structure and classifies it into one of three configurations, each with a measured revenue consequence. The same 50 people in Configuration A versus Configuration C can differ by <b>50%+ in revenue output.</b></div>
-          <div class="lit-callout">Restructure two teams and you haven't just moved boxes on a chart — you've changed the revenue ceiling. Most leaders never measure this. They feel the drag months later and blame the market.</div>
-        </div>
-        <div class="lit-tabpane" id="lit-pane-1">
-          <div class="lit-h">Why it matters</div>
-          <div class="lit-p">Reorgs are among the most expensive decisions a company makes, yet they're almost never evaluated on revenue impact. <b>Team Revenue Architecture makes the structure-to-revenue link measurable</b> before you commit to a costly reshuffle.</div>
-          <div class="lit-p">It also catches the slow killers: every additional management layer adds cost and dilutes accountability; every structural change resets team chemistry and drops the stability index. These compound invisibly until output craters.</div>
-          <div class="lit-p">For founders scaling fast, this is the difference between <b>adding headcount that compounds</b> and adding headcount that creates coordination drag.</div>
-        </div>
-        <div class="lit-tabpane" id="lit-pane-2">
-          <div class="lit-h">The instruments</div>
-          <div class="lit-p" style="margin-bottom:1.25rem">Each instrument isolates a different way this pillar translates people decisions into revenue impact.</div>
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name">Org Enablement Index</span><span class="lit-inst-abbr">OEI</span></div>
-            <div class="lit-inst-formula">OEI = (Revenue-generating roles ÷ Total headcount) × 100</div>
-            <div class="lit-inst-desc">The share of your org actually producing revenue versus coordinating, managing, or supporting. A high OEI means most of your payroll is pointed at the market; a low OEI means you're paying for overhead.</div>
-            <div class="lit-inst-bench">Benchmark: healthy 65%+ · below 50% is structurally top-heavy</div>
-          </div>
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name">Payroll Cost of Burn</span><span class="lit-inst-abbr">PCoB</span></div>
-            <div class="lit-inst-formula">PCoB = f(management layers, span of control)</div>
-            <div class="lit-inst-desc">How much of your burn is consumed by structural overhead — layers and narrow spans of control. It rises with every layer added and every manager overseeing too few people.</div>
-            <div class="lit-inst-bench">Benchmark: lower is leaner · climbs with each added layer</div>
-          </div>
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name">Org Stability Index</span><span class="lit-inst-abbr">OSI</span></div>
-            <div class="lit-inst-formula">OSI = 100 − (structural changes × churn weight)</div>
-            <div class="lit-inst-desc">Measures how much structural churn is destroying Revenue DNA. Every reorg resets relationships, ownership, and momentum. High change frequency means the structure never stabilises enough to perform.</div>
-            <div class="lit-inst-bench">Benchmark: 80+ stable · below 60 signals destructive churn</div>
-          </div>
-        </div>
-        <div class="lit-tabpane" id="lit-pane-3">
-          <div class="lit-h">The 3 configurations</div>
-          <div class="lit-p" style="margin-bottom:1.25rem">Your structure resolves into one of three configurations. Each carries a measured revenue consequence versus benchmark.</div>
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name"><span style="font-family:var(--font-head);font-weight:800;color:var(--teal);margin-right:8px">A</span>High-Autonomy Pod</span><span class="lit-inst-abbr" style="background:transparent;color:var(--teal);border-color:var(--teal)">+34%</span></div>
-            <div class="lit-inst-desc">Wide spans, few layers, decision-making pushed to where the work happens. Maximum revenue enablement.</div>
-          </div>
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name"><span style="font-family:var(--font-head);font-weight:800;color:var(--amber);margin-right:8px">B</span>Matrix Coordination</span><span class="lit-inst-abbr" style="background:transparent;color:var(--amber);border-color:var(--amber)">+8%</span></div>
-            <div class="lit-inst-desc">Balanced structure with moderate layering. Workable but carries coordination cost.</div>
-          </div>
-          <div class="lit-instrument">
-            <div class="lit-inst-head"><span class="lit-inst-name"><span style="font-family:var(--font-head);font-weight:800;color:var(--red);margin-right:8px">C</span>Top-Heavy Hierarchy</span><span class="lit-inst-abbr" style="background:transparent;color:var(--red);border-color:var(--red)">-19%</span></div>
-            <div class="lit-inst-desc">Many layers, narrow spans. Decisions bottleneck upward; revenue capacity is throttled by overhead.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="config-display" id="config-display">
-      <div class="config-badge" id="config-badge" style="color:var(--red)">C</div>
-      <div class="config-name" id="config-name">Top-Heavy Hierarchy</div>
-      <div class="config-delta" id="config-delta" style="color:var(--red)">-19% revenue vs benchmark</div>
-    </div>
-
-    <div class="output-grid">
-      <div class="big-metric teal">
-        <div class="bm-label">OEI Score</div>
-        <div class="bm-val teal" id="out-oei">—</div>
-        <div class="bm-sub">Org Enablement Index</div>
-        <div class="bm-bar"><div class="bm-fill" id="oei-bar" style="background:var(--teal);width:0%"></div></div>
-      </div>
-      <div class="big-metric amber">
-        <div class="bm-label">PCoB</div>
-        <div class="bm-val amber" id="out-pcob">—</div>
-        <div class="bm-sub">Payroll Cost of Burn</div>
-        <div class="bm-bar"><div class="bm-fill" id="pcob-bar" style="background:var(--amber);width:0%"></div></div>
-      </div>
-      <div class="big-metric red">
-        <div class="bm-label">OSI Score</div>
-        <div class="bm-val red" id="out-osi">—</div>
-        <div class="bm-sub">Org Stability Index</div>
-        <div class="bm-bar"><div class="bm-fill" id="osi-bar" style="background:var(--red);width:0%"></div></div>
-      </div>
-    </div>
-
-    <div class="org-viz">
-      <div class="mono-label" style="margin-bottom:1rem">Live Org Structure</div>
-      <div id="org-structure"></div>
-      <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute)">
-        <span>Management ratio: <span id="mgmt-ratio" style="color:var(--amber)">1:2.75</span></span>
-        <span>Revenue-gen roles: <span id="rev-roles-pct" style="color:var(--teal)">61%</span></span>
-      </div>
-    </div>
-
-    <div class="narrative-box">
-      <div class="mono-label" style="margin-bottom:8px;color:var(--amber)">Architecture Statement</div>
-      <p class="nb-quote" id="narrative">Adjust the structure to analyse Revenue DNA.</p>
-    </div>
-  </div>
-
-</div>
 </div>
 
+<div class="eyebrow">Revenue Fluent &middot; L3 &middot; Org Vitals</div>
+<div class="switch">
+  <label for="scen">Scenario</label>
+  <select id="scen"></select>
+  <span class="scen-meta" id="meta"></span>
+</div>
+<div id="app"></div>
+
+</div>
+<script src="rf-data.js"></script>
 <script>
-document.getElementById('rf-css').textContent = RF.css;
-RF.startTicker('ticker');
+(function(){
 
-// Literature panel
-function toggleLit() {
-  document.getElementById('lit-bar').classList.toggle('open');
-  document.getElementById('lit-panel').classList.toggle('open');
+var app = document.getElementById('app');
+if (!window.RF) {
+  app.innerHTML = '<div class="err">rf-data.js not found.</div>';
+  return;
 }
-function litTab(idx, btn) {
-  event.stopPropagation();
-  document.querySelectorAll('.lit-tabnav-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.lit-tabpane').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('lit-pane-' + idx).classList.add('active');
-}
-document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('p3');
-document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
-  ['Revenue Fluent', 'Team Architecture'],
-  '<span class="tb-pill green">Live Calculator</span>'
-);
 
-const scenarios = [
-  { name:'Apex Manufacturing', hc:50, layers:4, span:4, changes:4, qrev:21 },
-  { name:'TechVelocity Inc.', hc:50, layers:2, span:8, changes:1, qrev:21 },
-  { name:'Sterling Consulting', hc:50, layers:3, span:10, changes:2, qrev:30 },
+var sel = document.getElementById('scen');
+RF.list().forEach(function(n){
+  var o = document.createElement('option');
+  o.value = n; o.textContent = n; sel.appendChild(o);
+});
+var current = RF.current(); sel.value = current;
+
+// STATE
+var answers = {}; // signal_id: true/false/null
+var activeVital = 0;
+var simValues = { leadership: 50, fear: 50, middle: 50, execution: 50 };
+
+// DATA
+var VITALS = [
+  {
+    id: 'leadership', name: 'Leadership Pulse',
+    sub: 'Is energy flowing from the top, or is there a vacuum?',
+    signals: [
+      'Does senior leadership communicate directly with all employees at least once a month — not just through managers?',
+      'Are leadership decisions visible and explained to the org — not just announced?',
+      'Does the CEO/founder participate in ordinary work channels, not just formal meetings?',
+      'Does leadership arrive on time to meetings they call and end them on time?'
+    ]
+  },
+  {
+    id: 'fear', name: 'Fear Index',
+    sub: 'Is the org operating from safety or from threat?',
+    signals: [
+      'In the last 3 months, has leadership responded to mistakes with diagnosis rather than public blame?',
+      'Do people share bad news upward without significant delay?',
+      'Is knowledge shared freely across teams rather than held within silos?',
+      'In the last 6 months, has a senior leader visibly changed a decision based on input from someone more junior?'
+    ]
+  },
+  {
+    id: 'middle', name: 'Middle Layer Health',
+    sub: 'Is the transmission belt between leadership and frontline working or corroding?',
+    signals: [
+      'Do managers have regular structured 1:1s with their direct reports?',
+      'In the last 6 months, has any team member been promoted or given expanded responsibility as a direct result of their manager\'s advocacy?',
+      'When leadership announces a major decision, can a frontline employee accurately describe what it means for their work within one week?',
+      'In the last quarter, has any underperforming employee received a documented performance conversation from their manager?'
+    ]
+  },
+  {
+    id: 'execution', name: 'Execution Fidelity',
+    sub: 'Is activity connected to outcome, or disconnected?',
+    signals: [
+      'Can any team member name the specific revenue or cost number their work directly impacts?',
+      'Does less than 40% of the average employee\'s week consist of meetings?',
+      'Does the org have a documentation culture — decisions, processes, and knowledge written down?',
+      'Are projects completed on time at a rate above 60%?'
+    ]
+  },
+  {
+    id: 'hr', name: 'HR Mirror',
+    sub: 'Is HR part of the solution or quietly part of the problem?',
+    signals: [
+      'In the last 3 months, has HR initiated a proactive conversation with a business unit — not just responded to a request?',
+      'Is exit management handled with genuine care and structured process?',
+      'Does onboarding give new joiners a clear picture within their first two weeks?',
+      'Does HR proactively surface people risks to leadership — not just report metrics?'
+    ]
+  }
 ];
 
-function loadScenario(idx, el) {
-  document.querySelectorAll('.sc-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  const s = scenarios[idx];
-  document.getElementById('sl-hc').value = s.hc;
-  document.getElementById('sl-layers').value = s.layers;
-  document.getElementById('sl-span').value = s.span;
-  document.getElementById('sl-changes').value = s.changes;
-  document.getElementById('sl-qrev').value = s.qrev;
-  document.getElementById('scenario-tag').textContent = s.name;
-  update();
+var CAUSAL_CHAINS = {
+  'leadership_0': { seeing: 'People hear about decisions through the grapevine — not from leadership.', causing: 'Leadership assumes managers will cascade. Managers assume someone else will. Nothing reaches the frontline intact.' },
+  'leadership_1': { seeing: 'Decisions feel arbitrary. People comply without understanding.', causing: 'Leadership confuses announcing with communicating. Context was never given, so trust was never built.' },
+  'leadership_2': { seeing: 'Leadership feels distant. People perform for their manager, not for the mission.', causing: 'Senior leaders have separated themselves from the daily reality of the org. The temperature they set is invisible to them.' },
+  'leadership_3': { seeing: 'Meetings start late, run over, and respect no one\'s time.', causing: 'The leader who calls the meeting sets the cultural norm for how time is valued in the org. Disrespect cascades downward.' },
+  'fear_0': { seeing: 'Mistakes get hidden until they become crises.', causing: 'Blame has been normalised. When mistakes get punished publicly, people learn to hide problems rather than solve them.' },
+  'fear_1': { seeing: 'Leadership is always surprised by bad news.', causing: 'People have learned that bad news travels through the hierarchy at personal cost. They delay until they have no choice.' },
+  'fear_2': { seeing: 'Teams operate in silos. Knowledge doesn\'t flow.', causing: 'Information is power in a fear-based culture. Sharing it reduces leverage. People hoard knowledge to protect their position.' },
+  'fear_3': { seeing: 'Every decision lands from above. Pushback is absent.', causing: 'A senior leader who has never reversed a decision in response to junior input has never signalled that it is safe to try.' },
+  'middle_0': { seeing: 'People don\'t know where they stand with their manager.', causing: '1:1s exist to give people a safe, regular channel upward. Without them, people navigate by rumour and assumption.' },
+  'middle_1': { seeing: 'Good people are invisible to leadership. Promotions feel political.', causing: 'Managers who don\'t advocate for their people are managing tasks, not developing careers. The best people eventually leave to be seen.' },
+  'middle_2': { seeing: 'Strategic initiatives die between announcement and implementation.', causing: 'The middle layer is the transmission belt. When it corrodes, messages lose meaning at each layer. Frontline receives noise, not direction.' },
+  'middle_3': { seeing: 'Underperformance is tolerated or handled through avoidance.', causing: 'Managers who avoid tough conversations protect themselves, not the org. The team watches and learns what is tolerated.' },
+  'execution_0': { seeing: 'People are busy but can\'t connect their work to the business.', causing: 'Goals were written in the language of activity, not outcome. The connection between effort and financial impact was never made explicit.' },
+  'execution_1': { seeing: 'People spend more time in meetings than doing actual work.', causing: 'Meetings have become the proxy for progress. Attendance is mistaken for accountability. Output has been forgotten.' },
+  'execution_2': { seeing: 'Knowledge walks out the door when people leave.', causing: 'The org has never prioritised capturing what it knows. Institutional memory is stored in people\'s heads, not in systems.' },
+  'execution_3': { seeing: 'Projects slip routinely. Deadlines are treated as suggestions.', causing: 'Execution has been decoupled from accountability. There are no real consequences for missing timelines, so timelines stop meaning anything.' },
+  'hr_0': { seeing: 'HR is reactive. Business units only hear from HR when something goes wrong.', causing: 'HR automated the transactional and then retreated. Proactive presence requires intention, not process.' },
+  'hr_1': { seeing: 'Exits are handled poorly. People leave bitter, not neutral.', causing: 'Exit management is the last impression the org makes. When it is careless, it confirms every frustration the person felt while staying.' },
+  'hr_2': { seeing: 'New joiners spend their first weeks lost and confused.', causing: 'Onboarding was designed as a compliance exercise, not an integration experience. The org never made the new joiner feel expected.' },
+  'hr_3': { seeing: 'People risks surface as crises — not as early warnings.', causing: 'HR has been reporting on what happened, not advising on what is about to happen. The shift from reporter to strategist never happened.' }
+};
+
+var DNA_TYPES = {
+  'quiet_compounding': {
+    name: 'The Quiet Compounding Machine',
+    desc: 'The benchmark. Leadership visible and consistent. Trust present. The middle layer developing people. Execution connected to outcomes. HR proactive and forward-looking.',
+    good: 'Attracting and keeping talent, consistent execution, compounding performance over time',
+    vulnerable: 'Complacency, slow response to market shifts, assuming the model works forever',
+    breaks: 'Key leaders leave simultaneously — the culture is strong but the specific people matter more than it seems',
+    financial: 'Above-market retention, above-market productivity, compounding talent quality premium over time'
+  },
+  'disciplined_challenger': {
+    name: 'The Disciplined Challenger',
+    desc: 'Well-run, fast-moving, high accountability. Still proving itself but genuinely healthy. The difference from the Compounding Machine is trajectory — this org is climbing, not yet compounding.',
+    good: 'Speed, execution, clear ownership, attracting ambitious people',
+    vulnerable: 'Burning people out, under-investing in culture during growth phases',
+    breaks: 'Growth rate slows and the intensity has no release valve — the culture that drove growth starts driving exits',
+    financial: 'High revenue per employee, moderate attrition risk in senior roles, strong short-term output'
+  },
+  'resilient_community': {
+    name: 'The Resilient Community',
+    desc: 'Strong mission alignment, genuine care for people, real bonds across the org. Common in social enterprises, family businesses, and some professional services firms. Healthy DNA with a specific operational vulnerability.',
+    good: 'Retention, loyalty, riding out hard times together without losing people',
+    vulnerable: 'Operational discipline, scaling, commercial ruthlessness when the mission demands it',
+    breaks: 'When mission and commercial reality diverge and leadership can\'t reconcile them',
+    financial: 'Low attrition cost, high loyalty premium, underperforming on revenue per employee'
+  },
+  'fear_factory': {
+    name: 'The Fear Factory',
+    desc: 'High output, low trust. Blame has been normalised. Knowledge is hoarded. People execute brilliantly but never innovate. One bad quarter away from a talent exodus.',
+    good: 'Short-term execution, compliance, hitting targets under pressure',
+    vulnerable: 'Innovation, knowledge transfer, retaining people who have options',
+    breaks: 'The best people leave quietly, then suddenly — and they take the institutional knowledge with them',
+    financial: 'High short-term output, declining innovation return over 18 months, rising replacement cost'
+  },
+  'frozen_middle': {
+    name: 'The Frozen Middle',
+    desc: 'Leadership is strong, frontline is capable, but the management layer between them has calcified. Protecting positions, blocking change, avoiding tough conversations. The engine runs but the transmission is failing.',
+    good: 'Stability, operational consistency, not losing many people',
+    vulnerable: 'Strategic change, any initiative that requires the middle layer to act differently',
+    breaks: 'Strategic initiatives die between announcement and execution — leadership announces, nothing happens',
+    financial: 'High initiative spend, low initiative completion rate, compounding strategic lag'
+  },
+  'founders_shadow': {
+    name: 'The Founder\'s Shadow',
+    desc: 'Everything flows through one or two people at the top. Fast decisions, high energy, zero institutional depth. The organisation is entirely dependent on the founder\'s continued presence and judgment.',
+    good: 'Speed of decision, alignment to founder vision, agility in early stages',
+    vulnerable: 'Scaling, developing other leaders, functioning when the founder is absent',
+    breaks: 'The founder\'s bandwidth, then everything simultaneously — there is no second tier',
+    financial: 'Valuation depends entirely on key person retention, fragile growth trajectory'
+  },
+  'busy_illusion': {
+    name: 'The Busy Illusion',
+    desc: 'High activity, low outcome. Meetings everywhere, results nowhere. People are exhausted but nothing material moves. Tasks have replaced goals.',
+    good: 'Looking productive, avoiding conflict through activity, maintaining the appearance of progress',
+    vulnerable: 'Actual output, revenue growth, retaining people who want to do meaningful work',
+    breaks: 'People stop believing their work matters — the best ones leave first',
+    financial: 'High payroll cost, low revenue per employee vs industry, declining output quality'
+  },
+  'legacy_trap': {
+    name: 'The Legacy Trap',
+    desc: 'An established org where long-tenured employees are actively blocking change to protect their position. High stability, low adaptability. A time bomb if the market shifts.',
+    good: 'Institutional knowledge retention, operational stability, existing client relationships',
+    vulnerable: 'Any significant change — new technology, new competitors, new business models',
+    breaks: 'The first major market disruption the org cannot adapt to — and it cannot adapt',
+    financial: 'Declining growth rate masked by stable legacy revenue, rising workforce obsolescence risk'
+  }
+};
+
+function getVitalScore(vitalIdx) {
+  var vital = VITALS[vitalIdx];
+  var yesCount = 0, answered = 0;
+  vital.signals.forEach(function(s, si) {
+    var key = vital.id + '_' + si;
+    if (answers[key] === true) { yesCount++; answered++; }
+    else if (answers[key] === false) { answered++; }
+  });
+  if (answered === 0) return { status: 'unanswered', score: 0, answered: 0 };
+  if (answered < 4) return { status: 'partial', score: yesCount, answered: answered };
+  if (yesCount >= 3) return { status: 'healthy', score: yesCount, answered: 4 };
+  if (yesCount === 2) return { status: 'warning', score: yesCount, answered: 4 };
+  return { status: 'critical', score: yesCount, answered: 4 };
 }
 
-function update() {
-  const hc = parseInt(document.getElementById('sl-hc').value);
-  const layers = parseInt(document.getElementById('sl-layers').value);
-  const span = parseInt(document.getElementById('sl-span').value);
-  const changes = parseInt(document.getElementById('sl-changes').value);
-  const qrev = parseInt(document.getElementById('sl-qrev').value);
+function getDNAType() {
+  var scores = VITALS.map(function(v, i) { return getVitalScore(i); });
+  var allAnswered = scores.every(function(s) { return s.answered === 4; });
+  if (!allAnswered) return null;
 
-  document.getElementById('sv-hc').textContent = hc;
-  document.getElementById('sv-layers').textContent = layers;
-  document.getElementById('sv-span').textContent = span;
-  document.getElementById('sv-changes').textContent = changes;
-  document.getElementById('sv-qrev').textContent = qrev;
+  var statuses = scores.map(function(s) { return s.status; });
+  var L = statuses[0], F = statuses[1], M = statuses[2], E = statuses[3], H = statuses[4];
 
-  // Managers = headcount / span across layers
-  const managers = Math.max(1, Math.round(hc / span / (span/4)));
-  const revRoles = hc - managers;
-  const mgmtRatio = (revRoles / managers).toFixed(1);
-  const oei = Math.round((revRoles / hc) * 100);
-  const pcob = Math.min(80, Math.round(30 + layers * 6 + (10 - span) * 1.5));
-  const osi = Math.max(0, 100 - changes * 10);
-
-  // Determine config
-  let config, configName, delta, color;
-  if (span >= 6 && layers <= 2) { config='A'; configName='High-Autonomy Pod'; delta='+34%'; color='var(--teal)'; }
-  else if (layers >= 4 || span <= 4) { config='C'; configName='Top-Heavy Hierarchy'; delta='-19%'; color='var(--red)'; }
-  else { config='B'; configName='Matrix Coordination'; delta='+8%'; color='var(--amber)'; }
-
-  document.getElementById('config-badge').textContent = config;
-  document.getElementById('config-badge').style.color = color;
-  document.getElementById('config-name').textContent = configName;
-  document.getElementById('config-delta').textContent = delta + ' revenue vs benchmark';
-  document.getElementById('config-delta').style.color = color;
-
-  document.getElementById('out-oei').textContent = oei + '%';
-  document.getElementById('out-oei').className = 'bm-val ' + (oei>=65?'teal':oei>=50?'amber':'red');
-  document.getElementById('oei-bar').style.width = oei + '%';
-
-  document.getElementById('out-pcob').textContent = pcob + '%';
-  document.getElementById('pcob-bar').style.width = pcob + '%';
-
-  document.getElementById('out-osi').textContent = osi;
-  document.getElementById('out-osi').className = 'bm-val ' + (osi>=80?'teal':osi>=60?'amber':'red');
-  document.getElementById('osi-bar').style.width = osi + '%';
-
-  document.getElementById('mgmt-ratio').textContent = '1:' + mgmtRatio;
-  document.getElementById('rev-roles-pct').textContent = oei + '%';
-
-  // Org viz
-  let orgHtml = '';
-  orgHtml += `<div class="org-level"><div class="org-node cost"><div class="org-node-label">Leadership</div><div class="org-node-count">1</div></div></div>`;
-  for (let l = 1; l < layers; l++) {
-    const layerMgrs = Math.max(1, Math.round(managers / layers * l));
-    orgHtml += `<div class="org-level"><div class="org-node cost"><div class="org-node-label">Mgmt L${l}</div><div class="org-node-count">${layerMgrs}</div></div></div>`;
-  }
-  const teamsCount = Math.min(6, Math.ceil(revRoles / span));
-  let teamNodes = '';
-  for (let t = 0; t < teamsCount; t++) {
-    teamNodes += `<div class="org-node rev"><div class="org-node-label">Team</div><div class="org-node-count">${Math.round(revRoles/teamsCount)}</div></div>`;
-  }
-  orgHtml += `<div class="org-level">${teamNodes}</div>`;
-  document.getElementById('org-structure').innerHTML = orgHtml;
-
-  const scenarioName = document.getElementById('scenario-tag').textContent;
-  document.getElementById('narrative').innerHTML = `${scenarioName} is operating in <span class="nb-stat">Configuration ${config}</span> (${configName}), projecting <span class="nb-stat">${delta}</span> revenue vs benchmark. With ${managers} managers across ${layers} layers managing ${revRoles} revenue-generating roles, the OEI sits at <span class="nb-stat">${oei}%</span>. ${changes >= 3 ? 'High structural churn (OSI '+osi+') is destroying Revenue DNA stability.' : 'Structure is relatively stable.'}`;
+  // All healthy
+  if (L==='healthy' && F==='healthy' && M==='healthy' && E==='healthy' && H==='healthy') return 'quiet_compounding';
+  // Strong but middle has some issues
+  if (L==='healthy' && F==='healthy' && E==='healthy' && M!=='critical') return 'disciplined_challenger';
+  // Community type — good L and F, weaker execution
+  if (L==='healthy' && F==='healthy' && (E==='warning'||E==='critical')) return 'resilient_community';
+  // Fear dominant
+  if (F==='critical') return 'fear_factory';
+  // Middle dominant issue
+  if (M==='critical' && F!=='critical') return 'frozen_middle';
+  // Leadership critical
+  if (L==='critical') return 'founders_shadow';
+  // Execution critical
+  if (E==='critical' && L!=='critical' && F!=='critical') return 'busy_illusion';
+  // Middle and HR issues with tenure pattern
+  if (M==='warning' && H==='warning' && L==='warning') return 'legacy_trap';
+  // Default — use worst vital sign
+  var worst = statuses.indexOf('critical');
+  if (worst === 0) return 'founders_shadow';
+  if (worst === 1) return 'fear_factory';
+  if (worst === 2) return 'frozen_middle';
+  if (worst === 3) return 'busy_illusion';
+  return 'disciplined_challenger';
 }
 
-update();
+function getHybrid() {
+  var scores = VITALS.map(function(v, i) { return getVitalScore(i); });
+  var critical = [], warning = [];
+  scores.forEach(function(s, i) {
+    if (s.status === 'critical') critical.push(i);
+    else if (s.status === 'warning') warning.push(i);
+  });
+  if (critical.length >= 2) {
+    var typeMap = ['founders_shadow','fear_factory','frozen_middle','busy_illusion','legacy_trap'];
+    var primary = DNA_TYPES[typeMap[critical[0]]];
+    var secondary = DNA_TYPES[typeMap[critical[1]]];
+    if (primary && secondary) {
+      return { primary: primary.name, secondary: secondary.name };
+    }
+  }
+  return null;
+}
+
+function totalAnswered() {
+  var count = 0;
+  VITALS.forEach(function(v) {
+    v.signals.forEach(function(s, si) {
+      if (answers[v.id+'_'+si] !== undefined && answers[v.id+'_'+si] !== null) count++;
+    });
+  });
+  return count;
+}
+
+function simImpact() {
+  var total = Object.values(simValues).reduce(function(a,b){return a+b;},0);
+  var prodRecovery = Math.round(total * 180);
+  var attrReduction = Math.round(total * 0.08);
+  var monthsToShift = Math.round(20 - total / 10);
+  return { prodRecovery: prodRecovery, attrReduction: attrReduction, monthsToShift: Math.max(3, monthsToShift) };
+}
+
+function render() {
+  var s = RF.scenario(current), sum = RF.summary(current);
+  if (!s || !sum) return;
+
+  ['navP1','navP2','navP3','navP4','navP5'].forEach(function(id,i){
+    var el = document.getElementById(id);
+    var files=['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'];
+    if(el) el.href = files[i]+'?scenario='+encodeURIComponent(current);
+  });
+
+  document.getElementById('meta').innerHTML =
+    '<b>'+s.employeeCount+'</b> people &middot; <b>'+sum.geo+'</b> &middot; '+sum.industry;
+
+  var seen = false;
+  try { seen = !!localStorage.getItem('rf_ov_intro'); } catch(e){}
+  var isOpen = !seen;
+  var answered = totalAnswered();
+  var dnaType = getDNAType();
+  var hybrid = dnaType ? getHybrid() : null;
+
+  var h = '';
+
+  // INTRO
+  h += '<div class="intro-panel">'
+    +'<div class="intro-toggle" id="introToggle">'
+      +'<div class="intro-tl">'
+        +'<div class="intro-icon">?</div>'
+        +'<div><div class="intro-title">What is Org Vitals?</div>'
+        +'<div class="intro-sub">Read this first &mdash; takes 2 minutes</div></div>'
+      +'</div>'
+      +'<div class="intro-chevron" id="introChev">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
+    +'</div>'
+    +'<div class="intro-body'+(isOpen?' open':'')+'" id="introBody">'
+      +'<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div>'
+        +'<div class="intro-sec-txt">Every organisation has a DNA. Not a culture score. Not an engagement number. <b>A specific, identifiable character that determines how it performs, who it attracts, and what it is capable of.</b><br><br>Culture is the word HR uses when it does not have a more precise language. Org Vitals gives you that language. Five vital signs reveal the forces making your organisation behave the way it does. Eight character types name what you actually are.</div>'
+      +'</div>'
+      +'<div class="intro-sec"><div class="intro-sec-lbl">How it works</div>'
+        +'<div class="intro-sec-txt">You answer 20 binary questions — Yes or No, nothing in between. Each question is something you can observe directly. <b>Yes always means healthy.</b> Four questions per vital sign. The readings combine to name your organisation\'s DNA type.<br><br>This is not a questionnaire. There are no rating scales. Every signal is observable — things you can see happening, not things you have to interpret.</div>'
+        +'<div class="intro-story">An HR Head joined a new company and immediately sensed something was wrong. She could not name it. The CEO seemed engaged. The product was strong. The numbers were fine. But something in the way information moved — or didn\'t — felt off.<br><br><b>Org Vitals would have named it in 5 minutes. Fear Index: Critical. The org was a Fear Factory running on borrowed time.</b></div>'
+      +'</div>'
+      +'<div class="intro-transition">Answer the 20 signals below about <b>your organisation</b> — not the scenario data. The scenario gives context. Your answers reveal the DNA.</div>'
+    +'</div>'
+    +'</div>';
+
+  // HERO
+  h += '<div class="hero"><div class="hero-inner">'
+    +'<div class="hero-eyebrow">Org Vitals &middot; Organisational DNA Diagnostic</div>'
+    +'<div class="hero-hook">You\'ve been calling it culture. It\'s actually your organisation\'s DNA — and for the first time, it has a name.</div>'
+    +'<div class="hero-context">Answer the 20 binary signals across the five vital signs. <b>Yes always means healthy.</b> The readings will reveal your organisation\'s character type — one of eight possible DNA signatures that names what you actually are and what breaks first under pressure.'
+    +(answered > 0 ? ' <b>'+answered+' of 20 signals answered.</b>' : '')
+    +'</div>'
+    +'</div></div>';
+
+  // VITALS GRID
+  h += '<div class="sec-head"><h2><span class="step">1</span> The Reading</h2><div class="sec-sub">Five vital signs &middot; 20 binary signals &middot; click each to answer</div></div>';
+  h += '<div class="vitals-grid">';
+  VITALS.forEach(function(v, i) {
+    var sc = getVitalScore(i);
+    var cls = sc.status === 'partial' ? 'unanswered' : sc.status;
+    h += '<div class="vital-card '+cls+(activeVital===i?' active':'')+'" data-vital="'+i+'">'
+      +'<div class="vc-label">Vital Sign '+(i+1)+'</div>'
+      +'<div class="vc-name">'+v.name+'</div>'
+      +'<div class="vc-sub">'+v.sub+'</div>'
+      +'<div class="vc-status '+cls+'">'
+        +(cls==='healthy'?'HEALTHY':cls==='warning'?'WARNING':cls==='critical'?'CRITICAL':'ANSWER SIGNALS')
+      +'</div>'
+      +(sc.answered>0?'<div class="vc-score">'+sc.score+'/'+sc.answered+' yes</div>':'')
+    +'</div>';
+  });
+  h += '</div>';
+
+  // SIGNAL PANEL — active vital
+  var av = VITALS[activeVital];
+  h += '<div class="signal-panel">'
+    +'<div class="sp-header">'
+      +'<div class="sp-title">'+av.name+'</div>'
+      +'<div class="sp-pulse">Vital Sign '+(activeVital+1)+' of 5</div>'
+    +'</div>'
+    +'<div class="sp-sub">'+av.sub+'</div>'
+    +'<div class="signal-list">';
+
+  av.signals.forEach(function(sig, si) {
+    var key = av.id+'_'+si;
+    var val = answers[key];
+    h += '<div class="signal-item">'
+      +'<div class="signal-num">'+(activeVital*4+si+1)+'</div>'
+      +'<div class="signal-q">'+sig+'</div>'
+      +'<div class="signal-btns">'
+        +'<button class="sig-btn yes'+(val===true?' active':'')+'" data-key="'+key+'" data-val="true">YES</button>'
+        +'<button class="sig-btn no'+(val===false?' active':'')+'" data-key="'+key+'" data-val="false">NO</button>'
+      +'</div>'
+    +'</div>';
+  });
+  h += '</div></div>';
+
+  // DIAGNOSIS — only if warnings/criticals exist
+  var diagItems = [];
+  VITALS.forEach(function(v, vi) {
+    v.signals.forEach(function(sig, si) {
+      var key = v.id+'_'+si;
+      if (answers[key] === false) {
+        var chain = CAUSAL_CHAINS[key];
+        if (chain) diagItems.push({ vital: v.name, signal: sig, chain: chain, key: key });
+      }
+    });
+  });
+
+  if (diagItems.length > 0) {
+    h += '<div class="sec-head"><h2><span class="step">2</span> The Diagnosis</h2><div class="sec-sub">What you\'re seeing — and what\'s causing it</div></div>';
+    h += '<div class="diagnosis-section">';
+    diagItems.forEach(function(d) {
+      h += '<div class="diag-card">'
+        +'<div class="diag-signal critical">'+d.vital+' &mdash; Warning Signal</div>'
+        +'<div class="diag-row"><div class="diag-label">What you\'re seeing</div><div class="diag-text">'+d.chain.seeing+'</div></div>'
+        +'<div class="diag-row"><div class="diag-label">What\'s causing it</div><div class="diag-text">'+d.chain.causing+'</div></div>'
+      +'</div>';
+    });
+    h += '</div>';
+  }
+
+  // DNA TYPE — only if all 20 answered
+  if (dnaType) {
+    var type = DNA_TYPES[dnaType];
+    h += '<div class="sec-head"><h2><span class="step">3</span> The Character</h2><div class="sec-sub">Your organisation\'s DNA type</div></div>';
+    h += '<div class="dna-card">'
+      +'<div class="dna-eyebrow">Organisational DNA Type</div>'
+      +'<div class="dna-type">'+type.name+'</div>'
+      +'<div class="dna-desc">'+type.desc+'</div>'
+      +'<div class="dna-grid">'
+        +'<div class="dna-cell"><div class="dna-cell-lbl">Good at</div><div class="dna-cell-txt">'+type.good+'</div></div>'
+        +'<div class="dna-cell"><div class="dna-cell-lbl">Vulnerable to</div><div class="dna-cell-txt">'+type.vulnerable+'</div></div>'
+        +'<div class="dna-cell"><div class="dna-cell-lbl">Breaks when</div><div class="dna-cell-txt">'+type.breaks+'</div></div>'
+      +'</div>'
+      +'<div class="dna-fin-signal">Financial signal: '+type.financial+'</div>'
+      +(hybrid?'<div class="dna-fin-signal" style="margin-top:8px;color:var(--text-dim)">Hybrid reading: Primary '+hybrid.primary+' &middot; Secondary '+hybrid.secondary+'</div>':'')
+    +'</div>';
+
+    // SIMULATION — Layer 5
+    var imp = simImpact();
+    h += '<div class="sec-head"><h2><span class="step">4</span> The Simulation</h2><div class="sec-sub">What happens if you address the critical signals</div></div>';
+    h += '<div class="sim-section">'
+      +'<div class="sim-header">Layer 5 — Simulation</div>'
+      +'<div class="sim-title">Model the financial impact of intervention</div>'
+      +'<div class="sim-sub">Use the sliders to model how much effort you\'re willing to invest in addressing each vital sign. The simulation shows the estimated financial recovery over 6 months.</div>';
+
+    var sliders = [
+      { key: 'leadership', label: 'Leadership Pulse intervention', hint: '0 = no change · 100 = full structural intervention (regular all-hands, leadership coaching, decision transparency)' },
+      { key: 'fear', label: 'Fear Index intervention', hint: '0 = no change · 100 = full cultural reset (blame-free retrospectives, psychological safety programme, leadership behaviour change)' },
+      { key: 'middle', label: 'Middle Layer intervention', hint: '0 = no change · 100 = full management development (structured 1:1s, advocacy training, performance conversation coaching)' },
+      { key: 'execution', label: 'Execution Fidelity intervention', hint: '0 = no change · 100 = full operational reset (OKR alignment, meeting audit, documentation culture programme)' },
+    ];
+
+    sliders.forEach(function(sl) {
+      h += '<div class="sim-slider-group">'
+        +'<div class="sim-slider-label">'
+          +'<span class="sim-slider-name">'+sl.label+'</span>'
+          +'<span class="sim-slider-val" id="sv_'+sl.key+'">'+simValues[sl.key]+'%</span>'
+        +'</div>'
+        +'<input type="range" class="sim-slider" min="0" max="100" value="'+simValues[sl.key]+'" data-sim="'+sl.key+'">'
+        +'<div class="sim-slider-hint">'+sl.hint+'</div>'
+      +'</div>';
+    });
+
+    h += '<div class="sim-result">'
+      +'<div class="sim-result-lbl">Estimated 6-month impact of selected interventions</div>'
+      +'<div class="sim-metrics">'
+        +'<div class="sim-metric"><div class="sv">+'+imp.prodRecovery.toLocaleString()+'</div><div class="sl">Productivity points recovered</div></div>'
+        +'<div class="sim-metric"><div class="sv">-'+imp.attrReduction+'%</div><div class="sl">Estimated attrition reduction</div></div>'
+        +'<div class="sim-metric"><div class="sv">'+imp.monthsToShift+' mo</div><div class="sl">Estimated months to character shift</div></div>'
+      +'</div>'
+      +'<div class="sim-nothing"><b>Cost of doing nothing:</b> The signals that are Critical today become structural in 6 months. Character types don\'t drift — they compound. A Fear Factory that isn\'t addressed becomes harder to change with every quarter that passes.</div>'
+    +'</div>'
+    +'</div>';
+  } else if (answered > 0 && answered < 20) {
+    h += '<div class="statement" style="margin-top:28px">'
+      +'<div class="stmt-lbl">Progress</div>'
+      +'<div class="stmt-txt"><b>'+answered+' of 20 signals answered.</b> Complete all five vital signs to reveal your organisation\'s DNA type. The character type only emerges when the full picture is visible.</div>'
+    +'</div>';
+  }
+
+  // INTELLIGENCE STATEMENT
+  if (dnaType) {
+    var type = DNA_TYPES[dnaType];
+    var critCount = diagItems.length;
+    h += '<div class="statement" style="margin-top:28px">'
+      +'<div class="stmt-lbl">Intelligence Statement</div>'
+      +'<div class="stmt-txt">'
+        +(critCount===0
+          ? 'This organisation\'s vital signs are all reading <b>Healthy</b>. The DNA type is <b>'+type.name+'</b> — one of three positive character signatures in the Org Vitals framework. This is rare. Protect it deliberately, because it erodes faster than it builds.'
+          : 'This organisation is a <b>'+type.name+'</b>. <b>'+critCount+' warning signal'+(critCount>1?'s':'')+' identified</b> across the five vital signs. The diagnosis above names what is visible. The simulation models what addressing it is worth. The vital signs above are another dimension of this organisation\'s Humacity — the specific character of its human capital, named for the first time.'
+        )
+      +'</div>'
+    +'</div>';
+  }
+
+  // RESET
+  if (answered > 0) {
+    h += '<button class="reset-btn" id="resetBtn">Reset all answers</button>';
+  }
+
+  app.innerHTML = h;
+
+  // Wire intro
+  document.getElementById('introToggle').addEventListener('click', function(){
+    var body=document.getElementById('introBody'), chev=document.getElementById('introChev');
+    var open=body.classList.contains('open');
+    if(open){body.classList.remove('open');chev.innerHTML='Show &darr;';try{localStorage.setItem('rf_ov_intro','1');}catch(e){}}
+    else{body.classList.add('open');chev.innerHTML='Hide &uarr;';}
+  });
+
+  // Wire vital cards
+  document.querySelectorAll('.vital-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      activeVital = parseInt(this.getAttribute('data-vital'));
+      render();
+    });
+  });
+
+  // Wire signal buttons
+  document.querySelectorAll('.sig-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var key=this.getAttribute('data-key');
+      var val=this.getAttribute('data-val')==='true';
+      answers[key] = val;
+      render();
+    });
+  });
+
+  // Wire sim sliders
+  document.querySelectorAll('.sim-slider').forEach(function(sl){
+    sl.addEventListener('input', function(){
+      var key=this.getAttribute('data-sim');
+      simValues[key]=parseInt(this.value);
+      var label=document.getElementById('sv_'+key);
+      if(label) label.textContent=simValues[key]+'%';
+      var imp=simImpact();
+      var metrics=document.querySelectorAll('.sim-metric .sv');
+      if(metrics[0]) metrics[0].textContent='+'+imp.prodRecovery.toLocaleString();
+      if(metrics[1]) metrics[1].textContent='-'+imp.attrReduction+'%';
+      if(metrics[2]) metrics[2].textContent=imp.monthsToShift+' mo';
+    });
+  });
+
+  // Wire reset
+  var resetBtn=document.getElementById('resetBtn');
+  if(resetBtn){
+    resetBtn.addEventListener('click', function(){
+      answers={};
+      activeVital=0;
+      simValues={leadership:50,fear:50,middle:50,execution:50};
+      render();
+    });
+  }
+}
+
+sel.addEventListener('change', function(){
+  current=sel.value;
+  answers={};
+  activeVital=0;
+  simValues={leadership:50,fear:50,middle:50,execution:50};
+  var u=new URL(location.href);
+  u.searchParams.set('scenario',current);
+  history.replaceState({},'',u);
+  render();
+});
+
+render();
+
+})();
 </script>
-</body>
-</html>
+</body></html>
