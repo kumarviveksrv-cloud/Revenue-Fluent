@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Scenario Library — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#04060E;--bg2:#0A0C14;--bg3:#060810;
+  --cobalt:#3A7ADB;--cobalt-dim:rgba(30,80,200,.08);--cobalt-border:rgba(30,80,200,.18);
+  --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
+  --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
+  --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
+  --text-mute:rgba(30,80,200,.25);--border:rgba(30,80,200,.15);
+  --sidebar:220px;
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--serif:'Playfair Display',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(20,60,160,.12) 0%,transparent 55%),linear-gradient(rgba(20,60,180,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(20,60,180,.02) 1px,transparent 1px);
+  background-size:100% 100%,52px 52px,52px 52px;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-right:1px solid var(--cobalt-border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:var(--cobalt-border);border-radius:2px}
+.sb-brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid var(--cobalt-border);text-decoration:none;flex-shrink:0}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
+.sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#DCE8F8;font-weight:500}
+.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mute)}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:#9AB8D8;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(30,80,200,.08);color:#B8C8E8;border-color:rgba(30,80,200,.18)}
+.sb-item.active{background:rgba(58,122,219,.12);color:#5A9AEB;border-color:rgba(58,122,219,.25)}
+.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(58,122,219,.15);color:#5A9AEB;padding:2px 5px;border-radius:3px}
+.sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mute)}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:#9AB8D8;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(30,80,200,.08);color:#B8C8E8;border-color:rgba(30,80,200,.18)}
+.sb-tool.active{background:rgba(58,122,219,.12);color:#5A9AEB;border-color:rgba(58,122,219,.25)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(58,122,219,.1);color:rgba(90,154,235,.5);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--cobalt-border)}
+.sb-by{padding:8px 18px;font-family:var(--mono);font-size:.56rem;color:var(--text-mute);letter-spacing:.08em}
+.sb-by b{color:rgba(184,115,51,.5)}
+
+/* MAIN */
+.wrap{margin-left:var(--sidebar);padding:40px 48px 80px;max-width:calc(1200px + var(--sidebar))}
+
+/* HEADER */
+.eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:#5A9AEB;margin-bottom:12px}
+.page-title{font-size:2.2rem;font-weight:700;letter-spacing:-.02em;color:var(--text-cool);margin-bottom:8px}
+.lede{font-size:.96rem;color:var(--text-dim);max-width:580px;line-height:1.7;margin-bottom:28px}
+.lede b{color:var(--gold);font-weight:500}
+
+/* STAT BAR */
+.statbar{display:flex;gap:0;margin-bottom:32px;border:1px solid var(--cobalt-border);border-radius:10px;overflow:hidden;animation:card-glow 3s ease-in-out infinite}
+@keyframes card-glow{0%,100%{box-shadow:0 0 0 1px rgba(58,122,219,.15),0 0 16px rgba(30,80,200,.06)}50%{box-shadow:0 0 0 1px rgba(90,160,255,.3),0 0 28px rgba(30,80,200,.1)}}
+.stat{flex:1;padding:16px 20px;border-right:1px solid var(--cobalt-border);background:rgba(8,16,48,.3)}
+.stat:last-child{border-right:none}
+.stat .n{font-family:var(--mono);font-size:1.4rem;font-weight:600;color:var(--gold);margin-bottom:2px}
+.stat .l{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim)}
+
+/* FILTERS */
+.filters{margin-bottom:28px}
+.frow{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.flabel{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute);min-width:80px}
+.chip{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--text-dim);background:var(--bg2);border:1px solid var(--border);padding:5px 12px;border-radius:999px;cursor:pointer;transition:all .15s;user-select:none}
+.chip:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
+.chip.on{background:rgba(30,80,200,.1);border-color:var(--cobalt);color:#5A9AEB}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{
+  background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;
+  padding:22px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+  animation:card-glow 3s ease-in-out infinite;
+}
+.card:hover{border-color:rgba(90,154,235,.4);transform:translateY(-3px)}
+.card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(58,122,219,.4),transparent);opacity:0;transition:opacity .2s}
+.card:hover::after{opacity:1}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.card-name{font-size:1.0rem;font-weight:600;color:var(--text-cool);line-height:1.25}
+.card-cur{font-family:var(--mono);font-size:.88rem;color:var(--gold);font-weight:500;white-space:nowrap}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.card-tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--border);border-radius:4px;padding:2px 6px}
+.card-hook{font-family:var(--serif);font-style:italic;font-size:.88rem;line-height:1.55;color:var(--text-dim);border-left:2px solid rgba(58,122,219,.4);padding-left:12px;margin:14px 0 16px}
+.card-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:14px;border-top:1px solid var(--border)}
+.cm{display:flex;flex-direction:column;gap:2px}
+.cm .v{font-family:var(--mono);font-size:1.0rem;font-weight:500}
+.cm .k{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+.v-teal{color:var(--teal)}.v-gold{color:var(--gold)}.v-cobalt{color:#5A9AEB}
+.no-results{text-align:center;padding:60px;font-family:var(--mono);font-size:.82rem;color:var(--text-mute)}
+
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:24px 20px 60px}}
+</style></head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a href="index.html" class="sb-brand"><div class="sb-dot"></div><div class="sb-name">Revenue Fluent</div></a>
+  <div class="sb-section">Platform</div>
+  <a href="index.html" class="sb-item">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+  <a href="scenario-library.html" class="sb-item active">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+  <div class="sb-tools-section">The Five Pillars</div>
+  <a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+  <a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+  <a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+  <a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+  <a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+  <div class="sb-section">More</div>
+  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Learning Hub<span class="sb-badge">Soon</span></a>
+  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
+  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+  <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+</aside>
+
+<div class="wrap">
+  <div class="eyebrow">Revenue Fluent &middot; Scenario Library</div>
+  <h1 class="page-title">Fifteen companies. Seven currencies. One language.</h1>
+  <p class="lede">Every scenario is a real organisational shape — <b>750 people</b> across SaaS, BFSI, healthcare, manufacturing, hospitality, government and more. Pick the one that looks like your world.</p>
+
+  <div class="statbar">
+    <div class="stat"><div class="n">15</div><div class="l">Scenarios</div></div>
+    <div class="stat"><div class="n">750</div><div class="l">People Modelled</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">Currencies</div></div>
+    <div class="stat"><div class="n">13</div><div class="l">Cities</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">Industries</div></div>
+  </div>
+
+  <div class="filters">
+    <div class="frow">
+      <span class="flabel">Industry</span>
+      <span class="chip on" data-f="industry" data-v="All">All</span>
+      <span class="chip" data-f="industry" data-v="Academia">Academia</span>
+      <span class="chip" data-f="industry" data-v="BFSI">BFSI</span>
+      <span class="chip" data-f="industry" data-v="Consulting">Consulting</span>
+      <span class="chip" data-f="industry" data-v="Healthcare">Healthcare</span>
+      <span class="chip" data-f="industry" data-v="Hospitality">Hospitality</span>
+      <span class="chip" data-f="industry" data-v="Manufacturing">Manufacturing</span>
+      <span class="chip" data-f="industry" data-v="NGO / Impact">NGO / Impact</span>
+      <span class="chip" data-f="industry" data-v="Public Sector">Public Sector</span>
+      <span class="chip" data-f="industry" data-v="SaaS">SaaS</span>
+      <span class="chip" data-f="industry" data-v="Sales">Sales</span>
+    </div>
+    <div class="frow">
+      <span class="flabel">Geography</span>
+      <span class="chip on" data-f="geo" data-v="All">All</span>
+      <span class="chip" data-f="geo" data-v="Amsterdam">Amsterdam</span>
+      <span class="chip" data-f="geo" data-v="Boston">Boston</span>
+      <span class="chip" data-f="geo" data-v="Chicago">Chicago</span>
+      <span class="chip" data-f="geo" data-v="Dubai">Dubai</span>
+      <span class="chip" data-f="geo" data-v="Global">Global</span>
+      <span class="chip" data-f="geo" data-v="London">London</span>
+      <span class="chip" data-f="geo" data-v="Mumbai">Mumbai</span>
+      <span class="chip" data-f="geo" data-v="New York">New York</span>
+      <span class="chip" data-f="geo" data-v="San Francisco">San Francisco</span>
+      <span class="chip" data-f="geo" data-v="Singapore">Singapore</span>
+      <span class="chip" data-f="geo" data-v="Stuttgart">Stuttgart</span>
+      <span class="chip" data-f="geo" data-v="Tokyo">Tokyo</span>
+      <span class="chip" data-f="geo" data-v="Washington DC">Washington DC</span>
+    </div>
+    <div class="frow">
+      <span class="flabel">Currency</span>
+      <span class="chip on" data-f="currency" data-v="All">All</span>
+      <span class="chip" data-f="currency" data-v="AED">AED</span>
+      <span class="chip" data-f="currency" data-v="EUR">EUR</span>
+      <span class="chip" data-f="currency" data-v="GBP">GBP</span>
+      <span class="chip" data-f="currency" data-v="INR">INR</span>
+      <span class="chip" data-f="currency" data-v="JPY">JPY</span>
+      <span class="chip" data-f="currency" data-v="SGD">SGD</span>
+      <span class="chip" data-f="currency" data-v="USD">USD</span>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<script src="rf-data.js"></script>
+<script>
+(function(){
+  if(!window.RF){document.getElementById('grid').innerHTML='<div class="no-results">rf-data.js not found.</div>';return;}
+
+  var filters={industry:'All',geo:'All',currency:'All'};
+
+  var HOOKS={
+    'High-Growth Tech Startup':'40% of your revenue rides on 20 people. Most boards never see that line.',
+    'Professional Services Firm':'When a partner walks, the client relationship often walks with them.',
+    'Enterprise Healthcare':'Low attrition on paper. Zero Stars in practice. These are different problems.',
+    'Remote-First SaaS':'23 countries. One spreadsheet. Neither can hold what this org is worth.',
+    'Financial Services':'Every analyst lost is two years of deal memory gone.',
+    'Manufacturing Firm':'Two decades of floor knowledge, walking out one retirement at a time.',
+    'Sales Organization':'The quota is hit. The pipeline behind it is quietly thinning.',
+    'Consulting Firm':'Utilisation looks healthy — until you map who actually wins the work.',
+    'Family Business':'Loyalty kept the mill running. Succession is the question no one asks aloud.',
+    'MNC in Asia':'Lifetime employment meets a workforce that no longer assumes it.',
+    'Hospitality':'Guests remember the people. The P&L only counts the rooms.',
+    'Corporate America':'A supervisor with 13 years on the floor holds more uptime than any system.',
+    'Government Agency':'Institutional memory measured in decades, with no replacement bench.',
+    'Higher Education':'A distinguished chair retires and a research lineage ends with them.',
+    'Social Enterprise':'Mission attracts them. Pay cannot always keep them.'
+  };
+
+  function fmt(sym,n){
+    var abs=Math.abs(n),sign=n<0?'-':'';
+    if(sym==='₹'){if(abs>=10000000)return sign+sym+(abs/10000000).toFixed(2)+'Cr';if(abs>=100000)return sign+sym+(abs/100000).toFixed(1)+'L';return sign+sym+Math.round(abs/1000)+'K';}
+    if(abs>=1000000000)return sign+sym+(abs/1000000000).toFixed(2)+'B';
+    if(abs>=1000000)return sign+sym+(abs/1000000).toFixed(2)+'M';
+    if(abs>=1000)return sign+sym+Math.round(abs/1000)+'K';
+    return sign+sym+Math.round(abs);
+  }
+
+  function renderGrid(){
+    var grid=document.getElementById('grid');
+    var names=RF.list();
+    var cards=names.map(function(name){
+      var s=RF.scenario(name);var sum=RF.summary(name);if(!s||!sum)return null;
+      var ind=sum.industry||'';var geo=sum.geo||'';var cur=s.symbol;
+      var curName=cur==='$'?'USD':cur==='£'?'GBP':cur==='S$'?'SGD':cur==='€'?'EUR':cur==='₹'?'INR':cur==='¥'?'JPY':cur==='AED'?'AED':'USD';
+      var iMatch=filters.industry==='All'||ind.includes(filters.industry);
+      var gMatch=filters.geo==='All'||geo.includes(filters.geo);
+      var cMatch=filters.currency==='All'||curName===filters.currency;
+      if(!iMatch||!gMatch||!cMatch)return null;
+      var emps=s.employees;
+      var totalComp=emps.reduce(function(a,e){return a+e.salary;},0);
+      var stars=emps.filter(function(e){return e.placement==='Star';}).length;
+      var atRisk=emps.filter(function(e){return e.placement==='Inconsistent Performer';}).length;
+      var depts=new Set(emps.map(function(e){return e.dept;})).size;
+      return {name:name,s:s,sum:sum,curName:curName,ind:ind,geo:geo,totalComp:totalComp,stars:stars,atRisk:atRisk,depts:depts};
+    }).filter(Boolean);
+
+    if(!cards.length){grid.innerHTML='<div class="no-results">No scenarios match your filters.</div>';return;}
+
+    grid.innerHTML=cards.map(function(d){
+      return '<div class="card" data-name="'+d.name+'">'
+        +'<div class="card-top">'
+          +'<div><div class="card-name">'+d.name+'</div>'
+          +'<div class="card-tags"><span class="card-tag">'+d.ind+'</span><span class="card-tag">'+d.geo+'</span></div></div>'
+          +'<div class="card-cur">'+d.s.symbol+' '+d.curName+'</div>'
+        +'</div>'
+        +'<div class="card-hook">'+(HOOKS[d.name]||'')+'</div>'
+        +'<div class="card-metrics">'
+          +'<div class="cm"><div class="v v-gold">'+d.s.employeeCount+'</div><div class="k">Headcount</div></div>'
+          +'<div class="cm"><div class="v v-cobalt">'+fmt(d.s.symbol,d.totalComp)+'</div><div class="k">Comp Base</div></div>'
+          +'<div class="cm"><div class="v v-gold">'+d.depts+'</div><div class="k">Depts</div></div>'
+          +'<div class="cm"><div class="v v-teal">'+d.stars+'</div><div class="k">Stars</div></div>'
+          +'<div class="cm"><div class="v" style="color:var(--red)">'+d.atRisk+'</div><div class="k">At Risk</div></div>'
+          +'<div class="cm"><div class="v v-cobalt">'+d.sum.perfAvg+'</div><div class="k">Perf Avg</div></div>'
+        +'</div>'
+      +'</div>';
+    }).join('');
+
+    document.querySelectorAll('.card').forEach(function(card){
+      card.addEventListener('click',function(){
+        var name=this.getAttribute('data-name');
+        window.location.href='p1-tool.html?scenario='+encodeURIComponent(name);
+      });
+    });
+  }
+
+  document.querySelectorAll('.chip').forEach(function(chip){
+    chip.addEventListener('click',function(){
+      var f=this.getAttribute('data-f');
+      var v=this.getAttribute('data-v');
+      filters[f]=v;
+      document.querySelectorAll('.chip[data-f="'+f+'"]').forEach(function(c){c.classList.remove('on');});
+      this.classList.add('on');
+      renderGrid();
+    });
+  });
+
+  renderGrid();
+})();
+</script>
+</body></html>
