@@ -1,968 +1,329 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revenue Fluent — A new language for HR. The language of Revenue.</title>
-<meta name="description" content="The only platform that teaches HR professionals to speak the language of revenue. 5 live intelligence tools. 18 metrics. Real org scenarios. CRFP certification.">
-<meta property="og:title" content="Revenue Fluent — The language of Revenue.">
-<meta property="og:description" content="HR has never had a seat at the strategy table. Not because the work isn't valuable. Because the language was wrong. Revenue Fluent changes that.">
-<meta property="og:type" content="website">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Revenue Fluent — A new language for HR</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{
-  background:#08090F;
-  color:rgba(236,238,255,0.92);
-  font-family:'Sora',sans-serif;
-  font-weight:400;
-  line-height:1.7;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
 :root{
-  --accent:#6366F1;
-  --accent2:#818CF8;
-  --teal:#2DD4BF;
-  --amber:#F59E0B;
-  --red:#EF4444;
-  --green:#10B981;
-  --purple:#A855F7;
-  --text:rgba(236,238,255,0.92);
-  --text-dim:rgba(236,238,255,0.55);
-  --text-mute:rgba(236,238,255,0.28);
-  --border:rgba(255,255,255,0.07);
-  --border-hi:rgba(255,255,255,0.13);
-  --bg2:#0F1120;
-  --bg3:#141828;
-  --font-mono:'DM Mono',monospace;
+  --bg:#04060E;--bg2:#0A0C14;--bg3:#060810;
+  --cobalt:#3A7ADB;--cobalt-border:rgba(30,80,200,.18);--cobalt-dim:rgba(30,80,200,.08);
+  --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
+  --teal:#38C490;--red:#E05C3A;
+  --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
+  --text-mute:rgba(30,80,200,.25);--border:rgba(30,80,200,.15);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --serif:'Playfair Display',serif;--hero:'Bebas Neue',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--font);
+  font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 
-/* STAR CANVAS */
-#star-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+/* BACKGROUND */
+.bg-layer{
+  position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%,rgba(20,60,160,.22) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 30% at 85% 70%,rgba(184,115,51,.06) 0%,transparent 50%),
+    radial-gradient(ellipse 30% 20% at 15% 80%,rgba(20,60,160,.08) 0%,transparent 50%),
+    linear-gradient(rgba(20,60,180,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,60,180,.022) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,100% 100%,52px 52px,52px 52px;
+}
 
-/* NAV */
+/* TOP NAV */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 3rem;height:64px;
-  background:rgba(8,9,15,0.82);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  transition:background 0.3s;
+  padding:0 48px;height:56px;
+  background:rgba(4,6,14,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--cobalt-border);
 }
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo{width:30px;height:30px;border-radius:8px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);display:flex;align-items:center;justify-content:center}
-.nav-logo-dot{width:10px;height:10px;border-radius:50%;background:#818CF8;animation:pulse 2.5s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
-.nav-brand-text{font-weight:800;font-size:0.95rem;color:var(--text);letter-spacing:-0.02em}
-.nav-brand-text em{font-weight:300;font-style:italic;color:var(--accent2)}
-.nav-links{display:flex;align-items:center;gap:2rem}
-.nav-link{font-size:0.82rem;color:var(--text-dim);text-decoration:none;transition:color 0.15s;letter-spacing:0.01em}
-.nav-link:hover{color:var(--text)}
-.nav-right{display:flex;align-items:center;gap:10px}
-.btn-signin{font-size:0.82rem;color:var(--text-dim);background:transparent;border:1px solid var(--border-hi);border-radius:6px;padding:7px 16px;cursor:pointer;transition:all 0.15s;text-decoration:none;font-family:'Sora',sans-serif}
-.btn-signin:hover{color:var(--text);border-color:rgba(255,255,255,0.25)}
-.btn-start{font-size:0.82rem;color:#fff;background:var(--accent);border:none;border-radius:6px;padding:8px 18px;cursor:pointer;transition:all 0.2s;text-decoration:none;font-family:'Sora',sans-serif;font-weight:600;display:flex;align-items:center;gap:6px}
-.btn-start:hover{background:#5558E3;transform:translateY(-1px);box-shadow:0 4px 20px rgba(99,102,241,0.4)}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--copper);flex-shrink:0}
+.nav-name{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-cool);font-weight:500}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);padding:6px 12px;border-radius:6px;text-decoration:none;transition:all .15s;border:1px solid transparent}
+.nav-link:hover{color:var(--text-mid);border-color:var(--cobalt-border);background:var(--cobalt-dim)}
+.nav-cta{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--cobalt);padding:7px 16px;border-radius:6px;text-decoration:none;transition:all .15s;font-weight:500}
+.nav-cta:hover{background:#4A8AEB}
 
-/* SECTIONS */
-.section{position:relative;z-index:1}
-.container{max-width:1080px;margin:0 auto;padding:0 2rem}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 2rem 80px;position:relative;z-index:1}
-.hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);border-radius:20px;padding:5px 14px;font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:2.5rem}
-.hero-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2);animation:pulse 1.5s ease-in-out infinite}
-.hero-h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:300;font-style:italic;line-height:1.1;letter-spacing:-0.03em;color:rgba(236,238,255,0.65);margin-bottom:0.25rem}
-.hero-h1 strong{display:block;font-weight:800;font-style:normal;color:var(--text);font-size:clamp(2.2rem,4.5vw,3.8rem)}
-.hero-h1 em.accent{color:var(--accent2);font-weight:800;font-style:italic}
-.hero-sub{font-size:1rem;color:var(--text-dim);line-height:1.85;max-width:560px;margin:1.5rem auto 2.5rem;font-weight:300}
-.hero-sub b{color:var(--text);font-weight:600}
-.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
-.hero-btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;text-decoration:none}
-.hero-btn-primary:hover{background:#5558E3;transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,0.45)}
-.hero-btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text-dim);border:1px solid var(--border-hi);border-radius:8px;padding:14px 28px;font-family:'Sora',sans-serif;font-weight:500;font-size:0.95rem;cursor:pointer;transition:all 0.2s;text-decoration:none}
-.hero-btn-secondary:hover{color:var(--text);border-color:rgba(255,255,255,0.3)}
-.hero-btn-3d{display:inline-flex;align-items:center;gap:6px;background:rgba(45,212,191,0.08);color:var(--teal);border:1px solid rgba(45,212,191,0.2);border-radius:20px;padding:8px 18px;font-family:var(--font-mono);font-size:0.68rem;cursor:pointer;transition:all 0.2s;text-decoration:none;letter-spacing:0.04em}
-.hero-btn-3d:hover{background:rgba(45,212,191,0.12);border-color:rgba(45,212,191,0.35)}
-.hero-trust{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
-.hero-trust-item{font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute)}
-
-/* TOOLS TICKER */
-.tools-ticker{overflow:hidden;padding:14px 0;background:rgba(8,9,15,0.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
-.tools-track{display:flex;gap:0;width:max-content;animation:toolsTick 28s linear infinite}
-@keyframes toolsTick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tools-item{display:flex;align-items:center;gap:8px;padding:0 24px;font-family:var(--font-mono);font-size:0.65rem;color:var(--text-mute);white-space:nowrap}
-.tools-item span{color:var(--accent2);font-weight:500}
-.tools-dot{width:3px;height:3px;border-radius:50%;background:var(--border-hi)}
-
-/* STATS BAR */
-.stats-section{padding:5rem 0;position:relative;z-index:1}
-.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.stat-item{background:#0B0D18;padding:2rem 1.5rem;text-align:center}
-.stat-val{font-weight:800;font-size:3rem;color:var(--text);line-height:1;letter-spacing:-0.04em;margin-bottom:0.5rem}
-.stat-val.teal{color:var(--teal)} .stat-val.accent{color:var(--accent2)} .stat-val.amber{color:var(--amber)} .stat-val.green{color:var(--green)} .stat-val.purple{color:var(--purple)}
-.stat-label{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.12em}
-
-/* SECTION HEADERS */
-.section-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:1.25rem}
-.section-eyebrow::before,.section-eyebrow::after{content:'——'}
-.section-h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:300;font-style:italic;color:rgba(236,238,255,0.65);line-height:1.15;letter-spacing:-0.03em;margin-bottom:0.25rem}
-.section-h2 strong{font-weight:800;font-style:normal;color:var(--text)}
-.section-h2 em.acc{color:var(--accent2);font-style:italic;font-weight:800}
-.section-h2 em.teal{color:var(--teal);font-style:italic;font-weight:800}
-.section-lead{font-size:0.95rem;color:var(--text-dim);line-height:1.85;max-width:560px;font-weight:300;margin-top:1rem}
-.section-lead b{color:var(--text);font-weight:600}
-
-/* THE PROBLEM */
-.problem-section{padding:5rem 0 4rem;position:relative;z-index:1}
-.problem-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:2.5rem}
-.prob-card{background:#0B0D18;border:1px solid var(--border);border-radius:12px;padding:1.75rem}
-.prob-icon{font-size:1.5rem;margin-bottom:1rem;display:block}
-.prob-num{font-family:var(--font-mono);font-size:0.55rem;color:rgba(255,255,255,0.12);margin-bottom:0.75rem;letter-spacing:0.1em}
-.prob-h{font-weight:700;font-size:0.95rem;color:var(--text);margin-bottom:0.5rem;line-height:1.3}
-.prob-p{font-size:0.82rem;color:var(--text-dim);line-height:1.75}
-
-/* SOLUTION SECTION */
-.solution-section{padding:5rem 0;position:relative;z-index:1;text-align:center}
-.sol-terminal{display:inline-flex;align-items:center;gap:8px;background:rgba(8,9,15,0.9);border:1px solid var(--border-hi);border-radius:8px;padding:8px 18px;font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);margin:2rem 0}
-.sol-terminal-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 1.2s ease-in-out infinite}
-.sol-cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:14px 32px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;text-decoration:none;margin-top:1.5rem}
-.sol-cta:hover{background:#5558E3;transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,0.4)}
-
-/* BENTO FEATURES */
-.features-section{padding:4rem 0 5rem;position:relative;z-index:1}
-.bento-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto;gap:12px;margin-top:2.5rem}
-.bento-card{background:#0B0D18;border:1px solid var(--border);border-radius:16px;padding:1.75rem;overflow:hidden;position:relative;transition:border-color 0.2s}
-.bento-card:hover{border-color:var(--border-hi)}
-.bento-tag{font-family:var(--font-mono);font-size:0.55rem;color:var(--accent2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.875rem;display:flex;align-items:center;gap:6px}
-.bento-tag::before{content:'';width:14px;height:1px;background:var(--accent)}
-.bento-h{font-weight:700;font-size:1.05rem;color:var(--text);line-height:1.3;margin-bottom:0.5rem;letter-spacing:-0.01em}
-.bento-p{font-size:0.82rem;color:var(--text-dim);line-height:1.75}
-/* Grid positions */
-.bc-1{grid-column:1/8;grid-row:1}
-.bc-2{grid-column:8/13;grid-row:1}
-.bc-3{grid-column:1/5;grid-row:2}
-.bc-4{grid-column:5/9;grid-row:2}
-.bc-5{grid-column:9/13;grid-row:2}
-.bc-6{grid-column:1/6;grid-row:3}
-.bc-7{grid-column:6/13;grid-row:3}
-/* Card accent lines */
-.bc-1::before,.bc-2::before,.bc-3::before,.bc-4::before,.bc-5::before,.bc-6::before,.bc-7::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+/* HERO SECTION */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:120px 48px 80px;text-align:center;
 }
-.bc-1::before{background:linear-gradient(90deg,var(--accent),var(--accent2))}
-.bc-2::before{background:linear-gradient(90deg,var(--teal),#06B6D4)}
-.bc-3::before{background:linear-gradient(90deg,var(--amber),#F97316)}
-.bc-4::before{background:linear-gradient(90deg,var(--purple),var(--accent))}
-.bc-5::before{background:var(--green)}
-.bc-6::before{background:linear-gradient(90deg,var(--teal),var(--accent))}
-.bc-7::before{background:linear-gradient(90deg,var(--red),var(--purple))}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#5A9AEB;margin-bottom:28px;
+  display:flex;align-items:center;gap:12px;
+  opacity:0;animation:fadeUp .6s ease forwards .2s;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(90,154,235,.4))}
+.hero-eyebrow::after{background:linear-gradient(90deg,rgba(90,154,235,.4),transparent)}
 
-/* Mini metrics inside bento cards */
-.mini-metrics{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.25rem}
-.mini-metric{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:6px 12px}
-.mm-val{font-family:var(--font-mono);font-size:0.88rem;font-weight:500;color:var(--teal)}
-.mm-label{font-family:var(--font-mono);font-size:0.5rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.08em;margin-top:1px}
-.bento-stat-big{font-family:'Sora',sans-serif;font-weight:800;font-size:3.5rem;color:var(--text-mute);line-height:1;letter-spacing:-0.04em;margin-top:auto;padding-top:1rem}
-.bento-stat-big em{color:var(--accent2)}
+.hero-headline{
+  font-family:var(--hero);font-size:clamp(4rem,10vw,8.5rem);
+  line-height:.9;letter-spacing:.02em;
+  color:var(--text-cool);margin-bottom:20px;
+  opacity:0;animation:fadeUp .7s ease forwards .4s;
+}
+.hero-headline .gold-line{
+  display:block;
+  background:linear-gradient(135deg,#F0C840 0%,#D4900A 25%,#F5D060 55%,#C48000 80%,#E8C87A 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 40px rgba(200,160,40,.2));
+}
 
-/* 3D SPATIAL CARD */
-#humance-canvas{width:100%;height:200px;display:block;border-radius:10px;margin-top:1rem;cursor:grab}
-#humance-canvas:active{cursor:grabbing}
-.asset-dots{display:flex;gap:6px;margin-top:0.75rem;flex-wrap:wrap}
-.asset-dot{display:flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:0.55rem;color:var(--text-mute)}
-.ad-circle{width:7px;height:7px;border-radius:50%}
+.hero-sub{
+  font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2.5vw,1.5rem);
+  color:var(--text-dim);max-width:600px;margin:0 auto 40px;line-height:1.6;
+  opacity:0;animation:fadeUp .7s ease forwards .6s;
+}
 
-/* HOW IT WORKS */
-.how-section{padding:5rem 0;position:relative;z-index:1;text-align:center}
-.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:3rem;position:relative}
-.steps-grid::before{content:'';position:absolute;top:48px;left:calc(16.67% + 1rem);right:calc(16.67% + 1rem);height:1px;background:linear-gradient(90deg,var(--accent),var(--teal));z-index:0}
-.step-card{background:#0B0D18;border:1px solid var(--border);border-radius:16px;padding:2rem 1.75rem;position:relative;text-align:left}
-.step-num{font-family:var(--font-mono);font-size:3.5rem;font-weight:800;color:rgba(255,255,255,0.06);line-height:1;margin-bottom:1rem;letter-spacing:-0.04em}
-.step-icon{font-size:1.5rem;margin-bottom:1rem}
-.step-tag{font-family:var(--font-mono);font-size:0.55rem;color:var(--accent2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.5rem}
-.step-h{font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:0.5rem;letter-spacing:-0.01em}
-.step-p{font-size:0.82rem;color:var(--text-dim);line-height:1.75;margin-bottom:1rem}
-.step-items{display:flex;flex-direction:column;gap:4px}
-.step-item{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute)}
-.step-item::before{content:'→';color:var(--accent2);flex-shrink:0}
+.hero-ctas{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:fadeUp .7s ease forwards .8s;
+}
+.cta-primary{
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--cobalt),#2A6ACB);
+  color:#fff;padding:14px 32px;border-radius:10px;text-decoration:none;
+  font-weight:500;transition:all .2s;
+  box-shadow:0 0 24px rgba(58,122,219,.25);
+}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 0 32px rgba(58,122,219,.4)}
+.cta-secondary{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-dim);padding:14px 24px;border-radius:10px;text-decoration:none;
+  border:1px solid var(--cobalt-border);transition:all .2s;
+}
+.cta-secondary:hover{color:var(--text-mid);border-color:rgba(90,154,235,.4);background:var(--cobalt-dim)}
 
-/* FOR WHO */
-.who-section{padding:4rem 0 5rem;position:relative;z-index:1}
-.who-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:2rem}
-.who-card{background:#0B0D18;border:1px solid var(--border);border-radius:12px;padding:1.25rem}
-.who-icon{font-size:1.3rem;margin-bottom:0.75rem}
-.who-h{font-weight:700;font-size:0.88rem;color:var(--text);margin-bottom:0.4rem}
-.who-p{font-size:0.78rem;color:var(--text-dim);line-height:1.65}
+/* STAT BAR */
+.stat-bar{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  margin-top:60px;border:1px solid var(--cobalt-border);border-radius:12px;
+  overflow:hidden;max-width:700px;width:100%;
+  opacity:0;animation:fadeUp .7s ease forwards 1s;
+  background:rgba(8,16,48,.4);
+}
+.stat-item{flex:1;padding:16px 20px;text-align:center;border-right:1px solid var(--cobalt-border)}
+.stat-item:last-child{border-right:none}
+.stat-val{font-family:var(--mono);font-size:1.2rem;font-weight:500;color:var(--gold);margin-bottom:3px}
+.stat-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
 
-/* FINAL CTA */
-.final-section{padding:6rem 0 5rem;position:relative;z-index:1;text-align:center}
-.final-h{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;font-style:italic;color:rgba(236,238,255,0.55);line-height:1.1;letter-spacing:-0.03em}
-.final-h strong{display:block;font-weight:800;font-style:normal;color:var(--text)}
-.final-h em.teal{color:var(--teal);font-style:italic}
-.final-sub{font-size:0.9rem;color:var(--text-dim);max-width:480px;margin:1.25rem auto 2.5rem;line-height:1.75}
-.final-ctarow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
-.final-trust{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
-.ft-item{font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);display:flex;align-items:center;gap:4px}
-.ft-item::before{content:'·'}
+/* PHILOSOPHY STRIP */
+.philosophy{
+  position:relative;z-index:1;
+  padding:80px 48px;text-align:center;
+  border-top:1px solid var(--cobalt-border);
+}
+.philosophy-inner{max-width:800px;margin:0 auto}
+.philosophy-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#5A9AEB;margin-bottom:20px}
+.philosophy-quote{
+  font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,3vw,2rem);
+  line-height:1.5;color:var(--text-cool);margin-bottom:16px;
+}
+.philosophy-quote b{color:var(--gold);font-style:normal}
+.philosophy-desc{font-size:.9rem;color:var(--text-dim);line-height:1.7;max-width:560px;margin:0 auto}
+
+/* PILLARS SECTION */
+.pillars{position:relative;z-index:1;padding:80px 48px}
+.section-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#5A9AEB;margin-bottom:12px;text-align:center}
+.section-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:600;color:var(--text-cool);text-align:center;margin-bottom:8px}
+.section-sub{font-size:.9rem;color:var(--text-dim);text-align:center;margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto}
+.pillars-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1100px;margin:0 auto}
+.pillar-card{
+  background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;
+  padding:24px 20px;text-decoration:none;
+  transition:all .2s;position:relative;overflow:hidden;
+  animation:pillar-glow 3s ease-in-out infinite;
+}
+@keyframes pillar-glow{
+  0%,100%{box-shadow:0 0 0 1px rgba(58,122,219,.2),0 0 12px rgba(30,80,200,.08)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.4),0 0 24px rgba(30,80,200,.14)}
+}
+.pillar-card:hover{transform:translateY(-4px);border-color:rgba(90,154,235,.4)}
+.pillar-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cobalt),transparent);opacity:.5}
+.pillar-num{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#5A9AEB;margin-bottom:10px}
+.pillar-name{font-size:.92rem;font-weight:600;color:var(--text-cool);margin-bottom:6px;line-height:1.3}
+.pillar-one{font-size:.76rem;color:var(--text-dim);line-height:1.5;margin-bottom:14px}
+.pillar-badge{font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px;display:inline-block}
+.badge-ledger{background:rgba(56,196,144,.08);color:var(--teal);border:1px solid rgba(56,196,144,.2)}
+.badge-premium{background:rgba(224,184,48,.08);color:var(--gold);border:1px solid rgba(224,184,48,.2)}
+.badge-vitals{background:rgba(58,122,219,.08);color:#5A9AEB;border:1px solid rgba(58,122,219,.2)}
+.badge-pl{background:rgba(184,115,51,.08);color:var(--copper-lt);border:1px solid rgba(184,115,51,.2)}
+.badge-bs{background:rgba(224,92,58,.08);color:#F07060;border:1px solid rgba(224,92,58,.2)}
+
+/* HUMACITY SECTION */
+.humacity-section{
+  position:relative;z-index:1;padding:80px 48px;
+  border-top:1px solid var(--cobalt-border);
+}
+.humacity-inner{
+  max-width:900px;margin:0 auto;
+  background:linear-gradient(135deg,rgba(8,16,48,.8),rgba(4,6,14,.95));
+  border:1px solid var(--cobalt-border);border-radius:20px;
+  padding:52px 60px;position:relative;overflow:hidden;
+  animation:hero-glow 3s ease-in-out infinite;
+}
+@keyframes hero-glow{
+  0%,100%{box-shadow:0 0 0 1px rgba(58,122,219,.2),0 0 40px rgba(30,80,200,.08)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.4),0 0 60px rgba(30,80,200,.15)}
+}
+.humacity-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(30,80,200,.5),rgba(224,184,48,.3),rgba(30,80,200,.5),transparent)}
+.hum-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:#5A9AEB;margin-bottom:16px}
+.hum-word{font-family:var(--hero);font-size:clamp(3rem,7vw,5.5rem);line-height:.9;letter-spacing:.02em;background:linear-gradient(135deg,#F0C840 0%,#D4900A 30%,#F5D060 60%,#C48000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;display:block}
+.hum-def{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--text-cool);margin-bottom:14px;line-height:1.5}
+.hum-body{font-size:.9rem;color:var(--text-dim);line-height:1.7;max-width:580px}
+.hum-mantra{font-family:var(--mono);font-size:.72rem;color:rgba(90,154,235,.6);margin-top:20px;padding-top:16px;border-top:1px solid var(--border);line-height:1.6}
 
 /* FOOTER */
-.footer{padding:2rem 0;border-top:1px solid var(--border);position:relative;z-index:1}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.footer-brand{font-weight:800;font-size:0.88rem;color:var(--text-dim);letter-spacing:-0.01em}
-.footer-brand em{font-weight:300;font-style:italic;color:var(--accent2)}
-.footer-links{display:flex;gap:1.5rem}
-.footer-link{font-family:var(--font-mono);font-size:0.62rem;color:var(--text-mute);text-decoration:none;transition:color 0.15s}
-.footer-link:hover{color:var(--text-dim)}
-.footer-copy{font-family:var(--font-mono);font-size:0.6rem;color:var(--text-mute)}
+.footer{
+  position:relative;z-index:1;padding:40px 48px;
+  border-top:1px solid var(--cobalt-border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.footer-brand{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--text-dim)}
+.footer-brand b{color:var(--copper-lt)}
+.footer-copy{font-family:var(--mono);font-size:.62rem;color:var(--text-mute)}
 
 /* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
-.anim-up{opacity:0;animation:fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) forwards}
-.delay-1{animation-delay:0.1s}.delay-2{animation-delay:0.2s}.delay-3{animation-delay:0.3s}.delay-4{animation-delay:0.4s}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
-</style>
-</head>
+@media(max-width:900px){
+  .nav{padding:0 24px}
+  .hero{padding:100px 24px 60px}
+  .pillars-grid{grid-template-columns:repeat(2,1fr)}
+  .pillars-grid .pillar-card:last-child{grid-column:1/-1}
+  .philosophy,.pillars,.humacity-section{padding:60px 24px}
+  .humacity-inner{padding:36px 28px}
+  .footer{padding:30px 24px}
+  .stat-bar{flex-wrap:wrap}
+  .stat-item{flex:0 0 calc(50% - 1px)}
+}
+</style></head>
 <body>
 
-<!-- STAR FIELD CANVAS -->
-<canvas id="star-canvas"></canvas>
+<div class="bg-layer"></div>
 
-<!-- NAV -->
+<!-- TOP NAV -->
 <nav class="nav">
-  <a href="#" class="nav-brand">
-    <div class="nav-logo"><div class="nav-logo-dot"></div></div>
-    <div class="nav-brand-text">Revenue<em>Fluent</em></div>
+  <a href="landing.html" class="nav-brand">
+    <div class="nav-dot"></div>
+    <div class="nav-name">Revenue Fluent</div>
   </a>
   <div class="nav-links">
-    <a href="learn.html" class="nav-link">Learn</a>
-    <a href="cases.html" class="nav-link">Case Studies</a>
-    <a href="simulate.html" class="nav-link">Simulate</a>
-    <a href="certification.html" class="nav-link">Certify</a>
-    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="scenario-library.html" class="nav-link">Library</a>
+    <a href="p1-tool.html" class="nav-link">Tools</a>
+    <a href="#pillars" class="nav-link">About</a>
   </div>
-  <div class="nav-right">
-    <a href="dashboard.html" class="btn-signin">Sign In</a>
-    <a href="p1-tool.html" class="btn-start">⚡ Start Free →</a>
-  </div>
+  <a href="scenario-library.html" class="nav-cta">Open Platform &rarr;</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero section">
-  <div class="hero-pill">⚡ Now live — Free for HR Professionals</div>
-  <h1 class="hero-h1 anim-up">
-    Most HR professionals have never<br>spoken the board's language.
-    <strong><em class="accent">Revenue Fluent</em> changes that.</strong>
+<section class="hero">
+  <div class="hero-eyebrow">Revenue Fluent &middot; by Kumar Vivek</div>
+
+  <h1 class="hero-headline">
+    A new language
+    <span class="gold-line">for HR.</span>
   </h1>
-  <p class="hero-sub anim-up delay-1">
-    You know the frameworks. You've sat through the workshops. But when the CFO asks <b>"what did HR contribute to revenue this quarter?"</b> — most professionals freeze. Revenue Fluent is the only platform that teaches you to answer that question. With a number, a ratio, and a People P&L.
-  </p>
-  <div class="hero-ctas anim-up delay-2">
-    <a href="p1-tool.html" class="hero-btn-primary">⚡ Start Exploring Free</a>
-    <a href="pricing.html" class="hero-btn-secondary">+ Get CRFP — ₹3,999</a>
+
+  <p class="hero-sub">The language of Revenue.</p>
+
+  <div class="hero-ctas">
+    <a href="scenario-library.html" class="cta-primary">Open the Platform &rarr;</a>
+    <a href="#pillars" class="cta-secondary">See the five tools</a>
   </div>
-  <a href="#humance-3d" class="hero-btn-3d anim-up delay-3">🌐 See HUMANCE in 3D →</a>
-  <div class="hero-trust anim-up delay-4">
-    <span class="hero-trust-item">Free to explore</span>
-    <span class="hero-trust-item">·</span>
-    <span class="hero-trust-item">No credit card needed</span>
-    <span class="hero-trust-item">·</span>
-    <span class="hero-trust-item">CRFP certified</span>
-    <span class="hero-trust-item">·</span>
-    <span class="hero-trust-item">LinkedIn shareable</span>
+
+  <div class="stat-bar">
+    <div class="stat-item"><div class="stat-val">5</div><div class="stat-lbl">Intelligence Tools</div></div>
+    <div class="stat-item"><div class="stat-val">750</div><div class="stat-lbl">People Modelled</div></div>
+    <div class="stat-item"><div class="stat-val">15</div><div class="stat-lbl">Scenarios</div></div>
+    <div class="stat-item"><div class="stat-val">7</div><div class="stat-lbl">Currencies</div></div>
   </div>
 </section>
 
-<!-- TOOLS TICKER -->
-<div class="tools-ticker section">
-  <div class="tools-track" id="tools-track"></div>
-</div>
-
-<!-- STATS BAR -->
-<section class="stats-section section">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item"><div class="stat-val teal" id="s1">0</div><div class="stat-label">Intelligence Pillars</div></div>
-      <div class="stat-item"><div class="stat-val accent" id="s2">0</div><div class="stat-label">Revenue Metrics</div></div>
-      <div class="stat-item"><div class="stat-val amber" id="s3">0</div><div class="stat-label">Real Org Scenarios</div></div>
-      <div class="stat-item"><div class="stat-val green" id="s4">0</div><div class="stat-label">Interactive Cases</div></div>
-      <div class="stat-item"><div class="stat-val purple" id="s5">0</div><div class="stat-label">Certifications to Earn</div></div>
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <div class="philosophy-label">The disruption</div>
+    <div class="philosophy-quote">
+      HR has never been a cost centre.<br>
+      It has been an <b>unaudited profit centre.</b><br>
+      Revenue Fluent is the audit.
     </div>
+    <p class="philosophy-desc">Every hire, every retention save, every development investment, every risk resolved — each one has a financial value. Most organisations have never written it down. Revenue Fluent gives HR professionals the tools to write it down, in the language the board already speaks.</p>
   </div>
 </section>
 
-<!-- THE PROBLEM -->
-<section class="problem-section section">
-  <div class="container">
-    <div class="section-eyebrow">The Problem</div>
-    <h2 class="section-h2">Your job title says HR.<br><em class="acc">But nobody gave you the tools</em><br><strong>to actually speak revenue.</strong></h2>
-    <p class="section-lead">The tools sit behind your employer's HRIS login. The courses teach theory. The board tolerates the engagement scores. Until now.</p>
-    <div class="problem-cards">
-      <div class="prob-card">
-        <span class="prob-icon">🔒</span>
-        <div class="prob-num">01 — THE LOCK</div>
-        <div class="prob-h">The tools are locked behind your employer</div>
-        <div class="prob-p">Workday. SAP. Darwinbox. They sit behind a login you don't control. You learn the theory. You never touch the data. You never speak the language. Until now.</div>
-      </div>
-      <div class="prob-card">
-        <span class="prob-icon">📚</span>
-        <div class="prob-num">02 — THE THEORY TRAP</div>
-        <div class="prob-h">Courses teach frameworks. Not decisions.</div>
-        <div class="prob-p">You've read about attrition cost. Watched explainers on People Analytics. But you've never calculated your own org's ATC%, TDF, or ESR on real data. Frameworks without tools are just vocabulary.</div>
-      </div>
-      <div class="prob-card">
-        <span class="prob-icon">🎯</span>
-        <div class="prob-num">03 — THE LANGUAGE GAP</div>
-        <div class="prob-h">You're expected to speak revenue. Nobody taught you how.</div>
-        <div class="prob-p">CFOs expect HR to justify the people budget in revenue terms. Boards want People P&Ls, not engagement decks. Revenue Fluent gives you the language — and the number — that earns the seat.</div>
-      </div>
-    </div>
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="section-eyebrow">The five pillars</div>
+  <h2 class="section-title">HR's complete financial statement suite</h2>
+  <p class="section-sub">Five tools that translate every people decision into financial language. Each reads from the same 750-person data foundation.</p>
+
+  <div class="pillars-grid">
+    <a href="p1-tool.html" class="pillar-card">
+      <div class="pillar-num">L1</div>
+      <div class="pillar-name">The Value Ledger</div>
+      <div class="pillar-one">Every HR decision has a financial entry. Most organisations just never wrote it down.</div>
+      <span class="pillar-badge badge-ledger">Ledger</span>
+    </a>
+    <a href="p2-tool.html" class="pillar-card">
+      <div class="pillar-num">L2</div>
+      <div class="pillar-name">The Talent Premium</div>
+      <div class="pillar-one">Every organisation pays for people. Almost none know what they're actually getting back.</div>
+      <span class="pillar-badge badge-premium">Premium</span>
+    </a>
+    <a href="p3-tool.html" class="pillar-card">
+      <div class="pillar-num">L3</div>
+      <div class="pillar-name">Org Vitals</div>
+      <div class="pillar-one">You've been calling it culture. It's actually your organisation's DNA — and it has a name.</div>
+      <span class="pillar-badge badge-vitals">Diagnostic</span>
+    </a>
+    <a href="p4-tool.html" class="pillar-card">
+      <div class="pillar-num">L4</div>
+      <div class="pillar-name">The Human P&amp;L</div>
+      <div class="pillar-one">HR has always had a P&amp;L. Nobody taught them to read it.</div>
+      <span class="pillar-badge badge-pl">Statement</span>
+    </a>
+    <a href="p5-tool.html" class="pillar-card">
+      <div class="pillar-num">L5</div>
+      <div class="pillar-name">The Human Balance Sheet</div>
+      <div class="pillar-one">Your organisation has always had a Human Balance Sheet. Nobody ever filed it.</div>
+      <span class="pillar-badge badge-bs">Capstone</span>
+    </a>
   </div>
 </section>
 
-<!-- THE 5 PILLARS — CONDENSED -->
-<section class="section" style="padding:4rem 0;position:relative;z-index:1">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:2.5rem">
-      <div class="section-eyebrow">The Revenue Fluent Framework</div>
-      <h2 class="section-h2">Five pillars. <strong>Eighteen metrics.</strong><br><em class="teal">All coined by us. All new.</em></h2>
-      <p style="font-size:0.88rem;color:var(--text-dim);max-width:520px;margin:1rem auto 0;line-height:1.75">These concepts don't exist in any textbook, any HRIS, or any MBA curriculum. Revenue Fluent is the first framework that turns people into a financial intelligence system.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
-      <a href="framework.html" style="text-decoration:none">
-        <div style="background:#0B0D18;border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;transition:all 0.2s;cursor:pointer" onmouseenter="this.style.borderColor='rgba(99,102,241,0.4)'" onmouseleave="this.style.borderColor='var(--border)'">
-          <div style="width:36px;height:36px;border-radius:8px;background:rgba(99,102,241,0.12);display:flex;align-items:center;justify-content:center;font-size:1rem;margin:0 auto 0.75rem">⟳</div>
-          <div style="font-family:var(--font-mono);font-size:0.52rem;color:var(--accent2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Pillar 1</div>
-          <div style="font-weight:700;font-size:0.82rem;color:var(--text);margin-bottom:6px">Revenue Connect</div>
-          <div style="font-size:0.72rem;color:var(--text-mute);line-height:1.55">ATC% · TDF · ESR</div>
-        </div>
-      </a>
-      <a href="framework.html" style="text-decoration:none">
-        <div style="background:#0B0D18;border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;transition:all 0.2s" onmouseenter="this.style.borderColor='rgba(45,212,191,0.4)'" onmouseleave="this.style.borderColor='var(--border)'">
-          <div style="width:36px;height:36px;border-radius:8px;background:rgba(45,212,191,0.1);display:flex;align-items:center;justify-content:center;font-size:1rem;margin:0 auto 0.75rem">◈</div>
-          <div style="font-family:var(--font-mono);font-size:0.52rem;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Pillar 2</div>
-          <div style="font-weight:700;font-size:0.82rem;color:var(--text);margin-bottom:6px">People Alpha</div>
-          <div style="font-size:0.72rem;color:var(--text-mute);line-height:1.55">Hiring · Retention · L&D · Promotion</div>
-        </div>
-      </a>
-      <a href="framework.html" style="text-decoration:none">
-        <div style="background:#0B0D18;border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;transition:all 0.2s" onmouseenter="this.style.borderColor='rgba(245,158,11,0.4)'" onmouseleave="this.style.borderColor='var(--border)'">
-          <div style="width:36px;height:36px;border-radius:8px;background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center;font-size:1rem;margin:0 auto 0.75rem">⬡</div>
-          <div style="font-family:var(--font-mono);font-size:0.52rem;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Pillar 3</div>
-          <div style="font-weight:700;font-size:0.82rem;color:var(--text);margin-bottom:6px">Team Architecture</div>
-          <div style="font-size:0.72rem;color:var(--text-mute);line-height:1.55">OEI · PCoB · OSI</div>
-        </div>
-      </a>
-      <a href="framework.html" style="text-decoration:none">
-        <div style="background:#0B0D18;border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;transition:all 0.2s" onmouseenter="this.style.borderColor='rgba(168,85,247,0.4)'" onmouseleave="this.style.borderColor='var(--border)'">
-          <div style="width:36px;height:36px;border-radius:8px;background:rgba(168,85,247,0.1);display:flex;align-items:center;justify-content:center;font-size:1rem;margin:0 auto 0.75rem">◎</div>
-          <div style="font-family:var(--font-mono);font-size:0.52rem;color:var(--purple);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Pillar 4</div>
-          <div style="font-weight:700;font-size:0.82rem;color:var(--text);margin-bottom:6px">HUMANCE</div>
-          <div style="font-size:0.72rem;color:var(--text-mute);line-height:1.55">Trust · Culture · Signal · Belonging</div>
-        </div>
-      </a>
-      <a href="framework.html" style="text-decoration:none">
-        <div style="background:#0B0D18;border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;transition:all 0.2s" onmouseenter="this.style.borderColor='rgba(16,185,129,0.4)'" onmouseleave="this.style.borderColor='var(--border)'">
-          <div style="width:36px;height:36px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;font-size:1rem;margin:0 auto 0.75rem">◑</div>
-          <div style="font-family:var(--font-mono);font-size:0.52rem;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">Pillar 5</div>
-          <div style="font-weight:700;font-size:0.82rem;color:var(--text);margin-bottom:6px">People P&L</div>
-          <div style="font-size:0.72rem;color:var(--text-mute);line-height:1.55">Net ROI · ROI Ratio</div>
-        </div>
-      </a>
-    </div>
-    <div style="text-align:center;margin-top:1.25rem">
-      <a href="framework.html" style="font-family:var(--font-mono);font-size:0.65rem;color:var(--accent2);text-decoration:none;border:1px solid var(--border-accent);padding:6px 16px;border-radius:5px;display:inline-flex;align-items:center;gap:6px">Read the full framework — all 18 metrics defined →</a>
-    </div>
-  </div>
-</section>
-
-<!-- THE SOLUTION -->
-<section class="solution-section section">
-  <div class="container">
-    <div class="section-eyebrow">The Solution</div>
-    <h2 class="section-h2">
-      Not a course. Not a certification.<br>
-      <em class="teal">A complete Revenue Intelligence</em><br>
-      <strong>environment.</strong>
-    </h2>
-    <p class="section-lead" style="margin:1rem auto;text-align:center">
-      Live tools. Real org data. Simulated decisions. Every interaction teaches you to connect people to revenue — by actually doing it. Not watching videos about it.
-    </p>
-    <div class="sol-terminal">
-      <div class="sol-terminal-dot"></div>
-      <span id="sol-terminal-text">Currently running → Revenue Connect Calculator</span>
-    </div>
-    <br>
-    <a href="p1-tool.html" class="sol-cta">Try it Free — No Card Needed →</a>
-  </div>
-</section>
-
-<!-- BENTO FEATURES -->
-<section class="features-section section">
-  <div class="container">
-    <div class="section-eyebrow">Everything inside a real Revenue Intelligence environment</div>
-    <div class="bento-grid">
-
-      <!-- BC1: 5 Live Tools — LARGE -->
-      <div class="bento-card bc-1">
-        <div class="bento-tag">Core Platform</div>
-        <div class="bento-h">5 Live Intelligence Tools. One Platform.</div>
-        <div class="bento-p">Every people metric you'd need to build a complete People P&L — Revenue Connect, People Alpha Engine, Team Architecture Analyser, HUMANCE Intelligence, People P&L Generator. All interactive. All live.</div>
-        <div class="mini-metrics">
-          <div class="mini-metric"><div class="mm-val" style="color:var(--red)">141%</div><div class="mm-label">ATC%</div></div>
-          <div class="mini-metric"><div class="mm-val" style="color:var(--amber)">0.29</div><div class="mm-label">TDF Index</div></div>
-          <div class="mini-metric"><div class="mm-val" style="color:var(--teal)">+22%</div><div class="mm-label">People Alpha</div></div>
-          <div class="mini-metric"><div class="mm-val" style="color:var(--green)">2.3x</div><div class="mm-label">People ROI</div></div>
-          <div class="mini-metric"><div class="mm-val" style="color:var(--purple)">₹12.1Cr</div><div class="mm-label">HUMANCE</div></div>
-        </div>
-      </div>
-
-      <!-- BC2: 3D HUMANCE — SMALL -->
-      <div class="bento-card bc-2" id="humance-3d">
-        <div class="bento-tag">World First · 3D</div>
-        <div class="bento-h">HUMANCE Sphere</div>
-        <div class="bento-p">4 human asset classes in spatial 3D. Trust Capital. Culture Yield. Signal Intelligence. Belonging Premium. Each sphere scales with its rupee value. Drag to rotate.</div>
-        <canvas id="humance-canvas"></canvas>
-        <div class="asset-dots">
-          <div class="asset-dot"><div class="ad-circle" style="background:#6366F1"></div>Trust</div>
-          <div class="asset-dot"><div class="ad-circle" style="background:#2DD4BF"></div>Culture</div>
-          <div class="asset-dot"><div class="ad-circle" style="background:#F59E0B"></div>Signal</div>
-          <div class="asset-dot"><div class="ad-circle" style="background:#A855F7"></div>Belonging</div>
-        </div>
-      </div>
-
-      <!-- BC3: Real Scenarios -->
-      <div class="bento-card bc-3">
-        <div class="bento-tag">Scenarios</div>
-        <div class="bento-h">3 Real Org Scenarios</div>
-        <div class="bento-p">TechVelocity (SaaS, Bengaluru). Sterling Consulting (London). Mehta & Sons (Hyderabad). Each with 50 employees, real people events, and revenue consequences.</div>
-        <div style="margin-top:1rem;display:flex;flex-direction:column;gap:5px">
-          <div style="display:flex;justify-content:space-between;font-size:0.75rem;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-dim)">TechVelocity</span><span style="font-family:var(--font-mono);color:var(--red)">ATC% 141%</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:0.75rem;padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-dim)">Sterling</span><span style="font-family:var(--font-mono);color:var(--amber)">Alpha -8%</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:0.75rem;padding:5px 0"><span style="color:var(--text-dim)">Mehta & Sons</span><span style="font-family:var(--font-mono);color:var(--purple)">HUMANCE -₹12.1Cr</span></div>
-        </div>
-      </div>
-
-      <!-- BC4: Simulation -->
-      <div class="bento-card bc-4">
-        <div class="bento-tag">AI Simulation</div>
-        <div class="bento-h">Make the call. See the revenue.</div>
-        <div class="bento-p">3 decision simulations. 18 stages. Every choice updates the live People P&L. See what your instincts cost — or earn — in rupees.</div>
-        <div class="bento-stat-big"><em>18</em></div>
-      </div>
-
-      <!-- BC5: Game -->
-      <div class="bento-card bc-5">
-        <div class="bento-tag">Challenge</div>
-        <div class="bento-h">Timed. Scored. Graded.</div>
-        <div class="bento-p">Sprint (10 questions · 90 seconds) through Revenue Fluency questions. Streak multipliers. Wrong answers cost time. A+ to C grade.</div>
-        <div class="bento-stat-big"><em>300</em><br><span style="font-size:1rem;font-weight:400;color:var(--text-mute)">pts max</span></div>
-      </div>
-
-      <!-- BC6: Learning Hub -->
-      <div class="bento-card bc-6">
-        <div class="bento-tag">Learning Hub</div>
-        <div class="bento-h">Five deep-dives. Twelve real stories. India and global.</div>
-        <div class="bento-p">Each pillar page is 8–10 minutes of genuine reading — the intellectual case, real stories from Bengaluru to Berlin to San Francisco, worked instrument examples, and a Monday-morning practitioner's playbook. This is the kind of content that makes you screenshot and share with your CHRO.</div>
-        <div style="margin-top:1.25rem;display:flex;gap:6px;flex-wrap:wrap">
-          <span style="font-family:var(--font-mono);font-size:0.58rem;padding:3px 9px;border-radius:4px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-mute)">🇮🇳 Bengaluru · Mumbai · Delhi · Hyderabad · Pune</span>
-          <span style="font-family:var(--font-mono);font-size:0.58rem;padding:3px 9px;border-radius:4px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-mute)">🌍 London · Berlin · Singapore · SF · Sydney</span>
-        </div>
-      </div>
-
-      <!-- BC7: Certification -->
-      <div class="bento-card bc-7">
-        <div class="bento-tag">Certification</div>
-        <div class="bento-h">Certified Revenue Fluent Practitioner — CRFP</div>
-        <div class="bento-p">Complete all 5 intelligence tools to unlock your CRFP certificate. Printable. LinkedIn-shareable in one click. A signal that means something specific: you can build a People P&L and defend it in any boardroom in the world.</div>
-        <div style="margin-top:1.25rem;display:flex;gap:8px;flex-wrap:wrap">
-          <div style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:6px;padding:6px 12px;font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2)">CRFP certified</div>
-          <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:6px;padding:6px 12px;font-family:var(--font-mono);font-size:0.6rem;color:var(--green)">LinkedIn share</div>
-          <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:6px;padding:6px 12px;font-family:var(--font-mono);font-size:0.6rem;color:var(--amber)">Printable PDF</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how-section section">
-  <div class="container">
-    <div class="section-eyebrow">How it works</div>
-    <h2 class="section-h2">From zero to Revenue Fluent<br><em class="teal">in three steps.</em></h2>
-    <p style="font-size:0.9rem;color:var(--text-dim);margin-top:0.75rem">No onboarding. No setup calls. No waiting. Pick a scenario, run every tool, earn your certification — today.</p>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <div class="step-icon">⚡</div>
-        <div class="step-tag">Step One</div>
-        <div class="step-h">Pick a scenario or use your own numbers</div>
-        <div class="step-p">Choose from TechVelocity, Sterling, or Mehta & Sons — or dial in your own org's data using the sliders. All tools run instantly.</div>
-        <div class="step-items">
-          <div class="step-item">3 pre-built org scenarios</div>
-          <div class="step-item">50 employees each</div>
-          <div class="step-item">SaaS · Consulting · Family business</div>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <div class="step-icon">📊</div>
-        <div class="step-tag">Step Two</div>
-        <div class="step-h">Run every intelligence tool live</div>
-        <div class="step-p">Your inputs power 5 live calculators. Every slider updates ATC%, People Alpha, Revenue Architecture, HUMANCE, and People P&L in real time. This is what learning by doing actually looks like.</div>
-        <div class="step-items">
-          <div class="step-item">5 intelligence tools</div>
-          <div class="step-item">18 live revenue metrics</div>
-          <div class="step-item">3D HUMANCE visualisation</div>
-          <div class="step-item">Live People P&L statement</div>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <div class="step-icon">🏆</div>
-        <div class="step-tag">Step Three</div>
-        <div class="step-h">Get certified. Get recognised.</div>
-        <div class="step-p">Pass the CRFP certification to prove you can build a People P&L and speak revenue language. Download your credential, add it to LinkedIn, show the world you don't just talk HR — you speak revenue.</div>
-        <div class="step-items">
-          <div class="step-item">CRFP certification</div>
-          <div class="step-item">LinkedIn one-click share</div>
-          <div class="step-item">Printable certificate</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO IT'S FOR -->
-<section class="who-section section">
-  <div class="container">
-    <div class="section-eyebrow">Who it's for</div>
-    <h2 class="section-h2" style="text-align:center"><strong>Built for the HR professional</strong><br><em class="acc">who refuses to be the soft department.</em></h2>
-    <div class="who-grid" style="margin-top:2rem">
-      <div class="who-card">
-        <div class="who-icon">👩‍💼</div>
-        <div class="who-h">CHROs & VPs</div>
-        <div class="who-p">Walk into the next board meeting with a People P&L instead of engagement scores. Change the conversation permanently.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">📈</div>
-        <div class="who-h">HR Business Partners</div>
-        <div class="who-p">Stop being the person who manages the process. Start being the person who quantifies the revenue risk. Get in the room.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">🎓</div>
-        <div class="who-h">HR Students & MBAs</div>
-        <div class="who-p">Graduate with 18 revenue metrics, 5 live tools, and a CRFP certification. Stand out from every other CV in the pile.</div>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">🔭</div>
-        <div class="who-h">People Analytics Pros</div>
-        <div class="who-p">You have the data. Revenue Fluent gives you the framework to connect it directly to revenue — in a language every CFO understands.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS + TIME TO VALUE -->
-<section class="section" style="padding:3rem 0;position:relative;z-index:1">
-  <div class="container">
-    <div style="background:#0B0D18;border:1px solid var(--border);border-radius:16px;padding:2rem 2.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1px">
-      <div style="text-align:center;padding:1rem">
-        <div style="font-weight:800;font-size:2.5rem;color:var(--teal);line-height:1;letter-spacing:-0.04em">5<span style="font-family:var(--font-mono);font-size:1.2rem">min</span></div>
-        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px">To first insight</div>
-      </div>
-      <div style="text-align:center;padding:1rem;border-left:1px solid var(--border)">
-        <div style="font-weight:800;font-size:2.5rem;color:var(--accent2);line-height:1;letter-spacing:-0.04em">5+</div>
-        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px">Live tools</div>
-      </div>
-      <div style="text-align:center;padding:1rem;border-left:1px solid var(--border)">
-        <div style="font-weight:800;font-size:2.5rem;color:var(--amber);line-height:1;letter-spacing:-0.04em">0</div>
-        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px">Setup calls needed</div>
-      </div>
-      <div style="text-align:center;padding:1rem;border-left:1px solid var(--border)">
-        <div style="font-weight:800;font-size:2.5rem;color:var(--green);line-height:1;letter-spacing:-0.04em">1</div>
-        <div style="font-family:var(--font-mono);font-size:0.58rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px">Certification to earn</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-section section">
-  <div class="container">
-    <h2 class="final-h">
-      Stop waiting.<br>
-      <em class="teal">Start speaking revenue.</em><br>
-      <strong>Stop reading about HR.<br>Start leading it.</strong>
-    </h2>
-    <p class="final-sub">Every tool. Every simulation. Every case study. Every conversation scenario. Free to explore right now. No card needed. Upgrade when you're ready.</p>
-    <div class="final-ctarow">
-      <a href="p1-tool.html" class="hero-btn-primary">⚡ Start Exploring Free</a>
-      <a href="pricing.html" class="hero-btn-secondary">View Pricing →</a>
-    </div>
-    <div class="final-trust">
-      <span class="ft-item">Free to explore</span>
-      <span class="ft-item">₹3,999 one-time for CRFP</span>
-      <span class="ft-item">₹499/month PRO</span>
-      <span class="ft-item">No annual lock-in</span>
-      <span class="ft-item">Your data stays in your browser</span>
+<!-- HUMACITY -->
+<section class="humacity-section">
+  <div class="humacity-inner">
+    <div class="hum-eyebrow">The philosophy behind the platform</div>
+    <span class="hum-word">Humacity</span>
+    <div class="hum-def">The quality of human capital in an organisation — finally measurable.</div>
+    <p class="hum-body">Constructed from <em>humanus</em> (Latin: human) and the <em>-acity</em> suffix — as in tenacity, audacity, veracity. The quality that separates organisations that compound from those that plateau. Revenue Fluent is built on it.</p>
+    <div class="hum-mantra">
+      "Revenue tells you what you earned.<br>
+      Humacity tells you what made earning possible."
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="footer section">
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">Revenue<em>Fluent</em></div>
-      <div class="footer-links">
-        <a href="learn.html" class="footer-link">Learning Hub</a>
-        <a href="pricing.html" class="footer-link">Pricing</a>
-        <a href="certification.html" class="footer-link">Certify</a>
-        <a href="mailto:info@revenuefluent.com" class="footer-link">info@revenuefluent.com</a>
-      </div>
-      <div class="footer-copy">© 2025 Revenue Fluent by Kumar Vivek</div>
-    </div>
-  </div>
+<footer class="footer">
+  <div class="footer-brand">Revenue Fluent &middot; by <b>Kumar Vivek</b></div>
+  <div class="footer-copy">&copy; 2026 Kumar Vivek &middot; Humacity&#8482;</div>
 </footer>
 
-<script>
-// ── REVENUE INTELLIGENCE GRID BACKGROUND ──────────────────
-(function() {
-  const canvas = document.getElementById('star-canvas');
-  const ctx = canvas.getContext('2d');
-
-  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  window.addEventListener('resize', resize);
-  resize();
-
-  // Floating data nodes — each represents a metric
-  const METRICS = [
-    { label:'ATC%', val:'141%', color:'rgba(239,68,68,' },
-    { label:'People Alpha', val:'+22%', color:'rgba(45,212,191,' },
-    { label:'ESR', val:'60.5%', color:'rgba(245,158,11,' },
-    { label:'HUMANCE', val:'₹12.1Cr', color:'rgba(168,85,247,' },
-    { label:'People ROI', val:'2.3x', color:'rgba(99,102,241,' },
-    { label:'TDF', val:'0.29', color:'rgba(239,68,68,' },
-    { label:'OEI', val:'74%', color:'rgba(45,212,191,' },
-    { label:'PCoB', val:'42%', color:'rgba(245,158,11,' },
-    { label:'Trust Capital', val:'₹2.8Cr', color:'rgba(129,140,248,' },
-    { label:'Net ROI', val:'+₹21.5Cr', color:'rgba(16,185,129,' },
-    { label:'Hiring Alpha', val:'+14%', color:'rgba(45,212,191,' },
-    { label:'Config A', val:'+34%', color:'rgba(16,185,129,' },
-  ];
-
-  // Grid lines — horizontal + vertical like a trading terminal
-  const GRID_COLS = 12;
-  const GRID_ROWS = 8;
-
-  // Flowing particles along grid lines
-  let particles = [];
-  let nodes = [];
-  let t = 0;
-
-  function initNodes() {
-    nodes = METRICS.map((m, i) => ({
-      ...m,
-      x: (0.08 + Math.random() * 0.84) * canvas.width,
-      y: (0.08 + Math.random() * 0.84) * canvas.height,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: (Math.random() - 0.5) * 0.15,
-      opacity: 0.08 + Math.random() * 0.12,
-      size: 11 + Math.random() * 6,
-      pulse: Math.random() * Math.PI * 2,
-    }));
-  }
-
-  function initParticles() {
-    particles = [];
-    for (let i = 0; i < 40; i++) {
-      // Horizontal or vertical
-      const horiz = Math.random() > 0.5;
-      particles.push({
-        horiz,
-        pos: Math.random(),
-        track: Math.random(),
-        speed: 0.0008 + Math.random() * 0.0012,
-        color: ['rgba(99,102,241,', 'rgba(45,212,191,', 'rgba(129,140,248,'][Math.floor(Math.random()*3)],
-        opacity: 0.04 + Math.random() * 0.08,
-        length: 0.04 + Math.random() * 0.08,
-      });
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    t += 0.008;
-
-    const cw = canvas.width, ch = canvas.height;
-
-    // ─ GRID LINES ─
-    ctx.lineWidth = 0.5;
-    for (let c = 0; c <= GRID_COLS; c++) {
-      const x = (c / GRID_COLS) * cw;
-      const alpha = 0.025 + (c % 3 === 0 ? 0.02 : 0);
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(99,102,241,${alpha})`;
-      ctx.moveTo(x, 0); ctx.lineTo(x, ch);
-      ctx.stroke();
-    }
-    for (let r = 0; r <= GRID_ROWS; r++) {
-      const y = (r / GRID_ROWS) * ch;
-      const alpha = 0.025 + (r % 2 === 0 ? 0.015 : 0);
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(45,212,191,${alpha})`;
-      ctx.moveTo(0, y); ctx.lineTo(cw, y);
-      ctx.stroke();
-    }
-
-    // ─ FLOWING PARTICLES along grid lines ─
-    particles.forEach(p => {
-      p.pos += p.speed;
-      if (p.pos > 1 + p.length) p.pos = -p.length;
-      const tail = Math.max(0, p.pos - p.length);
-      if (p.horiz) {
-        const y = p.track * ch;
-        const x1 = tail * cw, x2 = p.pos * cw;
-        const grad = ctx.createLinearGradient(x1, y, x2, y);
-        grad.addColorStop(0, p.color + '0)');
-        grad.addColorStop(1, p.color + p.opacity + ')');
-        ctx.beginPath();
-        ctx.strokeStyle = grad; ctx.lineWidth = 1;
-        ctx.moveTo(x1, y); ctx.lineTo(x2, y);
-        ctx.stroke();
-        // Leading dot
-        ctx.beginPath();
-        ctx.arc(x2, y, 1.5, 0, Math.PI*2);
-        ctx.fillStyle = p.color + (p.opacity * 2.5) + ')';
-        ctx.fill();
-      } else {
-        const x = p.track * cw;
-        const y1 = tail * ch, y2 = p.pos * ch;
-        const grad = ctx.createLinearGradient(x, y1, x, y2);
-        grad.addColorStop(0, p.color + '0)');
-        grad.addColorStop(1, p.color + p.opacity + ')');
-        ctx.beginPath();
-        ctx.strokeStyle = grad; ctx.lineWidth = 1;
-        ctx.moveTo(x, y1); ctx.lineTo(x, y2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(x, y2, 1.5, 0, Math.PI*2);
-        ctx.fillStyle = p.color + (p.opacity * 2.5) + ')';
-        ctx.fill();
-      }
-    });
-
-    // ─ FLOATING METRIC NODES ─
-    ctx.font = '500 10px "DM Mono", monospace';
-    nodes.forEach(n => {
-      // Drift
-      n.x += n.vx; n.y += n.vy;
-      n.pulse += 0.02;
-      if (n.x < 60 || n.x > cw - 60) n.vx *= -1;
-      if (n.y < 30 || n.y > ch - 30) n.vy *= -1;
-      const pulseAlpha = n.opacity + Math.sin(n.pulse) * 0.04;
-
-      // Node pill background
-      const lw = ctx.measureText(n.label + '  ' + n.val).width + 20;
-      const px = n.x - lw/2, py = n.y - 10, pr = 4;
-      ctx.beginPath();
-      ctx.moveTo(px + pr, py);
-      ctx.lineTo(px + lw - pr, py);
-      ctx.arcTo(px + lw, py, px + lw, py + pr, pr);
-      ctx.lineTo(px + lw, py + 20 - pr);
-      ctx.arcTo(px + lw, py + 20, px + lw - pr, py + 20, pr);
-      ctx.lineTo(px + pr, py + 20);
-      ctx.arcTo(px, py + 20, px, py + 20 - pr, pr);
-      ctx.lineTo(px, py + pr);
-      ctx.arcTo(px, py, px + pr, py, pr);
-      ctx.closePath();
-      ctx.fillStyle = n.color + (pulseAlpha * 0.25) + ')';
-      ctx.fill();
-      ctx.strokeStyle = n.color + (pulseAlpha * 0.6) + ')';
-      ctx.lineWidth = 0.5;
-      ctx.stroke();
-
-      // Label
-      ctx.fillStyle = n.color + (pulseAlpha * 0.5) + ')';
-      ctx.textAlign = 'center';
-      ctx.fillText(n.label + '  ' + n.val, n.x, n.y + 4);
-
-      // Connection dot
-      ctx.beginPath();
-      ctx.arc(n.x - lw/2 + 8, n.y, 2, 0, Math.PI*2);
-      ctx.fillStyle = n.color + (pulseAlpha * 0.8) + ')';
-      ctx.fill();
-    });
-
-    // ─ RADIAL GRADIENT OVERLAY (depth) ─
-    const grad = ctx.createRadialGradient(cw*0.5, ch*0.4, 0, cw*0.5, ch*0.4, cw*0.7);
-    grad.addColorStop(0, 'rgba(8,9,15,0)');
-    grad.addColorStop(0.6, 'rgba(8,9,15,0)');
-    grad.addColorStop(1, 'rgba(8,9,15,0.7)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, cw, ch);
-
-    requestAnimationFrame(draw);
-  }
-
-  initNodes();
-  initParticles();
-  draw();
-})();
-
-// ── TOOLS TICKER ─────────────────────────────────────────────
-const tools = [
-  'Revenue Connect', 'People Alpha Engine', 'Team Architecture Analyser',
-  'HUMANCE Intelligence', 'People P&L Generator', 'Case Studies',
-  'Revenue Simulation', 'CRFP Challenge', 'Learning Hub',
-  'ATC% Calculator', 'TDF Index', 'ESR Tracker',
-  'Promotion Alpha', 'L&D Alpha', 'Retention Alpha',
-  'OEI Score', 'PCoB', 'OSI Index', 'Trust Capital', 'Culture Yield',
-];
-const track = document.getElementById('tools-track');
-const allTools = [...tools, ...tools];
-track.innerHTML = allTools.map(t =>
-  `<div class="tools-item"><span>${t}</span><div class="tools-dot"></div></div>`
-).join('');
-
-// ── STATS COUNT-UP ───────────────────────────────────────────
-const targets = [5, 18, 3, 3, 1];
-const ids = ['s1','s2','s3','s4','s5'];
-let counted = false;
-function countStats() {
-  if (counted) return; counted = true;
-  ids.forEach((id, i) => {
-    const el = document.getElementById(id);
-    let v = 0; const target = targets[i];
-    const step = Math.max(1, Math.round(target / 30));
-    const t = setInterval(() => {
-      v = Math.min(v + step, target);
-      el.textContent = v;
-      if (v >= target) clearInterval(t);
-    }, 40);
-  });
-}
-const statsObs = new IntersectionObserver(e => { if (e[0].isIntersecting) countStats(); }, { threshold: 0.5 });
-statsObs.observe(document.getElementById('s1'));
-
-// ── TERMINAL TYPING ──────────────────────────────────────────
-const termPhrases = [
-  'Currently running → Revenue Connect Calculator',
-  'Currently running → People Alpha Engine',
-  'Currently running → HUMANCE Intelligence Tool',
-  'Currently running → Team Architecture Analyser',
-  'Currently running → People P&L Generator',
-];
-let tIdx = 0, cIdx = 0, deleting = false;
-const termEl = document.getElementById('sol-terminal-text');
-function typeLoop() {
-  const phrase = termPhrases[tIdx];
-  if (!deleting) {
-    termEl.textContent = phrase.substring(0, cIdx++);
-    if (cIdx > phrase.length) { deleting = true; setTimeout(typeLoop, 1800); return; }
-  } else {
-    termEl.textContent = phrase.substring(0, cIdx--);
-    if (cIdx < 0) { deleting = false; tIdx = (tIdx+1) % termPhrases.length; cIdx = 0; setTimeout(typeLoop, 400); return; }
-  }
-  setTimeout(typeLoop, deleting ? 25 : 45);
-}
-setTimeout(typeLoop, 1000);
-
-// ── HUMANCE 3D SPHERE ────────────────────────────────────────
-(function() {
-  const canvas = document.getElementById('humance-canvas');
-  if (!canvas || typeof THREE === 'undefined') return;
-  const w = canvas.offsetWidth || 400, h = 200;
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, w/h, 0.1, 1000);
-  camera.position.z = 6;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setSize(w, h);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-  const group = new THREE.Group();
-  scene.add(group);
-  const colors = [0x6366F1, 0x2DD4BF, 0xF59E0B, 0xA855F7];
-  const sizes = [0.65, 0.45, 0.75, 0.85];
-  const positions = [[-1.8, 0.7, 0], [1.8, 0.7, 0], [-1.8, -0.7, 0], [1.8, -0.7, 0]];
-  const spheres = [];
-  colors.forEach((c, i) => {
-    const geo = new THREE.IcosahedronGeometry(sizes[i], 1);
-    const mat = new THREE.MeshStandardMaterial({ color:c, emissive:c, emissiveIntensity:0.35, metalness:0.4, roughness:0.3, flatShading:true });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(...positions[i]);
-    group.add(mesh);
-    spheres.push(mesh);
-    // Wireframe
-    const wgeo = new THREE.IcosahedronGeometry(sizes[i]*1.05, 1);
-    const wmat = new THREE.MeshBasicMaterial({ color:c, wireframe:true, transparent:true, opacity:0.12 });
-    mesh.add(new THREE.Mesh(wgeo, wmat));
-    // Line to center
-    const lmat = new THREE.LineBasicMaterial({ color:c, transparent:true, opacity:0.18 });
-    const lgeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(...positions[i])]);
-    group.add(new THREE.Line(lgeo, lmat));
-  });
-  // Core
-  const core = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(0.3, 0),
-    new THREE.MeshStandardMaterial({ color:0xffffff, emissive:0x6366F1, emissiveIntensity:0.8, metalness:0.9, roughness:0.1 })
-  );
-  group.add(core);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-  const l1 = new THREE.PointLight(0x6366F1, 1.2); l1.position.set(4, 4, 4); scene.add(l1);
-  const l2 = new THREE.PointLight(0x2DD4BF, 0.8); l2.position.set(-4, -3, 3); scene.add(l2);
-  // Mouse drag
-  let isDragging = false, prevX = 0, prevY = 0, autoRotate = true;
-  canvas.addEventListener('mousedown', e => { isDragging=true; autoRotate=false; prevX=e.clientX; prevY=e.clientY; });
-  window.addEventListener('mouseup', () => isDragging=false);
-  window.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-    group.rotation.y += (e.clientX-prevX)*0.012;
-    group.rotation.x += (e.clientY-prevY)*0.012;
-    prevX=e.clientX; prevY=e.clientY;
-  });
-  canvas.addEventListener('wheel', e => {
-    e.preventDefault();
-    camera.position.z = Math.max(3, Math.min(10, camera.position.z + e.deltaY*0.01));
-  });
-  function animate() {
-    requestAnimationFrame(animate);
-    if (autoRotate) { group.rotation.y += 0.005; group.rotation.x += 0.002; }
-    spheres.forEach((s,i) => { s.rotation.x += 0.006; s.rotation.y += 0.008; });
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
-
-// ── SCROLL ANIMATIONS ────────────────────────────────────────
-const animEls = document.querySelectorAll('.prob-card, .step-card, .who-card, .bento-card');
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
-  });
-}, { threshold: 0.1 });
-animEls.forEach((el, i) => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = `opacity 0.6s ease ${i*0.06}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i*0.06}s`;
-  obs.observe(el);
-});
-
-// ── NAV SCROLL EFFECT ────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('.nav');
-  nav.style.background = window.scrollY > 60 ? 'rgba(8,9,15,0.97)' : 'rgba(8,9,15,0.82)';
-});
-</script>
-</body>
-</html>
+</body></html>
