@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Revenue Fluent — A new language for HR</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root{
+  --bg:#04060E;--bg2:#0A0C14;--bg3:#060810;
+  --cobalt:#3A7ADB;--cobalt-border:rgba(30,80,200,.18);--cobalt-dim:rgba(30,80,200,.08);
+  --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
+  --teal:#38C490;--red:#E05C3A;
+  --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
+  --text-mute:rgba(30,80,200,.25);--border:rgba(30,80,200,.15);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --serif:'Playfair Display',serif;--hero:'Bebas Neue',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* PARTICLE BG */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* SLIM TOP BAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:56px;background:rgba(4,6,14,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(30,80,200,.12)}
+.tb-brand{display:flex;align-items:center;gap:9px;text-decoration:none}
+.tb-dot{width:7px;height:7px;border-radius:50%;background:var(--copper);animation:dot-pulse 2s ease-in-out infinite}
+@keyframes dot-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+.tb-name{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-cool);font-weight:500}
+.tb-links{display:flex;align-items:center;gap:4px}
+.tb-link{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);padding:5px 12px;border-radius:6px;text-decoration:none;transition:all .15s}
+.tb-link:hover{color:var(--text-mid);background:var(--cobalt-dim)}
+.tb-enter{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;background:var(--cobalt);color:#fff;padding:7px 18px;border-radius:7px;text-decoration:none;transition:all .15s;font-weight:500}
+.tb-enter:hover{background:#4A8AEB;transform:translateY(-1px)}
+
+/* HERO — TWO COLUMN */
+.hero{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:1fr 480px;gap:60px;align-items:center;padding:100px 80px 60px;max-width:1400px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#5A9AEB;margin-bottom:28px;background:rgba(58,122,219,.08);border:1px solid rgba(58,122,219,.2);padding:6px 14px;border-radius:20px}
+.hero-eyebrow::before{content:'●';font-size:.38rem;color:var(--teal);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-headline{font-family:var(--font);font-size:clamp(2.8rem,5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-.025em;color:var(--text-cool);margin-bottom:20px}
+.hero-headline .gold{display:block;background:linear-gradient(135deg,#F0C840 0%,#D4900A 25%,#F5D060 55%,#C48000 80%,#E8C87A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px rgba(200,160,40,.15))}
+.hero-sub{font-size:1.05rem;color:var(--text-mid);line-height:1.75;max-width:520px;margin-bottom:32px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.pill{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;padding:6px 14px;border-radius:20px;border:1px solid rgba(30,80,200,.2);color:#B8C8E8;background:rgba(30,80,200,.05);display:flex;align-items:center;gap:6px}
+.pill span{color:var(--gold);font-weight:500}
+.hero-ctas{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cta-primary{font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,var(--cobalt),#2A6ACB);color:#fff;padding:14px 30px;border-radius:10px;text-decoration:none;font-weight:500;transition:all .2s;box-shadow:0 0 28px rgba(58,122,219,.3);display:flex;align-items:center;gap:8px}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(58,122,219,.5)}
+.cta-secondary{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#B8C8E8;padding:14px 24px;border-radius:10px;text-decoration:none;border:1px solid var(--cobalt-border);transition:all .2s}
+.cta-secondary:hover{color:var(--text-cool);border-color:rgba(90,154,235,.4);background:var(--cobalt-dim)}
+
+/* 3D ORB CONTAINER */
+.orb-wrap{position:relative;width:480px;height:480px;flex-shrink:0}
+#humacityCanvas{width:100%;height:100%;border-radius:50%;cursor:grab}
+#humacityCanvas:active{cursor:grabbing}
+.orb-label{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(90,154,235,.5);white-space:nowrap}
+
+/* TICKER */
+.ticker-wrap{position:relative;z-index:1;border-top:1px solid rgba(30,80,200,.1);border-bottom:1px solid rgba(30,80,200,.1);background:rgba(8,16,48,.4);overflow:hidden;padding:10px 0}
+.ticker{display:flex;animation:ticker 35s linear infinite;white-space:nowrap}
+.ticker:hover{animation-play-state:paused}
+.ti{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;color:#9AB8D8;padding:0 28px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ti .pos{color:var(--teal);font-weight:500}
+.ti .neg{color:var(--red);font-weight:500}
+.ti-dot{color:rgba(30,80,200,.3)}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.section{position:relative;z-index:1;padding:80px;max-width:1400px;margin:0 auto}
+.section.full{max-width:none;padding:80px}
+.section.bordered{border-top:1px solid rgba(30,80,200,.1)}
+.sec-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:#5A9AEB;margin-bottom:14px}
+.sec-title{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;color:var(--text-cool);margin-bottom:8px;line-height:1.2}
+.sec-sub{font-size:.92rem;color:#B8C8E8;line-height:1.75;max-width:600px}
+
+/* PHILOSOPHY */
+.phil-quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,2.5vw,1.9rem);line-height:1.5;color:var(--text-cool);margin-bottom:14px}
+.phil-quote b{color:var(--gold);font-style:normal}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.how-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:16px;padding:28px;position:relative;overflow:hidden;animation:card-glow 3s ease-in-out infinite;transition:all .2s}
+.how-card:hover{transform:translateY(-4px)}
+@keyframes card-glow{0%,100%{box-shadow:0 0 0 1px rgba(58,122,219,.15),0 0 20px rgba(30,80,200,.06)}50%{box-shadow:0 0 0 1px rgba(90,160,255,.35),0 0 30px rgba(30,80,200,.12)}}
+.how-num{font-family:var(--hero);font-size:3.5rem;line-height:1;background:linear-gradient(135deg,rgba(58,122,219,.3),rgba(58,122,219,.1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px}
+.how-title{font-size:1.0rem;font-weight:600;color:var(--text-cool);margin-bottom:8px}
+.how-body{font-size:.86rem;color:#9AB8D8;line-height:1.65}
+
+/* PILLARS */
+.pillars-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:40px}
+.p-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;padding:24px 20px;text-decoration:none;transition:all .2s;position:relative;overflow:hidden;animation:card-glow 3s ease-in-out infinite}
+.p-card:hover{transform:translateY(-4px);border-color:rgba(90,154,235,.4)}
+.p-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.p-card.c1::before{background:linear-gradient(90deg,transparent,var(--teal),transparent)}
+.p-card.c2::before{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.p-card.c3::before{background:linear-gradient(90deg,transparent,#5A9AEB,transparent)}
+.p-card.c4::before{background:linear-gradient(90deg,transparent,var(--copper-lt),transparent)}
+.p-card.c5::before{background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.p-num{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:#5A9AEB;margin-bottom:10px}
+.p-name{font-size:.92rem;font-weight:600;color:var(--text-cool);margin-bottom:6px;line-height:1.3}
+.p-one{font-size:.76rem;color:#9AB8D8;line-height:1.55;margin-bottom:14px}
+.p-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
+.t-l{background:rgba(56,196,144,.08);color:var(--teal);border:1px solid rgba(56,196,144,.2)}
+.t-p{background:rgba(224,184,48,.08);color:var(--gold);border:1px solid rgba(224,184,48,.2)}
+.t-v{background:rgba(58,122,219,.08);color:#5A9AEB;border:1px solid rgba(58,122,219,.2)}
+.t-pl{background:rgba(184,115,51,.08);color:var(--copper-lt);border:1px solid rgba(184,115,51,.2)}
+.t-bs{background:rgba(224,92,58,.08);color:#F07060;border:1px solid rgba(224,92,58,.2)}
+.p-card-cta{margin-top:14px;font-family:var(--mono);font-size:.62rem;color:rgba(90,154,235,.5);letter-spacing:.06em}
+
+/* DATA FOUNDATION */
+.data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.data-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;padding:22px;animation:card-glow 3s ease-in-out infinite}
+.dc-val{font-family:var(--hero);font-size:2.8rem;line-height:1;margin-bottom:6px}
+.dc-val.gold{background:linear-gradient(135deg,#F0C840,#D4900A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dc-val.cobalt{color:#5A9AEB}
+.dc-val.teal{color:var(--teal)}
+.dc-val.copper{color:var(--copper-lt)}
+.dc-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#9AB8D8;margin-bottom:4px}
+.dc-desc{font-size:.78rem;color:rgba(30,80,200,.3)}
+
+/* HUMACITY */
+.hum-card{background:linear-gradient(135deg,rgba(8,16,48,.85),rgba(4,6,14,.95));border:1px solid var(--cobalt-border);border-radius:20px;padding:52px 60px;position:relative;overflow:hidden;animation:card-glow 3s ease-in-out infinite}
+.hum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(30,80,200,.5),rgba(224,184,48,.3),rgba(30,80,200,.5),transparent)}
+.hum-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#5A9AEB;margin-bottom:14px}
+.hum-word{font-family:var(--hero);font-size:clamp(3.5rem,6vw,5.5rem);line-height:.88;letter-spacing:.02em;background:linear-gradient(135deg,#F0C840 0%,#D4900A 30%,#F5D060 60%,#C48000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:18px;display:block}
+.hum-def{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--text-cool);margin-bottom:12px;line-height:1.5}
+.hum-body{font-size:.9rem;color:#B8C8E8;line-height:1.75;max-width:560px}
+.hum-mantra{font-family:var(--mono);font-size:.72rem;color:rgba(90,154,235,.6);margin-top:20px;padding-top:16px;border-top:1px solid var(--border);line-height:1.6}
+
+/* PRICING TEASER */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.price-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:16px;padding:28px;animation:card-glow 3s ease-in-out infinite;transition:all .2s}
+.price-card:hover{transform:translateY(-3px)}
+.price-card.featured{border-color:rgba(224,184,48,.3);background:linear-gradient(135deg,rgba(8,16,48,.9),rgba(4,6,14,.95))}
+.pc-tier{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#5A9AEB;margin-bottom:10px}
+.pc-price{font-family:var(--hero);font-size:2.8rem;line-height:1;color:var(--text-cool);margin-bottom:4px}
+.price-card.featured .pc-price{background:linear-gradient(135deg,#F0C840,#D4900A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pc-per{font-family:var(--mono);font-size:.68rem;color:#9AB8D8;margin-bottom:16px}
+.pc-features{list-style:none;margin-bottom:20px}
+.pc-features li{font-size:.84rem;color:#B8C8E8;padding:5px 0;border-bottom:1px solid rgba(30,80,200,.06);display:flex;align-items:center;gap:8px}
+.pc-features li::before{content:'✓';color:var(--teal);font-size:.7rem;flex-shrink:0}
+.pc-features li.muted{color:#9AB8D8}
+.pc-features li.muted::before{content:'—';color:rgba(30,80,200,.3)}
+.pc-cta{display:block;text-align:center;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:10px;border-radius:8px;text-decoration:none;transition:all .15s;font-weight:500}
+.pc-cta.outline{border:1px solid var(--cobalt-border);color:#9AB8D8}
+.pc-cta.outline:hover{border-color:var(--cobalt);color:#5A9AEB}
+.pc-cta.solid{background:var(--cobalt);color:#fff}
+.pc-cta.solid:hover{background:#4A8AEB}
+.pc-cta.gold-btn{background:linear-gradient(135deg,#D4900A,#E0B830);color:#000;font-weight:700}
+.pc-cta.gold-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(224,184,48,.3)}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;padding:28px 80px;border-top:1px solid rgba(30,80,200,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:#B8C8E8}
+.footer-brand b{color:var(--copper-lt);font-weight:600}
+.footer-copy{font-family:var(--mono);font-size:.62rem;color:#9AB8D8}
+
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;padding:80px 40px;gap:40px}
+  .orb-wrap{width:100%;max-width:380px;height:380px;margin:0 auto}
+  .how-grid,.pricing-grid{grid-template-columns:1fr 1fr}
+  .pillars-grid{grid-template-columns:repeat(2,1fr)}
+  .pillars-grid .p-card:last-child{grid-column:1/-1}
+  .data-grid{grid-template-columns:repeat(2,1fr)}
+  .section,.footer{padding:60px 40px}
+  .hum-card{padding:36px 30px}
+  .topbar{padding:0 24px}
+}
+</style></head>
+<body>
+<canvas id="particles"></canvas>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <a href="index.html" class="tb-brand">
+    <div class="tb-dot"></div>
+    <div class="tb-name">Revenue Fluent</div>
+  </a>
+  <div class="tb-links">
+    <a href="#how" class="tb-link">How it works</a>
+    <a href="#pillars" class="tb-link">The five pillars</a>
+    <a href="#pricing" class="tb-link">Pricing</a>
+  </div>
+  <a href="scenario-library.html" class="tb-enter">Enter Platform &rarr;</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Revenue Fluent &middot; Platform Live 2026</div>
+    <h1 class="hero-headline">
+      A new language<br>for HR.
+      <span class="gold">The language<br>of Revenue.</span>
+    </h1>
+    <p class="hero-sub">Five intelligence tools that translate every people decision into financial language — in the language your CEO and CFO already speak.</p>
+    <div class="hero-pills">
+      <div class="pill"><span>5</span> Intelligence Tools</div>
+      <div class="pill"><span>750</span> People Modelled</div>
+      <div class="pill"><span>15</span> Scenarios</div>
+      <div class="pill"><span>7</span> Currencies</div>
+    </div>
+    <div class="hero-ctas">
+      <a href="scenario-library.html" class="cta-primary">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        Enter the Platform
+      </a>
+      <a href="#pillars" class="cta-secondary">See the five tools &darr;</a>
+    </div>
+  </div>
+
+  <!-- 3D HUMACITY ORB -->
+  <div class="orb-wrap">
+    <canvas id="humacityCanvas"></canvas>
+    <div class="orb-label">Humacity &middot; Interactive &middot; Drag to explore</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ti">Talent Quality Premium <span class="pos">+18%</span></div><span class="ti-dot">·</span>
+    <div class="ti">Human Net Worth <span class="pos">+₹2.3Cr</span></div><span class="ti-dot">·</span>
+    <div class="ti">Attrition Cost <span class="neg">-₹595K</span></div><span class="ti-dot">·</span>
+    <div class="ti">HR Investment Return <span class="pos">4.5x</span></div><span class="ti-dot">·</span>
+    <div class="ti">Retention Savings <span class="pos">+S$2.7M</span></div><span class="ti-dot">·</span>
+    <div class="ti">Skill Debt Provision <span class="neg">-$204K</span></div><span class="ti-dot">·</span>
+    <div class="ti">Culture Premium <span class="pos">+€413K</span></div><span class="ti-dot">·</span>
+    <div class="ti">Flight Risk Liability <span class="neg">-₹46.3L</span></div><span class="ti-dot">·</span>
+    <div class="ti">Talent Equity <span class="pos">+$4.89M</span></div><span class="ti-dot">·</span>
+    <div class="ti">Human Gross Margin <span class="pos">89.2%</span></div><span class="ti-dot">·</span>
+    <div class="ti">Net Human Worth <span class="pos">+£3.2M</span></div><span class="ti-dot">·</span>
+    <div class="ti">Workforce Obsolescence Risk <span class="neg">-$312K</span></div><span class="ti-dot">·</span>
+    <!-- duplicate for seamless loop -->
+    <div class="ti">Talent Quality Premium <span class="pos">+18%</span></div><span class="ti-dot">·</span>
+    <div class="ti">Human Net Worth <span class="pos">+₹2.3Cr</span></div><span class="ti-dot">·</span>
+    <div class="ti">Attrition Cost <span class="neg">-₹595K</span></div><span class="ti-dot">·</span>
+    <div class="ti">HR Investment Return <span class="pos">4.5x</span></div><span class="ti-dot">·</span>
+    <div class="ti">Retention Savings <span class="pos">+S$2.7M</span></div><span class="ti-dot">·</span>
+    <div class="ti">Skill Debt Provision <span class="neg">-$204K</span></div><span class="ti-dot">·</span>
+    <div class="ti">Culture Premium <span class="pos">+€413K</span></div><span class="ti-dot">·</span>
+    <div class="ti">Flight Risk Liability <span class="neg">-₹46.3L</span></div><span class="ti-dot">·</span>
+    <div class="ti">Talent Equity <span class="pos">+$4.89M</span></div><span class="ti-dot">·</span>
+    <div class="ti">Human Gross Margin <span class="pos">89.2%</span></div><span class="ti-dot">·</span>
+    <div class="ti">Net Human Worth <span class="pos">+£3.2M</span></div><span class="ti-dot">·</span>
+    <div class="ti">Workforce Obsolescence Risk <span class="neg">-$312K</span></div><span class="ti-dot">·</span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="section bordered">
+  <div class="sec-label">The disruption</div>
+  <div class="phil-quote">
+    HR has never been a cost centre.<br>
+    It has been an <b>unaudited profit centre.</b><br>
+    Revenue Fluent is the audit.
+  </div>
+  <p class="sec-sub">Every hire, every retention save, every development investment, every risk resolved — each one has a financial value. Most organisations have never written it down. Revenue Fluent gives HR professionals the language to write it down — in the language the board already speaks.</p>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section bordered" id="how">
+  <div class="sec-label">How it works</div>
+  <h2 class="sec-title">Three steps to financial fluency</h2>
+  <p class="sec-sub">No installation. No HRIS integration required. Pick your scenario and start reading your organisation in financial language.</p>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <div class="how-title">Pick your scenario</div>
+      <div class="how-body">Choose from 15 real organisational scenarios — SaaS, BFSI, healthcare, manufacturing and more. Each scenario has 50 real employees, real salaries, real org structure. Your world, already modelled.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <div class="how-title">Run the five pillars</div>
+      <div class="how-body">Five intelligence tools, each producing a different financial statement. The Value Ledger. The Talent Premium. Org Vitals. The Human P&L. The Human Balance Sheet. Each one answers a question the board has never heard answered in financial language.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <div class="how-title">Walk into the room</div>
+      <div class="how-body">Download board-ready reports. Export pre-built Excel models. Walk into the CEO meeting with a Human P&L and a Human Balance Sheet. The conversation changes permanently — because you're speaking the language they already know.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIVE PILLARS -->
+<section class="section bordered" id="pillars">
+  <div class="sec-label">The five pillars</div>
+  <h2 class="sec-title">HR's complete financial statement suite</h2>
+  <p class="sec-sub">Five tools. One data foundation. Every people decision in financial language — from the first entry to the final balance sheet.</p>
+  <div class="pillars-grid">
+    <a href="p1-tool.html" class="p-card c1">
+      <div class="p-num">L1</div>
+      <div class="p-name">The Value Ledger</div>
+      <div class="p-one">Every HR decision has a financial entry. Most organisations just never wrote it down.</div>
+      <span class="p-tag t-l">Ledger</span>
+      <div class="p-card-cta">Open tool &rarr;</div>
+    </a>
+    <a href="p2-tool.html" class="p-card c2">
+      <div class="p-num">L2</div>
+      <div class="p-name">The Talent Premium</div>
+      <div class="p-one">Every organisation pays for people. Almost none know what they're actually getting back.</div>
+      <span class="p-tag t-p">Premium</span>
+      <div class="p-card-cta">Open tool &rarr;</div>
+    </a>
+    <a href="p3-tool.html" class="p-card c3">
+      <div class="p-num">L3</div>
+      <div class="p-name">Org Vitals</div>
+      <div class="p-one">You've been calling it culture. It's actually your organisation's DNA — and it has a name.</div>
+      <span class="p-tag t-v">Diagnostic</span>
+      <div class="p-card-cta">Open tool &rarr;</div>
+    </a>
+    <a href="p4-tool.html" class="p-card c4">
+      <div class="p-num">L4</div>
+      <div class="p-name">The Human P&amp;L</div>
+      <div class="p-one">HR has always had a P&amp;L. Nobody taught them to read it.</div>
+      <span class="p-tag t-pl">Statement</span>
+      <div class="p-card-cta">Open tool &rarr;</div>
+    </a>
+    <a href="p5-tool.html" class="p-card c5">
+      <div class="p-num">L5</div>
+      <div class="p-name">Human Balance Sheet</div>
+      <div class="p-one">Your organisation has always had a Human Balance Sheet. Nobody ever filed it. Here it is.</div>
+      <span class="p-tag t-bs">Capstone</span>
+      <div class="p-card-cta">Open tool &rarr;</div>
+    </a>
+  </div>
+</section>
+
+<!-- DATA FOUNDATION -->
+<section class="section bordered">
+  <div class="sec-label">The data foundation</div>
+  <h2 class="sec-title">Not demo data. A genuine simulation engine.</h2>
+  <p class="sec-sub">750 modelled employees. Every salary, grade, tenure, performance score, reporting chain and placement — real enough to compute real financial statements.</p>
+  <div class="data-grid">
+    <div class="data-card"><div class="dc-val gold">750</div><div class="dc-lbl">Employees Modelled</div><div class="dc-desc">Full org structure, reporting chains intact</div></div>
+    <div class="data-card"><div class="dc-val cobalt">15</div><div class="dc-lbl">Scenarios</div><div class="dc-desc">Across 10 industries, 13 cities</div></div>
+    <div class="data-card"><div class="dc-val teal">7</div><div class="dc-lbl">Currencies</div><div class="dc-desc">USD · GBP · SGD · EUR · INR · JPY · AED</div></div>
+    <div class="data-card"><div class="dc-val copper">5</div><div class="dc-lbl">Financial Statements</div><div class="dc-desc">Ledger · P&L · Balance Sheet · Premium · Vitals</div></div>
+  </div>
+</section>
+
+<!-- HUMACITY -->
+<section class="section bordered">
+  <div class="hum-card">
+    <div class="hum-eyebrow">The philosophy behind the platform</div>
+    <span class="hum-word">Humacity</span>
+    <div class="hum-def">The quality of human capital in an organisation — finally measurable.</div>
+    <p class="hum-body">Constructed from <em>humanus</em> (Latin: human) and the <em>-acity</em> suffix — as in tenacity, audacity, veracity. The quality that separates organisations that compound from those that plateau. Revenue Fluent is built on it. Every pillar, every calculation, every number — in service of one idea: that human capital has always been measurable. It just needed a language.</p>
+    <div class="hum-mantra">"Revenue tells you what you earned.<br>Humacity tells you what made earning possible."</div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section bordered" id="pricing">
+  <div class="sec-label">Pricing</div>
+  <h2 class="sec-title">Start free. Go deeper when you're ready.</h2>
+  <p class="sec-sub">No subscription traps. Pay once for full access. The CRFP certification is the professional credential for HR practitioners who speak Revenue Fluent.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="pc-tier">Free</div>
+      <div class="pc-price">₹0</div>
+      <div class="pc-per">Always free</div>
+      <ul class="pc-features">
+        <li>All 5 intelligence tools</li>
+        <li>6 scenarios</li>
+        <li>Live calculations</li>
+        <li class="muted">Excel downloads</li>
+        <li class="muted">PDF reports</li>
+        <li class="muted">CRFP certification</li>
+      </ul>
+      <a href="scenario-library.html" class="pc-cta outline">Start Free &rarr;</a>
+    </div>
+    <div class="price-card featured">
+      <div class="pc-tier">CRFP Individual</div>
+      <div class="pc-price">₹4,999</div>
+      <div class="pc-per">One-time payment</div>
+      <ul class="pc-features">
+        <li>All 5 intelligence tools</li>
+        <li>All 15 scenarios</li>
+        <li>Excel downloads</li>
+        <li>PDF board reports</li>
+        <li>CRFP certification exam</li>
+        <li>Credential + digital badge</li>
+      </ul>
+      <a href="#" class="pc-cta gold-btn">Get Certified &rarr;</a>
+    </div>
+    <div class="price-card">
+      <div class="pc-tier">PRO Monthly</div>
+      <div class="pc-price">₹999</div>
+      <div class="pc-per">per month</div>
+      <ul class="pc-features">
+        <li>All 5 intelligence tools</li>
+        <li>All 15 scenarios</li>
+        <li>Excel downloads</li>
+        <li>PDF board reports</li>
+        <li class="muted">CRFP certification</li>
+        <li class="muted">Digital badge</li>
+      </ul>
+      <a href="#" class="pc-cta solid">Subscribe &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Revenue Fluent &middot; by <b>Kumar Vivek</b></div>
+  <div class="footer-copy">&copy; 2026 Kumar Vivek &middot; Humacity&#8482; &middot; Built on Humacity</div>
+</footer>
+
+<script>
+// PARTICLE SYSTEM
+(function(){
+  var canvas=document.getElementById('particles');
+  var ctx=canvas.getContext('2d');
+  var W,H,particles=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(var i=0;i<100;i++){particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.3,dx:(Math.random()-.5)*.2,dy:(Math.random()-.5)*.2,o:Math.random()*.3+.04});}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(function(p){
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(90,154,235,'+p.o+')';ctx.fill();
+      p.x+=p.dx;p.y+=p.dy;
+      if(p.x<0||p.x>W)p.dx*=-1;if(p.y<0||p.y>H)p.dy*=-1;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// THREE.JS HUMACITY ORB
+(function(){
+  if(typeof THREE === 'undefined') return;
+
+  var canvas = document.getElementById('humacityCanvas');
+  var wrap = canvas.parentElement;
+  var W = wrap.offsetWidth, H = wrap.offsetHeight;
+
+  var renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:true});
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(60, W/H, 0.1, 100);
+  camera.position.set(0, 0, 5);
+
+  // CORE SPHERE — Humacity orb
+  var coreGeo = new THREE.SphereGeometry(1.2, 64, 64);
+  var coreMat = new THREE.MeshPhongMaterial({
+    color: 0x0A0C14,
+    emissive: 0x0A1830,
+    specular: 0x3A7ADB,
+    shininess: 80,
+    transparent: true,
+    opacity: 0.9,
+    wireframe: false,
+  });
+  var core = new THREE.Mesh(coreGeo, coreMat);
+  scene.add(core);
+
+  // WIREFRAME OVERLAY on core
+  var wireMat = new THREE.MeshBasicMaterial({color:0x1A3A6A, wireframe:true, transparent:true, opacity:0.15});
+  var wire = new THREE.Mesh(new THREE.SphereGeometry(1.21,24,24), wireMat);
+  scene.add(wire);
+
+  // OUTER GLOW RING
+  var ringGeo = new THREE.TorusGeometry(1.6, 0.015, 8, 120);
+  var ringMat = new THREE.MeshBasicMaterial({color:0x3A7ADB, transparent:true, opacity:0.4});
+  var ring1 = new THREE.Mesh(ringGeo, ringMat);
+  ring1.rotation.x = Math.PI/4;
+  scene.add(ring1);
+
+  var ring2 = new THREE.Mesh(
+    new THREE.TorusGeometry(1.9, 0.01, 8, 120),
+    new THREE.MeshBasicMaterial({color:0xB87333, transparent:true, opacity:0.25})
+  );
+  ring2.rotation.x = -Math.PI/6;
+  ring2.rotation.z = Math.PI/5;
+  scene.add(ring2);
+
+  // FIVE PILLAR NODES orbiting the core
+  var PILLARS = [
+    {name:'L1', color:0x38C490, angle:0},
+    {name:'L2', color:0xE0B830, angle:Math.PI*2/5},
+    {name:'L3', color:0x3A7ADB, angle:Math.PI*4/5},
+    {name:'L4', color:0xE8C87A, angle:Math.PI*6/5},
+    {name:'L5', color:0xE05C3A, angle:Math.PI*8/5},
+  ];
+
+  var nodes = [];
+  var orbitRadius = 2.2;
+
+  PILLARS.forEach(function(p){
+    var nodeGeo = new THREE.SphereGeometry(0.12, 16, 16);
+    var nodeMat = new THREE.MeshPhongMaterial({
+      color:p.color, emissive:p.color, emissiveIntensity:0.6,
+      transparent:true, opacity:0.9
+    });
+    var node = new THREE.Mesh(nodeGeo, nodeMat);
+    node.position.x = Math.cos(p.angle) * orbitRadius;
+    node.position.y = Math.sin(p.angle) * 0.6;
+    node.position.z = Math.sin(p.angle) * orbitRadius * 0.7;
+    scene.add(node);
+
+    // Line from core to node
+    var linePts = [new THREE.Vector3(0,0,0), node.position.clone()];
+    var lineGeo = new THREE.BufferGeometry().setFromPoints(linePts);
+    var lineMat = new THREE.LineBasicMaterial({color:p.color, transparent:true, opacity:0.2});
+    scene.add(new THREE.Line(lineGeo, lineMat));
+
+    nodes.push({mesh:node, angle:p.angle, color:p.color, speed: 0.003 + Math.random()*0.002});
+  });
+
+  // PARTICLE CLOUD around orb
+  var ptCount = 300;
+  var ptGeo = new THREE.BufferGeometry();
+  var ptPos = new Float32Array(ptCount * 3);
+  for(var i=0;i<ptCount;i++){
+    var theta = Math.random()*Math.PI*2;
+    var phi = Math.random()*Math.PI;
+    var r = 1.4 + Math.random()*1.4;
+    ptPos[i*3]   = r*Math.sin(phi)*Math.cos(theta);
+    ptPos[i*3+1] = r*Math.sin(phi)*Math.sin(theta);
+    ptPos[i*3+2] = r*Math.cos(phi);
+  }
+  ptGeo.setAttribute('position', new THREE.BufferAttribute(ptPos,3));
+  var ptMat = new THREE.PointsMaterial({color:0x3A7ADB, size:0.025, transparent:true, opacity:0.5});
+  scene.add(new THREE.Points(ptGeo, ptMat));
+
+  // LIGHTING
+  var ambLight = new THREE.AmbientLight(0x0A1830, 2);
+  scene.add(ambLight);
+  var ptLight1 = new THREE.PointLight(0x3A7ADB, 3, 10);
+  ptLight1.position.set(3,2,3);
+  scene.add(ptLight1);
+  var ptLight2 = new THREE.PointLight(0xE0B830, 2, 8);
+  ptLight2.position.set(-2,-2,2);
+  scene.add(ptLight2);
+  var ptLight3 = new THREE.PointLight(0xB87333, 1.5, 8);
+  ptLight3.position.set(0,3,-2);
+  scene.add(ptLight3);
+
+  // MOUSE INTERACTION
+  var mouse = {x:0, y:0};
+  var isDragging = false;
+  var prevMouse = {x:0, y:0};
+  var rotVel = {x:0, y:0};
+
+  canvas.addEventListener('mousedown', function(e){isDragging=true;prevMouse={x:e.clientX,y:e.clientY};});
+  window.addEventListener('mouseup', function(){isDragging=false;});
+  window.addEventListener('mousemove', function(e){
+    if(isDragging){
+      rotVel.y += (e.clientX - prevMouse.x) * 0.005;
+      rotVel.x += (e.clientY - prevMouse.y) * 0.005;
+      prevMouse={x:e.clientX,y:e.clientY};
+    }
+  });
+  canvas.addEventListener('touchstart', function(e){isDragging=true;prevMouse={x:e.touches[0].clientX,y:e.touches[0].clientY};});
+  window.addEventListener('touchend', function(){isDragging=false;});
+  window.addEventListener('touchmove', function(e){
+    if(isDragging){
+      rotVel.y += (e.touches[0].clientX - prevMouse.x) * 0.005;
+      rotVel.x += (e.touches[0].clientY - prevMouse.y) * 0.005;
+      prevMouse={x:e.touches[0].clientX,y:e.touches[0].clientY};
+    }
+  });
+
+  // RESIZE
+  window.addEventListener('resize', function(){
+    W=wrap.offsetWidth; H=wrap.offsetHeight;
+    renderer.setSize(W,H);
+    camera.aspect=W/H;
+    camera.updateProjectionMatrix();
+  });
+
+  var t = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t += 0.008;
+
+    // Auto rotation + drag
+    rotVel.x *= 0.92;
+    rotVel.y *= 0.92;
+    core.rotation.y += 0.003 + rotVel.y;
+    core.rotation.x += rotVel.x * 0.3;
+    wire.rotation.y = core.rotation.y;
+    wire.rotation.x = core.rotation.x;
+
+    // Orbit nodes
+    nodes.forEach(function(n, i){
+      n.angle += n.speed;
+      n.mesh.position.x = Math.cos(n.angle) * orbitRadius;
+      n.mesh.position.y = Math.sin(n.angle * 0.4) * 0.8;
+      n.mesh.position.z = Math.sin(n.angle) * orbitRadius * 0.7;
+      // Pulse
+      var pulse = 1 + Math.sin(t * 2 + i) * 0.15;
+      n.mesh.scale.setScalar(pulse);
+    });
+
+    // Ring rotation
+    ring1.rotation.z += 0.004;
+    ring2.rotation.y += 0.003;
+
+    // Light pulse
+    ptLight1.intensity = 2.5 + Math.sin(t) * 0.8;
+    ptLight2.intensity = 1.5 + Math.cos(t * 0.7) * 0.6;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
+</body></html>
