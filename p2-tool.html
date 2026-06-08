@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-  <meta http-equiv="Pragma" content="no-cache"/>
-  <meta http-equiv="Expires" content="0"/><meta charset="utf-8"/>
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>The Talent Premium — Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0A0608;--bg2:#100810;--bg3:#080408;--bg4:#0C060C;
-  --cobalt:#C0409A;--cobalt-dim:rgba(180,40,140,.15);--cobalt-glow:rgba(180,40,140,.08);
-  --cobalt-border:rgba(180,40,140,.18);
+  --bg:#0A0608;--bg2:#100810;--bg3:#080408;--bg4:#080A18;
+  --cobalt:#C0409A;--cobalt-dim:rgba(160,20,120,.15);--cobalt-glow:rgba(160,20,120,.08);
+  --cobalt-border:rgba(160,20,120,.18);
   --gold:#E0B830;--gold-dim:rgba(224,184,48,.12);
   --copper:#B87333;--copper-lt:#E8C87A;
   --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
   --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
-  --text-mute:rgba(180,40,140,.25);--border:rgba(180,40,140,.15);--border-hi:rgba(180,40,140,.3);
+  --text-mute:rgba(160,20,120,.25);--border:rgba(160,20,120,.15);--border-hi:rgba(160,20,120,.3);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
   --serif:'Playfair Display',serif;--hero:'Bebas Neue',sans-serif;
 }
@@ -24,7 +24,7 @@ body{
   background:var(--bg);color:var(--text);font-family:var(--font);
   font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;
   background-image:
-    radial-gradient(ellipse 70% 40% at 50% 0%,rgba(160,20,110,.18) 0%,transparent 55%),
+    radial-gradient(ellipse 70% 40% at 50% 0%,rgba(140,15,100,.18) 0%,transparent 55%),
     radial-gradient(ellipse 50% 30% at 10% 80%,rgba(160,80,20,.06) 0%,transparent 50%),
     linear-gradient(rgba(160,20,120,.025) 1px,transparent 1px),
     linear-gradient(90deg,rgba(160,20,120,.025) 1px,transparent 1px);
@@ -37,11 +37,11 @@ body{
 .crumb{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:32px;flex-wrap:wrap}
 .crumb a{color:var(--text-dim);text-decoration:none;transition:color .15s}
 .crumb a:hover{color:var(--cobalt)}
-.crumb .sep{color:#C8A8C0}
+.crumb .sep{color:var(--text-mute)}
 .tool-nav{display:flex;gap:3px;flex-wrap:wrap}
 .tool-nav a{padding:3px 9px;border-radius:5px;border:1px solid var(--border);color:var(--text-dim);font-size:.66rem;text-decoration:none;transition:all .15s}
 .tool-nav a:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
-.tool-nav a.active{background:rgba(160,20,110,.08);border-color:var(--cobalt);color:var(--cobalt)}
+.tool-nav a.active{background:var(--cobalt-dim);border-color:var(--cobalt);color:var(--cobalt)}
 
 /* EYEBROW + SWITCH */
 .eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#D060B0;margin-bottom:16px}
@@ -50,7 +50,7 @@ body{
 .switch select{background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-family:var(--font);font-size:.9rem;cursor:pointer;min-width:260px;transition:border-color .15s}
 .switch select:hover,.switch select:focus{outline:none;border-color:var(--cobalt)}
 .scen-meta{font-family:var(--mono);font-size:.72rem;color:var(--text-dim)}
-.scen-meta b{color:#D878BC}
+.scen-meta b{color:#7AABDB}
 
 /* INTRO PANEL */
 .intro-panel{margin-bottom:32px}
@@ -62,15 +62,15 @@ body{
 }
 .intro-toggle.seen{animation:cobalt-pulse 3s ease-in-out infinite}
 @keyframes cobalt-pulse{
-  0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.3),0 0 8px rgba(180,40,140,.15),0 0 20px rgba(180,40,140,.06)}
-  50%{box-shadow:0 0 0 1px rgba(220,80,180,.7),0 0 20px rgba(192,64,154,.4),0 0 40px rgba(180,40,140,.18),0 0 60px rgba(180,40,140,.08)}
+  0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.3),0 0 8px rgba(160,20,120,.15),0 0 20px rgba(160,20,120,.06)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.7),0 0 20px rgba(192,64,154,.4),0 0 40px rgba(160,20,120,.18),0 0 60px rgba(160,20,120,.08)}
 }
 .intro-tl{display:flex;align-items:center;gap:12px}
 .intro-icon{width:26px;height:26px;border-radius:50%;background:var(--cobalt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.66rem;font-weight:700;color:#fff;font-family:var(--mono)}
 .intro-title{font-size:.9rem;font-weight:500;color:var(--text-cool)}
 .intro-sub{font-family:var(--mono);font-size:.64rem;color:#D060B0;margin-top:2px;letter-spacing:.04em}
 .intro-chevron{font-family:var(--mono);font-size:.66rem;color:var(--text-dim)}
-.intro-body{background:var(--bg2);border:1px solid var(--cobalt-border);border-top:none;border-radius:0 0 12px 12px;padding:28px;display:none;box-shadow:0 4px 24px rgba(180,40,140,.08)}
+.intro-body{background:var(--bg2);border:1px solid var(--cobalt-border);border-top:none;border-radius:0 0 12px 12px;padding:28px;display:none;box-shadow:0 4px 24px rgba(160,20,120,.08)}
 .intro-body.open{display:block}
 .intro-sec{margin-bottom:22px}
 .intro-sec:last-child{margin-bottom:0}
@@ -85,13 +85,13 @@ body{
 /* HUMACITY BAND — always visible */
 .humacity-band{
   padding:20px 28px;margin-bottom:32px;
-  background:linear-gradient(135deg,rgba(8,16,48,.7),rgba(4,6,14,.9));
-  border:1px solid rgba(180,40,140,.2);border-radius:14px;
+  background:linear-gradient(135deg,rgba(40,8,28,.7),rgba(4,6,14,.9));
+  border:1px solid rgba(160,20,120,.2);border-radius:14px;
   border-left:3px solid #5A9AEB;
   position:relative;overflow:hidden;
   animation:hero-pulse 3s ease-in-out infinite;
 }
-.humacity-band::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(180,40,140,.4),rgba(224,184,48,.2),rgba(180,40,140,.4),transparent)}
+.humacity-band::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.4),rgba(224,184,48,.2),rgba(160,20,120,.4),transparent)}
 .hum-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#D060B0;margin-bottom:10px}
 .hum-text{font-size:.92rem;color:var(--text-mid);line-height:1.7}
 .hum-text b{color:var(--text-cool);font-weight:500}
@@ -100,19 +100,19 @@ body{
 /* HERO PANEL */
 .hero{
   padding:48px 52px;margin-bottom:32px;
-  background:linear-gradient(135deg,rgba(48,8,32,.8),rgba(14,4,10,.95));
+  background:linear-gradient(135deg,rgba(40,8,28,.8),rgba(4,6,14,.95));
   border:1px solid var(--cobalt-border);border-radius:20px;
   position:relative;overflow:hidden;
   animation:hero-pulse 3s ease-in-out infinite;
 }
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(180,40,140,.5),rgba(224,184,48,.3),rgba(180,40,140,.5),transparent)}
-.hero::after{content:'';position:absolute;bottom:-60px;left:20%;width:400px;height:200px;background:radial-gradient(ellipse,rgba(180,40,140,.1) 0%,transparent 65%);pointer-events:none}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(224,184,48,.3),rgba(160,20,120,.5),transparent)}
+.hero::after{content:'';position:absolute;bottom:-60px;left:20%;width:400px;height:200px;background:radial-gradient(ellipse,rgba(160,20,120,.1) 0%,transparent 65%);pointer-events:none}
 @keyframes hero-pulse{
-  0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.2),0 0 16px rgba(180,40,140,.1),0 0 40px rgba(180,40,140,.05)}
-  50%{box-shadow:0 0 0 1px rgba(220,80,180,.45),0 0 32px rgba(192,64,154,.2),0 0 64px rgba(180,40,140,.1)}
+  0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.2),0 0 16px rgba(160,20,120,.1),0 0 40px rgba(160,20,120,.05)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.45),0 0 32px rgba(192,64,154,.2),0 0 64px rgba(160,20,120,.1)}
 }
 .hero-grid{display:grid;grid-template-columns:1fr 1px 360px;gap:48px;align-items:center;position:relative;z-index:1}
-.hero-divider{background:rgba(160,20,110,.08)}
+.hero-divider{background:var(--cobalt-dim)}
 .tqp-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#D060B0;margin-bottom:12px}
 .tqp-num{
   font-family:var(--hero);font-size:7rem;line-height:.88;letter-spacing:.02em;
@@ -120,28 +120,28 @@ body{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   filter:drop-shadow(0 0 20px rgba(200,160,40,.25));margin-bottom:10px;
 }
-.tqp-desc{font-size:.86rem;color:#DCC8D8;line-height:1.6}
-.tqp-desc b{color:#D878BC;font-weight:400}
+.tqp-desc{font-size:.86rem;color:#C8D8F0;line-height:1.6}
+.tqp-desc b{color:#7AABDB;font-weight:400}
 .tqp-ratio{font-family:var(--mono);font-size:.82rem;color:var(--teal);margin-top:10px;font-weight:500}
 .story-rule{width:32px;height:2px;background:linear-gradient(90deg,var(--cobalt),var(--copper));margin-bottom:14px}
-.hook{font-family:var(--serif);font-style:italic;font-size:1.18rem;line-height:1.5;color:#F8EEF4;margin-bottom:12px}
-.context{font-size:.84rem;color:#DCC8D8;line-height:1.7}
+.hook{font-family:var(--serif);font-style:italic;font-size:1.18rem;line-height:1.5;color:#EEF4FF;margin-bottom:12px}
+.context{font-size:.84rem;color:#C8D8F0;line-height:1.7}
 .context b{color:var(--text-cool);font-weight:500}
 
 /* STATS */
 .stats{display:flex;gap:0;margin-bottom:32px;border:1px solid var(--cobalt-border);border-radius:10px;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
 .stat{flex:1;padding:17px 20px;border-right:1px solid var(--cobalt-border);background:rgba(40,8,28,.4);transition:all .15s}
 .stat:last-child{border-right:none}
-.stat:hover{background:rgba(180,40,140,.08)}
+.stat:hover{background:rgba(160,20,120,.08)}
 .stat .sv{font-family:var(--mono);font-size:1.05rem;font-weight:500;margin-bottom:3px}
-.stat .sl{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#C8A8C0}
-.sv-teal{color:var(--teal)}.sv-gold{color:var(--gold)}.sv-cobalt{color:#D060B0}.sv-copper{color:var(--copper-lt)}.sv-dim{color:#C8A8C0}
+.stat .sl{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#9AB8D8}
+.sv-teal{color:var(--teal)}.sv-gold{color:var(--gold)}.sv-cobalt{color:#D060B0}.sv-copper{color:var(--copper-lt)}.sv-dim{color:#9AB8D8}
 
 /* COMPONENTS */
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-.sec-head h2{font-size:.92rem;font-weight:500;color:#D8B8D0;display:flex;align-items:center;gap:10px}
+.sec-head h2{font-size:.92rem;font-weight:500;color:#B8C8E8;display:flex;align-items:center;gap:10px}
 .sec-head h2 .step{font-family:var(--mono);font-size:.64rem;color:#D060B0;border:1px solid rgba(210,80,170,.35);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.sec-sub{font-family:var(--mono);font-size:.62rem;color:#C8A8C0}
+.sec-sub{font-family:var(--mono);font-size:.62rem;color:#9AB8D8}
 
 .components{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
 .comp-card{
@@ -155,11 +155,11 @@ body{
 .comp-lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#D060B0;margin-bottom:10px}
 .comp-val{font-family:var(--mono);font-size:2rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
 .comp-val.pos{color:var(--teal)}.comp-val.neg{color:var(--red)}.comp-val.flat{color:var(--gold)}
-.comp-bar{height:4px;background:rgba(180,40,140,.15);border-radius:2px;margin-bottom:12px;overflow:hidden;position:relative}
+.comp-bar{height:4px;background:rgba(160,20,120,.15);border-radius:2px;margin-bottom:12px;overflow:hidden;position:relative}
 .comp-fill{height:100%;border-radius:2px;transition:width .8s cubic-bezier(.19,1,.22,1)}
 .comp-fill.pos{background:linear-gradient(90deg,var(--cobalt),var(--teal))}
 .comp-fill.neg{background:linear-gradient(90deg,var(--red),rgba(224,92,58,.4))}
-.comp-desc{font-size:.8rem;color:#C8A8C0;line-height:1.5}
+.comp-desc{font-size:.8rem;color:#9AB8D8;line-height:1.5}
 .comp-caveat{font-family:var(--mono);font-size:.6rem;color:rgba(210,80,170,.4);margin-top:8px;line-height:1.4;font-style:italic}
 
 /* P5 BRIDGE */
@@ -172,16 +172,16 @@ body{
   background:linear-gradient(90deg,#5A9AEB,var(--copper));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:14px}
-.p5-row{display:flex;align-items:center;gap:0;border:1px solid rgba(180,40,140,.12);border-radius:10px;overflow:hidden}
-.p5-cell{flex:1;padding:14px 16px;border-right:1px solid rgba(180,40,140,.1);text-align:center}
+.p5-row{display:flex;align-items:center;gap:0;border:1px solid rgba(160,20,120,.12);border-radius:10px;overflow:hidden}
+.p5-cell{flex:1;padding:14px 16px;border-right:1px solid rgba(160,20,120,.1);text-align:center}
 .p5-cell:last-child{border-right:none}
 .p5-cell.active{background:rgba(224,184,48,.06);border-color:rgba(224,184,48,.15)}
-.p5-cell .pc-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#C8A8C0;margin-bottom:4px}
-.p5-cell .pc-val{font-family:var(--mono);font-size:.9rem;font-weight:500;color:#C8A8C0}
+.p5-cell .pc-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#9AB8D8;margin-bottom:4px}
+.p5-cell .pc-val{font-family:var(--mono);font-size:.9rem;font-weight:500;color:#9AB8D8}
 .p5-cell.active .pc-lbl{color:var(--gold)}
 .p5-cell.active .pc-val{color:var(--gold);font-size:1.0rem}
-.p5-arrow{color:rgba(180,40,140,.3);font-size:1rem;padding:0 4px}
-.p5-note{font-size:.82rem;color:#C8A8C0;margin-top:12px;line-height:1.6}
+.p5-arrow{color:rgba(160,20,120,.3);font-size:1rem;padding:0 4px}
+.p5-note{font-size:.82rem;color:#9AB8D8;margin-top:12px;line-height:1.6}
 .p5-note b{color:var(--text-cool);font-weight:500}
 
 /* STATEMENT */
@@ -194,7 +194,7 @@ body{
 .stmt-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
   background:linear-gradient(90deg,#5A9AEB,var(--copper));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
-.stmt-txt{font-family:var(--serif);font-style:italic;font-size:1.06rem;line-height:1.65;color:#E4D0E0}
+.stmt-txt{font-family:var(--serif);font-style:italic;font-size:1.06rem;line-height:1.65;color:#D0E0F4}
 .stmt-txt b{color:var(--gold);font-style:normal}
 
 .err{background:var(--bg2);border:1px solid var(--red);border-radius:10px;padding:18px;color:var(--red);font-family:var(--mono);font-size:.82rem}
@@ -206,65 +206,31 @@ body{
   .tqp-num{font-size:5rem}
   .components{grid-template-columns:1fr}
   .p5-row{flex-direction:column}
-  .p5-cell{border-right:none;border-bottom:1px solid rgba(180,40,140,.1)}
+  .p5-cell{border-right:none;border-bottom:1px solid rgba(160,20,120,.1)}
 }
 
-.top-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 36px;height:52px;
-  background:rgba(4,6,14,.92);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(180,40,140,.18);
-}
-.tn-brand{display:flex;align-items:center;gap:8px;text-decoration:none}
-.tn-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
-.tn-name{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#EED8E8;font-weight:500}
-.tn-tools{display:flex;align-items:center;gap:2px}
-.tn-tool{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:#C8A8C0;padding:5px 10px;border-radius:5px;text-decoration:none;transition:all .15s;border:1px solid transparent;white-space:nowrap}
-.tn-tool:hover{color:#D8B8D0;border-color:rgba(180,40,140,.18);background:rgba(180,40,140,.08)}
-.tn-tool.active{color:#C0409A;background:rgba(180,40,140,.12);border-color:rgba(180,40,140,.25)}
-.tn-right{display:flex;align-items:center;gap:8px}
-.tn-lib{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#C8A8C0;padding:5px 12px;border-radius:5px;text-decoration:none;border:1px solid rgba(180,40,140,.18);transition:all .15s}
-.tn-lib:hover{color:#D8B8D0;border-color:rgba(192,64,154,.35)}
-body{padding-top:52px}
-@media(max-width:760px){.tn-tools{display:none}}
-
-
-/* PERSISTENT SIDEBAR */
 :root{--sidebar:220px}
-.sidebar{
-  position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);
-  background:rgba(4,6,14,.95);backdrop-filter:blur(16px);
-  border-right:1px solid var(--cobalt-border);
-  z-index:200;display:flex;flex-direction:column;
-  padding:0 0 20px;overflow-y:auto;
-}
-.sidebar::-webkit-scrollbar{width:3px}
-.sidebar::-webkit-scrollbar-thumb{background:var(--cobalt-border);border-radius:2px}
-.sb-brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid var(--cobalt-border);text-decoration:none;flex-shrink:0}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.2);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:rgba(180,40,140,.2);border-radius:2px}
+.sb-brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid rgba(180,40,140,.18);text-decoration:none;flex-shrink:0}
 .sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
 .sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
 .sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
 .sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-item:hover{background:rgba(180,40,140,.08);color:#D8B8D0;border-color:rgba(180,40,140,.18)}
+.sb-item:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
 .sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
 .sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
 .sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
 .sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-tool:hover{background:rgba(180,40,140,.08);color:#D8B8D0;border-color:rgba(180,40,140,.18)}
+.sb-tool:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
 .sb-tool.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
 .sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:#D060B0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
-.sb-tool.active .sb-tool-num{background:rgba(192,64,154,.2);color:#D060B0}
-.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--cobalt-border)}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid rgba(180,40,140,.18)}
 .sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:#D8B8D0;letter-spacing:.06em}
 .sb-by b{color:#E8C87A;font-weight:600;font-size:.72rem}
 .wrap{margin-left:var(--sidebar)}
-body{padding-top:0}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
-
-
-/* SHOW WORKINGS */
-.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:6px}
+.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:4px}
 .sw-trigger:hover{color:#E080C8}
 .sw-trigger svg{width:10px;height:10px;transition:transform .2s}
 .sw-trigger.open svg{transform:rotate(180deg)}
@@ -278,9 +244,6 @@ body{padding-top:0}
 .sw-formula{font-family:var(--mono);font-size:.76rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
 .sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
 .sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
-
-
-/* HUMAN CONFIDENCE INDEX */
 .hci-wrap{margin:20px 0;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px;overflow:hidden}
 .hci-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;transition:background .15s}
 .hci-header:hover{background:rgba(180,40,140,.06)}
@@ -305,7 +268,6 @@ body{padding-top:0}
 .hci-factor-toggle::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#D060B0;transition:all .2s}
 .hci-factor.yes .hci-factor-toggle::after{left:19px;background:#38C490}
 .hci-factor-desc{font-size:.74rem;color:#C8A8C0;line-height:1.5}
-.hci-factor.yes .hci-factor-desc{color:#9AB8D8}
 .hci-calc{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(40,8,28,.4);border-radius:10px;margin-bottom:14px}
 .hci-calc-formula{font-family:var(--mono);font-size:.7rem;color:#C8A8C0;flex:1}
 .hci-calc-result{font-family:var(--mono);font-size:1.3rem;font-weight:600;color:#E8C87A;white-space:nowrap}
@@ -324,9 +286,6 @@ body{padding-top:0}
 .hci-decay-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#E05C3A;margin-bottom:6px}
 .hci-decay-text{font-size:.82rem;color:#D8B8D0;line-height:1.6}
 .hci-decay-val{color:#E05C3A;font-weight:500;font-family:var(--mono)}
-
-
-/* DOWNLOAD SECTION */
 .dl-section{margin:32px 0 16px;padding:24px 28px;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px}
 .dl-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .dl-icon{width:28px;height:28px;border-radius:6px;background:rgba(192,64,154,.15);border:1px solid rgba(192,64,154,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -334,66 +293,35 @@ body{padding-top:0}
 .dl-sub{font-size:.82rem;color:#C8A8C0;margin-bottom:18px;line-height:1.6}
 .dl-sub b{color:#EED8E8}
 .dl-buttons{display:flex;gap:12px;flex-wrap:wrap}
-.dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border-radius:9px;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-weight:500}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border-radius:9px;cursor:pointer;border:none;font-weight:500;transition:all .2s}
 .dl-btn-excel{background:rgba(56,196,144,.1);color:#38C490;border:1px solid rgba(56,196,144,.25)}
-.dl-btn-excel:hover{background:rgba(56,196,144,.18);border-color:rgba(56,196,144,.5);transform:translateY(-2px)}
+.dl-btn-excel:hover{background:rgba(56,196,144,.18);transform:translateY(-2px)}
 .dl-btn-pdf{background:rgba(224,184,48,.08);color:#E8C87A;border:1px solid rgba(224,184,48,.2)}
-.dl-btn-pdf:hover{background:rgba(224,184,48,.15);border-color:rgba(224,184,48,.4);transform:translateY(-2px)}
+.dl-btn-pdf:hover{background:rgba(224,184,48,.15);transform:translateY(-2px)}
 .dl-btn svg{width:14px;height:14px;flex-shrink:0}
 .dl-note{font-size:.72rem;color:rgba(192,64,154,.4);margin-top:10px;font-style:italic}
-
 </style></head>
 <body>
-<aside class="sidebar" id="mainSidebar">
-  <a href="index.html" class="sb-brand"><div class="sb-dot"></div><div class="sb-name">Revenue Fluent</div></a>
-  <div class="sb-section">Platform</div>
-  <a href="home.html" class="sb-item">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
-  <a href="scenario-library.html" class="sb-item" id="sbLib">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
-  <div class="sb-tools-section">The Five Pillars</div>
-  <a href="p1-tool.html" class="sb-tool" id="sb_p1_tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
-<a href="p2-tool.html" class="sb-tool active" id="sb_p2_tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
-<a href="p3-tool.html" class="sb-tool" id="sb_p3_tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
-<a href="p4-tool.html" class="sb-tool" id="sb_p4_tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
-<a href="p5-tool.html" class="sb-tool" id="sb_p5_tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
-
-  <div class="sb-section">More</div>
-  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Learning Hub<span class="sb-badge">Soon</span></a>
-  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
-  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
-  <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+<aside class="sidebar">
+<a href="index.html" class="sb-brand"><div class="sb-dot"></div><div class="sb-name">Revenue Fluent</div></a>
+<div class="sb-section">Platform</div>
+<a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+<a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+<div class="sb-tools-section">The Five Pillars</div>
+<a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+<a href="p2-tool.html" class="sb-tool active"><div class="sb-tool-num">L2</div>Talent Premium</a>
+<a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+<a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+<a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+<div class="sb-section">More</div>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Learning Hub<span class="sb-badge">Soon</span></a>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+<div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 </aside>
 <script>
-// SHOW WORKINGS — must be global, defined before any onclick fires
-function swToggle(btn){
-  if(btn && btn.getAttribute && !btn.getAttribute('data-panel')){
-    // called from p3 with (event, btn) signature
-    btn = arguments[1] || btn;
-  }
-  var panelId = btn.getAttribute('data-panel');
-  var panel = document.getElementById(panelId);
-  if(!panel) return;
-  var open = panel.classList.contains('open');
-  document.querySelectorAll('.sw-panel.open').forEach(function(p){p.classList.remove('open');});
-  document.querySelectorAll('.sw-trigger.open').forEach(function(b){b.classList.remove('open');});
-  if(!open){ panel.classList.add('open'); btn.classList.add('open'); }
-}
-</script>
-<script>
-(function(){
-  var params=new URLSearchParams(location.search);
-  var scen=params.get('scenario')||'';
-  if(!scen)return;
-  document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){
-    var h=a.getAttribute('href');
-    if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0){
-      a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(scen);
-    }
-  });
-})();
-</script>
-<div class="wrap">
+(function(){var s=new URLSearchParams(location.search).get('scenario')||'';if(!s)return;document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){var h=a.getAttribute('href');if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0)a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(s);});})();
+</script><div class="wrap">
 
 <div class="crumb">
   <a href="scenario-library.html">&larr; Library</a>
@@ -413,9 +341,28 @@ function swToggle(btn){
   <select id="scen"></select>
   <span class="scen-meta" id="meta"></span>
 </div>
+<div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p2')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Talent Quality Premium for current org conditions</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p2_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p2_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p2_body"><div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p2_f0" onclick="hciTF('hci_p2',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p2_f1" onclick="hciTF('hci_p2',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p2_f2" onclick="hciTF('hci_p2',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p2_f3" onclick="hciTF('hci_p2',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p2_calc"></div><table class="hci-scenarios"><tbody id="hci_p2_scen"></tbody></table><div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div></div></div>
 <div id="app"></div>
 
 </div>
+<script>
+function swToggle(btn){
+  var p=document.getElementById(btn.getAttribute('data-panel'));
+  if(!p)return;
+  var o=p.classList.contains('open');
+  document.querySelectorAll('.sw-panel.open').forEach(function(x){x.classList.remove('open');});
+  document.querySelectorAll('.sw-trigger.open').forEach(function(x){x.classList.remove('open');});
+  if(!o){p.classList.add('open');btn.classList.add('open');}
+}
+var _hci={};
+function hciToggle(id){var b=document.getElementById(id+'_body'),c=document.getElementById(id+'_chev');if(!b)return;var o=b.classList.contains('open');b.classList.toggle('open',!o);if(c)c.classList.toggle('open',!o);}
+function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);}
+function _hciC(id){var s=_hci[id];if(!s)return 1;return Math.round((0.7+s.f.filter(Boolean).length*0.15)*100)/100;}
+function _hciFmt(sym,v){var a=Math.abs(v),sg=v<0?'-':'';if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';if(a>=1000)return sg+sym+Math.round(a/1000)+'K';return sg+sym+Math.round(a);}
+function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal — 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk — monitor closely.':'Significant risk — intervention recommended.')+'</div>';}}}
+function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:base||0,sym:sym||'$',decay:decay||null};_hciR(id);}
+function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
+</script>
 <script src="rf-data.js"></script>
 <script>
 (function(){
@@ -454,15 +401,9 @@ var HOOKS = {
 function fmt(sym, n) {
   var abs = Math.abs(n);
   var sign = n < 0 ? '-' : '';
-  if (sym === '₹') {
-    if (abs >= 10000000) return sign+sym+(abs/10000000).toFixed(2)+'Cr';
-    if (abs >= 100000)   return sign+sym+(abs/100000).toFixed(1)+'L';
-    if (abs >= 1000)     return sign+sym+Math.round(abs/1000)+'K';
-    return sign+sym+Math.round(abs);
-  }
-  if (abs >= 1000000000) return sign+sym+(abs/1000000000).toFixed(2)+'B';
-  if (abs >= 1000000)    return sign+sym+(abs/1000000).toFixed(2)+'M';
-  if (abs >= 1000)       return sign+sym+Math.round(abs/1000)+'K';
+  if (abs >= 10000000) return sign+sym+(abs/10000000).toFixed(2)+'Cr';
+  if (abs >= 100000)   return sign+sym+(abs/100000).toFixed(1)+'L';
+  if (abs >= 1000)     return sign+sym+Math.round(abs/1000)+'K';
   return sign+sym+Math.round(abs);
 }
 
@@ -509,7 +450,6 @@ function computeTQP(name) {
 
   var tqp = perfPremium + retPremium + hiringPremium;
   var tqpRatio = totalComp > 0 ? tqp / totalComp : 0;
-  var keepers = emps.filter(function(e){ return ['Star','High Performer','High Potential'].indexOf(e.placement)>=0; }).length;
 
   return {
     sym: sym, tqp: tqp, totalComp: totalComp,
@@ -633,14 +573,7 @@ function render(name) {
       +'<div class="comp-lbl">Performance Premium</div>'
       +'<div class="comp-val '+(d.perfPremium>=0?'pos':'neg')+'">'+fmt(sym,d.perfPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.perfPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.perfPremium,maxComp)+'%"></div></div>'
-      +'<div class="comp-desc">Are your people outperforming their grade baseline? This measures the aggregate salary-weighted performance surplus across the entire organisation.</div>'
-      +'<button class="sw-trigger" data-panel="sw_perf" onclick="swToggle(this)"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
-      +'<div class="sw-panel" id="sw_perf">'
-        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">Σ(actual perf score − grade benchmark) × salary</span></div></div>'
-        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+d.employeeCount+'</b> employees &middot; each compared to their grade average &middot; surplus weighted by salary</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+fmt(sym,d.perfPremium)+'</span></div></div>'
-        +'<div class="sw-note">Grade benchmarks computed from the distribution within this scenario. A positive result means your aggregate workforce is performing above its own grade baseline.</div>'
-      +'</div>'
+      +'<div class="comp-desc">Are your people outperforming their grade baseline? This measures the aggregate salary-weighted performance surplus across the entire organisation. Positive means your people are delivering above what their grade benchmark predicts.</div>'
     +'</div>'
 
     // Retention Quality Premium
@@ -648,14 +581,7 @@ function render(name) {
       +'<div class="comp-lbl">Retention Quality Premium</div>'
       +'<div class="comp-val '+(d.retPremium>=0?'pos':'neg')+'">'+fmt(sym,d.retPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.retPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.retPremium,maxComp)+'%"></div></div>'
-      +'<div class="comp-desc">Are you retaining the right people — not just any people? The financial value concentrated in your Stars, High Performers, and High Potentials who are still here.</div>'
-      +'<button class="sw-trigger" data-panel="sw_ret" onclick="swToggle(this)"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
-      +'<div class="sw-panel" id="sw_ret">'
-        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">Stars &amp; HiPos retained × (perf surplus × salary × 0.5) + (salary × 1.5 × 0.1)</span></div></div>'
-        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+keepers+'</b> Stars/HiPos/High Performers retained &middot; each contributing perf surplus and replacement cost avoided</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+fmt(sym,d.retPremium)+'</span></div></div>'
-        +'<div class="sw-note">1.5x salary = estimated replacement cost (recruitment, onboarding, ramp). 0.5 factor applied to perf surplus to reflect contribution uncertainty. Conservative by design.</div>'
-      +'</div>'
+      +'<div class="comp-desc">Are you retaining the right people — not just any people? This measures the financial value concentrated in your Stars, High Performers, and High Potentials who are still here. When they leave, this number falls.</div>'
     +'</div>'
 
     // Hiring Quality Premium
@@ -664,24 +590,18 @@ function render(name) {
       +'<div class="comp-val '+(d.hiringPremium>=0?'pos':'neg')+'">'+fmt(sym,d.hiringPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.hiringPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.hiringPremium,maxComp)+'%"></div></div>'
       +'<div class="comp-desc">Are your recent hires outperforming what a random market hire would deliver? Measured from employees with under 1 year tenure against their grade benchmark.</div>'
-      +'<button class="sw-trigger" data-panel="sw_hire" onclick="swToggle(this)"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
-      +'<div class="sw-panel" id="sw_hire">'
-        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">Recent hire perf surplus (vs grade benchmark) × salary</span></div></div>'
-        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val">Employees with tenure ≤ 1 year &middot; only positive surplus counted &middot; negative performers excluded from premium</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+fmt(sym,d.hiringPremium)+'</span></div></div>'
-        +'<div class="sw-note">Important caveat: new hire performance in year 1 is influenced by onboarding quality and manager quality — not hiring decisions alone. This number should be read as an indicator, not a definitive hiring quality score.</div>'
-      +'</div>'
+      +'<div class="comp-caveat">Note: new hire performance is also influenced by onboarding quality and manager quality — not hiring decisions alone.</div>'
     +'</div>'
 
     +'</div>';
 
   // P5 BRIDGE
   h += '<div class="sec-head">'
-    +'<h2><span class="step">2</span> Where this lives in the platform</h2>'
-    +'<div class="sec-sub">Gross Margin in L4, feeding the capstone L5</div>'
+    +'<h2><span class="step">2</span> Where this lives in your Human P&L</h2>'
+    +'<div class="sec-sub">The Talent Premium is your Human Gross Margin</div>'
     +'</div>'
     +'<div class="p5-bridge">'
-      +'<div class="p5-lbl">Connection to L4 (Human P&amp;L) &rarr; L5 (Human Balance Sheet)</div>'
+      +'<div class="p5-lbl">Connection to L5 &mdash; The Human P&L</div>'
       +'<div class="p5-row">'
         +'<div class="p5-cell"><div class="pc-lbl">Human Revenue</div><div class="pc-val">from L1</div></div>'
         +'<div class="p5-arrow">&minus;</div>'
@@ -693,7 +613,7 @@ function render(name) {
         +'<div class="p5-arrow">=</div>'
         +'<div class="p5-cell"><div class="pc-lbl">Human Net Profit</div><div class="pc-val">L5 capstone</div></div>'
       +'</div>'
-      +'<div class="p5-note">The Talent Quality Premium of <b>'+fmt(sym,d.tqp)+'</b> feeds your Human P&L as the Gross Margin line — and through it, into the Human Balance Sheet, the capstone that shows your organisation\'s complete human capital worth. High premium = wide margin. Low premium = thin margin. <b>This number belongs in your board presentation.</b></div>'
+      +'<div class="p5-note">The Talent Quality Premium of <b>'+fmt(sym,d.tqp)+'</b> is the explanation for why your Human Gross Margin is what it is. High premium = wide margin. Low premium = thin margin. <b>This number belongs in your board presentation.</b></div>'
     +'</div>';
 
   // INTELLIGENCE STATEMENT
@@ -734,96 +654,30 @@ sel.addEventListener('change', function(){
 render(current);
 
 })();
-
 </script>
 
 <script>
-
-var _hciState = {};
-function hciToggle(id){
-  var b=document.getElementById(id+'_body'),c=document.getElementById(id+'_chev');
-  if(!b)return;
-  var o=b.classList.contains('open');
-  b.classList.toggle('open',!o);
-  if(c)c.classList.toggle('open',!o);
-}
-function hciToggleFactor(id,idx){
-  if(!_hciState[id])return;
-  _hciState[id].factors[idx]=!_hciState[id].factors[idx];
-  _hciRender(id);
-}
-function _hciCoeff(id){
-  var s=_hciState[id];if(!s)return 1.0;
-  return Math.round((0.70+s.factors.filter(Boolean).length*0.15)*100)/100;
-}
-function _hciFmt(sym,val){
-  var abs=Math.abs(val),sign=val<0?'-':'';
-  if(sym==='\u20b9'){if(abs>=10000000)return sign+sym+(abs/10000000).toFixed(2)+'Cr';if(abs>=100000)return sign+sym+(abs/100000).toFixed(1)+'L';return sign+sym+Math.round(abs/1000)+'K';}
-  if(abs>=1000000000)return sign+sym+(abs/1000000000).toFixed(2)+'B';
-  if(abs>=1000000)return sign+sym+(abs/1000000).toFixed(2)+'M';
-  if(abs>=1000)return sign+sym+Math.round(abs/1000)+'K';
-  return sign+sym+Math.round(abs);
-}
-function _hciRender(id){
-  var s=_hciState[id];if(!s)return;
-  var hci=_hciCoeff(id),base=s.base,sym=s.sym;
-  var yc=s.factors.filter(Boolean).length;
-  var el=document.getElementById(id+'_coeff');if(el)el.textContent=hci.toFixed(2)+'x';
-  s.factors.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});
-  var calc=document.getElementById(id+'_calc');
-  if(calc)calc.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style=\"color:#E8C87A\">'+hci.toFixed(2)+'</b></span><div class="hci-calc-result">'+hci.toFixed(2)+'x<span>HCI Coefficient</span></div>';
-  var scen=document.getElementById(id+'_scen');
-  if(scen){
-    var c=base*(hci-0.15),y=base*hci,o=base*(hci+0.15);
-    scen.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class=\"yours\">Value</th></tr>'
-      +'<tr><td class=\"label\">Conservative</td><td class=\"conservative\">'+(hci-0.15).toFixed(2)+'x</td><td class=\"conservative\">'+_hciFmt(sym,c)+'</td></tr>'
-      +'<tr><td class=\"label\" style=\"color:#E8C87A\">Your Assessment</td><td class=\"yours\">'+hci.toFixed(2)+'x</td><td class=\"yours\">'+_hciFmt(sym,y)+'</td></tr>'
-      +'<tr><td class=\"label\">Optimistic</td><td class=\"optimistic\">'+(hci+0.15).toFixed(2)+'x</td><td class=\"optimistic\">'+_hciFmt(sym,o)+'</td></tr>';
-  }
-  if(s.decay){
-    var dEl=document.getElementById(id+'_decay');
-    if(dEl){
-      var dp=Math.round((1.3-hci)*20+8);
-      dEl.innerHTML='<div class=\"hci-decay-label\">⚠ Decay Signal — 6-Month Trajectory</div>'
-        +'<div class=\"hci-decay-text\">At current trajectory, <span class=\"hci-decay-val\">'+s.decay+'</span> deteriorates by approximately <span class=\"hci-decay-val\">'+dp+'%</span> over 6 months without intervention. '+(hci>=1.0?'HCI suggests stable conditions.':hci>=0.85?'Moderate risk — monitor closely.':'Significant risk — intervention recommended.')+'</div>';
-    }
-  }
-}
-function initHCI(id,base,sym,decay){
-  _hciState[id]={factors:[false,false,false,false],base:base,sym:sym,decay:decay||null};
-  _hciRender(id);
-}
-
-// Auto-init HCI when page renders — pull base value from DOM
 (function(){
-  function tryInit(){
-    // Find the hero number
-    var heroEl = document.querySelector('.tqp-val, .ratio-val, .ratio-num, .bs-net-val, [class*="ratio"]');
-    var baseVal = 0, sym = '$';
-    // Get symbol from scenario
-    var symEl = document.querySelector('.scenario-sym, .sym');
-    if(symEl) sym = symEl.textContent.trim();
-    initHCI('hci_p2', baseVal, sym, null);
+  var origRender = typeof render === 'function' ? render : null;
+  function tryInitHCI(){
+    var sym = '$';
+    var sel = document.getElementById('scen');
+    if(sel && window.RF){
+      var s = RF.scenario(sel.value);
+      if(s) sym = s.symbol || '$';
+    }
+    initHCI('hci_p2', 0, sym, null);
   }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', tryInit);
-  } else {
-    tryInit();
-  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', tryInitHCI);
+  }else{tryInitHCI();}
+  // Re-init on scenario change
+  var sel = document.getElementById('scen');
+  if(sel){sel.addEventListener('change', function(){
+    var s = window.RF ? RF.scenario(sel.value) : null;
+    var sym = s ? (s.symbol || '$') : '$';
+    initHCI('hci_p2', 0, sym, null);
+  });}
 })();
 </script>
-
-<script>
-function downloadExcel(filename) {
-  // Excel files are hosted in the /excel/ subfolder of the same repo
-  var base = window.location.href.replace(/\/[^/]*$/, '');
-  var url = base + '/excel/' + filename;
-  var a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
-</script>
-</body></html>
+</body></html>\

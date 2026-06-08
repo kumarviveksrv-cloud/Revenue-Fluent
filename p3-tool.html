@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-  <meta http-equiv="Pragma" content="no-cache"/>
-  <meta http-equiv="Expires" content="0"/><meta charset="utf-8"/>
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Org Vitals — Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
@@ -48,16 +47,16 @@ body{
 .switch select{background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-family:var(--font);font-size:.9rem;cursor:pointer;min-width:260px;transition:border-color .15s}
 .switch select:hover,.switch select:focus{outline:none;border-color:var(--cobalt)}
 .scen-meta{font-family:var(--mono);font-size:.72rem;color:var(--text-dim)}
-.scen-meta b{color:#D878BC}
+.scen-meta b{color:#7AABDB}
 
 /* PULSE ANIMATION */
 @keyframes hero-pulse{
   0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.2),0 0 16px rgba(160,20,120,.1),0 0 40px rgba(160,20,120,.05)}
-  50%{box-shadow:0 0 0 1px rgba(220,80,180,.45),0 0 32px rgba(192,64,154,.2),0 0 64px rgba(160,20,120,.1)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.45),0 0 32px rgba(192,64,154,.2),0 0 64px rgba(160,20,120,.1)}
 }
 @keyframes cobalt-pulse{
   0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.3),0 0 8px rgba(160,20,120,.15),0 0 20px rgba(160,20,120,.06)}
-  50%{box-shadow:0 0 0 1px rgba(220,80,180,.7),0 0 20px rgba(192,64,154,.4),0 0 40px rgba(160,20,120,.18)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.7),0 0 20px rgba(192,64,154,.4),0 0 40px rgba(160,20,120,.18)}
 }
 
 /* INTRO */
@@ -194,9 +193,8 @@ body{
   .sim-metrics{grid-template-columns:1fr 1fr}
 }
 
-/* SIDEBAR */
 :root{--sidebar:220px}
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.95);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.18);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.2);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto}
 .sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:rgba(180,40,140,.2);border-radius:2px}
 .sb-brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid rgba(180,40,140,.18);text-decoration:none;flex-shrink:0}
 .sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
@@ -216,9 +214,6 @@ body{
 .sb-by b{color:#E8C87A;font-weight:600;font-size:.72rem}
 .wrap{margin-left:var(--sidebar)}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
-
-
-/* SHOW WORKINGS */
 .sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:4px}
 .sw-trigger:hover{color:#E080C8}
 .sw-trigger svg{width:10px;height:10px;transition:transform .2s}
@@ -233,9 +228,6 @@ body{
 .sw-formula{font-family:var(--mono);font-size:.76rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
 .sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
 .sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
-
-
-/* HCI */
 .hci-wrap{margin:20px 0;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px;overflow:hidden}
 .hci-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;transition:background .15s}
 .hci-header:hover{background:rgba(180,40,140,.06)}
@@ -278,9 +270,6 @@ body{
 .hci-decay-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#E05C3A;margin-bottom:6px}
 .hci-decay-text{font-size:.82rem;color:#D8B8D0;line-height:1.6}
 .hci-decay-val{color:#E05C3A;font-weight:500;font-family:var(--mono)}
-
-
-/* DOWNLOADS */
 .dl-section{margin:32px 0 16px;padding:24px 28px;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px}
 .dl-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .dl-icon{width:28px;height:28px;border-radius:6px;background:rgba(192,64,154,.15);border:1px solid rgba(192,64,154,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -288,16 +277,35 @@ body{
 .dl-sub{font-size:.82rem;color:#C8A8C0;margin-bottom:18px;line-height:1.6}
 .dl-sub b{color:#EED8E8}
 .dl-buttons{display:flex;gap:12px;flex-wrap:wrap}
-.dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border-radius:9px;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-weight:500}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border-radius:9px;cursor:pointer;border:none;font-weight:500;transition:all .2s}
 .dl-btn-excel{background:rgba(56,196,144,.1);color:#38C490;border:1px solid rgba(56,196,144,.25)}
-.dl-btn-excel:hover{background:rgba(56,196,144,.18);border-color:rgba(56,196,144,.5);transform:translateY(-2px)}
+.dl-btn-excel:hover{background:rgba(56,196,144,.18);transform:translateY(-2px)}
 .dl-btn-pdf{background:rgba(224,184,48,.08);color:#E8C87A;border:1px solid rgba(224,184,48,.2)}
-.dl-btn-pdf:hover{background:rgba(224,184,48,.15);border-color:rgba(224,184,48,.4);transform:translateY(-2px)}
+.dl-btn-pdf:hover{background:rgba(224,184,48,.15);transform:translateY(-2px)}
 .dl-btn svg{width:14px;height:14px;flex-shrink:0}
 .dl-note{font-size:.72rem;color:rgba(192,64,154,.4);margin-top:10px;font-style:italic}
-
 </style></head>
-<body><div class="wrap">
+<body>
+<aside class="sidebar">
+<a href="index.html" class="sb-brand"><div class="sb-dot"></div><div class="sb-name">Revenue Fluent</div></a>
+<div class="sb-section">Platform</div>
+<a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+<a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+<div class="sb-tools-section">The Five Pillars</div>
+<a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+<a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+<a href="p3-tool.html" class="sb-tool active"><div class="sb-tool-num">L3</div>Org Vitals</a>
+<a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+<a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+<div class="sb-section">More</div>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Learning Hub<span class="sb-badge">Soon</span></a>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+<div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+</aside>
+<script>
+(function(){var s=new URLSearchParams(location.search).get('scenario')||'';if(!s)return;document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){var h=a.getAttribute('href');if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0)a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(s);});})();
+</script><div class="wrap">
 
 <div class="crumb">
   <a href="scenario-library.html">&larr; Library</a>
@@ -317,30 +325,28 @@ body{
   <select id="scen"></select>
   <span class="scen-meta" id="meta"></span>
 </div>
+<div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p3')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Org Vitals score for current conditions</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p3_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p3_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p3_body"><div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p3_f0" onclick="hciTF('hci_p3',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p3_f1" onclick="hciTF('hci_p3',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p3_f2" onclick="hciTF('hci_p3',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p3_f3" onclick="hciTF('hci_p3',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p3_calc"></div><table class="hci-scenarios"><tbody id="hci_p3_scen"></tbody></table><div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div></div></div>
 <div id="app"></div>
 
 </div>
-
 <script>
 function swToggle(btn){
-  var panelId=btn.getAttribute('data-panel');
-  var panel=document.getElementById(panelId);
-  if(!panel)return;
-  var open=panel.classList.contains('open');
-  document.querySelectorAll('.sw-panel.open').forEach(function(p){p.classList.remove('open');});
-  document.querySelectorAll('.sw-trigger.open').forEach(function(b){b.classList.remove('open');});
-  if(!open){panel.classList.add('open');btn.classList.add('open');}
+  var p=document.getElementById(btn.getAttribute('data-panel'));
+  if(!p)return;
+  var o=p.classList.contains('open');
+  document.querySelectorAll('.sw-panel.open').forEach(function(x){x.classList.remove('open');});
+  document.querySelectorAll('.sw-trigger.open').forEach(function(x){x.classList.remove('open');});
+  if(!o){p.classList.add('open');btn.classList.add('open');}
 }
-var _hciState={};
+var _hci={};
 function hciToggle(id){var b=document.getElementById(id+'_body'),c=document.getElementById(id+'_chev');if(!b)return;var o=b.classList.contains('open');b.classList.toggle('open',!o);if(c)c.classList.toggle('open',!o);}
-function hciToggleFactor(id,idx){if(!_hciState[id])return;_hciState[id].factors[idx]=!_hciState[id].factors[idx];_hciRender(id);}
-function _hciCoeff(id){var s=_hciState[id];if(!s)return 1.0;return Math.round((0.70+s.factors.filter(Boolean).length*0.15)*100)/100;}
-function _hciFmt(sym,val){var abs=Math.abs(val),sign=val<0?'-':'';if(sym==='₹'){if(abs>=10000000)return sign+sym+(abs/10000000).toFixed(2)+'Cr';if(abs>=100000)return sign+sym+(abs/100000).toFixed(1)+'L';return sign+sym+Math.round(abs/1000)+'K';}if(abs>=1000000000)return sign+sym+(abs/1000000000).toFixed(2)+'B';if(abs>=1000000)return sign+sym+(abs/1000000).toFixed(2)+'M';if(abs>=1000)return sign+sym+Math.round(abs/1000)+'K';return sign+sym+Math.round(abs);}
-function _hciRender(id){var s=_hciState[id];if(!s)return;var hci=_hciCoeff(id),base=s.base,sym=s.sym;var yc=s.factors.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=hci.toFixed(2)+'x';s.factors.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var calc=document.getElementById(id+'_calc');if(calc)calc.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+hci.toFixed(2)+'</b></span><div class="hci-calc-result">'+hci.toFixed(2)+'x<span>HCI Coefficient</span></div>';var scen=document.getElementById(id+'_scen');if(scen){var c=base*(hci-0.15),y=base*hci,o=base*(hci+0.15);scen.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(hci-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+hci.toFixed(2)+'x</td><td class="yours">'+_hciFmt(sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(hci+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(sym,o)+'</td></tr>';}if(s.decay){var dEl=document.getElementById(id+'_decay');if(dEl){var dp=Math.round((1.3-hci)*20+8);dEl.innerHTML='<div class="hci-decay-label">⚠ Decay Signal — 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(hci>=1.0?'HCI suggests stable conditions.':hci>=0.85?'Moderate risk — monitor closely.':'Significant risk — intervention recommended.')+'</div>';}}}
-function initHCI(id,base,sym,decay){_hciState[id]={factors:[false,false,false,false],base:base,sym:sym,decay:decay||null};_hciRender(id);}
-function downloadExcel(filename){var base=window.location.href.replace(/\/[^/]*$/,'');var url=base+'/excel/'+filename;var a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);}
+function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);}
+function _hciC(id){var s=_hci[id];if(!s)return 1;return Math.round((0.7+s.f.filter(Boolean).length*0.15)*100)/100;}
+function _hciFmt(sym,v){var a=Math.abs(v),sg=v<0?'-':'';if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';if(a>=1000)return sg+sym+Math.round(a/1000)+'K';return sg+sym+Math.round(a);}
+function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal — 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk — monitor closely.':'Significant risk — intervention recommended.')+'</div>';}}}
+function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:base||0,sym:sym||'$',decay:decay||null};_hciR(id);}
+function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
 </script>
-
 <script src="rf-data.js"></script>
 <script>
 (function(){
@@ -424,13 +430,13 @@ var CAUSAL_CHAINS = {
   'leadership_3': { seeing: 'Meetings start late, run over, and respect no one\'s time.', causing: 'The leader who calls the meeting sets the cultural norm for how time is valued in the org. Disrespect cascades downward.' },
   'fear_0': { seeing: 'Mistakes get hidden until they become crises.', causing: 'Blame has been normalised. When mistakes get punished publicly, people learn to hide problems rather than solve them.' },
   'fear_1': { seeing: 'Leadership is always surprised by bad news.', causing: 'People have learned that bad news travels through the hierarchy at personal cost. They delay until they have no choice.' },
-  'fear_2': { seeing: 'Teams operate in silos. Knowledge doesn\'t flow.', causing: 'Information is power in a fear-based culture. Sharing it reduces leverage. People hoard knowledge to protect their position.' },
+  'fear_2': { seeing: 'Teams operate in silos. Knowledge does\n\'t flow.', causing: 'Information is power in a fear-based culture. Sharing it reduces leverage. People hoard knowledge to protect their position.' },
   'fear_3': { seeing: 'Every decision lands from above. Pushback is absent.', causing: 'A senior leader who has never reversed a decision in response to junior input has never signalled that it is safe to try.' },
-  'middle_0': { seeing: 'People don\'t know where they stand with their manager.', causing: '1:1s exist to give people a safe, regular channel upward. Without them, people navigate by rumour and assumption.' },
-  'middle_1': { seeing: 'Good people are invisible to leadership. Promotions feel political.', causing: 'Managers who don\'t advocate for their people are managing tasks, not developing careers. The best people eventually leave to be seen.' },
+  'middle_0': { seeing: 'People do\n\'t know where they stand with their manager.', causing: '1:1s exist to give people a safe, regular channel upward. Without them, people navigate by rumour and assumption.' },
+  'middle_1': { seeing: 'Good people are invisible to leadership. Promotions feel political.', causing: 'Managers who do\n\'t advocate for their people are managing tasks, not developing careers. The best people eventually leave to be seen.' },
   'middle_2': { seeing: 'Strategic initiatives die between announcement and implementation.', causing: 'The middle layer is the transmission belt. When it corrodes, messages lose meaning at each layer. Frontline receives noise, not direction.' },
   'middle_3': { seeing: 'Underperformance is tolerated or handled through avoidance.', causing: 'Managers who avoid tough conversations protect themselves, not the org. The team watches and learns what is tolerated.' },
-  'execution_0': { seeing: 'People are busy but can\'t connect their work to the business.', causing: 'Goals were written in the language of activity, not outcome. The connection between effort and financial impact was never made explicit.' },
+  'execution_0': { seeing: 'People are busy but ca\n\'t connect their work to the business.', causing: 'Goals were written in the language of activity, not outcome. The connection between effort and financial impact was never made explicit.' },
   'execution_1': { seeing: 'People spend more time in meetings than doing actual work.', causing: 'Meetings have become the proxy for progress. Attendance is mistaken for accountability. Output has been forgotten.' },
   'execution_2': { seeing: 'Knowledge walks out the door when people leave.', causing: 'The org has never prioritised capturing what it knows. Institutional memory is stored in people\'s heads, not in systems.' },
   'execution_3': { seeing: 'Projects slip routinely. Deadlines are treated as suggestions.', causing: 'Execution has been decoupled from accountability. There are no real consequences for missing timelines, so timelines stop meaning anything.' },
@@ -462,7 +468,7 @@ var DNA_TYPES = {
     desc: 'Strong mission alignment, genuine care for people, real bonds across the org. Common in social enterprises, family businesses, and some professional services firms. Healthy DNA with a specific operational vulnerability.',
     good: 'Retention, loyalty, riding out hard times together without losing people',
     vulnerable: 'Operational discipline, scaling, commercial ruthlessness when the mission demands it',
-    breaks: 'When mission and commercial reality diverge and leadership can\'t reconcile them',
+    breaks: 'When mission and commercial reality diverge and leadership ca\n\'t reconcile them',
     financial: 'Low attrition cost, high loyalty premium, underperforming on revenue per employee'
   },
   'fear_factory': {
@@ -629,7 +635,7 @@ function render() {
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">How it works</div>'
         +'<div class="intro-sec-txt">You answer 20 binary questions — Yes or No, nothing in between. Each question is something you can observe directly. <b>Yes always means healthy.</b> Four questions per vital sign. The readings combine to name your organisation\'s DNA type.<br><br>This is not a questionnaire. There are no rating scales. Every signal is observable — things you can see happening, not things you have to interpret.</div>'
-        +'<div class="intro-story">An HR Head joined a new company and immediately sensed something was wrong. She could not name it. The CEO seemed engaged. The product was strong. The numbers were fine. But something in the way information moved — or didn\'t — felt off.<br><br><b>Org Vitals would have named it in 5 minutes. Fear Index: Critical. The org was a Fear Factory running on borrowed time.</b></div>'
+        +'<div class="intro-story">An HR Head joined a new company and immediately sensed something was wrong. She could not name it. The CEO seemed engaged. The product was strong. The numbers were fine. But something in the way information moved — or did\n\'t — felt off.<br><br><b>Org Vitals would have named it in 5 minutes. Fear Index: Critical. The org was a Fear Factory running on borrowed time.</b></div>'
       +'</div>'
       +'<div class="intro-transition">Answer the 20 signals below about <b>your organisation</b> — not the scenario data. The scenario gives context. Your answers reveal the DNA.</div>'
     +'</div>'
@@ -761,7 +767,7 @@ function render() {
         +'<div class="sim-metric"><div class="sv">-'+imp.attrReduction+'%</div><div class="sl">Estimated attrition reduction</div></div>'
         +'<div class="sim-metric"><div class="sv">'+imp.monthsToShift+' mo</div><div class="sl">Estimated months to character shift</div></div>'
       +'</div>'
-      +'<div class="sim-nothing"><b>Cost of doing nothing:</b> The signals that are Critical today become structural in 6 months. Character types don\'t drift — they compound. A Fear Factory that isn\'t addressed becomes harder to change with every quarter that passes.</div>'
+      +'<div class="sim-nothing"><b>Cost of doing nothing:</b> The signals that are Critical today become structural in 6 months. Character types do\n\'t drift — they compound. A Fear Factory that is\n\'t addressed becomes harder to change with every quarter that passes.</div>'
     +'</div>'
     +'</div>';
   } else if (answered > 0 && answered < 20) {
@@ -864,13 +870,26 @@ render();
 
 <script>
 (function(){
-  function tryInit(){
-    var sym='$';
-    var symEl=document.querySelector('.scen-meta');
-    if(symEl){var t=symEl.textContent;if(t.indexOf('₹')>-1)sym='₹';else if(t.indexOf('£')>-1)sym='£';else if(t.indexOf('S$')>-1)sym='S$';else if(t.indexOf('€')>-1)sym='€';else if(t.indexOf('¥')>-1)sym='¥';}
-    initHCI('hci_p3',0,sym,null);
+  var origRender = typeof render === 'function' ? render : null;
+  function tryInitHCI(){
+    var sym = '$';
+    var sel = document.getElementById('scen');
+    if(sel && window.RF){
+      var s = RF.scenario(sel.value);
+      if(s) sym = s.symbol || '$';
+    }
+    initHCI('hci_p3', 0, sym, null);
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',tryInit);}else{tryInit();}
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', tryInitHCI);
+  }else{tryInitHCI();}
+  // Re-init on scenario change
+  var sel = document.getElementById('scen');
+  if(sel){sel.addEventListener('change', function(){
+    var s = window.RF ? RF.scenario(sel.value) : null;
+    var sym = s ? (s.symbol || '$') : '$';
+    initHCI('hci_p3', 0, sym, null);
+  });}
 })();
 </script>
 </body></html>

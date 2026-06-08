@@ -1,10 +1,181 @@
-\n<!DOCTYPE html>\n<html lang=\"en\"><head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-  <meta http-equiv="Pragma" content="no-cache"/>
-  <meta http-equiv="Expires" content="0"/><meta charset=\"utf-8\"/>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>\n<title>The Human Balance Sheet \u2014 Revenue Fluent</title>\n<link href=\"https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Bebas+Neue&display=swap\" rel=\"stylesheet\"/>\n<style>\n:root{\n  --bg:#0A0608;--bg2:#100810;--bg3:#080408;--bg4:#080A18;\n  --cobalt:#C0409A;--cobalt-dim:rgba(160,20,120,.15);--cobalt-glow:rgba(160,20,120,.08);\n  --cobalt-border:rgba(160,20,120,.18);\n  --gold:#E0B830;--gold-dim:rgba(224,184,48,.12);\n  --copper:#B87333;--copper-lt:#E8C87A;\n  --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;\n  --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;\n  --text-mute:rgba(160,20,120,.25);--border:rgba(160,20,120,.15);\n  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;\n  --serif:'Playfair Display',serif;--hero:'Bebas Neue',sans-serif;\n}\n*{box-sizing:border-box;margin:0;padding:0}\nbody{\n  background:var(--bg);color:var(--text);font-family:var(--font);\n  font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;\n  background-image:\n    radial-gradient(ellipse 70% 40% at 50% 0%,rgba(140,15,100,.18) 0%,transparent 55%),\n    radial-gradient(ellipse 50% 30% at 10% 80%,rgba(160,80,20,.06) 0%,transparent 50%),\n    linear-gradient(rgba(160,20,120,.025) 1px,transparent 1px),\n    linear-gradient(90deg,rgba(160,20,120,.025) 1px,transparent 1px);\n  background-size:100% 100%,100% 100%,52px 52px,52px 52px;\n  min-height:100vh;\n}\n.wrap{max-width:1100px;margin:0 auto;padding:36px 40px 80px}\n\n/* NAV */\n.crumb{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:32px;flex-wrap:wrap}\n.crumb a{color:var(--text-dim);text-decoration:none;transition:color .15s}\n.crumb a:hover{color:var(--cobalt)}\n.crumb .sep{color:var(--text-mute)}\n.tool-nav{display:flex;gap:3px;flex-wrap:wrap}\n.tool-nav a{padding:3px 9px;border-radius:5px;border:1px solid var(--border);color:var(--text-dim);font-size:.66rem;text-decoration:none;transition:all .15s}\n.tool-nav a:hover{border-color:var(--cobalt-border);color:var(--text-mid)}\n.tool-nav a.active{background:var(--cobalt-dim);border-color:var(--cobalt);color:var(--cobalt)}\n\n.eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#D060B0;margin-bottom:16px}\n.switch{display:flex;align-items:center;gap:12px;margin-bottom:36px;flex-wrap:wrap}\n.switch label{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}\n.switch select{background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-family:var(--font);font-size:.9rem;cursor:pointer;min-width:260px;transition:border-color .15s}\n.switch select:hover,.switch select:focus{outline:none;border-color:var(--cobalt)}\n.scen-meta{font-family:var(--mono);font-size:.72rem;color:var(--text-dim)}\n.scen-meta b{color:#D878BC}\n\n/* PULSE */\n@keyframes hero-pulse{\n  0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.2),0 0 16px rgba(160,20,120,.1),0 0 40px rgba(160,20,120,.05)}\n  50%{box-shadow:0 0 0 1px rgba(220,80,180,.45),0 0 32px rgba(192,64,154,.2),0 0 64px rgba(160,20,120,.1)}\n}\n@keyframes cobalt-pulse{\n  0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.3),0 0 8px rgba(160,20,120,.15),0 0 20px rgba(160,20,120,.06)}\n  50%{box-shadow:0 0 0 1px rgba(220,80,180,.7),0 0 20px rgba(192,64,154,.4),0 0 40px rgba(160,20,120,.18)}\n}\n\n/* INTRO */\n.intro-panel{margin-bottom:32px}\n.intro-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;cursor:pointer;animation:cobalt-pulse 3s ease-in-out infinite}\n.intro-tl{display:flex;align-items:center;gap:12px}\n.intro-icon{width:26px;height:26px;border-radius:50%;background:var(--cobalt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.66rem;font-weight:700;color:#fff;font-family:var(--mono)}\n.intro-title{font-size:.9rem;font-weight:500;color:var(--text-cool)}\n.intro-sub{font-family:var(--mono);font-size:.64rem;color:#D060B0;margin-top:2px}\n.intro-chevron{font-family:var(--mono);font-size:.66rem;color:var(--text-dim)}\n.intro-body{background:var(--bg2);border:1px solid var(--cobalt-border);border-top:none;border-radius:0 0 12px 12px;padding:28px;display:none}\n.intro-body.open{display:block}\n.intro-sec{margin-bottom:22px}\n.intro-sec:last-child{margin-bottom:0}\n.intro-sec-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#D060B0;margin-bottom:8px}\n.intro-sec-txt{font-size:.9rem;color:var(--text-mid);line-height:1.7}\n.intro-sec-txt b{color:var(--text-cool);font-weight:500}\n.intro-story{background:var(--bg3);border-left:2px solid var(--cobalt);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:10px;font-family:var(--serif);font-style:italic;font-size:.9rem;line-height:1.6;color:var(--text-mid)}\n.intro-story b{color:var(--gold);font-style:normal}\n.intro-transition{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:14px;margin-top:16px;line-height:1.5}\n.intro-transition b{color:var(--gold);font-style:normal}\n\n/* HERO */\n.hero{padding:44px 52px;margin-bottom:32px;background:linear-gradient(135deg,rgba(40,8,28,.8),rgba(4,6,14,.95));border:1px solid var(--cobalt-border);border-radius:20px;position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}\n.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(224,184,48,.3),rgba(160,20,120,.5),transparent)}\n.hero-grid{display:grid;grid-template-columns:1fr 1px 340px;gap:44px;align-items:center;position:relative;z-index:1}\n.hero-divider{background:var(--cobalt-dim)}\n.nhw-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#D060B0;margin-bottom:12px}\n.nhw-num{font-family:var(--hero);font-size:6.5rem;line-height:.88;letter-spacing:.02em;background:linear-gradient(135deg,#F0C840 0%,#D4900A 30%,#F5D060 60%,#C48000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(200,160,40,.25));margin-bottom:10px}\n.nhw-desc{font-size:.86rem;color:#C8D8F0;line-height:1.6}\n.nhw-desc b{color:#D878BC;font-weight:400}\n.story-rule{width:32px;height:2px;background:linear-gradient(90deg,var(--cobalt),var(--copper));margin-bottom:14px}\n.hook{font-family:var(--serif);font-style:italic;font-size:1.18rem;line-height:1.5;color:#EEF4FF;margin-bottom:12px}\n.context{font-size:.84rem;color:#C8D8F0;line-height:1.7}\n.context b{color:var(--text-cool);font-weight:500}\n\n/* BALANCE SHEET \u2014 two columns */\n.bs-wrap{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:16px;overflow:hidden;margin-bottom:28px;animation:hero-pulse 3s ease-in-out infinite;position:relative}\n.bs-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.4),rgba(184,115,51,.2),rgba(160,20,120,.4),transparent)}\n.bs-header{padding:16px 28px;background:linear-gradient(90deg,rgba(160,20,120,.06),transparent);border-bottom:1px solid var(--cobalt-border);display:flex;align-items:center;justify-content:space-between}\n.bs-header-title{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}\n.bs-header-sub{font-family:var(--mono);font-size:.62rem;color:var(--text-dim)}\n\n/* TWO COLUMN LAYOUT */\n.bs-cols{display:grid;grid-template-columns:1fr 1px 1fr}\n.bs-col-divider{background:var(--cobalt-border)}\n.bs-col-head{padding:14px 24px;background:rgba(160,20,120,.05);border-bottom:1px solid var(--cobalt-border)}\n.bs-col-head span{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}\n.bs-col-head.assets span{color:var(--teal)}\n.bs-col-head.liabs span{color:var(--red)}\n.bs-row{padding:12px 24px;border-top:1px solid rgba(160,20,120,.04)}\n.bs-row:hover{background:rgba(160,20,120,.03)}\n.bs-item-label{font-size:.84rem;color:var(--text-mid);margin-bottom:2px}\n.bs-item-desc{font-family:var(--mono);font-size:.6rem;color:rgba(160,20,120,.3);line-height:1.4;margin-bottom:5px}\n.bs-item-val{font-family:var(--mono);font-size:.92rem;font-weight:500}\n.bs-item-val.pos{color:var(--teal)}\n.bs-item-val.neg{color:var(--red)}\n.bs-total{padding:14px 24px;background:rgba(40,8,28,.4);border-top:1px solid var(--cobalt-border)}\n.bs-total-label{font-family:var(--mono);font-size:.68rem;font-weight:500;color:var(--text-cool);margin-bottom:2px}\n.bs-total-val{font-family:var(--mono);font-size:1.0rem;font-weight:700}\n.bs-total-val.pos{color:var(--teal)}\n.bs-total-val.neg{color:var(--red)}\n\n/* NET HUMAN WORTH */\n.bs-net{padding:20px 28px;background:linear-gradient(90deg,rgba(160,20,120,.08),rgba(184,115,51,.04),transparent);border-top:2px solid var(--cobalt-border);display:grid;grid-template-columns:1fr 1fr}\n.bs-net-left{display:flex;flex-direction:column;gap:6px}\n.bs-net-label{font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--text-cool)}\n.bs-net-formula{font-family:var(--mono);font-size:.62rem;color:var(--text-dim)}\n.bs-net-right{text-align:right}\n.bs-net-val{font-family:var(--hero);font-size:2.4rem;letter-spacing:.02em;line-height:1}\n.bs-net-val.pos{background:linear-gradient(135deg,#F0C840,#D4900A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}\n.bs-net-val.neg{background:linear-gradient(135deg,#F08070,#E05C3A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}\n\n/* RETAINED EARNINGS ROW */\n.bs-retained{padding:12px 28px;background:rgba(224,184,48,.04);border-top:1px solid rgba(224,184,48,.1)}\n.bs-retained-label{font-size:.82rem;color:var(--copper-lt);display:flex;align-items:center;gap:8px}\n.bs-retained-val{font-family:var(--mono);font-size:.86rem;color:var(--copper-lt);text-align:right}\n.bs-retained-grid{display:grid;grid-template-columns:1fr auto}\n\n/* PLATFORM FLOW */\n.platform-flow{background:rgba(40,8,28,.4);border:1px solid var(--cobalt-border);border-radius:14px;padding:22px 28px;margin-bottom:28px;animation:hero-pulse 3s ease-in-out infinite}\n.pf-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px}\n.pf-row{display:flex;align-items:center;gap:0;border:1px solid rgba(160,20,120,.12);border-radius:10px;overflow:hidden;margin-bottom:10px}\n.pf-cell{flex:1;padding:12px 14px;border-right:1px solid rgba(160,20,120,.1);text-align:center}\n.pf-cell:last-child{border-right:none}\n.pf-cell.active{background:rgba(224,184,48,.06);border-color:rgba(224,184,48,.15)}\n.pf-cell .pc-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#9AB8D8;margin-bottom:3px}\n.pf-cell .pc-val{font-family:var(--mono);font-size:.84rem;font-weight:500;color:#9AB8D8}\n.pf-cell.active .pc-lbl{color:var(--gold)}\n.pf-cell.active .pc-val{color:var(--gold)}\n.pf-arrow{color:rgba(160,20,120,.3);font-size:1rem;padding:0 2px;flex:0}\n.pf-note{font-size:.84rem;color:var(--text-mid);line-height:1.6;margin-top:10px}\n.pf-note b{color:var(--text-cool);font-weight:500}\n\n/* STATEMENT */\n.statement{padding:26px 30px;background:rgba(40,8,28,.5);border:1px solid var(--cobalt-border);border-radius:14px;border-left:3px solid var(--cobalt);position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}\n.statement::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#5A9AEB,var(--copper))}\n.stmt-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}\n.stmt-txt{font-family:var(--serif);font-style:italic;font-size:1.06rem;line-height:1.65;color:#D0E0F4}\n.stmt-txt b{color:var(--gold);font-style:normal}\n\n.err{background:var(--bg2);border:1px solid var(--red);border-radius:10px;padding:18px;color:var(--red);font-family:var(--mono);font-size:.82rem}\n\n@media(max-width:760px){\n  .wrap{padding:24px 20px 60px}\n  .hero-grid{grid-template-columns:1fr}\n  .hero-divider{display:none}\n  .nhw-num{font-size:4.5rem}\n  .bs-cols{grid-template-columns:1fr}\n  .bs-col-divider{display:none}\n  .bs-net{grid-template-columns:1fr}\n  .bs-net-right{text-align:left;margin-top:8px}\n  .pf-row{flex-wrap:wrap}\n}\n
-/* SIDEBAR */
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The Human Balance Sheet — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0A0608;--bg2:#100810;--bg3:#080408;--bg4:#080A18;
+  --cobalt:#C0409A;--cobalt-dim:rgba(160,20,120,.15);--cobalt-glow:rgba(160,20,120,.08);
+  --cobalt-border:rgba(160,20,120,.18);
+  --gold:#E0B830;--gold-dim:rgba(224,184,48,.12);
+  --copper:#B87333;--copper-lt:#E8C87A;
+  --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
+  --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
+  --text-mute:rgba(160,20,120,.25);--border:rgba(160,20,120,.15);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --serif:'Playfair Display',serif;--hero:'Bebas Neue',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--font);
+  font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 70% 40% at 50% 0%,rgba(140,15,100,.18) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 30% at 10% 80%,rgba(160,80,20,.06) 0%,transparent 50%),
+    linear-gradient(rgba(160,20,120,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(160,20,120,.025) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,52px 52px,52px 52px;
+  min-height:100vh;
+}
+.wrap{max-width:1100px;margin:0 auto;padding:36px 40px 80px}
+
+/* NAV */
+.crumb{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:32px;flex-wrap:wrap}
+.crumb a{color:var(--text-dim);text-decoration:none;transition:color .15s}
+.crumb a:hover{color:var(--cobalt)}
+.crumb .sep{color:var(--text-mute)}
+.tool-nav{display:flex;gap:3px;flex-wrap:wrap}
+.tool-nav a{padding:3px 9px;border-radius:5px;border:1px solid var(--border);color:var(--text-dim);font-size:.66rem;text-decoration:none;transition:all .15s}
+.tool-nav a:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
+.tool-nav a.active{background:var(--cobalt-dim);border-color:var(--cobalt);color:var(--cobalt)}
+
+.eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#D060B0;margin-bottom:16px}
+.switch{display:flex;align-items:center;gap:12px;margin-bottom:36px;flex-wrap:wrap}
+.switch label{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
+.switch select{background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-family:var(--font);font-size:.9rem;cursor:pointer;min-width:260px;transition:border-color .15s}
+.switch select:hover,.switch select:focus{outline:none;border-color:var(--cobalt)}
+.scen-meta{font-family:var(--mono);font-size:.72rem;color:var(--text-dim)}
+.scen-meta b{color:#7AABDB}
+
+/* PULSE */
+@keyframes hero-pulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.2),0 0 16px rgba(160,20,120,.1),0 0 40px rgba(160,20,120,.05)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.45),0 0 32px rgba(192,64,154,.2),0 0 64px rgba(160,20,120,.1)}
+}
+@keyframes cobalt-pulse{
+  0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.3),0 0 8px rgba(160,20,120,.15),0 0 20px rgba(160,20,120,.06)}
+  50%{box-shadow:0 0 0 1px rgba(90,160,255,.7),0 0 20px rgba(192,64,154,.4),0 0 40px rgba(160,20,120,.18)}
+}
+
+/* INTRO */
+.intro-panel{margin-bottom:32px}
+.intro-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;cursor:pointer;animation:cobalt-pulse 3s ease-in-out infinite}
+.intro-tl{display:flex;align-items:center;gap:12px}
+.intro-icon{width:26px;height:26px;border-radius:50%;background:var(--cobalt);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.66rem;font-weight:700;color:#fff;font-family:var(--mono)}
+.intro-title{font-size:.9rem;font-weight:500;color:var(--text-cool)}
+.intro-sub{font-family:var(--mono);font-size:.64rem;color:#D060B0;margin-top:2px}
+.intro-chevron{font-family:var(--mono);font-size:.66rem;color:var(--text-dim)}
+.intro-body{background:var(--bg2);border:1px solid var(--cobalt-border);border-top:none;border-radius:0 0 12px 12px;padding:28px;display:none}
+.intro-body.open{display:block}
+.intro-sec{margin-bottom:22px}
+.intro-sec:last-child{margin-bottom:0}
+.intro-sec-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#D060B0;margin-bottom:8px}
+.intro-sec-txt{font-size:.9rem;color:var(--text-mid);line-height:1.7}
+.intro-sec-txt b{color:var(--text-cool);font-weight:500}
+.intro-story{background:var(--bg3);border-left:2px solid var(--cobalt);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:10px;font-family:var(--serif);font-style:italic;font-size:.9rem;line-height:1.6;color:var(--text-mid)}
+.intro-story b{color:var(--gold);font-style:normal}
+.intro-transition{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:14px;margin-top:16px;line-height:1.5}
+.intro-transition b{color:var(--gold);font-style:normal}
+
+/* HERO */
+.hero{padding:44px 52px;margin-bottom:32px;background:linear-gradient(135deg,rgba(40,8,28,.8),rgba(4,6,14,.95));border:1px solid var(--cobalt-border);border-radius:20px;position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(224,184,48,.3),rgba(160,20,120,.5),transparent)}
+.hero-grid{display:grid;grid-template-columns:1fr 1px 340px;gap:44px;align-items:center;position:relative;z-index:1}
+.hero-divider{background:var(--cobalt-dim)}
+.nhw-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#D060B0;margin-bottom:12px}
+.nhw-num{font-family:var(--hero);font-size:6.5rem;line-height:.88;letter-spacing:.02em;background:linear-gradient(135deg,#F0C840 0%,#D4900A 30%,#F5D060 60%,#C48000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(200,160,40,.25));margin-bottom:10px}
+.nhw-desc{font-size:.86rem;color:#C8D8F0;line-height:1.6}
+.nhw-desc b{color:#7AABDB;font-weight:400}
+.story-rule{width:32px;height:2px;background:linear-gradient(90deg,var(--cobalt),var(--copper));margin-bottom:14px}
+.hook{font-family:var(--serif);font-style:italic;font-size:1.18rem;line-height:1.5;color:#EEF4FF;margin-bottom:12px}
+.context{font-size:.84rem;color:#C8D8F0;line-height:1.7}
+.context b{color:var(--text-cool);font-weight:500}
+
+/* BALANCE SHEET — two columns */
+.bs-wrap{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:16px;overflow:hidden;margin-bottom:28px;animation:hero-pulse 3s ease-in-out infinite;position:relative}
+.bs-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.4),rgba(184,115,51,.2),rgba(160,20,120,.4),transparent)}
+.bs-header{padding:16px 28px;background:linear-gradient(90deg,rgba(160,20,120,.06),transparent);border-bottom:1px solid var(--cobalt-border);display:flex;align-items:center;justify-content:space-between}
+.bs-header-title{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bs-header-sub{font-family:var(--mono);font-size:.62rem;color:var(--text-dim)}
+
+/* TWO COLUMN LAYOUT */
+.bs-cols{display:grid;grid-template-columns:1fr 1px 1fr}
+.bs-col-divider{background:var(--cobalt-border)}
+.bs-col-head{padding:14px 24px;background:rgba(160,20,120,.05);border-bottom:1px solid var(--cobalt-border)}
+.bs-col-head span{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}
+.bs-col-head.assets span{color:var(--teal)}
+.bs-col-head.liabs span{color:var(--red)}
+.bs-row{padding:12px 24px;border-top:1px solid rgba(160,20,120,.04)}
+.bs-row:hover{background:rgba(160,20,120,.03)}
+.bs-item-label{font-size:.84rem;color:var(--text-mid);margin-bottom:2px}
+.bs-item-desc{font-family:var(--mono);font-size:.6rem;color:rgba(160,20,120,.3);line-height:1.4;margin-bottom:5px}
+.bs-item-val{font-family:var(--mono);font-size:.92rem;font-weight:500}
+.bs-item-val.pos{color:var(--teal)}
+.bs-item-val.neg{color:var(--red)}
+.bs-total{padding:14px 24px;background:rgba(40,8,28,.4);border-top:1px solid var(--cobalt-border)}
+.bs-total-label{font-family:var(--mono);font-size:.68rem;font-weight:500;color:var(--text-cool);margin-bottom:2px}
+.bs-total-val{font-family:var(--mono);font-size:1.0rem;font-weight:700}
+.bs-total-val.pos{color:var(--teal)}
+.bs-total-val.neg{color:var(--red)}
+
+/* NET HUMAN WORTH */
+.bs-net{padding:20px 28px;background:linear-gradient(90deg,rgba(160,20,120,.08),rgba(184,115,51,.04),transparent);border-top:2px solid var(--cobalt-border);display:grid;grid-template-columns:1fr 1fr}
+.bs-net-left{display:flex;flex-direction:column;gap:6px}
+.bs-net-label{font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--text-cool)}
+.bs-net-formula{font-family:var(--mono);font-size:.62rem;color:var(--text-dim)}
+.bs-net-right{text-align:right}
+.bs-net-val{font-family:var(--hero);font-size:2.4rem;letter-spacing:.02em;line-height:1}
+.bs-net-val.pos{background:linear-gradient(135deg,#F0C840,#D4900A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bs-net-val.neg{background:linear-gradient(135deg,#F08070,#E05C3A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* RETAINED EARNINGS ROW */
+.bs-retained{padding:12px 28px;background:rgba(224,184,48,.04);border-top:1px solid rgba(224,184,48,.1)}
+.bs-retained-label{font-size:.82rem;color:var(--copper-lt);display:flex;align-items:center;gap:8px}
+.bs-retained-val{font-family:var(--mono);font-size:.86rem;color:var(--copper-lt);text-align:right}
+.bs-retained-grid{display:grid;grid-template-columns:1fr auto}
+
+/* PLATFORM FLOW */
+.platform-flow{background:rgba(40,8,28,.4);border:1px solid var(--cobalt-border);border-radius:14px;padding:22px 28px;margin-bottom:28px;animation:hero-pulse 3s ease-in-out infinite}
+.pf-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px}
+.pf-row{display:flex;align-items:center;gap:0;border:1px solid rgba(160,20,120,.12);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.pf-cell{flex:1;padding:12px 14px;border-right:1px solid rgba(160,20,120,.1);text-align:center}
+.pf-cell:last-child{border-right:none}
+.pf-cell.active{background:rgba(224,184,48,.06);border-color:rgba(224,184,48,.15)}
+.pf-cell .pc-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#9AB8D8;margin-bottom:3px}
+.pf-cell .pc-val{font-family:var(--mono);font-size:.84rem;font-weight:500;color:#9AB8D8}
+.pf-cell.active .pc-lbl{color:var(--gold)}
+.pf-cell.active .pc-val{color:var(--gold)}
+.pf-arrow{color:rgba(160,20,120,.3);font-size:1rem;padding:0 2px;flex:0}
+.pf-note{font-size:.84rem;color:var(--text-mid);line-height:1.6;margin-top:10px}
+.pf-note b{color:var(--text-cool);font-weight:500}
+
+/* STATEMENT */
+.statement{padding:26px 30px;background:rgba(40,8,28,.5);border:1px solid var(--cobalt-border);border-radius:14px;border-left:3px solid var(--cobalt);position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
+.statement::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#5A9AEB,var(--copper))}
+.stmt-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.stmt-txt{font-family:var(--serif);font-style:italic;font-size:1.06rem;line-height:1.65;color:#D0E0F4}
+.stmt-txt b{color:var(--gold);font-style:normal}
+
+.err{background:var(--bg2);border:1px solid var(--red);border-radius:10px;padding:18px;color:var(--red);font-family:var(--mono);font-size:.82rem}
+
+@media(max-width:760px){
+  .wrap{padding:24px 20px 60px}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-divider{display:none}
+  .nhw-num{font-size:4.5rem}
+  .bs-cols{grid-template-columns:1fr}
+  .bs-col-divider{display:none}
+  .bs-net{grid-template-columns:1fr}
+  .bs-net-right{text-align:left;margin-top:8px}
+  .pf-row{flex-wrap:wrap}
+}
+
 :root{--sidebar:220px}
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.95);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.18);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.2);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto}
 .sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:rgba(180,40,140,.2);border-radius:2px}
 .sb-brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid rgba(180,40,140,.18);text-decoration:none;flex-shrink:0}
 .sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
@@ -24,9 +195,6 @@
 .sb-by b{color:#E8C87A;font-weight:600;font-size:.72rem}
 .wrap{margin-left:var(--sidebar)}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
-
-
-/* SHOW WORKINGS */
 .sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:4px}
 .sw-trigger:hover{color:#E080C8}
 .sw-trigger svg{width:10px;height:10px;transition:transform .2s}
@@ -41,9 +209,6 @@
 .sw-formula{font-family:var(--mono);font-size:.76rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
 .sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
 .sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
-
-
-/* HCI */
 .hci-wrap{margin:20px 0;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px;overflow:hidden}
 .hci-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;transition:background .15s}
 .hci-header:hover{background:rgba(180,40,140,.06)}
@@ -86,9 +251,6 @@
 .hci-decay-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#E05C3A;margin-bottom:6px}
 .hci-decay-text{font-size:.82rem;color:#D8B8D0;line-height:1.6}
 .hci-decay-val{color:#E05C3A;font-weight:500;font-family:var(--mono)}
-
-
-/* DOWNLOADS */
 .dl-section{margin:32px 0 16px;padding:24px 28px;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px}
 .dl-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .dl-icon{width:28px;height:28px;border-radius:6px;background:rgba(192,64,154,.15);border:1px solid rgba(192,64,154,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -96,15 +258,78 @@
 .dl-sub{font-size:.82rem;color:#C8A8C0;margin-bottom:18px;line-height:1.6}
 .dl-sub b{color:#EED8E8}
 .dl-buttons{display:flex;gap:12px;flex-wrap:wrap}
-.dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border-radius:9px;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-weight:500}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border-radius:9px;cursor:pointer;border:none;font-weight:500;transition:all .2s}
 .dl-btn-excel{background:rgba(56,196,144,.1);color:#38C490;border:1px solid rgba(56,196,144,.25)}
-.dl-btn-excel:hover{background:rgba(56,196,144,.18);border-color:rgba(56,196,144,.5);transform:translateY(-2px)}
+.dl-btn-excel:hover{background:rgba(56,196,144,.18);transform:translateY(-2px)}
 .dl-btn-pdf{background:rgba(224,184,48,.08);color:#E8C87A;border:1px solid rgba(224,184,48,.2)}
-.dl-btn-pdf:hover{background:rgba(224,184,48,.15);border-color:rgba(224,184,48,.4);transform:translateY(-2px)}
+.dl-btn-pdf:hover{background:rgba(224,184,48,.15);transform:translateY(-2px)}
 .dl-btn svg{width:14px;height:14px;flex-shrink:0}
 .dl-note{font-size:.72rem;color:rgba(192,64,154,.4);margin-top:10px;font-style:italic}
+</style></head>
+<body>
+<aside class="sidebar">
+<a href="index.html" class="sb-brand"><div class="sb-dot"></div><div class="sb-name">Revenue Fluent</div></a>
+<div class="sb-section">Platform</div>
+<a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+<a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+<div class="sb-tools-section">The Five Pillars</div>
+<a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+<a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+<a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+<a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+<a href="p5-tool.html" class="sb-tool active"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+<div class="sb-section">More</div>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>Learning Hub<span class="sb-badge">Soon</span></a>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
+<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+<div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+</aside>
+<script>
+(function(){var s=new URLSearchParams(location.search).get('scenario')||'';if(!s)return;document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){var h=a.getAttribute('href');if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0)a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(s);});})();
+</script><div class="wrap">
 
-</style></head>\n<body><div class=\"wrap\">\n\n<div class=\"crumb\">\n  <a href=\"scenario-library.html\">&larr; Library</a>\n  <span class=\"sep\">/</span>\n  <div class=\"tool-nav\">\n    <a href=\"p1-tool.html\" id=\"navP1\">Value Ledger</a>\n    <a href=\"p2-tool.html\" id=\"navP2\">Talent Premium</a>\n    <a href=\"p3-tool.html\" id=\"navP3\">Org Vitals</a>\n    <a href=\"p4-tool.html\" id=\"navP4\">Human P&L</a>\n    <a href=\"p5-tool.html\" class=\"active\" id=\"navP5\">Human B/S</a>\n  </div>\n</div>\n\n<div class=\"eyebrow\">Revenue Fluent &middot; L5 &middot; The Human Balance Sheet</div>\n<div class=\"switch\">\n  <label for=\"scen\">Scenario</label>\n  <select id=\"scen\"></select>\n  <span class=\"scen-meta\" id=\"meta\"></span>\n</div>\n<div id=\"app\"></div>\n\n</div>\n<script src=\"rf-data.js\"></script>\n<script>
+<div class="crumb">
+  <a href="scenario-library.html">&larr; Library</a>
+  <span class="sep">/</span>
+  <div class="tool-nav">
+    <a href="p1-tool.html" id="navP1">Value Ledger</a>
+    <a href="p2-tool.html" id="navP2">Talent Premium</a>
+    <a href="p3-tool.html" id="navP3">Org Vitals</a>
+    <a href="p4-tool.html" id="navP4">Human P&L</a>
+    <a href="p5-tool.html" class="active" id="navP5">Human B/S</a>
+  </div>
+</div>
+
+<div class="eyebrow">Revenue Fluent &middot; L5 &middot; The Human Balance Sheet</div>
+<div class="switch">
+  <label for="scen">Scenario</label>
+  <select id="scen"></select>
+  <span class="scen-meta" id="meta"></span>
+</div>
+<div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p5')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Human Balance Sheet for current org confidence</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p5_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p5_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p5_body"><div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p5_f0" onclick="hciTF('hci_p5',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p5_f1" onclick="hciTF('hci_p5',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p5_f2" onclick="hciTF('hci_p5',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p5_f3" onclick="hciTF('hci_p5',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p5_calc"></div><table class="hci-scenarios"><tbody id="hci_p5_scen"></tbody></table><div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div><div class="hci-decay" id="hci_p5_decay"></div></div></div>
+<div id="app"></div>
+
+</div>
+<script>
+function swToggle(btn){
+  var p=document.getElementById(btn.getAttribute('data-panel'));
+  if(!p)return;
+  var o=p.classList.contains('open');
+  document.querySelectorAll('.sw-panel.open').forEach(function(x){x.classList.remove('open');});
+  document.querySelectorAll('.sw-trigger.open').forEach(function(x){x.classList.remove('open');});
+  if(!o){p.classList.add('open');btn.classList.add('open');}
+}
+var _hci={};
+function hciToggle(id){var b=document.getElementById(id+'_body'),c=document.getElementById(id+'_chev');if(!b)return;var o=b.classList.contains('open');b.classList.toggle('open',!o);if(c)c.classList.toggle('open',!o);}
+function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);}
+function _hciC(id){var s=_hci[id];if(!s)return 1;return Math.round((0.7+s.f.filter(Boolean).length*0.15)*100)/100;}
+function _hciFmt(sym,v){var a=Math.abs(v),sg=v<0?'-':'';if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';if(a>=1000)return sg+sym+Math.round(a/1000)+'K';return sg+sym+Math.round(a);}
+function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal — 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk — monitor closely.':'Significant risk — intervention recommended.')+'</div>';}}}
+function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:base||0,sym:sym||'$',decay:decay||null};_hciR(id);}
+function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
+</script>
+<script src="rf-data.js"></script>
+<script>
 (function(){
 
 var app = document.getElementById('app');
@@ -134,13 +359,13 @@ var HOOKS = {
   'Hospitality': 'The property is on the balance sheet. The people who fill it with meaning now are too.',
   'Corporate America': 'The plant has a book value. The workforce that runs it has a human worth.',
   'Government Agency': 'Public institutions have always had human capital. Now it has a balance sheet.',
-  'Higher Education': 'The endowment is invested. The faculty are the other endowment \u2014 the human one.',
+  'Higher Education': 'The endowment is invested. The faculty are the other endowment — the human one.',
   'Social Enterprise': 'The mission is the asset. The culture is the moat. Both are on this balance sheet.'
 };
 
 function fmt(sym, n) {
   var abs = Math.abs(n), sign = n < 0 ? '-' : '';
-  if (sym === '\u20b9') {
+  if (sym === '\\₹') {
     if (abs >= 10000000) return sign+sym+(abs/10000000).toFixed(2)+'Cr';
     if (abs >= 100000)   return sign+sym+(abs/100000).toFixed(1)+'L';
     if (abs >= 1000)     return sign+sym+Math.round(abs/1000)+'K';
@@ -242,10 +467,10 @@ function computeBS(name) {
 function stmtText(d) {
   var sym = d.sym;
   if (d.netHumanWorth < 0)
-    return 'The Human Balance Sheet shows a <b>negative Net Human Worth of '+fmt(sym,d.netHumanWorth)+'</b>. Human liabilities exceed human assets. This organisation is drawing on its human capital faster than it is building it. Without intervention, the gap compounds. The board needs to see this statement \u2014 and the liability lines tell them exactly where to act.';
+    return 'The Human Balance Sheet shows a <b>negative Net Human Worth of '+fmt(sym,d.netHumanWorth)+'</b>. Human liabilities exceed human assets. This organisation is drawing on its human capital faster than it is building it. Without intervention, the gap compounds. The board needs to see this statement — and the liability lines tell them exactly where to act.';
   if (d.totalLiabilities > d.totalAssets * 0.5)
-    return 'Net Human Worth stands at <b>'+fmt(sym,d.netHumanWorth)+'</b> \u2014 positive, but the liability position is significant at <b>'+fmt(sym,d.totalLiabilities)+'</b>. The assets are real. The liabilities are real too. A healthy Human Balance Sheet requires both sides to be managed, not just the asset column.';
-  return 'Net Human Worth: <b>'+fmt(sym,d.netHumanWorth)+'</b>. Assets outweigh liabilities by a healthy margin. The human capital position of this organisation is strong \u2014 and now it is filed. This is the statement that answers the question every board asks and no HR function has ever answered before: <b>what are our people actually worth?</b>';
+    return 'Net Human Worth stands at <b>'+fmt(sym,d.netHumanWorth)+'</b> — positive, but the liability position is significant at <b>'+fmt(sym,d.totalLiabilities)+'</b>. The assets are real. The liabilities are real too. A healthy Human Balance Sheet requires both sides to be managed, not just the asset column.';
+  return 'Net Human Worth: <b>'+fmt(sym,d.netHumanWorth)+'</b>. Assets outweigh liabilities by a healthy margin. The human capital position of this organisation is strong — and now it is filed. This is the statement that answers the question every board asks and no HR function has ever answered before: <b>what are our people actually worth?</b>';
 }
 
 function render() {
@@ -280,14 +505,14 @@ function render() {
     +'</div>'
     +'<div class="intro-body'+(isOpen?' open':'')+'" id="introBody">'
       +'<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div>'
-        +'<div class="intro-sec-txt">Every company files a financial balance sheet. None of them file the one that actually predicts next year\'s performance.<br><br>The Human Balance Sheet answers the same question as a financial balance sheet \u2014 <b>what does this entity own, and what does it owe</b> \u2014 but in human capital terms. Five assets. Five liabilities. One reconciling figure: Net Human Worth.<br><br>The form does the work. The moment someone sees it formatted as a balance sheet, they cannot dismiss it as soft HR data. They already know how to read it.</div>'
+        +'<div class="intro-sec-txt">Every company files a financial balance sheet. None of them file the one that actually predicts next year\'s performance.<br><br>The Human Balance Sheet answers the same question as a financial balance sheet — <b>what does this entity own, and what does it owe</b> — but in human capital terms. Five assets. Five liabilities. One reconciling figure: Net Human Worth.<br><br>The form does the work. The moment someone sees it formatted as a balance sheet, they cannot dismiss it as soft HR data. They already know how to read it.</div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">Why the format matters</div>'
-        +'<div class="intro-sec-txt">Finance has a balance sheet. Human capital deserves one too. That sentence is the entire argument. The format is not decoration \u2014 it is the argument. If the form does not match the concept, the concept collapses.</div>'
+        +'<div class="intro-sec-txt">Finance has a balance sheet. Human capital deserves one too. That sentence is the entire argument. The format is not decoration — it is the argument. If the form does not match the concept, the concept collapses.</div>'
         +'<div class="intro-story">A CFO had dismissed every HR presentation for three years. The numbers were soft, the methodology was unclear, the format was always slides.<br><br>The CHRO brought in a two-column balance sheet. The CFO picked it up expecting another HR report. He put it down saying it was the first time HR had spoken his language.<br><br><b>The format did the work. It always does.</b></div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">How it connects to the platform</div>'
-        +'<div class="intro-sec-txt">This is the capstone. Every pillar feeds into it. The Value Ledger provides the activity record. The Talent Premium explains the asset quality. The Human P&amp;L contributes the retained earnings. The Human Balance Sheet is where it all lands \u2014 the complete picture of what this organisation\'s human capital is worth.</div>'
+        +'<div class="intro-sec-txt">This is the capstone. Every pillar feeds into it. The Value Ledger provides the activity record. The Talent Premium explains the asset quality. The Human P&amp;L contributes the retained earnings. The Human Balance Sheet is where it all lands — the complete picture of what this organisation\'s human capital is worth.</div>'
       +'</div>'
       +'<div class="intro-transition">Below is the Human Balance Sheet for this scenario, <b>computed from real data</b>. Assets on the left. Liabilities on the right. Net Human Worth at the bottom.</div>'
     +'</div>'
@@ -299,7 +524,7 @@ function render() {
     +'<div>'
       +'<div class="nhw-lbl">Net Human Worth &middot; '+sum.geo+'</div>'
       +'<div class="nhw-num"'+(nhwPos?'':' style="-webkit-text-fill-color:var(--red)"')+'>'+fmt(sym,d.netHumanWorth)+'</div>'
-      +'<div class="nhw-desc">the complete human capital position of this organisation \u2014 <b>assets minus liabilities</b> plus retained earnings from the Human P&amp;L</div>'
+      +'<div class="nhw-desc">the complete human capital position of this organisation — <b>assets minus liabilities</b> plus retained earnings from the Human P&amp;L</div>'
     +'</div>'
     +'<div class="hero-divider"></div>'
     +'<div>'
@@ -310,7 +535,7 @@ function render() {
     +'</div></div>';
 
   // THE BALANCE SHEET
-  h += '<div class="bs-wrap">'
+  h += '\n<div class="bs-wrap">'
     +'<div class="bs-header">'
       +'<div class="bs-header-title">Human Balance Sheet</div>'
       +'<div class="bs-header-sub">'+current+' &middot; as at Q1 2026</div>'
@@ -322,10 +547,10 @@ function render() {
     +'<div>'
       +'<div class="bs-col-head assets"><span>Human Assets</span></div>'
       +bsRow('Talent Equity', d.talentEquity, sym, 'Performance/potential value of Stars, HiPos above grade benchmark', true)
-      +bsRow('Institutional Knowledge', d.instKnowledge, sym, 'Senior tenure \u00d7 salary \u2014 knowledge that walks out when they leave', true)
-      +bsRow('Organisational Learning Velocity', d.orgLearning, sym, 'Emerging talent pipeline \u2014 future capability being built now', true)
-      +bsRow('Relationship Capital', d.relCapital, sym, 'Revenue-dept tenure \u00d7 client relationship value', true)
-      +bsRow('Culture Asset', d.cultureAsset, sym, 'Long-tenure engagement premium \u2014 the culture that reduces attrition', true)
+      +bsRow('Institutional Knowledge', d.instKnowledge, sym, 'Senior tenure × salary — knowledge that walks out when they leave', true)
+      +bsRow('Organisational Learning Velocity', d.orgLearning, sym, 'Emerging talent pipeline — future capability being built now', true)
+      +bsRow('Relationship Capital', d.relCapital, sym, 'Revenue-dept tenure × client relationship value', true)
+      +bsRow('Culture Asset', d.cultureAsset, sym, 'Long-tenure engagement premium — the culture that reduces attrition', true)
       +'<div class="bs-total"><div class="bs-total-label">= TOTAL HUMAN ASSETS</div><div class="bs-total-val pos">'+fmt(sym,d.totalAssets)+'</div></div>'
     +'</div>'
 
@@ -338,8 +563,8 @@ function render() {
       +bsRow('Talent Concentration Risk', d.talentConc, sym, 'Risk from at-risk employees + HiPos who may depart', false)
       +bsRow('Skill Debt', d.skillDebt, sym, 'Gap between current skills and skills needed in 2-3 years', false)
       +bsRow('Growth Readiness Gap', d.growthGap, sym, 'Cost of unpreparedness for the organisation\'s next stage', false)
-      +bsRow('Culture Liability', d.cultureLiab, sym, 'Financial cost of known dysfunction \u2014 underperformers, disengagement', false)
-      +bsRow('Workforce Obsolescence Risk', d.workforceObs, sym, 'Tenured employees below grade benchmark \u2014 a drag, not a gap', false)
+      +bsRow('Culture Liability', d.cultureLiab, sym, 'Financial cost of known dysfunction — underperformers, disengagement', false)
+      +bsRow('Workforce Obsolescence Risk', d.workforceObs, sym, 'Tenured employees below grade benchmark — a drag, not a gap', false)
       +'<div class="bs-total"><div class="bs-total-label">= TOTAL HUMAN LIABILITIES</div><div class="bs-total-val neg">'+fmt(sym,d.totalLiabilities)+'</div></div>'
     +'</div>'
 
@@ -419,16 +644,30 @@ sel.addEventListener('change', function(){
 render();
 
 })();
-</script>\n
+</script>
+
 <script>
 (function(){
-  function tryInit(){
-    var sym='$';
-    var symEl=document.querySelector('.scen-meta');
-    if(symEl){var t=symEl.textContent;if(t.indexOf('₹')>-1)sym='₹';else if(t.indexOf('£')>-1)sym='£';else if(t.indexOf('S$')>-1)sym='S$';else if(t.indexOf('€')>-1)sym='€';else if(t.indexOf('¥')>-1)sym='¥';}
-    initHCI('hci_p5',0,sym,'Net Human Worth');
+  var origRender = typeof render === 'function' ? render : null;
+  function tryInitHCI(){
+    var sym = '$';
+    var sel = document.getElementById('scen');
+    if(sel && window.RF){
+      var s = RF.scenario(sel.value);
+      if(s) sym = s.symbol || '$';
+    }
+    initHCI('hci_p5', 0, sym, 'p5');
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',tryInit);}else{tryInit();}
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', tryInitHCI);
+  }else{tryInitHCI();}
+  // Re-init on scenario change
+  var sel = document.getElementById('scen');
+  if(sel){sel.addEventListener('change', function(){
+    var s = window.RF ? RF.scenario(sel.value) : null;
+    var sym = s ? (s.symbol || '$') : '$';
+    initHCI('hci_p5', 0, sym, 'p5');
+  });}
 })();
 </script>
-</body></html>\n
+</body></html>\
