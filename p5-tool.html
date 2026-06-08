@@ -244,6 +244,52 @@ body{padding-top:0}
 .sw-result{font-family:var(--mono);font-size:.78rem;color:#38C490;font-weight:500}
 .sw-note{font-size:.72rem;color:rgba(210,80,170,.4);margin-top:5px;font-style:italic;padding-top:5px;border-top:1px solid rgba(180,40,140,.06)}
 
+
+/* HUMAN CONFIDENCE INDEX */
+.hci-wrap{margin:20px 0;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px;overflow:hidden}
+.hci-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;transition:background .15s}
+.hci-header:hover{background:rgba(180,40,140,.06)}
+.hci-left{display:flex;align-items:center;gap:10px}
+.hci-icon{width:28px;height:28px;border-radius:6px;background:rgba(192,64,154,.15);border:1px solid rgba(192,64,154,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hci-title{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#D060B0;font-weight:500}
+.hci-sub{font-size:.76rem;color:#C8A8C0;margin-top:2px}
+.hci-coeff-display{font-family:var(--mono);font-size:1.1rem;font-weight:600;color:#E8C87A}
+.hci-coeff-label{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:#C8A8C0;margin-top:2px;text-align:right}
+.hci-chevron{color:#D060B0;transition:transform .2s;flex-shrink:0}
+.hci-chevron.open{transform:rotate(180deg)}
+.hci-body{display:none;padding:0 20px 20px;border-top:1px solid rgba(180,40,140,.1)}
+.hci-body.open{display:block}
+.hci-factors{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;margin-bottom:16px}
+.hci-factor{background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.12);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;user-select:none}
+.hci-factor:hover{border-color:rgba(192,64,154,.3)}
+.hci-factor.yes{background:rgba(56,196,144,.08);border-color:rgba(56,196,144,.3)}
+.hci-factor-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.hci-factor-name{font-size:.84rem;font-weight:600;color:#EED8E8}
+.hci-factor-toggle{width:36px;height:20px;border-radius:10px;background:rgba(180,40,140,.2);border:1px solid rgba(180,40,140,.3);position:relative;transition:all .2s;flex-shrink:0}
+.hci-factor.yes .hci-factor-toggle{background:rgba(56,196,144,.3);border-color:rgba(56,196,144,.5)}
+.hci-factor-toggle::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#D060B0;transition:all .2s}
+.hci-factor.yes .hci-factor-toggle::after{left:19px;background:#38C490}
+.hci-factor-desc{font-size:.74rem;color:#C8A8C0;line-height:1.5}
+.hci-factor.yes .hci-factor-desc{color:#9AB8D8}
+.hci-calc{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(40,8,28,.4);border-radius:10px;margin-bottom:14px}
+.hci-calc-formula{font-family:var(--mono);font-size:.7rem;color:#C8A8C0;flex:1}
+.hci-calc-result{font-family:var(--mono);font-size:1.3rem;font-weight:600;color:#E8C87A;white-space:nowrap}
+.hci-calc-result span{font-size:.56rem;color:#C8A8C0;display:block;text-align:right;letter-spacing:.1em;text-transform:uppercase}
+.hci-scenarios{width:100%;border-collapse:collapse}
+.hci-scenarios th{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;background:rgba(40,8,28,.6);color:#C8A8C0;text-align:left;border-bottom:1px solid rgba(180,40,140,.15)}
+.hci-scenarios th.yours{color:#E8C87A}
+.hci-scenarios td{padding:8px 12px;font-family:var(--mono);font-size:.82rem;border-bottom:1px solid rgba(180,40,140,.06)}
+.hci-scenarios td.label{font-size:.74rem;color:#C8A8C0}
+.hci-scenarios td.conservative{color:#9AB8D8}
+.hci-scenarios td.yours{color:#E8C87A;font-weight:500}
+.hci-scenarios td.optimistic{color:#38C490}
+.hci-scenarios tr:last-child td{border-bottom:none}
+.hci-note{font-size:.7rem;color:rgba(192,64,154,.4);margin-top:8px;font-style:italic;text-align:center}
+.hci-decay{margin-top:14px;padding:12px 16px;background:rgba(224,92,58,.06);border:1px solid rgba(224,92,58,.2);border-radius:10px}
+.hci-decay-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#E05C3A;margin-bottom:6px}
+.hci-decay-text{font-size:.82rem;color:#D8B8D0;line-height:1.6}
+.hci-decay-val{color:#E05C3A;font-weight:500;font-family:var(--mono)}
+
 </style></head>
 <body>
 <aside class="sidebar" id="mainSidebar">
@@ -267,399 +313,18 @@ body{padding-top:0}
   <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 </aside>
 <script>
-// SHOW WORKINGS — must be global, defined before any onclick fires
-function swToggle(btn){
-  if(btn && btn.getAttribute && !btn.getAttribute('data-panel')){
-    // called from p3 with (event, btn) signature
-    btn = arguments[1] || btn;
-  }
-  var panelId = btn.getAttribute('data-panel');
-  var panel = document.getElementById(panelId);
-  if(!panel) return;
-  var open = panel.classList.contains('open');
-  document.querySelectorAll('.sw-panel.open').forEach(function(p){p.classList.remove('open');});
-  document.querySelectorAll('.sw-trigger.open').forEach(function(b){b.classList.remove('open');});
-  if(!open){ panel.classList.add('open'); btn.classList.add('open'); }
-}
-</script>
-<script>
 (function(){
-  var params=new URLSearchParams(location.search);
-  var scen=params.get('scenario')||'';
-  if(!scen)return;
-  document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){
-    var h=a.getAttribute('href');
-    if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0){
-      a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(scen);
-    }
-  });
-})();
-</script>
-<div class="wrap">
-
-<div class="crumb">
-  <a href="scenario-library.html">&larr; Library</a>
-  <span class="sep">/</span>
-  <div class="tool-nav">
-    <a href="p1-tool.html" id="navP1">Value Ledger</a>
-    <a href="p2-tool.html" id="navP2">Talent Premium</a>
-    <a href="p3-tool.html" id="navP3">Org Vitals</a>
-    <a href="p4-tool.html" id="navP4">Human P&L</a>
-    <a href="p5-tool.html" class="active" id="navP5">Human B/S</a>
-  </div>
-</div>
-
-<div class="eyebrow">Revenue Fluent &middot; L5 &middot; The Human Balance Sheet</div>
-<div class="switch">
-  <label for="scen">Scenario</label>
-  <select id="scen"></select>
-  <span class="scen-meta" id="meta"></span>
-</div>
-<div id="app"></div>
-
-</div>
-<script src="rf-data.js"></script>
-<script>
-(function(){
-
-var app = document.getElementById('app');
-if (!window.RF || !window.RF_DATA) {
-  app.innerHTML = '<div class="err">rf-data.js not found.</div>';
-  return;
-}
-
-var sel = document.getElementById('scen');
-RF.list().forEach(function(n){
-  var o = document.createElement('option');
-  o.value = n; o.textContent = n; sel.appendChild(o);
-});
-var current = RF.current(); sel.value = current;
-
-var HOOKS = {
-  'High-Growth Tech Startup': 'Finance has a balance sheet. Human capital deserves one too.',
-  'Professional Services Firm': 'The firm\'s value walks in every morning and takes the lift home at night. Here it is, filed.',
-  'Enterprise Healthcare': 'Every organisation has a Human Balance Sheet. Most have never looked at it.',
-  'Remote-First SaaS': 'Twenty-three countries of human capital. One balance sheet. Filed for the first time.',
-  'Financial Services': 'You price every asset on the trading floor. This is the one you never priced.',
-  'Manufacturing Firm': 'The machines depreciate on schedule. The knowledge that runs them never appeared on any statement.',
-  'Sales Organization': 'The pipeline is on the CRM. The people who built it are on this balance sheet.',
-  'Consulting Firm': 'The client buys the relationship. The relationship capital is on this balance sheet.',
-  'Family Business': 'Three generations of institutional knowledge. Filed for the first time.',
-  'MNC in Asia': 'Global assets. Global liabilities. For the first time, the human ones are counted.',
-  'Hospitality': 'The property is on the balance sheet. The people who fill it with meaning now are too.',
-  'Corporate America': 'The plant has a book value. The workforce that runs it has a human worth.',
-  'Government Agency': 'Public institutions have always had human capital. Now it has a balance sheet.',
-  'Higher Education': 'The endowment is invested. The faculty are the other endowment — the human one.',
-  'Social Enterprise': 'The mission is the asset. The culture is the moat. Both are on this balance sheet.'
-};
-
-function fmt(sym, n) {
-  var abs = Math.abs(n), sign = n < 0 ? '-' : '';
-  if (sym === '\u20b9') {
-    if (abs >= 10000000) return sign+sym+(abs/10000000).toFixed(2)+'Cr';
-    if (abs >= 100000)   return sign+sym+(abs/100000).toFixed(1)+'L';
-    if (abs >= 1000)     return sign+sym+Math.round(abs/1000)+'K';
-    return sign+sym+Math.round(abs);
+  function tryInit(){
+    var sym = '$';
+    var symEl = document.querySelector('.scenario-sym, .sym');
+    if(symEl) sym = symEl.textContent.trim();
+    initHCI('hci_p5', 0, sym, "Net Human Worth");
   }
-  if (abs >= 1000000000) return sign+sym+(abs/1000000000).toFixed(2)+'B';
-  if (abs >= 1000000)    return sign+sym+(abs/1000000).toFixed(2)+'M';
-  if (abs >= 1000)       return sign+sym+Math.round(abs/1000)+'K';
-  return sign+sym+Math.round(abs);
-}
-
-function computeBS(name) {
-  var s = RF.scenario(name); if (!s) return null;
-  var emps = s.employees, sym = s.symbol;
-  var totalComp = emps.reduce(function(a,e){ return a+e.salary; }, 0);
-
-  var gradePerfMap = {};
-  emps.forEach(function(e){
-    if (!gradePerfMap[e.grade]) gradePerfMap[e.grade] = [];
-    gradePerfMap[e.grade].push(e.perfScore);
-  });
-  var gradeBench = {};
-  Object.keys(gradePerfMap).forEach(function(g){
-    gradeBench[g] = gradePerfMap[g].reduce(function(a,b){return a+b;},0) / gradePerfMap[g].length;
-  });
-
-  // ASSETS
-  var stars = emps.filter(function(e){ return ['Star','High Performer','High Potential'].indexOf(e.placement)>=0; });
-  var talentEquity = Math.round(stars.reduce(function(a,e){
-    var surplus = e.perfScore - gradeBench[e.grade];
-    return a + (surplus > 0 ? surplus * e.salary * 2 : 0);
-  }, 0));
-
-  var seniors = emps.filter(function(e){ return ['Senior','Lead','Principal','Director','VP','C-Suite'].indexOf(e.grade)>=0; });
-  var instKnowledge = Math.round(seniors.reduce(function(a,e){
-    return a + e.salary * Math.min(e.tenure * 0.08, 0.6);
-  }, 0));
-
-  var emerging = emps.filter(function(e){ return e.placement==='Emerging Talent'; });
-  var orgLearning = Math.round(emerging.reduce(function(a,e){ return a + e.salary * 0.35; }, 0));
-
-  var revDepts = ['Sales','Business Dev','Customer Success','Investment Banking','M&A'];
-  var revEmps = emps.filter(function(e){ return revDepts.indexOf(e.dept)>=0 && e.tenure>=2; });
-  var relCapital = Math.round(revEmps.reduce(function(a,e){
-    return a + e.salary * Math.min(e.tenure * 0.12, 0.8);
-  }, 0));
-
-  var tenured = emps.filter(function(e){ return e.tenure>=5; });
-  var cultureAsset = Math.round(tenured.reduce(function(a,e){ return a + e.salary * 0.08; }, 0));
-
-  var totalAssets = talentEquity + instKnowledge + orgLearning + relCapital + cultureAsset;
-
-  // LIABILITIES
-  var atRisk = emps.filter(function(e){ return e.placement==='Inconsistent Performer'; });
-  var hiPos = emps.filter(function(e){ return e.placement==='High Potential'; });
-  var talentConc = Math.round(
-    atRisk.reduce(function(a,e){ return a+e.salary*0.6; },0) +
-    hiPos.reduce(function(a,e){ return a+e.salary*0.25; },0)
-  );
-
-  var skillDebt = Math.round(totalComp * 0.03);
-  var growthGap  = Math.round(totalComp * 0.02);
-
-  var lowPerf = emps.filter(function(e){ return e.perfScore < 0.4; });
-  var cultureLiab = Math.round(lowPerf.reduce(function(a,e){ return a+e.salary*0.25; },0) + totalComp*0.01);
-
-  var obsRisk = emps.filter(function(e){ return e.tenure>=5 && e.perfScore<gradeBench[e.grade]; });
-  var workforceObs = Math.round(obsRisk.reduce(function(a,e){ return a+e.salary*0.3; },0));
-
-  var totalLiabilities = talentConc + skillDebt + growthGap + cultureLiab + workforceObs;
-
-  // P4 NET PROFIT (simplified recompute for retained earnings)
-  var revHires = emps.filter(function(e){ return e.tenure<=2 && revDepts.indexOf(e.dept)>=0; });
-  var talentAcqVal = Math.round(revHires.reduce(function(a,e){ return a+e.salary*1.4; },0));
-  var retSavings = Math.round(stars.reduce(function(a,e){ return a+e.salary*1.5; },0)*0.3);
-  var perfUplift = Math.round(emerging.reduce(function(a,e){ return a+e.salary*0.08; },0));
-  var cultPrem = Math.round(tenured.reduce(function(a,e){ return a+e.salary*0.06; },0));
-  var totalRev = talentAcqVal + retSavings + perfUplift + cultPrem;
-  var totalCOGS = Math.round(revHires.reduce(function(a,e){ return a+e.salary*0.15; },0))
-    + Math.round(emerging.reduce(function(a,e){ return a+e.salary*0.04; },0))
-    + Math.round(totalComp*0.04);
-  var grossM = totalRev - totalCOGS;
-  var opEx = Math.round(totalComp*0.015) + Math.round(totalComp*0.02);
-  var opProfit = grossM - opEx;
-  var adjTotal = atRisk.reduce(function(a,e){ return a+e.salary*0.6; },0)
-    + Math.round(totalComp*0.03) + Math.round(totalComp*0.02);
-  var retainedEarnings = Math.round(opProfit - adjTotal);
-
-  var netHumanWorth = totalAssets - totalLiabilities + retainedEarnings;
-
-  return {
-    sym, totalComp, employeeCount: s.employeeCount,
-    talentEquity, instKnowledge, orgLearning, relCapital, cultureAsset, totalAssets,
-    talentConc, skillDebt, growthGap, cultureLiab, workforceObs, totalLiabilities,
-    retainedEarnings, netHumanWorth
-  };
-}
-
-function stmtText(d) {
-  var sym = d.sym;
-  if (d.netHumanWorth < 0)
-    return 'The Human Balance Sheet shows a <b>negative Net Human Worth of '+fmt(sym,d.netHumanWorth)+'</b>. Human liabilities exceed human assets. This organisation is drawing on its human capital faster than it is building it. Without intervention, the gap compounds. The board needs to see this statement — and the liability lines tell them exactly where to act.';
-  if (d.totalLiabilities > d.totalAssets * 0.5)
-    return 'Net Human Worth stands at <b>'+fmt(sym,d.netHumanWorth)+'</b> — positive, but the liability position is significant at <b>'+fmt(sym,d.totalLiabilities)+'</b>. The assets are real. The liabilities are real too. A healthy Human Balance Sheet requires both sides to be managed, not just the asset column.';
-  return 'Net Human Worth: <b>'+fmt(sym,d.netHumanWorth)+'</b>. Assets outweigh liabilities by a healthy margin. The human capital position of this organisation is strong — and now it is filed. This is the statement that answers the question every board asks and no HR function has ever answered before: <b>what are our people actually worth?</b>';
-}
-
-function render() {
-  var s = RF.scenario(current), sum = RF.summary(current);
-  if (!s || !sum) return;
-  var d = computeBS(current);
-  var sym = d.sym;
-
-  document.getElementById('meta').innerHTML =
-    '<b>'+d.employeeCount+'</b> people &middot; <b>'+sum.geo+'</b> &middot; comp base <b>'+fmt(sym,d.totalComp)+'</b>';
-
-  ['navP1','navP2','navP3','navP4','navP5'].forEach(function(id,i){
-    var el=document.getElementById(id);
-    var files=['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'];
-    if(el) el.href=files[i]+'?scenario='+encodeURIComponent(current);
-  });
-
-  var seen=false; try{seen=!!localStorage.getItem('rf_bs_intro');}catch(e){}
-  var isOpen=!seen;
-
-  var h = '';
-
-  // INTRO
-  h += '<div class="intro-panel">'
-    +'<div class="intro-toggle" id="introToggle">'
-      +'<div class="intro-tl">'
-        +'<div class="intro-icon">?</div>'
-        +'<div><div class="intro-title">What is The Human Balance Sheet?</div>'
-        +'<div class="intro-sub">Read this first &mdash; takes 2 minutes</div></div>'
-      +'</div>'
-      +'<div class="intro-chevron" id="introChev">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
-    +'</div>'
-    +'<div class="intro-body'+(isOpen?' open':'')+'" id="introBody">'
-      +'<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div>'
-        +'<div class="intro-sec-txt">Every company files a financial balance sheet. None of them file the one that actually predicts next year\'s performance.<br><br>The Human Balance Sheet answers the same question as a financial balance sheet — <b>what does this entity own, and what does it owe</b> — but in human capital terms. Five assets. Five liabilities. One reconciling figure: Net Human Worth.<br><br>The form does the work. The moment someone sees it formatted as a balance sheet, they cannot dismiss it as soft HR data. They already know how to read it.</div>'
-      +'</div>'
-      +'<div class="intro-sec"><div class="intro-sec-lbl">Why the format matters</div>'
-        +'<div class="intro-sec-txt">Finance has a balance sheet. Human capital deserves one too. That sentence is the entire argument. The format is not decoration — it is the argument. If the form does not match the concept, the concept collapses.</div>'
-        +'<div class="intro-story">A CFO had dismissed every HR presentation for three years. The numbers were soft, the methodology was unclear, the format was always slides.<br><br>The CHRO brought in a two-column balance sheet. The CFO picked it up expecting another HR report. He put it down saying it was the first time HR had spoken his language.<br><br><b>The format did the work. It always does.</b></div>'
-      +'</div>'
-      +'<div class="intro-sec"><div class="intro-sec-lbl">How it connects to the platform</div>'
-        +'<div class="intro-sec-txt">This is the capstone. Every pillar feeds into it. The Value Ledger provides the activity record. The Talent Premium explains the asset quality. The Human P&amp;L contributes the retained earnings. The Human Balance Sheet is where it all lands — the complete picture of what this organisation\'s human capital is worth.</div>'
-      +'</div>'
-      +'<div class="intro-transition">Below is the Human Balance Sheet for this scenario, <b>computed from real data</b>. Assets on the left. Liabilities on the right. Net Human Worth at the bottom.</div>'
-    +'</div>'
-    +'</div>';
-
-  // HERO
-  var nhwPos = d.netHumanWorth >= 0;
-  h += '<div class="hero"><div class="hero-grid">'
-    +'<div>'
-      +'<div class="nhw-lbl">Net Human Worth &middot; '+sum.geo+'</div>'
-      +'<div class="nhw-num"'+(nhwPos?'':' style="-webkit-text-fill-color:var(--red)"')+'>'+fmt(sym,d.netHumanWorth)+'</div>'
-      +'<div class="nhw-desc">the complete human capital position of this organisation — <b>assets minus liabilities</b> plus retained earnings from the Human P&amp;L</div>'
-    +'</div>'
-    +'<div class="hero-divider"></div>'
-    +'<div>'
-      +'<div class="story-rule"></div>'
-      +'<div class="hook">'+(HOOKS[current]||'Finance has a balance sheet. Human capital deserves one too.')+'</div>'
-      +'<div class="context">Total human assets: <b>'+fmt(sym,d.totalAssets)+'</b> &middot; Total human liabilities: <b>'+fmt(sym,d.totalLiabilities)+'</b></div>'
-    +'</div>'
-    +'</div></div>';
-
-  // THE BALANCE SHEET
-  h += '<div class="bs-wrap">'
-    +'<div class="bs-header">'
-      +'<div class="bs-header-title">Human Balance Sheet</div>'
-      +'<div class="bs-header-sub">'+current+' &middot; as at Q1 2026</div>'
-    +'</div>'
-
-    +'<div class="bs-cols">'
-
-    // ASSETS COLUMN
-    +'<div>'
-      +'<div class="bs-col-head assets"><span>Human Assets</span></div>'
-      +bsRow('Talent Equity', d.talentEquity, sym, 'Performance/potential value of Stars, HiPos above grade benchmark', true)
-      +bsRow('Institutional Knowledge', d.instKnowledge, sym, 'Senior tenure × salary — knowledge that walks out when they leave', true)
-      +bsRow('Organisational Learning Velocity', d.orgLearning, sym, 'Emerging talent pipeline — future capability being built now', true)
-      +bsRow('Relationship Capital', d.relCapital, sym, 'Revenue-dept tenure × client relationship value', true)
-      +bsRow('Culture Asset', d.cultureAsset, sym, 'Long-tenure engagement premium — the culture that reduces attrition', true)
-      +'<div class="bs-total"><div class="bs-total-label">= TOTAL HUMAN ASSETS</div><div class="bs-total-val pos">'+fmt(sym,d.totalAssets)+'</div></div>'
-    +'</div>'
-
-    // DIVIDER
-    +'<div class="bs-col-divider"></div>'
-
-    // LIABILITIES COLUMN
-    +'<div>'
-      +'<div class="bs-col-head liabs"><span>Human Liabilities</span></div>'
-      +bsRow('Talent Concentration Risk', d.talentConc, sym, 'Risk from at-risk employees + HiPos who may depart', false)
-      +bsRow('Skill Debt', d.skillDebt, sym, 'Gap between current skills and skills needed in 2-3 years', false)
-      +bsRow('Growth Readiness Gap', d.growthGap, sym, 'Cost of unpreparedness for the organisation\'s next stage', false)
-      +bsRow('Culture Liability', d.cultureLiab, sym, 'Financial cost of known dysfunction — underperformers, disengagement', false)
-      +bsRow('Workforce Obsolescence Risk', d.workforceObs, sym, 'Tenured employees below grade benchmark — a drag, not a gap', false)
-      +'<div class="bs-total"><div class="bs-total-label">= TOTAL HUMAN LIABILITIES</div><div class="bs-total-val neg">'+fmt(sym,d.totalLiabilities)+'</div></div>'
-    +'</div>'
-
-    +'</div>'
-
-    // RETAINED EARNINGS
-    +'<div class="bs-retained">'
-      +'<div class="bs-retained-grid">'
-        +'<div class="bs-retained-label">Retained Human Earnings (from Human P&amp;L, L4) <span style="font-family:var(--mono);font-size:.58rem;color:rgba(184,115,51,.4)">accumulated HR contribution</span></div>'
-        +'<div class="bs-retained-val">'+fmt(sym,d.retainedEarnings)+'</div>'
-      +'</div>'
-    +'</div>'
-
-    // NET HUMAN WORTH
-    +'<div class="bs-net">'
-      +'<div class="bs-net-left">'
-        +'<div class="bs-net-label">NET HUMAN WORTH</div>'
-        +'<div class="bs-net-formula">Total Assets &minus; Total Liabilities + Retained Earnings</div>'
-        +'<div class="bs-net-formula" style="margin-top:4px">'+fmt(sym,d.totalAssets)+' &minus; '+fmt(sym,d.totalLiabilities)+' + '+fmt(sym,d.retainedEarnings)+'</div>'
-      +'</div>'
-      +'<div class="bs-net-right">'
-        +'<div class="bs-net-val '+(nhwPos?'pos':'neg')+'">'+fmt(sym,d.netHumanWorth)+'</div>'
-      +'</div>'
-    +'</div>'
-    +'</div>';
-
-  // PLATFORM FLOW
-  h += '<div class="platform-flow">'
-    +'<div class="pf-lbl">How all five pillars feed this statement</div>'
-    +'<div class="pf-row">'
-      +'<div class="pf-cell"><div class="pc-lbl">L1 Value Ledger</div><div class="pc-val">HR activity record</div></div>'
-      +'<div class="pf-arrow">&rarr;</div>'
-      +'<div class="pf-cell"><div class="pc-lbl">L2 Talent Premium</div><div class="pc-val">Asset quality signal</div></div>'
-      +'<div class="pf-arrow">&rarr;</div>'
-      +'<div class="pf-cell"><div class="pc-lbl">L3 Org Vitals</div><div class="pc-val">Culture position</div></div>'
-      +'<div class="pf-arrow">&rarr;</div>'
-      +'<div class="pf-cell"><div class="pc-lbl">L4 Human P&amp;L</div><div class="pc-val">'+fmt(sym,d.retainedEarnings)+' retained</div></div>'
-      +'<div class="pf-arrow">&rarr;</div>'
-      +'<div class="pf-cell active"><div class="pc-lbl">L5 Balance Sheet</div><div class="pc-val">'+fmt(sym,d.netHumanWorth)+' NHW</div></div>'
-    +'</div>'
-    +'<div class="pf-note">Every pillar feeds this statement. The Net Human Worth is the number that answers the question every board asks and no HR function has ever answered: <b>what are our people actually worth?</b></div>'
-    +'</div>';
-
-  // STATEMENT
-  h += '<div class="statement">'
-    +'<div class="stmt-lbl">Intelligence Statement</div>'
-    +'<div class="stmt-txt">'+stmtText(d)+'</div>'
-    +'</div>';
-
-  app.innerHTML = h;
-
-  // Wire intro
-  document.getElementById('introToggle').addEventListener('click', function(){
-    var body=document.getElementById('introBody'), chev=document.getElementById('introChev');
-    var open=body.classList.contains('open');
-    if(open){body.classList.remove('open');chev.innerHTML='Show &darr;';try{localStorage.setItem('rf_bs_intro','1');}catch(e){}}
-    else{body.classList.add('open');chev.innerHTML='Hide &uarr;';}
-  });
-}
-
-var BS_WORKINGS = {
-  'Talent Equity': {f:'Stars/HiPos × (perf surplus above grade benchmark) × salary × 2',i:'Only positive performers counted × 2x multiplier reflects the premium value of above-benchmark talent',n:'2x multiplier = market premium for above-average performers. Conservative relative to external talent market pricing.'},
-  'Institutional Knowledge': {f:'Senior employees × salary × min(tenure × 8%, 60%)',i:'Senior grades only × knowledge accumulation rate of 8% per year × capped at 60% to prevent overstatement',n:'Knowledge accumulation rate derived from organisational learning research. Cap of 60% prevents overvaluing very long tenure.'},
-  'Organisational Learning Velocity': {f:'Emerging Talent × salary × 35%',i:'Employees in Emerging Talent placement × 35% future capability premium',n:'35% represents the present value of future capability being built. Based on L&D ROI research for high-potential development.'},
-  'Relationship Capital': {f:'Revenue-dept employees (tenure ≥2yr) × salary × min(tenure × 12%, 80%)',i:'Revenue-facing roles only × relationship value accrual rate of 12% per year × capped at 80%',n:'Client relationships deepen with tenure. 12% per year reflects typical client relationship maturity curve in professional services.'},
-  'Culture Asset': {f:'Tenured employees (5+ years) × salary × 8%',i:'Long-tenure employees × 8% culture productivity premium',n:'Strong culture reduces attrition cost, hiring cost, and increases productivity. 8% is a conservative estimate of the combined benefit.'},
-  'Talent Concentration Risk': {f:'At-risk employees × salary × 60% + HiPos × salary × 25%',i:'Inconsistent Performers at departure risk + High Potentials with concentration risk',n:'60% departure probability for at-risk employees (conservative). 25% for HiPos reflects concentration risk even when unlikely to leave.'},
-  'Skill Debt': {f:'Total comp × 3% (skill gap provision)',i:'Estimated cost of closing the gap between current skills and skills needed in 2-3 years',n:'3% provision. Organisations undergoing significant transformation (digital, AI adoption) may carry substantially higher skill debt.'},
-  'Growth Readiness Gap': {f:'Total comp × 2% (growth readiness provision)',i:'Estimated cost of unpreparedness for next growth stage',n:'2% represents conservative failed-scaling risk. Actual gap depends on how far the org is from its next stage requirements.'},
-  'Culture Liability': {f:'Low performers (perf < 0.4) × salary × 25% + total comp × 1%',i:'Known dysfunction cost: low performers dragging productivity + general culture friction estimate',n:'25% drag factor for below-threshold performers. 1% org-wide friction estimate is conservative — toxic culture research suggests 3-5% drag.'},
-  'Workforce Obsolescence Risk': {f:'Tenured employees below grade benchmark × salary × 30%',i:'Long-tenure staff performing below their grade average × 30% obsolescence risk factor',n:'Distinct from Skill Debt — this is existing talent becoming a drag, not a future gap. 30% reflects productivity drag and eventual replacement cost.'},
-};
-
-function bsRow(label, val, sym, desc, isAsset) {
-  var sw = BS_WORKINGS[label];
-  var swHtml = '';
-  if(sw){
-    var swId='sw_bs_'+label.replace(/[^a-zA-Z]/g,'_');
-    swHtml='<button class="sw-trigger" data-panel="'+swId+'" onclick="swToggle(this)">'
-      +'<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
-      +'<div class="sw-panel" id="'+swId+'">'
-        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">'+sw.f+'</span></div></div>'
-        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val">'+sw.i+'</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+fmt(sym,val)+'</span></div></div>'
-        +(sw.n?'<div class="sw-note">'+sw.n+'</div>':'')
-      +'</div>';
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', tryInit);
+  } else {
+    tryInit();
   }
-  return '<div class="bs-row">'
-    +'<div class="bs-item-label">'+label+'</div>'
-    +'<div class="bs-item-desc">'+desc+'</div>'
-    +'<div class="bs-item-val '+(isAsset?'pos':'neg')+'">'+fmt(sym,val)+'</div>'
-    +swHtml
-    +'</div>';
-}
-
-sel.addEventListener('change', function(){
-  current=sel.value;
-  var u=new URL(location.href);
-  u.searchParams.set('scenario',current);
-  history.replaceState({},'',u);
-  render();
-});
-
-render();
-
 })();
 </script>
 </body></html>
