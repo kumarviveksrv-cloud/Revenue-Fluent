@@ -311,6 +311,7 @@ body{
 .dl-section{clear:both}
 
 </style><script src="rf-report.js"></script>
+<script src="rf-profile.js"></script>
 </head>
 <body>
 <aside class="sidebar">
@@ -358,6 +359,7 @@ body{
   <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a></span>
   <span id="userDataBadge" style="display:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#38C490;background:rgba(56,196,144,.1);border:1px solid rgba(56,196,144,.2);padding:3px 8px;border-radius:4px">Your Data Active</span>
 </div>
+<div id="profileContext" style="display:none"></div>
 <div id="app"></div>
 <div class="dl-section">
   <div class="dl-header">
@@ -814,4 +816,5 @@ function generatePDFP2() {
   checkActive();
 })();
 </script>
+<script>if(window.RFProfile){RFProfile.personaliseToolPage('p2');RFProfile.injectSidebarBadge();}</script>
 </body></html>\

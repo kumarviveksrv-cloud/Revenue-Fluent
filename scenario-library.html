@@ -91,7 +91,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .no-results{text-align:center;padding:60px;font-family:var(--mono);font-size:.82rem;color:#C8A8C0}
 
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:24px 20px 60px}}
-</style></head>
+</style><script src="rf-profile.js"></script>
+</head>
 <body>
 
 <!-- SIDEBAR -->
@@ -270,4 +271,5 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   renderGrid();
 })();
 </script>
+<script>if(window.RFProfile)RFProfile.injectSidebarBadge();</script>
 </body></html>

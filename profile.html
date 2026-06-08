@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<title>Your Practitioner Profile — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0A0608;--bg2:#100810;--bg3:#180C14;
+  --magenta:#C0409A;--magenta-mid:#D060B0;--magenta-dim:rgba(192,64,154,.15);
+  --gold:#E0B830;--copper:#B87333;
+  --teal:#38C490;--amber:#E8C87A;--red:#E05C3A;
+  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
+  --border:rgba(192,64,154,.18);--border-lt:rgba(192,64,154,.08);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--hero:'Bebas Neue',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}
+
+/* LAYOUT */
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden}
+
+/* BG GRID */
+.page::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.025) 1px,transparent 1px);background-size:52px 52px;pointer-events:none}
+
+/* GLOW */
+.page::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(160,20,110,.12) 0%,transparent 70%);pointer-events:none}
+
+.container{width:100%;max-width:640px;position:relative;z-index:1}
+
+/* HEADER */
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:48px;justify-content:center}
+.brand-dot{width:8px;height:8px;border-radius:50%;background:var(--copper)}
+.brand-name{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text);font-weight:600}
+
+/* PROGRESS */
+.progress-bar{display:flex;align-items:center;gap:8px;margin-bottom:40px;justify-content:center}
+.prog-step{width:28px;height:4px;border-radius:2px;background:rgba(192,64,154,.15);transition:background .3s}
+.prog-step.done{background:var(--magenta)}
+.prog-step.active{background:rgba(192,64,154,.5)}
+
+/* QUESTION CARD */
+.q-card{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:36px 40px;margin-bottom:24px;min-height:300px;display:flex;flex-direction:column}
+.q-step{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:12px}
+.q-text{font-size:1.25rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:8px}
+.q-sub{font-size:.84rem;color:var(--text-dim);line-height:1.6;margin-bottom:28px}
+.q-options{display:flex;flex-direction:column;gap:10px;flex:1}
+.q-opt{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-radius:12px;border:1px solid var(--border-lt);background:rgba(192,64,154,.03);cursor:pointer;transition:all .18s;text-align:left}
+.q-opt:hover{background:rgba(192,64,154,.07);border-color:var(--border)}
+.q-opt.selected{background:rgba(192,64,154,.12);border-color:var(--magenta);box-shadow:0 0 0 1px rgba(192,64,154,.2)}
+.q-opt-icon{width:36px;height:36px;border-radius:9px;background:rgba(192,64,154,.1);border:1px solid rgba(192,64,154,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;transition:all .18s}
+.q-opt.selected .q-opt-icon{background:rgba(192,64,154,.2);border-color:rgba(192,64,154,.4)}
+.q-opt-body{flex:1}
+.q-opt-label{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:3px;transition:color .18s}
+.q-opt.selected .q-opt-label{color:var(--magenta-mid)}
+.q-opt-desc{font-size:.76rem;color:var(--text-dim);line-height:1.5}
+.q-opt-check{width:18px;height:18px;border-radius:50%;border:2px solid rgba(192,64,154,.25);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .18s}
+.q-opt.selected .q-opt-check{background:var(--magenta);border-color:var(--magenta)}
+.q-opt.selected .q-opt-check::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff}
+
+/* NAV */
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nav-back{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:none;border:none;cursor:pointer;padding:10px 0;transition:color .15s}
+.nav-back:hover{color:var(--text)}
+.nav-next{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;border-radius:10px;background:var(--magenta);color:#fff;border:none;cursor:pointer;font-weight:500;transition:all .2s;box-shadow:0 4px 20px rgba(192,64,154,.3)}
+.nav-next:hover{background:#D050A8;transform:translateY(-2px)}
+.nav-next:disabled{background:rgba(192,64,154,.2);color:rgba(255,255,255,.3);cursor:not-allowed;transform:none;box-shadow:none}
+.nav-skip{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(192,64,154,.35);background:none;border:none;cursor:pointer;padding:8px;transition:color .15s}
+.nav-skip:hover{color:rgba(192,64,154,.6)}
+
+/* COMPLETION */
+.complete-card{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:48px 40px;text-align:center;display:none}
+.complete-icon{width:64px;height:64px;border-radius:16px;background:rgba(192,64,154,.12);border:1px solid rgba(192,64,154,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.8rem}
+.complete-title{font-size:1.6rem;font-weight:700;color:var(--text);margin-bottom:10px}
+.complete-sub{font-size:.9rem;color:var(--text-mid);line-height:1.7;margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto}
+.profile-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px;text-align:left}
+.ps-item{background:rgba(192,64,154,.06);border:1px solid var(--border-lt);border-radius:10px;padding:12px 14px}
+.ps-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:4px}
+.ps-value{font-size:.84rem;font-weight:500;color:var(--text)}
+.enter-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:14px 32px;border-radius:12px;background:var(--magenta);color:#fff;border:none;cursor:pointer;font-weight:500;transition:all .2s;box-shadow:0 4px 24px rgba(192,64,154,.35)}
+.enter-btn:hover{background:#D050A8;transform:translateY(-2px);box-shadow:0 6px 28px rgba(192,64,154,.45)}
+.enter-btn svg{transition:transform .2s}
+.enter-btn:hover svg{transform:translateX(4px)}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="container">
+
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <div class="brand-name">Revenue Fluent</div>
+    </div>
+
+    <div class="progress-bar" id="progressBar">
+      <div class="prog-step active" id="ps0"></div>
+      <div class="prog-step" id="ps1"></div>
+      <div class="prog-step" id="ps2"></div>
+      <div class="prog-step" id="ps3"></div>
+    </div>
+
+    <!-- QUESTION CARD -->
+    <div class="q-card" id="qCard"></div>
+
+    <!-- NAV -->
+    <div class="nav-row">
+      <button class="nav-back" id="backBtn" onclick="goBack()">&#8592; Back</button>
+      <button class="nav-skip" onclick="skipProfile()">Skip for now</button>
+      <button class="nav-next" id="nextBtn" onclick="goNext()" disabled>Continue &rarr;</button>
+    </div>
+
+    <!-- COMPLETION -->
+    <div class="complete-card" id="completeCard">
+      <div class="complete-icon">&#10003;</div>
+      <div class="complete-title" id="completeTitle"></div>
+      <div class="complete-sub" id="completeSub"></div>
+      <div class="profile-summary" id="profileSummary"></div>
+      <button class="enter-btn" onclick="enterPlatform()">
+        Enter Revenue Fluent
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var QUESTIONS = [
+  {
+    id: 'role',
+    step: 'Question 1 of 4',
+    text: 'What is your role in HR?',
+    sub: 'This shapes the depth of explanation and how the platform frames its outputs.',
+    options: [
+      { value:'HRBP', icon:'👤', label:'HRBP / HR Manager', desc:'You partner with business units and translate HR into people decisions.' },
+      { value:'HR Head', icon:'🏢', label:'HR Head / HR Director', desc:'You lead the HR function and report to the C-suite or business leadership.' },
+      { value:'CHRO', icon:'⚡', label:'CHRO', desc:'You sit at the executive table. Numbers first. Context second.' },
+      { value:'Consultant', icon:'💼', label:'HR Consultant / Advisor', desc:'You advise organisations on people strategy as an external expert.' },
+    ]
+  },
+  {
+    id: 'context',
+    step: 'Question 2 of 4',
+    text: 'What best describes your organisation?',
+    sub: 'This pre-selects the most relevant scenarios and adjusts benchmark assumptions.',
+    options: [
+      { value:'Startup', icon:'🚀', label:'Startup / Scale-up', desc:'Under 200 people. Moving fast. Every hire and exit has outsized impact.' },
+      { value:'Enterprise', icon:'🏛️', label:'Enterprise', desc:'500+ people. Complexity is the challenge. Data matters at scale.' },
+      { value:'Mid-Market', icon:'📈', label:'Mid-Market', desc:'200–500 people. Between startup speed and enterprise structure.' },
+      { value:'Public Sector', icon:'🏛', label:'Public Sector / NGO', desc:'Mission-driven. Different constraints, same need for financial language.' },
+    ]
+  },
+  {
+    id: 'confidence',
+    step: 'Question 3 of 4',
+    text: 'How comfortable are you with financial language?',
+    sub: 'This determines how much financial context the platform layers into its outputs.',
+    options: [
+      { value:'Building', icon:'📖', label:'Still building', desc:'P&L, balance sheet — you know the words but want more context as you go.' },
+      { value:'Comfortable', icon:'📊', label:'Comfortable', desc:'You can read a P&L and hold your own in a finance conversation.' },
+      { value:'Fluent', icon:'💡', label:'Fluent', desc:'You think in financial terms naturally. Give me the numbers, skip the explanation.' },
+      { value:'CFO Level', icon:'🎯', label:'I present to CFOs regularly', desc:'You are in the room when financial decisions are made. Numbers only.' },
+    ]
+  },
+  {
+    id: 'challenge',
+    step: 'Question 4 of 4',
+    text: 'What is your primary challenge right now?',
+    sub: 'This changes which pillar is recommended first and what the platform emphasises.',
+    options: [
+      { value:'Attrition', icon:'🔄', label:'Attrition & retention', desc:'People are leaving and you need to quantify what it is costing.' },
+      { value:'Talent Quality', icon:'⭐', label:'Talent quality & performance', desc:'You have the numbers but not the financial language to make the case.' },
+      { value:'Board Credibility', icon:'📋', label:'Board & CFO credibility', desc:'HR needs to show up differently in the boardroom. You need the numbers.' },
+      { value:'Culture', icon:'🌱', label:'Culture & org health', desc:'Something is wrong with the org and you need to name and quantify it.' },
+      { value:'Growth Readiness', icon:'🔮', label:'Scaling & growth readiness', desc:'The organisation is about to grow and you need to know if it is ready.' },
+    ]
+  }
+];
+
+var answers = {};
+var currentQ = 0;
+
+// ── RENDERING ─────────────────────────────────────────────────────────────
+function renderQuestion(idx) {
+  var q = QUESTIONS[idx];
+  var selected = answers[q.id];
+
+  var opts = q.options.map(function(o){
+    var sel = selected === o.value ? ' selected' : '';
+    return '<div class="q-opt'+sel+'" onclick="selectOption(\''+q.id+'\',\''+o.value+'\',this)">'
+      + '<div class="q-opt-icon">'+o.icon+'</div>'
+      + '<div class="q-opt-body"><div class="q-opt-label">'+o.label+'</div>'
+      + '<div class="q-opt-desc">'+o.desc+'</div></div>'
+      + '<div class="q-opt-check"></div>'
+      + '</div>';
+  }).join('');
+
+  document.getElementById('qCard').innerHTML =
+    '<div class="q-step">'+q.step+'</div>'
+    + '<div class="q-text">'+q.text+'</div>'
+    + '<div class="q-sub">'+q.sub+'</div>'
+    + '<div class="q-options">'+opts+'</div>';
+
+  // Progress
+  for(var i=0;i<4;i++){
+    var el = document.getElementById('ps'+i);
+    el.className = 'prog-step' + (i<idx?' done':i===idx?' active':'');
+  }
+
+  document.getElementById('backBtn').style.visibility = idx===0?'hidden':'visible';
+  document.getElementById('nextBtn').disabled = !selected;
+  document.getElementById('nextBtn').textContent = idx===3 ? 'Build my profile ✓' : 'Continue →';
+  document.getElementById('qCard').style.display = 'flex';
+  document.getElementById('completeCard').style.display = 'none';
+  document.querySelector('.nav-row').style.display = 'flex';
+  document.getElementById('progressBar').style.display = 'flex';
+}
+
+function selectOption(qid, value, el) {
+  answers[qid] = value;
+  document.querySelectorAll('.q-opt').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function goNext() {
+  if(currentQ < QUESTIONS.length - 1) {
+    currentQ++;
+    renderQuestion(currentQ);
+  } else {
+    showCompletion();
+  }
+}
+
+function goBack() {
+  if(currentQ > 0) { currentQ--; renderQuestion(currentQ); }
+}
+
+function skipProfile() {
+  localStorage.setItem('rf_profile_skipped', '1');
+  window.location.href = 'home.html';
+}
+
+// ── COMPLETION ────────────────────────────────────────────────────────────
+function showCompletion() {
+  var profile = buildProfile();
+  localStorage.setItem('rf_practitioner_profile', JSON.stringify(profile));
+
+  document.getElementById('qCard').style.display = 'none';
+  document.querySelector('.nav-row').style.display = 'none';
+  document.getElementById('progressBar').style.display = 'none';
+
+  document.getElementById('completeTitle').textContent = profile.greeting;
+  document.getElementById('completeSub').textContent = profile.introLine;
+
+  var summaryItems = [
+    {label:'Your Role', value: answers.role},
+    {label:'Org Context', value: answers.context},
+    {label:'Financial Confidence', value: answers.confidence},
+    {label:'Primary Challenge', value: answers.challenge},
+  ];
+  document.getElementById('profileSummary').innerHTML = summaryItems.map(function(s){
+    return '<div class="ps-item"><div class="ps-label">'+s.label+'</div><div class="ps-value">'+s.value+'</div></div>';
+  }).join('');
+
+  document.getElementById('completeCard').style.display = 'block';
+}
+
+function buildProfile() {
+  var role = answers.role, ctx = answers.context, conf = answers.confidence, ch = answers.challenge;
+
+  // Recommended first pillar based on challenge
+  var pillarMap = {
+    'Attrition': {pillar:'L1', name:'The Value Ledger', file:'p1-tool.html'},
+    'Talent Quality': {pillar:'L2', name:'The Talent Premium', file:'p2-tool.html'},
+    'Board Credibility': {pillar:'L4', name:'The Human P&L', file:'p4-tool.html'},
+    'Culture': {pillar:'L3', name:'Org Vitals', file:'p3-tool.html'},
+    'Growth Readiness': {pillar:'L5', name:'The Human Balance Sheet', file:'p5-tool.html'},
+  };
+  var rec = pillarMap[ch] || pillarMap['Board Credibility'];
+
+  // Greeting based on role
+  var greetings = {
+    'HRBP': 'Your profile is set, HRBP.',
+    'HR Head': 'Your profile is set, HR Head.',
+    'CHRO': 'Your profile is set, CHRO.',
+    'Consultant': 'Your profile is set.',
+  };
+
+  // Intro line
+  var introLines = {
+    'CHRO': 'Numbers-first experience. Minimal hand-holding. The platform will lead with the headline and let you drill down when you want to.',
+    'HR Head': 'You will see full context alongside the numbers — enough to explain every figure to your CEO.',
+    'HRBP': 'The platform will walk you through the financial logic step by step. Every number comes with a plain-language explanation.',
+    'Consultant': 'You will see the methodology and the numbers. The Show Workings layer is your friend.',
+  };
+
+  // Explanation depth
+  var depthMap = {'Building':3,'Comfortable':2,'Fluent':1,'CFO Level':0};
+
+  // Scenario recommendation based on context
+  var scenarioMap = {
+    'Startup': 'High-Growth Tech Startup',
+    'Enterprise': 'Corporate America',
+    'Mid-Market': 'Professional Services Firm',
+    'Public Sector': 'Government Agency',
+  };
+
+  return {
+    role: role,
+    context: ctx,
+    confidence: conf,
+    challenge: ch,
+    recommendedPillar: rec,
+    recommendedScenario: scenarioMap[ctx] || 'High-Growth Tech Startup',
+    explanationDepth: depthMap[conf] !== undefined ? depthMap[conf] : 2,
+    greeting: greetings[role] || 'Your profile is set.',
+    introLine: introLines[role] || introLines['HR Head'],
+    createdAt: new Date().toISOString(),
+  };
+}
+
+function enterPlatform() {
+  window.location.href = 'home.html';
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+// If profile already exists, go straight to home
+var existing = localStorage.getItem('rf_practitioner_profile');
+var skipped = localStorage.getItem('rf_profile_skipped');
+if(existing || skipped) {
+  // Allow re-doing profile via ?reset=1
+  if(window.location.search.indexOf('reset=1') < 0) {
+    window.location.href = 'home.html';
+  }
+}
+
+renderQuestion(0);
+</script>
+</body></html>

@@ -136,6 +136,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
 .legend-item{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--text-dim)}
 .legend-dot{width:8px;height:8px;border-radius:50%}
 </style>
+<script src="rf-profile.js"></script>
 </head>
 <body>
 
@@ -551,4 +552,5 @@ window.addEventListener('mouseup',function(){if(dragging){dragging=false;handle.
 
 })();
 </script>
+<script>if(window.RFProfile)RFProfile.injectSidebarBadge();</script>
 </body></html>

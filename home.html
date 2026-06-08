@@ -140,7 +140,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   .pillars-strip .ps-card:last-child{grid-column:1/-1}
   .stat-bar{grid-template-columns:repeat(2,1fr)}
 }
-</style></head>
+</style><script src="rf-profile.js"></script>
+<script>if(window.RFProfile)RFProfile.checkOnboarding();</script>
+</head>
 <body>
 
 <!-- SIDEBAR -->
@@ -207,7 +209,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   </div>
 
   <!-- THE PROBLEM -->
-  <div class="section">
+  <div id="profileGreeting" style="margin-bottom:24px"></div>
+<div class="section">
     <div class="sec-label">The problem we solve</div>
     <h2 class="sec-title">HR has never had a P&amp;L.</h2>
     <p class="sec-sub">Every function in the business can draw a line from its work to revenue — except HR. It reports headcount while Sales reports pipeline. Revenue Fluent ends that.</p>
@@ -329,4 +332,5 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   });
 })();
 </script>
+<script>if(window.RFProfile){RFProfile.personaliseHome();RFProfile.injectSidebarBadge();}</script>
 </body></html>
