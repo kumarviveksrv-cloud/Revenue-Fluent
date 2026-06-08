@@ -1,130 +1,509 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <title>Learning Hub — Revenue Fluent</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style id="rf-css"></style>
-<script src="shared.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
-.hub-hero { padding: 2.5rem 0 2rem; }
-.hub-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 2rem; }
-.hub-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1.5rem 1.25rem; text-decoration: none; display: flex; flex-direction: column;
-  gap: 12px; transition: all 0.25s; position: relative; overflow: hidden; cursor: pointer;
+:root{
+  --bg:#0A0608;--bg2:#100810;--bg3:#180C14;
+  --magenta:#C0409A;--magenta-mid:#D060B0;
+  --gold:#E0B830;--copper:#B87333;
+  --teal:#38C490;--amber:#E8C87A;--red:#E05C3A;
+  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
+  --border:rgba(192,64,154,.18);--border-lt:rgba(192,64,154,.08);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --sidebar:220px;
 }
-.hub-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
-.hub-card.p1::before { background: var(--accent); }
-.hub-card.p2::before { background: var(--teal); }
-.hub-card.p3::before { background: var(--amber); }
-.hub-card.p4::before { background: var(--purple); }
-.hub-card.p5::before { background: var(--green); }
-.hub-card:hover { transform:translateY(-5px); border-color:var(--border-hi); box-shadow:0 16px 40px rgba(0,0,0,0.35); }
-.hc-badge { font-family:var(--font-mono); font-size:0.55rem; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.1em; }
-.hc-icon { font-size:1.6rem; }
-.hc-name { font-family:var(--font-head); font-weight:700; font-size:0.95rem; color:var(--text); }
-.hc-desc { font-size:0.76rem; color:var(--text-mute); line-height:1.5; }
-.hc-time { font-family:var(--font-mono); font-size:0.58rem; color:var(--text-mute); margin-top:auto; padding-top:8px; border-top:1px solid var(--border); }
-.hc-cta { font-family:var(--font-mono); font-size:0.62rem; color:var(--accent2); display:flex; align-items:center; gap:5px; }
-.why-strip { background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(45,212,191,0.04)); border:1px solid var(--border-accent); border-radius:var(--radius); padding:2rem; margin-bottom:2rem; }
-.what-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-.what-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; }
-.wc-h { font-family:var(--font-head); font-weight:700; font-size:0.92rem; color:var(--text); margin-bottom:6px; }
-.wc-p { font-size:0.8rem; color:var(--text-dim); line-height:1.7; }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.025) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto}
+.sb-brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid var(--border);text-decoration:none;flex-shrink:0}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
+.sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
+.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
+.sb-item.active{background:rgba(192,64,154,.12);color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
+.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
+.sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:var(--text-mid)}
+.sb-by b{color:var(--gold);font-weight:600}
+.sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s}
+.sidebar-resize:hover{background:rgba(192,64,154,.4)}
+
+/* LAYOUT */
+.wrap{margin-left:var(--sidebar);position:relative;z-index:1}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
+
+/* HUB HERO */
+.hub-hero{padding:48px 48px 0;max-width:960px}
+.hub-eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:12px}
+.hub-title{font-size:2.2rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:10px}
+.hub-sub{font-size:.95rem;color:var(--text-mid);line-height:1.7;max-width:580px;margin-bottom:32px}
+
+/* TAB BAR */
+.tab-bar{display:flex;gap:4px;padding:0 48px;border-bottom:1px solid var(--border-lt);margin-bottom:0;overflow-x:auto}
+.tab-bar::-webkit-scrollbar{height:2px}.tab-bar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.2)}
+.tab{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;cursor:pointer;color:var(--text-dim);border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--text-mid)}
+.tab.active{color:var(--magenta-mid);border-bottom-color:var(--magenta)}
+
+/* FILTER ROW */
+.filter-row{display:flex;align-items:center;gap:8px;padding:20px 48px;flex-wrap:wrap}
+.filter-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-right:4px}
+.filter-chip{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid var(--border-lt);color:var(--text-dim);cursor:pointer;transition:all .15s;background:none}
+.filter-chip:hover{border-color:var(--border);color:var(--text-mid)}
+.filter-chip.active{background:rgba(192,64,154,.12);border-color:rgba(192,64,154,.3);color:var(--magenta-mid)}
+
+/* CONTENT GRID */
+.content-area{padding:0 48px 80px}
+
+/* FEATURED ARTICLE */
+.featured{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:36px 40px;margin-bottom:32px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--magenta),var(--magenta-mid),transparent)}
+.featured:hover{border-color:rgba(192,64,154,.35);transform:translateY(-2px);box-shadow:0 8px 40px rgba(192,64,154,.1)}
+.featured-tag{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.tag-pill{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;border:1px solid}
+.tag-type-article{color:#9AB8D8;border-color:rgba(154,184,216,.3)}
+.tag-type-case-study{color:var(--teal);border-color:rgba(56,196,144,.3)}
+.tag-type-glossary{color:var(--amber);border-color:rgba(232,200,122,.3)}
+.tag-pillar{color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
+.tag-topic{color:var(--text-dim);border-color:var(--border-lt)}
+.featured-read-time{font-family:var(--mono);font-size:.58rem;color:var(--text-dim);margin-left:auto}
+.featured-title{font-size:1.5rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:10px}
+.featured-sub{font-size:.9rem;color:var(--text-mid);line-height:1.7;margin-bottom:20px;max-width:680px}
+.featured-hook{font-size:.88rem;color:var(--text-dim);line-height:1.7;font-style:italic;border-left:2px solid rgba(192,64,154,.3);padding-left:16px;margin-bottom:20px}
+.featured-read-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--magenta-mid);background:none;border:none;cursor:pointer;padding:0;transition:color .15s}
+.featured-read-btn:hover{color:var(--text)}
+.featured-read-btn svg{transition:transform .2s}
+.featured-read-btn:hover svg{transform:translateX(4px)}
+
+/* ARTICLE GRID */
+.article-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-bottom:32px}
+.article-card{background:var(--bg2);border:1px solid var(--border-lt);border-radius:14px;padding:24px;cursor:pointer;transition:all .2s;display:flex;flex-direction:column}
+.article-card:hover{border-color:var(--border);transform:translateY(-2px);box-shadow:0 6px 24px rgba(192,64,154,.08)}
+.ac-tags{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.ac-title{font-size:.95rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:8px}
+.ac-desc{font-size:.78rem;color:var(--text-dim);line-height:1.6;flex:1;margin-bottom:14px}
+.ac-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.ac-read-time{font-family:var(--mono);font-size:.58rem;color:var(--text-dim)}
+.ac-arrow{color:rgba(192,64,154,.4);transition:all .2s}
+.article-card:hover .ac-arrow{color:var(--magenta-mid);transform:translateX(3px)}
+.coming-soon-overlay{opacity:.5;pointer-events:none}
+.coming-soon-badge{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(192,64,154,.1);color:var(--magenta-mid);border:1px solid rgba(192,64,154,.2);padding:2px 8px;border-radius:3px;margin-left:auto}
+
+/* GLOSSARY */
+.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px}
+@media(max-width:700px){.glossary-grid{grid-template-columns:1fr}}
+.glossary-card{background:var(--bg2);border:1px solid var(--border-lt);border-radius:12px;padding:18px 20px}
+.gc-term{font-family:var(--mono);font-size:.78rem;font-weight:500;color:var(--magenta-mid);margin-bottom:4px}
+.gc-def{font-size:.82rem;color:var(--text-mid);line-height:1.6;margin-bottom:8px}
+.gc-example{font-family:var(--mono);font-size:.7rem;color:var(--text-dim);background:rgba(192,64,154,.04);border-left:2px solid rgba(192,64,154,.2);padding:6px 10px;border-radius:0 4px 4px 0;line-height:1.5}
+
+/* SECTION HEADER */
+.section-hdr{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;margin-top:8px}
+.section-hdr-title{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--magenta-mid)}
+.section-hdr-count{font-family:var(--mono);font-size:.58rem;color:var(--text-dim)}
+
+/* ARTICLE READER */
+.reader-overlay{display:none;position:fixed;inset:0;background:rgba(10,6,8,.95);z-index:500;overflow-y:auto}
+.reader-overlay.open{display:block}
+.reader-inner{max-width:720px;margin:0 auto;padding:48px 32px 80px}
+.reader-close{position:fixed;top:20px;right:24px;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:rgba(192,64,154,.1);border:1px solid var(--border);border-radius:8px;padding:8px 16px;cursor:pointer;transition:all .15s;z-index:10}
+.reader-close:hover{color:var(--text);border-color:var(--magenta-mid)}
+.reader-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.reader-title{font-size:2rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:14px}
+.reader-byline{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--text-dim);margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border-lt)}
+.reader-body{font-size:.95rem;color:var(--text-mid);line-height:1.85}
+.reader-body h2{font-size:1.2rem;font-weight:600;color:var(--text);margin:36px 0 12px;line-height:1.3}
+.reader-body h3{font-size:1rem;font-weight:600;color:var(--text);margin:28px 0 10px}
+.reader-body p{margin-bottom:18px}
+.reader-body p:last-child{margin-bottom:0}
+.reader-body strong{color:var(--text);font-weight:600}
+.reader-body em{color:var(--text-mid);font-style:italic}
+.reader-body blockquote{border-left:3px solid var(--magenta);padding:12px 20px;margin:24px 0;background:rgba(192,64,154,.05);border-radius:0 8px 8px 0}
+.reader-body blockquote p{color:var(--text);font-size:1rem;margin-bottom:0;font-style:italic}
+.reader-body .stat-callout{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:24px 0;display:flex;align-items:center;gap:18px}
+.reader-body .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);line-height:1;flex-shrink:0}
+.reader-body .stat-text{font-size:.84rem;color:var(--text-dim);line-height:1.6}
+.reader-cta{background:rgba(192,64,154,.08);border:1px solid rgba(192,64,154,.2);border-radius:14px;padding:24px 28px;margin-top:40px;text-align:center}
+.reader-cta-title{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:6px}
+.reader-cta-sub{font-size:.82rem;color:var(--text-dim);margin-bottom:16px}
+.reader-cta-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;border-radius:9px;background:var(--magenta);color:#fff;border:none;cursor:pointer;text-decoration:none;transition:all .2s}
+.reader-cta-btn:hover{background:#D050A8;transform:translateY(-2px)}
 </style>
 </head>
 <body>
-<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
-<div id="sidebar-mount"></div>
-<div id="topbar-mount"></div>
-<div class="app-body">
-<div class="page-wrap" style="max-width:1100px">
 
-  <div class="hub-hero anim-slide">
-    <div class="page-eyebrow">Learning Hub</div>
-    <h1 class="page-title">Five pillars. Studied <em>deeply.</em></h1>
-    <p class="page-desc" style="max-width:640px">Each page is a complete intellectual deep-dive — the intellectual case, real stories from India and around the world, the instruments with worked examples, and a practitioner's playbook you can use on Monday morning.</p>
-  </div>
+<aside class="sidebar" id="mainSidebar">
+  <a href="index.html" class="sb-brand"><div class="sb-dot"></div><div class="sb-name">Revenue Fluent</div></a>
+  <div class="sb-section">Platform</div>
+  <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+  <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
+  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
+  <a href="learn.html" class="sb-item active"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
+  <div class="sb-tools-section">The Five Pillars</div>
+  <a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+  <a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+  <a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+  <a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+  <a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+  <div class="sb-section">More</div>
+  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
+  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+  <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+  <div class="sidebar-resize" id="sbResize"></div>
+</aside>
 
-  <div class="hub-grid">
-    <a href="learn-p1.html" class="hub-card p1 anim-slide anim-delay-1">
-      <div class="hc-badge">Pillar 1</div>
-      <div class="hc-icon">⟳</div>
-      <div class="hc-name">Revenue Connect</div>
-      <div class="hc-desc">The bridge between people events and revenue outcomes. ATC%, TDF, ESR.</div>
-      <div class="hc-time">~8 min read</div>
-      <div class="hc-cta">Read deep-dive →</div>
-    </a>
-    <a href="learn-p2.html" class="hub-card p2 anim-slide anim-delay-2">
-      <div class="hc-badge">Pillar 2</div>
-      <div class="hc-icon">◈</div>
-      <div class="hc-name">People Alpha</div>
-      <div class="hc-desc">Above-market returns on every hire, promotion, retention and L&D investment.</div>
-      <div class="hc-time">~9 min read</div>
-      <div class="hc-cta">Read deep-dive →</div>
-    </a>
-    <a href="learn-p3.html" class="hub-card p3 anim-slide anim-delay-3">
-      <div class="hc-badge">Pillar 3</div>
-      <div class="hc-icon">⬡</div>
-      <div class="hc-name">Team Architecture</div>
-      <div class="hc-desc">Your org chart is a revenue document. Config A, B, C. OEI, PCoB, OSI.</div>
-      <div class="hc-time">~8 min read</div>
-      <div class="hc-cta">Read deep-dive →</div>
-    </a>
-    <a href="learn-p4.html" class="hub-card p4 anim-slide anim-delay-4">
-      <div class="hc-badge">Pillar 4</div>
-      <div class="hc-icon">◎</div>
-      <div class="hc-name">HUMANCE</div>
-      <div class="hc-desc">The accounting standard HR never had. Price trust, culture, signal, belonging.</div>
-      <div class="hc-time">~10 min read</div>
-      <div class="hc-cta">Read deep-dive →</div>
-    </a>
-    <a href="learn-p5.html" class="hub-card p5 anim-slide anim-delay-4">
-      <div class="hc-badge">Pillar 5</div>
-      <div class="hc-icon">◑</div>
-      <div class="hc-name">People P&L</div>
-      <div class="hc-desc">The synthesis. HR's complete income statement. Net People ROI.</div>
-      <div class="hc-time">~9 min read</div>
-      <div class="hc-cta">Read deep-dive →</div>
-    </a>
-  </div>
-
-  <div class="why-strip anim-slide">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap">
-      <div style="max-width:420px">
-        <div class="page-eyebrow" style="margin-bottom:10px">Why study this</div>
-        <h2 style="font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--text);letter-spacing:-0.025em;margin-bottom:10px">The world's most important professionals don't know how to speak the board's language.</h2>
-        <p style="font-size:0.88rem;color:var(--text-dim);line-height:1.8;">HR manages the single largest cost and the single largest value-creator in most organisations. Yet the profession has never had the vocabulary to say so in numbers. These five pillars fix that — permanently.</p>
-      </div>
-      <div class="what-row" style="flex:1;min-width:300px">
-        <div class="what-card">
-          <div class="wc-h">Stories</div>
-          <div class="wc-p">Every pillar has real (fictionalised) narratives from India and global markets that make the concepts visceral.</div>
-        </div>
-        <div class="what-card">
-          <div class="wc-h">Instruments</div>
-          <div class="wc-p">Every metric explained with its formula, worked example, and benchmark — so you can use it immediately.</div>
-        </div>
-        <div class="what-card">
-          <div class="wc-h">Playbook</div>
-          <div class="wc-p">Five Monday-morning moves per pillar. Not theory — specific actions you take in your org next week.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<!-- ARTICLE READER -->
+<div class="reader-overlay" id="readerOverlay">
+  <button class="reader-close" onclick="closeReader()">&#8592; Back to Hub</button>
+  <div class="reader-inner" id="readerInner"></div>
 </div>
+
+<div class="wrap">
+  <div class="hub-hero">
+    <div class="hub-eyebrow">Learning Hub</div>
+    <h1 class="hub-title">The language of Revenue.<br>Written down.</h1>
+    <p class="hub-sub">Thought leadership, financial glossary, and case studies — all built on the Humacity philosophy. Read this before you walk into the boardroom.</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab active" onclick="setTab('all',this)">All Content</button>
+    <button class="tab" onclick="setTab('articles',this)">Articles</button>
+    <button class="tab" onclick="setTab('case-studies',this)">Case Studies</button>
+    <button class="tab" onclick="setTab('glossary',this)">Glossary</button>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-row" id="filterRow">
+    <span class="filter-label">Filter</span>
+    <button class="filter-chip active" onclick="setFilter('all',this)">All Topics</button>
+    <button class="filter-chip" onclick="setFilter('Board Credibility',this)">Board Credibility</button>
+    <button class="filter-chip" onclick="setFilter('Talent Quality',this)">Talent Quality</button>
+    <button class="filter-chip" onclick="setFilter('Attrition',this)">Attrition</button>
+    <button class="filter-chip" onclick="setFilter('Culture',this)">Culture</button>
+    <button class="filter-chip" onclick="setFilter('Growth Readiness',this)">Growth</button>
+    <button class="filter-chip" onclick="setFilter('L1',this)">L1</button>
+    <button class="filter-chip" onclick="setFilter('L2',this)">L2</button>
+    <button class="filter-chip" onclick="setFilter('L3',this)">L3</button>
+    <button class="filter-chip" onclick="setFilter('L4',this)">L4</button>
+    <button class="filter-chip" onclick="setFilter('L5',this)">L5</button>
+  </div>
+
+  <!-- CONTENT AREA -->
+  <div class="content-area" id="contentArea"></div>
 </div>
+
 <script>
-document.getElementById('rf-css').textContent = RF.css;
-RF.startTicker('ticker');
-document.getElementById('sidebar-mount').innerHTML = RF.renderSidebar('learn');
-document.getElementById('topbar-mount').innerHTML = RF.renderTopbar(
-  ['Revenue Fluent', 'Learning Hub'],
-  '<span class="tb-pill">5 deep-dives</span>'
-);
+// ── CONTENT LIBRARY ───────────────────────────────────────────────────────
+var ARTICLES = [
+  {
+    id: 'a1',
+    type: 'article',
+    pillar: 'L4',
+    topic: 'Board Credibility',
+    title: 'HR has always had a P&L. Nobody taught them to read it.',
+    subtitle: 'Every function in the business draws a line from its work to revenue. HR never learned to draw that line. That ends here.',
+    hook: 'The CFO walks out of the QBR. The head of Sales just defended every dollar of their forecast. The CMO showed pipeline attribution. Then the CHRO stands up and shows headcount and attrition rate. The room goes quiet in a different way.',
+    readTime: '8 min read',
+    featured: true,
+    live: true,
+    body: `
+<h2>The meeting nobody talks about</h2>
+<p>There is a moment that happens in organisations everywhere, roughly once a quarter, that nobody in HR talks about openly. It is the moment the CHRO presents to the board.</p>
+<p>The CFO has just walked the room through a P&L. Revenue line by line. Gross margin explained. OpEx justified. Every number has a story, and every story has a currency value. The board nods along. They know how to read this. They have been reading it their whole careers.</p>
+<p>Then the CHRO stands up.</p>
+<p>Headcount: 847. Attrition: 14%. Engagement score: 72%. Positions open: 23. Training hours: 18 per employee per year.</p>
+<p>The board looks at the slides. They ask polite questions. They say thank you. And then they move on.</p>
+<p>Nobody says it out loud. But everyone in the room knows: they do not know what to do with this. It does not connect to anything they already know how to read. And so it does not count.</p>
+<div class="stat-callout"><div class="stat-num">74%</div><div class="stat-text">of CHROs say they struggle to connect HR metrics to financial outcomes in board settings. The other 26% have either solved it or stopped trying.</div></div>
+<h2>The problem is not the data. It is the format.</h2>
+<p>HR has data. Often, too much of it. Engagement surveys, exit interviews, performance distributions, promotion rates, span of control analysis, succession depth charts. The data exists. The problem is that it arrives in HR's language, not finance's language.</p>
+<p>Finance has a language. It is called accounting. It has been standardised for over 500 years. Revenue minus cost equals profit. Assets minus liabilities equals net worth. Every CFO in every company in every country speaks this language. It is the closest thing to a universal business language that exists.</p>
+<p>HR has never learned to translate into it.</p>
+<p>Not because HR professionals are not intelligent. But because nobody ever gave them the format. Nobody ever showed them that their data — the attrition rates, the engagement scores, the training investments — could be formatted as a P&L. That it already <em>is</em> a P&L, just one that has never been written down in the right columns.</p>
+<blockquote><p>HR has never been unquantifiable. It has been unformatted. The format is the missing piece.</p></blockquote>
+<h2>What the Human P&L actually looks like</h2>
+<p>A Human P&L works exactly like a financial P&L. Revenue at the top. Cost of goods below. Gross margin in the middle. Operating expenses. Operating profit. Adjustments below the line. Net at the bottom.</p>
+<p>The difference is in what populates each line.</p>
+<p><strong>Human Revenue</strong> is not turnover. It is the financial value that HR activity generates — the value of revenue-generating hires ramping up, the replacement costs avoided through retention, the productivity gains from development programmes, the above-baseline output from engaged teams. These are real numbers. They are computable from the employee data that already exists in every HRIS.</p>
+<p><strong>Human COGS</strong> is total compensation, hiring spend, and development investment — everything you spent to field the team.</p>
+<p><strong>Human Gross Margin</strong> is the spread between what the people investment returned and what it cost. This is the number that tells you whether HR is generating value above its own cost.</p>
+<p><strong>Human OpEx</strong> is the HR function itself — the team, the tools, the compliance cost, the engagement spend. These are the costs of running people operations, separate from the cost of the people themselves.</p>
+<p><strong>Human Adjustments</strong> — and this is the part no financial P&L has — captures what is at risk. Flight risk liability. Skill debt. Growth readiness gap. These are the honest reckonings that sit below the operating line and change the net figure. No CFO would present a P&L without provisions for known risks. The Human P&L does the same.</p>
+<div class="stat-callout"><div class="stat-num">3.2x</div><div class="stat-text">Average Human Gross Margin across organisations that have calculated it. For every currency unit spent on people, organisations generate 3.2 units back. Most boards have never seen this number.</div></div>
+<h2>The Ratio that changes the conversation</h2>
+<p>At the bottom of the Human P&L sits a single line. It is formatted like this:</p>
+<p><em>For every £1 invested in HR, this organisation returns £X.</em></p>
+<p>This is the number that changes the meeting. Not because it is surprising — in most healthy organisations it is somewhere between 2x and 5x — but because it is formatted in a way the board already knows how to process. It is a return on investment. The same frame they use for every other capital allocation decision in the company.</p>
+<p>When an HR leader can answer this question about themselves, the conversation is permanently different. They are no longer presenting operational data. They are presenting a return. And returns are something the board knows exactly what to do with.</p>
+<h2>Why this has not existed before</h2>
+<p>The honest answer is that nobody gave HR the framework. Finance had centuries of accounting standards. Marketing got attribution modelling in the 2000s. Sales got CRM and pipeline analytics. HR got HRIS systems that were built to store data, not to translate it into financial language.</p>
+<p>The Humacity philosophy — the idea that human capital has always been measurable, but nobody gave it a language — is the direct response to this gap. Human capital is not soft. It is not intangible. It is an asset with a return, a liability with a cost, and a P&L that has been sitting unwritten in every organisation's data since the first employee was hired.</p>
+<p>The work is not to invent new data. The work is to format the data that already exists into the language that already works.</p>
+<p>The P&L already existed. It just needed to be filed.</p>`
+  ,
+    cta: {title: 'Run your own Human P&L', sub: 'The numbers in this article are computable from your org\'s actual data.', btn: 'Open L4 \u2014 The Human P&L', link: 'p4-tool.html'}
+  },
+  {
+    id: 'a2',
+    type: 'article',
+    pillar: 'L2',
+    topic: 'Talent Quality',
+    title: 'The Talent Premium: what your CFO already knows that your CHRO doesn\'t.',
+    subtitle: 'Every investment thesis in finance starts with the same question: are we getting above-average returns at average cost? Talent is the one investment where HR has never asked it.',
+    hook: 'A private equity firm does not buy a company and then ask whether the assets are good. They price the quality of the assets before they buy. HR acquires human capital every quarter and almost never prices it.',
+    readTime: '6 min read',
+    featured: false,
+    live: true,
+    body: `
+<h2>The question finance always asks</h2>
+<p>Every capital allocation decision in finance starts with one question: what is the quality of the return relative to the cost?</p>
+<p>A CFO does not ask "how many assets do we have?" They ask "what are these assets worth relative to what we paid?" A portfolio manager does not ask "how many positions are we holding?" They ask "which positions are generating alpha — returns above what the market would give us for the same risk?"</p>
+<p>HR asks neither of these questions. HR asks how many people it has, what the attrition rate is, and what the engagement score came in at. These are volume and sentiment metrics. They say nothing about quality relative to cost.</p>
+<p>The Talent Premium is the attempt to answer the question finance always asks, but applied to human capital: are the people in this organisation generating above-average returns at the cost we are paying for them?</p>
+<div class="stat-callout"><div class="stat-num">18%</div><div class="stat-text">Average Talent Quality Premium as a percentage of total compensation base across high-performing organisations. Most CHROs have never calculated this number for their own org.</div></div>
+<h2>What the Talent Premium actually measures</h2>
+<p>The Talent Premium has three components, each measuring a different dimension of talent quality relative to benchmark.</p>
+<p><strong>The Performance Premium</strong> is the salary-weighted surplus of actual performance above the grade benchmark. If the average IC3 in your industry performs at 3.2 on a 5-point scale, and yours perform at 4.0, that 0.8-point surplus is worth something in currency. It is what it would cost to buy that performance increment on the open market — either through higher salaries or through replacing the underperformers. The Performance Premium quantifies it.</p>
+<p><strong>The Retention Quality Premium</strong> is the financial value of having kept the right people. This is not about retention rate — it is about <em>who</em> stayed. An organisation that retained all its Stars and High Performers while losing its under-performers has a high Retention Quality Premium regardless of total attrition. The premium captures the value of the talent you did not lose.</p>
+<p><strong>The Hiring Quality Premium</strong> captures the performance of recent hires relative to grade benchmark. Early attrition — exits within 12 months — is the most expensive failure signal in hiring. But the positive signal matters too: a cohort of new hires performing above benchmark within six months is generating a premium that most organisations have never calculated.</p>
+<blockquote><p>Most CHROs operate on conviction. The Talent Premium operates on evidence. The humbling is the value.</p></blockquote>
+<h2>The benchmark problem — and why layered benchmarks solve it</h2>
+<p>Standard industry benchmarks are dismissed as gimmicks by serious CHROs, and rightly so. "The industry average" does not account for your size, your growth stage, your geography, or your competitive set. A benchmark against all companies in all industries tells you almost nothing useful.</p>
+<p>The solution is a layered benchmark that gets progressively more contextualised. The Market Benchmark gives you the broadest baseline — here is where the average is. The Cohort Benchmark narrows to organisations that look like yours — same industry, similar size, similar growth stage. The Internal Trajectory benchmark is the one that cannot be argued with: it is entirely your own data, asking whether your talent decisions are getting better or worse over time.</p>
+<p>The further down the benchmark stack you go, the more credible the comparison — and the more uncomfortable the reading.</p>
+<h2>The five areas where wrong talent decisions hurt most</h2>
+<p>The Talent Premium is not a general-purpose talent score. It focuses specifically on the five areas where wrong decisions have the most serious, most financially significant, and most difficult-to-reverse consequences.</p>
+<p><strong>Promotion accuracy</strong> is the most damaging. A wrong promotion simultaneously loses the vacated role, puts the wrong person in a more powerful position, demoralises the people who were passed over, and is almost impossible to undo without major disruption. The average cost of a wrong senior promotion is 3-5 times annual salary — and that does not count the downstream decisions the wrong person makes while in the role.</p>
+<p><strong>Manager quality</strong> is the highest-leverage, most undertracked area in all of HR. A team's performance variance is explained more by who manages it than by almost any other factor. Bad managers drive out good people, create invisible performance drag, and cost organisations far more than their own salaries.</p>
+<p><strong>Hiring quality, selective retention, and HiPo identification accuracy</strong> complete the five. Together, they cover the entire talent lifecycle — acquisition, development, and retention — through the lens of financial consequence.</p>
+<div class="stat-callout"><div class="stat-num">5x</div><div class="stat-text">Average cost of a wrong senior hire, expressed as a multiple of annual salary. This includes the direct replacement cost, the productivity gap during the tenure, and the downstream effect of poor decisions made while in role.</div></div>
+<h2>Why conviction is not evidence</h2>
+<p>Every CHRO believes their talent decisions were good. They have to — it is how they function. Making hundreds of decisions per year under uncertainty requires a baseline conviction that your judgment is sound.</p>
+<p>But conviction is not evidence. Conviction is what you believe. Evidence is what the data shows when you ask the uncomfortable question: compared to what?</p>
+<p>The Talent Premium does not ask whether you feel good about your talent decisions. It asks whether your talent, at the cost you are paying for it, is generating a premium above what the market would give you for the same spend. That is the question finance asks. It is the question HR needs to start answering.</p>`
+    ,
+    cta: {title: 'Calculate your Talent Quality Premium', sub: 'Three components, one number, one uncomfortable answer.', btn: 'Open L2 \u2014 The Talent Premium', link: 'p2-tool.html'}
+  },
+  {
+    id: 'cs1',
+    type: 'case-study',
+    pillar: 'L1',
+    topic: 'Attrition',
+    title: 'The Attrition Lie: why your attrition rate is the least useful number in your org.',
+    subtitle: 'A 12% attrition rate tells you almost nothing. Two organisations can have identical attrition rates and one is in crisis while the other is performing a natural cleanse. The number is the same. The reality is opposite.',
+    hook: 'Imagine two technology companies. Both report 12% annual attrition. Both present the same slide to the board. One of them is haemorrhaging quietly. The other is getting healthier. Same number. Completely different story.',
+    readTime: '7 min read',
+    featured: false,
+    live: true,
+    body: `
+<h2>The number everyone reports and nobody questions</h2>
+<p>Attrition rate is one of the most reported metrics in HR. It appears on almost every board deck, every QBR, every HR dashboard. It is cited in annual reports. It is benchmarked against industry averages. It is trended over time.</p>
+<p>And it is almost entirely useless as a standalone metric.</p>
+<p>The problem is not that attrition rate is wrong. The problem is that it is incomplete in a way that systematically misleads. A 12% attrition rate tells you that 12 out of every 100 employees left in a given year. It tells you nothing about who left. And who left is the only thing that actually matters.</p>
+<blockquote><p>A company with 5% attrition losing all its Stars is in more trouble than a company with 20% attrition losing its under-performers. The attrition rate is the same in neither scenario but the financial outcomes are opposite.</p></blockquote>
+<h2>Two companies. One number. Opposite realities.</h2>
+<p>Consider two technology companies, both 200 people, both operating in the same market, both reporting 12% annual attrition — 24 people gone in a year.</p>
+<p>Company A lost 18 of its 24 departures from the Star, High Performer, and High Potential cohorts. The six others were under-performers and natural exits. The people who left were the people building the product, closing the deals, and carrying the institutional knowledge of how the organisation actually works. The people who stayed are largely the people the organisation would have chosen to lose.</p>
+<p>Company B lost 20 of its 24 departures from the Inconsistent Performer and Below Benchmark cohorts. Four were genuine losses — two senior engineers and two account managers who left for better offers. But the organisation retained all its Stars, replaced its under-performers through natural attrition, and ended the year with a higher-quality talent base than it started with.</p>
+<div class="stat-callout"><div class="stat-num">12%</div><div class="stat-text">Both companies report this attrition rate. Company A is quietly losing the talent war. Company B just ran a natural performance improvement process. The rate tells you nothing about which is which.</div></div>
+<h2>The real cost is not the number — it is what leaves with it</h2>
+<p>The financial cost of attrition is not the replacement cost of the headcount. That is the most visible number and it is also the least important one in the long run.</p>
+<p>The real cost has four components that most organisations have never added up.</p>
+<p><strong>Replacement cost</strong> is the direct cost — agency fees, interview time, onboarding, the time to full productivity. For a mid-level professional in a developed market, this typically runs between 0.5x and 1.5x annual salary depending on the role and seniority. For senior or specialist roles, it is higher.</p>
+<p><strong>Productivity gap</strong> is the period between the departure and the point at which the replacement reaches the same output level. For a Star performer, this gap can run 6–12 months. During that period, the organisation is paying replacement cost on top of diminished output.</p>
+<p><strong>Institutional knowledge loss</strong> is the hardest to quantify and the most expensive to recover. When a senior person with deep client relationships, deep product knowledge, or deep operational knowledge leaves, they take with them years of accumulated context that is not written down anywhere. The replacement arrives and rebuilds from scratch — at full salary.</p>
+<p><strong>Team impact</strong> is the final and often most overlooked component. When a Star leaves, it is rarely just a departure. It is a signal to the people who worked with them. High performers are frequently the first to observe other high performers leaving — and they draw the logical conclusion about what that means for the organisation's direction. Attrition of Stars often leads to attrition of the people who respected them most.</p>
+<h2>Selective retention: the metric that matters</h2>
+<p>The question HR should be presenting to the board is not "what is our attrition rate?" It is "who left, and what is that worth?"</p>
+<p>Selective Retention is the metric that answers this question. It measures not how many people stayed, but whether the <em>right</em> people stayed. It weights departures by the performance and potential rating of who left. A departure from the bottom quartile of performance contributes almost nothing to the Selective Retention liability. A departure from the top quartile contributes disproportionately.</p>
+<p>An organisation with strong Selective Retention may have a high total attrition rate and be performing a healthy natural cleanse. An organisation with weak Selective Retention may have low total attrition and be slowly hollowing out its best talent while retaining its weakest.</p>
+<p>The attrition rate cannot tell you which of these is happening. Selective Retention can.</p>
+<div class="stat-callout"><div class="stat-num">1.8x</div><div class="stat-text">The average replacement cost multiplier for a Star performer — 1.8 times annual salary. For a High Potential in a revenue-bearing role, it can reach 3x when the full productivity gap and institutional knowledge loss are included.</div></div>
+<h2>What to present instead</h2>
+<p>The next time attrition comes up in a board or leadership conversation, the question to ask is not "what is our rate?" The question is: "what did we lose, and what is it worth?"</p>
+<p>The Value Ledger answers this. Every exit has a financial entry. Replacement cost. Productivity gap. Institutional knowledge value. Team impact estimate. Added up, this is the true cost of attrition — not as a percentage, but as a currency value that lands on the P&L in a way the board already knows how to process.</p>
+<p>When an HR leader can say "our attrition this year cost us £2.3M in replacement and productivity loss, concentrated in our top-performing cohort," the conversation changes. The rate is the same. The story is completely different.</p>
+<p>The attrition rate is a symptom. The Value Ledger is the diagnosis.</p>`
+    ,
+    cta: {title: 'Calculate your true attrition cost', sub: 'Not the rate. The actual currency value of who left and what it cost.', btn: 'Open L1 \u2014 The Value Ledger', link: 'p1-tool.html'}
+  },
+];
+
+var GLOSSARY = [
+  {term:'Humacity',def:'The quality of human capital in an organisation — its vitality, capability, and financial contribution. Constructed from humanus (Latin: human) and the -acity suffix (as in tenacity, audacity, veracity). Not a score or a rating — a state of being.',example:'"The Humacity of this team is declining. We need to improve our Humacity position before the next growth phase."'},
+  {term:'Human Gross Margin',def:'Total Human Revenue minus Total Human Cost of Goods. The spread between what the people investment returned and what it cost to field the team. Expressed as a percentage of Human Revenue.',example:'"Our Human Gross Margin is 34% — for every £100 of HR-attributable revenue, £34 is contribution above cost."'},
+  {term:'Talent Quality Premium (TQP)',def:'The financial value of having better-than-average people at the same cost. Composed of Performance Premium, Retention Quality Premium, and Hiring Quality Premium. Expressed in currency, not as a score.',example:'"Our Talent Quality Premium is $2.4M — the financial value of the performance differential between our people and the grade benchmark."'},
+  {term:'Flight Risk Liability',def:'The estimated financial value at risk of departure — calculated from at-risk employees weighted by their performance, potential, and irreplaceability. A balance sheet liability, not a headcount metric.',example:'"Flight Risk Liability stands at £890K — the value we stand to lose if the six flagged employees leave in the next 6 months."'},
+  {term:'Skill Debt',def:'The gap between current workforce capabilities and the skills needed to execute the organisation\'s strategy over the next 2-3 years. Every company has skill debt. Almost none have quantified it.',example:'"Our Skill Debt provision is $340K — the estimated cost of the skills gap if unaddressed over the next 18 months."'},
+  {term:'Net Human Worth',def:'Total Human Assets minus Total Human Liabilities, plus Retained Human Earnings from the Human P&L. The balance sheet equivalent of equity — what the organisation\'s human capital is actually worth at this point in time.',example:'"Net Human Worth: S$4.2M. Assets outweigh liabilities. The human capital position of this organisation is strong."'},
+  {term:'Human Confidence Index (HCI)',def:'A named coefficient (0.7 to 1.3) set by the HR professional based on four observable binary factors: Leadership Stability, Org Disruption, Culture Health, Execution Momentum. Applies a human judgment layer to base calculations. The HR professional is the author of the uncertainty.',example:'"HCI: 1.15 — three of four confidence factors confirmed. Conservative adjusted value: $1.8M. Your Assessment: $2.1M. Optimistic: $2.4M."'},
+  {term:'Selective Retention',def:'A measure of whether the right people stayed — not how many. Weights departures by performance and potential rating. High total attrition with strong Selective Retention is healthier than low total attrition with poor Selective Retention.',example:'"Selective Retention rate: 94% — we retained 94% of our Stars, High Performers, and High Potentials. Total attrition was 16%."'},
+  {term:'Talent Concentration Risk',def:'The financial risk created by dangerous concentration of critical knowledge, relationships, or function in too few people — combined with the probability that those people may leave. A single-point-of-failure liability on the Human Balance Sheet.',example:'"Talent Concentration Risk: $680K — four senior people hold 70% of our critical client relationships. If two leave, we lose that value."'},
+  {term:'Institutional Knowledge Value',def:'The accumulated knowledge held by long-tenured employees in critical roles that is not documented anywhere. Quantified as tenure in role multiplied by criticality coefficient. Walks out the door when they leave.',example:'"Institutional Knowledge Value: £1.2M — our three longest-serving operations leads have 47 combined years of undocumented process knowledge."'},
+  {term:'The Ratio',def:'For every [currency unit] invested in HR, this organisation returns [X]. The central output of the Value Ledger and the Human P&L. The number that reframes HR from a cost centre to an investment with a return.',example:'"The Ratio: 3.8x. For every £1 invested in HR, this organisation returns £3.80. This number belongs in the board presentation."'},
+  {term:'Workforce Obsolescence Risk',def:'People already in the organisation whose skills, mindset, or working style have fallen behind what the organisation needs — and who remain in place. Distinct from Skill Debt (a gap in what is needed) — this is existing talent becoming a drag.',example:'"Workforce Obsolescence Risk: $290K — 8 employees in roles where their core skills are being automated or displaced. Currently absorbing full salary with declining marginal contribution."'},
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+var currentTab = 'all', currentFilter = 'all';
+
+function setTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  btn.classList.add('active');
+  // Show/hide filter row
+  document.getElementById('filterRow').style.display = tab==='glossary' ? 'none' : 'flex';
+  render();
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('active');});
+  btn.classList.add('active');
+  render();
+}
+
+function matchesFilter(item) {
+  if(currentFilter==='all') return true;
+  return item.pillar===currentFilter || item.topic===currentFilter;
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+function render() {
+  var area = document.getElementById('contentArea');
+  var html = '';
+
+  if(currentTab==='glossary') {
+    html += '<div class="section-hdr"><div class="section-hdr-title">Financial Glossary for HR</div><div class="section-hdr-count">'+GLOSSARY.length+' terms</div></div>';
+    html += '<div class="glossary-grid">';
+    GLOSSARY.forEach(function(g){
+      html += '<div class="glossary-card">'
+        +'<div class="gc-term">'+g.term+'</div>'
+        +'<div class="gc-def">'+g.def+'</div>'
+        +'<div class="gc-example">'+g.example+'</div>'
+        +'</div>';
+    });
+    html += '</div>';
+    area.innerHTML = html;
+    return;
+  }
+
+  var filtered = ARTICLES.filter(function(a){
+    if(currentTab==='articles' && a.type!=='article') return false;
+    if(currentTab==='case-studies' && a.type!=='case-study') return false;
+    return matchesFilter(a);
+  });
+
+  // Featured article (first live article in filtered set)
+  var featured = filtered.find(function(a){return a.featured && a.live;}) || filtered.find(function(a){return a.live;});
+  if(featured && currentFilter==='all' && currentTab!=='case-studies') {
+    html += renderFeatured(featured);
+  }
+
+  // Remaining articles
+  var rest = filtered.filter(function(a){return a!==featured;});
+  if(rest.length) {
+    html += '<div class="section-hdr"><div class="section-hdr-title">'+(currentTab==='all'?'More Reading':currentTab==='case-studies'?'Case Studies':'Articles')+'</div><div class="section-hdr-count">'+rest.length+' '+(rest.length===1?'piece':'pieces')+'</div></div>';
+    html += '<div class="article-grid">';
+    rest.forEach(function(a){ html += renderCard(a); });
+    html += '</div>';
+  }
+
+  if(!filtered.length) {
+    html = '<div style="text-align:center;padding:60px 0;color:var(--text-dim);font-size:.88rem">No content matches this filter yet.</div>';
+  }
+
+  area.innerHTML = html;
+}
+
+function tagPill(type) {
+  var map = {article:'tag-type-article','case-study':'tag-type-case-study'};
+  var label = type==='case-study'?'Case Study':'Article';
+  return '<span class="tag-pill '+(map[type]||'tag-type-article')+'">'+label+'</span>';
+}
+
+function renderFeatured(a) {
+  return '<div class="featured" onclick="openReader(\''+a.id+'\')">'
+    +'<div class="featured-tag">'
+    +tagPill(a.type)
+    +'<span class="tag-pill tag-pillar">'+a.pillar+'</span>'
+    +'<span class="tag-pill tag-topic">'+a.topic+'</span>'
+    +'<span class="featured-read-time">'+a.readTime+'</span>'
+    +'</div>'
+    +'<div class="featured-title">'+a.title+'</div>'
+    +'<div class="featured-sub">'+a.subtitle+'</div>'
+    +'<div class="featured-hook">'+a.hook+'</div>'
+    +'<button class="featured-read-btn">Read article <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>'
+    +'</div>';
+}
+
+function renderCard(a) {
+  var cls = a.live ? '' : ' coming-soon-overlay';
+  return '<div class="article-card'+cls+'" '+(a.live?'onclick="openReader(\''+a.id+'\')"':'')+'>'
+    +'<div class="ac-tags">'
+    +tagPill(a.type)
+    +'<span class="tag-pill tag-pillar">'+a.pillar+'</span>'
+    +(a.live?'':'<span class="coming-soon-badge">Soon</span>')
+    +'</div>'
+    +'<div class="ac-title">'+a.title+'</div>'
+    +'<div class="ac-desc">'+a.subtitle+'</div>'
+    +'<div class="ac-footer"><span class="ac-read-time">'+a.readTime+'</span>'
+    +(a.live?'<svg class="ac-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>':'')
+    +'</div></div>';
+}
+
+// ── READER ────────────────────────────────────────────────────────────────
+function openReader(id) {
+  var a = ARTICLES.find(function(x){return x.id===id;});
+  if(!a || !a.live) return;
+  var html = '<div class="reader-eyebrow">'
+    +tagPill(a.type)
+    +'<span class="tag-pill tag-pillar">'+a.pillar+'</span>'
+    +'<span class="tag-pill tag-topic">'+a.topic+'</span>'
+    +'</div>'
+    +'<div class="reader-title">'+a.title+'</div>'
+    +'<div class="reader-byline">By Kumar Vivek &middot; Revenue Fluent &middot; '+a.readTime+'</div>'
+    +'<div class="reader-body">'+a.body+'</div>'
+    +'<div class="reader-cta">'
+    +'<div class="reader-cta-title">'+a.cta.title+'</div>'
+    +'<div class="reader-cta-sub">'+a.cta.sub+'</div>'
+    +'<a href="'+a.cta.link+'" class="reader-cta-btn">'+a.cta.btn+' \u2192</a>'
+    +'</div>';
+  document.getElementById('readerInner').innerHTML = html;
+  document.getElementById('readerOverlay').classList.add('open');
+  document.getElementById('readerOverlay').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReader() {
+  document.getElementById('readerOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on Escape
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeReader(); });
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+render();
+
+// Sidebar resize
+var sb=document.querySelector('.sidebar'),handle=document.getElementById('sbResize'),drag=false,sx=0,sw=0;
+handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
+window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelectorAll('.wrap').forEach(function(el){el.style.marginLeft=w+'px';});});
+window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
 </script>
-</body>
-</html>
+</body></html>
