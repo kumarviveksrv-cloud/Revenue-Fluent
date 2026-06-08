@@ -394,7 +394,9 @@ body{padding-top:0}
 .sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s;z-index:10}
 .sidebar-resize:hover,.sidebar-resize.dragging{background:rgba(192,64,154,.4)}
 
-</style></head>
+</style><link rel="stylesheet" href="rf-report.css">
+<script src="rf-report.js"></script>
+</head>
 <body>
 <aside class="sidebar" id="mainSidebar">
   <a href="index.html" class="sb-brand"><div class="sb-dot"></div><div class="sb-name">Revenue Fluent</div></a>
@@ -1020,5 +1022,43 @@ function downloadExcel(filename) {
     document.body.style.cursor = '';
   });
 })();
+</script>
+<script>
+function generatePDFP1() {
+  var sel = document.getElementById('scen');
+  if(!sel || !window.RF) return;
+  var name = sel.value;
+  var s = RF.scenario(name);
+  if(!s) return;
+  var sym = s.symbol;
+  var app = document.getElementById('app');
+  var entries = [];
+  app.querySelectorAll('.ledger-row').forEach(function(row) {
+    var date = row.querySelector('.row-date');
+    var action = row.querySelector('.row-action');
+    var note = row.querySelector('.row-note');
+    var cat = row.querySelector('.pill');
+    var cost = row.querySelector('.row-cost');
+    var ret = row.querySelector('.row-ret');
+    if(action && cost && ret) {
+      var costVal = parseFloat((cost.textContent||'').replace(/[^0-9.-]/g,'')) || 0;
+      var retVal = parseFloat((ret.textContent||'').replace(/[^0-9.-]/g,'')) || 0;
+      var costM = (cost.textContent||'').indexOf('M')>-1?1e6:(cost.textContent||'').indexOf('K')>-1?1e3:1;
+      var retM = (ret.textContent||'').indexOf('M')>-1?1e6:(ret.textContent||'').indexOf('K')>-1?1e3:1;
+      entries.push({
+        date: date ? date.textContent : 'Q1 2026',
+        action: action.textContent,
+        note: note ? note.textContent : '',
+        category: cat ? cat.textContent.trim() : 'General',
+        cost: costVal * costM,
+        ret: retVal * retM
+      });
+    }
+  });
+  var totalReturn = entries.reduce(function(a,e){return a+e.ret;},0);
+  var hrInvestment = entries.reduce(function(a,e){return a+e.cost;},0);
+  var ratio = hrInvestment > 0 ? totalReturn / hrInvestment : 0;
+  RFReport.reportP1(name, entries, sym, totalReturn, hrInvestment, ratio);
+}
 </script>
 </body></html>
