@@ -467,6 +467,10 @@ function swToggle(btn){
   <select id="scen"></select>
   <span class="scen-meta" id="meta"></span>
 </div>
+<div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+  <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a></span>
+  <span id="userDataBadge" style="display:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#38C490;background:rgba(56,196,144,.1);border:1px solid rgba(56,196,144,.2);padding:3px 8px;border-radius:4px">Your Data Active</span>
+</div>
 <div id="app"></div>
 
 
@@ -487,6 +491,42 @@ function swToggle(btn){
 </div>
 </div>
 <script src="rf-data.js"></script>
+
+<script>
+// Inject user-uploaded scenario from sessionStorage
+(function(){
+  var raw = sessionStorage.getItem('rf_user_scenario');
+  if(!raw) return;
+  try {
+    var sc = JSON.parse(raw);
+    if(!window.RF_DATA) return;
+    // Add to RF_DATA
+    window.RF_DATA['Your Organisation'] = sc;
+    // Add to scenario dropdown
+    var sel = document.getElementById('scen');
+    if(sel) {
+      // Check if already there
+      var exists = false;
+      for(var i=0;i<sel.options.length;i++){
+        if(sel.options[i].value==='Your Organisation'){exists=true;break;}
+      }
+      if(!exists){
+        var opt = document.createElement('option');
+        opt.value = 'Your Organisation';
+        opt.textContent = 'Your Organisation ★';
+        opt.style.color = '#E0B830';
+        sel.insertBefore(opt, sel.firstChild);
+      }
+      // Auto-select if URL param says so
+      var urlSc = new URLSearchParams(location.search).get('scenario');
+      if(urlSc === 'Your Organisation') {
+        sel.value = 'Your Organisation';
+        sel.dispatchEvent(new Event('change'));
+      }
+    }
+  } catch(e) {}
+})();
+</script>
 <script>
 (function(){
 
@@ -1056,5 +1096,29 @@ function generatePDFP1() {
   var ratio = hrInvestment > 0 ? totalReturn / hrInvestment : 0;
   RFReport.reportP1(name, entries, sym, totalReturn, hrInvestment, ratio);
 }
+</script>
+
+<script>
+(function(){
+  var nudge = document.getElementById('uploadNudge');
+  var badge = document.getElementById('userDataBadge');
+  if(!nudge) return;
+  nudge.style.display = 'flex';
+  // Show badge if user data active
+  var sel = document.getElementById('scen');
+  function checkActive(){
+    if(sel && sel.value === 'Your Organisation'){
+      badge.style.display = 'inline';
+      nudge.style.background = 'rgba(56,196,144,.06)';
+      nudge.style.borderColor = 'rgba(56,196,144,.2)';
+    } else {
+      badge.style.display = 'none';
+      nudge.style.background = 'rgba(224,184,48,.06)';
+      nudge.style.borderColor = 'rgba(224,184,48,.15)';
+    }
+  }
+  if(sel) sel.addEventListener('change', checkActive);
+  checkActive();
+})();
 </script>
 </body></html>

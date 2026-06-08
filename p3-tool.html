@@ -338,6 +338,10 @@ body{
   <span class="scen-meta" id="meta"></span>
 </div>
 <div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p3')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Org Vitals score for current conditions</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p3_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p3_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p3_body"><div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p3_f0" onclick="hciTF('hci_p3',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p3_f1" onclick="hciTF('hci_p3',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p3_f2" onclick="hciTF('hci_p3',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p3_f3" onclick="hciTF('hci_p3',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p3_calc"></div><table class="hci-scenarios"><tbody id="hci_p3_scen"></tbody></table><div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div></div></div>
+<div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+  <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a></span>
+  <span id="userDataBadge" style="display:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#38C490;background:rgba(56,196,144,.1);border:1px solid rgba(56,196,144,.2);padding:3px 8px;border-radius:4px">Your Data Active</span>
+</div>
 <div id="app"></div>
 <div class="dl-section">
   <div class="dl-header">
@@ -375,6 +379,42 @@ function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:b
 function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
 </script>
 <script src="rf-data.js"></script>
+
+<script>
+// Inject user-uploaded scenario from sessionStorage
+(function(){
+  var raw = sessionStorage.getItem('rf_user_scenario');
+  if(!raw) return;
+  try {
+    var sc = JSON.parse(raw);
+    if(!window.RF_DATA) return;
+    // Add to RF_DATA
+    window.RF_DATA['Your Organisation'] = sc;
+    // Add to scenario dropdown
+    var sel = document.getElementById('scen');
+    if(sel) {
+      // Check if already there
+      var exists = false;
+      for(var i=0;i<sel.options.length;i++){
+        if(sel.options[i].value==='Your Organisation'){exists=true;break;}
+      }
+      if(!exists){
+        var opt = document.createElement('option');
+        opt.value = 'Your Organisation';
+        opt.textContent = 'Your Organisation ★';
+        opt.style.color = '#E0B830';
+        sel.insertBefore(opt, sel.firstChild);
+      }
+      // Auto-select if URL param says so
+      var urlSc = new URLSearchParams(location.search).get('scenario');
+      if(urlSc === 'Your Organisation') {
+        sel.value = 'Your Organisation';
+        sel.dispatchEvent(new Event('change'));
+      }
+    }
+  } catch(e) {}
+})();
+</script>
 <script>
 (function(){
 
@@ -980,5 +1020,29 @@ function generatePDFP3() {
   var dnaType = dnaEl ? dnaEl.textContent : '';
   RFReport.reportP3(sel.value, vitals, dnaType);
 }
+</script>
+
+<script>
+(function(){
+  var nudge = document.getElementById('uploadNudge');
+  var badge = document.getElementById('userDataBadge');
+  if(!nudge) return;
+  nudge.style.display = 'flex';
+  // Show badge if user data active
+  var sel = document.getElementById('scen');
+  function checkActive(){
+    if(sel && sel.value === 'Your Organisation'){
+      badge.style.display = 'inline';
+      nudge.style.background = 'rgba(56,196,144,.06)';
+      nudge.style.borderColor = 'rgba(56,196,144,.2)';
+    } else {
+      badge.style.display = 'none';
+      nudge.style.background = 'rgba(224,184,48,.06)';
+      nudge.style.borderColor = 'rgba(224,184,48,.15)';
+    }
+  }
+  if(sel) sel.addEventListener('change', checkActive);
+  checkActive();
+})();
 </script>
 </body></html>
