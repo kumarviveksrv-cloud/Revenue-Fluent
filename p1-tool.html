@@ -330,6 +330,48 @@ body{padding-top:0}
 .sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
 .sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
 
+
+/* HUMAN CONFIDENCE INDEX */
+.hci-wrap{margin:20px 0;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px;overflow:hidden}
+.hci-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;transition:background .15s}
+.hci-header:hover{background:rgba(180,40,140,.06)}
+.hci-left{display:flex;align-items:center;gap:10px}
+.hci-icon{width:28px;height:28px;border-radius:6px;background:rgba(192,64,154,.15);border:1px solid rgba(192,64,154,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hci-title{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#D060B0;font-weight:500}
+.hci-sub{font-size:.76rem;color:#C8A8C0;margin-top:2px}
+.hci-coeff-display{font-family:var(--mono);font-size:1.1rem;font-weight:600;color:#E8C87A}
+.hci-coeff-label{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:#C8A8C0;margin-top:2px;text-align:right}
+.hci-chevron{color:#D060B0;transition:transform .2s;flex-shrink:0}
+.hci-chevron.open{transform:rotate(180deg)}
+.hci-body{display:none;padding:0 20px 20px;border-top:1px solid rgba(180,40,140,.1)}
+.hci-body.open{display:block}
+.hci-factors{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;margin-bottom:16px}
+.hci-factor{background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.12);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;user-select:none}
+.hci-factor:hover{border-color:rgba(192,64,154,.3)}
+.hci-factor.yes{background:rgba(56,196,144,.08);border-color:rgba(56,196,144,.3)}
+.hci-factor-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.hci-factor-name{font-size:.84rem;font-weight:600;color:#EED8E8}
+.hci-factor-toggle{width:36px;height:20px;border-radius:10px;background:rgba(180,40,140,.2);border:1px solid rgba(180,40,140,.3);position:relative;transition:all .2s;flex-shrink:0}
+.hci-factor.yes .hci-factor-toggle{background:rgba(56,196,144,.3);border-color:rgba(56,196,144,.5)}
+.hci-factor-toggle::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#D060B0;transition:all .2s}
+.hci-factor.yes .hci-factor-toggle::after{left:19px;background:#38C490}
+.hci-factor-desc{font-size:.74rem;color:#C8A8C0;line-height:1.5}
+.hci-factor.yes .hci-factor-desc{color:#9AB8D8}
+.hci-calc{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(40,8,28,.4);border-radius:10px;margin-bottom:14px}
+.hci-calc-formula{font-family:var(--mono);font-size:.7rem;color:#C8A8C0;flex:1}
+.hci-calc-result{font-family:var(--mono);font-size:1.3rem;font-weight:600;color:#E8C87A;white-space:nowrap}
+.hci-calc-result span{font-size:.56rem;color:#C8A8C0;display:block;text-align:right;letter-spacing:.1em;text-transform:uppercase}
+.hci-scenarios{width:100%;border-collapse:collapse}
+.hci-scenarios th{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;background:rgba(40,8,28,.6);color:#C8A8C0;text-align:left;border-bottom:1px solid rgba(180,40,140,.15)}
+.hci-scenarios th.yours{color:#E8C87A}
+.hci-scenarios td{padding:8px 12px;font-family:var(--mono);font-size:.82rem;border-bottom:1px solid rgba(180,40,140,.06)}
+.hci-scenarios td.label{font-size:.74rem;color:#C8A8C0}
+.hci-scenarios td.conservative{color:#9AB8D8}
+.hci-scenarios td.yours{color:#E8C87A;font-weight:500}
+.hci-scenarios td.optimistic{color:#38C490}
+.hci-scenarios tr:last-child td{border-bottom:none}
+.hci-note{font-size:.7rem;color:rgba(192,64,154,.4);margin-top:8px;font-style:italic;text-align:center}
+
 </style></head>
 <body>
 <aside class="sidebar" id="mainSidebar">
@@ -801,4 +843,93 @@ function swToggle(btn){
   if(!open){panel.classList.add('open');btn.classList.add('open');}
 }
 </script>
+
+<script>
+
+var _hciState = {};
+function hciToggle(id){
+  var b=document.getElementById(id+'_body'),c=document.getElementById(id+'_chev');
+  if(!b)return;
+  var o=b.classList.contains('open');
+  b.classList.toggle('open',!o);
+  if(c)c.classList.toggle('open',!o);
+}
+function hciToggleFactor(id,idx){
+  if(!_hciState[id])return;
+  _hciState[id].factors[idx]=!_hciState[id].factors[idx];
+  _hciRender(id);
+}
+function _hciCoeff(id){
+  var s=_hciState[id];if(!s)return 1.0;
+  return Math.round((0.70+s.factors.filter(Boolean).length*0.15)*100)/100;
+}
+function _hciFmt(sym,val){
+  var abs=Math.abs(val),sign=val<0?'-':'';
+  if(sym==='₹'){if(abs>=10000000)return sign+sym+(abs/10000000).toFixed(2)+'Cr';if(abs>=100000)return sign+sym+(abs/100000).toFixed(1)+'L';return sign+sym+Math.round(abs/1000)+'K';}
+  if(abs>=1000000000)return sign+sym+(abs/1000000000).toFixed(2)+'B';
+  if(abs>=1000000)return sign+sym+(abs/1000000).toFixed(2)+'M';
+  if(abs>=1000)return sign+sym+Math.round(abs/1000)+'K';
+  return sign+sym+Math.round(abs);
+}
+function _hciRender(id){
+  var s=_hciState[id];if(!s)return;
+  var hci=_hciCoeff(id),base=s.base,sym=s.sym;
+  var yc=s.factors.filter(Boolean).length;
+  var el=document.getElementById(id+'_coeff');if(el)el.textContent=hci.toFixed(2)+'x';
+  s.factors.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});
+  var calc=document.getElementById(id+'_calc');
+  if(calc)calc.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+hci.toFixed(2)+'</b></span><div class="hci-calc-result">'+hci.toFixed(2)+'x<span>HCI Coefficient</span></div>';
+  var scen=document.getElementById(id+'_scen');
+  if(scen){
+    var c=base*(hci-0.15),y=base*hci,o=base*(hci+0.15);
+    scen.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Ratio</th></tr>'
+      +'<tr><td class="label">Conservative</td><td class="conservative">'+(hci-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(sym,c)+'</td></tr>'
+      +'<tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+hci.toFixed(2)+'x</td><td class="yours">'+_hciFmt(sym,y)+'</td></tr>'
+      +'<tr><td class="label">Optimistic</td><td class="optimistic">'+(hci+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(sym,o)+'</td></tr>';
+  }
+}
+function initHCI(id,base,sym,decay){
+  _hciState[id]={factors:[false,false,false,false],base:base,sym:sym,decay:decay||null};
+  _hciRender(id);
+}
+
+(function(){
+  function tryInit(){
+    // Pull the headline ratio value from the rendered page
+    var ratioEl = document.querySelector('.ratio-big, .return-ratio, .ledger-ratio');
+    var base = 0;
+    // Fallback: use totalReturn / hrInvestment ratio as base
+    // We'll init with 1.0 as the baseline ratio and let the three scenarios show the range
+    var symEl = document.querySelector('.scenario-details');
+    var sym = '$';
+    if(symEl){
+      var t = symEl.textContent;
+      if(t.indexOf('₹')>-1) sym='₹';
+      else if(t.indexOf('£')>-1) sym='£';
+      else if(t.indexOf('S$')>-1) sym='S$';
+      else if(t.indexOf('€')>-1) sym='€';
+      else if(t.indexOf('¥')>-1) sym='¥';
+      else if(t.indexOf('AED')>-1) sym='AED';
+    }
+    // Get total return value from stats bar
+    var totalEl = document.querySelector('.stat-val');
+    if(totalEl){
+      var txt = totalEl.textContent.replace(/[^0-9.]/g,'');
+      var raw = parseFloat(txt)||0;
+      var t2 = totalEl.textContent;
+      if(t2.indexOf('B')>-1) raw*=1e9;
+      else if(t2.indexOf('M')>-1) raw*=1e6;
+      else if(t2.indexOf('Cr')>-1) raw*=1e7;
+      else if(t2.indexOf('L')>-1) raw*=1e5;
+      else if(t2.indexOf('K')>-1) raw*=1e3;
+      base = raw;
+    }
+    initHCI('hci_p1', base, sym, null);
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', tryInit);
+  } else { tryInit(); }
+})();
+</script>
+
 </body></html>
