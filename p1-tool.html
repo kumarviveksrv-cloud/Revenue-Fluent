@@ -963,4 +963,23 @@ function downloadExcel(filename) {
   document.body.removeChild(a);
 }
 </script>
+
+<div class="dl-section">
+  <div class="dl-header">
+    <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
+    <div class="dl-title">Downloads</div>
+  </div>
+  <div class="dl-sub"><b>Value Ledger Model</b> &mdash; Pre-built ledger with five entry categories and the HR Return Ratio. Populate with your data.</div>
+  <div class="dl-buttons">
+    <button class="dl-btn dl-btn-excel" onclick="downloadExcel('P1_Value_Ledger_RevenueFluent.xlsx')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6l2 2-2 2M8 10h3"/></svg>
+      Download Excel Model
+    </button>
+    <button class="dl-btn dl-btn-pdf" onclick="alert('PDF reports coming soon.')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M9 2v5h5"/></svg>
+      PDF Report &mdash; Coming Soon
+    </button>
+  </div>
+  <div class="dl-note">Opens in Microsoft Excel or Google Sheets. Replace sample inputs with your organisation's actual data.</div>
+</div>
 </body></html>
