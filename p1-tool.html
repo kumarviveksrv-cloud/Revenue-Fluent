@@ -313,6 +313,23 @@ body{padding-top:52px}
 body{padding-top:0}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
 
+
+/* SHOW WORKINGS */
+.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:4px}
+.sw-trigger:hover{color:#E080C8}
+.sw-trigger svg{width:10px;height:10px;transition:transform .2s}
+.sw-trigger.open svg{transform:rotate(180deg)}
+.sw-panel{display:none;margin-top:10px;background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.15);border-radius:10px;padding:16px 18px}
+.sw-panel.open{display:block}
+.sw-row{display:grid;grid-template-columns:120px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid rgba(180,40,140,.06)}
+.sw-row:last-child{border-bottom:none}
+.sw-key{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;padding-top:2px}
+.sw-val{font-size:.82rem;color:#D8B8D0;line-height:1.6}
+.sw-val b{color:#EED8E8;font-weight:500}
+.sw-formula{font-family:var(--mono);font-size:.76rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
+.sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
+.sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
+
 </style></head>
 <body>
 <aside class="sidebar" id="mainSidebar">
@@ -482,8 +499,43 @@ function buildAuto(name) {
   return entries;
 }
 
+function swPanel(id, formula, inputs, assumption, result) {
+  return '<button class="sw-trigger" data-panel="'+id+'" onclick="swToggle(this)">'
+    +'<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>'
+    +'Show workings</button>'
+    +'<div class="sw-panel" id="'+id+'">'
+      +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">'+formula+'</span></div></div>'
+      +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val">'+inputs+'</div></div>'
+      +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+result+'</span></div></div>'
+      +(assumption?'<div class="sw-note">'+assumption+'</div>':'')
+    +'</div>';
+}
+
 function rowHTML(e, sym) {
   var net = e.ret - e.cost;
+  var swId = 'sw_'+e.id;
+  var formula, inputs, assumption;
+  if(e.category==='Cost-Saving'){
+    formula='Stars retained × 1.8x annual salary = replacement cost avoided';
+    inputs='<b>'+fmt(sym,e.cost)+'</b> HR cost &middot; Based on industry standard: replacing a Star costs 1.5-2x annual salary';
+    assumption='1.8x multiplier reflects recruitment, onboarding, and productivity ramp cost. Source: SHRM replacement cost research.';
+  } else if(e.category==='Revenue-Generating'){
+    formula='Revenue hires × 1.4x first-year salary = estimated productive output';
+    inputs='<b>'+fmt(sym,e.cost)+'</b> acquisition cost &middot; 1.4x revenue contribution factor for ramp-adjusted first year';
+    assumption='1.4x is a conservative estimate for revenue-bearing roles. Actual contribution depends on role type and ramp speed.';
+  } else if(e.category==='Development'){
+    formula='Development investment × 2.8x DRI = performance uplift return';
+    inputs='<b>'+fmt(sym,e.cost)+'</b> development spend &middot; DRI (Development Return Index) = 2.8x for structured programmes';
+    assumption='2.8x DRI based on McKinsey L&D research on structured vs informal development programmes.';
+  } else if(e.category==='Culture & Engagement'){
+    formula='Tenured employee salaries × 8% EEI productivity premium';
+    inputs='<b>'+fmt(sym,e.cost)+'</b> engagement spend &middot; 8% productivity premium from sustained engagement in 5+ year tenure staff';
+    assumption='8% engagement productivity premium sourced from Gallup State of the Global Workplace report.';
+  } else {
+    formula='At-risk employees × 60% of salary × probability of exit = exposure contained';
+    inputs='<b>'+fmt(sym,e.cost)+'</b> risk management cost &middot; Unmanaged exits estimated at 2x salary each';
+    assumption='Risk Mitigation Value = probability of bad outcome × cost if materialised. Conservative 60% exit probability applied.';
+  }
   return '<div class="ledger-row">'
     +'<div class="row-date">'+e.date+'</div>'
     +'<div>'
@@ -491,6 +543,7 @@ function rowHTML(e, sym) {
       +'<div class="row-action">'+e.action+'</div>'
       +'<div class="row-note">'+e.note+'</div>'
       +'<span class="pill '+(CAT_CSS[e.category]||'p-cost')+'">'+e.category+'</span>'
+      +swPanel(swId, formula, inputs, assumption, fmt(sym,e.ret)+' return &middot; '+fmtSigned(sym,net)+' net')
     +'</div>'
     +'<div class="row-cost">'+fmt(sym,e.cost)+'</div>'
     +'<div class="row-ret">'+fmt(sym,e.ret)+'</div>'
@@ -720,5 +773,16 @@ sel.addEventListener('change', function(){
 render(current);
 
 })();
+
+function swToggle(btn){
+  var panelId=btn.getAttribute('data-panel');
+  var panel=document.getElementById(panelId);
+  if(!panel)return;
+  var open=panel.classList.contains('open');
+  // Close all open panels first
+  document.querySelectorAll('.sw-panel.open').forEach(function(p){p.classList.remove('open');});
+  document.querySelectorAll('.sw-trigger.open').forEach(function(b){b.classList.remove('open');});
+  if(!open){panel.classList.add('open');btn.classList.add('open');}
+}
 </script>
 </body></html>

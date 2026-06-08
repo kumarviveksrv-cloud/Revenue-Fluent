@@ -227,6 +227,23 @@ body{padding-top:52px}
 body{padding-top:0}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
 
+
+/* SHOW WORKINGS */
+.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:2px 0;transition:color .15s}
+.sw-trigger:hover{color:#E080C8}
+.sw-trigger svg{width:10px;height:10px;transition:transform .2s}
+.sw-trigger.open svg{transform:rotate(180deg)}
+.sw-panel{display:none;margin-top:8px;background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.15);border-radius:10px;padding:14px 16px;grid-column:1/-1}
+.sw-panel.open{display:block}
+.sw-row{display:grid;grid-template-columns:110px 1fr;gap:8px;padding:4px 0;border-bottom:1px solid rgba(180,40,140,.06)}
+.sw-row:last-child{border-bottom:none}
+.sw-key{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;padding-top:2px}
+.sw-val{font-size:.8rem;color:#D8B8D0;line-height:1.6}
+.sw-val b{color:#EED8E8;font-weight:500}
+.sw-formula{font-family:var(--mono);font-size:.74rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:3px 8px;border-radius:4px;display:block;margin-top:3px}
+.sw-result{font-family:var(--mono);font-size:.78rem;color:#38C490;font-weight:500}
+.sw-note{font-size:.72rem;color:rgba(210,80,170,.4);margin-top:5px;font-style:italic;padding-top:5px;border-top:1px solid rgba(180,40,140,.06)}
+
 </style></head>
 <body>
 <aside class="sidebar" id="mainSidebar">
@@ -582,11 +599,38 @@ function render() {
   });
 }
 
+var BS_WORKINGS = {
+  'Talent Equity': {f:'Stars/HiPos × (perf surplus above grade benchmark) × salary × 2',i:'Only positive performers counted × 2x multiplier reflects the premium value of above-benchmark talent',n:'2x multiplier = market premium for above-average performers. Conservative relative to external talent market pricing.'},
+  'Institutional Knowledge': {f:'Senior employees × salary × min(tenure × 8%, 60%)',i:'Senior grades only × knowledge accumulation rate of 8% per year × capped at 60% to prevent overstatement',n:'Knowledge accumulation rate derived from organisational learning research. Cap of 60% prevents overvaluing very long tenure.'},
+  'Organisational Learning Velocity': {f:'Emerging Talent × salary × 35%',i:'Employees in Emerging Talent placement × 35% future capability premium',n:'35% represents the present value of future capability being built. Based on L&D ROI research for high-potential development.'},
+  'Relationship Capital': {f:'Revenue-dept employees (tenure ≥2yr) × salary × min(tenure × 12%, 80%)',i:'Revenue-facing roles only × relationship value accrual rate of 12% per year × capped at 80%',n:'Client relationships deepen with tenure. 12% per year reflects typical client relationship maturity curve in professional services.'},
+  'Culture Asset': {f:'Tenured employees (5+ years) × salary × 8%',i:'Long-tenure employees × 8% culture productivity premium',n:'Strong culture reduces attrition cost, hiring cost, and increases productivity. 8% is a conservative estimate of the combined benefit.'},
+  'Talent Concentration Risk': {f:'At-risk employees × salary × 60% + HiPos × salary × 25%',i:'Inconsistent Performers at departure risk + High Potentials with concentration risk',n:'60% departure probability for at-risk employees (conservative). 25% for HiPos reflects concentration risk even when unlikely to leave.'},
+  'Skill Debt': {f:'Total comp × 3% (skill gap provision)',i:'Estimated cost of closing the gap between current skills and skills needed in 2-3 years',n:'3% provision. Organisations undergoing significant transformation (digital, AI adoption) may carry substantially higher skill debt.'},
+  'Growth Readiness Gap': {f:'Total comp × 2% (growth readiness provision)',i:'Estimated cost of unpreparedness for next growth stage',n:'2% represents conservative failed-scaling risk. Actual gap depends on how far the org is from its next stage requirements.'},
+  'Culture Liability': {f:'Low performers (perf < 0.4) × salary × 25% + total comp × 1%',i:'Known dysfunction cost: low performers dragging productivity + general culture friction estimate',n:'25% drag factor for below-threshold performers. 1% org-wide friction estimate is conservative — toxic culture research suggests 3-5% drag.'},
+  'Workforce Obsolescence Risk': {f:'Tenured employees below grade benchmark × salary × 30%',i:'Long-tenure staff performing below their grade average × 30% obsolescence risk factor',n:'Distinct from Skill Debt — this is existing talent becoming a drag, not a future gap. 30% reflects productivity drag and eventual replacement cost.'},
+};
+
 function bsRow(label, val, sym, desc, isAsset) {
+  var sw = BS_WORKINGS[label];
+  var swHtml = '';
+  if(sw){
+    var swId='sw_bs_'+label.replace(/[^a-zA-Z]/g,'_');
+    swHtml='<button class="sw-trigger" data-panel="'+swId+'" onclick="swToggle(this)">'
+      +'<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
+      +'<div class="sw-panel" id="'+swId+'">'
+        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">'+sw.f+'</span></div></div>'
+        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val">'+sw.i+'</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+fmt(sym,val)+'</span></div></div>'
+        +(sw.n?'<div class="sw-note">'+sw.n+'</div>':'')
+      +'</div>';
+  }
   return '<div class="bs-row">'
     +'<div class="bs-item-label">'+label+'</div>'
     +'<div class="bs-item-desc">'+desc+'</div>'
     +'<div class="bs-item-val '+(isAsset?'pos':'neg')+'">'+fmt(sym,val)+'</div>'
+    +swHtml
     +'</div>';
 }
 

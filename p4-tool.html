@@ -225,6 +225,23 @@ body{padding-top:52px}
 body{padding-top:0}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
 
+
+/* SHOW WORKINGS */
+.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:2px 0;transition:color .15s}
+.sw-trigger:hover{color:#E080C8}
+.sw-trigger svg{width:10px;height:10px;transition:transform .2s}
+.sw-trigger.open svg{transform:rotate(180deg)}
+.sw-panel{display:none;margin-top:8px;background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.15);border-radius:10px;padding:14px 16px;grid-column:1/-1}
+.sw-panel.open{display:block}
+.sw-row{display:grid;grid-template-columns:110px 1fr;gap:8px;padding:4px 0;border-bottom:1px solid rgba(180,40,140,.06)}
+.sw-row:last-child{border-bottom:none}
+.sw-key{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;padding-top:2px}
+.sw-val{font-size:.8rem;color:#D8B8D0;line-height:1.6}
+.sw-val b{color:#EED8E8;font-weight:500}
+.sw-formula{font-family:var(--mono);font-size:.74rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:3px 8px;border-radius:4px;display:block;margin-top:3px}
+.sw-result{font-family:var(--mono);font-size:.78rem;color:#38C490;font-weight:500}
+.sw-note{font-size:.72rem;color:rgba(210,80,170,.4);margin-top:5px;font-style:italic;padding-top:5px;border-top:1px solid rgba(180,40,140,.06)}
+
 </style></head>
 <body>
 <aside class="sidebar" id="mainSidebar">

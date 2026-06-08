@@ -262,6 +262,23 @@ body{padding-top:52px}
 body{padding-top:0}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
 
+
+/* SHOW WORKINGS */
+.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:6px}
+.sw-trigger:hover{color:#E080C8}
+.sw-trigger svg{width:10px;height:10px;transition:transform .2s}
+.sw-trigger.open svg{transform:rotate(180deg)}
+.sw-panel{display:none;margin-top:10px;background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.15);border-radius:10px;padding:16px 18px}
+.sw-panel.open{display:block}
+.sw-row{display:grid;grid-template-columns:120px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid rgba(180,40,140,.06)}
+.sw-row:last-child{border-bottom:none}
+.sw-key{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;padding-top:2px}
+.sw-val{font-size:.82rem;color:#D8B8D0;line-height:1.6}
+.sw-val b{color:#EED8E8;font-weight:500}
+.sw-formula{font-family:var(--mono);font-size:.76rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
+.sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
+.sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
+
 </style></head>
 <body>
 <aside class="sidebar" id="mainSidebar">
@@ -413,6 +430,7 @@ function computeTQP(name) {
 
   var tqp = perfPremium + retPremium + hiringPremium;
   var tqpRatio = totalComp > 0 ? tqp / totalComp : 0;
+  var keepers = emps.filter(function(e){ return ['Star','High Performer','High Potential'].indexOf(e.placement)>=0; }).length;
 
   return {
     sym: sym, tqp: tqp, totalComp: totalComp,
@@ -536,7 +554,14 @@ function render(name) {
       +'<div class="comp-lbl">Performance Premium</div>'
       +'<div class="comp-val '+(d.perfPremium>=0?'pos':'neg')+'">'+fmt(sym,d.perfPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.perfPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.perfPremium,maxComp)+'%"></div></div>'
-      +'<div class="comp-desc">Are your people outperforming their grade baseline? This measures the aggregate salary-weighted performance surplus across the entire organisation. Positive means your people are delivering above what their grade benchmark predicts.</div>'
+      +'<div class="comp-desc">Are your people outperforming their grade baseline? This measures the aggregate salary-weighted performance surplus across the entire organisation.</div>'
+      +'<button class="sw-trigger" data-panel="sw_perf" onclick="swToggle(this)"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
+      +'<div class="sw-panel" id="sw_perf">'
+        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">Σ(actual perf score − grade benchmark) × salary</span></div></div>'
+        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+d.employeeCount+'</b> employees &middot; each compared to their grade average &middot; surplus weighted by salary</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+fmt(sym,d.perfPremium)+'</span></div></div>'
+        +'<div class="sw-note">Grade benchmarks computed from the distribution within this scenario. A positive result means your aggregate workforce is performing above its own grade baseline.</div>'
+      +'</div>'
     +'</div>'
 
     // Retention Quality Premium
@@ -544,7 +569,14 @@ function render(name) {
       +'<div class="comp-lbl">Retention Quality Premium</div>'
       +'<div class="comp-val '+(d.retPremium>=0?'pos':'neg')+'">'+fmt(sym,d.retPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.retPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.retPremium,maxComp)+'%"></div></div>'
-      +'<div class="comp-desc">Are you retaining the right people — not just any people? This measures the financial value concentrated in your Stars, High Performers, and High Potentials who are still here. When they leave, this number falls.</div>'
+      +'<div class="comp-desc">Are you retaining the right people — not just any people? The financial value concentrated in your Stars, High Performers, and High Potentials who are still here.</div>'
+      +'<button class="sw-trigger" data-panel="sw_ret" onclick="swToggle(this)"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
+      +'<div class="sw-panel" id="sw_ret">'
+        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">Stars &amp; HiPos retained × (perf surplus × salary × 0.5) + (salary × 1.5 × 0.1)</span></div></div>'
+        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+keepers+'</b> Stars/HiPos/High Performers retained &middot; each contributing perf surplus and replacement cost avoided</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+fmt(sym,d.retPremium)+'</span></div></div>'
+        +'<div class="sw-note">1.5x salary = estimated replacement cost (recruitment, onboarding, ramp). 0.5 factor applied to perf surplus to reflect contribution uncertainty. Conservative by design.</div>'
+      +'</div>'
     +'</div>'
 
     // Hiring Quality Premium
@@ -553,7 +585,13 @@ function render(name) {
       +'<div class="comp-val '+(d.hiringPremium>=0?'pos':'neg')+'">'+fmt(sym,d.hiringPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.hiringPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.hiringPremium,maxComp)+'%"></div></div>'
       +'<div class="comp-desc">Are your recent hires outperforming what a random market hire would deliver? Measured from employees with under 1 year tenure against their grade benchmark.</div>'
-      +'<div class="comp-caveat">Note: new hire performance is also influenced by onboarding quality and manager quality — not hiring decisions alone.</div>'
+      +'<button class="sw-trigger" data-panel="sw_hire" onclick="swToggle(this)"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
+      +'<div class="sw-panel" id="sw_hire">'
+        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">Recent hire perf surplus (vs grade benchmark) × salary</span></div></div>'
+        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val">Employees with tenure ≤ 1 year &middot; only positive surplus counted &middot; negative performers excluded from premium</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val"><span class="sw-result">'+fmt(sym,d.hiringPremium)+'</span></div></div>'
+        +'<div class="sw-note">Important caveat: new hire performance in year 1 is influenced by onboarding quality and manager quality — not hiring decisions alone. This number should be read as an indicator, not a definitive hiring quality score.</div>'
+      +'</div>'
     +'</div>'
 
     +'</div>';
@@ -617,5 +655,15 @@ sel.addEventListener('change', function(){
 render(current);
 
 })();
+
+function swToggle(btn){
+  var panelId=btn.getAttribute('data-panel');
+  var panel=document.getElementById(panelId);
+  if(!panel)return;
+  var open=panel.classList.contains('open');
+  document.querySelectorAll('.sw-panel.open').forEach(function(p){p.classList.remove('open');});
+  document.querySelectorAll('.sw-trigger.open').forEach(function(b){b.classList.remove('open');});
+  if(!open){panel.classList.add('open');btn.classList.add('open');}
+}
 </script>
 </body></html>

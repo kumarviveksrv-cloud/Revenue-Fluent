@@ -246,6 +246,23 @@ body{padding-top:52px}
 body{padding-top:0}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
 
+
+/* SHOW WORKINGS */
+.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:6px}
+.sw-trigger:hover{color:#E080C8}
+.sw-trigger svg{width:10px;height:10px;transition:transform .2s}
+.sw-trigger.open svg{transform:rotate(180deg)}
+.sw-panel{display:none;margin-top:10px;background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.15);border-radius:10px;padding:16px 18px}
+.sw-panel.open{display:block}
+.sw-row{display:grid;grid-template-columns:120px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid rgba(180,40,140,.06)}
+.sw-row:last-child{border-bottom:none}
+.sw-key{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;padding-top:2px}
+.sw-val{font-size:.82rem;color:#D8B8D0;line-height:1.6}
+.sw-val b{color:#EED8E8;font-weight:500}
+.sw-formula{font-family:var(--mono);font-size:.76rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
+.sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
+.sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
+
 </style></head>
 <body>
 <aside class="sidebar" id="mainSidebar">
@@ -613,6 +630,7 @@ function render() {
   VITALS.forEach(function(v, i) {
     var sc = getVitalScore(i);
     var cls = sc.status === 'partial' ? 'unanswered' : sc.status;
+    var swVitalId='sw_vital_'+i;
     h += '<div class="vital-card '+cls+(activeVital===i?' active':'')+'" data-vital="'+i+'">'
       +'<div class="vc-label">Vital Sign '+(i+1)+'</div>'
       +'<div class="vc-name">'+v.name+'</div>'
@@ -621,6 +639,13 @@ function render() {
         +(cls==='healthy'?'HEALTHY':cls==='warning'?'WARNING':cls==='critical'?'CRITICAL':'ANSWER SIGNALS')
       +'</div>'
       +(sc.answered>0?'<div class="vc-score">'+sc.score+'/'+sc.answered+' yes</div>':'')
+      +(sc.answered===4?'<button class="sw-trigger" data-panel="'+swVitalId+'" onclick="swToggle(event,this)" style="margin-top:8px"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
+        +'<div class="sw-panel" id="'+swVitalId+'">'
+          +'<div class="sw-row"><div class="sw-key">Scoring</div><div class="sw-val">4 binary signals &middot; YES = healthy &middot; 3-4 yes = HEALTHY &middot; 2 yes = WARNING &middot; 0-1 yes = CRITICAL</div></div>'
+          +'<div class="sw-row"><div class="sw-key">Your score</div><div class="sw-val"><span class="sw-result">'+sc.score+' of 4 signals answered Yes</span></div></div>'
+          +'<div class="sw-row"><div class="sw-key">Verdict</div><div class="sw-val"><b>'+cls.toUpperCase()+'</b> &mdash; '+(cls==='healthy'?'All or most signals present. This vital sign is functioning.':cls==='warning'?'Partial signal health. Some dysfunction present but not critical.':'Significant dysfunction detected. Immediate attention warranted.')+'</div></div>'
+          +'<div class="sw-note">Binary signals only — no rating scales. Observable, not subjective. Each Yes/No reflects something you can see in your organisation today.</div>'
+        +'</div>':'')
     +'</div>';
   });
   h += '</div>';
