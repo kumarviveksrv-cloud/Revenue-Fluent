@@ -52,10 +52,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .cta-secondary:hover{color:var(--text-cool);border-color:rgba(90,154,235,.4);background:var(--cobalt-dim)}
 
 /* 3D ORB CONTAINER */
-.orb-wrap{position:relative;width:480px;height:480px;flex-shrink:0}
+.orb-wrap{position:relative;width:560px;height:560px;flex-shrink:0}
 #humacityCanvas{width:100%;height:100%;border-radius:50%;cursor:grab}
 #humacityCanvas:active{cursor:grabbing}
-.orb-label{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(90,154,235,.5);white-space:nowrap}
+.orb-label{position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(90,154,235,.5);white-space:nowrap}
+.node-label{position:absolute;pointer-events:none;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;transition:opacity .2s}
+.node-label .nl-num{font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.1em;padding:2px 6px;border-radius:3px;white-space:nowrap}
+.node-label .nl-name{font-family:var(--mono);font-size:.52rem;color:rgba(220,232,248,.7);letter-spacing:.04em;white-space:nowrap;background:rgba(4,6,14,.75);padding:1px 5px;border-radius:3px}
+.nl-l1 .nl-num{color:#38C490;background:rgba(56,196,144,.12);border:1px solid rgba(56,196,144,.25)}
+.nl-l2 .nl-num{color:#E0B830;background:rgba(224,184,48,.12);border:1px solid rgba(224,184,48,.25)}
+.nl-l3 .nl-num{color:#5A9AEB;background:rgba(58,122,219,.12);border:1px solid rgba(58,122,219,.25)}
+.nl-l4 .nl-num{color:#E8C87A;background:rgba(232,200,122,.12);border:1px solid rgba(232,200,122,.25)}
+.nl-l5 .nl-num{color:#F07060;background:rgba(224,92,58,.12);border:1px solid rgba(224,92,58,.25)}
 
 /* TICKER */
 .ticker-wrap{position:relative;z-index:1;border-top:1px solid rgba(30,80,200,.1);border-bottom:1px solid rgba(30,80,200,.1);background:rgba(8,16,48,.4);overflow:hidden;padding:10px 0}
@@ -211,8 +219,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   </div>
 
   <!-- 3D HUMACITY ORB -->
-  <div class="orb-wrap">
+  <div class="orb-wrap" id="orbWrap">
     <canvas id="humacityCanvas"></canvas>
+    <div class="node-label nl-l1" id="nl0"><div class="nl-num">L1</div><div class="nl-name">Value Ledger</div></div>
+    <div class="node-label nl-l2" id="nl1"><div class="nl-num">L2</div><div class="nl-name">Talent Premium</div></div>
+    <div class="node-label nl-l3" id="nl2"><div class="nl-num">L3</div><div class="nl-name">Org Vitals</div></div>
+    <div class="node-label nl-l4" id="nl3"><div class="nl-num">L4</div><div class="nl-name">Human P&amp;L</div></div>
+    <div class="node-label nl-l5" id="nl4"><div class="nl-num">L5</div><div class="nl-name">Balance Sheet</div></div>
     <div class="orb-label">Humacity &middot; Interactive &middot; Drag to explore</div>
   </div>
 </section>
@@ -609,6 +622,28 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
     ptLight2.intensity = 1.5 + Math.cos(t * 0.7) * 0.6;
 
     renderer.render(scene, camera);
+
+    // PROJECT 3D NODE POSITIONS TO 2D SCREEN SPACE FOR LABELS
+    var wrapRect = wrap.getBoundingClientRect();
+    nodes.forEach(function(n, i){
+      var label = document.getElementById('nl'+i);
+      if(!label) return;
+      var vec = n.mesh.position.clone();
+      vec.project(camera);
+      // Only show label if node is in front (z < 1)
+      if(vec.z > 1){ label.style.opacity = '0'; return; }
+      var x = (vec.x * 0.5 + 0.5) * W;
+      var y = (-(vec.y) * 0.5 + 0.5) * H;
+      // Offset label away from orb centre
+      var dx = x - W/2, dy = y - H/2;
+      var dist = Math.sqrt(dx*dx+dy*dy);
+      var offset = 28;
+      var ox = dist > 0 ? dx/dist*offset : 0;
+      var oy = dist > 0 ? dy/dist*offset : 0;
+      label.style.left = (x + ox) + 'px';
+      label.style.top  = (y + oy) + 'px';
+      label.style.opacity = vec.z < 0.95 ? '1' : '0';
+    });
   }
   animate();
 })();
