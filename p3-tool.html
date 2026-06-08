@@ -286,6 +286,22 @@ body{padding-top:0}
   <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 </aside>
 <script>
+// SHOW WORKINGS — must be global, defined before any onclick fires
+function swToggle(btn){
+  if(btn && btn.getAttribute && !btn.getAttribute('data-panel')){
+    // called from p3 with (event, btn) signature
+    btn = arguments[1] || btn;
+  }
+  var panelId = btn.getAttribute('data-panel');
+  var panel = document.getElementById(panelId);
+  if(!panel) return;
+  var open = panel.classList.contains('open');
+  document.querySelectorAll('.sw-panel.open').forEach(function(p){p.classList.remove('open');});
+  document.querySelectorAll('.sw-trigger.open').forEach(function(b){b.classList.remove('open');});
+  if(!open){ panel.classList.add('open'); btn.classList.add('open'); }
+}
+</script>
+<script>
 (function(){
   var params=new URLSearchParams(location.search);
   var scen=params.get('scenario')||'';
@@ -639,7 +655,7 @@ function render() {
         +(cls==='healthy'?'HEALTHY':cls==='warning'?'WARNING':cls==='critical'?'CRITICAL':'ANSWER SIGNALS')
       +'</div>'
       +(sc.answered>0?'<div class="vc-score">'+sc.score+'/'+sc.answered+' yes</div>':'')
-      +(sc.answered===4?'<button class="sw-trigger" data-panel="'+swVitalId+'" onclick="swToggle(event,this)" style="margin-top:8px"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
+      +(sc.answered===4?'<button class="sw-trigger" data-panel="'+swVitalId+'" onclick="swToggle(this)" style="margin-top:8px"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3l3 3 3-3"/></svg>Show workings</button>'
         +'<div class="sw-panel" id="'+swVitalId+'">'
           +'<div class="sw-row"><div class="sw-key">Scoring</div><div class="sw-val">4 binary signals &middot; YES = healthy &middot; 3-4 yes = HEALTHY &middot; 2 yes = WARNING &middot; 0-1 yes = CRITICAL</div></div>'
           +'<div class="sw-row"><div class="sw-key">Your score</div><div class="sw-val"><span class="sw-result">'+sc.score+' of 4 signals answered Yes</span></div></div>'

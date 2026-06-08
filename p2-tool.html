@@ -302,6 +302,22 @@ body{padding-top:0}
   <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 </aside>
 <script>
+// SHOW WORKINGS — must be global, defined before any onclick fires
+function swToggle(btn){
+  if(btn && btn.getAttribute && !btn.getAttribute('data-panel')){
+    // called from p3 with (event, btn) signature
+    btn = arguments[1] || btn;
+  }
+  var panelId = btn.getAttribute('data-panel');
+  var panel = document.getElementById(panelId);
+  if(!panel) return;
+  var open = panel.classList.contains('open');
+  document.querySelectorAll('.sw-panel.open').forEach(function(p){p.classList.remove('open');});
+  document.querySelectorAll('.sw-trigger.open').forEach(function(b){b.classList.remove('open');});
+  if(!open){ panel.classList.add('open'); btn.classList.add('open'); }
+}
+</script>
+<script>
 (function(){
   var params=new URLSearchParams(location.search);
   var scen=params.get('scenario')||'';
@@ -656,14 +672,5 @@ render(current);
 
 })();
 
-function swToggle(btn){
-  var panelId=btn.getAttribute('data-panel');
-  var panel=document.getElementById(panelId);
-  if(!panel)return;
-  var open=panel.classList.contains('open');
-  document.querySelectorAll('.sw-panel.open').forEach(function(p){p.classList.remove('open');});
-  document.querySelectorAll('.sw-trigger.open').forEach(function(b){b.classList.remove('open');});
-  if(!open){panel.classList.add('open');btn.classList.add('open');}
-}
 </script>
 </body></html>
