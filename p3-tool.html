@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Org Vitals — Revenue Fluent</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --bg:#0A0608;--bg2:#100810;--bg3:#080408;--bg4:#080A18;
@@ -15,7 +15,7 @@
   --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
   --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
   --text-mute:rgba(160,20,120,.25);--border:rgba(160,20,120,.15);--border-hi:rgba(160,20,120,.3);
-  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--serif:'Playfair Display',serif;
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--serif:var(--font);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -74,8 +74,8 @@ body{
 .intro-sec-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#D060B0;margin-bottom:8px}
 .intro-sec-txt{font-size:.9rem;color:var(--text-mid);line-height:1.7}
 .intro-sec-txt b{color:var(--text-cool);font-weight:500}
-.intro-story{background:var(--bg3);border-left:2px solid var(--cobalt);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:10px;font-family:var(--serif);font-style:italic;font-size:.9rem;line-height:1.6;color:var(--text-mid)}
-.intro-transition{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:14px;margin-top:16px;line-height:1.5}
+.intro-story{background:var(--bg3);border-left:2px solid var(--cobalt);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:10px;font-style:italic;font-size:.9rem;line-height:1.6;color:var(--text-mid)}
+.intro-transition{font-style:italic;font-size:.88rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:14px;margin-top:16px;line-height:1.5}
 .intro-transition b{color:var(--gold);font-style:normal}
 
 /* HERO */
@@ -83,7 +83,7 @@ body{
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(224,184,48,.3),rgba(160,20,120,.5),transparent)}
 .hero-inner{position:relative;z-index:1}
 .hero-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#D060B0;margin-bottom:12px}
-.hero-hook{font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1.5;color:#EEF4FF;margin-bottom:12px}
+.hero-hook{font-style:italic;font-size:1.3rem;line-height:1.5;color:#EEF4FF;margin-bottom:12px}
 .hero-context{font-size:.88rem;color:#C8D8F0;line-height:1.7}
 .hero-context b{color:var(--text-cool);font-weight:500}
 
@@ -112,7 +112,7 @@ body{
 .sp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
 .sp-title{font-size:1.0rem;font-weight:500;color:var(--text-cool);display:flex;align-items:center;gap:10px}
 .sp-pulse{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:#D060B0}
-.sp-sub{font-family:var(--serif);font-style:italic;font-size:.88rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5}
+.sp-sub{font-style:italic;font-size:.88rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5}
 .signal-list{display:flex;flex-direction:column;gap:12px}
 .signal-item{display:flex;align-items:flex-start;gap:14px;padding:14px;background:var(--bg3);border-radius:10px;border:1px solid var(--border);transition:border-color .15s}
 .signal-item:hover{border-color:var(--cobalt-border)}
@@ -139,7 +139,7 @@ body{
 .dna-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(224,184,48,.3),rgba(160,20,120,.5),transparent)}
 .dna-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#D060B0;margin-bottom:8px}
 .dna-type{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;line-height:.9;letter-spacing:.02em;background:linear-gradient(135deg,#F0C840 0%,#D4900A 30%,#F5D060 60%,#C48000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
-.dna-desc{font-family:var(--serif);font-style:italic;font-size:1.08rem;color:#C8D8F0;line-height:1.6;margin-bottom:20px}
+.dna-desc{font-style:italic;font-size:1.08rem;color:#C8D8F0;line-height:1.6;margin-bottom:20px}
 .dna-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .dna-cell{background:rgba(40,8,28,.5);border:1px solid var(--border);border-radius:10px;padding:14px}
 .dna-cell-lbl{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#D060B0;margin-bottom:6px}
@@ -171,7 +171,7 @@ body{
 .statement{padding:26px 30px;background:rgba(40,8,28,.5);border:1px solid var(--cobalt-border);border-radius:14px;border-left:3px solid var(--cobalt);position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
 .statement::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#5A9AEB,var(--copper))}
 .stmt-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
-.stmt-txt{font-family:var(--serif);font-style:italic;font-size:1.06rem;line-height:1.65;color:#D0E0F4}
+.stmt-txt{font-style:italic;font-size:1.06rem;line-height:1.65;color:#D0E0F4}
 .stmt-txt b{color:var(--gold);font-style:normal}
 
 /* RESET */
@@ -212,7 +212,7 @@ body{
 .sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid rgba(180,40,140,.18)}
 .sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:#D8B8D0;letter-spacing:.06em}
 .sb-by b{color:#E8C87A;font-weight:600;font-size:.72rem}
-.wrap{margin-left:var(--sidebar)}
+.wrap{margin-left:var(--sidebar);padding-bottom:60px}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
 .sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:4px}
 .sw-trigger:hover{color:#E080C8}
@@ -284,6 +284,11 @@ body{
 .dl-btn-pdf:hover{background:rgba(224,184,48,.15);transform:translateY(-2px)}
 .dl-btn svg{width:14px;height:14px;flex-shrink:0}
 .dl-note{font-size:.72rem;color:rgba(192,64,154,.4);margin-top:10px;font-style:italic}
+
+/* RESIZABLE SIDEBAR */
+.sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s;z-index:10}
+.sidebar-resize:hover,.sidebar-resize.dragging{background:rgba(192,64,154,.4)}
+
 </style></head>
 <body>
 <aside class="sidebar">
@@ -302,6 +307,7 @@ body{
 <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
 <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
 <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+<div class="sidebar-resize"></div>
 </aside>
 <script>
 (function(){var s=new URLSearchParams(location.search).get('scenario')||'';if(!s)return;document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){var h=a.getAttribute('href');if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0)a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(s);});})();
@@ -893,6 +899,38 @@ render();
 })();
 </script>
 
+
+
+<script>
+(function(){
+  var sidebar = document.querySelector('.sidebar');
+  var handle = document.querySelector('.sidebar-resize');
+  if(!sidebar || !handle) return;
+  var isDragging = false, startX = 0, startW = 0;
+  handle.addEventListener('mousedown', function(e){
+    isDragging = true;
+    startX = e.clientX;
+    startW = sidebar.offsetWidth;
+    handle.classList.add('dragging');
+    document.body.style.userSelect = 'none';
+    document.body.style.cursor = 'col-resize';
+  });
+  window.addEventListener('mousemove', function(e){
+    if(!isDragging) return;
+    var newW = Math.min(320, Math.max(160, startW + (e.clientX - startX)));
+    sidebar.style.width = newW + 'px';
+    document.querySelectorAll('.wrap').forEach(function(w){ w.style.marginLeft = newW + 'px'; });
+    document.documentElement.style.setProperty('--sidebar', newW + 'px');
+  });
+  window.addEventListener('mouseup', function(){
+    if(!isDragging) return;
+    isDragging = false;
+    handle.classList.remove('dragging');
+    document.body.style.userSelect = '';
+    document.body.style.cursor = '';
+  });
+})();
+</script>
 <div class="dl-section">
   <div class="dl-header">
     <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
