@@ -305,6 +305,11 @@ body{
 .sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s;z-index:10}
 .sidebar-resize:hover,.sidebar-resize.dragging{background:rgba(192,64,154,.4)}
 
+
+/* DL SECTION INSIDE WRAP */
+.wrap .dl-section{margin-left:0;margin-right:0}
+.dl-section{clear:both}
+
 </style></head>
 <body>
 <aside class="sidebar">
@@ -349,6 +354,24 @@ body{
 </div>
 <div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p2')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Talent Quality Premium for current org conditions</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p2_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p2_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p2_body"><div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p2_f0" onclick="hciTF('hci_p2',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p2_f1" onclick="hciTF('hci_p2',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p2_f2" onclick="hciTF('hci_p2',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p2_f3" onclick="hciTF('hci_p2',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p2_calc"></div><table class="hci-scenarios"><tbody id="hci_p2_scen"></tbody></table><div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div></div></div>
 <div id="app"></div>
+<div class="dl-section">
+  <div class="dl-header">
+    <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
+    <div class="dl-title">Downloads</div>
+  </div>
+  <div class="dl-sub"><b>Talent Premium Model</b> &mdash; Three-tab model — Performance Premium, Retention Quality Premium, Hiring Quality Premium.</div>
+  <div class="dl-buttons">
+    <button class="dl-btn dl-btn-excel" onclick="downloadExcel('P2_Talent_Premium_RevenueFluent.xlsx')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6l2 2-2 2M8 10h3"/></svg>
+      Download Excel Model
+    </button>
+    <button class="dl-btn dl-btn-pdf" onclick="alert('PDF reports coming soon.')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M9 2v5h5"/></svg>
+      PDF Report &mdash; Coming Soon
+    </button>
+  </div>
+  <div class="dl-note">Opens in Microsoft Excel or Google Sheets. Replace sample inputs with your organisation's actual data.</div>
+</div>
 
 </div>
 <script>
@@ -719,22 +742,5 @@ render(current);
   });
 })();
 </script>
-<div class="dl-section">
-  <div class="dl-header">
-    <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
-    <div class="dl-title">Downloads</div>
-  </div>
-  <div class="dl-sub"><b>Talent Premium Model</b> &mdash; Three-tab model — Performance Premium, Retention Quality Premium, Hiring Quality Premium.</div>
-  <div class="dl-buttons">
-    <button class="dl-btn dl-btn-excel" onclick="downloadExcel('P2_Talent_Premium_RevenueFluent.xlsx')">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6l2 2-2 2M8 10h3"/></svg>
-      Download Excel Model
-    </button>
-    <button class="dl-btn dl-btn-pdf" onclick="alert('PDF reports coming soon.')">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h6l4 4v8a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M9 2v5h5"/></svg>
-      PDF Report &mdash; Coming Soon
-    </button>
-  </div>
-  <div class="dl-note">Opens in Microsoft Excel or Google Sheets. Replace sample inputs with your organisation's actual data.</div>
-</div>
+
 </body></html>\
