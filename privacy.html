@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<title>Privacy Policy — Revenue Fluent</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0A0608;--bg2:#100810;
+  --magenta:#C0409A;--magenta-mid:#D060B0;
+  --gold:#E0B830;--copper:#B87333;
+  --teal:#38C490;--red:#E05C3A;
+  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
+  --border:rgba(192,64,154,.18);--border-lt:rgba(192,64,154,.08);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --sidebar:220px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.2);border-radius:2px}
+.sb-brand{display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18)}
+.sb-brand img{width:100%;height:auto;max-width:176px;object-fit:contain;filter:brightness(1.3) drop-shadow(0 0 10px rgba(192,64,154,.25))}
+.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
+.sb-item.active{background:rgba(192,64,154,.12);color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
+.sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:var(--text-mid)}
+.sb-by b{color:var(--gold);font-weight:600}
+.sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s}
+.sidebar-resize:hover{background:rgba(192,64,154,.4)}
+
+.wrap{margin-left:var(--sidebar);padding:48px 64px 80px;max-width:900px;position:relative;z-index:1}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:32px 24px}}
+
+.crumb{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:32px;display:flex;align-items:center;gap:8px}
+.crumb a{color:var(--magenta-mid);text-decoration:none}
+.doc-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:10px}
+.doc-title{font-size:2rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.doc-meta{font-family:var(--mono);font-size:.68rem;color:var(--text-dim);margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border-lt)}
+
+.doc-body h2{font-size:1.1rem;font-weight:600;color:var(--text);margin:32px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-lt)}
+.doc-body h3{font-size:.95rem;font-weight:600;color:var(--magenta-mid);margin:22px 0 8px}
+.doc-body p{font-size:.88rem;color:var(--text-mid);line-height:1.8;margin-bottom:14px}
+.doc-body ul{list-style:none;margin-bottom:14px;padding-left:0}
+.doc-body ul li{font-size:.88rem;color:var(--text-mid);line-height:1.8;padding:4px 0 4px 20px;position:relative}
+.doc-body ul li::before{content:'—';position:absolute;left:0;color:rgba(192,64,154,.4)}
+.doc-body strong{color:var(--text);font-weight:600}
+.doc-body a{color:var(--magenta-mid);text-decoration:none}
+.doc-body a:hover{text-decoration:underline}
+
+.highlight-box{background:rgba(56,196,144,.06);border:1px solid rgba(56,196,144,.2);border-radius:12px;padding:18px 22px;margin:20px 0}
+.highlight-box p{color:var(--text);margin-bottom:0;font-weight:500}
+.highlight-box.warning{background:rgba(232,200,122,.06);border-color:rgba(232,200,122,.2)}
+.highlight-box.warning p{color:var(--amber)}
+
+.toc{background:var(--bg2);border:1px solid var(--border-lt);border-radius:12px;padding:20px 24px;margin-bottom:32px}
+.toc-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:12px}
+.toc a{display:block;font-size:.82rem;color:var(--text-dim);text-decoration:none;padding:3px 0;transition:color .15s}
+.toc a:hover{color:var(--magenta-mid)}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a href="index.html" class="sb-brand"><img src="logo.png" alt="Revenue Fluent"/></a>
+  <div class="sb-section">Platform</div>
+  <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+  <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
+  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
+  <a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
+  <div class="sb-tools-section">The Five Pillars</div>
+  <a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+  <a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+  <a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+  <a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+  <a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+  <div class="sb-section">Legal</div>
+  <a href="privacy.html" class="sb-item active"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5 2v4c0 3-2 5-5 6C5 13 3 11 3 8V4l5-2z"/></svg>Privacy Policy</a>
+  <a href="terms.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zM5 6h6M5 9h6M5 12h4"/></svg>Terms of Service</a>
+  <div class="sb-section">More</div>
+  <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+  <div class="sb-bottom">
+    <div style="padding:8px 18px 4px;border-top:1px solid rgba(192,64,154,.08);margin-top:8px"><a href="humacity.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 0;opacity:.6" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'"><div style="width:6px;height:6px;border-radius:50%;background:#B87333;flex-shrink:0"></div><span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#C8A8C0">Built on Humacity</span><span style="font-family:var(--mono);font-size:.55rem;color:rgba(192,64,154,.4);margin-left:auto">&#8599;</span></a></div>
+    <div class="sb-by">by <b>Kumar Vivek</b></div>
+  </div>
+  <div class="sidebar-resize" id="sbResize"></div>
+</aside>
+
+<div class="wrap">
+  <div class="crumb"><a href="home.html">&larr; Home</a><span style="color:rgba(192,64,154,.3)">/</span>Privacy Policy</div>
+
+  <div class="doc-eyebrow">Legal</div>
+  <h1 class="doc-title">Privacy Policy</h1>
+  <div class="doc-meta">Last updated: 10 June 2026 &middot; Revenue Fluent / Humacity &middot; Built by Kumar Vivek</div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <a href="#overview">1. Overview</a>
+    <a href="#data-collected">2. What data we collect</a>
+    <a href="#upload-data">3. Data you upload</a>
+    <a href="#no-server">4. No server storage</a>
+    <a href="#cookies">5. Cookies and local storage</a>
+    <a href="#third-party">6. Third-party services</a>
+    <a href="#dpdp">7. DPDP Act 2023 (India)</a>
+    <a href="#gdpr">8. GDPR (European Users)</a>
+    <a href="#rights">9. Your rights</a>
+    <a href="#children">10. Children</a>
+    <a href="#contact">11. Contact</a>
+  </div>
+
+  <div class="doc-body">
+
+    <div class="highlight-box">
+      <p>&#128274; <strong>The short version:</strong> Revenue Fluent does not collect, store, or transmit any personal data you upload. All employee data you upload is processed entirely in your browser and disappears permanently when you close the tab. We have no access to it.</p>
+    </div>
+
+    <h2 id="overview">1. Overview</h2>
+    <p>Revenue Fluent ("the Platform") is an HR intelligence tool built on the Humacity philosophy, created and operated by Kumar Vivek ("we", "us", "our"). This Privacy Policy explains how we handle information in connection with your use of the Platform at humacity.com.</p>
+    <p>This Policy is written to comply with the <strong>Digital Personal Data Protection Act 2023 (DPDP Act)</strong> of India and the <strong>General Data Protection Regulation (GDPR)</strong> for users in the European Economic Area.</p>
+
+    <h2 id="data-collected">2. What data we collect</h2>
+    <h3>Platform usage data</h3>
+    <p>Revenue Fluent is a static web application hosted on GitHub Pages. We do not operate a backend server, a database, or any data collection infrastructure. We do not collect:</p>
+    <ul>
+      <li>Names, email addresses, or contact information</li>
+      <li>IP addresses or device identifiers</li>
+      <li>Usage analytics or behavioural tracking</li>
+      <li>Account information (there are no accounts)</li>
+    </ul>
+
+    <h3>Preference data (localStorage)</h3>
+    <p>The Platform stores the following in your browser's <strong>localStorage</strong> — on your device only, never transmitted to any server:</p>
+    <ul>
+      <li>Your Practitioner Profile answers (role, org context, financial confidence, primary challenge)</li>
+      <li>Your Human Confidence Index (HCI) settings</li>
+      <li>Your scenario preferences</li>
+    </ul>
+    <p>This data lives entirely on your device. You can delete it at any time by clearing your browser's localStorage or using the "Clear Profile" button in My Profile.</p>
+
+    <h2 id="upload-data">3. Data you upload</h2>
+    <div class="highlight-box warning">
+      <p>&#9888; <strong>Important:</strong> When you upload employee data via the CSV Upload feature, you are uploading personal data of third parties (your employees). You are solely responsible for ensuring you have the legal right and appropriate consent to process this data.</p>
+    </div>
+    <p>Before uploading any employee data, you must ensure:</p>
+    <ul>
+      <li>You have the legal authority to process the data under applicable law</li>
+      <li>The data has been collected lawfully and with appropriate consent where required</li>
+      <li>You have anonymised or pseudonymised the data where possible — <strong>we strongly recommend replacing employee names with anonymous IDs</strong></li>
+      <li>You are complying with your organisation's data protection policies</li>
+    </ul>
+    <p>Revenue Fluent acts as a <strong>data processor tool</strong> in your browser only. We are not a data controller for any employee data you upload. We have no access to, and cannot see, any data you upload.</p>
+
+    <h2 id="no-server">4. No server storage — how it actually works</h2>
+    <p><strong>Your uploaded data never leaves your browser.</strong> Here is precisely what happens when you upload a CSV file:</p>
+    <ul>
+      <li>The file is read by your browser's JavaScript engine entirely in memory</li>
+      <li>The data is stored in <strong>sessionStorage</strong> — a temporary browser memory space that is completely and permanently deleted when you close the tab or browser window</li>
+      <li>No data is sent to any server, API, or third-party service</li>
+      <li>No data is written to your device's permanent storage</li>
+      <li>No data persists after your session ends</li>
+    </ul>
+    <p>To remove uploaded data immediately during a session: click "Clear &amp; Remove" on the Upload Your Data page, or simply close the browser tab.</p>
+
+    <h2 id="cookies">5. Cookies and local storage</h2>
+    <p>Revenue Fluent does not use cookies. The Platform uses browser <strong>localStorage</strong> solely to store your profile preferences (see Section 2). No tracking cookies, advertising cookies, or analytics cookies are used.</p>
+
+    <h2 id="third-party">6. Third-party services</h2>
+    <p>The Platform uses the following third-party services:</p>
+    <ul>
+      <li><strong>GitHub Pages</strong> — hosting provider. GitHub may log standard server access data (IP addresses, browser types) as per <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">GitHub's Privacy Statement</a></li>
+      <li><strong>Google Fonts</strong> — font delivery. Google may collect standard request data as per <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a></li>
+      <li><strong>Gumroad</strong> — payment processing for paid tiers. Gumroad handles all payment data independently per <a href="https://gumroad.com/privacy" target="_blank">Gumroad's Privacy Policy</a>. Revenue Fluent never receives your payment details.</li>
+    </ul>
+
+    <h2 id="dpdp">7. DPDP Act 2023 (India)</h2>
+    <p>Under the Digital Personal Data Protection Act 2023, Revenue Fluent is committed to the following principles:</p>
+    <ul>
+      <li><strong>Lawful purpose:</strong> Profile preferences stored in localStorage are used solely to personalise your experience on the Platform</li>
+      <li><strong>Data minimisation:</strong> We store only what is necessary for the stated purpose. We store no personal data whatsoever on our infrastructure</li>
+      <li><strong>Consent:</strong> Before uploading employee data, users must provide explicit consent acknowledging their responsibility for the data</li>
+      <li><strong>Right to erasure:</strong> You can delete all locally stored preferences at any time via My Profile → Clear Profile, or by clearing browser localStorage</li>
+      <li><strong>No cross-border transfer:</strong> Since no data is transmitted to any server, cross-border transfer does not apply</li>
+    </ul>
+    <p>If you are uploading personal data of Indian citizens as part of your CSV upload, you — as the data fiduciary — are responsible for compliance with the DPDP Act in respect of that data.</p>
+
+    <h2 id="gdpr">8. GDPR (European Users)</h2>
+    <p>For users in the European Economic Area, Revenue Fluent processes no personal data on its own infrastructure. The legal basis for storing profile preferences in localStorage is <strong>legitimate interest</strong> (personalising the user experience) — these preferences contain no personally identifiable information.</p>
+    <p>Any employee data you upload is processed as a controller-to-processor relationship where you are the data controller and Revenue Fluent is a client-side processing tool. Since no data leaves your browser, GDPR transfer mechanisms do not apply.</p>
+
+    <h2 id="rights">9. Your rights</h2>
+    <p>Regardless of jurisdiction, you have the following rights in respect of data stored locally on your device:</p>
+    <ul>
+      <li><strong>Right to access:</strong> Your profile preferences are visible in My Profile at any time</li>
+      <li><strong>Right to erasure:</strong> Delete all preferences via My Profile → Clear Profile</li>
+      <li><strong>Right to data portability:</strong> Your preferences are stored in standard JSON format in your browser's localStorage</li>
+      <li><strong>Right to withdraw consent:</strong> Close the browser tab to permanently delete any uploaded session data</li>
+    </ul>
+
+    <h2 id="children">10. Children</h2>
+    <p>Revenue Fluent is designed for HR professionals and is not directed at children under the age of 18. We do not knowingly collect any data from children.</p>
+
+    <h2 id="contact">11. Contact</h2>
+    <p>For privacy-related questions or concerns, contact Kumar Vivek directly. As this platform has no backend infrastructure, there is no data processing register or DPO to contact — all data handling occurs on your own device.</p>
+    <p>For general queries: reach out via <a href="https://humacity.com">humacity.com</a></p>
+
+    <div style="margin-top:40px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border-lt);border-radius:12px">
+      <p style="font-family:var(--mono);font-size:.7rem;color:var(--text-dim)">This Privacy Policy was last updated on 10 June 2026. Revenue Fluent reserves the right to update this policy as the platform evolves. Material changes will be reflected in the "Last updated" date above.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var sb=document.querySelector('.sidebar'),handle=document.getElementById('sbResize'),drag=false,sx=0,sw=0;
+handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
+window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelectorAll('.wrap').forEach(function(el){el.style.marginLeft=w+'px';});});
+window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
+</script>
+</body></html>

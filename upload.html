@@ -139,10 +139,77 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
 .legend{display:flex;gap:20px;margin-bottom:16px;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--text-dim)}
 .legend-dot{width:8px;height:8px;border-radius:50%}
+
+/* CONSENT GATE */
+.consent-gate{position:fixed;inset:0;z-index:999;background:rgba(10,6,8,.96);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;padding:24px}
+.consent-box{background:var(--bg2, #100810);border:1px solid rgba(192,64,154,.25);border-radius:20px;max-width:600px;width:100%;padding:40px 44px}
+.consent-eyebrow{font-family:var(--mono,'DM Mono',monospace);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#D060B0;margin-bottom:14px}
+.consent-title{font-size:1.4rem;font-weight:700;color:#EED8E8;line-height:1.3;margin-bottom:14px}
+.consent-body{font-size:.84rem;color:#C8A8C0;line-height:1.75;margin-bottom:22px}
+.consent-body strong{color:#EED8E8}
+.consent-anon{background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.2);border-radius:10px;padding:14px 18px;margin-bottom:22px}
+.consent-anon-title{font-family:var(--mono,'DM Mono',monospace);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#E8C87A;margin-bottom:8px}
+.consent-anon-text{font-size:.82rem;color:#D8B8D0;line-height:1.65}
+.consent-anon-text strong{color:#E8C87A}
+.consent-data{background:rgba(56,196,144,.05);border:1px solid rgba(56,196,144,.15);border-radius:10px;padding:14px 18px;margin-bottom:24px}
+.consent-data-title{font-family:var(--mono,'DM Mono',monospace);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#38C490;margin-bottom:8px}
+.consent-data-text{font-size:.82rem;color:#D8B8D0;line-height:1.65}
+.consent-data-text strong{color:#38C490}
+.consent-check-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:24px;cursor:pointer}
+.consent-check-row input[type=checkbox]{width:18px;height:18px;margin-top:2px;accent-color:#C0409A;cursor:pointer;flex-shrink:0}
+.consent-check-label{font-size:.84rem;color:#D8B8D0;line-height:1.6;cursor:pointer}
+.consent-check-label a{color:#D060B0;text-decoration:none}
+.consent-check-label a:hover{text-decoration:underline}
+.consent-btn{width:100%;font-family:var(--mono,'DM Mono',monospace);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:14px 24px;border-radius:11px;background:rgba(192,64,154,.3);color:rgba(238,216,232,.4);border:1px solid rgba(192,64,154,.2);cursor:not-allowed;transition:all .25s;font-weight:500}
+.consent-btn.ready{background:#C0409A;color:#fff;cursor:pointer;box-shadow:0 4px 20px rgba(192,64,154,.35)}
+.consent-btn.ready:hover{background:#D050A8;transform:translateY(-1px)}
+.consent-footer{margin-top:16px;text-align:center;font-family:var(--mono,'DM Mono',monospace);font-size:.58rem;color:rgba(192,64,154,.35);line-height:1.6}
+
 </style>
 <script src="rf-profile.js"></script>
 </head>
 <body>
+
+<!-- CONSENT GATE -->
+<div class="consent-gate" id="consentGate">
+  <div class="consent-box">
+    <div class="consent-eyebrow">Before you upload</div>
+    <h2 class="consent-title">You are about to upload employee data. Please read this first.</h2>
+    <div class="consent-body">
+      Revenue Fluent processes your data <strong>entirely in your browser</strong>. Nothing is sent to any server. However, the data you upload likely contains sensitive personal information about real people. You must confirm you have the right to use it here.
+    </div>
+
+    <div class="consent-anon">
+      <div class="consent-anon-title">&#9888; Anonymise your data before uploading</div>
+      <div class="consent-anon-text">
+        <strong>Replace employee names with anonymous IDs</strong> (e.g. EMP001, EMP002) in the Employee ID column before uploading. Do not include full names, national ID numbers, contact details, or any data that would directly identify an individual. This protects your employees and reduces your compliance risk significantly.
+      </div>
+    </div>
+
+    <div class="consent-data">
+      <div class="consent-data-title">&#128274; How your data is handled</div>
+      <div class="consent-data-text">
+        <strong>Your data never leaves your browser.</strong> It is stored in sessionStorage — a temporary browser memory that is <strong>permanently and automatically deleted the moment you close this tab</strong>. It is not cached, not saved to disk, and not transmitted anywhere. Revenue Fluent has no server, no database, and no access to anything you upload.
+      </div>
+    </div>
+
+    <label class="consent-check-row" for="consentCheck">
+      <input type="checkbox" id="consentCheck" onchange="toggleConsentBtn()"/>
+      <span class="consent-check-label">
+        I confirm that I have the legal authority to process this employee data, that I have anonymised it where required, and that I take full responsibility for the data I upload. I have read and agree to the <a href="privacy.html" target="_blank">Privacy Policy</a> and <a href="terms.html" target="_blank">Terms of Service</a>.
+      </span>
+    </label>
+
+    <button class="consent-btn" id="consentBtn" onclick="acceptConsent()" disabled>
+      I Understand — Proceed to Upload
+    </button>
+
+    <div class="consent-footer">
+      Revenue Fluent &middot; Built on Humacity &middot; DPDP Act 2023 &middot; GDPR compliant
+    </div>
+  </div>
+</div>
+
 
 <aside class="sidebar" id="mainSidebar">
   <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:176px;object-fit:contain;filter:brightness(1.3) drop-shadow(0 0 10px rgba(192,64,154,.25))"/></a>
@@ -157,6 +224,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
   <a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
   <a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
   <a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+  <div class="sb-section">Legal</div>
+  <a href="privacy.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5 2v4c0 3-2 5-5 6C5 13 3 11 3 8V4l5-2z"/></svg>Privacy Policy</a>
+  <a href="terms.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zM5 6h6M5 9h6M5 12h4"/></svg>Terms of Service</a>
   <div class="sb-section">More</div>
   <a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
   <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
@@ -566,4 +636,35 @@ window.addEventListener('mouseup',function(){if(dragging){dragging=false;handle.
 })();
 </script>
 <script>if(window.RFProfile)RFProfile.injectSidebarBadge();</script>
+
+<script>
+// CONSENT GATE
+(function(){
+  var accepted = sessionStorage.getItem('rf_upload_consent');
+  if(accepted === '1'){
+    var gate = document.getElementById('consentGate');
+    if(gate) gate.style.display = 'none';
+  }
+})();
+
+function toggleConsentBtn(){
+  var cb = document.getElementById('consentCheck');
+  var btn = document.getElementById('consentBtn');
+  if(cb && btn){
+    btn.disabled = !cb.checked;
+    btn.classList.toggle('ready', cb.checked);
+  }
+}
+
+function acceptConsent(){
+  sessionStorage.setItem('rf_upload_consent','1');
+  var gate = document.getElementById('consentGate');
+  if(gate){
+    gate.style.opacity='0';
+    gate.style.transition='opacity .3s';
+    setTimeout(function(){ gate.style.display='none'; }, 300);
+  }
+}
+</script>
+
 </body></html>
