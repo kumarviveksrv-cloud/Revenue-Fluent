@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#C0409A"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Revenue Fluent"/>
+<link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Terms of Service, Revenue Fluent</title>
       <li>Claim ownership of, or commercially exploit, any Platform methodology or framework</li>
@@ -50,5 +57,14 @@ var sb=document.querySelector('.sidebar'),handle=document.getElementById('sbResi
 handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
 window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelectorAll('.wrap').forEach(function(el){el.style.marginLeft=w+'px';});});
 window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(reg){ console.log('SW registered'); })
+      .catch(function(err){ console.warn('SW error:', err); });
+  });
+}
 </script>
 </body></html>

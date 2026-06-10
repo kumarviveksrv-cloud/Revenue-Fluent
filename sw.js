@@ -1,79 +1,99 @@
-// Revenue Fluent — Service Worker v3
-// Enables offline access + PWA install
+// Revenue Fluent — Service Worker
+// Version: 2026-06-10
+// Enables offline access and PWA install
 
-const CACHE_NAME = 'revenue-fluent-v4';
+const CACHE_NAME = 'revenue-fluent-v5';
 
-const CACHE_URLS = [
-  '/Revenue-Fluent/',
-  '/Revenue-Fluent/index.html',
-  '/Revenue-Fluent/dashboard.html',
-  '/Revenue-Fluent/shared.js',
-  // Tools
-  '/Revenue-Fluent/p1-tool.html',
-  '/Revenue-Fluent/p2-tool.html',
-  '/Revenue-Fluent/p3-tool.html',
-  '/Revenue-Fluent/p4-tool.html',
-  '/Revenue-Fluent/p5-tool.html',
-  // Learning Hub
-  '/Revenue-Fluent/learn.html',
-  '/Revenue-Fluent/learn-p1.html',
-  '/Revenue-Fluent/learn-p2.html',
-  '/Revenue-Fluent/learn-p3.html',
-  '/Revenue-Fluent/learn-p4.html',
-  '/Revenue-Fluent/learn-p5.html',
-  // Platform pages
-  '/Revenue-Fluent/cases.html',
-  '/Revenue-Fluent/simulate.html',
-  '/Revenue-Fluent/game.html',
-  '/Revenue-Fluent/scenarios.html',
-  '/Revenue-Fluent/certification.html',
-  '/Revenue-Fluent/pricing.html',
+const CORE_FILES = [
+  '/',
+  '/index.html',
+  '/home.html',
+  '/scenario-library.html',
+  '/upload.html',
+  '/profile.html',
+  '/downloads.html',
+  '/learn.html',
+  '/pricing.html',
+  '/privacy.html',
+  '/terms.html',
+  '/humacity.html',
+  '/p1-tool.html',
+  '/p2-tool.html',
+  '/p3-tool.html',
+  '/p4-tool.html',
+  '/p5-tool.html',
+  '/rf-data.js',
+  '/rf-report.js',
+  '/rf-profile.js',
+  '/manifest.json',
+  '/favicon.png',
+  '/logo.png',
 ];
 
-// Install — cache all v3 files
-self.addEventListener('install', event => {
+// Install — cache all core files
+self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(CACHE_URLS))
-      .then(() => self.skipWaiting())
+      .then(function(cache) {
+        return cache.addAll(CORE_FILES);
+      })
+      .then(function() {
+        return self.skipWaiting();
+      })
+      .catch(function(err) {
+        console.warn('SW install cache error:', err);
+      })
   );
 });
 
-// Activate — wipe ALL old caches (v1, v2)
-self.addEventListener('activate', event => {
+// Activate — delete old caches
+self.addEventListener('activate', function(event) {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(k => k !== CACHE_NAME)
-          .map(k => {
-            console.log('[SW] Deleting old cache:', k);
-            return caches.delete(k);
-          })
-      )
-    ).then(() => self.clients.claim())
+    caches.keys()
+      .then(function(keys) {
+        return Promise.all(
+          keys
+            .filter(function(key) { return key !== CACHE_NAME; })
+            .map(function(key) { return caches.delete(key); })
+        );
+      })
+      .then(function() {
+        return self.clients.claim();
+      })
   );
 });
 
-// Fetch — cache first, fallback to network
-self.addEventListener('fetch', event => {
+// Fetch — network first, fall back to cache
+// This ensures users always get fresh data when online
+self.addEventListener('fetch', function(event) {
   if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
+  // Skip cross-origin requests (fonts, CDN etc)
+  var url = new URL(event.request.url);
+  if (url.origin !== location.origin) return;
 
-      return fetch(event.request).then(response => {
-        if (response.ok && event.request.url.includes('Revenue-Fluent')) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+  event.respondWith(
+    fetch(event.request)
+      .then(function(response) {
+        // Cache successful same-origin responses
+        if (response.ok) {
+          var clone = response.clone();
+          caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, clone);
+          });
         }
         return response;
-      }).catch(() => {
-        if (event.request.destination === 'document') {
-          return caches.match('/Revenue-Fluent/index.html');
-        }
-      });
-    })
+      })
+      .catch(function() {
+        // Network failed — try cache
+        return caches.match(event.request)
+          .then(function(cached) {
+            if (cached) return cached;
+            // Final fallback for navigation requests
+            if (event.request.mode === 'navigate') {
+              return caches.match('/home.html');
+            }
+          });
+      })
   );
 });
