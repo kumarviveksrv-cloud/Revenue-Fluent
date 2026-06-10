@@ -209,6 +209,57 @@ function init() {
 init();
 
 // Export
+
+// ── GLOBAL HCI STATE ──────────────────────────────────────────────────────
+var HCI_KEY = 'rf_hci_global';
+
+function getHCI() {
+  try {
+    var raw = localStorage.getItem(HCI_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch(e) { return null; }
+}
+
+function saveHCI(factors) {
+  try {
+    localStorage.setItem(HCI_KEY, JSON.stringify({
+      factors: factors,
+      updatedAt: new Date().toISOString()
+    }));
+  } catch(e) {}
+}
+
+function clearHCI() {
+  localStorage.removeItem(HCI_KEY);
+}
+
+// Apply global HCI to a tool's HCI widget on page load
+function applyGlobalHCI(toolId) {
+  var hci = getHCI();
+  if(!hci || !hci.factors) return;
+  // Wait for HCI widget to be initialised
+  var attempts = 0;
+  var interval = setInterval(function() {
+    attempts++;
+    if(attempts > 20) { clearInterval(interval); return; }
+    if(typeof _hci !== 'undefined' && _hci[toolId]) {
+      clearInterval(interval);
+      hci.factors.forEach(function(val, i) {
+        if(val !== _hci[toolId].f[i]) {
+          _hci[toolId].f[i] = val;
+        }
+      });
+      if(typeof _hciR === 'function') _hciR(toolId);
+    }
+  }, 100);
+}
+
+// Save HCI from a tool back to global
+function syncHCIToGlobal(toolId) {
+  if(typeof _hci === 'undefined' || !_hci[toolId]) return;
+  saveHCI(_hci[toolId].f.slice());
+}
+
 global.RFProfile = {
   getProfile: getProfile,
   hasProfile: hasProfile,
@@ -219,6 +270,11 @@ global.RFProfile = {
   personaliseHome: personaliseHome,
   personaliseToolPage: personaliseToolPage,
   injectSidebarBadge: injectSidebarBadge,
+  getHCI: getHCI,
+  saveHCI: saveHCI,
+  clearHCI: clearHCI,
+  applyGlobalHCI: applyGlobalHCI,
+  syncHCIToGlobal: syncHCIToGlobal,
 };
 
 })(window);

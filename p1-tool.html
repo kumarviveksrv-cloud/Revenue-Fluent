@@ -508,6 +508,7 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
   <div class="hci-factors"><div class="hci-factor" id="hci_p1_f0" onclick="hciTF('hci_p1',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p1_f1" onclick="hciTF('hci_p1',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p1_f2" onclick="hciTF('hci_p1',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p1_f3" onclick="hciTF('hci_p1',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div>
   <div class="hci-calc" id="hci_p1_calc"></div>
   <table class="hci-scenarios"><tbody id="hci_p1_scen"></tbody></table>
+  <div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
   <div class="hci-note">Conservative = HCI &minus;0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div>
 </div>
 </div>
@@ -1162,4 +1163,16 @@ function generatePDFP1() {
 })();
 </script>
 <script>if(window.RFProfile){RFProfile.personaliseToolPage('p1');RFProfile.injectSidebarBadge();}</script>
+<script>
+// Sync HCI changes back to global
+(function(){
+  var origHciTF = window.hciTF;
+  window.hciTF = function(id, i){
+    if(origHciTF) origHciTF(id, i);
+    if(id === 'hci_p1' && window.RFProfile && window.RFProfile.syncHCIToGlobal) {
+      setTimeout(function(){ RFProfile.syncHCIToGlobal('hci_p1'); }, 50);
+    }
+  };
+})();
+</script>
 </body></html>

@@ -133,6 +133,36 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .cc-item-val{font-size:.82rem;font-weight:500;color:var(--text)}
 .cc-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:11px 24px;border-radius:9px;background:var(--magenta);color:#fff;border:none;cursor:pointer;font-weight:500;transition:all .2s}
 .cc-btn:hover{background:#D050A8;transform:translateY(-2px)}
+
+/* HCI GLOBAL SECTION */
+.hci-global-section{margin-top:32px;display:none}
+.hci-global-section.show{display:block}
+.hci-global-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px 32px}
+.hci-global-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:8px}
+.hci-global-title{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.hci-global-sub{font-size:.82rem;color:var(--text-dim);line-height:1.65;margin-bottom:22px}
+.hci-global-factors{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+@media(max-width:600px){.hci-global-factors{grid-template-columns:1fr}}
+.hci-gf{background:rgba(40,8,28,.6);border:1px solid rgba(192,64,154,.1);border-radius:11px;padding:14px;cursor:pointer;transition:all .2s;user-select:none}
+.hci-gf:hover{border-color:rgba(192,64,154,.25)}
+.hci-gf.yes{background:rgba(56,196,144,.07);border-color:rgba(56,196,144,.28)}
+.hci-gf-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.hci-gf-name{font-size:.84rem;font-weight:600;color:var(--text)}
+.hci-gf-toggle{width:36px;height:20px;border-radius:10px;background:rgba(192,64,154,.18);border:1px solid rgba(192,64,154,.28);position:relative;transition:all .2s;flex-shrink:0}
+.hci-gf.yes .hci-gf-toggle{background:rgba(56,196,144,.28);border-color:rgba(56,196,144,.45)}
+.hci-gf-toggle::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#D060B0;transition:all .2s}
+.hci-gf.yes .hci-gf-toggle::after{left:19px;background:#38C490}
+.hci-gf-desc{font-size:.74rem;color:var(--text-dim);line-height:1.5}
+.hci-coeff-preview{display:flex;align-items:center;gap:16px;padding:14px 16px;background:rgba(40,8,28,.5);border-radius:10px;margin-bottom:18px}
+.hci-coeff-num{font-family:var(--mono);font-size:1.6rem;font-weight:600;color:var(--gold);line-height:1}
+.hci-coeff-text{font-size:.8rem;color:var(--text-dim);line-height:1.6}
+.hci-coeff-text b{color:var(--text)}
+.hci-save-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:11px 22px;border-radius:9px;background:var(--magenta);color:#fff;border:none;cursor:pointer;font-weight:500;transition:all .2s}
+.hci-save-btn:hover{background:#D050A8;transform:translateY(-2px)}
+.hci-saved-note{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--teal);margin-top:10px;display:none}
+.hci-saved-note.show{display:block}
+.hci-last-set{font-family:var(--mono);font-size:.58rem;color:var(--text-dim);margin-top:6px}
+
 </style>
 </head>
 <body>
@@ -194,6 +224,25 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       </a>
     </div>
 
+
+    <div class="hci-global-section" id="hciGlobalSection">
+      <div class="hci-global-card">
+        <div class="hci-global-eyebrow">Org Conditions &mdash; Global HCI</div>
+        <div class="hci-global-title">How is your organisation right now?</div>
+        <div class="hci-global-sub">These four answers set your <b>Human Confidence Index</b> — a coefficient applied to every calculation across all five tools. Answer once here. All tools use it automatically. Override on any individual tool if needed.</div>
+        <div class="hci-global-factors" id="hciGlobalFactors"></div>
+        <div class="hci-coeff-preview">
+          <div class="hci-coeff-num" id="hciCoeffPreview">0.70x</div>
+          <div class="hci-coeff-text"><b>Your HCI Coefficient</b><br>0 answers yes = 0.70x &middot; 4 answers yes = 1.30x<br>Applied to every calculation across all five pillars.</div>
+        </div>
+        <button class="hci-save-btn" onclick="saveGlobalHCI()">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8l4 4 8-8"/></svg>
+          Save HCI Settings
+        </button>
+        <div class="hci-saved-note" id="hciSavedNote">&#10003; Saved — all five tools will use this coefficient</div>
+        <div class="hci-last-set" id="hciLastSet"></div>
+      </div>
+    </div>
     <div class="action-row">
       <button class="btn-update" onclick="startOnboarding(true)">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2l-1 1-4 4-1 3 3-1 4-4 1-1-2-2zM11 4l1 1M3 10v3h3l5-5-3-1-5 3z"/></svg>
@@ -334,6 +383,7 @@ function showViewMode(p) {
     'Growth Readiness':'The Human Balance Sheet shows whether the org can carry its next stage.',
   };
 
+  renderHCIGlobal();
   document.getElementById('phRole').textContent = roleLabels[p.role] || p.role;
   document.getElementById('phSub').textContent = roleSubs[p.role] || '';
   document.getElementById('phBadge').textContent = p.context;
@@ -460,6 +510,70 @@ function confirmClear() {
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────
+
+// ── HCI GLOBAL ON PROFILE PAGE ────────────────────────────────────────────
+var HCI_FACTORS_DEF = [
+  {name:'Leadership Stability', desc:'Is leadership stable, present, and actively engaged right now?'},
+  {name:'Org Disruption Free', desc:'Is the org free from major disruption — restructure, M\u0026A, or layoffs?'},
+  {name:'Culture Health', desc:'Is the culture broadly functional and not in crisis?'},
+  {name:'Execution Momentum', desc:'Is the org executing well against its current strategic priorities?'},
+];
+
+var _gHCIFactors = [false, false, false, false];
+
+function renderHCIGlobal() {
+  var existing = null;
+  try { var r = localStorage.getItem('rf_hci_global'); existing = r ? JSON.parse(r) : null; } catch(e){}
+  if(existing && existing.factors) _gHCIFactors = existing.factors.slice();
+
+  var html = HCI_FACTORS_DEF.map(function(f, i) {
+    var yes = _gHCIFactors[i];
+    return '<div class="hci-gf'+(yes?' yes':'')+'" id="hgf'+i+'" onclick="toggleGHCI('+i+')">'
+      +'<div class="hci-gf-top"><div class="hci-gf-name">'+f.name+'</div><div class="hci-gf-toggle"></div></div>'
+      +'<div class="hci-gf-desc">'+f.desc+'</div></div>';
+  }).join('');
+
+  var el = document.getElementById('hciGlobalFactors');
+  if(el) el.innerHTML = html;
+  updateHCIPreview();
+
+  if(existing && existing.updatedAt) {
+    var d = new Date(existing.updatedAt);
+    var last = document.getElementById('hciLastSet');
+    if(last) last.textContent = 'Last updated: ' + d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ' at ' + d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  }
+
+  document.getElementById('hciGlobalSection').classList.add('show');
+}
+
+function toggleGHCI(i) {
+  _gHCIFactors[i] = !_gHCIFactors[i];
+  var el = document.getElementById('hgf'+i);
+  if(el) el.classList.toggle('yes', _gHCIFactors[i]);
+  updateHCIPreview();
+}
+
+function updateHCIPreview() {
+  var count = _gHCIFactors.filter(Boolean).length;
+  var coeff = (0.70 + count * 0.15).toFixed(2);
+  var el = document.getElementById('hciCoeffPreview');
+  if(el) el.textContent = coeff + 'x';
+}
+
+function saveGlobalHCI() {
+  try {
+    localStorage.setItem('rf_hci_global', JSON.stringify({
+      factors: _gHCIFactors.slice(),
+      updatedAt: new Date().toISOString()
+    }));
+  } catch(e){}
+  var note = document.getElementById('hciSavedNote');
+  if(note) { note.classList.add('show'); setTimeout(function(){ note.classList.remove('show'); }, 3000); }
+  var last = document.getElementById('hciLastSet');
+  var d = new Date();
+  if(last) last.textContent = 'Last updated: ' + d.toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + ' at ' + d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+}
+
 function getProfile() {
   try{var r=localStorage.getItem('rf_practitioner_profile');return r?JSON.parse(r):null;}catch(e){return null;}
 }
