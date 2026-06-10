@@ -21,6 +21,7 @@
   --bg:#0A0608;--bg2:#100810;--bg3:#080408;--bg4:#080A18;
   --cobalt:#C0409A;--cobalt-dim:rgba(160,20,120,.15);--cobalt-glow:rgba(160,20,120,.08);
   --cobalt-border:rgba(160,20,120,.18);
+  --magenta:#C0409A;--magenta-mid:#D060B0;
   --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
   --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
   --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
@@ -1238,15 +1239,9 @@ function render() {
 
   app.innerHTML = h;
 
-  // PRESCRIPTION LAYER
+  // PRESCRIPTION LAYER — uses actual answers, not sim sliders
   if(typeof renderRxSection === 'function') {
-    var _answers = {};
-    VITALS.forEach(function(v,vi){
-      for(var i=0;i<4;i++){
-        _answers[v.id+'_'+i] = !!(simValues && simValues[v.id] > i);
-      }
-    });
-    renderRxSection(_answers, sym, totalComp);
+    renderRxSection(answers, sym, totalComp);
   }
 
   // Wire intro
