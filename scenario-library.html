@@ -304,9 +304,61 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
       filters[f]=v;
       document.querySelectorAll('.chip[data-f="'+f+'"]').forEach(function(c){c.classList.remove('on');});
       this.classList.add('on');
+      // if user manually changes orgsize filter, hide the personalisation notice
+      if(f==='orgsize'){
+        var notice=document.getElementById('profile-notice');
+        if(notice)notice.style.display='none';
+      }
       renderGrid();
     });
   });
+
+  // PROFILE-DRIVEN AUTO-PERSONALISATION
+  // Map profile Q2 orgSize values to our 4 filter buckets
+  var PROFILE_TO_BUCKET={
+    '2-20':'Startup',
+    '20-100':'Startup',
+    '100-250':'Mid-Market',
+    '250-500':'Mid-Market',
+    '500-1000':'Enterprise',
+    '1000-5000':'Enterprise',
+    '5000+':'Public & Institutional'
+  };
+
+  var autoApplied=false;
+  try{
+    var raw=localStorage.getItem('rf_practitioner_profile');
+    if(raw){
+      var prof=JSON.parse(raw);
+      var orgSize=prof.orgSize||prof.orgsize||prof.q2||null;
+      var bucket=orgSize?PROFILE_TO_BUCKET[orgSize]:null;
+      if(bucket){
+        filters.orgsize=bucket;
+        // activate the matching chip visually
+        document.querySelectorAll('.chip[data-f="orgsize"]').forEach(function(c){c.classList.remove('on');});
+        var matchChip=document.querySelector('.chip[data-f="orgsize"][data-v="'+bucket+'"]');
+        if(matchChip){matchChip.classList.add('on');autoApplied=true;}
+      }
+    }
+  }catch(e){}
+
+  // inject personalisation notice above the grid if auto-applied
+  if(autoApplied){
+    var noticeEl=document.createElement('div');
+    noticeEl.id='profile-notice';
+    noticeEl.style.cssText='margin-bottom:16px;padding:10px 16px;background:rgba(192,64,154,.08);border:1px solid rgba(192,64,154,.2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:12px;';
+    noticeEl.innerHTML='<span style="font-family:\'DM Mono\',monospace;font-size:.7rem;color:#D878BC;letter-spacing:.04em">Showing scenarios matched to your org size from your profile.</span>'
+      +'<span id="profile-notice-clear" style="font-family:\'DM Mono\',monospace;font-size:.66rem;color:#9AB8D8;cursor:pointer;text-decoration:underline;white-space:nowrap">Show all</span>';
+    var grid=document.getElementById('grid');
+    grid.parentNode.insertBefore(noticeEl,grid);
+    document.getElementById('profile-notice-clear').addEventListener('click',function(){
+      filters.orgsize='All';
+      document.querySelectorAll('.chip[data-f="orgsize"]').forEach(function(c){c.classList.remove('on');});
+      document.querySelector('.chip[data-f="orgsize"][data-v="All"]').classList.add('on');
+      noticeEl.style.display='none';
+      renderGrid();
+    });
+  }
 
   renderGrid();
 })();
