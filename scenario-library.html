@@ -70,10 +70,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .stat .l{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#C8A8C0}
 
 /* FILTERS */
-.filters{margin-bottom:28px}
-.frow{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
-.flabel{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#C8A8C0;min-width:80px}
-.chip{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--text-dim);background:var(--bg2);border:1px solid var(--border);padding:5px 12px;border-radius:999px;cursor:pointer;transition:all .15s;user-select:none}
+.filters{margin-bottom:28px;background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;padding:16px 20px}
+.fgrid{display:grid;grid-template-columns:88px 1fr;gap:10px 16px;align-items:start}
+.flabel{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:#C8A8C0;padding-top:6px}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;color:var(--text-dim);background:var(--bg);border:1px solid var(--border);padding:4px 10px;border-radius:999px;cursor:pointer;transition:all .15s;user-select:none}
 .chip:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
 .chip.on{background:rgba(180,40,140,.1);border-color:var(--cobalt);color:#D060B0}
 
@@ -146,55 +147,57 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   </div>
 
   <div class="filters">
-    <div class="frow">
+    <div class="fgrid">
       <span class="flabel">Industry</span>
-      <span class="chip on" data-f="industry" data-v="All">All</span>
-      <span class="chip" data-f="industry" data-v="Academia">Academia</span>
-      <span class="chip" data-f="industry" data-v="BFSI">BFSI</span>
-      <span class="chip" data-f="industry" data-v="Consulting">Consulting</span>
-      <span class="chip" data-f="industry" data-v="Healthcare">Healthcare</span>
-      <span class="chip" data-f="industry" data-v="Hospitality">Hospitality</span>
-      <span class="chip" data-f="industry" data-v="Manufacturing">Manufacturing</span>
-      <span class="chip" data-f="industry" data-v="NGO / Impact">NGO / Impact</span>
-      <span class="chip" data-f="industry" data-v="Public Sector">Public Sector</span>
-      <span class="chip" data-f="industry" data-v="SaaS">SaaS</span>
-      <span class="chip" data-f="industry" data-v="Sales">Sales</span>
-    </div>
-    <div class="frow">
+      <div class="fchips">
+        <span class="chip on" data-f="industry" data-v="All">All</span>
+        <span class="chip" data-f="industry" data-v="Academia">Academia</span>
+        <span class="chip" data-f="industry" data-v="BFSI">BFSI</span>
+        <span class="chip" data-f="industry" data-v="Consulting">Consulting</span>
+        <span class="chip" data-f="industry" data-v="Healthcare">Healthcare</span>
+        <span class="chip" data-f="industry" data-v="Hospitality">Hospitality</span>
+        <span class="chip" data-f="industry" data-v="Manufacturing">Manufacturing</span>
+        <span class="chip" data-f="industry" data-v="NGO / Impact">NGO / Impact</span>
+        <span class="chip" data-f="industry" data-v="Public Sector">Public Sector</span>
+        <span class="chip" data-f="industry" data-v="SaaS">SaaS</span>
+        <span class="chip" data-f="industry" data-v="Sales">Sales</span>
+      </div>
       <span class="flabel">Geography</span>
-      <span class="chip on" data-f="geo" data-v="All">All</span>
-      <span class="chip" data-f="geo" data-v="Amsterdam">Amsterdam</span>
-      <span class="chip" data-f="geo" data-v="Boston">Boston</span>
-      <span class="chip" data-f="geo" data-v="Chicago">Chicago</span>
-      <span class="chip" data-f="geo" data-v="Dubai">Dubai</span>
-      <span class="chip" data-f="geo" data-v="Global">Global</span>
-      <span class="chip" data-f="geo" data-v="London">London</span>
-      <span class="chip" data-f="geo" data-v="Mumbai">Mumbai</span>
-      <span class="chip" data-f="geo" data-v="New York">New York</span>
-      <span class="chip" data-f="geo" data-v="San Francisco">San Francisco</span>
-      <span class="chip" data-f="geo" data-v="Singapore">Singapore</span>
-      <span class="chip" data-f="geo" data-v="Stuttgart">Stuttgart</span>
-      <span class="chip" data-f="geo" data-v="Tokyo">Tokyo</span>
-      <span class="chip" data-f="geo" data-v="Washington DC">Washington DC</span>
-    </div>
-    <div class="frow">
+      <div class="fchips">
+        <span class="chip on" data-f="geo" data-v="All">All</span>
+        <span class="chip" data-f="geo" data-v="Amsterdam">Amsterdam</span>
+        <span class="chip" data-f="geo" data-v="Boston">Boston</span>
+        <span class="chip" data-f="geo" data-v="Chicago">Chicago</span>
+        <span class="chip" data-f="geo" data-v="Dubai">Dubai</span>
+        <span class="chip" data-f="geo" data-v="Global">Global</span>
+        <span class="chip" data-f="geo" data-v="London">London</span>
+        <span class="chip" data-f="geo" data-v="Mumbai">Mumbai</span>
+        <span class="chip" data-f="geo" data-v="New York">New York</span>
+        <span class="chip" data-f="geo" data-v="San Francisco">San Francisco</span>
+        <span class="chip" data-f="geo" data-v="Singapore">Singapore</span>
+        <span class="chip" data-f="geo" data-v="Stuttgart">Stuttgart</span>
+        <span class="chip" data-f="geo" data-v="Tokyo">Tokyo</span>
+        <span class="chip" data-f="geo" data-v="Washington DC">Washington DC</span>
+      </div>
       <span class="flabel">Currency</span>
-      <span class="chip on" data-f="currency" data-v="All">All</span>
-      <span class="chip" data-f="currency" data-v="AED">AED</span>
-      <span class="chip" data-f="currency" data-v="EUR">EUR</span>
-      <span class="chip" data-f="currency" data-v="GBP">GBP</span>
-      <span class="chip" data-f="currency" data-v="INR">INR</span>
-      <span class="chip" data-f="currency" data-v="JPY">JPY</span>
-      <span class="chip" data-f="currency" data-v="SGD">SGD</span>
-      <span class="chip" data-f="currency" data-v="USD">USD</span>
-    </div>
-    <div class="frow">
+      <div class="fchips">
+        <span class="chip on" data-f="currency" data-v="All">All</span>
+        <span class="chip" data-f="currency" data-v="AED">AED</span>
+        <span class="chip" data-f="currency" data-v="EUR">EUR</span>
+        <span class="chip" data-f="currency" data-v="GBP">GBP</span>
+        <span class="chip" data-f="currency" data-v="INR">INR</span>
+        <span class="chip" data-f="currency" data-v="JPY">JPY</span>
+        <span class="chip" data-f="currency" data-v="SGD">SGD</span>
+        <span class="chip" data-f="currency" data-v="USD">USD</span>
+      </div>
       <span class="flabel">Org Size</span>
-      <span class="chip on" data-f="orgsize" data-v="All">All</span>
-      <span class="chip" data-f="orgsize" data-v="Startup">Startup</span>
-      <span class="chip" data-f="orgsize" data-v="Mid-Market">Mid-Market</span>
-      <span class="chip" data-f="orgsize" data-v="Enterprise">Enterprise</span>
-      <span class="chip" data-f="orgsize" data-v="Public &amp; Institutional">Public &amp; Institutional</span>
+      <div class="fchips">
+        <span class="chip on" data-f="orgsize" data-v="All">All</span>
+        <span class="chip" data-f="orgsize" data-v="Startup">Startup</span>
+        <span class="chip" data-f="orgsize" data-v="Mid-Market">Mid-Market</span>
+        <span class="chip" data-f="orgsize" data-v="Enterprise">Enterprise</span>
+        <span class="chip" data-f="orgsize" data-v="Public &amp; Institutional">Public &amp; Institutional</span>
+      </div>
     </div>
   </div>
 
