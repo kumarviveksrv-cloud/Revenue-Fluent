@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The Human P&L — Revenue Fluent</title>
+<title>The Human P&L, Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -299,14 +299,6 @@ body{
 <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
 <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 <div class="sidebar-resize"></div>
-
-  <div style="padding:8px 18px 4px;border-top:1px solid rgba(192,64,154,.08);margin-top:8px">
-    <a href="humacity.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 0;transition:opacity .15s;opacity:.6" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'">
-      <div style="width:6px;height:6px;border-radius:50%;background:#B87333;flex-shrink:0"></div>
-      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#C8A8C0">Built on Humacity</span>
-      <span style="font-family:var(--mono);font-size:.55rem;color:rgba(192,64,154,.4);margin-left:auto">&#8599;</span>
-    </a>
-  </div>
 </aside>
 <script>
 (function(){var s=new URLSearchParams(location.search).get('scenario')||'';if(!s)return;document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){var h=a.getAttribute('href');if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0)a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(s);});})();
@@ -324,7 +316,7 @@ body{
   </div>
 </div>
 
-<div class="eyebrow"><a href="humacity.html" style="color:rgba(192,64,154,.5);text-decoration:none;transition:color .15s" onmouseover="this.style.color='#D060B0'" onmouseout="this.style.color='rgba(192,64,154,.5)'">Humacity</a> &middot; Revenue Fluent &middot; L4 &middot; The Human P&L</div>
+<div class="eyebrow">Revenue Fluent &middot; L4 &middot; The Human P&L</div>
 <div class="switch">
   <label for="scen">Scenario</label>
   <select id="scen"></select>
@@ -332,9 +324,9 @@ body{
 </div>
 <div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p4')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Human P&L for current org confidence</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p4_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p4_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p4_body"><div style="font-size:.82rem;color:#C8A8C0;line-height:1.7;margin:14px 0 16px;padding:12px 14px;background:rgba(192,64,154,.04);border-radius:8px;border-left:2px solid rgba(192,64,154,.2)">
 <b style="color:#EED8E8;display:block;margin-bottom:4px">What is the Human Confidence Index?</b>
-Every number in Revenue Fluent is computed from real data. But data reflects the past — your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
+Every number in Revenue Fluent is computed from real data. But data reflects the past, your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
 </div>
-<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p4_f0" onclick="hciTF('hci_p4',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p4_f1" onclick="hciTF('hci_p4',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p4_f2" onclick="hciTF('hci_p4',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p4_f3" onclick="hciTF('hci_p4',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p4_calc"></div><table class="hci-scenarios"><tbody id="hci_p4_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
+<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p4_f0" onclick="hciTF('hci_p4',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p4_f1" onclick="hciTF('hci_p4',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p4_f2" onclick="hciTF('hci_p4',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p4_f3" onclick="hciTF('hci_p4',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p4_calc"></div><table class="hci-scenarios"><tbody id="hci_p4_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
   <div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div><div class="hci-decay" id="hci_p4_decay"></div></div></div>
 <div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
   <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a>
@@ -348,7 +340,7 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
     <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
     <div class="dl-title">Downloads</div>
   </div>
-  <div class="dl-sub"><b>Human P&L Model</b> &mdash; Literal P&L statement. Every line pre-labelled, formulas pre-built. The Ratio auto-calculates.</div>
+  <div class="dl-sub"><b>Human P&L Model</b>, Literal P&L statement. Every line pre-labelled, formulas pre-built. The Ratio auto-calculates.</div>
   <div class="dl-buttons">
     <button class="dl-btn dl-btn-excel" onclick="downloadExcel('P4_Human_PL_RevenueFluent.xlsx')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6l2 2-2 2M8 10h3"/></svg>
@@ -375,7 +367,7 @@ function hciToggle(id){var b=document.getElementById(id+'_body'),c=document.getE
 function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);}
 function _hciC(id){var s=_hci[id];if(!s)return 1;return Math.round((0.7+s.f.filter(Boolean).length*0.15)*100)/100;}
 function _hciFmt(sym,v){var a=Math.abs(v),sg=v<0?'-':'';if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';if(a>=1000)return sg+sym+Math.round(a/1000)+'K';return sg+sym+Math.round(a);}
-function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal — 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk — monitor closely.':'Significant risk — intervention recommended.')+'</div>';}}}
+function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal, 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk, monitor closely.':'Significant risk, intervention recommended.')+'</div>';}}}
 function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:base||0,sym:sym||'$',decay:decay||null};_hciR(id);}
 function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
 </script>
@@ -439,7 +431,7 @@ var userInputs = {};
 RF.list().forEach(function(n){ userInputs[n] = {}; });
 
 var HOOKS = {
-  'High-Growth Tech Startup': 'HR has always had a P&L. Nobody taught them to read it — until now.',
+  'High-Growth Tech Startup': 'HR has always had a P&L. Nobody taught them to read it, until now.',
   'Professional Services Firm': 'The partners see a cost centre. This statement shows them a profit centre.',
   'Enterprise Healthcare': 'A negative Human P&L is not a failure. It is a diagnosis. Now you can treat it.',
   'Remote-First SaaS': 'Twenty-three countries. One P&L. For the first time, it is human.',
@@ -496,7 +488,7 @@ function computePL(name) {
 
   var totalRevenue = talentAcqValue + retentionSavings + perfUplift + culturePremium;
 
-  // COGS — HR delivery costs only
+  // COGS, HR delivery costs only
   var acqCost     = ui.acqCost     !== undefined ? ui.acqCost     : Math.round(revHires.reduce(function(a,e){ return a+e.salary*0.15; },0));
   var devInvest   = ui.devInvest   !== undefined ? ui.devInvest   : Math.round(emerging.reduce(function(a,e){ return a+e.salary*0.04; },0));
   var hrFuncCost  = ui.hrFuncCost  !== undefined ? ui.hrFuncCost  : Math.round(totalComp*0.04);
@@ -538,12 +530,12 @@ function computePL(name) {
 function stmtText(d) {
   var sym = d.sym;
   if (d.netProfit < 0 && d.ratio < -1)
-    return 'The Human P&L is <b>deeply negative at '+fmt(sym,d.netProfit)+'</b>. The adjustments below the line — flight risk, skill debt, growth readiness gap — are consuming all operating profit. This is not a cost problem. It is a human capital risk problem that has been allowed to compound. The board needs to see this statement.';
+    return 'The Human P&L is <b>deeply negative at '+fmt(sym,d.netProfit)+'</b>. The adjustments below the line, flight risk, skill debt, growth readiness gap, are consuming all operating profit. This is not a cost problem. It is a human capital risk problem that has been allowed to compound. The board needs to see this statement.';
   if (d.netProfit < 0)
-    return 'The Human P&L shows a <b>net loss of '+fmt(sym,d.netProfit)+'</b>. Operating profit exists, but the below-the-line adjustments erase it. The organisation is generating value from HR activity — but carrying human capital liabilities that are larger than that value. The adjustment lines tell you exactly where to intervene.';
+    return 'The Human P&L shows a <b>net loss of '+fmt(sym,d.netProfit)+'</b>. Operating profit exists, but the below-the-line adjustments erase it. The organisation is generating value from HR activity, but carrying human capital liabilities that are larger than that value. The adjustment lines tell you exactly where to intervene.';
   if (d.ratio > 3)
     return 'For every '+sym+'1 invested in HR, this organisation returns <b>'+sym+d.ratio.toFixed(1)+'</b>. A Human P&L at '+d.ratio.toFixed(1)+'x is not an HR metric. It is a <b>return on investment statement</b> that belongs in the CFO\'s office. This is the number that changes the conversation permanently.';
-  return 'The Human P&L returns <b>'+fmt(sym,d.netProfit)+'</b> on a <b>'+fmt(sym,d.hrInvestment)+'</b> HR investment — a '+d.ratio.toFixed(1)+'x return. The gross margin is healthy. The adjustment lines carry risk that, if addressed, would improve the ratio significantly. This is the statement that makes the case for proactive HR investment.';
+  return 'The Human P&L returns <b>'+fmt(sym,d.netProfit)+'</b> on a <b>'+fmt(sym,d.hrInvestment)+'</b> HR investment, a '+d.ratio.toFixed(1)+'x return. The gross margin is healthy. The adjustment lines carry risk that, if addressed, would improve the ratio significantly. This is the statement that makes the case for proactive HR investment.';
 }
 
 function showEdit(field, label, hint, currentVal, sym) {
@@ -600,20 +592,20 @@ function render() {
       +'<div class="intro-tl">'
         +'<div class="intro-icon">?</div>'
         +'<div><div class="intro-title">What is The Human P&amp;L?</div>'
-        +'<div class="intro-sub">Read this first &mdash; takes 2 minutes</div></div>'
+        +'<div class="intro-sub">Read this first, takes 2 minutes</div></div>'
       +'</div>'
       +'<div class="intro-chevron" id="introChev">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
     +'</div>'
     +'<div class="intro-body'+(isOpen?' open':'')+'" id="introBody">'
       +'<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div>'
-        +'<div class="intro-sec-txt">The Human P&amp;L is a literal income statement for HR — formatted exactly like the P&amp;L your CFO reads every month, but denominated in human capital terms.<br><br>Revenue at the top. Costs below it. Gross margin in the middle. Operating expenses. Adjustments below the line. Net profit or loss at the bottom. <b>And the ratio that changes the conversation permanently: for every unit invested in HR, this organisation returns X.</b></div>'
+        +'<div class="intro-sec-txt">The Human P&amp;L is a literal income statement for HR, formatted exactly like the P&amp;L your CFO reads every month, but denominated in human capital terms.<br><br>Revenue at the top. Costs below it. Gross margin in the middle. Operating expenses. Adjustments below the line. Net profit or loss at the bottom. <b>And the ratio that changes the conversation permanently: for every unit invested in HR, this organisation returns X.</b></div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">Why does the format matter?</div>'
         +'<div class="intro-sec-txt">The moment this statement looks like what a CFO already reads every month, it stops being an HR document and becomes a financial document about people. That shift is everything.</div>'
         +'<div class="intro-story">A CHRO printed the Human P&amp;L and brought it into the quarterly business review. The CFO picked it up expecting an HR report. He put it down saying it was the most honest financial document about the organisation he had seen all year.<br><br><b>The format did the work. The numbers were already there. They had just never been filed.</b></div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">The editable lines</div>'
-        +'<div class="intro-sec-txt">Some lines are auto-computed from the scenario data. <b>Lines marked with a pencil icon can be edited</b> — click them to enter your organisation\'s actual figures. The more accurately you populate these, the more credible the statement becomes.</div>'
+        +'<div class="intro-sec-txt">Some lines are auto-computed from the scenario data. <b>Lines marked with a pencil icon can be edited</b>, click them to enter your organisation\'s actual figures. The more accurately you populate these, the more credible the statement becomes.</div>'
       +'</div>'
       +'<div class="intro-transition">Below is the Human P&amp;L for this scenario, <b>pre-computed from real data</b>. Edit the user-input lines to reflect your actual organisation. The ratio at the bottom updates automatically.</div>'
     +'</div>'
@@ -652,17 +644,17 @@ function render() {
 
     // HUMAN COGS
     +'<div class="pl-section-head"><span>Human COGS</span><span>HR delivery costs only</span></div>'
-    +plRow('Acquisition Cost', d.acqCost, sym, 'Hiring spend, agency fees, onboarding', true, 'acqCost', 'Acquisition Cost', 'Total spent on hiring — agency fees, job boards, onboarding costs. Typical range: 12-18% of first-year salary per hire.')
-    +plRow('Development Investment', d.devInvest, sym, 'Training, coaching, certifications', true, 'devInvest', 'Development Investment', 'Total annual spend on developing people — formal training, coaching, certifications, conferences. Typical range: 2-5% of salary base.')
-    +plRow('HR Function Cost', d.hrFuncCost, sym, 'HR team salaries + tools + systems', true, 'hrFuncCost', 'HR Function Cost', 'Total cost of running the HR function — HR team salaries, HRIS tools, systems. Typical range: 3-5% of total comp base.')
+    +plRow('Acquisition Cost', d.acqCost, sym, 'Hiring spend, agency fees, onboarding', true, 'acqCost', 'Acquisition Cost', 'Total spent on hiring, agency fees, job boards, onboarding costs. Typical range: 12-18% of first-year salary per hire.')
+    +plRow('Development Investment', d.devInvest, sym, 'Training, coaching, certifications', true, 'devInvest', 'Development Investment', 'Total annual spend on developing people, formal training, coaching, certifications, conferences. Typical range: 2-5% of salary base.')
+    +plRow('HR Function Cost', d.hrFuncCost, sym, 'HR team salaries + tools + systems', true, 'hrFuncCost', 'HR Function Cost', 'Total cost of running the HR function, HR team salaries, HRIS tools, systems. Typical range: 3-5% of total comp base.')
     +'<div class="pl-subtotal"><div class="pl-subtotal-label">= TOTAL HUMAN COGS</div><div class="pl-subtotal-val neg">'+fmt(sym,d.totalCOGS)+'</div></div>'
 
     // GROSS MARGIN
     +'<div class="pl-margin-row"><div class="pl-margin-label">HUMAN GROSS MARGIN</div><div class="pl-margin-val '+(d.grossMargin>=0?'pos':'neg')+'">'+fmt(sym,d.grossMargin)+'</div></div>'
     +'<div class="pl-margin-pct">Gross Margin %: '+d.grossMarginPct+'% &nbsp;&middot;&nbsp; Talent Quality Premium contribution</div>'
 
-    // COMP BASE (shown separately — not in COGS)
-    +'<div class="pl-comp-row"><div class="pl-comp-label">Human Investment Base (total compensation) <span style="font-family:var(--mono);font-size:.6rem;color:rgba(184,115,51,.4)">shown separately — not in COGS</span></div><div class="pl-comp-val">'+fmt(sym,d.totalComp)+'</div></div>'
+    // COMP BASE (shown separately, not in COGS)
+    +'<div class="pl-comp-row"><div class="pl-comp-label">Human Investment Base (total compensation) <span style="font-family:var(--mono);font-size:.6rem;color:rgba(184,115,51,.4)">shown separately, not in COGS</span></div><div class="pl-comp-val">'+fmt(sym,d.totalComp)+'</div></div>'
 
     // OPEX
     +'<div class="pl-section-head"><span>Human OpEx</span><span>edit to match your org</span></div>'
@@ -675,9 +667,9 @@ function render() {
 
     // ADJUSTMENTS
     +'<div class="pl-section-head"><span>Human Adjustments</span><span>below the line</span></div>'
-    +plRow('Flight Risk Liability', d.flightRisk, sym, 'Value at risk from Inconsistent Performers — potential exits × salary', false)
-    +plRow('Skill Debt Provision', d.skillDebt, sym, 'Cost of skills gap if unaddressed — 3% of comp base', false)
-    +plRow('Growth Readiness Gap', d.growthGap, sym, 'Cost of unpreparedness for next growth stage — 2% of comp base', false)
+    +plRow('Flight Risk Liability', d.flightRisk, sym, 'Value at risk from Inconsistent Performers, potential exits × salary', false)
+    +plRow('Skill Debt Provision', d.skillDebt, sym, 'Cost of skills gap if unaddressed, 3% of comp base', false)
+    +plRow('Growth Readiness Gap', d.growthGap, sym, 'Cost of unpreparedness for next growth stage, 2% of comp base', false)
     +'<div class="pl-adj-note">These adjustments are the honest reckoning. They represent human capital risk the org is carrying right now.</div>'
     +'<div class="pl-subtotal"><div class="pl-subtotal-label">= TOTAL ADJUSTMENTS</div><div class="pl-subtotal-val neg">'+fmt(sym,d.totalAdj)+'</div></div>'
 
@@ -691,8 +683,8 @@ function render() {
 
   // P5 BRIDGE
   h += '<div class="p5-bridge">'
-    +'<div class="p5-lbl">Connection to L5 &mdash; The Human Balance Sheet</div>'
-    +'<div class="p5-txt">The Human Net Profit of <b>'+fmt(sym,d.netProfit)+'</b> feeds directly into the Human Balance Sheet as <b>retained human earnings</b> — the accumulated value of HR\'s contribution to the organisation\'s human capital position. A positive net profit strengthens the balance sheet. A negative one erodes it.</div>'
+    +'<div class="p5-lbl">Connection to L5, The Human Balance Sheet</div>'
+    +'<div class="p5-txt">The Human Net Profit of <b>'+fmt(sym,d.netProfit)+'</b> feeds directly into the Human Balance Sheet as <b>retained human earnings</b>, the accumulated value of HR\'s contribution to the organisation\'s human capital position. A positive net profit strengthens the balance sheet. A negative one erodes it.</div>'
     +'</div>';
 
   // STATEMENT

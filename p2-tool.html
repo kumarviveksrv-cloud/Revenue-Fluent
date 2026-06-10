@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The Talent Premium — Revenue Fluent</title>
+<title>The Talent Premium, Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -85,7 +85,7 @@ body{
 .intro-transition{font-style:italic;font-size:.88rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:14px;margin-top:4px;line-height:1.5}
 .intro-transition b{color:var(--gold);font-style:normal}
 
-/* HUMACITY BAND — always visible */
+/* HUMACITY BAND, always visible */
 .humacity-band{
   padding:20px 28px;margin-bottom:32px;
   background:linear-gradient(135deg,rgba(40,8,28,.7),rgba(4,6,14,.9));
@@ -336,14 +336,6 @@ body{
 <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
 <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 <div class="sidebar-resize"></div>
-
-  <div style="padding:8px 18px 4px;border-top:1px solid rgba(192,64,154,.08);margin-top:8px">
-    <a href="humacity.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 0;transition:opacity .15s;opacity:.6" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'">
-      <div style="width:6px;height:6px;border-radius:50%;background:#B87333;flex-shrink:0"></div>
-      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#C8A8C0">Built on Humacity</span>
-      <span style="font-family:var(--mono);font-size:.55rem;color:rgba(192,64,154,.4);margin-left:auto">&#8599;</span>
-    </a>
-  </div>
 </aside>
 <script>
 (function(){var s=new URLSearchParams(location.search).get('scenario')||'';if(!s)return;document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){var h=a.getAttribute('href');if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0)a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(s);});})();
@@ -361,7 +353,7 @@ body{
   </div>
 </div>
 
-<div class="eyebrow"><a href="humacity.html" style="color:rgba(192,64,154,.5);text-decoration:none;transition:color .15s" onmouseover="this.style.color='#D060B0'" onmouseout="this.style.color='rgba(192,64,154,.5)'">Humacity</a> &middot; Revenue Fluent &middot; L2 &middot; The Talent Premium</div>
+<div class="eyebrow">Revenue Fluent &middot; L2 &middot; The Talent Premium</div>
 <div class="switch">
   <label for="scen">Scenario</label>
   <select id="scen"></select>
@@ -369,9 +361,9 @@ body{
 </div>
 <div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p2')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Talent Quality Premium for current org conditions</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p2_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p2_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p2_body"><div style="font-size:.82rem;color:#C8A8C0;line-height:1.7;margin:14px 0 16px;padding:12px 14px;background:rgba(192,64,154,.04);border-radius:8px;border-left:2px solid rgba(192,64,154,.2)">
 <b style="color:#EED8E8;display:block;margin-bottom:4px">What is the Human Confidence Index?</b>
-Every number in Revenue Fluent is computed from real data. But data reflects the past — your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
+Every number in Revenue Fluent is computed from real data. But data reflects the past, your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
 </div>
-<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p2_f0" onclick="hciTF('hci_p2',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p2_f1" onclick="hciTF('hci_p2',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p2_f2" onclick="hciTF('hci_p2',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p2_f3" onclick="hciTF('hci_p2',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p2_calc"></div><table class="hci-scenarios"><tbody id="hci_p2_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
+<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p2_f0" onclick="hciTF('hci_p2',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p2_f1" onclick="hciTF('hci_p2',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p2_f2" onclick="hciTF('hci_p2',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p2_f3" onclick="hciTF('hci_p2',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p2_calc"></div><table class="hci-scenarios"><tbody id="hci_p2_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
   <div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div></div></div>
 <div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
   <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a>
@@ -385,7 +377,7 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
     <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
     <div class="dl-title">Downloads</div>
   </div>
-  <div class="dl-sub"><b>Talent Premium Model</b> &mdash; Three-tab model — Performance Premium, Retention Quality Premium, Hiring Quality Premium.</div>
+  <div class="dl-sub"><b>Talent Premium Model</b>, Three-tab model, Performance Premium, Retention Quality Premium, Hiring Quality Premium.</div>
   <div class="dl-buttons">
     <button class="dl-btn dl-btn-excel" onclick="downloadExcel('P2_Talent_Premium_RevenueFluent.xlsx')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6l2 2-2 2M8 10h3"/></svg>
@@ -411,7 +403,7 @@ function hciToggle(id){var b=document.getElementById(id+'_body'),c=document.getE
 function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);}
 function _hciC(id){var s=_hci[id];if(!s)return 1;return Math.round((0.7+s.f.filter(Boolean).length*0.15)*100)/100;}
 function _hciFmt(sym,v){var a=Math.abs(v),sg=v<0?'-':'';if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';if(a>=1000)return sg+sym+Math.round(a/1000)+'K';return sg+sym+Math.round(a);}
-function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal — 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk — monitor closely.':'Significant risk — intervention recommended.')+'</div>';}}}
+function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal, 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk, monitor closely.':'Significant risk, intervention recommended.')+'</div>';}}}
 function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:base||0,sym:sym||'$',decay:decay||null};_hciR(id);}
 function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
 </script>
@@ -457,7 +449,7 @@ function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=doc
 
 var app = document.getElementById('app');
 if (!window.RF || !window.RF_DATA) {
-  app.innerHTML = '<div class="err">rf-data.js not found — keep it in the same folder.</div>';
+  app.innerHTML = '<div class="err">rf-data.js not found, keep it in the same folder.</div>';
   return;
 }
 
@@ -562,10 +554,10 @@ function stmtText(sym, tqp, ratio, perfP, retP, hireP) {
   ].sort(function(a,b){ return b[1]-a[1]; })[0];
 
   if (tqp <= 0)
-    return 'This organisation is generating <b>no Talent Quality Premium</b> — the workforce is performing at or below the grade baseline for its cost. The salary bill is being paid. The premium above that baseline is not materialising. This is the gap that should concern the board, not the headcount.';
+    return 'This organisation is generating <b>no Talent Quality Premium</b>, the workforce is performing at or below the grade baseline for its cost. The salary bill is being paid. The premium above that baseline is not materialising. This is the gap that should concern the board, not the headcount.';
   if (ratio < 0.15)
-    return 'A <b>thin Talent Quality Premium of '+fmt(sym,tqp)+'</b> — real, but fragile. The org is generating above-baseline output, but the margin is narrow. One bad hiring quarter or a Star departure could erase it. The <b>'+dominant[0]+'</b> is carrying most of the weight at <b>'+fmt(sym,dominant[1])+'</b>.';
-  return 'This organisation is generating a <b>Talent Quality Premium of '+fmt(sym,tqp)+'</b> — the financial value of having better-than-average people at the same cost. The <b>'+dominant[0]+'</b> is the primary driver at <b>'+fmt(sym,dominant[1])+'</b>. This premium is your Human Gross Margin contribution. It belongs in the board presentation.';
+    return 'A <b>thin Talent Quality Premium of '+fmt(sym,tqp)+'</b>, real, but fragile. The org is generating above-baseline output, but the margin is narrow. One bad hiring quarter or a Star departure could erase it. The <b>'+dominant[0]+'</b> is carrying most of the weight at <b>'+fmt(sym,dominant[1])+'</b>.';
+  return 'This organisation is generating a <b>Talent Quality Premium of '+fmt(sym,tqp)+'</b>, the financial value of having better-than-average people at the same cost. The <b>'+dominant[0]+'</b> is the primary driver at <b>'+fmt(sym,dominant[1])+'</b>. This premium is your Human Gross Margin contribution. It belongs in the board presentation.';
 }
 
 function render(name) {
@@ -596,29 +588,29 @@ function render(name) {
       +'<div class="intro-tl">'
         +'<div class="intro-icon">?</div>'
         +'<div><div class="intro-title">What is The Talent Premium?</div>'
-        +'<div class="intro-sub">Read this first &mdash; takes 2 minutes</div></div>'
+        +'<div class="intro-sub">Read this first, takes 2 minutes</div></div>'
       +'</div>'
       +'<div class="intro-chevron" id="introChev">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
     +'</div>'
     +'<div class="intro-body'+(isOpen?' open':'')+'" id="introBody">'
       +'<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div>'
-        +'<div class="intro-sec-txt">Every organisation pays for people. That is the cost side — salaries, benefits, hiring spend. It shows up on every P&L as people cost.<br><br>But here is what nobody has ever quantified: <b>the difference in output between the people you actually have, and the people you would have if you had hired average.</b><br><br>If you hired 50 average performers at the same salary bill, you would get a baseline output. Because your HR function hired, developed, and retained better-than-average people, you get a higher output at the same cost. That difference — the premium output over baseline — is the <b>Talent Quality Premium</b>.</div>'
+        +'<div class="intro-sec-txt">Every organisation pays for people. That is the cost side, salaries, benefits, hiring spend. It shows up on every P&L as people cost.<br><br>But here is what nobody has ever quantified: <b>the difference in output between the people you actually have, and the people you would have if you had hired average.</b><br><br>If you hired 50 average performers at the same salary bill, you would get a baseline output. Because your HR function hired, developed, and retained better-than-average people, you get a higher output at the same cost. That difference, the premium output over baseline, is the <b>Talent Quality Premium</b>.</div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">Why does this matter?</div>'
-        +'<div class="intro-sec-txt">In investment terms: if the market gives you a 1.0x return on every unit of people spend, and your org generates 1.4x because your people are genuinely better — that 0.4x IS the Talent Quality Premium. It is alpha. It is real. It has never been expressed as a financial concept before.</div>'
-        +'<div class="intro-story">A consulting firm had two teams of identical size and salary bill. One consistently closed 40% more engagements. The difference was not strategy, not tools, not process. It was the quality of the people in the room. That quality had a financial value — but nobody had ever filed it.<br><br><b>The Talent Premium is that filing. For the first time, your people quality has a number.</b></div>'
+        +'<div class="intro-sec-txt">In investment terms: if the market gives you a 1.0x return on every unit of people spend, and your org generates 1.4x because your people are genuinely better, that 0.4x IS the Talent Quality Premium. It is alpha. It is real. It has never been expressed as a financial concept before.</div>'
+        +'<div class="intro-story">A consulting firm had two teams of identical size and salary bill. One consistently closed 40% more engagements. The difference was not strategy, not tools, not process. It was the quality of the people in the room. That quality had a financial value, but nobody had ever filed it.<br><br><b>The Talent Premium is that filing. For the first time, your people quality has a number.</b></div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">Three components</div>'
-        +'<div class="intro-sec-txt">The headline number breaks into three sources of premium — <b>Performance</b> (are your people outperforming their grade baseline?), <b>Retention Quality</b> (are you keeping the right people, not just any people?), and <b>Hiring Quality</b> (are your new hires outperforming what a random market hire would deliver?).</div>'
+        +'<div class="intro-sec-txt">The headline number breaks into three sources of premium, <b>Performance</b> (are your people outperforming their grade baseline?), <b>Retention Quality</b> (are you keeping the right people, not just any people?), and <b>Hiring Quality</b> (are your new hires outperforming what a random market hire would deliver?).</div>'
       +'</div>'
-      +'<div class="intro-transition">Below is this organisation\'s Talent Quality Premium, <b>computed from scenario data</b>. The number is what your people quality is worth — in currency, not scores.</div>'
+      +'<div class="intro-transition">Below is this organisation\'s Talent Quality Premium, <b>computed from scenario data</b>. The number is what your people quality is worth, in currency, not scores.</div>'
     +'</div>'
     +'</div>';
 
-  // HUMACITY BAND — always visible
+  // HUMACITY BAND, always visible
   h += '<div class="humacity-band">'
-    +'<div class="hum-label">The Humacity Connection</div>'
-    +'<div class="hum-text"><span class="hum-word">Humacity</span> is the quality of human capital in an organisation — and every organisation has it, whether they measure it or not. <b>The Talent Premium is how we express your Humacity in financial terms.</b> The number below is what your people quality is actually worth.</div>'
+    +'<div class="hum-label">Revenue Fluent Intelligence</div>'
+    +'<div class="hum-text"><span class="hum-word">Humacity</span> is the quality of human capital in an organisation, and every organisation has it, whether they measure it or not. <b>The Talent Premium is how we express your Humacity in financial terms.</b> The number below is what your people quality is actually worth.</div>'
     +'</div>';
 
   // HERO
@@ -651,7 +643,7 @@ function render(name) {
   // THREE COMPONENTS
   h += '<div class="sec-head">'
     +'<h2><span class="step">1</span> The three components</h2>'
-    +'<div class="sec-sub">Where the premium is generated — and where it is lost</div>'
+    +'<div class="sec-sub">Where the premium is generated, and where it is lost</div>'
     +'</div>';
 
   h += '<div class="components">'
@@ -669,7 +661,7 @@ function render(name) {
       +'<div class="comp-lbl">Retention Quality Premium</div>'
       +'<div class="comp-val '+(d.retPremium>=0?'pos':'neg')+'">'+fmt(sym,d.retPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.retPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.retPremium,maxComp)+'%"></div></div>'
-      +'<div class="comp-desc">Are you retaining the right people — not just any people? This measures the financial value concentrated in your Stars, High Performers, and High Potentials who are still here. When they leave, this number falls.</div>'
+      +'<div class="comp-desc">Are you retaining the right people, not just any people? This measures the financial value concentrated in your Stars, High Performers, and High Potentials who are still here. When they leave, this number falls.</div>'
     +'</div>'
 
     // Hiring Quality Premium
@@ -678,7 +670,7 @@ function render(name) {
       +'<div class="comp-val '+(d.hiringPremium>=0?'pos':'neg')+'">'+fmt(sym,d.hiringPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.hiringPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.hiringPremium,maxComp)+'%"></div></div>'
       +'<div class="comp-desc">Are your recent hires outperforming what a random market hire would deliver? Measured from employees with under 1 year tenure against their grade benchmark.</div>'
-      +'<div class="comp-caveat">Note: new hire performance is also influenced by onboarding quality and manager quality — not hiring decisions alone.</div>'
+      +'<div class="comp-caveat">Note: new hire performance is also influenced by onboarding quality and manager quality, not hiring decisions alone.</div>'
     +'</div>'
 
     +'</div>';
@@ -689,7 +681,7 @@ function render(name) {
     +'<div class="sec-sub">The Talent Premium is your Human Gross Margin</div>'
     +'</div>'
     +'<div class="p5-bridge">'
-      +'<div class="p5-lbl">Connection to L5 &mdash; The Human P&L</div>'
+      +'<div class="p5-lbl">Connection to L5, The Human P&L</div>'
       +'<div class="p5-row">'
         +'<div class="p5-cell"><div class="pc-lbl">Human Revenue</div><div class="pc-val">from L1</div></div>'
         +'<div class="p5-arrow">&minus;</div>'

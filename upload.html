@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
-<title>Upload Your Data — Revenue Fluent</title>
+<title>Upload Your Data, Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -192,7 +192,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
     <div class="consent-data">
       <div class="consent-data-title">&#128274; How your data is handled</div>
       <div class="consent-data-text">
-        <strong>Your data never leaves your browser.</strong> It is stored in sessionStorage — a temporary browser memory that is <strong>permanently and automatically deleted the moment you close this tab</strong>. It is not cached, not saved to disk, and not transmitted anywhere. Revenue Fluent has no server, no database, and no access to anything you upload.
+        <strong>Your data never leaves your browser.</strong> It is stored in sessionStorage, a temporary browser memory that is <strong>permanently and automatically deleted the moment you close this tab</strong>. It is not cached, not saved to disk, and not transmitted anywhere. Revenue Fluent has no server, no database, and no access to anything you upload.
       </div>
     </div>
 
@@ -204,11 +204,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
     </label>
 
     <button class="consent-btn" id="consentBtn" onclick="acceptConsent()" disabled>
-      I Understand — Proceed to Upload
+      I Understand, Proceed to Upload
     </button>
 
     <div class="consent-footer">
-      Revenue Fluent &middot; Built on Humacity &middot; DPDP Act 2023 &middot; GDPR compliant
+      Revenue Fluent &middot; DPDP Act 2023 &middot; GDPR compliant
     </div>
   </div>
 </div>
@@ -236,14 +236,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
   <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
   <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
   <div class="sidebar-resize" id="sbResize"></div>
-
-  <div style="padding:8px 18px 4px;border-top:1px solid rgba(192,64,154,.08);margin-top:8px">
-    <a href="humacity.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 0;transition:opacity .15s;opacity:.6" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'">
-      <div style="width:6px;height:6px;border-radius:50%;background:#B87333;flex-shrink:0"></div>
-      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#C8A8C0">Built on Humacity</span>
-      <span style="font-family:var(--mono);font-size:.55rem;color:rgba(192,64,154,.4);margin-left:auto">&#8599;</span>
-    </a>
-  </div>
 </aside>
 
 <div class="wrap">
@@ -251,7 +243,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
 
   <div class="page-eyebrow">Your Organisation</div>
   <h1 class="page-title">Stop modelling someone else's org.<br>Run it on yours.</h1>
-  <p class="page-sub">Upload your employee data as a CSV and all five Revenue Fluent tools will run on your actual numbers. Your data stays in your browser — nothing is sent to any server.</p>
+  <p class="page-sub">Upload your employee data as a CSV and all five Revenue Fluent tools will run on your actual numbers. Your data stays in your browser, nothing is sent to any server.</p>
 
   <!-- UPLOAD ZONE -->
   <div class="upload-zone" id="dropZone">
@@ -280,7 +272,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
   <!-- PREVIEW -->
   <div class="preview-section" id="previewSection">
     <div class="preview-header">
-      <div class="preview-title">Data Preview &mdash; Your Organisation</div>
+      <div class="preview-title">Data Preview, Your Organisation</div>
       <button class="preview-clear" id="clearBtn" onclick="clearUpload()">&#x2715; Clear &amp; Remove</button>
     </div>
     <div class="preview-stats" id="previewStats"></div>
@@ -296,7 +288,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:.9
   <!-- TEMPLATE -->
   <div class="template-card">
     <div class="template-card-title">CSV Template &amp; Column Reference</div>
-    <div class="template-card-sub">Your CSV needs these columns. Download the template below — it includes sample data for 10 employees you can replace with your own.</div>
+    <div class="template-card-sub">Your CSV needs these columns. Download the template below, it includes sample data for 10 employees you can replace with your own.</div>
     <table class="col-table">
       <thead><tr><th>Column Name</th><th>What It Is</th><th>Required?</th><th>Example</th></tr></thead>
       <tbody>
@@ -362,7 +354,7 @@ function processFile(file) {
     showStatus('error','File Too Large','Maximum file size is 10MB.');
     return;
   }
-  showStatus('loading','Reading your file…','Parsing CSV — this takes a moment.');
+  showStatus('loading','Reading your file…','Parsing CSV, this takes a moment.');
   var reader = new FileReader();
   reader.onload = function(e) {
     try {
@@ -378,9 +370,9 @@ function processFile(file) {
 
 function parseCSV(text) {
   var lines = text.trim().split(/\r?\n/);
-  if(lines.length < 2) return {error: 'File appears empty — need at least a header row and one data row.'};
+  if(lines.length < 2) return {error: 'File appears empty, need at least a header row and one data row.'};
 
-  // Parse headers — normalise to lowercase, replace spaces with underscores
+  // Parse headers, normalise to lowercase, replace spaces with underscores
   var headers = lines[0].split(',').map(function(h){
     return h.trim().replace(/^["']|["']$/g,'').toLowerCase().replace(/\s+/g,'_');
   });

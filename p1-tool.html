@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The Value Ledger — Revenue Fluent</title>
+<title>The Value Ledger, Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -182,7 +182,7 @@ body{
 .leg-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.6rem;color:#C8A8C0}
 .leg-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 
-/* LEDGER — intentionally quiet */
+/* LEDGER, intentionally quiet */
 .ledger{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;overflow:hidden;margin-bottom:28px;position:relative;animation:hero-pulse 3s ease-in-out infinite}
 .ledger::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(180,40,140,.3),rgba(184,115,51,.2),rgba(180,40,140,.3),transparent)}
 .ledger-hd{display:grid;grid-template-columns:90px minmax(0,1fr) 122px 122px 106px;padding:11px 24px;background:var(--bg3);border-bottom:1px solid var(--border)}
@@ -426,17 +426,9 @@ body{padding-top:0}
   <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
   <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 <div class="sidebar-resize"></div>
-
-  <div style="padding:8px 18px 4px;border-top:1px solid rgba(192,64,154,.08);margin-top:8px">
-    <a href="humacity.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 0;transition:opacity .15s;opacity:.6" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'">
-      <div style="width:6px;height:6px;border-radius:50%;background:#B87333;flex-shrink:0"></div>
-      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#C8A8C0">Built on Humacity</span>
-      <span style="font-family:var(--mono);font-size:.55rem;color:rgba(192,64,154,.4);margin-left:auto">&#8599;</span>
-    </a>
-  </div>
 </aside>
 <script>
-// SHOW WORKINGS — must be global, defined before any onclick fires
+// SHOW WORKINGS, must be global, defined before any onclick fires
 function swToggle(btn){
   if(btn && btn.getAttribute && !btn.getAttribute('data-panel')){
     // called from p3 with (event, btn) signature
@@ -478,7 +470,7 @@ function swToggle(btn){
   </div>
 </div>
 
-<div class="eyebrow"><a href="humacity.html" style="color:rgba(192,64,154,.5);text-decoration:none;transition:color .15s" onmouseover="this.style.color='#D060B0'" onmouseout="this.style.color='rgba(192,64,154,.5)'">Humacity</a> &middot; Revenue Fluent &middot; L1 &middot; The Value Ledger</div>
+<div class="eyebrow">Revenue Fluent &middot; L1 &middot; The Value Ledger</div>
 <div class="switch">
   <label for="scen">Scenario</label>
   <select id="scen"></select>
@@ -508,9 +500,9 @@ function swToggle(btn){
 <div class="hci-body" id="hci_p1_body">
   <div style="font-size:.82rem;color:#C8A8C0;line-height:1.7;margin:14px 0 16px;padding:12px 14px;background:rgba(192,64,154,.04);border-radius:8px;border-left:2px solid rgba(192,64,154,.2)">
 <b style="color:#EED8E8;display:block;margin-bottom:4px">What is the Human Confidence Index?</b>
-Every number in Revenue Fluent is computed from real data. But data reflects the past — your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
+Every number in Revenue Fluent is computed from real data. But data reflects the past, your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
 </div>
-  <div class="hci-factors"><div class="hci-factor" id="hci_p1_f0" onclick="hciTF('hci_p1',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p1_f1" onclick="hciTF('hci_p1',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p1_f2" onclick="hciTF('hci_p1',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p1_f3" onclick="hciTF('hci_p1',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div>
+  <div class="hci-factors"><div class="hci-factor" id="hci_p1_f0" onclick="hciTF('hci_p1',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p1_f1" onclick="hciTF('hci_p1',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p1_f2" onclick="hciTF('hci_p1',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p1_f3" onclick="hciTF('hci_p1',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div>
   <div class="hci-calc" id="hci_p1_calc"></div>
   <table class="hci-scenarios"><tbody id="hci_p1_scen"></tbody></table>
   <div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
@@ -525,7 +517,7 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
     <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
     <div class="dl-title">Downloads</div>
   </div>
-  <div class="dl-sub"><b>Value Ledger Model</b> &mdash; Pre-built ledger with five entry categories and the HR Return Ratio. Populate with your data.</div>
+  <div class="dl-sub"><b>Value Ledger Model</b>, Pre-built ledger with five entry categories and the HR Return Ratio. Populate with your data.</div>
   <div class="dl-buttons">
     <button class="dl-btn dl-btn-excel" onclick="downloadExcel('P1_Value_Ledger_RevenueFluent.xlsx')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6l2 2-2 2M8 10h3"/></svg>
@@ -578,7 +570,7 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
 
 var app = document.getElementById('app');
 if (!window.RF || !window.RF_DATA) {
-  app.innerHTML = '<div class="err">rf-data.js not found — keep it in the same folder as this file.</div>';
+  app.innerHTML = '<div class="err">rf-data.js not found, keep it in the same folder as this file.</div>';
   return;
 }
 
@@ -605,7 +597,7 @@ var HOOKS = {
   'Financial Services':'Every analyst lost is two years of deal memory gone.',
   'Manufacturing Firm':'Two decades of floor knowledge, walking out one retirement at a time.',
   'Sales Organization':'The quota is hit. The pipeline behind it is quietly thinning.',
-  'Consulting Firm':'Utilisation looks healthy — until you map who actually wins the work.',
+  'Consulting Firm':'Utilisation looks healthy, until you map who actually wins the work.',
   'Family Business':'Loyalty kept the mill running. Succession is the question no one asks aloud.',
   'MNC in Asia':'Lifetime employment meets a workforce that no longer assumes it.',
   'Hospitality':'Guests remember the people. The P&L only counts the rooms.',
@@ -650,7 +642,7 @@ function buildAuto(name) {
     entries.push({ id:'E001', date:'2026-Q1', category:'Cost-Saving',
       action:'Retention of '+stars.length+' Star performers',
       cost:Math.round(ss*.05), ret:Math.round(ss*1.8),
-      note:'Replacement cost avoided — 1.8x annual salary per Star retained', auto:true });
+      note:'Replacement cost avoided, 1.8x annual salary per Star retained', auto:true });
   }
   if (revHires.length > 0) {
     var rs = revHires.reduce(function(a,e){ return a+e.salary; }, 0);
@@ -669,16 +661,16 @@ function buildAuto(name) {
   if (tenured.length > 0) {
     var ts = tenured.reduce(function(a,e){ return a+e.salary; },0);
     entries.push({ id:'E004', date:'2026-Q1', category:'Culture & Engagement',
-      action:'Engagement maintenance — '+tenured.length+' tenured employees',
+      action:'Engagement maintenance, '+tenured.length+' tenured employees',
       cost:Math.round(tenured.length*avgSal*.01), ret:Math.round(ts*.08),
       note:'EEI: 8% productivity premium from sustained engagement in long-tenure staff', auto:true });
   }
   if (atRisk.length > 0) {
     var as2 = atRisk.reduce(function(a,e){ return a+e.salary; },0);
     entries.push({ id:'E005', date:'2026-Q1', category:'Risk & Compliance',
-      action:'Performance risk management — '+atRisk.length+' at-risk employees',
+      action:'Performance risk management, '+atRisk.length+' at-risk employees',
       cost:Math.round(atRisk.length*avgSal*.02), ret:Math.round(as2*.6),
-      note:'RMV: exposure contained — unmanaged exits at 2x salary each', auto:true });
+      note:'RMV: exposure contained, unmanaged exits at 2x salary each', auto:true });
   }
   return entries;
 }
@@ -744,17 +736,17 @@ function introHTML(sym) {
       +'<div class="intro-tl">'
         +'<div class="intro-icon">?</div>'
         +'<div><div class="intro-title">What is The Value Ledger?</div>'
-        +'<div class="intro-sub">Read this first &mdash; takes 2 minutes</div></div>'
+        +'<div class="intro-sub">Read this first, takes 2 minutes</div></div>'
       +'</div>'
       +'<div class="intro-chevron" id="introChev">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
     +'</div>'
     +'<div class="intro-body'+(isOpen?' open':'')+'" id="introBody">'
       +'<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div>'
-        +'<div class="intro-sec-txt">The Value Ledger is a <b>financial record of everything HR does</b> — written in the language your CEO and CFO already speak. Not engagement scores. Not headcount numbers. Actual figures, in actual currency, showing what HR contributed to the business.<br><br>Every hire, every retention save, every training programme, every risk resolved — each one gets a line. Each line has a cost and a return. Together they answer the question every HR professional deserves to answer with confidence: <b>what did we actually contribute, and what did it return?</b></div>'
+        +'<div class="intro-sec-txt">The Value Ledger is a <b>financial record of everything HR does</b>, written in the language your CEO and CFO already speak. Not engagement scores. Not headcount numbers. Actual figures, in actual currency, showing what HR contributed to the business.<br><br>Every hire, every retention save, every training programme, every risk resolved, each one gets a line. Each line has a cost and a return. Together they answer the question every HR professional deserves to answer with confidence: <b>what did we actually contribute, and what did it return?</b></div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">Why does this exist?</div>'
-        +'<div class="intro-sec-txt">Most HR professionals do work that has enormous financial value — but they have no way to prove it. The board sees costs. HR knows there is a return. The Value Ledger closes that gap permanently.</div>'
-        +'<div class="intro-story">An HR manager spent two months coaching a high-potential engineer who was close to resigning. The engineer stayed. A year later, she led the product that drove 40% of that year\'s revenue. The HR manager never got credit — because there was no record.<br><br>The Value Ledger would have captured that retention save the day it happened. <b>Cost: the time invested. Return: the replacement cost avoided, plus the revenue impact of keeping the right person in the right role.</b></div>'
+        +'<div class="intro-sec-txt">Most HR professionals do work that has enormous financial value, but they have no way to prove it. The board sees costs. HR knows there is a return. The Value Ledger closes that gap permanently.</div>'
+        +'<div class="intro-story">An HR manager spent two months coaching a high-potential engineer who was close to resigning. The engineer stayed. A year later, she led the product that drove 40% of that year\'s revenue. The HR manager never got credit, because there was no record.<br><br>The Value Ledger would have captured that retention save the day it happened. <b>Cost: the time invested. Return: the replacement cost avoided, plus the revenue impact of keeping the right person in the right role.</b></div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">How does an entry work?</div>'
         +'<div class="intro-sec-txt">Every HR action becomes an entry. Five elements: when it happened, what HR did, what it cost, what it returned, and the net value.</div>'
@@ -771,19 +763,19 @@ function introHTML(sym) {
           +'</div>'
           +'<div class="ex-ann"><div class="ann">When</div><div class="ann">What HR did &amp; how return was calculated</div><div class="ann">HR spent</div><div class="ann">Value returned</div><div class="ann">Net impact</div></div>'
         +'</div>'
-        +'<div class="intro-sec-txt" style="margin-top:10px">The return is always <b>calculated with transparent workings</b> — not guessed, not inflated. Every entry has a methodology you can defend in any room.</div>'
+        +'<div class="intro-sec-txt" style="margin-top:10px">The return is always <b>calculated with transparent workings</b>, not guessed, not inflated. Every entry has a methodology you can defend in any room.</div>'
       +'</div>'
-      +'<div class="intro-transition">Below is your organisation\'s Value Ledger, <b>pre-populated from scenario data</b>. Add your own entries to build the complete picture — every contribution deserves a line.</div>'
+      +'<div class="intro-transition">Below is your organisation\'s Value Ledger, <b>pre-populated from scenario data</b>. Add your own entries to build the complete picture, every contribution deserves a line.</div>'
     +'</div>'
   +'</div>';
 }
 
 function stmtText(sym, ratio, totalRet, totalComp, n) {
   if (ratio < 1)
-    return 'This ledger is <b>incomplete</b> — only '+n+' entries recorded for Q1 2026. Even so, HR activity has returned <b>'+fmt(sym,totalRet)+'</b> against a <b>'+fmt(sym,totalComp)+'</b> comp base. Add your own entries to build the full picture. Every contribution deserves a line.';
+    return 'This ledger is <b>incomplete</b>, only '+n+' entries recorded for Q1 2026. Even so, HR activity has returned <b>'+fmt(sym,totalRet)+'</b> against a <b>'+fmt(sym,totalComp)+'</b> comp base. Add your own entries to build the full picture. Every contribution deserves a line.';
   if (ratio < 2)
-    return 'A <b>'+ratio.toFixed(1)+'x return</b> on the comp base — the ledger is building. <b>'+fmt(sym,totalRet)+'</b> in documented HR value so far. The full picture, when every contribution is entered, is the number you take into the boardroom.';
-  return 'For every '+sym+'1 this organisation invests in HR, it receives <b>'+sym+ratio.toFixed(1)+'</b> back. That is not an HR metric. That is a <b>return on investment</b>. The Value Ledger is the document that proves it — line by line, entry by entry, in the language the board already speaks.';
+    return 'A <b>'+ratio.toFixed(1)+'x return</b> on the comp base, the ledger is building. <b>'+fmt(sym,totalRet)+'</b> in documented HR value so far. The full picture, when every contribution is entered, is the number you take into the boardroom.';
+  return 'For every '+sym+'1 this organisation invests in HR, it receives <b>'+sym+ratio.toFixed(1)+'</b> back. That is not an HR metric. That is a <b>return on investment</b>. The Value Ledger is the document that proves it, line by line, entry by entry, in the language the board already speaks.';
 }
 
 function render(name) {
@@ -822,7 +814,7 @@ function render(name) {
         +'<div class="ratio-lbl">Return on HR Investment &middot; Q1 2026</div>'
         +'<div class="ratio-num'+(rClass?' '+rClass:'')+'" id="ratioNum">'+sym+ratio.toFixed(1)+'</div>'
         +'<div class="ratio-desc">returned for every <b>'+sym+'1</b> invested in HR</div>'
-        +(ratio<1?'<div class="ratio-note">Ledger is partial — add your own entries to see the full return</div>':'')
+        +(ratio<1?'<div class="ratio-note">Ledger is partial, add your own entries to see the full return</div>':'')
       +'</div>'
       +'<div class="hero-divider"></div>'
       +'<div>'
@@ -858,7 +850,7 @@ function render(name) {
     +'<div class="ledger-hd"><span>Period</span><span>Action</span><span>HR Cost</span><span>Return</span><span>Net</span></div>'
     +'<div id="ledger-rows">'+all.map(function(e){ return rowHTML(e,sym); }).join('')+'</div>'
     +'<div class="ledger-total">'
-      +'<div class="total-lbl">TOTAL &mdash; '+all.length+' entries</div>'
+      +'<div class="total-lbl">TOTAL, '+all.length+' entries</div>'
       +'<div class="total-cost">'+fmt(sym,totCost)+'</div>'
       +'<div class="total-ret">'+fmt(sym,totRet)+'</div>'
       +'<div class="total-net '+(totNet>=0?'pos':'neg')+'">'+fmtSigned(sym,totNet)+'</div>'
@@ -924,7 +916,7 @@ function render(name) {
   document.getElementById('addBtn').addEventListener('click', function(){
     var f = document.getElementById('addForm');
     f.classList.toggle('open');
-    this.textContent = f.classList.contains('open') ? '— Close' : '+ Add Entry';
+    this.textContent = f.classList.contains('open') ? ', Close' : '+ Add Entry';
   });
   document.getElementById('cancelBtn').addEventListener('click', function(){
     document.getElementById('addForm').classList.remove('open');

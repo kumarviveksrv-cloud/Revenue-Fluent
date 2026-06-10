@@ -6,7 +6,7 @@
 <link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-<title>Practitioner Profile — Revenue Fluent</title>
+<title>Practitioner Profile, Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -190,14 +190,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
   <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
   <div class="sidebar-resize" id="sbResize"></div>
-
-  <div style="padding:8px 18px 4px;border-top:1px solid rgba(192,64,154,.08);margin-top:8px">
-    <a href="humacity.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 0;transition:opacity .15s;opacity:.6" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'">
-      <div style="width:6px;height:6px;border-radius:50%;background:#B87333;flex-shrink:0"></div>
-      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#C8A8C0">Built on Humacity</span>
-      <span style="font-family:var(--mono);font-size:.55rem;color:rgba(192,64,154,.4);margin-left:auto">&#8599;</span>
-    </a>
-  </div>
 </aside>
 
 <div class="wrap">
@@ -231,9 +223,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
     <div class="hci-global-section" id="hciGlobalSection">
       <div class="hci-global-card">
-        <div class="hci-global-eyebrow">Org Conditions &mdash; Global HCI</div>
+        <div class="hci-global-eyebrow">Org Conditions, Global HCI</div>
         <div class="hci-global-title">How is your organisation right now?</div>
-        <div class="hci-global-sub">These four answers set your <b>Human Confidence Index</b> — a coefficient applied to every calculation across all five tools. Answer once here. All tools use it automatically. Override on any individual tool if needed.</div>
+        <div class="hci-global-sub">These four answers set your <b>Human Confidence Index</b>, a coefficient applied to every calculation across all five tools. Answer once here. All tools use it automatically. Override on any individual tool if needed.</div>
         <div class="hci-global-factors" id="hciGlobalFactors"></div>
         <div class="hci-coeff-preview">
           <div class="hci-coeff-num" id="hciCoeffPreview">0.70x</div>
@@ -243,7 +235,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8l4 4 8-8"/></svg>
           Save HCI Settings
         </button>
-        <div class="hci-saved-note" id="hciSavedNote">&#10003; Saved — all five tools will use this coefficient</div>
+        <div class="hci-saved-note" id="hciSavedNote">&#10003; Saved, all five tools will use this coefficient</div>
         <div class="hci-last-set" id="hciLastSet"></div>
       </div>
     </div>
@@ -264,7 +256,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="onboard-header">
       <div class="onboard-eyebrow" id="onboardEyebrow">Set Up Your Profile</div>
       <h1 class="onboard-title" id="onboardTitle">Four questions. Sixty seconds.</h1>
-      <p class="onboard-sub">Revenue Fluent will tailor your experience based on your role, context, and priorities. The output calculations never change — only the depth of explanation and recommended journey.</p>
+      <p class="onboard-sub">Revenue Fluent will tailor your experience based on your role, context, and priorities. The output calculations never change, only the depth of explanation and recommended journey.</p>
     </div>
 
     <div class="progress-bar" id="progressBar">
@@ -299,7 +291,7 @@ var QUESTIONS = [
   {
     id:'role', step:'Question 1 of 4',
     text:'What is your role in HR?',
-    sub:'This shapes how the platform frames its outputs — depth of explanation, recommended starting pillar, tone.',
+    sub:'This shapes how the platform frames its outputs, depth of explanation, recommended starting pillar, tone.',
     options:[
       {value:'HRBP',icon:'👤',label:'HRBP / HR Manager',desc:'You partner with business units and translate HR into people decisions.'},
       {value:'HR Head',icon:'🏢',label:'HR Head / HR Director',desc:'You lead the HR function and are accountable to the C-suite.'},
@@ -323,7 +315,7 @@ var QUESTIONS = [
     text:'How comfortable are you with financial language?',
     sub:'This determines how much context the platform layers into outputs.',
     options:[
-      {value:'Building',icon:'📖',label:'Still building',desc:'P&L, balance sheet — you know the words but want more context as you go.'},
+      {value:'Building',icon:'📖',label:'Still building',desc:'P&L, balance sheet, you know the words but want more context as you go.'},
       {value:'Comfortable',icon:'📊',label:'Comfortable',desc:'You can read a P&L and hold your own in a finance conversation.'},
       {value:'Fluent',icon:'💡',label:'Fluent',desc:'You think in financial terms naturally. Give me the numbers.'},
       {value:'CFO Level',icon:'🎯',label:'I present to CFOs regularly',desc:'You are in the room when financial decisions are made. Numbers only.'},
@@ -351,7 +343,7 @@ function buildProfile() {
     'Attrition':{pillar:'L1',name:'The Value Ledger',file:'p1-tool.html',sub:'Quantify the cost of exits and the value of every retention save.'},
     'Talent Quality':{pillar:'L2',name:'The Talent Premium',file:'p2-tool.html',sub:'The financial value of having better-than-average people at the same cost.'},
     'Board Credibility':{pillar:'L4',name:'The Human P&L',file:'p4-tool.html',sub:'The document that changes the boardroom conversation permanently.'},
-    'Culture':{pillar:'L3',name:'Org Vitals',file:'p3-tool.html',sub:'Five vital signs. Binary signals. Your organisation DNA — named.'},
+    'Culture':{pillar:'L3',name:'Org Vitals',file:'p3-tool.html',sub:'Five vital signs. Binary signals. Your organisation DNA, named.'},
     'Growth Readiness':{pillar:'L5',name:'The Human Balance Sheet',file:'p5-tool.html',sub:'Does your organisation have the human capital to carry its next stage?'},
   };
   var scenarioMap = {Startup:'High-Growth Tech Startup',Enterprise:'Corporate America','Mid-Market':'Professional Services Firm','Public Sector':'Government Agency'};
@@ -375,7 +367,7 @@ function showViewMode(p) {
   var roleLabels = {HRBP:'HRBP',CHRO:'CHRO','HR Head':'HR Director','Consultant':'HR Consultant'};
   var roleSubs = {
     CHRO:'Numbers-first experience. Minimal hand-holding. Lead with the headline.',
-    'HR Head':'Full context alongside the numbers — enough to explain every figure to your CEO.',
+    'HR Head':'Full context alongside the numbers, enough to explain every figure to your CEO.',
     HRBP:'Step-by-step financial logic. Every number comes with a plain-language explanation.',
     Consultant:'Methodology and numbers both visible. Show Workings is your friend.',
   };
@@ -518,7 +510,7 @@ function confirmClear() {
 // ── HCI GLOBAL ON PROFILE PAGE ────────────────────────────────────────────
 var HCI_FACTORS_DEF = [
   {name:'Leadership Stability', desc:'Is leadership stable, present, and actively engaged right now?'},
-  {name:'Org Disruption Free', desc:'Is the org free from major disruption — restructure, M\u0026A, or layoffs?'},
+  {name:'Org Disruption Free', desc:'Is the org free from major disruption, restructure, M\u0026A, or layoffs?'},
   {name:'Culture Health', desc:'Is the culture broadly functional and not in crisis?'},
   {name:'Execution Momentum', desc:'Is the org executing well against its current strategic priorities?'},
 ];

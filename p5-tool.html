@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The Human Balance Sheet — Revenue Fluent</title>
+<title>The Human Balance Sheet, Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -98,7 +98,7 @@ body{
 .context{font-size:.84rem;color:#C8D8F0;line-height:1.7}
 .context b{color:var(--text-cool);font-weight:500}
 
-/* BALANCE SHEET — two columns */
+/* BALANCE SHEET, two columns */
 .bs-wrap{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:16px;overflow:hidden;margin-bottom:28px;animation:hero-pulse 3s ease-in-out infinite;position:relative}
 .bs-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.4),rgba(184,115,51,.2),rgba(160,20,120,.4),transparent)}
 .bs-header{padding:16px 28px;background:linear-gradient(90deg,rgba(160,20,120,.06),transparent);border-bottom:1px solid var(--cobalt-border);display:flex;align-items:center;justify-content:space-between}
@@ -301,14 +301,6 @@ body{
 <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
 <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 <div class="sidebar-resize"></div>
-
-  <div style="padding:8px 18px 4px;border-top:1px solid rgba(192,64,154,.08);margin-top:8px">
-    <a href="humacity.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 0;transition:opacity .15s;opacity:.6" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'">
-      <div style="width:6px;height:6px;border-radius:50%;background:#B87333;flex-shrink:0"></div>
-      <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#C8A8C0">Built on Humacity</span>
-      <span style="font-family:var(--mono);font-size:.55rem;color:rgba(192,64,154,.4);margin-left:auto">&#8599;</span>
-    </a>
-  </div>
 </aside>
 <script>
 (function(){var s=new URLSearchParams(location.search).get('scenario')||'';if(!s)return;document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){var h=a.getAttribute('href');if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0)a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(s);});})();
@@ -326,7 +318,7 @@ body{
   </div>
 </div>
 
-<div class="eyebrow"><a href="humacity.html" style="color:rgba(192,64,154,.5);text-decoration:none;transition:color .15s" onmouseover="this.style.color='#D060B0'" onmouseout="this.style.color='rgba(192,64,154,.5)'">Humacity</a> &middot; Revenue Fluent &middot; L5 &middot; The Human Balance Sheet</div>
+<div class="eyebrow">Revenue Fluent &middot; L5 &middot; The Human Balance Sheet</div>
 <div class="switch">
   <label for="scen">Scenario</label>
   <select id="scen"></select>
@@ -334,9 +326,9 @@ body{
 </div>
 <div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p5')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Human Balance Sheet for current org confidence</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p5_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p5_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p5_body"><div style="font-size:.82rem;color:#C8A8C0;line-height:1.7;margin:14px 0 16px;padding:12px 14px;background:rgba(192,64,154,.04);border-radius:8px;border-left:2px solid rgba(192,64,154,.2)">
 <b style="color:#EED8E8;display:block;margin-bottom:4px">What is the Human Confidence Index?</b>
-Every number in Revenue Fluent is computed from real data. But data reflects the past — your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
+Every number in Revenue Fluent is computed from real data. But data reflects the past, your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
 </div>
-<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p5_f0" onclick="hciTF('hci_p5',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p5_f1" onclick="hciTF('hci_p5',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption — restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p5_f2" onclick="hciTF('hci_p5',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p5_f3" onclick="hciTF('hci_p5',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p5_calc"></div><table class="hci-scenarios"><tbody id="hci_p5_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
+<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p5_f0" onclick="hciTF('hci_p5',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p5_f1" onclick="hciTF('hci_p5',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p5_f2" onclick="hciTF('hci_p5',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p5_f3" onclick="hciTF('hci_p5',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p5_calc"></div><table class="hci-scenarios"><tbody id="hci_p5_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
   <div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div><div class="hci-decay" id="hci_p5_decay"></div></div></div>
 <div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
   <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a>
@@ -350,7 +342,7 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
     <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
     <div class="dl-title">Downloads</div>
   </div>
-  <div class="dl-sub"><b>Human Balance Sheet</b> &mdash; Two-column balance sheet. Five assets, five liabilities, Net Human Worth auto-calculates.</div>
+  <div class="dl-sub"><b>Human Balance Sheet</b>, Two-column balance sheet. Five assets, five liabilities, Net Human Worth auto-calculates.</div>
   <div class="dl-buttons">
     <button class="dl-btn dl-btn-excel" onclick="downloadExcel('P5_Human_Balance_Sheet_RevenueFluent.xlsx')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6l2 2-2 2M8 10h3"/></svg>
@@ -376,7 +368,7 @@ function hciToggle(id){var b=document.getElementById(id+'_body'),c=document.getE
 function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);}
 function _hciC(id){var s=_hci[id];if(!s)return 1;return Math.round((0.7+s.f.filter(Boolean).length*0.15)*100)/100;}
 function _hciFmt(sym,v){var a=Math.abs(v),sg=v<0?'-':'';if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';if(a>=1000)return sg+sym+Math.round(a/1000)+'K';return sg+sym+Math.round(a);}
-function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal — 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk — monitor closely.':'Significant risk — intervention recommended.')+'</div>';}}}
+function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal, 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk, monitor closely.':'Significant risk, intervention recommended.')+'</div>';}}}
 function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:base||0,sym:sym||'$',decay:decay||null};_hciR(id);}
 function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
 </script>
@@ -447,7 +439,7 @@ var HOOKS = {
   'Hospitality': 'The property is on the balance sheet. The people who fill it with meaning now are too.',
   'Corporate America': 'The plant has a book value. The workforce that runs it has a human worth.',
   'Government Agency': 'Public institutions have always had human capital. Now it has a balance sheet.',
-  'Higher Education': 'The endowment is invested. The faculty are the other endowment — the human one.',
+  'Higher Education': 'The endowment is invested. The faculty are the other endowment, the human one.',
   'Social Enterprise': 'The mission is the asset. The culture is the moat. Both are on this balance sheet.'
 };
 
@@ -555,10 +547,10 @@ function computeBS(name) {
 function stmtText(d) {
   var sym = d.sym;
   if (d.netHumanWorth < 0)
-    return 'The Human Balance Sheet shows a <b>negative Net Human Worth of '+fmt(sym,d.netHumanWorth)+'</b>. Human liabilities exceed human assets. This organisation is drawing on its human capital faster than it is building it. Without intervention, the gap compounds. The board needs to see this statement — and the liability lines tell them exactly where to act.';
+    return 'The Human Balance Sheet shows a <b>negative Net Human Worth of '+fmt(sym,d.netHumanWorth)+'</b>. Human liabilities exceed human assets. This organisation is drawing on its human capital faster than it is building it. Without intervention, the gap compounds. The board needs to see this statement, and the liability lines tell them exactly where to act.';
   if (d.totalLiabilities > d.totalAssets * 0.5)
-    return 'Net Human Worth stands at <b>'+fmt(sym,d.netHumanWorth)+'</b> — positive, but the liability position is significant at <b>'+fmt(sym,d.totalLiabilities)+'</b>. The assets are real. The liabilities are real too. A healthy Human Balance Sheet requires both sides to be managed, not just the asset column.';
-  return 'Net Human Worth: <b>'+fmt(sym,d.netHumanWorth)+'</b>. Assets outweigh liabilities by a healthy margin. The human capital position of this organisation is strong — and now it is filed. This is the statement that answers the question every board asks and no HR function has ever answered before: <b>what are our people actually worth?</b>';
+    return 'Net Human Worth stands at <b>'+fmt(sym,d.netHumanWorth)+'</b>, positive, but the liability position is significant at <b>'+fmt(sym,d.totalLiabilities)+'</b>. The assets are real. The liabilities are real too. A healthy Human Balance Sheet requires both sides to be managed, not just the asset column.';
+  return 'Net Human Worth: <b>'+fmt(sym,d.netHumanWorth)+'</b>. Assets outweigh liabilities by a healthy margin. The human capital position of this organisation is strong, and now it is filed. This is the statement that answers the question every board asks and no HR function has ever answered before: <b>what are our people actually worth?</b>';
 }
 
 function render() {
@@ -587,20 +579,20 @@ function render() {
       +'<div class="intro-tl">'
         +'<div class="intro-icon">?</div>'
         +'<div><div class="intro-title">What is The Human Balance Sheet?</div>'
-        +'<div class="intro-sub">Read this first &mdash; takes 2 minutes</div></div>'
+        +'<div class="intro-sub">Read this first, takes 2 minutes</div></div>'
       +'</div>'
       +'<div class="intro-chevron" id="introChev">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
     +'</div>'
     +'<div class="intro-body'+(isOpen?' open':'')+'" id="introBody">'
       +'<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div>'
-        +'<div class="intro-sec-txt">Every company files a financial balance sheet. None of them file the one that actually predicts next year\'s performance.<br><br>The Human Balance Sheet answers the same question as a financial balance sheet — <b>what does this entity own, and what does it owe</b> — but in human capital terms. Five assets. Five liabilities. One reconciling figure: Net Human Worth.<br><br>The form does the work. The moment someone sees it formatted as a balance sheet, they cannot dismiss it as soft HR data. They already know how to read it.</div>'
+        +'<div class="intro-sec-txt">Every company files a financial balance sheet. None of them file the one that actually predicts next year\'s performance.<br><br>The Human Balance Sheet answers the same question as a financial balance sheet, <b>what does this entity own, and what does it owe</b>, but in human capital terms. Five assets. Five liabilities. One reconciling figure: Net Human Worth.<br><br>The form does the work. The moment someone sees it formatted as a balance sheet, they cannot dismiss it as soft HR data. They already know how to read it.</div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">Why the format matters</div>'
-        +'<div class="intro-sec-txt">Finance has a balance sheet. Human capital deserves one too. That sentence is the entire argument. The format is not decoration — it is the argument. If the form does not match the concept, the concept collapses.</div>'
+        +'<div class="intro-sec-txt">Finance has a balance sheet. Human capital deserves one too. That sentence is the entire argument. The format is not decoration, it is the argument. If the form does not match the concept, the concept collapses.</div>'
         +'<div class="intro-story">A CFO had dismissed every HR presentation for three years. The numbers were soft, the methodology was unclear, the format was always slides.<br><br>The CHRO brought in a two-column balance sheet. The CFO picked it up expecting another HR report. He put it down saying it was the first time HR had spoken his language.<br><br><b>The format did the work. It always does.</b></div>'
       +'</div>'
       +'<div class="intro-sec"><div class="intro-sec-lbl">How it connects to the platform</div>'
-        +'<div class="intro-sec-txt">This is the capstone. Every pillar feeds into it. The Value Ledger provides the activity record. The Talent Premium explains the asset quality. The Human P&amp;L contributes the retained earnings. The Human Balance Sheet is where it all lands — the complete picture of what this organisation\'s human capital is worth.</div>'
+        +'<div class="intro-sec-txt">This is the capstone. Every pillar feeds into it. The Value Ledger provides the activity record. The Talent Premium explains the asset quality. The Human P&amp;L contributes the retained earnings. The Human Balance Sheet is where it all lands, the complete picture of what this organisation\'s human capital is worth.</div>'
       +'</div>'
       +'<div class="intro-transition">Below is the Human Balance Sheet for this scenario, <b>computed from real data</b>. Assets on the left. Liabilities on the right. Net Human Worth at the bottom.</div>'
     +'</div>'
@@ -612,7 +604,7 @@ function render() {
     +'<div>'
       +'<div class="nhw-lbl">Net Human Worth &middot; '+sum.geo+'</div>'
       +'<div class="nhw-num"'+(nhwPos?'':' style="-webkit-text-fill-color:var(--red)"')+'>'+fmt(sym,d.netHumanWorth)+'</div>'
-      +'<div class="nhw-desc">the complete human capital position of this organisation — <b>assets minus liabilities</b> plus retained earnings from the Human P&amp;L</div>'
+      +'<div class="nhw-desc">the complete human capital position of this organisation, <b>assets minus liabilities</b> plus retained earnings from the Human P&amp;L</div>'
     +'</div>'
     +'<div class="hero-divider"></div>'
     +'<div>'
@@ -635,10 +627,10 @@ function render() {
     +'<div>'
       +'<div class="bs-col-head assets"><span>Human Assets</span></div>'
       +bsRow('Talent Equity', d.talentEquity, sym, 'Performance/potential value of Stars, HiPos above grade benchmark', true)
-      +bsRow('Institutional Knowledge', d.instKnowledge, sym, 'Senior tenure × salary — knowledge that walks out when they leave', true)
-      +bsRow('Organisational Learning Velocity', d.orgLearning, sym, 'Emerging talent pipeline — future capability being built now', true)
+      +bsRow('Institutional Knowledge', d.instKnowledge, sym, 'Senior tenure × salary, knowledge that walks out when they leave', true)
+      +bsRow('Organisational Learning Velocity', d.orgLearning, sym, 'Emerging talent pipeline, future capability being built now', true)
       +bsRow('Relationship Capital', d.relCapital, sym, 'Revenue-dept tenure × client relationship value', true)
-      +bsRow('Culture Asset', d.cultureAsset, sym, 'Long-tenure engagement premium — the culture that reduces attrition', true)
+      +bsRow('Culture Asset', d.cultureAsset, sym, 'Long-tenure engagement premium, the culture that reduces attrition', true)
       +'<div class="bs-total"><div class="bs-total-label">= TOTAL HUMAN ASSETS</div><div class="bs-total-val pos">'+fmt(sym,d.totalAssets)+'</div></div>'
     +'</div>'
 
@@ -651,8 +643,8 @@ function render() {
       +bsRow('Talent Concentration Risk', d.talentConc, sym, 'Risk from at-risk employees + HiPos who may depart', false)
       +bsRow('Skill Debt', d.skillDebt, sym, 'Gap between current skills and skills needed in 2-3 years', false)
       +bsRow('Growth Readiness Gap', d.growthGap, sym, 'Cost of unpreparedness for the organisation\'s next stage', false)
-      +bsRow('Culture Liability', d.cultureLiab, sym, 'Financial cost of known dysfunction — underperformers, disengagement', false)
-      +bsRow('Workforce Obsolescence Risk', d.workforceObs, sym, 'Tenured employees below grade benchmark — a drag, not a gap', false)
+      +bsRow('Culture Liability', d.cultureLiab, sym, 'Financial cost of known dysfunction, underperformers, disengagement', false)
+      +bsRow('Workforce Obsolescence Risk', d.workforceObs, sym, 'Tenured employees below grade benchmark, a drag, not a gap', false)
       +'<div class="bs-total"><div class="bs-total-label">= TOTAL HUMAN LIABILITIES</div><div class="bs-total-val neg">'+fmt(sym,d.totalLiabilities)+'</div></div>'
     +'</div>'
 
