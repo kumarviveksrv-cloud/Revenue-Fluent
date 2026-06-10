@@ -619,8 +619,8 @@ function render(name) {
 
   // HUMACITY BAND, always visible
   h += '<div class="humacity-band">'
-    +'<div class="hum-label">Revenue Fluent Intelligence</div>'
-    +'<div class="hum-text"><span class="hum-word">Humacity</span> is the quality of human capital in an organisation, and every organisation has it, whether they measure it or not. <b>The Talent Premium is how we express your Humacity in financial terms.</b> The number below is what your people quality is actually worth.</div>'
+    +'<div class="hum-label">Built on Humacity</div>'
+    +'<div class="hum-text"><span class="hum-word">Humacity</span> is the fundamental quality of human capital in an organisation — every organisation has it, whether they measure it or not. <b>Most organisations pay for people. Almost none of them know what they are actually getting back.</b> The number below is the financial expression of your Humacity: what your people quality is worth, in currency, right now.</div>'
     +'</div>';
 
   // HERO
@@ -656,6 +656,11 @@ function render(name) {
     +'<div class="sec-sub">Where the premium is generated, and where it is lost</div>'
     +'</div>';
 
+  // Pre-compute Show Workings data
+  var gradeCount = Object.keys((function(){var m={};s.employees.forEach(function(e){m[e.grade]=1;});return m;})()).length;
+  var keeperCount = s.employees.filter(function(e){return ['Star','High Performer','High Potential'].indexOf(e.placement)>=0;}).length;
+  var recentCount = s.employees.filter(function(e){return e.tenure<=1;}).length;
+
   h += '<div class="components">'
 
     // Performance Premium
@@ -664,6 +669,14 @@ function render(name) {
       +'<div class="comp-val '+(d.perfPremium>=0?'pos':'neg')+'">'+fmt(sym,d.perfPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.perfPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.perfPremium,maxComp)+'%"></div></div>'
       +'<div class="comp-desc">Are your people outperforming their grade baseline? This measures the aggregate salary-weighted performance surplus across the entire organisation. Positive means your people are delivering above what their grade benchmark predicts.</div>'
+      +'<button class="sw-trigger" data-panel="sw_perf" onclick="swToggle(this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h10"/><path d="M12 10l2 2-2 2"/></svg>Show Workings</button>'
+      +'<div class="sw-panel" id="sw_perf">'
+        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><code class="sw-formula">Sum over all employees: (perfScore &minus; gradeAvg) &times; salary</code></div></div>'
+        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+d.employeeCount+'</b> employees across <b>'+gradeCount+'</b> grade levels. Grade average computed from all employees at that grade within this scenario.</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Logic</div><div class="sw-val">Each employee is compared to their own grade peers, not to the whole org. A surplus perfScore &times; their salary = their performance premium contribution. Negative means below grade average.</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val sw-result">'+fmt(sym,d.perfPremium)+'</div></div>'
+        +'<div class="sw-note">Sensitivity: a 0.1 shift in average perfScore across the org moves this figure by approximately '+fmt(sym,Math.round(d.totalComp*0.1))+'.</div>'
+      +'</div>'
     +'</div>'
 
     // Retention Quality Premium
@@ -672,6 +685,14 @@ function render(name) {
       +'<div class="comp-val '+(d.retPremium>=0?'pos':'neg')+'">'+fmt(sym,d.retPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.retPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.retPremium,maxComp)+'%"></div></div>'
       +'<div class="comp-desc">Are you retaining the right people, not just any people? This measures the financial value concentrated in your Stars, High Performers, and High Potentials who are still here. When they leave, this number falls.</div>'
+      +'<button class="sw-trigger" data-panel="sw_ret" onclick="swToggle(this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h10"/><path d="M12 10l2 2-2 2"/></svg>Show Workings</button>'
+      +'<div class="sw-panel" id="sw_ret">'
+        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><code class="sw-formula">For each keeper: (perfScore &minus; gradeAvg) &times; salary &times; 0.5 + replaceCost &times; 0.1</code><br><span style="font-size:.72rem;color:#C8A8C0">replaceCost = salary &times; 1.5. Applied only where perfScore &gt; gradeAvg.</span></div></div>'
+        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+keeperCount+'</b> employees classified as Star, High Performer, or High Potential in this scenario.</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Logic</div><div class="sw-val">Two signals combined: the performance surplus of each keeper (what they deliver above baseline) plus the avoided replacement cost premium (10% of 1.5x salary). The 0.5 multiplier reflects that only part of the performance surplus is directly attributable to retention vs. hiring.</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val sw-result">'+fmt(sym,d.retPremium)+'</div></div>'
+        +'<div class="sw-note">Sensitivity: losing one Star from this org reduces this figure by an estimated '+fmt(sym,Math.round(d.retPremium/Math.max(keeperCount,1)))+' on average.</div>'
+      +'</div>'
     +'</div>'
 
     // Hiring Quality Premium
@@ -680,6 +701,14 @@ function render(name) {
       +'<div class="comp-val '+(d.hiringPremium>=0?'pos':'neg')+'">'+fmt(sym,d.hiringPremium)+'</div>'
       +'<div class="comp-bar"><div class="comp-fill '+(d.hiringPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.hiringPremium,maxComp)+'%"></div></div>'
       +'<div class="comp-desc">Are your recent hires outperforming what a random market hire would deliver? Measured from employees with under 1 year tenure against their grade benchmark.</div>'
+      +'<button class="sw-trigger" data-panel="sw_hire" onclick="swToggle(this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h10"/><path d="M12 10l2 2-2 2"/></svg>Show Workings</button>'
+      +'<div class="sw-panel" id="sw_hire">'
+        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><code class="sw-formula">For each recent hire: (perfScore &minus; gradeAvg) &times; salary, where perfScore &gt; gradeAvg</code></div></div>'
+        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+recentCount+'</b> employees with tenure under 1 year in this scenario, measured against their grade average.</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Logic</div><div class="sw-val">Only surplus-generating hires contribute (perfScore above grade average). Hires below baseline are excluded from the premium but are a signal of hiring quality risk. The grade average benchmark is drawn from all employees at that grade, not just recent hires.</div></div>'
+        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val sw-result">'+fmt(sym,d.hiringPremium)+'</div></div>'
+        +'<div class="sw-note">Caveat: new hire performance is also influenced by onboarding quality and manager quality, not hiring decisions alone. This figure reflects combined effect.</div>'
+      +'</div>'
       +'<div class="comp-caveat">Note: new hire performance is also influenced by onboarding quality and manager quality, not hiring decisions alone.</div>'
     +'</div>'
 
