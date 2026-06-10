@@ -34,7 +34,7 @@ body{
   background-size:100% 100%,100% 100%,52px 52px,52px 52px;
   min-height:100vh;
 }
-.wrap{max-width:1060px;margin:0 auto;padding:36px 40px 80px}
+.wrap{max-width:1060px;margin-left:var(--sidebar);padding:36px 40px 80px}
 
 /* NAV */
 .crumb{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:32px;flex-wrap:wrap}
@@ -178,16 +178,16 @@ body{
 :root{--sidebar:220px}
 .sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.2);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto}
 .sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:rgba(180,40,140,.2);border-radius:2px}
-.sb-brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid rgba(180,40,140,.18);text-decoration:none;flex-shrink:0}
+.sb-brand{display:flex;align-items:center;gap:10px;padding:12px 14px 10px;border-bottom:1px solid rgba(180,40,140,.18);text-decoration:none;flex-shrink:0}
 .sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
 .sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
-.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
-.sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-section{padding:8px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
+.sb-item{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
 .sb-item:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
 .sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
 .sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
-.sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
-.sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tools-section{padding:6px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
 .sb-tool:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
 .sb-tool.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
 .sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:#D060B0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
@@ -281,10 +281,12 @@ body{
 </head>
 <body>
 <aside class="sidebar">
-<a href="index.html" class="sb-brand" style="padding:14px 14px 12px;"><img src="logo.png" alt="Revenue Fluent" style="width:100%;max-width:160px;height:auto;object-fit:contain;filter:brightness(1.4) contrast(1.1) drop-shadow(0 0 8px rgba(192,64,154,.3))"/></a>
+<a href="index.html" class="sb-brand" style="padding:10px 12px 8px;"><img src="logo.png" alt="Revenue Fluent" style="width:100%;max-width:150px;max-height:44px;height:auto;object-fit:contain;filter:brightness(1.4) contrast(1.1) drop-shadow(0 0 8px rgba(192,64,154,.3))"/></a>
 <div class="sb-section">Platform</div>
 <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
 <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
+  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
 <div class="sb-tools-section">The Five Pillars</div>
 <a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
 <a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
