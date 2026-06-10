@@ -186,6 +186,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
       <span class="chip" data-f="currency" data-v="SGD">SGD</span>
       <span class="chip" data-f="currency" data-v="USD">USD</span>
     </div>
+    <div class="frow">
+      <span class="flabel">Org Size</span>
+      <span class="chip on" data-f="orgsize" data-v="All">All</span>
+      <span class="chip" data-f="orgsize" data-v="Startup">Startup</span>
+      <span class="chip" data-f="orgsize" data-v="Mid-Market">Mid-Market</span>
+      <span class="chip" data-f="orgsize" data-v="Enterprise">Enterprise</span>
+      <span class="chip" data-f="orgsize" data-v="Public &amp; Institutional">Public &amp; Institutional</span>
+    </div>
   </div>
 
   <div class="grid" id="grid"></div>
@@ -196,7 +204,25 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 (function(){
   if(!window.RF){document.getElementById('grid').innerHTML='<div class="no-results">rf-data.js not found.</div>';return;}
 
-  var filters={industry:'All',geo:'All',currency:'All'};
+  var filters={industry:'All',geo:'All',currency:'All',orgsize:'All'};
+
+  var ORG_SIZE={
+    'High-Growth Tech Startup':'Startup',
+    'Remote-First SaaS':'Startup',
+    'Social Enterprise':'Startup',
+    'Professional Services Firm':'Mid-Market',
+    'Sales Organization':'Mid-Market',
+    'Consulting Firm':'Mid-Market',
+    'Family Business':'Mid-Market',
+    'Hospitality':'Mid-Market',
+    'Enterprise Healthcare':'Enterprise',
+    'Financial Services':'Enterprise',
+    'Manufacturing Firm':'Enterprise',
+    'MNC in Asia':'Enterprise',
+    'Corporate America':'Enterprise',
+    'Government Agency':'Public & Institutional',
+    'Higher Education':'Public & Institutional'
+  };
 
   var HOOKS={
     'High-Growth Tech Startup':'40% of your revenue rides on 20 people. Most boards never see that line.',
@@ -235,7 +261,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
       var iMatch=filters.industry==='All'||ind.includes(filters.industry);
       var gMatch=filters.geo==='All'||geo.includes(filters.geo);
       var cMatch=filters.currency==='All'||curName===filters.currency;
-      if(!iMatch||!gMatch||!cMatch)return null;
+      var sizeMatch=filters.orgsize==='All'||(ORG_SIZE[name]===filters.orgsize);
+      if(!iMatch||!gMatch||!cMatch||!sizeMatch)return null;
       return {name:name,s:s,sum:sum,curName:curName,ind:ind,geo:geo,
         totalComp:sum.totalComp,stars:sum.stars,atRisk:sum.atRisk,
         depts:sum.depts,avgPerf:sum.avgPerf};
@@ -247,7 +274,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
       return '<div class="card" data-name="'+d.name+'">'
         +'<div class="card-top">'
           +'<div><div class="card-name">'+d.name+'</div>'
-          +'<div class="card-tags"><span class="card-tag">'+d.ind+'</span><span class="card-tag">'+d.geo+'</span></div></div>'
+          +'<div class="card-tags"><span class="card-tag">'+d.ind+'</span><span class="card-tag">'+d.geo+'</span><span class="card-tag" style="border-color:rgba(192,64,154,.35);color:#D878BC">'+ORG_SIZE[d.name]+'</span></div></div>'
           +'<div class="card-cur">'+d.s.symbol+' '+d.curName+'</div>'
         +'</div>'
         +'<div class="card-hook">'+(HOOKS[d.name]||'')+'</div>'
