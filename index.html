@@ -139,6 +139,27 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   .section,.footer{padding:60px 40px}
   .topbar{padding:0 24px}
 }
+@media(max-width:600px){
+  .topbar{padding:0 16px;height:52px}
+  .tb-links{display:none}
+  .tb-enter{padding:6px 14px;font-size:.6rem}
+  .hero{padding:72px 20px 40px;gap:28px}
+  .hero-headline{font-size:2.6rem;letter-spacing:-.02em}
+  .hero-sub{font-size:.92rem}
+  .hero-pills{gap:6px}
+  .pill{font-size:.58rem;padding:5px 10px}
+  .hero-ctas{flex-direction:column;gap:10px}
+  .cta-primary,.cta-secondary{width:100%;justify-content:center;text-align:center}
+  .orb-wrap{max-width:280px;height:280px}
+  .pillars-grid{grid-template-columns:1fr}
+  .pillars-grid .p-card:last-child{grid-column:auto}
+  .data-grid{grid-template-columns:repeat(2,1fr)}
+  .pricing-grid{grid-template-columns:1fr}
+  .section{padding:48px 20px}
+  .footer{padding:24px 20px;flex-direction:column;gap:8px;text-align:center}
+  body{overflow-x:hidden}
+  html{overflow-x:hidden}
+}
 </style>
 </head>
 <body>
@@ -167,7 +188,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
       A new language<br>for HR.
       <span class="gold">The language<br>of Revenue.</span>
     </h1>
-    <p class="hero-sub">Five intelligence tools that translate every people decision into financial language — in the language your CEO and CFO already speak.</p>
+    <p class="hero-sub">Five intelligence tools that translate every people decision into financial language, in the language your CEO and CFO already speak.</p>
     <div class="hero-pills">
       <div class="pill"><span>5</span> Intelligence Tools</div>
       <div class="pill"><span>750</span> People Modelled</div>
