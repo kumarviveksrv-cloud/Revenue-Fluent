@@ -171,22 +171,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <aside class="sidebar" id="mainSidebar">
   <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:176px;object-fit:contain;filter:brightness(1.3) drop-shadow(0 0 10px rgba(192,64,154,.25))"/></a>
   <div class="sb-section">Platform</div>
-  <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
-  <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
-  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
-  <a href="profile.html" class="sb-item active"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
-  <div class="sb-tools-section">The Five Pillars</div>
-  <a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
-  <a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
-  <a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
-  <a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
-  <a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
-  <div class="sb-section">Legal</div>
-  <a href="privacy.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5 2v4c0 3-2 5-5 6C5 13 3 11 3 8V4l5-2z"/></svg>Privacy Policy</a>
-  <a href="terms.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zM5 6h6M5 9h6M5 12h4"/></svg>Terms of Service</a>
-  <div class="sb-section">More</div>
-  <a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
-  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
   <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
   <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
   <div class="sidebar-resize" id="sbResize"></div>
@@ -255,7 +239,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="onboard-mode" id="onboardMode">
     <div class="onboard-header">
       <div class="onboard-eyebrow" id="onboardEyebrow">Set Up Your Profile</div>
-      <h1 class="onboard-title" id="onboardTitle">Four questions. Sixty seconds.</h1>
+      <h1 class="onboard-title" id="onboardTitle">Five questions. Sixty seconds.</h1>
       <p class="onboard-sub">Revenue Fluent will tailor your experience based on your role, context, and priorities. The output calculations never change, only the depth of explanation and recommended journey.</p>
     </div>
 
@@ -289,29 +273,46 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <script>
 var QUESTIONS = [
   {
-    id:'role', step:'Question 1 of 4',
+    id:'role', step:'Question 1 of 5',
     text:'What is your role in HR?',
     sub:'This shapes how the platform frames its outputs, depth of explanation, recommended starting pillar, tone.',
     options:[
       {value:'HRBP',icon:'👤',label:'HRBP / HR Manager',desc:'You partner with business units and translate HR into people decisions.'},
-      {value:'HR Head',icon:'🏢',label:'HR Head / HR Director',desc:'You lead the HR function and are accountable to the C-suite.'},
+      {value:'HR Specialist',icon:'🔬',label:'HR Specialist',desc:'You own a specific domain, compensation, L&D, talent acquisition, or HR ops.'},
+      {value:'HR Generalist',icon:'🔄',label:'HR Generalist',desc:'You cover the full spectrum. One person, every people problem.'},
+      {value:'Startup HR',icon:'🚀',label:'Startup HR',desc:'You are the HR function. Solo or near-solo, building from scratch.'},
+      {value:'HR Head',icon:'🏢',label:'VP HR / HR Head / HR Director',desc:'You lead the HR function and are accountable to the C-suite.'},
       {value:'CHRO',icon:'⚡',label:'CHRO',desc:'You sit at the executive table. Numbers first. Context second.'},
       {value:'Consultant',icon:'💼',label:'HR Consultant / Advisor',desc:'You advise organisations on people strategy as an external expert.'},
     ]
   },
   {
-    id:'context', step:'Question 2 of 4',
-    text:'What best describes your organisation?',
+    id:'orgsize', step:'Question 2 of 5',
+    text:'How large is your organisation?',
+    sub:'This filters scenarios to your org size and adjusts benchmark assumptions accordingly.',
+    options:[
+      {value:'2-20',icon:'🌱',label:'2 to 20 people',desc:'Every person is critical. One bad hire or exit changes everything.'},
+      {value:'20-100',icon:'📈',label:'20 to 100 people',desc:'Past the founding stage. People processes are starting to matter.'},
+      {value:'100-250',icon:'🏗️',label:'100 to 250 people',desc:'Structure is being built. HR is becoming a real function.'},
+      {value:'250-500',icon:'🏢',label:'250 to 500 people',desc:'Mid-market. Complexity is growing faster than your systems.'},
+      {value:'500-1000',icon:'🏛️',label:'500 to 1,000 people',desc:'Scale-up or established mid-market. Data and process both matter.'},
+      {value:'1000-5000',icon:'🌐',label:'1,000 to 5,000 people',desc:'Large organisation. HR strategy has to work at significant scale.'},
+      {value:'5000+',icon:'🏙️',label:'5,000+ people',desc:'Enterprise. Systemic thinking, board-level language, global complexity.'},
+    ]
+  },
+  {
+    id:'context', step:'Question 3 of 5',
+    text:'What best describes your organisation type?',
     sub:'This pre-selects the most relevant scenarios and adjusts benchmark assumptions.',
     options:[
-      {value:'Startup',icon:'🚀',label:'Startup / Scale-up',desc:'Under 200 people. Fast-moving. Every hire and exit has outsized impact.'},
-      {value:'Mid-Market',icon:'📈',label:'Mid-Market',desc:'200–500 people. Between startup speed and enterprise structure.'},
-      {value:'Enterprise',icon:'🏛️',label:'Enterprise',desc:'500+ people. Complexity is the challenge. Data matters at scale.'},
+      {value:'Startup',icon:'🚀',label:'Startup / Scale-up',desc:'Fast-moving. Every hire and exit has outsized impact.'},
+      {value:'Mid-Market',icon:'📈',label:'Mid-Market / Growth Stage',desc:'Between startup speed and enterprise structure.'},
+      {value:'Enterprise',icon:'🏛️',label:'Enterprise',desc:'Complexity is the challenge. Data matters at scale.'},
       {value:'Public Sector',icon:'🏛',label:'Public Sector / NGO',desc:'Mission-driven. Different constraints, same need for financial language.'},
     ]
   },
   {
-    id:'confidence', step:'Question 3 of 4',
+    id:'confidence', step:'Question 4 of 5',
     text:'How comfortable are you with financial language?',
     sub:'This determines how much context the platform layers into outputs.',
     options:[
@@ -322,7 +323,7 @@ var QUESTIONS = [
     ]
   },
   {
-    id:'challenge', step:'Question 4 of 4',
+    id:'challenge', step:'Question 5 of 5',
     text:'What is your primary challenge right now?',
     sub:'This changes which pillar is recommended first and what the platform emphasises.',
     options:[
@@ -417,7 +418,7 @@ function startOnboarding(editing) {
   } else {
     answers = {};
     document.getElementById('onboardEyebrow').textContent = 'Set Up Your Profile';
-    document.getElementById('onboardTitle').textContent = 'Four questions. Sixty seconds.';
+    document.getElementById('onboardTitle').textContent = 'Five questions. Sixty seconds.';
   }
   document.getElementById('viewMode').classList.remove('show');
   document.getElementById('onboardMode').classList.add('show');

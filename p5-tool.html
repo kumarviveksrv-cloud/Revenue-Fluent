@@ -18,7 +18,7 @@
   --copper:#B87333;--copper-lt:#E8C87A;
   --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
   --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
-  --text-mute:rgba(160,20,120,.25);--border:rgba(160,20,120,.15);
+  --text-mute:rgba(200,168,192,.7);--border:rgba(160,20,120,.15);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
   --serif:var(--font);--hero:'Bebas Neue',sans-serif;
 }
@@ -148,8 +148,8 @@ body{
 .pf-cell{flex:1;padding:12px 14px;border-right:1px solid rgba(160,20,120,.1);text-align:center}
 .pf-cell:last-child{border-right:none}
 .pf-cell.active{background:rgba(224,184,48,.06);border-color:rgba(224,184,48,.15)}
-.pf-cell .pc-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#9AB8D8;margin-bottom:3px}
-.pf-cell .pc-val{font-family:var(--mono);font-size:.84rem;font-weight:500;color:#9AB8D8}
+.pf-cell .pc-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#C8D8F0;margin-bottom:3px}
+.pf-cell .pc-val{font-family:var(--mono);font-size:.84rem;font-weight:500;color:#C8D8F0}
 .pf-cell.active .pc-lbl{color:var(--gold)}
 .pf-cell.active .pc-val{color:var(--gold)}
 .pf-arrow{color:rgba(160,20,120,.3);font-size:1rem;padding:0 2px;flex:0}
@@ -186,12 +186,12 @@ body{
 .sb-section{padding:8px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
 .sb-item{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
 .sb-item:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
-.sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
+.sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(200,168,192,.7)}
 .sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
 .sb-tools-section{padding:6px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
 .sb-tool{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
 .sb-tool:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
-.sb-tool.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
+.sb-tool.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(200,168,192,.7)}
 .sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:#D060B0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
 .sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid rgba(180,40,140,.18)}
 .sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:#D8B8D0;letter-spacing:.06em}
@@ -245,11 +245,11 @@ body{
 .hci-scenarios th.yours{color:#E8C87A}
 .hci-scenarios td{padding:8px 12px;font-family:var(--mono);font-size:.82rem;border-bottom:1px solid rgba(180,40,140,.06)}
 .hci-scenarios td.label{font-size:.74rem;color:#C8A8C0}
-.hci-scenarios td.conservative{color:#9AB8D8}
+.hci-scenarios td.conservative{color:#C8D8F0}
 .hci-scenarios td.yours{color:#E8C87A;font-weight:500}
 .hci-scenarios td.optimistic{color:#38C490}
 .hci-scenarios tr:last-child td{border-bottom:none}
-.hci-note{font-size:.7rem;color:rgba(192,64,154,.4);margin-top:8px;font-style:italic;text-align:center}
+.hci-note{font-size:.7rem;color:rgba(208,96,176,.7);margin-top:8px;font-style:italic;text-align:center}
 .hci-decay{margin-top:14px;padding:12px 16px;background:rgba(224,92,58,.06);border:1px solid rgba(224,92,58,.2);border-radius:10px}
 .hci-decay-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#E05C3A;margin-bottom:6px}
 .hci-decay-text{font-size:.82rem;color:#D8B8D0;line-height:1.6}
@@ -267,7 +267,7 @@ body{
 .dl-btn-pdf{background:rgba(224,184,48,.08);color:#E8C87A;border:1px solid rgba(224,184,48,.2)}
 .dl-btn-pdf:hover{background:rgba(224,184,48,.15);transform:translateY(-2px)}
 .dl-btn svg{width:14px;height:14px;flex-shrink:0}
-.dl-note{font-size:.72rem;color:rgba(192,64,154,.4);margin-top:10px;font-style:italic}
+.dl-note{font-size:.72rem;color:rgba(208,96,176,.7);margin-top:10px;font-style:italic}
 
 /* RESIZABLE SIDEBAR */
 .sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s;z-index:10}
@@ -283,21 +283,8 @@ body{
 </head>
 <body>
 <aside class="sidebar">
-<a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:176px;object-fit:contain;filter:brightness(1.3) drop-shadow(0 0 10px rgba(192,64,154,.25))"/></a>
+<a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:176px;object-fit:contain;filter:brightness(1.3) drop-shadow(0 0 10px rgba(200,168,192,.7))"/></a>
 <div class="sb-section">Platform</div>
-<a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
-<a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
-  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
-  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
-<div class="sb-tools-section">The Five Pillars</div>
-<a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
-<a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
-<a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
-<a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
-<a href="p5-tool.html" class="sb-tool active"><div class="sb-tool-num">L5</div>Balance Sheet</a>
-<div class="sb-section">More</div>
-<a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
-<a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
 <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
 <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 <div class="sidebar-resize"></div>
@@ -328,7 +315,7 @@ body{
 <b style="color:#EED8E8;display:block;margin-bottom:4px">What is the Human Confidence Index?</b>
 Every number in Revenue Fluent is computed from real data. But data reflects the past, your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
 </div>
-<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p5_f0" onclick="hciTF('hci_p5',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p5_f1" onclick="hciTF('hci_p5',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p5_f2" onclick="hciTF('hci_p5',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p5_f3" onclick="hciTF('hci_p5',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p5_calc"></div><table class="hci-scenarios"><tbody id="hci_p5_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
+<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p5_f0" onclick="hciTF('hci_p5',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p5_f1" onclick="hciTF('hci_p5',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p5_f2" onclick="hciTF('hci_p5',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p5_f3" onclick="hciTF('hci_p5',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p5_calc"></div><table class="hci-scenarios"><tbody id="hci_p5_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(208,96,176,.7);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
   <div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div><div class="hci-decay" id="hci_p5_decay"></div></div></div>
 <div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
   <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a>

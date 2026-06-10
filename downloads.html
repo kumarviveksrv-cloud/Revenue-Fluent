@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Downloads — Revenue Fluent</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0A0608;--bg2:#100810;
+  --magenta:#C0409A;--magenta-mid:#D060B0;
+  --gold:#E0B830;--copper:#B87333;
+  --teal:#38C490;--amber:#E8C87A;
+  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
+  --border:rgba(192,64,154,.18);--border-lt:rgba(192,64,154,.08);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --sidebar:220px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.025) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.2);border-radius:2px}
+.sb-brand{display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18)}
+.sb-brand img{width:100%;height:auto;max-width:176px;object-fit:contain;filter:brightness(1.3) drop-shadow(0 0 10px rgba(192,64,154,.25))}
+.sb-section{padding:8px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-item{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
+.sb-item.active{background:rgba(192,64,154,.12);color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
+.sb-tools-section{padding:6px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:var(--text-mid)}
+.sb-by b{color:var(--gold);font-weight:600}
+.sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s}
+.sidebar-resize:hover{background:rgba(192,64,154,.4)}
+
+.wrap{margin-left:var(--sidebar);padding:48px 48px 80px;position:relative;z-index:1}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:24px 20px}}
+
+.crumb{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:32px;display:flex;align-items:center;gap:8px}
+.crumb a{color:var(--magenta-mid);text-decoration:none}
+.page-eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:12px}
+.page-title{font-size:2rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:10px}
+.page-sub{font-size:.95rem;color:var(--text-mid);line-height:1.7;max-width:600px;margin-bottom:48px}
+
+.pro-gate{background:rgba(224,184,48,.05);border:1px solid rgba(224,184,48,.2);border-radius:14px;padding:18px 24px;margin-bottom:40px;max-width:840px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.pro-gate-text{font-size:.86rem;color:var(--amber);line-height:1.6}
+.pro-gate-text b{color:var(--gold)}
+.pro-gate-btn{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:9px 20px;border-radius:8px;background:rgba(224,184,48,.12);color:var(--amber);border:1px solid rgba(224,184,48,.25);text-decoration:none;white-space:nowrap;transition:all .2s}
+.pro-gate-btn:hover{background:rgba(224,184,48,.2);border-color:rgba(224,184,48,.4)}
+
+.dl-section{margin-bottom:48px;max-width:840px}
+.dl-section-header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.dl-section-num{font-family:var(--mono);font-size:.6rem;background:rgba(192,64,154,.12);color:var(--magenta-mid);padding:3px 8px;border-radius:4px;letter-spacing:.1em;text-transform:uppercase}
+.dl-section-title{font-size:1.1rem;font-weight:600;color:var(--text)}
+.dl-section-sub{font-size:.84rem;color:var(--text-dim);line-height:1.6;margin-bottom:20px;padding-left:0}
+
+.dl-card{background:var(--bg2);border:1px solid var(--border-lt);border-radius:14px;padding:24px 28px;margin-bottom:14px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;transition:border-color .2s}
+.dl-card:hover{border-color:var(--border)}
+.dl-card-left{flex:1}
+.dl-card-type{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.dl-card-type.excel{color:var(--teal)}
+.dl-card-type.pdf{color:var(--amber)}
+.dl-card-name{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:6px}
+.dl-card-desc{font-size:.82rem;color:var(--text-dim);line-height:1.6}
+.dl-card-right{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.dl-btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:9px 16px;border-radius:8px;cursor:pointer;border:none;font-weight:500;transition:all .2s;text-decoration:none;white-space:nowrap}
+.dl-btn.excel{background:rgba(56,196,144,.1);color:var(--teal);border:1px solid rgba(56,196,144,.2)}
+.dl-btn.excel:hover{background:rgba(56,196,144,.18);transform:translateY(-1px)}
+.dl-btn.pdf{background:rgba(232,200,122,.08);color:var(--amber);border:1px solid rgba(232,200,122,.2)}
+.dl-btn.pdf:hover{background:rgba(232,200,122,.15);transform:translateY(-1px)}
+.dl-btn.locked{background:rgba(192,64,154,.06);color:rgba(192,64,154,.4);border:1px solid rgba(192,64,154,.1);cursor:not-allowed}
+.dl-note{font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-top:6px;font-style:italic}
+
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(192,64,154,.15),transparent);margin:8px 0 28px}
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="mainSidebar">
+  <a href="index.html" class="sb-brand"><img src="logo.png" alt="Revenue Fluent"/></a>
+  <div class="sb-section">Platform</div>
+  <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+  <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
+  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
+  <a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
+  <a href="downloads.html" class="sb-item active"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>Downloads</a>
+  <div class="sb-tools-section">The Five Pillars</div>
+  <a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+  <a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+  <a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+  <a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+  <a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+  <div class="sb-section">Legal</div>
+  <a href="privacy.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5 2v4c0 3-2 5-5 6C5 13 3 11 3 8V4l5-2z"/></svg>Privacy Policy</a>
+  <a href="terms.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zM5 6h6M5 9h6M5 12h4"/></svg>Terms of Service</a>
+  <div class="sb-section">More</div>
+  <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+  <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+  <div class="sidebar-resize" id="sbResize"></div>
+</aside>
+
+<div class="wrap">
+  <div class="crumb"><a href="home.html">&larr; Home</a><span style="color:rgba(192,64,154,.3)">/</span>Downloads</div>
+
+  <div class="page-eyebrow">Downloads</div>
+  <h1 class="page-title">Take Revenue Fluent<br>into your organisation.</h1>
+  <p class="page-sub">Every Excel model is pre-labelled and formula-ready. Every PDF report is board-formatted. Populate with your own numbers and walk into the CEO meeting with a complete Human P&amp;L.</p>
+
+  <div class="pro-gate">
+    <div class="pro-gate-text"><b>PRO feature.</b> Downloads are available to PRO subscribers. Free users can access all five tools and run every calculation on the platform. Upgrade to take the models off-platform.</div>
+    <a href="pricing.html" class="pro-gate-btn">View Pricing &rarr;</a>
+  </div>
+
+  <!-- EXCEL MODELS -->
+  <div class="dl-section">
+    <div class="dl-section-header">
+      <div class="dl-section-num">Excel Models</div>
+      <div class="dl-section-title">Five working financial models</div>
+    </div>
+    <p class="dl-section-sub">Pre-built in Excel and Google Sheets format. Every formula is pre-written. Replace the sample inputs with your organisation's actual numbers. The outputs auto-calculate.</p>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type excel">L1 Excel Model</div>
+        <div class="dl-card-name">The Value Ledger</div>
+        <div class="dl-card-desc">HR revenue, cost-saving, development, and culture entries. The Ratio auto-calculates. Four entry categories, nine underlying metrics, one headline number.</div>
+      </div>
+      <div class="dl-card-right">
+        <button class="dl-btn excel" onclick="downloadExcel('RF_L1_Value_Ledger.xlsx')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>
+          Download Excel
+        </button>
+        <div class="dl-note">Opens in Excel or Google Sheets</div>
+      </div>
+    </div>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type excel">L2 Excel Model</div>
+        <div class="dl-card-name">The Talent Premium</div>
+        <div class="dl-card-desc">Talent Quality Premium calculation across five verdict areas. Performance premium, retention premium, hiring quality. Benchmarked output in currency.</div>
+      </div>
+      <div class="dl-card-right">
+        <button class="dl-btn excel" onclick="downloadExcel('RF_L2_Talent_Premium.xlsx')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>
+          Download Excel
+        </button>
+        <div class="dl-note">Opens in Excel or Google Sheets</div>
+      </div>
+    </div>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type excel">L3 Excel Model</div>
+        <div class="dl-card-name">Org Vitals</div>
+        <div class="dl-card-desc">Intervention simulation model. Select which prescriptions to implement, see combined financial impact, cost of doing nothing, and productivity recovery timeline.</div>
+      </div>
+      <div class="dl-card-right">
+        <button class="dl-btn excel" onclick="downloadExcel('RF_L3_Org_Vitals.xlsx')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>
+          Download Excel
+        </button>
+        <div class="dl-note">Opens in Excel or Google Sheets</div>
+      </div>
+    </div>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type excel">L4 Excel Model</div>
+        <div class="dl-card-name">The Human P&amp;L</div>
+        <div class="dl-card-desc">Literal P&amp;L statement. Revenue, COGS, Gross Margin, OpEx, Operating Profit, Adjustments, Net. The Ratio auto-calculates from your inputs.</div>
+      </div>
+      <div class="dl-card-right">
+        <button class="dl-btn excel" onclick="downloadExcel('RF_L4_Human_PL.xlsx')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>
+          Download Excel
+        </button>
+        <div class="dl-note">Opens in Excel or Google Sheets</div>
+      </div>
+    </div>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type excel">L5 Excel Model</div>
+        <div class="dl-card-name">The Human Balance Sheet</div>
+        <div class="dl-card-desc">Two-column balance sheet. Human Assets vs Human Liabilities. Net Human Worth auto-calculates. Five asset lines, five liability lines, one net position.</div>
+      </div>
+      <div class="dl-card-right">
+        <button class="dl-btn excel" onclick="downloadExcel('RF_L5_Human_Balance_Sheet.xlsx')">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>
+          Download Excel
+        </button>
+        <div class="dl-note">Opens in Excel or Google Sheets</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- PDF REPORTS -->
+  <div class="dl-section">
+    <div class="dl-section-header">
+      <div class="dl-section-num" style="color:var(--amber);background:rgba(232,200,122,.08);border:1px solid rgba(232,200,122,.15)">PDF Reports</div>
+      <div class="dl-section-title">Five board-ready documents</div>
+    </div>
+    <p class="dl-section-sub">Formatted as professional financial documents, not HR reports. Run the tool, generate the PDF, bring it into the room. A CFO will recognise the format immediately.</p>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type pdf">L1 Board Report</div>
+        <div class="dl-card-name">The Value Ledger Report</div>
+        <div class="dl-card-desc">Complete ledger with all HR entries, returns, and The Ratio. Formatted for C-suite presentation. Run from any scenario with one click.</div>
+      </div>
+      <div class="dl-card-right">
+        <a href="p1-tool.html" class="dl-btn pdf">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"/></svg>
+          Generate in L1
+        </a>
+      </div>
+    </div>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type pdf">L2 Board Report</div>
+        <div class="dl-card-name">The Talent Premium Report</div>
+        <div class="dl-card-desc">Talent Quality Premium with full Show Workings. Five verdict areas, benchmark comparisons, financial value in currency. CHRO-ready.</div>
+      </div>
+      <div class="dl-card-right">
+        <a href="p2-tool.html" class="dl-btn pdf">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"/></svg>
+          Generate in L2
+        </a>
+      </div>
+    </div>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type pdf">L3 Board Report</div>
+        <div class="dl-card-name">Org Vitals Diagnostic Report</div>
+        <div class="dl-card-desc">Full diagnostic with vital sign verdicts, causal chains, DNA type, selected prescriptions, and simulation results. The org health document leadership has never seen.</div>
+      </div>
+      <div class="dl-card-right">
+        <a href="p3-tool.html" class="dl-btn pdf">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"/></svg>
+          Generate in L3
+        </a>
+      </div>
+    </div>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type pdf">L4 Board Report</div>
+        <div class="dl-card-name">The Human P&amp;L Report</div>
+        <div class="dl-card-desc">Formatted exactly like a financial P&amp;L. Revenue, COGS, Gross Margin, OpEx, Net. The Ratio at the bottom. Bring this into the CFO meeting.</div>
+      </div>
+      <div class="dl-card-right">
+        <a href="p4-tool.html" class="dl-btn pdf">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"/></svg>
+          Generate in L4
+        </a>
+      </div>
+    </div>
+
+    <div class="dl-card">
+      <div class="dl-card-left">
+        <div class="dl-card-type pdf">L5 Board Report</div>
+        <div class="dl-card-name">The Human Balance Sheet Report</div>
+        <div class="dl-card-desc">Two-column balance sheet formatted as a board document. Net Human Worth at the bottom. The financial statement HR has never filed, until now.</div>
+      </div>
+      <div class="dl-card-right">
+        <a href="p5-tool.html" class="dl-btn pdf">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"/></svg>
+          Generate in L5
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function downloadExcel(filename){
+  var base=window.location.href.replace(/\/[^/]*$/,'');
+  var url=base+'/excel/'+filename;
+  var a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);
+}
+var sb=document.querySelector('.sidebar'),handle=document.getElementById('sbResize'),drag=false,sx=0,sw=0;
+handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
+window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelectorAll('.wrap').forEach(function(el){el.style.marginLeft=w+'px';});});
+window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
+</script>
+</body></html>

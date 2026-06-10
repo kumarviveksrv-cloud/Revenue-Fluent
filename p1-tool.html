@@ -31,7 +31,7 @@
   --text:#E8E6E0;
   --text-cool:rgba(190,200,230,.75);
   --text-dim:rgba(190,200,230,.35);
-  --text-mute:rgba(180,40,140,.25);
+  --text-mute:rgba(200,168,192,.7);
   --border:rgba(180,40,140,.15);
   --border-hi:rgba(180,40,140,.3);
   --font:'Sora',sans-serif;
@@ -276,7 +276,7 @@ body{
 .tn-tools{display:flex;align-items:center;gap:2px}
 .tn-tool{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:#C8A8C0;padding:5px 10px;border-radius:5px;text-decoration:none;transition:all .15s;border:1px solid transparent;white-space:nowrap}
 .tn-tool:hover{color:#D8B8D0;border-color:rgba(180,40,140,.18);background:rgba(180,40,140,.08)}
-.tn-tool.active{color:#C0409A;background:rgba(180,40,140,.12);border-color:rgba(180,40,140,.25)}
+.tn-tool.active{color:#C0409A;background:rgba(180,40,140,.12);border-color:rgba(200,168,192,.7)}
 .tn-right{display:flex;align-items:center;gap:8px}
 .tn-lib{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#C8A8C0;padding:5px 12px;border-radius:5px;text-decoration:none;border:1px solid rgba(180,40,140,.18);transition:all .15s}
 .tn-lib:hover{color:#D8B8D0;border-color:rgba(192,64,154,.35)}
@@ -301,12 +301,12 @@ body{padding-top:52px}
 .sb-section{padding:8px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
 .sb-item{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
 .sb-item:hover{background:rgba(180,40,140,.08);color:#D8B8D0;border-color:rgba(180,40,140,.18)}
-.sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
+.sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(200,168,192,.7)}
 .sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
 .sb-tools-section{padding:6px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
 .sb-tool{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
 .sb-tool:hover{background:rgba(180,40,140,.08);color:#D8B8D0;border-color:rgba(180,40,140,.18)}
-.sb-tool.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
+.sb-tool.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(200,168,192,.7)}
 .sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:#D060B0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
 .sb-tool.active .sb-tool-num{background:rgba(192,64,154,.2);color:#D060B0}
 .sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--cobalt-border)}
@@ -359,7 +359,7 @@ body{padding-top:0}
 .hci-factor-toggle::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#D060B0;transition:all .2s}
 .hci-factor.yes .hci-factor-toggle::after{left:19px;background:#38C490}
 .hci-factor-desc{font-size:.74rem;color:#C8A8C0;line-height:1.5}
-.hci-factor.yes .hci-factor-desc{color:#9AB8D8}
+.hci-factor.yes .hci-factor-desc{color:#C8D8F0}
 .hci-calc{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(40,8,28,.4);border-radius:10px;margin-bottom:14px}
 .hci-calc-formula{font-family:var(--mono);font-size:.7rem;color:#C8A8C0;flex:1}
 .hci-calc-result{font-family:var(--mono);font-size:1.3rem;font-weight:600;color:#E8C87A;white-space:nowrap}
@@ -369,11 +369,11 @@ body{padding-top:0}
 .hci-scenarios th.yours{color:#E8C87A}
 .hci-scenarios td{padding:8px 12px;font-family:var(--mono);font-size:.82rem;border-bottom:1px solid rgba(180,40,140,.06)}
 .hci-scenarios td.label{font-size:.74rem;color:#C8A8C0}
-.hci-scenarios td.conservative{color:#9AB8D8}
+.hci-scenarios td.conservative{color:#C8D8F0}
 .hci-scenarios td.yours{color:#E8C87A;font-weight:500}
 .hci-scenarios td.optimistic{color:#38C490}
 .hci-scenarios tr:last-child td{border-bottom:none}
-.hci-note{font-size:.7rem;color:rgba(192,64,154,.4);margin-top:8px;font-style:italic;text-align:center}
+.hci-note{font-size:.7rem;color:rgba(208,96,176,.7);margin-top:8px;font-style:italic;text-align:center}
 
 
 /* DOWNLOAD SECTION */
@@ -390,7 +390,7 @@ body{padding-top:0}
 .dl-btn-pdf{background:rgba(224,184,48,.08);color:#E8C87A;border:1px solid rgba(224,184,48,.2)}
 .dl-btn-pdf:hover{background:rgba(224,184,48,.15);border-color:rgba(224,184,48,.4);transform:translateY(-2px)}
 .dl-btn svg{width:14px;height:14px;flex-shrink:0}
-.dl-note{font-size:.72rem;color:rgba(192,64,154,.4);margin-top:10px;font-style:italic}
+.dl-note{font-size:.72rem;color:rgba(208,96,176,.7);margin-top:10px;font-style:italic}
 
 
 /* RESIZABLE SIDEBAR */
@@ -402,27 +402,8 @@ body{padding-top:0}
 </head>
 <body>
 <aside class="sidebar" id="mainSidebar">
-  <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:176px;object-fit:contain;filter:brightness(1.3) drop-shadow(0 0 10px rgba(192,64,154,.25))"/></a>
+  <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:176px;object-fit:contain;filter:brightness(1.3) drop-shadow(0 0 10px rgba(200,168,192,.7))"/></a>
   <div class="sb-section">Platform</div>
-  <a href="home.html" class="sb-item">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
-  <a href="scenario-library.html" class="sb-item" id="sbLib">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
-  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
-  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
-  <div class="sb-tools-section">The Five Pillars</div>
-  <a href="p1-tool.html" class="sb-tool active" id="sb_p1_tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
-<a href="p2-tool.html" class="sb-tool" id="sb_p2_tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
-<a href="p3-tool.html" class="sb-tool" id="sb_p3_tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
-<a href="p4-tool.html" class="sb-tool" id="sb_p4_tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
-<a href="p5-tool.html" class="sb-tool" id="sb_p5_tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
-
-  <div class="sb-section">Legal</div>
-  <a href="privacy.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5 2v4c0 3-2 5-5 6C5 13 3 11 3 8V4l5-2z"/></svg>Privacy Policy</a>
-  <a href="terms.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zM5 6h6M5 9h6M5 12h4"/></svg>Terms of Service</a>
-  <div class="sb-section">More</div>
-  <a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
-  <a href="#" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5z"/></svg>Certification<span class="sb-badge">Soon</span></a>
   <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
   <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
 <div class="sidebar-resize"></div>
@@ -505,7 +486,7 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
   <div class="hci-factors"><div class="hci-factor" id="hci_p1_f0" onclick="hciTF('hci_p1',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p1_f1" onclick="hciTF('hci_p1',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p1_f2" onclick="hciTF('hci_p1',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p1_f3" onclick="hciTF('hci_p1',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div>
   <div class="hci-calc" id="hci_p1_calc"></div>
   <table class="hci-scenarios"><tbody id="hci_p1_scen"></tbody></table>
-  <div style="font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.4);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
+  <div style="font-family:var(--mono);font-size:.58rem;color:rgba(208,96,176,.7);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
   <div class="hci-note">Conservative = HCI &minus;0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div>
 </div>
 </div>
