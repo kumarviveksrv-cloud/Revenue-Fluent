@@ -472,6 +472,70 @@ var PRESCRIPTIONS = {
   'hr_3': {action:"Implement a quarterly People Risk Register \u2014 a structured document listing the top 5 people risks in the organisation, their probability, their financial impact if they materialise, and the mitigation underway.",detail:"Format: Risk name, Probability (High/Medium/Low), Financial impact if realised, Current mitigation, Owner, Next review date. Presented to leadership every quarter. Forces HR to think in financial risk language, not HR language.",costLow:500,costHigh:2000,timeframe:30,prodRecovery:5,roiMultiple:6.8,owner:"HR"}
 };
 
+
+// DNA SHIFT LOGIC
+// Maps vital signs to DNA type determination
+function computeDNAType(scores) {
+  // scores = {leadership: 0-4, fear: 0-4, middle: 0-4, execution: 0-4, hr: 0-4}
+  var l = scores.leadership || 0;
+  var f = scores.fear || 0;
+  var m = scores.middle || 0;
+  var e = scores.execution || 0;
+  var h = scores.hr || 0;
+  var total = l + f + m + e + h;
+
+  if(total >= 18) return 'quiet_compounding';
+  if(total >= 14 && e >= 3 && l >= 3) return 'disciplined_challenger';
+  if(total >= 14 && h >= 3 && f >= 3) return 'resilient_community';
+  if(f <= 1) return 'fear_factory';
+  if(m <= 1) return 'frozen_middle';
+  if(l <= 1 && total >= 10) return 'founders_shadow';
+  if(e <= 1) return 'busy_illusion';
+  if(total < 8) return 'legacy_trap';
+  return 'disciplined_challenger';
+}
+
+// Maps each intervention key to the vital sign scores it improves
+var RX_VITAL_IMPACT = {
+  leadership_0: {leadership: 1},
+  leadership_1: {leadership: 1},
+  leadership_2: {leadership: 1},
+  leadership_3: {leadership: 1, execution: 0.5},
+  fear_0: {fear: 1},
+  fear_1: {fear: 1},
+  fear_2: {fear: 1},
+  fear_3: {fear: 1, leadership: 0.5},
+  middle_0: {middle: 1},
+  middle_1: {middle: 1, leadership: 0.5},
+  middle_2: {middle: 1},
+  middle_3: {middle: 1},
+  execution_0: {execution: 1},
+  execution_1: {execution: 1},
+  execution_2: {execution: 1, middle: 0.5},
+  execution_3: {execution: 1},
+  hr_0: {hr: 1},
+  hr_1: {hr: 1},
+  hr_2: {hr: 1, middle: 0.5},
+  hr_3: {hr: 1},
+};
+
+function computeProjectedDNA(currentScores, selectedKeys) {
+  var projected = {
+    leadership: currentScores.leadership || 0,
+    fear: currentScores.fear || 0,
+    middle: currentScores.middle || 0,
+    execution: currentScores.execution || 0,
+    hr: currentScores.hr || 0,
+  };
+  selectedKeys.forEach(function(key) {
+    var impact = RX_VITAL_IMPACT[key] || {};
+    Object.keys(impact).forEach(function(v) {
+      projected[v] = Math.min(4, projected[v] + impact[v]);
+    });
+  });
+  return projected;
+}
+
 var _rxSelected = {};
 
 function toggleRxCard(key) {
@@ -628,6 +692,52 @@ function renderRxSim() {
     +   '<div class="rx-doing-nothing-label">\u26a0 Cost of Doing Nothing</div>'
     +   '<div class="rx-doing-nothing-text">At current trajectory, unaddressed signals will cost approximately <b>'+fmtCur(doNothingCost)+'</b> in productivity loss and elevated attrition risk over the next 12 months. The productivity recovery value of implementing these interventions is estimated at <b>'+fmtCur(prodValue)+'</b>.</div>'
     + '</div>';
+
+  // DNA SHIFT
+  var currentDNAKey = '';
+  var dnaEl = document.querySelector('[data-dna-key]');
+  if(dnaEl) currentDNAKey = dnaEl.getAttribute('data-dna-key') || '';
+
+  // Get current vital scores from the DOM
+  var currentScores = {leadership:0, fear:0, middle:0, execution:0, hr:0};
+  var vitOrder = ['leadership','fear','middle','execution','hr'];
+  document.querySelectorAll('.vc-score').forEach(function(el, i) {
+    if(i < vitOrder.length) {
+      var num = parseInt(el.textContent);
+      currentScores[vitOrder[i]] = isNaN(num) ? 0 : num;
+    }
+  });
+
+  var projectedScores = computeProjectedDNA ? computeProjectedDNA(currentScores, sel) : currentScores;
+  var projectedDNAKey = computeDNAType ? computeDNAType(projectedScores) : '';
+  var projectedDNA = DNA_TYPES && DNA_TYPES[projectedDNAKey] ? DNA_TYPES[projectedDNAKey] : null;
+  var currentDNA = DNA_TYPES && currentDNAKey && DNA_TYPES[currentDNAKey] ? DNA_TYPES[currentDNAKey] : null;
+
+  var dnaShiftHTML = '';
+  if(projectedDNA && currentDNA && projectedDNAKey !== currentDNAKey) {
+    dnaShiftHTML = '<div style="margin-top:14px;background:rgba(56,196,144,.06);border:1px solid rgba(56,196,144,.18);border-radius:10px;padding:16px 18px">'
+      + '<div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px">&#10230; Organisation DNA Shift &mdash; 6 Month Projection</div>'
+      + '<div style="display:grid;grid-template-columns:1fr 24px 1fr;gap:12px;align-items:center;margin-bottom:10px">'
+      +   '<div style="background:rgba(40,8,28,.6);border:1px solid rgba(192,64,154,.12);border-radius:8px;padding:12px 14px">'
+      +     '<div style="font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:5px">Current DNA</div>'
+      +     '<div style="font-size:.82rem;font-weight:600;color:var(--text-mid)">' + (currentDNA ? currentDNA.name : currentDNAKey) + '</div>'
+      +   '</div>'
+      +   '<div style="text-align:center;font-size:1rem;color:var(--teal)">&#8594;</div>'
+      +   '<div style="background:rgba(56,196,144,.06);border:1px solid rgba(56,196,144,.2);border-radius:8px;padding:12px 14px">'
+      +     '<div style="font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:5px">Projected DNA</div>'
+      +     '<div style="font-size:.82rem;font-weight:600;color:var(--teal)">' + projectedDNA.name + '</div>'
+      +   '</div>'
+      + '</div>'
+      + '<div style="font-size:.78rem;color:var(--text-dim);line-height:1.6">' + projectedDNA.desc + '</div>'
+      + '</div>';
+  } else if(projectedDNA && projectedDNAKey === currentDNAKey) {
+    dnaShiftHTML = '<div style="margin-top:14px;background:rgba(232,200,122,.05);border:1px solid rgba(232,200,122,.15);border-radius:10px;padding:14px 18px">'
+      + '<div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px">DNA Type &mdash; Maintained</div>'
+      + '<div style="font-size:.78rem;color:var(--text-dim);line-height:1.6">These interventions strengthen your current DNA type without shifting it. Continued implementation over 12+ months may trigger a full shift.</div>'
+      + '</div>';
+  }
+
+  sim.innerHTML += dnaShiftHTML;
 }
 
 </script>
