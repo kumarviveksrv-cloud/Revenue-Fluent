@@ -1165,7 +1165,8 @@ function generatePDFP1() {
   checkActive();
 })();
 </script>
-<script>if(window.RFProfile){RFProfile.personaliseToolPage('p1');RFProfile.injectSidebarBadge();}</script>
+<script>if(window.RFProfile){RFProfile.personaliseToolPage('p1');
+  if(window.RFProfile){RFProfile.gateToolPage();}RFProfile.injectSidebarBadge();}</script>
 <script>
 // Sync HCI changes back to global
 (function(){

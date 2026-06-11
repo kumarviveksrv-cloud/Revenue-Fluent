@@ -278,7 +278,45 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     </div>
   </div>
 
+  <!-- PRO ACTIVATION -->
+  <div id="proActivation" style="max-width:480px;margin:48px auto 0;padding:28px 32px;background:rgba(192,64,154,.06);border:1px solid rgba(192,64,154,.2);border-radius:16px;text-align:center">
+    <div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#C0409A;margin-bottom:12px">Already a PRO member?</div>
+    <div style="font-size:.88rem;color:#C8A8C0;margin-bottom:20px;line-height:1.6">Enter the access code from your Gumroad receipt to unlock PRO features on this device.</div>
+    <div style="display:flex;gap:8px;max-width:360px;margin:0 auto">
+      <input id="proCodeInput" type="text" placeholder="Enter access code" style="flex:1;background:rgba(192,64,154,.08);border:1px solid rgba(192,64,154,.25);border-radius:8px;padding:10px 14px;color:#EED8E8;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;outline:none;text-transform:uppercase" onkeydown="if(event.key==='Enter')activateCode()"/>
+      <button onclick="activateCode()" style="background:#C0409A;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .15s;white-space:nowrap" onmouseover="this.style.background='#D050A8'" onmouseout="this.style.background='#C0409A'">Activate</button>
+    </div>
+    <div id="proCodeMsg" style="font-family:var(--mono);font-size:.68rem;margin-top:12px;min-height:20px"></div>
+  </div>
+
 </div>
+
+<script>
+function activateCode() {
+  var input = document.getElementById('proCodeInput');
+  var msg = document.getElementById('proCodeMsg');
+  var code = (input.value||'').trim().toUpperCase();
+  if(!code){ msg.style.color='#E05C3A'; msg.textContent='Please enter your access code.'; return; }
+  if(window.RFProfile && RFProfile.activateProCode(code)){
+    msg.style.color='#38C490';
+    msg.textContent='PRO activated. Welcome to Revenue Fluent PRO.';
+    input.value='';
+    setTimeout(function(){ window.location.href='home.html'; }, 1500);
+  } else {
+    msg.style.color='#E05C3A';
+    msg.textContent='Invalid code. Check your Gumroad receipt and try again.';
+  }
+}
+// Show deactivate option if already PRO
+if(window.RFProfile && RFProfile.isPro()){
+  var act = document.getElementById('proActivation');
+  if(act){
+    act.innerHTML = '<div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#38C490;margin-bottom:8px">PRO Active</div>'
+      + '<div style="font-size:.82rem;color:#C8A8C0;margin-bottom:16px">Revenue Fluent PRO is active on this device.</div>'
+      + '<button onclick="if(confirm(\'Deactivate PRO on this device?\')){RFProfile.deactivatePro();location.reload();}" style="background:transparent;border:1px solid rgba(224,92,58,.3);color:#E05C3A;border-radius:8px;padding:8px 16px;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Deactivate PRO</button>';
+  }
+}
+</script>
 
 <script>
 function toggleFaq(el){

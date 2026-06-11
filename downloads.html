@@ -318,4 +318,27 @@ if('serviceWorker' in navigator){
   });
 }
 </script>
+<script>
+// Gate downloads for non-PRO users
+window.addEventListener('DOMContentLoaded', function(){
+  if(window.RFProfile && !RFProfile.isPro()){
+    // Lock all download buttons
+    document.querySelectorAll('.dl-btn').forEach(function(btn){
+      btn.classList.add('locked');
+      btn.style.pointerEvents = 'none';
+      btn.style.opacity = '0.45';
+    });
+    // Show upgrade banner above downloads
+    var wrap = document.querySelector('.wrap');
+    if(wrap){
+      var banner = document.createElement('div');
+      banner.style.cssText = 'margin-bottom:24px;padding:14px 20px;background:rgba(192,64,154,.07);border:1px solid rgba(192,64,154,.2);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap';
+      banner.innerHTML = '<div style="font-family:var(--mono);font-size:.78rem;color:#C8A8C0">Excel models and PDF reports are available on <span style="color:#D060B0">Revenue Fluent PRO</span>.</div>'
+        + '<a href="pricing.html" style="font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:6px 14px;border-radius:7px;white-space:nowrap;flex-shrink:0">Upgrade to PRO &rarr;</a>';
+      wrap.insertBefore(banner, wrap.firstChild);
+    }
+  }
+  if(window.RFProfile) RFProfile.injectSidebarBadge();
+});
+</script>
 </body></html>

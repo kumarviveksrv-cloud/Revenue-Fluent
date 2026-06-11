@@ -835,7 +835,8 @@ function generatePDFP5() {
   checkActive();
 })();
 </script>
-<script>if(window.RFProfile){RFProfile.personaliseToolPage('p5');RFProfile.injectSidebarBadge();}</script>
+<script>if(window.RFProfile){RFProfile.personaliseToolPage('p5');
+  if(window.RFProfile){RFProfile.gateToolPage();}RFProfile.injectSidebarBadge();}</script>
 <script>
 // Sync HCI changes back to global
 (function(){
