@@ -29,7 +29,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   background-image:radial-gradient(ellipse 70% 40% at 60% 0%,rgba(160,20,110,.12) 0%,transparent 55%),linear-gradient(rgba(160,20,120,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.02) 1px,transparent 1px);
   background-size:100% 100%,52px 52px,52px 52px;min-height:100vh;}
 .sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-right:1px solid var(--cobalt-border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:none;}
-.sidebar::-webkit-scrollbar{display:none}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
 .sb-logo{padding:16px 14px 12px;border-bottom:1px solid var(--cobalt-border);margin-bottom:6px}
 .sb-logo img{width:100%;max-width:186px;max-height:52px;object-fit:contain;filter:brightness(0.9);mix-blend-mode:lighten}
 .sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}

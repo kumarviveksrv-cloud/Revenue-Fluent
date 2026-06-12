@@ -31,8 +31,8 @@ html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:va
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.025) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
 
 /* SIDEBAR */
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:none}
-.sidebar::-webkit-scrollbar{display:none}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
 .sb-brand{display:block;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);overflow:hidden}
 .sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
 .sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
@@ -62,7 +62,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .hub-sub{font-size:.95rem;color:var(--text-mid);line-height:1.7;max-width:580px;margin-bottom:32px}
 
 /* TAB BAR */
-.tab-bar{display:flex;gap:4px;padding:0 48px;border-bottom:1px solid var(--border-lt);margin-bottom:0;overflow-x:auto;scrollbar-width:none}
+.tab-bar{display:flex;gap:4px;padding:0 48px;border-bottom:1px solid var(--border-lt);margin-bottom:0;overflow-x:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
 .tab-bar::-webkit-scrollbar{display:none}
 .tab{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;cursor:pointer;color:var(--text-dim);border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}
 .tab:hover{color:var(--text-mid)}
