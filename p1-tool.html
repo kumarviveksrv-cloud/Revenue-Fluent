@@ -406,6 +406,7 @@ body{padding-top:0}
 .sidebar-resize:hover,.sidebar-resize.dragging{background:rgba(192,64,154,.4)}
 
 </style><script src="rf-report.js"></script>
+<script src="rf-org.js"></script>
 <script src="rf-profile.js"></script>
 </head>
 <body>
@@ -900,6 +901,8 @@ function render(name) {
     +'</div>';
 
   app.innerHTML = h;
+  // Inject My Org context strip if org data is set
+  if(typeof RFOrg !== 'undefined' && RFOrg.isReady()) RFOrg.injectOrgStrip('app');
 
   // Wire intro
   document.getElementById('introToggle').addEventListener('click', function(){
@@ -1140,6 +1143,18 @@ function generatePDFP1() {
   var hrInvestment = entries.reduce(function(a,e){return a+e.cost;},0);
   var ratio = hrInvestment > 0 ? totalReturn / hrInvestment : 0;
   RFReport.reportP1(name, entries, sym, totalReturn, hrInvestment, ratio);
+  // Publish L1 outputs for L4 to read
+  if(typeof RFOrg !== 'undefined'){
+    var retSavings   = entries.filter(function(e){return e.cat==='Cost-Saving';}).reduce(function(a,e){return a+e.ret;},0);
+    var perfUplift   = entries.filter(function(e){return e.cat==='Development';}).reduce(function(a,e){return a+e.ret;},0);
+    var cultPrem     = entries.filter(function(e){return e.cat==='Culture & Engagement';}).reduce(function(a,e){return a+e.ret;},0);
+    var talentAcqVal = entries.filter(function(e){return e.cat==='Revenue-Generating';}).reduce(function(a,e){return a+e.ret;},0);
+    RFOrg.publishL1({
+      totalReturn:totalReturn, totalInvestment:hrInvestment, ratio:ratio,
+      retSavings:retSavings, perfUplift:perfUplift, cultPrem:cultPrem,
+      talentAcqVal:talentAcqVal, scenario:name
+    });
+  }
 }
 </script>
 

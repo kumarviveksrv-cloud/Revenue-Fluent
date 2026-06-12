@@ -285,6 +285,7 @@ body{
 .dl-section{clear:both}
 
 </style><script src="rf-report.js"></script>
+<script src="rf-org.js"></script>
 <script src="rf-profile.js"></script>
 </head>
 <body>
@@ -707,6 +708,7 @@ function render() {
     +'</div>';
 
   app.innerHTML = h;
+  if(typeof RFOrg !== 'undefined' && RFOrg.isReady()) RFOrg.injectOrgStrip('app');
 
   // Wire intro
   document.getElementById('introToggle').addEventListener('click', function(){
@@ -851,7 +853,36 @@ function generatePDFP4() {
   var growthGap = -Math.round(totalComp*0.02);
   var totalAdj = flightRisk + skillDebt + growthGap;
   var netProfit = opProfit + totalAdj;
+
+  // If L1 outputs exist, blend them into revenue lines
+  if(typeof RFOrg !== 'undefined'){
+    var l1 = RFOrg.getL1();
+    if(l1 && l1.scenario === name){
+      // Use L1 computed values for the revenue lines where available
+      if(l1.talentAcqVal > 0) talentAcqVal = l1.talentAcqVal;
+      if(l1.retSavings   > 0) retSavings   = l1.retSavings;
+      if(l1.perfUplift   > 0) perfUplift   = l1.perfUplift;
+      if(l1.cultPrem     > 0) cultPrem     = l1.cultPrem;
+      // Recalculate downstream
+      var totalRev2 = talentAcqVal + retSavings + perfUplift + cultPrem;
+      if(totalRev2 > 0) totalRev = totalRev2;
+      grossMargin = totalRev - totalCOGS;
+      opProfit = grossMargin - totalOpEx;
+      netProfit = opProfit + totalAdj;
+    }
+  }
+
   RFReport.reportP4(name, {sym:sym,totalComp:totalComp,talentAcqVal:talentAcqVal,retSavings:retSavings,perfUplift:perfUplift,cultPrem:cultPrem,totalRev:totalRev,acqCost:acqCost,devInvest:devInvest,totalCOGS:totalCOGS,grossMargin:grossMargin,hrFuncCost:hrFuncCost,compliance:compliance,engagementSpend:engagementSpend,totalOpEx:totalOpEx,opProfit:opProfit,flightRisk:flightRisk,skillDebt:skillDebt,growthGap:growthGap,totalAdj:totalAdj,netProfit:netProfit});
+
+  // Publish L4 outputs for L5 to read
+  if(typeof RFOrg !== 'undefined'){
+    var hrInvestment = totalCOGS + totalOpEx;
+    var ratio = hrInvestment > 0 ? totalRev / hrInvestment : 0;
+    RFOrg.publishL4({
+      netProfit:netProfit, grossMargin:grossMargin, totalRev:totalRev,
+      totalCOGS:totalCOGS, ratio:ratio, scenario:name
+    });
+  }
 }
 </script>
 

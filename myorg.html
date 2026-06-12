@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#0A0608"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Revenue Fluent"/>
+<link rel="apple-touch-icon" href="favicon.png"/>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Org — Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0A0608;--bg2:#100810;--bg3:#080408;
+  --cobalt:#C0409A;--cobalt-border:rgba(180,40,140,.18);--cobalt-dim:rgba(180,40,140,.08);
+  --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
+  --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
+  --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
+  --text-mute:rgba(180,40,140,.25);--border:rgba(180,40,140,.15);
+  --sidebar:220px;
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --serif:'Playfair Display',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(ellipse 70% 40% at 60% 0%,rgba(160,20,110,.12) 0%,transparent 55%),linear-gradient(rgba(160,20,120,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.02) 1px,transparent 1px);
+  background-size:100% 100%,52px 52px,52px 52px;min-height:100vh;}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-right:1px solid var(--cobalt-border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:none;}
+.sidebar::-webkit-scrollbar{display:none}
+.sb-logo{padding:16px 14px 12px;border-bottom:1px solid var(--cobalt-border);margin-bottom:6px}
+.sb-logo img{width:100%;max-width:186px;max-height:52px;object-fit:contain;filter:brightness(0.9);mix-blend-mode:lighten}
+.sb-section{padding:8px 12px 4px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
+.sb-item{display:flex;align-items:center;gap:9px;padding:6px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
+.sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
+.sidebar-resize{width:4px;position:absolute;right:0;top:0;bottom:0;cursor:col-resize;background:transparent;transition:background .15s}
+.sidebar-resize:hover{background:rgba(192,64,154,.3)}
+.main{margin-left:var(--sidebar);min-height:100vh;padding:40px 48px 80px}
+.page-header{margin-bottom:36px}
+.page-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cobalt);margin-bottom:10px}
+.page-title{font-size:1.8rem;font-weight:700;color:var(--text-cool);margin-bottom:8px}
+.page-sub{font-size:.9rem;color:var(--text-mid);max-width:560px;line-height:1.7}
+
+/* Save banner */
+.save-banner{display:none;align-items:center;gap:10px;background:rgba(56,196,144,.1);border:1px solid rgba(56,196,144,.3);border-radius:8px;padding:10px 16px;margin-bottom:24px;font-size:.82rem;color:var(--teal)}
+.save-banner.show{display:flex}
+
+/* Cards */
+.section-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;padding:28px;margin-bottom:20px}
+.section-card-title{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field-grid.single{grid-template-columns:1fr}
+.field-wrap{display:flex;flex-direction:column;gap:6px}
+.field-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
+.field-input{background:rgba(180,40,140,.06);border:1px solid var(--cobalt-border);border-radius:7px;padding:10px 14px;color:var(--text);font-family:var(--font);font-size:.9rem;font-weight:400;transition:all .15s;width:100%}
+.field-input:focus{outline:none;border-color:var(--cobalt);background:rgba(192,64,154,.1)}
+.field-input::placeholder{color:var(--text-dim);opacity:.6}
+select.field-input{cursor:pointer}
+.field-note{font-size:.72rem;color:var(--text-dim);opacity:.8}
+.auto-field{background:rgba(56,196,144,.06);border:1px solid rgba(56,196,144,.2);border-radius:7px;padding:10px 14px;color:var(--teal);font-family:var(--mono);font-size:.85rem;font-weight:400}
+
+/* Flow preview */
+.flow-section{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;padding:28px;margin-bottom:20px}
+.flow-title{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px}
+.flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center}
+.flow-pill{background:rgba(192,64,154,.1);border:1px solid rgba(192,64,154,.25);border-radius:8px;padding:10px 12px;text-align:center}
+.flow-pill-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt);margin-bottom:4px}
+.flow-pill-name{font-size:.75rem;font-weight:600;color:var(--text-cool)}
+.flow-arrow{text-align:center;color:var(--cobalt);font-size:1rem;opacity:.6}
+.flow-note{font-size:.75rem;color:var(--text-mid);margin-top:14px;line-height:1.6}
+
+/* Status row */
+.status-row{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--cobalt-border)}
+.status-dot{width:7px;height:7px;border-radius:50%}
+.status-dot.set{background:var(--teal)}
+.status-dot.unset{background:var(--amber)}
+.status-label{font-size:.78rem;color:var(--text-mid)}
+
+/* Save button */
+.btn-save{background:var(--cobalt);color:#fff;border:none;border-radius:8px;padding:11px 28px;font-family:var(--font);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s;letter-spacing:.02em}
+.btn-save:hover{background:#D060B0;transform:translateY(-1px)}
+.btn-save:active{transform:translateY(0)}
+.btn-clear{background:transparent;color:var(--text-dim);border:1px solid var(--cobalt-border);border-radius:8px;padding:11px 20px;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:all .15s;margin-left:10px}
+.btn-clear:hover{border-color:var(--cobalt);color:var(--text)}
+.btn-row{display:flex;align-items:center;margin-top:24px}
+
+@media(max-width:760px){
+  .sidebar{display:none}.main{margin-left:0;padding:24px 20px 100px}
+  .field-grid{grid-template-columns:1fr}
+  .flow-grid{grid-template-columns:1fr}
+  .flow-arrow{transform:rotate(90deg)}
+}
+</style>
+</head>
+<body>
+<aside class="sidebar" id="mainSidebar">
+  <div class="sb-logo"><img src="logo.png" alt="Revenue Fluent"/></div>
+  <div class="sb-section">Platform</div>
+  <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+  <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
+  <a href="myorg.html" class="sb-item active"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="8" width="4" height="6" rx="1"/><rect x="6" y="5" width="4" height="9" rx="1"/><rect x="10" y="2" width="4" height="12" rx="1"/></svg>My Org</a>
+  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
+  <a href="downloads.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>Downloads</a>
+  <a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
+  <div class="sb-section">The Five Pillars</div>
+  <a href="p1-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L1</div>Value Ledger</a>
+  <a href="p2-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L2</div>Talent Premium</a>
+  <a href="p3-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L3</div>Org Vitals</a>
+  <a href="p4-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L4</div>Human P&amp;L</a>
+  <a href="p5-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L5</div>Balance Sheet</a>
+  <div class="sb-section">Philosophy</div>
+  <a href="humacity.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1"/></svg>Humacity</a>
+  <div class="sb-section">Legal</div>
+  <a href="privacy.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5 2v4c0 3-2 5-5 6C5 13 3 11 3 8V4l5-2z"/></svg>Privacy Policy</a>
+  <a href="terms.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zM5 6h6M5 9h6M5 12h4"/></svg>Terms of Service</a>
+  <div class="sb-section">More</div>
+  <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+  <div class="sidebar-resize" id="sbResize"></div>
+</aside>
+
+<div class="main">
+  <div class="page-header">
+    <div class="page-eyebrow">Shared Foundation</div>
+    <h1 class="page-title">My Org</h1>
+    <p class="page-sub">Enter your organisation's core data once. Every tool reads from it. The calculations never change, only the numbers they work with.</p>
+  </div>
+
+  <div class="save-banner" id="saveBanner">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l3 3 7-7"/></svg>
+    Saved. All five tools will now use your org data.
+  </div>
+
+  <!-- Core Identity -->
+  <div class="section-card">
+    <div class="section-card-title">Organisation Identity</div>
+    <div class="field-grid">
+      <div class="field-wrap">
+        <label class="field-label">Organisation Name</label>
+        <input class="field-input" id="orgName" type="text" placeholder="e.g. Acme Corp" autocomplete="off"/>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Financial Year</label>
+        <input class="field-input" id="orgYear" type="text" placeholder="e.g. FY2026" autocomplete="off"/>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Sector</label>
+        <select class="field-input" id="orgSector">
+          <option value="">Select sector</option>
+          <option value="SaaS">SaaS / Tech</option>
+          <option value="Consulting">Consulting / Professional Services</option>
+          <option value="BFSI">BFSI / Financial Services</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Manufacturing">Manufacturing</option>
+          <option value="Sales">Sales Organisation</option>
+          <option value="Hospitality">Hospitality</option>
+          <option value="Public Sector">Public Sector</option>
+          <option value="NGO">NGO / Social Enterprise</option>
+          <option value="Academia">Academia / Education</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Growth Stage</label>
+        <select class="field-input" id="orgStage">
+          <option value="">Select stage</option>
+          <option value="Startup">Startup (under 50 people)</option>
+          <option value="Scale-up">Scale-up (50-250 people)</option>
+          <option value="Mid-Market">Mid-Market (250-1000 people)</option>
+          <option value="Enterprise">Enterprise (1000+ people)</option>
+          <option value="Public Sector">Public / Institutional</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial Inputs -->
+  <div class="section-card">
+    <div class="section-card-title">Financial Foundation</div>
+    <div class="field-grid">
+      <div class="field-wrap">
+        <label class="field-label">Currency</label>
+        <select class="field-input" id="orgCurrency">
+          <option value="INR">₹ Indian Rupee (INR)</option>
+          <option value="USD">$ US Dollar (USD)</option>
+          <option value="GBP">£ British Pound (GBP)</option>
+          <option value="EUR">€ Euro (EUR)</option>
+          <option value="SGD">S$ Singapore Dollar (SGD)</option>
+          <option value="JPY">¥ Japanese Yen (JPY)</option>
+          <option value="AED">AED UAE Dirham (AED)</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Total Headcount</label>
+        <input class="field-input" id="orgHeadcount" type="number" placeholder="e.g. 250" min="1"/>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Total Annual Compensation Base</label>
+        <input class="field-input" id="orgCompBase" type="number" placeholder="e.g. 125000000" min="0"/>
+        <span class="field-note" id="compBaseNote"></span>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Average Annual Salary (auto-calculated)</label>
+        <div class="auto-field" id="avgSalaryDisplay">Enter headcount and comp base above</div>
+        <span class="field-note">Headcount / Comp base. Updates automatically.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HR Function Inputs -->
+  <div class="section-card">
+    <div class="section-card-title">HR Function Benchmarks</div>
+    <div class="field-grid">
+      <div class="field-wrap">
+        <label class="field-label">HR Team Size</label>
+        <input class="field-input" id="orgHRSize" type="number" placeholder="e.g. 8" min="1"/>
+        <span class="field-note">Number of people in the HR function</span>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Annual HR Function Cost</label>
+        <input class="field-input" id="orgHRCost" type="number" placeholder="Leave blank to auto-estimate (4% of comp base)"/>
+        <span class="field-note">HR salaries + tools + systems. Blank = 4% of comp base.</span>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Annual Learning &amp; Development Budget</label>
+        <input class="field-input" id="orgLDBudget" type="number" placeholder="Leave blank to auto-estimate"/>
+        <span class="field-note">Training, coaching, certifications. Blank = 1% of comp base.</span>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label">Annual Recruitment Spend</label>
+        <input class="field-input" id="orgRecSpend" type="number" placeholder="Leave blank to auto-estimate"/>
+        <span class="field-note">Agency fees, job boards, onboarding. Blank = 2.5% of comp base.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cross-tool flow preview -->
+  <div class="flow-section">
+    <div class="flow-title">How your data flows across the five pillars</div>
+    <div class="flow-grid">
+      <div class="flow-pill">
+        <div class="flow-pill-label">L1</div>
+        <div class="flow-pill-name">Value Ledger</div>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-pill">
+        <div class="flow-pill-label">L2 + L3</div>
+        <div class="flow-pill-name">Talent Premium &amp; Org Vitals</div>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-pill">
+        <div class="flow-pill-label">L4</div>
+        <div class="flow-pill-name">Human P&amp;L</div>
+      </div>
+    </div>
+    <div class="flow-grid" style="margin-top:8px">
+      <div></div><div></div><div></div>
+      <div class="flow-arrow" style="transform:rotate(90deg)">&#8594;</div>
+      <div></div>
+    </div>
+    <div class="flow-grid">
+      <div></div><div></div><div></div>
+      <div class="flow-pill" style="border-color:rgba(224,184,48,.3);background:rgba(224,184,48,.08)">
+        <div class="flow-pill-label" style="color:var(--gold)">L5</div>
+        <div class="flow-pill-name">Human Balance Sheet</div>
+      </div>
+      <div></div>
+    </div>
+    <p class="flow-note">Your org assumptions pre-populate every tool. L1 outputs (total return, The Ratio) feed L4. L4 net profit feeds L5 as Retained Human Earnings. One set of numbers. Five consistent views.</p>
+  </div>
+
+  <!-- Status -->
+  <div class="section-card" id="statusCard">
+    <div class="section-card-title">Current Status</div>
+    <div id="statusRows"></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-save" onclick="saveOrg()">Save My Org</button>
+    <button class="btn-clear" onclick="clearOrg()">Clear All</button>
+  </div>
+</div>
+
+<script>
+var CURRENCIES = {INR:'₹',USD:'$',GBP:'£',EUR:'€',SGD:'S$',JPY:'¥',AED:'AED '};
+var ORG_KEY = 'rf_org_data';
+
+function getOrg(){
+  try{ var r=localStorage.getItem(ORG_KEY); return r?JSON.parse(r):{}; }catch(e){return {};}
+}
+
+function fmt(n){
+  if(!n||isNaN(n)) return '';
+  if(n>=10000000) return (n/10000000).toFixed(1)+'Cr';
+  if(n>=100000)   return (n/100000).toFixed(1)+'L';
+  return Number(n).toLocaleString('en-IN');
+}
+
+function updateAvgSalary(){
+  var hc = parseFloat(document.getElementById('orgHeadcount').value)||0;
+  var cb = parseFloat(document.getElementById('orgCompBase').value)||0;
+  var cur = document.getElementById('orgCurrency').value;
+  var sym = CURRENCIES[cur]||cur+' ';
+  var el = document.getElementById('avgSalaryDisplay');
+  var note = document.getElementById('compBaseNote');
+  if(hc>0&&cb>0){
+    var avg = Math.round(cb/hc);
+    el.textContent = sym+fmt(avg)+' per year';
+    note.textContent = sym+fmt(cb)+' total';
+  } else {
+    el.textContent = 'Enter headcount and comp base above';
+    note.textContent = '';
+  }
+}
+
+function loadFromProfile(){
+  try{
+    var p = localStorage.getItem('rf_practitioner_profile');
+    if(!p) return;
+    var profile = JSON.parse(p);
+    var org = getOrg();
+    // Only pre-fill if My Org hasn't been saved yet
+    if(Object.keys(org).length > 0) return;
+    // Map orgSize from profile to stage
+    var sizeMap = {'2-20':'Startup','20-100':'Startup','100-250':'Scale-up','250-500':'Mid-Market','500-1000':'Mid-Market','1000-5000':'Enterprise','5000+':'Enterprise'};
+    // Map context from profile to stage
+    var contextMap = {'Startup':'Scale-up','Mid-Market':'Mid-Market','Enterprise':'Enterprise','Public Sector':'Public Sector'};
+    if(profile.orgSize && sizeMap[profile.orgSize]){
+      var stageEl = document.getElementById('orgStage');
+      stageEl.value = sizeMap[profile.orgSize];
+    }
+    if(profile.context && contextMap[profile.context]){
+      // Only override if not already set from orgSize
+      var stageEl = document.getElementById('orgStage');
+      if(!stageEl.value) stageEl.value = contextMap[profile.context];
+    }
+  }catch(e){}
+}
+
+function loadForm(){
+  var org = getOrg();
+  var fields = ['orgName','orgYear','orgSector','orgStage','orgCurrency','orgHeadcount','orgCompBase','orgHRSize','orgHRCost','orgLDBudget','orgRecSpend'];
+  fields.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el && org[id] !== undefined && org[id] !== null && org[id] !== ''){
+      el.value = org[id];
+    }
+  });
+  updateAvgSalary();
+  renderStatus(org);
+  // If no org saved yet, try to pre-fill from profile
+  if(Object.keys(org).length === 0) loadFromProfile();
+}
+
+function renderStatus(org){
+  var checks = [
+    {key:'orgName',     label:'Organisation name'},
+    {key:'orgCurrency', label:'Currency'},
+    {key:'orgHeadcount',label:'Headcount'},
+    {key:'orgCompBase', label:'Compensation base'},
+    {key:'orgYear',     label:'Financial year'},
+    {key:'orgSector',   label:'Sector'},
+  ];
+  var html = checks.map(function(c){
+    var set = org[c.key] && org[c.key] !== '';
+    return '<div class="status-row">'
+      +'<div class="status-dot '+(set?'set':'unset')+'"></div>'
+      +'<span class="status-label">'+(set?c.label+' — set':'c.label+' — not set yet'')+'</span>'
+      +'</div>';
+  }).join('');
+  // fix string concat issue
+  html = checks.map(function(c){
+    var set = !!(org[c.key] && org[c.key] !== '');
+    return '<div class="status-row"><div class="status-dot '+(set?'set':'unset')+'"></div><span class="status-label">'+c.label+(set?' — set':' — not set yet')+'</span></div>';
+  }).join('');
+  document.getElementById('statusRows').innerHTML = html;
+}
+
+function saveOrg(){
+  var org = {
+    orgName:     document.getElementById('orgName').value.trim(),
+    orgYear:     document.getElementById('orgYear').value.trim(),
+    orgSector:   document.getElementById('orgSector').value,
+    orgStage:    document.getElementById('orgStage').value,
+    orgCurrency: document.getElementById('orgCurrency').value,
+    orgHeadcount:parseFloat(document.getElementById('orgHeadcount').value)||0,
+    orgCompBase: parseFloat(document.getElementById('orgCompBase').value)||0,
+    orgHRSize:   parseFloat(document.getElementById('orgHRSize').value)||0,
+    orgHRCost:   parseFloat(document.getElementById('orgHRCost').value)||0,
+    orgLDBudget: parseFloat(document.getElementById('orgLDBudget').value)||0,
+    orgRecSpend: parseFloat(document.getElementById('orgRecSpend').value)||0,
+    savedAt:     new Date().toISOString()
+  };
+  // Auto-calculate derived fields
+  org.orgAvgSalary = org.orgHeadcount>0 ? Math.round(org.orgCompBase/org.orgHeadcount) : 0;
+  org.orgHRCostCalc = org.orgHRCost > 0 ? org.orgHRCost : Math.round(org.orgCompBase*0.04);
+  org.orgLDBudgetCalc = org.orgLDBudget > 0 ? org.orgLDBudget : Math.round(org.orgCompBase*0.01);
+  org.orgRecSpendCalc = org.orgRecSpend > 0 ? org.orgRecSpend : Math.round(org.orgCompBase*0.025);
+  org.currencySymbol = CURRENCIES[org.orgCurrency]||org.orgCurrency+' ';
+  try{ localStorage.setItem(ORG_KEY, JSON.stringify(org)); }catch(e){}
+  var banner = document.getElementById('saveBanner');
+  banner.classList.add('show');
+  setTimeout(function(){ banner.classList.remove('show'); }, 3500);
+  renderStatus(org);
+}
+
+function clearOrg(){
+  if(!confirm('Clear all My Org data? This will not affect your Practitioner Profile.')) return;
+  try{ localStorage.removeItem(ORG_KEY); }catch(e){}
+  var fields = ['orgName','orgYear','orgHeadcount','orgCompBase','orgHRSize','orgHRCost','orgLDBudget','orgRecSpend'];
+  fields.forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('orgSector').value='';
+  document.getElementById('orgStage').value='';
+  document.getElementById('orgCurrency').value='INR';
+  document.getElementById('avgSalaryDisplay').textContent='Enter headcount and comp base above';
+  document.getElementById('compBaseNote').textContent='';
+  renderStatus({});
+}
+
+// Live update avg salary
+document.getElementById('orgHeadcount').addEventListener('input', updateAvgSalary);
+document.getElementById('orgCompBase').addEventListener('input', updateAvgSalary);
+document.getElementById('orgCurrency').addEventListener('change', updateAvgSalary);
+
+// Sidebar resize
+var sb=document.getElementById('mainSidebar'),handle=document.getElementById('sbResize'),drag=false,sx=0,sw=0;
+handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
+window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelector('.main').style.marginLeft=w+'px';});
+window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
+
+loadForm();
+</script>
+<script src="rf-profile.js"></script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>

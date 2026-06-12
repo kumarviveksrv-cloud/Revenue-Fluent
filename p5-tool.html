@@ -287,6 +287,7 @@ body{
 .dl-section{clear:both}
 
 </style><script src="rf-report.js"></script>
+<script src="rf-org.js"></script>
 <script src="rf-profile.js"></script>
 </head>
 <body>
@@ -547,6 +548,14 @@ function computeBS(name) {
     + Math.round(totalComp*0.03) + Math.round(totalComp*0.02);
   var retainedEarnings = Math.round(opProfit - adjTotal);
 
+  // If L4 has published its net profit for this scenario, use it as retained earnings
+  if(typeof RFOrg !== 'undefined'){
+    var l4data = RFOrg.getL4();
+    if(l4data && l4data.scenario === name && l4data.netProfit !== 0){
+      retainedEarnings = l4data.netProfit;
+    }
+  }
+
   var netHumanWorth = totalAssets - totalLiabilities + retainedEarnings;
 
   return {
@@ -708,6 +717,7 @@ function render() {
     +'</div>';
 
   app.innerHTML = h;
+  if(typeof RFOrg !== 'undefined' && RFOrg.isReady()) RFOrg.injectOrgStrip('app');
 
   // Wire intro
   document.getElementById('introToggle').addEventListener('click', function(){
