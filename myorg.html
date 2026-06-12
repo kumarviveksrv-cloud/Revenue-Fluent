@@ -365,14 +365,6 @@ function renderStatus(org){
     {key:'orgSector',   label:'Sector'},
   ];
   var html = checks.map(function(c){
-    var set = org[c.key] && org[c.key] !== '';
-    return '<div class="status-row">'
-      +'<div class="status-dot '+(set?'set':'unset')+'"></div>'
-      +'<span class="status-label">'+(set?c.label+' — set':'c.label+' — not set yet'')+'</span>'
-      +'</div>';
-  }).join('');
-  // fix string concat issue
-  html = checks.map(function(c){
     var set = !!(org[c.key] && org[c.key] !== '');
     return '<div class="status-row"><div class="status-dot '+(set?'set':'unset')+'"></div><span class="status-label">'+c.label+(set?' — set':' — not set yet')+'</span></div>';
   }).join('');
@@ -434,6 +426,15 @@ window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.s
 loadForm();
 </script>
 <script src="rf-profile.js"></script>
+<script>
+// Gate My Org for free users
+document.addEventListener('DOMContentLoaded', function(){
+  if(window.RFProfile){
+    if(typeof RFProfile.gateMyOrgPage === 'function') RFProfile.gateMyOrgPage();
+    if(typeof RFProfile.injectSidebarBadge === 'function') RFProfile.injectSidebarBadge();
+  }
+});
+</script>
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){

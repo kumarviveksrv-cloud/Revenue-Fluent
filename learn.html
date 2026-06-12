@@ -1120,22 +1120,7 @@ if('serviceWorker' in navigator){
 window.addEventListener('DOMContentLoaded', function(){
   if(window.RFProfile){
     RFProfile.injectSidebarBadge();
-    if(!RFProfile.isPro()){
-      var wrap = document.querySelector('.wrap');
-      if(wrap){
-        var banner = document.createElement('div');
-        banner.style.cssText = 'margin-bottom:24px;padding:14px 20px;background:rgba(192,64,154,.07);border:1px solid rgba(192,64,154,.2);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap';
-        banner.innerHTML = '<div style="font-family:var(--mono);font-size:.78rem;color:#C8A8C0">The Learning Hub is available on <span style="color:#D060B0">Revenue Fluent PRO</span>.</div>'
-          + '<a href="pricing.html" style="font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:6px 14px;border-radius:7px;white-space:nowrap;flex-shrink:0">Upgrade to PRO &rarr;</a>';
-        wrap.insertBefore(banner, wrap.firstChild);
-        // Blur article content
-        document.querySelectorAll('.article-card,.article-content,.learn-article').forEach(function(el){
-          el.style.filter = 'blur(3px)';
-          el.style.pointerEvents = 'none';
-          el.style.userSelect = 'none';
-        });
-      }
-    }
+    if(typeof RFProfile.gateLearnPage === 'function') RFProfile.gateLearnPage();
   }
 });
 </script>

@@ -369,6 +369,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   }
 
   renderGrid();
+  // Gate non-free scenarios for free users
+  setTimeout(function(){ if(window.RFProfile && RFProfile.gateScenarioLibrary) RFProfile.gateScenarioLibrary(); }, 100);
 })();
 </script>
 <script>if(window.RFProfile)RFProfile.injectSidebarBadge();</script>

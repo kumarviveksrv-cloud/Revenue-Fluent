@@ -1,8 +1,8 @@
 // Revenue Fluent — Service Worker
-// Version: 2026-06-10
+// Version: 2026-06-12
 // Enables offline access and PWA install
 
-const CACHE_NAME = 'revenue-fluent-v12';
+const CACHE_NAME = 'revenue-fluent-v13';
 
 const CORE_FILES = [
   '/',
@@ -11,6 +11,7 @@ const CORE_FILES = [
   '/scenario-library.html',
   '/upload.html',
   '/profile.html',
+  '/myorg.html',
   '/downloads.html',
   '/learn.html',
   '/pricing.html',
@@ -25,6 +26,7 @@ const CORE_FILES = [
   '/rf-data.js',
   '/rf-report.js',
   '/rf-profile.js',
+  '/rf-org.js',
   '/manifest.json',
   '/favicon.png',
   '/logo.png',

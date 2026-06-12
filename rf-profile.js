@@ -552,7 +552,132 @@ global.RFProfile = {
   applyAllProGates: applyAllProGates,
   injectProBadge: injectProBadge,
   gateToolPage: gateToolPage,
+  gateScenarioLibrary: gateScenarioLibrary,
+  gateLearnPage: gateLearnPage,
+  gateMyOrgPage: gateMyOrgPage,
   injectMobileNav: injectMobileNav,
 };
 
 })(window);
+
+// ── FREE SCENARIO RESTRICTION ──────────────────────────────────────────────
+// Free users get 3 scenarios only. PRO gets all 15.
+var FREE_SCENARIOS = [
+  'High-Growth Tech Startup',
+  'Professional Services Firm',
+  'Family Business'
+];
+
+function gateScenarioLibrary() {
+  if(isPro()) return;
+  // Add PRO lock overlay to non-free scenario cards
+  // Called after renderGrid() has run
+  var observer = new MutationObserver(function() {
+    document.querySelectorAll('.card').forEach(function(card) {
+      var name = card.getAttribute('data-name') || '';
+      var isFree = FREE_SCENARIOS.some(function(f){ return name.indexOf(f) === 0 || name === f; });
+      if(!isFree && !card.getAttribute('data-gated')) {
+        card.setAttribute('data-gated','1');
+        card.style.position = 'relative';
+        card.style.overflow = 'hidden';
+        // Dim the card
+        card.querySelectorAll('.card-metrics,.card-hook').forEach(function(el){
+          el.style.filter = 'blur(2px)';
+          el.style.pointerEvents = 'none';
+        });
+        // PRO overlay
+        var ov = document.createElement('div');
+        ov.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,6,8,.82);gap:8px;cursor:pointer;z-index:5;border-radius:inherit;';
+        ov.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.12);border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px">PRO Scenario</div>'
+          + '<div style="font-size:.75rem;color:#C8A8C0;text-align:center;padding:0 20px;font-family:var(--mono,\'DM Mono\',monospace)">'+name+'</div>'
+          + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px;margin-top:2px">Unlock with PRO</a>';
+        ov.addEventListener('click', function(e){ e.stopPropagation(); window.location.href='pricing.html'; });
+        card.appendChild(ov);
+        // Block card click
+        card.addEventListener('click', function(e){
+          if(!isPro()){ e.stopPropagation(); window.location.href='pricing.html'; }
+        }, true);
+      }
+    });
+  });
+  var grid = document.getElementById('grid');
+  if(grid) observer.observe(grid, {childList:true, subtree:false});
+
+  // Also inject a "3 of 15 free" notice above the grid
+  setTimeout(function(){
+    var gridEl = document.getElementById('grid');
+    if(!gridEl || document.getElementById('scenFreeNotice')) return;
+    var notice = document.createElement('div');
+    notice.id = 'scenFreeNotice';
+    notice.style.cssText = 'background:rgba(192,64,154,.07);border:1px solid rgba(192,64,154,.2);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;';
+    notice.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;color:#C8A8C0"><b style="color:#C0409A">3 of 15 scenarios</b> available on Free. PRO unlocks all 15.</div>'
+      + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px;white-space:nowrap">Upgrade to PRO</a>';
+    gridEl.parentNode.insertBefore(notice, gridEl);
+  }, 300);
+}
+
+// ── LEARNING HUB GATE ─────────────────────────────────────────────────────
+// Free users see 3 articles. Articles 4+ are PRO.
+var FREE_ARTICLE_IDS = ['a1','a2','a3'];
+
+function gateLearnPage() {
+  if(isPro()) return;
+  setTimeout(function(){
+    // Gate all non-free article cards
+    document.querySelectorAll('.ac-card, .article-card, [data-id]').forEach(function(card){
+      var id = card.getAttribute('data-id') || '';
+      if(FREE_ARTICLE_IDS.indexOf(id) >= 0) return; // free article
+      if(card.getAttribute('data-gated')) return;
+      card.setAttribute('data-gated','1');
+      card.style.position = 'relative';
+      card.style.overflow = 'hidden';
+      card.style.cursor = 'pointer';
+      // Blur content
+      card.querySelectorAll('h2,h3,p,.ac-body,.article-body,.hook,.subtitle').forEach(function(el){
+        el.style.filter = 'blur(3px)';
+        el.style.pointerEvents = 'none';
+        el.style.userSelect = 'none';
+      });
+      var ov = document.createElement('div');
+      ov.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,6,8,.8);gap:8px;border-radius:inherit;z-index:5;';
+      ov.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.12);border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px">PRO Article</div>'
+        + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px">Unlock with PRO</a>';
+      card.appendChild(ov);
+      card.addEventListener('click', function(e){ if(!isPro()) window.location.href='pricing.html'; });
+    });
+
+    // Inject free notice
+    var grid = document.querySelector('.articles-grid,.learn-grid,#articleGrid,.rest-grid');
+    if(grid && !document.getElementById('learnFreeNotice')){
+      var notice = document.createElement('div');
+      notice.id = 'learnFreeNotice';
+      notice.style.cssText = 'background:rgba(192,64,154,.07);border:1px solid rgba(192,64,154,.2);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;';
+      notice.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;color:#C8A8C0"><b style="color:#C0409A">3 of 20 articles</b> available on Free. PRO unlocks all 20 including white papers and case studies.</div>'
+        + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px;white-space:nowrap">Upgrade to PRO</a>';
+      grid.parentNode.insertBefore(notice, grid);
+    }
+  }, 400);
+}
+
+// ── MY ORG PAGE GATE ──────────────────────────────────────────────────────
+// My Org is a PRO feature — free users see a gate overlay
+function gateMyOrgPage() {
+  if(isPro()) return;
+  var main = document.querySelector('.main');
+  if(!main) return;
+  // Hide all form content and show upgrade message
+  var cards = main.querySelectorAll('.section-card, .flow-section, .btn-row');
+  cards.forEach(function(el){ el.style.display = 'none'; });
+  var saveBanner = document.getElementById('saveBanner');
+  if(saveBanner) saveBanner.style.display = 'none';
+
+  var gate = document.createElement('div');
+  gate.style.cssText = 'background:var(--bg2,#100810);border:1px solid rgba(192,64,154,.25);border-radius:16px;padding:48px 40px;text-align:center;max-width:520px;margin:0 auto;';
+  gate.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#C0409A;margin-bottom:16px">PRO Feature</div>'
+    + '<h2 style="font-size:1.4rem;font-weight:700;color:#E8E6E0;margin-bottom:12px">My Org</h2>'
+    + '<p style="font-size:.88rem;color:#B8C8E8;line-height:1.7;margin-bottom:12px">Enter your organisation\'s financial data once. Every tool reads from it. L1 outputs flow into L4. L4 net profit flows into L5.</p>'
+    + '<p style="font-size:.82rem;color:#9AB8D8;line-height:1.7;margin-bottom:24px">My Org is the shared assumptions layer that makes the five pillars a connected financial suite rather than five standalone tools.</p>'
+    + '<a href="pricing.html" style="display:inline-block;background:#C0409A;color:#fff;font-family:var(--mono,\'DM Mono\',monospace);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:12px 28px;border-radius:8px;">Upgrade to PRO</a>'
+    + '<div style="margin-top:14px;font-size:.75rem;color:rgba(192,64,154,.5);font-family:var(--mono,\'DM Mono\',monospace)">Cancel any time</div>';
+  main.appendChild(gate);
+}
