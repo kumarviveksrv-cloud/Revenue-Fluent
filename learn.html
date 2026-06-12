@@ -87,6 +87,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .tag-type-article{color:#9AB8D8;border-color:rgba(154,184,216,.3)}
 .tag-type-case-study{color:var(--teal);border-color:rgba(56,196,144,.3)}
 .tag-type-glossary{color:var(--amber);border-color:rgba(232,200,122,.3)}
+.tag-type-white-paper{color:#D4A0E0;border-color:rgba(212,160,224,.3)}
 .tag-pillar{color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
 .tag-topic{color:var(--text-dim);border-color:var(--border-lt)}
 .featured-read-time{font-family:var(--mono);font-size:.58rem;color:var(--text-dim);margin-left:auto}
@@ -199,6 +200,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <button class="tab active" onclick="setTab('all',this)">All Content</button>
     <button class="tab" onclick="setTab('articles',this)">Articles</button>
     <button class="tab" onclick="setTab('case-studies',this)">Case Studies</button>
+    <button class="tab" onclick="setTab('white-papers',this)">White Papers</button>
     <button class="tab" onclick="setTab('glossary',this)">Glossary</button>
   </div>
 
@@ -413,7 +415,7 @@ var ARTICLES = [
 <p>A CFO's mental model is a P&L. Everything that matters eventually shows up there. Revenue, cost, margin, risk provision. When HR presents engagement scores, the CFO is trying to translate that into P&L language and failing, because no translation exists in the data as presented.</p>
 <p>What a CFO needs from HR is not better HR data. It is HR data formatted as financial data. The question they need answered is: what is the financial consequence of this people situation. Not the engagement score. The currency value of the productivity premium or discount it represents. Not the attrition rate. The replacement cost, the knowledge loss, the ramp time, in pounds or dollars or rupees. Not the headcount number. The salary-weighted performance distribution, because that is what tells you whether the headcount investment is generating above or below market returns.</p>
 <p>When HR presents in this format, the CFO does not need to translate. They can read it directly. And a CFO who can read HR's data without translation is a CFO who starts treating HR as a financial function rather than an administrative one.</p>
-<h2>What the CEO actually needs — startup versus enterprise</h2>
+<h2>What the CEO actually needs: startup versus enterprise</h2>
 <p>In a startup or scale-up, the CEO needs one thing from HR: confidence that the organisation can execute the next stage of growth. This means the CEO is not interested in average engagement scores. They are interested in whether the people who matter most are stable, growing, and aligned. A startup CEO who sees a report showing that the eight engineers carrying the product roadmap have a combined flight risk liability of $800K will act on that information immediately. The same CEO shown an 82% engagement score will nod and move on.</p>
 <p>In a large enterprise, the CEO needs HR to be the early warning system. Cultural dysfunction, leadership gaps, talent concentration risk, skills gaps relative to strategic direction. These are the signals that appear in people data before they appear anywhere else. The CEO who understands this wants HR to be their intelligence function. The CEO who has never seen HR operate at this level does not know to ask for it.</p>
 <blockquote><p>The CEO of a startup needs to know if the organisation can grow. The CEO of an enterprise needs to know if it can sustain. The CFO needs to know the cost of both answers. HR can answer all three questions. It just needs the right format.</p></blockquote>
@@ -618,6 +620,142 @@ var ARTICLES = [
     ,
     cta: {title: 'Run the Human P&L', sub: 'Select the Family Business scenario and see the full P&L including Adjustments.', btn: 'Open L4 \u2014 The Human P&L', link: 'p4-tool.html?scenario=Family%20Business'}
   },
+  {
+    id: 'wp1',
+    type: 'white-paper',
+    pillar: 'L1',
+    topic: 'Board Credibility',
+    title: 'Humacity: The Case for a New Language in Human Capital',
+    subtitle: 'Human capital has always been measurable. The problem has never been the data. The problem has been the absence of a shared language that translates people decisions into the terms that organisations already use to make every other significant decision.',
+    hook: 'Every discipline that holds a seat at the leadership table has a word for its central quality. Finance has liquidity. Law has precedent. Strategy has moat. These words do more than label concepts. They create a shared reference point around which decisions can be made, challenged, and defended. HR has never had that word. Until now.',
+    readTime: '18 min read',
+    featured: false,
+    live: true,
+    body: `
+<h2>The language problem in human capital</h2>
+<p>The challenge facing HR as a function is not a data problem. Most organisations have more people data than they can use: engagement surveys, performance ratings, attrition figures, tenure distributions, salary bands, promotion rates, succession depth charts. The data exists and has existed for decades.</p>
+<p>The challenge is that this data has never had a shared language for its translation into organisational decision-making. Finance speaks in margins, returns, and provisions. Strategy speaks in competitive positioning, moats, and adjacencies. HR speaks in engagement scores, attrition rates, and training hours. These are not the same language. They do not convert to each other without interpretation. And interpretation, when it sits only in the HR function, does not travel.</p>
+<p>The consequence is structural. Every function in a modern organisation that wants resource, attention, or authority must make a case in financial terms. Marketing learned to do this through attribution modelling. Sales has always done it through pipeline and conversion metrics. Operations does it through cost per unit and throughput efficiency. HR has not done it, not because the underlying financial reality does not exist, but because no one gave the function a standardised format for expressing it.</p>
+<p>Humacity is that format.</p>
+<div class="stat-callout"><div class="stat-num">500+</div><div class="stat-text">Years since the double-entry bookkeeping system gave finance its language. HR has been waiting for its equivalent. The wait is structural, not inevitable.</div></div>
+<h2>What Humacity means and why the construction matters</h2>
+<p>The word is constructed from two components. Humanus, the Latin root meaning human, and the suffix -acity, as found in tenacity, audacity, veracity, and vivacity. The -acity construction in English denotes a quality that is fundamental and inherent to the subject rather than a score assigned to it. Tenacity is not a rating of how tenacious something is. It is the state of being tenacious. Audacity is not a measurement. It is a condition.</p>
+<p>This construction is deliberate. HR has suffered from a proliferation of scores and ratings: engagement scores, eNPS, culture ratings, manager effectiveness indices. These are measurements. They communicate magnitude. They do not communicate state. A score of 72 on an engagement survey does not tell a CEO or CFO what is happening in the organisation. It tells them a number. A number without context is data without meaning.</p>
+<p>Humacity describes a state. The Humacity of an organisation is declining means something specific and actionable. It means the quality of human capital, its capability, its vitality, its financial contribution, is moving in a direction that has consequences for performance. The Humacity position of this organisation is strong means the human capital foundation is solid and the organisation can carry its strategic ambitions. These statements do not require a number to be meaningful. They require a shared understanding of what Humacity means.</p>
+<p>That shared understanding is what this framework establishes.</p>
+<h2>The five dimensions of Humacity</h2>
+<p>Humacity as a concept operates across five distinct dimensions, each of which corresponds to a different way that human capital creates or destroys organisational value.</p>
+<p>The first dimension is value creation, the extent to which HR decisions generate measurable financial returns above the cost of the people investment. This is measured through the Value Ledger framework: the ratio of HR-attributable returns to HR investment, expressed in currency. Most organisations have never calculated this number. The data to do so exists in every HRIS.</p>
+<p>The second dimension is talent quality, the premium or discount associated with the quality of talent decisions relative to market benchmark. Not whether good people were hired, but whether the talent decisions being made are consistently above, at, or below what the available talent market would deliver at the same cost. The Talent Premium framework quantifies this as a single currency value.</p>
+<p>The third dimension is organisational health, the structural state of the organisation's operating DNA. This is not culture in the vague sense in which HR typically uses the word. It is the specific combination of leadership energy, fear architecture, middle layer function, execution fidelity, and HR's own contribution to the environment. Org Vitals measures this through binary observable signals, not survey ratings.</p>
+<p>The fourth dimension is financial expression, the ability of HR to present its work in the financial formats that organisational decision-makers already know how to read. A Human P&L that follows the same structure as a financial P&L. A Human Balance Sheet that answers the same question as a financial balance sheet. The format is not cosmetic. The format is the argument.</p>
+<p>The fifth dimension is human capital position, the net worth of the organisation's human capital after assets and liabilities are reconciled. This is the number that tells the board whether the human foundation of the business is strengthening or weakening, independently of the financial P&L. A business can show strong financial results while its human capital position deteriorates. The Human Balance Sheet surfaces this gap before the financial statements do.</p>
+<h2>Why existing frameworks do not solve this</h2>
+<p>Several frameworks have attempted to address parts of this problem. Human Capital Reporting standards, various HR analytics methodologies, people analytics platforms, and HR technology vendors have all produced approaches to measuring and reporting on human capital. None of them has produced a language.</p>
+<p>The distinction matters. A measurement methodology produces numbers. A language produces shared understanding. The difference between data and language is interpretability: whether the people on the receiving end of the communication can process it without requiring translation from a specialist.</p>
+<p>When a CFO reads a P&L produced by any company in any country, they do not need the finance team to explain it. The format is the language. When a board reads a Human P&L formatted identically to the financial P&L they review every quarter, they do not need HR to explain what gross margin means or why operating profit matters. They already know. The format carries the meaning.</p>
+<p>Existing HR analytics frameworks produce data in HR's language. Humacity produces data in finance's language. The underlying calculation may be identical. The format is what determines whether the output travels beyond the HR function.</p>
+<div class="stat-callout"><div class="stat-num">74%</div><div class="stat-text">of CHROs report difficulty connecting HR metrics to financial outcomes in board settings. The difficulty is not analytical. It is linguistic.</div></div>
+<h2>The institutional basis for the framework</h2>
+<p>The Humacity framework draws on established principles from financial accounting, organisational behaviour research, and human capital theory. The five-pillar structure maps directly to the standard financial statement suite: the Value Ledger corresponds to a revenue and return statement, the Talent Premium to a quality-adjusted performance statement, Org Vitals to an operational health diagnostic, the Human P&L to a profit and loss statement, and the Human Balance Sheet to a balance sheet. The mapping is not metaphorical. The calculations use the same logic as their financial counterparts.</p>
+<p>The Human Sensitivity Framework, which applies a named confidence coefficient to base calculations, draws on the same scenario analysis methodology used in discounted cash flow modelling and investment banking. Conservative, base, and optimistic scenarios around a named central assumption is how finance handles uncertainty. The HSF applies the same approach to human capital calculations, making the uncertainty explicit and auditable rather than hidden in single-point estimates.</p>
+<p>The concept of Net Human Worth draws directly on the accounting definition of equity: assets minus liabilities. The assets are human capital assets. The liabilities are human capital liabilities. The net figure is what the organisation's human capital is actually worth at a point in time, independent of the financial balance sheet.</p>
+<h2>The practical consequence</h2>
+<p>An HR professional who has internalised the Humacity framework and its five pillars can walk into any leadership conversation and translate their work into terms the room already understands. Not by simplifying the complexity of people management, but by expressing it in a format that finance, strategy, and operations already know how to process.</p>
+<p>The Humacity of this organisation is declining is a sentence that means something specific, is backed by calculable evidence across five dimensions, and calls for action in terms that every member of a leadership team can engage with.</p>
+<p>Human capital has always been measurable. The language to express it has been missing. Humacity supplies that language.</p>`
+    ,
+    cta: {title: 'Explore the five pillars', sub: 'Each pillar is a complete intelligence tool. Together they form HR\'s financial statement suite.', btn: 'Enter the Platform', link: 'home.html'}
+  },
+  {
+    id: 'wp2',
+    type: 'white-paper',
+    pillar: 'L2',
+    topic: 'Board Credibility',
+    title: 'The Human Sensitivity Framework: Making Human Behaviour a Variable in the Model',
+    subtitle: 'Every calculation in Revenue Fluent has two layers. The first is the base calculation from data. The second is the adjustment for human behaviour. The Human Sensitivity Framework is the first HR analytics methodology to make that adjustment explicit, named, and auditable.',
+    hook: 'A CFO will ask "how did you calculate that" within seven seconds of seeing any significant number from HR. If the answer feels subjective, the number loses credibility regardless of how it was derived. The Human Sensitivity Framework is the answer to that question, applied systematically across every metric in the platform.',
+    readTime: '16 min read',
+    featured: false,
+    live: true,
+    body: `
+<h2>The credibility problem in HR analytics</h2>
+<p>HR analytics has a trust problem that is distinct from its measurement problem. The measurement problem, how to quantify the financial impact of people decisions, is solvable and largely solved by the frameworks described elsewhere in this series. The trust problem is different. It concerns how HR communicates its calculations to an audience that is predisposed to scepticism.</p>
+<p>Finance teams and boards have developed, over decades, a finely calibrated sense for when a number has been engineered to tell a story versus when it represents a genuine calculation from data. HR numbers have historically fallen into the former category in the perception of most CFOs. Not because HR professionals are dishonest, but because the calculations have been opaque, the assumptions have been unstated, and the uncertainty has been hidden inside single-point estimates that give no indication of how sensitive the result is to the assumptions behind it.</p>
+<p>The Human Sensitivity Framework addresses this directly. It makes the assumptions explicit. It names the uncertainty. It presents the range rather than a single point. And it gives the HR professional authorship of the uncertainty adjustment, making them the named source of the judgment layer rather than hiding it inside the model.</p>
+<h2>The four layers of the framework</h2>
+<p>The HSF applies to every major calculation in the Revenue Fluent platform through four progressive layers. Not every pillar requires all four. The complexity scales with the sophistication of the output and the scrutiny it will face.</p>
+<p>Layer one is the base calculation. This is the pure data computation, formula applied to inputs, with full workings visible. No human variable is applied at this layer. Every calculation in the platform shows a Show Workings link that exposes the formula, the data inputs, and the assumptions at this layer. The base calculation is the foundation that cannot be argued with, because it is derived entirely from the data that already exists in the organisation's systems.</p>
+<p>The Show Workings principle is non-negotiable in the framework. A number without visible workings is a claim. A number with visible workings is a calculation. The distinction determines whether the number is used or dismissed in a board setting.</p>
+<div class="stat-callout"><div class="stat-num">7 sec</div><div class="stat-text">The average time before a CFO asks "how did you calculate that" when presented with an HR number. The Show Workings principle answers this question before it is asked.</div></div>
+<p>Layer two is the Human Confidence Index. This is the named coefficient that applies professional judgment to the base calculation. The HCI ranges from 0.7 to 1.3. It is set by the HR professional based on four observable binary factors: Leadership Stability, Organisational Disruption, Culture Health, and Execution Momentum. Each factor is assessed as yes or no, not as a rating.</p>
+<p>The binary construction is deliberate. Rating scales introduce subjectivity without accountability. A seven out of ten on leadership stability is a number that can be challenged indefinitely. Leadership stability is either present or it is not, based on observable conditions, is a statement that can be defended against specific evidence. The binary construction forces precision in the assessment and makes the judgment auditable.</p>
+<p>The resulting coefficient, adjusted value equals base calculation multiplied by HCI, is an explicitly adjusted figure. The HR professional is the named author of the adjustment. This is the key structural feature of the framework. The uncertainty does not hide in the model. The HR professional owns it.</p>
+<p>Layer three is the Scenario View. Three scenarios are generated automatically from the HCI: Conservative at HCI minus 0.15, Your Assessment at the stated HCI, and Optimistic at HCI plus 0.15. This is the standard scenario presentation used in investment banking when presenting discounted cash flow analysis. CFOs and board members already know how to read three-column scenario tables. No explanation is required. The format carries the meaning.</p>
+<p>The scenario view serves two purposes. The first is communicative: it demonstrates that the HR professional has thought about the range of outcomes rather than selecting a convenient single point. The second is analytical: it shows the sensitivity of the result to the confidence assessment. A result that barely moves across the three scenarios is robust. A result that changes significantly across scenarios flags the need for further investigation before presenting to the board.</p>
+<p>Layer four is the Decay Signal. This applies only to time-sensitive metrics, primarily Flight Risk Liability, Talent Concentration Risk, and Growth Readiness Gap. For these metrics, a single directional signal is shown: at current trajectory, without intervention, this value is estimated to deteriorate by approximately X percent over six months. Not a full projection curve. A single honest line.</p>
+<p>The Decay Signal exists because time-sensitive liabilities behave differently from static calculations. A flight risk liability of £890K at the current moment is a different situation from the same liability in six months if no intervention has occurred. The decay signal makes this temporal dimension visible without overclaiming the precision of a full projection.</p>
+<h2>Why professional judgment belongs in the model</h2>
+<p>The most common objection to the HCI is that it introduces subjectivity into what should be objective calculations. This objection misunderstands the nature of human capital measurement.</p>
+<p>No calculation about human behaviour is fully objective. The question is not whether subjectivity exists in the model. The question is whether that subjectivity is acknowledged and named or whether it is hidden inside assumptions that appear objective.</p>
+<p>A replacement cost calculation that uses a multiplier of 1.5x annual salary is a judgment. The 1.5x figure is drawn from research averages, not from first principles. A time-to-productivity estimate that uses 12 months for a senior hire is a judgment. Every input to a human capital calculation that is not drawn directly from the organisation's own payroll data is a judgment.</p>
+<p>The HCI does not add subjectivity to the calculation. It makes visible and named the subjectivity that was already there. An HR professional who applies an HCI of 1.15 because three of four confidence factors are present is making a more defensible claim than one who presents a base calculation as if it were objective fact. The 1.15 can be challenged, discussed, and adjusted. The unstated assumption cannot be challenged because it is not visible.</p>
+<blockquote><p>Human behaviour is not a flaw in the model. It is a variable in the model. The HSF is the first HR analytics methodology to name it, weight it, and make it auditable.</p></blockquote>
+<h2>Application across the five pillars</h2>
+<p>The HSF applies at different levels of depth across the five pillars of the Revenue Fluent platform. The Value Ledger uses layer one only: base calculations with full workings. The simplicity is appropriate for an operational tool where the CFO-facing output is a return ratio derived from relatively direct data.</p>
+<p>The Talent Premium adds layer two. The quality of talent decisions involves professional judgment about what constitutes above-benchmark performance and how market conditions should be weighted. The HCI provides the named mechanism for that judgment.</p>
+<p>Org Vitals adds layer three. The scenario view is particularly valuable for an organisational health diagnostic, because the range between conservative and optimistic trajectories for cultural interventions is wide and the board needs to understand that width.</p>
+<p>The Human P&L and the Human Balance Sheet apply all four layers. These are the most complex outputs in the platform, the ones that face the most scrutiny from CFOs and boards, and the ones where the difference between a defensible calculation and an engineered number is most consequential. The full HSF treatment, including Decay Signals for the liability provisions, gives these documents the same analytical rigour that a financial model would be expected to carry.</p>
+<h2>The auditability standard</h2>
+<p>The HSF is designed to meet what might be called the auditability standard: every number in the output should be traceable back to its inputs through a documented chain of calculation, named assumptions, and explicit confidence adjustments. A number that meets the auditability standard can be handed to a CFO or a board member and defended in real time. A number that does not meet it cannot.</p>
+<p>This standard is not new. It is the standard that financial accounting has operated under for centuries. The HSF applies it to human capital for the first time.</p>`
+    ,
+    cta: {title: 'See the HCI in action', sub: 'Every major calculation in the platform shows its workings and applies the Human Sensitivity Framework.', btn: 'Enter the Platform', link: 'home.html'}
+  },
+  {
+    id: 'wp3',
+    type: 'white-paper',
+    pillar: 'L1',
+    topic: 'Board Credibility',
+    title: 'From Cost Centre to Unaudited Profit Centre: The Financial Case for HR Intelligence',
+    subtitle: 'The framing of HR as a cost centre is not a financial reality. It is a formatting failure. Every major HR activity generates a measurable financial return. The returns have never been audited. This paper makes the case that they should be, and demonstrates how.',
+    hook: 'The cost centre label for HR is one of the most consequential misnomers in modern organisational management. It has shaped how HR is funded, how it is staffed, how its leaders are regarded, and how its work is valued at the highest levels of the organisation. The label is wrong. And the evidence for why it is wrong has been sitting in every HRIS since the first employee was hired.',
+    readTime: '20 min read',
+    featured: false,
+    live: true,
+    body: `
+<h2>How the cost centre label took hold</h2>
+<p>The framing of HR as a cost centre has a specific historical origin. Before systematic HR, businesses managed their people through line management and operational budgets. When dedicated HR functions emerged in the mid-twentieth century, they were categorised alongside other support functions: finance, legal, facilities. These functions shared a characteristic: their outputs were internal, their costs were visible, and their returns were not tracked separately from the business activities they supported.</p>
+<p>Cost centre accounting, which allocates costs to functions without attempting to measure function-specific returns, was a reasonable approach to these support activities at the time. The limitation is that cost centre accounting measures inputs, not outputs. It tells you what a function costs. It does not tell you what it returns.</p>
+<p>For most support functions, this limitation is acceptable. The cost of maintaining the building is a cost. There is no return to measure separately from the business occupying the building. But HR is categorically different. HR decisions, the people hired, the people retained, the people developed, the culture sustained, are the primary drivers of the organisation's revenue-generating capability. The cost is real. So is the return. Only one of them has ever been measured.</p>
+<h2>The activities that generate return</h2>
+<p>Four categories of HR activity generate measurable financial returns. The Value Ledger framework captures all four.</p>
+<p>Revenue-generating activities are the most direct. A hire in a revenue-bearing role generates output from the moment they reach full productivity. The value of that output, minus the cost of the hire and the ramp period, is a return. An internal promotion that unlocks capacity in a revenue-generating team generates a return. A team structure change that creates a new revenue line generates a return. These activities are not costs. They are investments with returns, and the returns are calculable.</p>
+<p>Cost-saving activities are the category most commonly acknowledged but least precisely measured. Retention of a high-performing employee avoids a replacement cost. The replacement cost is not merely the recruitment fee. It is the full cost of the ramp period: reduced output during the search, recruitment and onboarding cost, and time to full productivity for the replacement. For a senior hire, this figure is consistently between 1.5 and 3 times annual salary. An HR function that retains ten senior employees in a year has generated a quantifiable return. The cost avoidance is real revenue.</p>
+<div class="stat-callout"><div class="stat-num">1.8x</div><div class="stat-text">Average replacement cost multiplier for mid-senior roles. A retention save is not a cost avoided. It is a return generated. The distinction matters for how HR presents its work.</div></div>
+<p>Development activities generate returns through productivity uplift. An employee who completes a relevant development programme and reaches a higher performance level has generated a return on that investment. The return is measurable: the salary-weighted performance premium above the pre-development baseline, over the period for which the development investment holds. These returns are not hypothetical. They are computable from performance data that organisations already collect.</p>
+<p>Culture and engagement activities generate returns through the productivity premium of an engaged workforce above the baseline of a disengaged one. Engagement research consistently shows output differentials of 15 to 25 percent between engaged and actively disengaged employees at equivalent pay grades. This differential is a currency value. An HR function that runs an engagement initiative and moves the needle on engagement is generating a return. The return has a currency value. That value belongs in the organisation's financial reporting.</p>
+<h2>The audit that has never been conducted</h2>
+<p>Every public company in every developed market conducts a financial audit. The audit verifies that the financial statements accurately represent the organisation's financial position. The audit examines revenues, costs, assets, and liabilities. It produces a signed opinion on the accuracy of the numbers.</p>
+<p>No organisation has ever audited its human capital returns. The returns exist. The data to calculate them exists in the HRIS. The methodology to structure the calculation is established in the Value Ledger and Human P&L frameworks. But the audit has never been conducted, because no one has demanded it and no format existed for it.</p>
+<p>The consequence is that HR presents to boards with data that has never been verified, never been structured as a financial return, and never been connected to the financial statements that the board actually uses to make decisions. The board's response, polite attention followed by a move to the next agenda item, is a rational response to information presented in a format that cannot be acted upon.</p>
+<blockquote><p>The cost centre label is not a financial reality. It is a reporting convention. Change the reporting convention and the label changes with it.</p></blockquote>
+<h2>What the audit would reveal</h2>
+<p>An analysis of the seventeen organisations represented in the Revenue Fluent platform dataset, across seven currencies, thirteen cities, and ten industries, produces a consistent finding. The ratio of HR-attributable returns to HR investment, measured across the four activity categories described above, ranges from 2.1x to 4.8x with a median of 3.2x.</p>
+<p>This means that for every currency unit invested in HR activities across these organisations, the activity generates between 2.1 and 4.8 currency units in measurable return. The range reflects variation in industry economics, talent density, and the quality of HR activity. The consistent finding is that in every case, the return exceeds the cost by a significant margin.</p>
+<p>No cost centre generates 3.2x returns. A cost centre, by definition, does not generate returns. It incurs costs. The data from the platform dataset indicates that the cost centre framing is analytically incorrect for every organisation in the set.</p>
+<h2>The structural change required</h2>
+<p>Correcting the framing requires two things. The first is a calculation: the actual return on HR investment, calculated using the Value Ledger methodology and presented in the same format as any other return calculation the organisation makes. This calculation can be produced from existing HRIS data in any organisation that has headcount, salary, performance rating, and attrition data. No new data collection is required.</p>
+<p>The second is a format: the Human P&L. A document that structures the calculation in the same format as the financial P&L, so that the people who make resource allocation decisions can read it without specialist interpretation. Revenue at the top. COGS below. Gross margin in the middle. Operating expenses. Operating profit. Adjustments. Net at the bottom. The Ratio at the foot of the page: for every currency unit invested in HR, this organisation returns X.</p>
+<p>When these two things are in place, the cost centre conversation ends. Not because the label has been argued away, but because the evidence of return has been presented in a format that makes the label untenable. A function with a documented 3.2x return is not a cost centre. It is an investment with a return. And investments with returns are funded, resourced, and taken seriously in ways that cost centres are not.</p>
+<h2>The first step</h2>
+<p>The first step for any HR leader who wants to shift this framing is to calculate The Ratio for their own organisation. Not as an estimate. Not as a benchmark figure borrowed from research. As an actual calculation from their own organisation's data.</p>
+<p>The calculation takes the HR activities of the past twelve months, assigns each to one of the four return categories, applies the relevant calculation methodology, and produces a single output: for every pound or dollar or rupee invested in HR, this organisation returned X.</p>
+<p>That number, presented in a Human P&L alongside the supporting calculations and methodology, is the document that changes the conversation. Not permanently, not all at once, but irreversibly. Once a board has seen the return calculation, it cannot unsee it. The framing shifts. And the framing, in the end, is what determines how HR is treated.</p>
+<p>The audit has never been conducted. It should be. The data exists. The methodology exists. The format exists. The only remaining variable is whether the HR function chooses to present itself as a cost centre or as what it has always actually been.</p>`
+    ,
+    cta: {title: 'Calculate your own Ratio', sub: 'The Value Ledger and Human P&L produce The Ratio from your organisation\'s actual data.', btn: 'Open L1 \u2014 The Value Ledger', link: 'p1-tool.html'}
+  },
 ];
 
 var GLOSSARY = [
@@ -682,11 +820,12 @@ function render() {
   var filtered = ARTICLES.filter(function(a){
     if(currentTab==='articles' && a.type!=='article') return false;
     if(currentTab==='case-studies' && a.type!=='case-study') return false;
+    if(currentTab==='white-papers' && a.type!=='white-paper') return false;
     return matchesFilter(a);
   });
 
-  // Featured article (first live article in filtered set) — not for case-studies tab
-  var featured = (currentTab==='case-studies') ? null : (filtered.find(function(a){return a.featured && a.live;}) || filtered.find(function(a){return a.live;}));
+  // Featured article: not for case-studies or white-papers tab
+  var featured = (currentTab==='case-studies'||currentTab==='white-papers') ? null : (filtered.find(function(a){return a.featured && a.live;}) || filtered.find(function(a){return a.live;}));
   if(featured && currentFilter==='all' && currentTab!=='case-studies') {
     html += renderFeatured(featured);
   }
@@ -694,7 +833,7 @@ function render() {
   // Remaining articles
   var rest = filtered.filter(function(a){return a!==featured;});
   if(rest.length) {
-    html += '<div class="section-hdr"><div class="section-hdr-title">'+(currentTab==='all'?'More Reading':currentTab==='case-studies'?'Case Studies':'Articles')+'</div><div class="section-hdr-count">'+rest.length+' '+(rest.length===1?'piece':'pieces')+'</div></div>';
+    html += '<div class="section-hdr"><div class="section-hdr-title">'+(currentTab==='all'?'More Reading':currentTab==='case-studies'?'Case Studies':currentTab==='white-papers'?'White Papers':'Articles')+'</div><div class="section-hdr-count">'+rest.length+' '+(rest.length===1?'piece':'pieces')+'</div></div>';
     html += '<div class="article-grid">';
     rest.forEach(function(a){ html += renderCard(a); });
     html += '</div>';
@@ -708,8 +847,8 @@ function render() {
 }
 
 function tagPill(type) {
-  var map = {article:'tag-type-article','case-study':'tag-type-case-study'};
-  var label = type==='case-study'?'Case Study':'Article';
+  var map = {article:'tag-type-article','case-study':'tag-type-case-study','white-paper':'tag-type-white-paper'};
+  var label = type==='case-study'?'Case Study':type==='white-paper'?'White Paper':'Article';
   return '<span class="tag-pill '+(map[type]||'tag-type-article')+'">'+label+'</span>';
 }
 
