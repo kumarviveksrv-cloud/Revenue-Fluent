@@ -2,7 +2,7 @@
 // Version: 2026-06-10
 // Enables offline access and PWA install
 
-const CACHE_NAME = 'revenue-fluent-v9';
+const CACHE_NAME = 'revenue-fluent-v10';
 
 const CORE_FILES = [
   '/',

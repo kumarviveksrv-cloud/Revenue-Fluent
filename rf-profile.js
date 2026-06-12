@@ -249,131 +249,109 @@ function injectMobileNav() {
   if(document.getElementById('rf-mobile-nav')) return;
 
   var page = location.pathname.split('/').pop() || 'index.html';
+  function isActive(pages){ return pages.indexOf(page)>=0?'rf-mn-active':''; }
 
-  function isActive(pages) {
-    return pages.indexOf(page) >= 0 ? 'rf-mn-active' : '';
+  var morePages=['pricing.html','downloads.html','learn.html','humacity.html'];
+  var moreActive=isActive(morePages);
+
+  // Inject styles into head
+  var style=document.createElement('style');
+  style.textContent=
+    '#rf-mobile-nav{position:fixed;bottom:0;left:0;right:0;z-index:9000;'
+    +'background:rgba(10,6,8,.97);backdrop-filter:blur(20px);'
+    +'border-top:1px solid rgba(192,64,154,.25);'
+    +'display:flex;align-items:stretch;height:60px;'
+    +'padding-bottom:env(safe-area-inset-bottom,0px);}'
+    +'.rf-mn-item{flex:1;display:flex;flex-direction:column;align-items:center;'
+    +'justify-content:center;gap:3px;text-decoration:none;'
+    +'color:rgba(200,168,192,.45);transition:color .15s;'
+    +'border:none;background:none;cursor:pointer;padding:6px 2px 0;}'
+    +'.rf-mn-item:active,.rf-mn-item.rf-mn-active{color:#C0409A}'
+    +'.rf-mn-icon{width:20px;height:20px;display:block;}'
+    +'.rf-mn-label{font-size:9px;letter-spacing:.05em;text-transform:uppercase;'
+    +'font-family:"DM Mono",monospace;line-height:1;margin-top:2px;display:block;}'
+    +'#rf-more-drawer{position:fixed;bottom:60px;left:0;right:0;z-index:8999;'
+    +'background:rgba(10,6,8,.98);backdrop-filter:blur(20px);'
+    +'border-top:1px solid rgba(192,64,154,.25);'
+    +'transform:translateY(110%);transition:transform .22s ease;}'
+    +'#rf-more-drawer.rf-open{transform:translateY(0);}'
+    +'.rf-di{display:flex;align-items:center;gap:14px;padding:15px 28px;'
+    +'text-decoration:none;color:rgba(200,168,192,.7);'
+    +'border-bottom:1px solid rgba(192,64,154,.08);'
+    +'font-family:"Sora",sans-serif;font-size:14px;}'
+    +'.rf-di:last-child{border-bottom:none}'
+    +'.rf-di.rf-da{color:#C0409A}'
+    +'.rf-di svg{width:18px;height:18px;opacity:.7;flex-shrink:0;}'
+    +'#rf-backdrop{display:none;position:fixed;inset:0;z-index:8998;'
+    +'background:rgba(0,0,0,.45);}';
+  document.head.appendChild(style);
+
+  // Backdrop
+  var backdrop=document.createElement('div');
+  backdrop.id='rf-backdrop';
+  backdrop.onclick=function(){rfCloseDrawer();};
+  document.body.appendChild(backdrop);
+
+  // Drawer
+  var drawer=document.createElement('div');
+  drawer.id='rf-more-drawer';
+  drawer.innerHTML=
+    '<a href="downloads.html" class="rf-di'+(page==='downloads.html'?' rf-da':'')+'">'
+      +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>Downloads</a>'
+    +'<a href="learn.html" class="rf-di'+(page==='learn.html'?' rf-da':'')+'">'
+      +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 6v13M12 6C10.8 5.5 9.2 5 7.5 5S4.2 5.5 3 6v13c1.2-.5 2.8-1 4.5-1s3.3.5 4.5 1m0-13c1.2-.5 2.8-1 4.5-1s3.3.5 4.5 1v13c-1.2-.5-2.8-1-4.5-1s-3.3.5-4.5 1"/></svg>Learning Hub</a>'
+    +'<a href="humacity.html" class="rf-di'+(page==='humacity.html'?' rf-da':'')+'">'
+      +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>Humacity</a>'
+    +'<a href="pricing.html" class="rf-di'+(page==='pricing.html'?' rf-da':'')+'">'
+      +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 5v4m0 4h.01"/></svg>Pricing</a>';
+  document.body.appendChild(drawer);
+
+  // Nav bar
+  var nav=document.createElement('div');
+  nav.id='rf-mobile-nav';
+
+  function navItem(href, label, iconPath, activePages, isBtn) {
+    var active=isActive(activePages)?'rf-mn-active':'';
+    var tag=isBtn?'button':'a';
+    var attrs=isBtn?'onclick="rfToggleDrawer()" id="rf-more-btn"':'href="'+href+'"';
+    return '<'+tag+' class="rf-mn-item '+active+'" '+attrs+'>'
+      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">'+iconPath+'</svg>'
+      +'<span class="rf-mn-label">'+label+'</span>'
+      +'</'+tag+'>';
   }
 
-  var morePages = ['pricing.html','downloads.html','learn.html','humacity.html'];
-  var moreActive = isActive(morePages);
-
-  var nav = document.createElement('div');
-  nav.id = 'rf-mobile-nav';
-  nav.innerHTML =
-    '<style>'
-    +'#rf-mobile-nav{'
-      +'position:fixed;bottom:0;left:0;right:0;z-index:1000;'
-      +'background:rgba(10,6,8,.97);backdrop-filter:blur(20px);'
-      +'border-top:1px solid rgba(192,64,154,.2);'
-      +'display:flex;align-items:stretch;height:60px;'
-      +'padding:0 4px;padding-bottom:env(safe-area-inset-bottom,0px);'
-    +'}'
-    +'.rf-mn-item{'
-      +'flex:1;display:flex;flex-direction:column;align-items:center;'
-      +'justify-content:center;gap:3px;text-decoration:none;'
-      +'color:rgba(200,168,192,.45);transition:color .15s;'
-      +'border:none;background:none;cursor:pointer;padding:0;'
-      +'font-family:"Sora",sans-serif;'
-    +'}'
-    +'.rf-mn-item:hover,.rf-mn-item.rf-mn-active{color:#C0409A}'
-    +'.rf-mn-icon{width:20px;height:20px;flex-shrink:0}'
-    +'.rf-mn-label{font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;font-family:"DM Mono",monospace;line-height:1}'
-    +'#rf-more-drawer{'
-      +'position:fixed;bottom:60px;left:0;right:0;z-index:999;'
-      +'background:rgba(10,6,8,.98);backdrop-filter:blur(20px);'
-      +'border-top:1px solid rgba(192,64,154,.25);'
-      +'transform:translateY(100%);transition:transform .22s ease;'
-      +'padding:8px 0 4px;'
-    +'}'
-    +'#rf-more-drawer.open{transform:translateY(0)}'
-    +'.rf-drawer-item{'
-      +'display:flex;align-items:center;gap:14px;'
-      +'padding:14px 28px;text-decoration:none;'
-      +'color:rgba(200,168,192,.7);transition:all .15s;'
-      +'font-family:"Sora",sans-serif;font-size:.82rem;'
-      +'border-bottom:1px solid rgba(192,64,154,.08);'
-    +'}'
-    +'.rf-drawer-item:last-child{border-bottom:none}'
-    +'.rf-drawer-item:hover{color:#EED8E8;background:rgba(192,64,154,.06)}'
-    +'.rf-drawer-item.active{color:#C0409A}'
-    +'.rf-drawer-item svg{width:17px;height:17px;flex-shrink:0;opacity:.7}'
-    +'#rf-drawer-backdrop{'
-      +'display:none;position:fixed;inset:0;z-index:998;'
-      +'background:rgba(0,0,0,.4);'
-    +'}'
-    +'</style>'
-    // Backdrop
-    +'<div id="rf-drawer-backdrop" onclick="rfCloseDrawer()"></div>'
-    // Drawer
-    +'<div id="rf-more-drawer">'
-      +'<a href="downloads.html" class="rf-drawer-item'+(page==='downloads.html'?' active':'')+'">'
-        +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>'
-        +'Downloads'
-      +'</a>'
-      +'<a href="learn.html" class="rf-drawer-item'+(page==='learn.html'?' active':'')+'">'
-        +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>'
-        +'Learning Hub'
-      +'</a>'
-      +'<a href="humacity.html" class="rf-drawer-item'+(page==='humacity.html'?' active':'')+'">'
-        +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>'
-        +'Humacity'
-      +'</a>'
-      +'<a href="pricing.html" class="rf-drawer-item'+(page==='pricing.html'?' active':'')+'">'
-        +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>'
-        +'Pricing'
-      +'</a>'
-    +'</div>'
-    // Nav bar
-    +'<a href="home.html" class="rf-mn-item '+isActive(['home.html','index.html'])+'">'
-      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>'
-      +'<span class="rf-mn-label">Home</span>'
-    +'</a>'
-    +'<a href="scenario-library.html" class="rf-mn-item '+isActive(['scenario-library.html'])+'">'
-      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>'
-      +'<span class="rf-mn-label">Scenarios</span>'
-    +'</a>'
-    +'<a href="p1-tool.html" class="rf-mn-item '+isActive(['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'])+'">'
-      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>'
-      +'<span class="rf-mn-label">Tools</span>'
-    +'</a>'
-    +'<a href="profile.html" class="rf-mn-item '+isActive(['profile.html'])+'">'
-      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>'
-      +'<span class="rf-mn-label">Profile</span>'
-    +'</a>'
-    +'<button class="rf-mn-item '+moreActive+'" onclick="rfToggleDrawer()" id="rf-more-btn">'
-      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/></svg>'
-      +'<span class="rf-mn-label">More</span>'
-    +'</button>';
+  nav.innerHTML=
+    navItem('home.html','Home','<path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/>',['home.html','index.html'],false)
+    +navItem('scenario-library.html','Scenarios','<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',['scenario-library.html'],false)
+    +navItem('p1-tool.html','Tools','<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>',['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'],false)
+    +navItem('profile.html','Profile','<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>',['profile.html'],false)
+    +navItem('','More','<circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/>',morePages,true);
 
   document.body.appendChild(nav);
 
-  // Drawer toggle functions on window scope
-  window.rfToggleDrawer = function() {
-    var drawer = document.getElementById('rf-more-drawer');
-    var backdrop = document.getElementById('rf-drawer-backdrop');
-    var btn = document.getElementById('rf-more-btn');
-    var isOpen = drawer.classList.contains('open');
-    if(isOpen) {
-      drawer.classList.remove('open');
-      backdrop.style.display = 'none';
-      btn.style.color = '';
+  window.rfToggleDrawer=function(){
+    var d=document.getElementById('rf-more-drawer');
+    var b=document.getElementById('rf-backdrop');
+    var btn=document.getElementById('rf-more-btn');
+    if(d.classList.contains('rf-open')){
+      d.classList.remove('rf-open');b.style.display='none';
+      if(btn)btn.style.color='';
     } else {
-      drawer.classList.add('open');
-      backdrop.style.display = 'block';
-      btn.style.color = '#C0409A';
+      d.classList.add('rf-open');b.style.display='block';
+      if(btn)btn.style.color='#C0409A';
     }
   };
-  window.rfCloseDrawer = function() {
-    var drawer = document.getElementById('rf-more-drawer');
-    var backdrop = document.getElementById('rf-drawer-backdrop');
-    var btn = document.getElementById('rf-more-btn');
-    drawer.classList.remove('open');
-    backdrop.style.display = 'none';
-    if(btn) btn.style.color = '';
+  window.rfCloseDrawer=function(){
+    var d=document.getElementById('rf-more-drawer');
+    var b=document.getElementById('rf-backdrop');
+    var btn=document.getElementById('rf-more-btn');
+    if(d)d.classList.remove('rf-open');
+    if(b)b.style.display='none';
+    if(btn)btn.style.color='';
   };
 
-  var wrap = document.querySelector('.wrap');
-  if(wrap) wrap.style.paddingBottom = 'calc(60px + env(safe-area-inset-bottom, 0px) + 16px)';
+  var wrap=document.querySelector('.wrap');
+  if(wrap) wrap.style.paddingBottom='76px';
 }
 
 // ── INITIALISE ON PAGE LOAD ───────────────────────────────────────────────
