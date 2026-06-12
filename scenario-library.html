@@ -79,7 +79,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .chip.on{background:rgba(180,40,140,.1);border-color:var(--cobalt);color:#D060B0}
 
 /* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .card{
   background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;
   padding:22px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
@@ -101,7 +101,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .v-teal{color:var(--teal)}.v-gold{color:var(--gold)}.v-cobalt{color:#D060B0}
 .no-results{text-align:center;padding:60px;font-family:var(--mono);font-size:.82rem;color:#C8A8C0}
 
-@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:24px 20px 60px}}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:24px 20px 60px}.grid{grid-template-columns:1fr}}
 </style><script src="rf-profile.js"></script>
 </head>
 <body>
