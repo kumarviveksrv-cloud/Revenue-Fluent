@@ -74,8 +74,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .pc-features li{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--text-mid)}
 .pc-features li::before{content:'';width:16px;height:16px;border-radius:50%;background:rgba(56,196,144,.15);border:1px solid rgba(56,196,144,.3);flex-shrink:0}
 .pc-features li.check::before{content:'✓';font-size:.6rem;color:var(--teal);background:rgba(56,196,144,.12)}
-.pc-features li.muted{color:var(--text-dim)}
-.pc-features li.muted::before{background:rgba(192,64,154,.06);border-color:rgba(192,64,154,.12);content:''}
+.pc-features li.muted{color:var(--text-dim);opacity:.6}
+.pc-features li.muted::before{background:transparent;border-color:transparent;content:'—';font-size:.75rem;color:rgba(192,64,154,.35);width:16px;display:flex;align-items:center;justify-content:center}
 
 .pc-cta{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:500;transition:all .2s;cursor:pointer;border:none;width:100%}
 .pc-cta.outline{background:transparent;color:var(--text-mid);border:1px solid var(--border)}
@@ -161,17 +161,18 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="pc-per">No card required. No expiry.</div>
       <ul class="pc-features">
         <li class="check">All 5 intelligence tools</li>
-        <li class="check">3 scenarios (Startup, Consulting, Family Business)</li>
+        <li class="check">3 scenarios to explore</li>
         <li class="check">Base calculations visible</li>
         <li class="check">Practitioner profile</li>
+        <li class="check">3 Learning Hub articles</li>
+        <li style="border-top:1px solid rgba(192,64,154,.15);margin-top:4px;padding-top:10px;font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(192,64,154,.5);border-bottom:none;gap:0">PRO only</li>
         <li class="muted">All 15 scenarios</li>
         <li class="muted">Show Workings on every metric</li>
-        <li class="muted">HCI confidence layer</li>
+        <li class="muted">HCI Confidence Layer</li>
         <li class="muted">My Org (shared assumptions)</li>
-        <li class="muted">Learning Hub (3 of 20 articles free)</li>
-        <li class="muted">Excel model downloads</li>
-        <li class="muted">PDF board reports</li>
-        <li class="muted">Upload your own data</li>
+        <li class="muted">Full Learning Hub (20 pieces)</li>
+        <li class="muted">Excel downloads + PDF reports</li>
+        <li class="muted">Upload your own org data</li>
       </ul>
       <a href="home.html" class="pc-cta outline">Enter the Platform &rarr;</a>
     </div>
