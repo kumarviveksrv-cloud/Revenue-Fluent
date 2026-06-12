@@ -243,14 +243,84 @@ function gateToolPage() {
   injectProBadge();
 }
 
+// ── MOBILE BOTTOM NAV ────────────────────────────────────────────────────
+function injectMobileNav() {
+  // Only inject on mobile viewports
+  if(window.innerWidth > 760) return;
+  // Don't double-inject
+  if(document.getElementById('rf-mobile-nav')) return;
+
+  var page = location.pathname.split('/').pop() || 'index.html';
+
+  function isActive(pages) {
+    return pages.indexOf(page) >= 0 ? 'rf-mn-active' : '';
+  }
+
+  var nav = document.createElement('div');
+  nav.id = 'rf-mobile-nav';
+  nav.innerHTML =
+    '<style>'
+    +'#rf-mobile-nav{'
+      +'position:fixed;bottom:0;left:0;right:0;z-index:1000;'
+      +'background:rgba(10,6,8,.97);backdrop-filter:blur(20px);'
+      +'border-top:1px solid rgba(192,64,154,.2);'
+      +'display:flex;align-items:stretch;height:60px;'
+      +'padding:0 4px;padding-bottom:env(safe-area-inset-bottom,0px);'
+    +'}'
+    +'.rf-mn-item{'
+      +'flex:1;display:flex;flex-direction:column;align-items:center;'
+      +'justify-content:center;gap:3px;text-decoration:none;'
+      +'color:rgba(200,168,192,.45);transition:color .15s;'
+      +'border:none;background:none;cursor:pointer;padding:0;'
+      +'font-family:"Sora",sans-serif;'
+    +'}'
+    +'.rf-mn-item:hover,.rf-mn-item.rf-mn-active{color:#C0409A}'
+    +'.rf-mn-icon{width:20px;height:20px;flex-shrink:0}'
+    +'.rf-mn-label{font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;font-family:"DM Mono",monospace;line-height:1}'
+    +'</style>'
+    // Home
+    +'<a href="home.html" class="rf-mn-item '+isActive(['home.html','index.html'])+'">'
+      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>'
+      +'<span class="rf-mn-label">Home</span>'
+    +'</a>'
+    // Scenarios
+    +'<a href="scenario-library.html" class="rf-mn-item '+isActive(['scenario-library.html'])+'">'
+      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>'
+      +'<span class="rf-mn-label">Scenarios</span>'
+    +'</a>'
+    // Tools (active on any p-tool page)
+    +'<a href="p1-tool.html" class="rf-mn-item '+isActive(['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'])+'">'
+      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>'
+      +'<span class="rf-mn-label">Tools</span>'
+    +'</a>'
+    // Profile
+    +'<a href="profile.html" class="rf-mn-item '+isActive(['profile.html'])+'">'
+      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>'
+      +'<span class="rf-mn-label">Profile</span>'
+    +'</a>'
+    // More
+    +'<a href="pricing.html" class="rf-mn-item '+isActive(['pricing.html','downloads.html','learn.html','humacity.html'])+'">'
+      +'<svg class="rf-mn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/></svg>'
+      +'<span class="rf-mn-label">More</span>'
+    +'</a>';
+
+  document.body.appendChild(nav);
+
+  // Add bottom padding to wrap so content isn't hidden behind nav
+  var wrap = document.querySelector('.wrap');
+  if(wrap) wrap.style.paddingBottom = 'calc(60px + env(safe-area-inset-bottom, 0px) + 16px)';
+}
+
 // ── INITIALISE ON PAGE LOAD ───────────────────────────────────────────────
 function init() {
   if(document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function(){
       injectSidebarBadge();
+      injectMobileNav();
     });
   } else {
     injectSidebarBadge();
+    injectMobileNav();
   }
 }
 
@@ -439,6 +509,7 @@ global.RFProfile = {
   applyAllProGates: applyAllProGates,
   injectProBadge: injectProBadge,
   gateToolPage: gateToolPage,
+  injectMobileNav: injectMobileNav,
 };
 
 })(window);
