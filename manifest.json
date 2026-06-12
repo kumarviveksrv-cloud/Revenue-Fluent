@@ -7,7 +7,7 @@
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0A0608",
-  "theme_color": "#C0409A",
+  "theme_color": "#0A0608",
   "lang": "en",
   "icons": [
     {
@@ -28,40 +28,21 @@
       "name": "Platform Home",
       "short_name": "Home",
       "url": "/home.html",
-      "icons": [
-        {
-          "src": "favicon.png",
-          "sizes": "192x192"
-        }
-      ]
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
     },
     {
       "name": "Value Ledger",
       "short_name": "L1",
       "url": "/p1-tool.html",
-      "icons": [
-        {
-          "src": "favicon.png",
-          "sizes": "192x192"
-        }
-      ]
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
     },
     {
       "name": "Scenario Library",
       "short_name": "Scenarios",
       "url": "/scenario-library.html",
-      "icons": [
-        {
-          "src": "favicon.png",
-          "sizes": "192x192"
-        }
-      ]
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
     }
   ],
-  "categories": [
-    "business",
-    "productivity",
-    "finance"
-  ],
+  "categories": ["business", "productivity", "finance"],
   "screenshots": []
 }
