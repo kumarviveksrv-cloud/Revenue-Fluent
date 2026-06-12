@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <link rel="manifest" href="manifest.json"/>
-<meta name="theme-color" content="#C0409A"/>
+<meta name="theme-color" content="#0A0608"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -10,6 +10,141 @@
 <link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Terms of Service, Revenue Fluent</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0A0608;--bg2:#100810;
+  --magenta:#C0409A;--magenta-mid:#D060B0;
+  --gold:#E0B830;--copper:#B87333;
+  --teal:#38C490;--amber:#E8C87A;--red:#E05C3A;
+  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
+  --border:rgba(192,64,154,.18);--border-lt:rgba(192,64,154,.08);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --sidebar:220px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:none}
+.sidebar::-webkit-scrollbar{display:none}
+.sb-brand{display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18)}
+.sb-brand img{width:100%;height:auto;max-width:186px;object-fit:contain;filter:brightness(0.95)}
+.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
+.sb-item.active{background:rgba(192,64,154,.12);color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
+.sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:var(--text-mid)}
+.sb-by b{color:var(--gold);font-weight:600}
+.sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s}
+.sidebar-resize:hover{background:rgba(192,64,154,.4)}
+.wrap{margin-left:var(--sidebar);padding:48px 64px 80px;max-width:900px;position:relative;z-index:1}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:32px 24px}}
+.crumb{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:32px;display:flex;align-items:center;gap:8px}
+.crumb a{color:var(--magenta-mid);text-decoration:none}
+.doc-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:10px}
+.doc-title{font-size:2rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.doc-meta{font-family:var(--mono);font-size:.68rem;color:var(--text-dim);margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border-lt)}
+.doc-body h2{font-size:1.1rem;font-weight:600;color:var(--text);margin:32px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border-lt)}
+.doc-body h3{font-size:.95rem;font-weight:600;color:var(--magenta-mid);margin:22px 0 8px}
+.doc-body p{font-size:.88rem;color:var(--text-mid);line-height:1.8;margin-bottom:14px}
+.doc-body ul{list-style:none;margin-bottom:14px;padding-left:0}
+.doc-body ul li{font-size:.88rem;color:var(--text-mid);line-height:1.8;padding:4px 0 4px 20px;position:relative}
+.doc-body ul li::before{content:'·';position:absolute;left:0;color:rgba(192,64,154,.4)}
+.doc-body strong{color:var(--text);font-weight:600}
+.doc-body a{color:var(--magenta-mid);text-decoration:none}
+.doc-body a:hover{text-decoration:underline}
+.toc{background:var(--bg2);border:1px solid var(--border-lt);border-radius:12px;padding:20px 24px;margin-bottom:32px}
+.toc-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:12px}
+.toc a{display:block;font-size:.82rem;color:var(--text-dim);text-decoration:none;padding:3px 0;transition:color .15s}
+.toc a:hover{color:var(--magenta-mid)}
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="mainSidebar">
+  <a href="index.html" class="sb-brand"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:186px;object-fit:contain;filter:brightness(0.95)"/></a>
+  <div class="sb-section">Platform</div>
+  <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
+  <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
+  <a href="upload.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V2M5 5l3-3 3 3M2 12h12"/></svg>Upload Your Data</a>
+  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
+  <a href="downloads.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>Downloads</a>
+  <a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
+  <div class="sb-tools-section">The Five Pillars</div>
+  <a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+  <a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+  <a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+  <a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+  <a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
+  <div class="sb-section">Philosophy</div>
+  <a href="humacity.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 2a4 4 0 010 8 4 4 0 010-8zm0 1v3l2 1"/></svg>Humacity</a>
+  <div class="sb-section">Legal</div>
+  <a href="privacy.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5 2v4c0 3-2 5-5 6C5 13 3 11 3 8V4l5-2z"/></svg>Privacy Policy</a>
+  <a href="terms.html" class="sb-item active"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zM5 6h6M5 9h6M5 12h4"/></svg>Terms of Service</a>
+  <div class="sb-section">More</div>
+  <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+  <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
+  <div class="sidebar-resize" id="sbResize"></div>
+</aside>
+
+<div class="wrap">
+  <div class="crumb"><a href="home.html">&larr; Home</a><span style="color:rgba(192,64,154,.3)">/</span>Terms of Service</div>
+
+  <div class="doc-eyebrow">Legal</div>
+  <h1 class="doc-title">Terms of Service</h1>
+  <div class="doc-meta">Last updated: 10 June 2026 &middot; Revenue Fluent &middot; Built by Kumar Vivek</div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <a href="#acceptance">1. Acceptance of terms</a>
+    <a href="#platform">2. What the platform is</a>
+    <a href="#access">3. Access and accounts</a>
+    <a href="#pro">4. PRO tier and payments</a>
+    <a href="#data">5. Your data</a>
+    <a href="#ip">6. Intellectual property</a>
+    <a href="#disclaimer">7. Disclaimer of warranties</a>
+    <a href="#liability">8. Limitation of liability</a>
+    <a href="#conduct">9. Acceptable use</a>
+    <a href="#termination">10. Termination</a>
+    <a href="#governing">11. Governing law</a>
+    <a href="#changes">12. Changes to these terms</a>
+  </div>
+
+  <div class="doc-body">
+
+    <h2 id="acceptance">1. Acceptance of terms</h2>
+    <p>By accessing or using Revenue Fluent at humacity.com, you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the Platform.</p>
+    <p>These Terms apply to all users of the Platform, including free tier users, PRO tier subscribers, and visitors.</p>
+
+    <h2 id="platform">2. What the platform is</h2>
+    <p>Revenue Fluent is an HR intelligence platform that provides analytical tools, frameworks, and educational content to help HR professionals connect people decisions to financial outcomes. The Platform is built on the Humacity philosophy, developed by Kumar Vivek.</p>
+    <p>The Platform uses a proprietary dataset of 750 modelled employees across 15 scenarios. All calculations are illustrative models based on this dataset and any data you choose to input. They are not certified financial statements, audited conclusions, or legally binding assessments.</p>
+
+    <h2 id="access">3. Access and accounts</h2>
+    <p>The free tier of Revenue Fluent requires no account creation. Access to PRO tier features requires activation of a valid access code obtained through a paid subscription via Gumroad.</p>
+    <p>Access codes are for individual use. You may not share, resell, or distribute access codes. Each access code activates PRO features on the device where it is entered via the browser's local storage.</p>
+    <p>You are responsible for maintaining the confidentiality of your access code and for all activity associated with its use.</p>
+
+    <h2 id="pro">4. PRO tier and payments</h2>
+    <p>PRO tier subscriptions are processed exclusively through Gumroad. Revenue Fluent does not collect or store payment information directly.</p>
+    <p>PRO subscriptions are billed monthly. You may cancel at any time through your Gumroad account. Cancellation takes effect at the end of the current billing period. No partial refunds are provided for unused portions of a billing period.</p>
+    <p>Two pricing tiers are available: PRO India (INR pricing) and PRO Global (USD pricing). Both tiers provide identical features. Pricing reflects purchasing power parity across markets.</p>
+
+    <h2 id="data">5. Your data</h2>
+    <p>Revenue Fluent processes all user-uploaded data entirely within your browser. No employee data you upload is transmitted to any server, stored remotely, or accessible by Kumar Vivek or any third party.</p>
+    <p>Uploaded data is held in your browser's session storage and is permanently deleted when you close the tab. It is not cached, saved, or transmitted anywhere.</p>
+    <p>Your practitioner profile, HCI settings, and PRO activation status are stored in your browser's local storage on your device only. This data does not leave your device.</p>
+
+    <h2 id="ip">6. Intellectual property</h2>
+    <p>Revenue Fluent, Humacity, and all associated frameworks, methodologies, metric names, and platform content are the intellectual property of Kumar Vivek. All rights reserved.</p>
+    <p>You may not:</p>
+    <ul>
       <li>Claim ownership of, or commercially exploit, any Platform methodology or framework</li>
       <li>Use the Platform's intellectual property to build competing products</li>
       <li>Remove or obscure any attribution or copyright notices</li>
@@ -49,6 +184,7 @@
     <div style="margin-top:40px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border-lt);border-radius:12px">
       <p style="font-family:var(--mono);font-size:.7rem;color:var(--text-dim)">These Terms of Service were last updated on 10 June 2026. For questions, contact Kumar Vivek via humacity.com.</p>
     </div>
+
   </div>
 </div>
 
