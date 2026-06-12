@@ -553,6 +553,7 @@ global.RFProfile = {
   injectProBadge: injectProBadge,
   gateToolPage: gateToolPage,
   gateScenarioLibrary: gateScenarioLibrary,
+  gateScenarioInTool: gateScenarioInTool,
   gateLearnPage: gateLearnPage,
   gateMyOrgPage: gateMyOrgPage,
   injectMobileNav: injectMobileNav,
@@ -560,7 +561,68 @@ global.RFProfile = {
 
 })(window);
 
-// ── FREE SCENARIO RESTRICTION ──────────────────────────────────────────────
+// ── SCENARIO GATE IN TOOL PAGES ───────────────────────────────────────────
+// Call this on each tool page after the scenario dropdown is set.
+// If the loaded scenario is not in the free list and user is not PRO,
+// show a gate overlay over the tool output and lock the dropdown.
+function gateScenarioInTool() {
+  if(isPro()) return;
+
+  var FREE = ['High-Growth Tech Startup','Professional Services Firm','Family Business'];
+
+  function checkAndGate() {
+    var sel = document.getElementById('scen');
+    if(!sel) return;
+    var name = sel.value;
+    var isFree = FREE.some(function(f){ return name === f || name.indexOf(f) === 0; });
+    if(isFree) {
+      // Remove any existing gate
+      var eg = document.getElementById('scenGateOverlay');
+      if(eg) eg.remove();
+      return;
+    }
+
+    // Lock non-free scenario — show overlay on app div
+    var app = document.getElementById('app');
+    if(!app) return;
+    if(document.getElementById('scenGateOverlay')) return; // already gated
+
+    var ov = document.createElement('div');
+    ov.id = 'scenGateOverlay';
+    ov.style.cssText = 'position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(10,6,8,.92);backdrop-filter:blur(8px);';
+    ov.innerHTML = '<div style="background:#100810;border:1px solid rgba(192,64,154,.3);border-radius:16px;padding:48px 40px;text-align:center;max-width:480px;width:90%;">'
+      + '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.1);border:1px solid rgba(192,64,154,.25);padding:4px 14px;border-radius:4px;display:inline-block;margin-bottom:20px">PRO Scenario</div>'
+      + '<h2 style="font-size:1.3rem;font-weight:700;color:#E8E6E0;margin-bottom:10px">'+name+'</h2>'
+      + '<p style="font-size:.85rem;color:#B8C8E8;line-height:1.7;margin-bottom:8px">This scenario is available on Revenue Fluent PRO. Free users can explore 3 scenarios: High-Growth Tech Startup, Professional Services Firm, and Family Business.</p>'
+      + '<p style="font-size:.8rem;color:#9AB8D8;margin-bottom:24px">PRO unlocks all 15 scenarios across 10 industries, 7 currencies, and 13 cities.</p>'
+      + '<a href="pricing.html" style="display:inline-block;background:#C0409A;color:#fff;font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:12px 28px;border-radius:8px;margin-bottom:14px">Upgrade to PRO</a>'
+      + '<br><button onclick="document.getElementById(\'scenGateOverlay\').remove();document.getElementById(\'scen\').value=\'High-Growth Tech Startup\';document.getElementById(\'scen\').dispatchEvent(new Event(\'change\'));" style="background:none;border:none;font-family:var(--mono,\'DM Mono\',monospace);font-size:.6rem;color:rgba(192,64,154,.5);cursor:pointer;text-decoration:underline;margin-top:4px">Switch to a free scenario</button>'
+      + '</div>';
+    document.body.appendChild(ov);
+
+    // Also restrict dropdown options for free users
+    var sel2 = document.getElementById('scen');
+    if(sel2) {
+      Array.from(sel2.options).forEach(function(opt){
+        var optFree = FREE.some(function(f){ return opt.value === f || opt.value.indexOf(f) === 0; });
+        if(!optFree && opt.value !== 'Your Organisation') {
+          opt.textContent = opt.value + ' 🔒';
+          opt.style.color = 'rgba(192,64,154,.4)';
+        }
+      });
+    }
+  }
+
+  // Check on page load
+  setTimeout(checkAndGate, 200);
+
+  // Check on every scenario change
+  document.addEventListener('change', function(e){
+    if(e.target && e.target.id === 'scen') {
+      setTimeout(checkAndGate, 50);
+    }
+  });
+}
 // Free users get 3 scenarios only. PRO gets all 15.
 var FREE_SCENARIOS = [
   'High-Growth Tech Startup',
