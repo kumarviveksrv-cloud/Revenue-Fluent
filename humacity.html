@@ -143,11 +143,16 @@ body::before{
   .footer{padding:28px 24px}
   .nav-links{display:none}
 }
+#starfieldCanvas{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;
+}
 </style>
 </head>
 <body>
 
 <canvas id="ambientCanvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0.6"></canvas>
+<canvas id="starfieldCanvas"></canvas>
 
 <nav class="nav">
   <a href="#" class="nav-brand">
@@ -484,6 +489,128 @@ body::before{
   }
   animate();
   window.addEventListener('resize',function(){var s=getSize();canvas.style.width=s+'px';canvas.style.height=s+'px';renderer.setSize(s,s);});
+})();
+
+
+// ── STARFIELD — particles flying toward camera ────────────────────────────
+(function(){
+  var canvas = document.getElementById('starfieldCanvas');
+  var W, H;
+  var scene, camera, renderer, particles, positions, velocities, opacities;
+  var PARTICLE_COUNT = 2000;
+  var mouse = {x: 0, y: 0};
+
+  function init(){
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W; canvas.height = H;
+
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, W/H, 0.1, 2000);
+    camera.position.z = 500;
+
+    renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: false, alpha: true});
+    renderer.setSize(W, H);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setClearColor(0x000000, 0);
+
+    // Build particle geometry
+    var geo = new THREE.BufferGeometry();
+    positions = new Float32Array(PARTICLE_COUNT * 3);
+    velocities = new Float32Array(PARTICLE_COUNT);
+    opacities = new Float32Array(PARTICLE_COUNT);
+
+    for(var i = 0; i < PARTICLE_COUNT; i++){
+      resetParticle(i, true);
+    }
+
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    // Brand-consistent colours — mix of magenta, gold, and soft white
+    var colors = new Float32Array(PARTICLE_COUNT * 3);
+    var palette = [
+      [0.75, 0.25, 0.60],  // magenta
+      [0.88, 0.72, 0.19],  // gold
+      [0.85, 0.73, 0.82],  // soft pink-white
+      [0.47, 0.77, 0.56],  // teal accent
+      [0.92, 0.90, 0.88],  // warm white
+    ];
+    for(var i = 0; i < PARTICLE_COUNT; i++){
+      var c = palette[Math.floor(Math.random() * palette.length)];
+      // slight random variation
+      colors[i*3]   = Math.min(1, c[0] + (Math.random()-.5)*.15);
+      colors[i*3+1] = Math.min(1, c[1] + (Math.random()-.5)*.15);
+      colors[i*3+2] = Math.min(1, c[2] + (Math.random()-.5)*.15);
+    }
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    var mat = new THREE.PointsMaterial({
+      size: 2.8,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.85,
+      sizeAttenuation: true,
+      depthWrite: false,
+    });
+
+    particles = new THREE.Points(geo, mat);
+    scene.add(particles);
+  }
+
+  function resetParticle(i, randomZ){
+    // Spread across a wide field
+    var spread = 900;
+    positions[i*3]   = (Math.random() - 0.5) * spread;
+    positions[i*3+1] = (Math.random() - 0.5) * spread;
+    positions[i*3+2] = randomZ
+      ? (Math.random() - 1.0) * 1000   // spread from -1000 to 0 on init
+      : -1000 + Math.random() * 100;   // reset to far back
+    velocities[i] = 0.8 + Math.random() * 2.2;  // varied speeds
+    opacities[i]  = 0.2 + Math.random() * 0.8;
+  }
+
+  function animate(){
+    requestAnimationFrame(animate);
+
+    var pos = particles.geometry.attributes.position.array;
+    var camZ = 500;
+
+    for(var i = 0; i < PARTICLE_COUNT; i++){
+      // Move particle toward camera (increase Z)
+      pos[i*3+2] += velocities[i];
+
+      // Subtle mouse parallax on X/Y
+      pos[i*3]   += mouse.x * 0.012;
+      pos[i*3+1] -= mouse.y * 0.012;
+
+      // If particle has passed camera, reset to back
+      if(pos[i*3+2] > camZ){
+        resetParticle(i, false);
+      }
+    }
+
+    particles.geometry.attributes.position.needsUpdate = true;
+
+    // Very subtle scene drift
+    particles.rotation.z += 0.00015;
+
+    renderer.render(scene, camera);
+  }
+
+  document.addEventListener('mousemove', function(e){
+    mouse.x = (e.clientX / window.innerWidth  - 0.5) * 2;
+    mouse.y = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  window.addEventListener('resize', function(){
+    W = window.innerWidth; H = window.innerHeight;
+    camera.aspect = W/H;
+    camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+  });
+
+  init();
+  animate();
 })();
 
 (function(){
