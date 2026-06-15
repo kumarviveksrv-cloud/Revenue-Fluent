@@ -464,8 +464,8 @@ body::before{
   scene.add(new THREE.AmbientLight(0x180C14,4));
   var mLight=new THREE.PointLight(0xC0409A,4,10);mLight.position.set(2.5,2,2);scene.add(mLight);
   var gLight=new THREE.PointLight(0xE0B830,2,10);gLight.position.set(-2,-1.5,1.5);scene.add(gLight);
-  scene.add(Object.assign(new THREE.PointLight(0x6030AA,1.5,8),{position:{x:0,y:-2.5,z:-1}}));
-  scene.add(Object.assign(new THREE.PointLight(0xFF80D0,1.2,6),{position:{x:-1.5,y:1.5,z:2}}));
+  var bLight=new THREE.PointLight(0x6030AA,1.5,8);bLight.position.set(0,-2.5,-1);scene.add(bLight);
+  var fLight=new THREE.PointLight(0xFF80D0,1.2,6);fLight.position.set(-1.5,1.5,2);scene.add(fLight);
   var mouseX=0,mouseY=0;
   document.addEventListener('mousemove',function(e){mouseX=(e.clientX/window.innerWidth-.5)*1.2;mouseY=(e.clientY/window.innerHeight-.5)*1.2;});
   var t=0;
