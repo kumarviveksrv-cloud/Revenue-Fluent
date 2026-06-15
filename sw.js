@@ -2,7 +2,7 @@
 // Version: 2026-06-12
 // Enables offline access and PWA install
 
-const CACHE_NAME = 'revenue-fluent-v15';
+const CACHE_NAME = 'revenue-fluent-v16';
 
 const CORE_FILES = [
   '/',
@@ -26,6 +26,7 @@ const CORE_FILES = [
   '/rf-data.js',
   '/rf-report.js',
   '/rf-profile.js',
+  '/rf-onboarding.js',
   '/rf-org.js',
   '/manifest.json',
   '/favicon.png',
