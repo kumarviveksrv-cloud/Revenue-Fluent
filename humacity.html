@@ -492,107 +492,151 @@ body::before{
 })();
 
 
-// ── STARFIELD — particles flying toward camera ────────────────────────────
+// ── STARFIELD — Humacity symbols flying toward camera ───────────────────────
 (function(){
   var canvas = document.getElementById('starfieldCanvas');
   var W, H;
-  var scene, camera, renderer, particles, positions, velocities, opacities;
-  var PARTICLE_COUNT = 2000;
+  var scene, camera, renderer;
   var mouse = {x: 0, y: 0};
+  var PARTICLE_COUNT = 180;
+  var sprites = [];
+
+  // The symbols — Humacity's own language
+  var SYMBOLS = [
+    'L1','L2','L3','L4','L5',
+    'TQP','HCI','NHW',
+    'HUMACITY',
+    'Humacity',
+    'tenacity','audacity','veracity','vivacity','capacity',
+    '3.8x','2.4x','1.0x','4.1x',
+    '₹','$','£','€','¥',
+    'P&L','ROI',
+    '+18%','+12%','+24%',
+    'Value','Talent','Vitality',
+    'L1 · Value Ledger',
+    'L2 · Talent Premium',
+    'L3 · Org Vitals',
+    'Net Human Worth',
+    'Human P&L',
+  ];
+
+  // Brand colours
+  var COLORS = [
+    '#C0409A','#D060B0','#E0B830',
+    '#B87333','#E8C87A','#38C490',
+    '#EED8E8','#D8B8D0',
+  ];
+
+  function makeSpriteTex(text, color){
+    var c = document.createElement('canvas');
+    var ctx = c.getContext('2d');
+    var fontSize = text.length > 8 ? 18 : text.length > 4 ? 22 : 28;
+    ctx.font = 'bold ' + fontSize + 'px "DM Mono", monospace';
+    var tw = ctx.measureText(text).width;
+    c.width  = Math.ceil(tw) + 20;
+    c.height = fontSize + 16;
+    // Re-set font after resize
+    ctx.font = 'bold ' + fontSize + 'px "DM Mono", monospace';
+    ctx.clearRect(0, 0, c.width, c.height);
+    // Soft glow
+    ctx.shadowColor = color;
+    ctx.shadowBlur  = 10;
+    ctx.fillStyle   = color;
+    ctx.globalAlpha = 0.92;
+    ctx.fillText(text, 10, fontSize + 2);
+    var tex = new THREE.CanvasTexture(c);
+    return {tex: tex, aspect: c.width / c.height};
+  }
+
+  function makeSprite(tex, aspect){
+    var mat = new THREE.SpriteMaterial({
+      map: tex,
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    var sp = new THREE.Sprite(mat);
+    var baseSize = 1.2 + Math.random() * 1.8;
+    sp.scale.set(baseSize * aspect * 12, baseSize * 12, 1);
+    return sp;
+  }
+
+  function resetSprite(data, randomZ){
+    var spread = 700;
+    data.sprite.position.x = (Math.random() - 0.5) * spread;
+    data.sprite.position.y = (Math.random() - 0.5) * spread;
+    data.sprite.position.z = randomZ
+      ? -800 + Math.random() * 600
+      : -900 + Math.random() * 100;
+    data.speed   = 1.2 + Math.random() * 3.5;
+    data.maxOpacity = 0.15 + Math.random() * 0.55;
+    data.sprite.material.opacity = 0;
+    data.fadeIn  = true;
+  }
 
   function init(){
     W = window.innerWidth;
     H = window.innerHeight;
-    canvas.width = W; canvas.height = H;
 
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, W/H, 0.1, 2000);
+    camera = new THREE.PerspectiveCamera(70, W/H, 0.1, 2000);
     camera.position.z = 500;
 
-    renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: false, alpha: true});
+    renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
     renderer.setSize(W, H);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setClearColor(0x000000, 0);
 
-    // Build particle geometry
-    var geo = new THREE.BufferGeometry();
-    positions = new Float32Array(PARTICLE_COUNT * 3);
-    velocities = new Float32Array(PARTICLE_COUNT);
-    opacities = new Float32Array(PARTICLE_COUNT);
-
-    for(var i = 0; i < PARTICLE_COUNT; i++){
-      resetParticle(i, true);
-    }
-
-    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-    // Brand-consistent colours — mix of magenta, gold, and soft white
-    var colors = new Float32Array(PARTICLE_COUNT * 3);
-    var palette = [
-      [0.75, 0.25, 0.60],  // magenta
-      [0.88, 0.72, 0.19],  // gold
-      [0.85, 0.73, 0.82],  // soft pink-white
-      [0.47, 0.77, 0.56],  // teal accent
-      [0.92, 0.90, 0.88],  // warm white
-    ];
-    for(var i = 0; i < PARTICLE_COUNT; i++){
-      var c = palette[Math.floor(Math.random() * palette.length)];
-      // slight random variation
-      colors[i*3]   = Math.min(1, c[0] + (Math.random()-.5)*.15);
-      colors[i*3+1] = Math.min(1, c[1] + (Math.random()-.5)*.15);
-      colors[i*3+2] = Math.min(1, c[2] + (Math.random()-.5)*.15);
-    }
-    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    var mat = new THREE.PointsMaterial({
-      size: 2.8,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.85,
-      sizeAttenuation: true,
-      depthWrite: false,
+    // Pre-build textures for each symbol
+    var texCache = {};
+    SYMBOLS.forEach(function(sym){
+      var col = COLORS[Math.floor(Math.random() * COLORS.length)];
+      texCache[sym] = makeSpriteTex(sym, col);
     });
 
-    particles = new THREE.Points(geo, mat);
-    scene.add(particles);
-  }
-
-  function resetParticle(i, randomZ){
-    // Spread across a wide field
-    var spread = 900;
-    positions[i*3]   = (Math.random() - 0.5) * spread;
-    positions[i*3+1] = (Math.random() - 0.5) * spread;
-    positions[i*3+2] = randomZ
-      ? (Math.random() - 1.0) * 1000   // spread from -1000 to 0 on init
-      : -1000 + Math.random() * 100;   // reset to far back
-    velocities[i] = 0.8 + Math.random() * 2.2;  // varied speeds
-    opacities[i]  = 0.2 + Math.random() * 0.8;
+    for(var i = 0; i < PARTICLE_COUNT; i++){
+      var sym = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+      var tc  = texCache[sym];
+      var sp  = makeSprite(tc.tex, tc.aspect);
+      scene.add(sp);
+      var data = {sprite: sp, speed: 0, maxOpacity: 0, fadeIn: true};
+      resetSprite(data, true);
+      sprites.push(data);
+    }
   }
 
   function animate(){
     requestAnimationFrame(animate);
 
-    var pos = particles.geometry.attributes.position.array;
     var camZ = 500;
 
-    for(var i = 0; i < PARTICLE_COUNT; i++){
-      // Move particle toward camera (increase Z)
-      pos[i*3+2] += velocities[i];
+    sprites.forEach(function(data){
+      var sp = data.sprite;
 
-      // Subtle mouse parallax on X/Y
-      pos[i*3]   += mouse.x * 0.012;
-      pos[i*3+1] -= mouse.y * 0.012;
+      // Move toward camera
+      sp.position.z += data.speed;
 
-      // If particle has passed camera, reset to back
-      if(pos[i*3+2] > camZ){
-        resetParticle(i, false);
+      // Subtle mouse drift
+      sp.position.x += mouse.x * 0.06;
+      sp.position.y -= mouse.y * 0.06;
+
+      // Fade in as it approaches
+      var progress = (sp.position.z + 900) / 1400; // 0 (far) → 1 (close)
+      if(data.fadeIn && progress < 0.6){
+        sp.material.opacity = Math.min(data.maxOpacity, progress * data.maxOpacity * 2.5);
       }
-    }
 
-    particles.geometry.attributes.position.needsUpdate = true;
+      // Fade out as it gets very close to camera
+      if(sp.position.z > 300){
+        sp.material.opacity *= 0.92;
+      }
 
-    // Very subtle scene drift
-    particles.rotation.z += 0.00015;
+      // Reset when past camera
+      if(sp.position.z > camZ + 50){
+        resetSprite(data, false);
+      }
+    });
 
     renderer.render(scene, camera);
   }
