@@ -498,7 +498,7 @@ body::before{
   var W, H;
   var scene, camera, renderer;
   var mouse = {x: 0, y: 0};
-  var PARTICLE_COUNT = 350;
+  var PARTICLE_COUNT = 500;
   var sprites = [];
 
   // The symbols — Humacity's own language
@@ -570,7 +570,7 @@ body::before{
     data.sprite.position.z = randomZ
       ? -900 + Math.random() * 700
       : -1000 + Math.random() * 100;
-    data.speed   = 1.8 + Math.random() * 4.5;  // faster = more energetic
+    data.speed   = 0.3 + Math.random() * 0.7;  // slow drift — readable
     data.maxOpacity = 0.35 + Math.random() * 0.30;  // visible but not overpowering
     data.sprite.material.opacity = 0;
     data.fadeIn  = true;
