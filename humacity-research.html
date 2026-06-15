@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#C0409A"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Revenue Fluent"/>
+<link rel="apple-touch-icon" href="favicon.png"/>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Humacity Research — The Intellectual Foundation</title>
+<meta name="description" content="The research, evidence, and historical analysis that validates Humacity as a framework for understanding human capital."/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0A0608;--bg2:#100810;
+  --magenta:#C0409A;--magenta-mid:#D060B0;
+  --gold:#E0B830;--teal:#38C490;
+  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
+  --border:rgba(192,64,154,.15);
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--hero:'Bebas Neue',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(10,6,8,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(192,64,154,.08)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:#B87333}
+.nav-wordmark{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--magenta-mid)}
+.nav-cta{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:8px;background:rgba(192,64,154,.12);color:var(--magenta-mid);border:1px solid rgba(192,64,154,.22);text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:rgba(192,64,154,.22)}
+
+/* HERO */
+.hero{padding:140px 48px 80px;max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.hero-breadcrumb{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(192,64,154,.4);margin-bottom:24px;display:flex;align-items:center;gap:8px}
+.hero-breadcrumb a{color:rgba(192,64,154,.4);text-decoration:none;transition:color .15s}
+.hero-breadcrumb a:hover{color:var(--magenta-mid)}
+.hero-breadcrumb span{color:rgba(192,64,154,.2)}
+.hero-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.hero-label::before{content:'';width:24px;height:1px;background:rgba(192,64,154,.4)}
+.hero-title{font-size:clamp(2.2rem,5vw,4rem);font-weight:700;color:var(--text);line-height:1.1;margin-bottom:20px}
+.hero-title em{color:var(--gold);font-style:normal}
+.hero-sub{font-size:1rem;color:var(--text-mid);line-height:1.8;max-width:600px}
+
+/* RESEARCH CARDS */
+.research-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:64px}
+@media(max-width:900px){.research-grid{grid-template-columns:1fr}}
+.research-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:36px;position:relative;overflow:hidden;text-decoration:none;display:block;transition:border-color .2s,transform .2s}
+.research-card:hover{border-color:rgba(192,64,154,.35);transform:translateY(-2px)}
+.research-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--magenta),transparent)}
+.rc-status{font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:4px}
+.rc-status.live{color:var(--teal);background:rgba(56,196,144,.08);border:1px solid rgba(56,196,144,.2)}
+.rc-status.soon{color:rgba(192,64,154,.5);background:rgba(192,64,154,.06);border:1px solid rgba(192,64,154,.15)}
+.rc-num{font-family:var(--hero);font-size:3.5rem;color:rgba(192,64,154,.12);line-height:1;margin-bottom:16px}
+.rc-title{font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.3}
+.rc-sub{font-size:.82rem;color:var(--text-dim);line-height:1.7;margin-bottom:20px}
+.rc-cta{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--magenta-mid);display:flex;align-items:center;gap:6px}
+.rc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.rc-tag{font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(192,64,154,.08);color:var(--text-dim);border:1px solid rgba(192,64,154,.12)}
+
+/* STATEMENT */
+.statement{padding:80px 48px;text-align:center;position:relative;z-index:1;background:linear-gradient(180deg,transparent,rgba(192,64,154,.03),transparent)}
+.statement-inner{max-width:700px;margin:0 auto}
+.statement-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:20px}
+.statement-text{font-size:clamp(1.3rem,3vw,2.2rem);font-weight:700;color:var(--text);line-height:1.5}
+.statement-text em{color:var(--gold);font-style:normal}
+.statement-sub{font-size:.9rem;color:var(--text-mid);line-height:1.8;margin-top:16px}
+
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(192,64,154,.2),transparent)}
+
+.footer{padding:36px 48px;border-top:1px solid rgba(192,64,154,.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;position:relative;z-index:1}
+.footer-left{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:var(--text-dim)}
+.footer-left b{color:var(--gold)}
+.footer-right{font-family:var(--mono);font-size:.58rem;color:rgba(192,64,154,.25)}
+
+@media(max-width:600px){
+  .nav{padding:14px 20px}.nav-links{display:none}
+  .hero{padding:100px 24px 60px}
+  .statement{padding:60px 24px}
+  .footer{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="humacity.html" class="nav-brand">
+    <div class="nav-dot"></div>
+    <div class="nav-wordmark">Humacity</div>
+  </a>
+  <div class="nav-links">
+    <a href="humacity.html">The Concept</a>
+    <a href="humacity-research.html" class="active">Research</a>
+    <a href="humacity-evidence.html">Evidence Base</a>
+    <a href="humacity-inflections.html">Inflection Points</a>
+  </div>
+  <a href="https://humacity.com/home.html" class="nav-cta">Revenue Fluent &rarr;</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-breadcrumb">
+    <a href="humacity.html">Humacity</a>
+    <span>/</span>
+    Research
+  </div>
+  <div class="hero-label">Humacity Research</div>
+  <h1 class="hero-title">The intellectual<br>foundation of <em>Humacity</em>.</h1>
+  <p class="hero-sub">Humacity is not an assertion. It is a framework built on decades of independent research, documented organisational history, and original analysis. This is where we show our working.</p>
+
+  <div class="research-grid">
+
+    <a href="humacity-evidence.html" class="research-card">
+      <div class="rc-status live">&#9679; Live</div>
+      <div class="rc-num">01</div>
+      <div class="rc-title">The Evidence Base</div>
+      <div class="rc-tags">
+        <span class="rc-tag">McKinsey MGI</span>
+        <span class="rc-tag">Gallup</span>
+        <span class="rc-tag">SHRM</span>
+        <span class="rc-tag">Chicago Booth</span>
+      </div>
+      <div class="rc-sub">What thirty years of independent research says about the financial reality of human capital. Six bodies of evidence, organised for the first time under a single framework.</div>
+      <div class="rc-cta">Read the evidence &rarr;</div>
+    </a>
+
+    <a href="humacity-inflections.html" class="research-card">
+      <div class="rc-status live">&#9679; Live</div>
+      <div class="rc-num">02</div>
+      <div class="rc-title">Historical Inflection Points</div>
+      <div class="rc-tags">
+        <span class="rc-tag">Kodak</span>
+        <span class="rc-tag">Nokia</span>
+        <span class="rc-tag">Blockbuster</span>
+        <span class="rc-tag">Enron</span>
+        <span class="rc-tag">Zappos</span>
+      </div>
+      <div class="rc-sub">Five documented cases where human capital was the decisive variable. Reanalysed through the five forces of Humacity. What the public record tells us about what actually failed.</div>
+      <div class="rc-cta">Read the case analyses &rarr;</div>
+    </a>
+
+    <div class="research-card" style="cursor:default;opacity:.7">
+      <div class="rc-status soon">Coming soon</div>
+      <div class="rc-num">03</div>
+      <div class="rc-title">The Humacity Observatory</div>
+      <div class="rc-tags">
+        <span class="rc-tag">Original research</span>
+        <span class="rc-tag">15 scenarios</span>
+        <span class="rc-tag">7 currencies</span>
+      </div>
+      <div class="rc-sub">Original analysis from the Revenue Fluent dataset. What the 750-person simulation engine reveals about Humacity patterns across industries, geographies, and org types.</div>
+      <div class="rc-cta" style="color:rgba(192,64,154,.3)">In preparation</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="statement">
+  <div class="statement-inner">
+    <div class="statement-label">Why this matters</div>
+    <div class="statement-text">Humacity does not need to be invented.<br>It needs to be <em>recognised</em>.</div>
+    <div class="statement-sub">The research community has been documenting the financial impact of human capital for three decades. What has been missing is a shared language that makes those findings legible in a boardroom. Humacity is that language. Revenue Fluent is the tool that puts it in financial format.</div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">Humacity Research &middot; <b>Kumar Vivek</b> &middot; humacity.com</div>
+  <div class="footer-right">The foundation of Revenue Fluent &middot; 2026</div>
+</footer>
+
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
+</script>
+</body></html>
