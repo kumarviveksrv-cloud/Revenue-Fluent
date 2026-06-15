@@ -498,7 +498,7 @@ body::before{
   var W, H;
   var scene, camera, renderer;
   var mouse = {x: 0, y: 0};
-  var PARTICLE_COUNT = 180;
+  var PARTICLE_COUNT = 350;
   var sprites = [];
 
   // The symbols — Humacity's own language
@@ -530,20 +530,24 @@ body::before{
   function makeSpriteTex(text, color){
     var c = document.createElement('canvas');
     var ctx = c.getContext('2d');
-    var fontSize = text.length > 8 ? 18 : text.length > 4 ? 22 : 28;
-    ctx.font = 'bold ' + fontSize + 'px "DM Mono", monospace';
+    // Smaller, crisper font — feels like sparks not labels
+    var fontSize = text.length > 8 ? 13 : text.length > 4 ? 16 : 20;
+    ctx.font = '600 ' + fontSize + 'px "DM Mono", monospace';
     var tw = ctx.measureText(text).width;
-    c.width  = Math.ceil(tw) + 20;
-    c.height = fontSize + 16;
-    // Re-set font after resize
-    ctx.font = 'bold ' + fontSize + 'px "DM Mono", monospace';
+    c.width  = Math.ceil(tw) + 16;
+    c.height = fontSize + 12;
+    ctx.font = '600 ' + fontSize + 'px "DM Mono", monospace';
     ctx.clearRect(0, 0, c.width, c.height);
-    // Soft glow
+    // Strong multi-layer glow for luminosity
     ctx.shadowColor = color;
-    ctx.shadowBlur  = 10;
+    ctx.shadowBlur  = 18;
     ctx.fillStyle   = color;
-    ctx.globalAlpha = 0.92;
-    ctx.fillText(text, 10, fontSize + 2);
+    ctx.globalAlpha = 1.0;
+    ctx.fillText(text, 8, fontSize + 2);
+    // Second pass for extra brightness
+    ctx.shadowBlur = 8;
+    ctx.globalAlpha = 0.7;
+    ctx.fillText(text, 8, fontSize + 2);
     var tex = new THREE.CanvasTexture(c);
     return {tex: tex, aspect: c.width / c.height};
   }
@@ -557,20 +561,21 @@ body::before{
       blending: THREE.AdditiveBlending,
     });
     var sp = new THREE.Sprite(mat);
-    var baseSize = 1.2 + Math.random() * 1.8;
-    sp.scale.set(baseSize * aspect * 12, baseSize * 12, 1);
+    // Smaller scale — feels like sparks
+    var baseSize = 0.5 + Math.random() * 0.9;
+    sp.scale.set(baseSize * aspect * 10, baseSize * 10, 1);
     return sp;
   }
 
   function resetSprite(data, randomZ){
-    var spread = 700;
+    var spread = 800;
     data.sprite.position.x = (Math.random() - 0.5) * spread;
     data.sprite.position.y = (Math.random() - 0.5) * spread;
     data.sprite.position.z = randomZ
-      ? -800 + Math.random() * 600
-      : -900 + Math.random() * 100;
-    data.speed   = 1.2 + Math.random() * 3.5;
-    data.maxOpacity = 0.15 + Math.random() * 0.55;
+      ? -900 + Math.random() * 700
+      : -1000 + Math.random() * 100;
+    data.speed   = 1.8 + Math.random() * 4.5;  // faster = more energetic
+    data.maxOpacity = 0.55 + Math.random() * 0.45;  // much brighter
     data.sprite.material.opacity = 0;
     data.fadeIn  = true;
   }
@@ -624,12 +629,12 @@ body::before{
       // Fade in as it approaches
       var progress = (sp.position.z + 900) / 1400; // 0 (far) → 1 (close)
       if(data.fadeIn && progress < 0.6){
-        sp.material.opacity = Math.min(data.maxOpacity, progress * data.maxOpacity * 2.5);
+        sp.material.opacity = Math.min(data.maxOpacity, progress * data.maxOpacity * 4.0);
       }
 
       // Fade out as it gets very close to camera
-      if(sp.position.z > 300){
-        sp.material.opacity *= 0.92;
+      if(sp.position.z > 420){
+        sp.material.opacity *= 0.88;
       }
 
       // Reset when past camera
