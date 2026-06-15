@@ -12,7 +12,6 @@
 <link rel="apple-touch-icon" href="favicon.png"/>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="shortcut icon" href="favicon.png"/>
-<link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>The Talent Premium, Revenue Fluent</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
@@ -70,7 +69,6 @@ body{
   border:1px solid var(--cobalt-border);border-radius:12px;cursor:pointer;
   animation:cobalt-pulse 3s ease-in-out infinite;
 }
-.intro-toggle.seen{animation:cobalt-pulse 3s ease-in-out infinite}
 @keyframes cobalt-pulse{
   0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.3),0 0 8px rgba(160,20,120,.15),0 0 20px rgba(160,20,120,.06)}
   50%{box-shadow:0 0 0 1px rgba(90,160,255,.7),0 0 20px rgba(192,64,154,.4),0 0 40px rgba(160,20,120,.18),0 0 60px rgba(160,20,120,.08)}
@@ -92,7 +90,7 @@ body{
 .intro-transition{font-style:italic;font-size:.88rem;color:var(--text-dim);border-top:1px solid var(--border);padding-top:14px;margin-top:4px;line-height:1.5}
 .intro-transition b{color:var(--gold);font-style:normal}
 
-/* HUMACITY BAND, always visible */
+/* HUMACITY BAND */
 .humacity-band{
   padding:20px 28px;margin-bottom:32px;
   background:linear-gradient(135deg,rgba(40,8,28,.7),rgba(4,6,14,.9));
@@ -121,7 +119,7 @@ body{
   0%,100%{box-shadow:0 0 0 1px rgba(192,64,154,.2),0 0 16px rgba(160,20,120,.1),0 0 40px rgba(160,20,120,.05)}
   50%{box-shadow:0 0 0 1px rgba(90,160,255,.45),0 0 32px rgba(192,64,154,.2),0 0 64px rgba(160,20,120,.1)}
 }
-.hero-grid{display:grid;grid-template-columns:1fr 1px 360px;gap:48px;align-items:center;position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:1fr 1px 320px;gap:44px;align-items:center;position:relative;z-index:1}
 .hero-divider{background:var(--cobalt-dim)}
 .tqp-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#D060B0;margin-bottom:12px}
 .tqp-num{
@@ -138,7 +136,7 @@ body{
 .context{font-size:.84rem;color:#C8D8F0;line-height:1.7}
 .context b{color:var(--text-cool);font-weight:500}
 
-/* STATS */
+/* STATS BAR */
 .stats{display:flex;gap:0;margin-bottom:32px;border:1px solid var(--cobalt-border);border-radius:10px;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
 .stat{flex:1;padding:17px 20px;border-right:1px solid var(--cobalt-border);background:rgba(40,8,28,.4);transition:all .15s}
 .stat:last-child{border-right:none}
@@ -147,113 +145,77 @@ body{
 .stat .sl{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#C8D8F0}
 .sv-teal{color:var(--teal)}.sv-gold{color:var(--gold)}.sv-cobalt{color:#D060B0}.sv-copper{color:var(--copper-lt)}.sv-dim{color:#C8D8F0}
 
-/* COMPONENTS */
+/* BENCHMARK STRIP */
+.bm-section{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:16px;padding:28px 32px;margin-bottom:32px;animation:hero-pulse 3s ease-in-out infinite}
+.bm-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#D060B0;margin-bottom:6px}
+.bm-sub{font-size:.82rem;color:var(--text-dim);margin-bottom:24px;line-height:1.5}
+.bm-rows{display:flex;flex-direction:column;gap:14px}
+.bm-row{display:grid;grid-template-columns:180px 1fr 80px;gap:14px;align-items:center}
+.bm-name{font-family:var(--mono);font-size:.68rem;color:var(--text-dim)}
+.bm-name b{color:var(--text-mid);font-weight:500}
+.bm-track{height:6px;background:rgba(160,20,120,.1);border-radius:3px;overflow:hidden}
+.bm-fill{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.19,1,.22,1)}
+.bm-fill-market{background:rgba(200,168,192,.3)}
+.bm-fill-yours{background:linear-gradient(90deg,var(--cobalt),var(--teal))}
+.bm-val{font-family:var(--mono);font-size:.78rem;font-weight:500;text-align:right}
+.bm-val-market{color:var(--text-dim)}
+.bm-val-yours{color:var(--teal)}
+.bm-coming{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(192,64,154,.4);border:1px solid rgba(192,64,154,.12);border-radius:4px;padding:2px 8px;margin-top:12px}
+
+/* SECTION HEAD */
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
 .sec-head h2{font-size:.92rem;font-weight:500;color:#B8C8E8;display:flex;align-items:center;gap:10px}
 .sec-head h2 .step{font-family:var(--mono);font-size:.64rem;color:#D060B0;border:1px solid rgba(210,80,170,.35);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.sec-sub{font-family:var(--mono);font-size:.62rem;color:#C8D8F0}
 
-.components{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
-.comp-card{
+/* VERDICT GRID */
+.verdict-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:32px}
+@media(max-width:760px){.verdict-grid{grid-template-columns:1fr}}
+.verdict-card{
   background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;
   padding:24px;position:relative;overflow:hidden;
-  animation:hero-pulse 3s ease-in-out infinite;
-  transition:border-color .2s;
+  animation:hero-pulse 3s ease-in-out infinite;transition:border-color .2s;
 }
-.comp-card:hover{border-color:rgba(210,80,170,.7)}
-.comp-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cobalt),transparent);opacity:.4}
-.comp-lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#D060B0;margin-bottom:10px}
-.comp-val{font-family:var(--mono);font-size:2rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
-.comp-val.pos{color:var(--teal)}.comp-val.neg{color:var(--red)}.comp-val.flat{color:var(--gold)}
-.comp-bar{height:4px;background:rgba(160,20,120,.15);border-radius:2px;margin-bottom:12px;overflow:hidden;position:relative}
-.comp-fill{height:100%;border-radius:2px;transition:width .8s cubic-bezier(.19,1,.22,1)}
-.comp-fill.pos{background:linear-gradient(90deg,var(--cobalt),var(--teal))}
-.comp-fill.neg{background:linear-gradient(90deg,var(--red),rgba(224,92,58,.4))}
-.comp-desc{font-size:.8rem;color:#C8D8F0;line-height:1.5}
-.comp-caveat{font-family:var(--mono);font-size:.6rem;color:rgba(210,80,170,.7);margin-top:8px;line-height:1.4;font-style:italic}
-
-/* P5 BRIDGE */
-.p5-bridge{
-  background:rgba(40,8,28,.4);border:1px solid var(--cobalt-border);border-radius:14px;
-  padding:24px 28px;margin-bottom:32px;
-  animation:hero-pulse 3s ease-in-out infinite;
-}
-.p5-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
-  background:linear-gradient(90deg,#5A9AEB,var(--copper));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:14px}
-.p5-row{display:flex;align-items:center;gap:0;border:1px solid rgba(160,20,120,.12);border-radius:10px;overflow:hidden}
-.p5-cell{flex:1;padding:14px 16px;border-right:1px solid rgba(160,20,120,.1);text-align:center}
-.p5-cell:last-child{border-right:none}
-.p5-cell.active{background:rgba(224,184,48,.06);border-color:rgba(224,184,48,.15)}
-.p5-cell .pc-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#C8D8F0;margin-bottom:4px}
-.p5-cell .pc-val{font-family:var(--mono);font-size:.9rem;font-weight:500;color:#C8D8F0}
-.p5-cell.active .pc-lbl{color:var(--gold)}
-.p5-cell.active .pc-val{color:var(--gold);font-size:1.0rem}
-.p5-arrow{color:rgba(160,20,120,.3);font-size:1rem;padding:0 4px}
-.p5-note{font-size:.82rem;color:#C8D8F0;margin-top:12px;line-height:1.6}
-.p5-note b{color:var(--text-cool);font-weight:500}
-
-/* STATEMENT */
-.statement{
-  padding:26px 30px;background:rgba(40,8,28,.5);
-  border:1px solid var(--cobalt-border);border-radius:14px;border-left:3px solid var(--cobalt);
-  position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite;
-}
-.statement::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#5A9AEB,var(--copper))}
-.stmt-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
-  background:linear-gradient(90deg,#5A9AEB,var(--copper));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
-.stmt-txt{font-style:italic;font-size:1.06rem;line-height:1.65;color:#D0E0F4}
-.stmt-txt b{color:var(--gold);font-style:normal}
-
-.err{background:var(--bg2);border:1px solid var(--red);border-radius:10px;padding:18px;color:var(--red);font-family:var(--mono);font-size:.82rem}
-
-@media(max-width:760px){
-  .wrap{padding:24px 20px 60px}
-  .hero-grid{grid-template-columns:1fr}
-  .hero-divider{display:none}
-  .tqp-num{font-size:5rem}
-  .components{grid-template-columns:1fr}
-  .p5-row{flex-direction:column}
-  .p5-cell{border-right:none;border-bottom:1px solid rgba(160,20,120,.1)}
-}
-
-:root{--sidebar:220px}
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.2);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
-.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
-.sb-brand{display:block;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);overflow:hidden}
-.sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
-.sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
-.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
-.sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-item:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
-.sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(200,168,192,.7)}
-.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
-.sb-tools-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
-.sb-tool{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-tool:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
-.sb-tool.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(200,168,192,.7)}
-.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:#D060B0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
-.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid rgba(180,40,140,.18)}
-.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:#D8B8D0;letter-spacing:.06em}
-.sb-by b{color:#E8C87A;font-weight:600;font-size:.72rem}
-.wrap{margin-left:var(--sidebar);padding-bottom:60px}
-@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
-.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:4px}
+.verdict-card:hover{border-color:rgba(210,80,170,.5)}
+.verdict-card.strong{border-left:3px solid var(--teal);border-radius:0 14px 14px 0}
+.verdict-card.watch{border-left:3px solid var(--amber);border-radius:0 14px 14px 0}
+.verdict-card.weak{border-left:3px solid var(--red);border-radius:0 14px 14px 0}
+.vc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:14px}
+.vc-name{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#D060B0}
+.vc-badge{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:4px;white-space:nowrap;font-weight:500}
+.badge-strong{background:rgba(56,196,144,.1);color:var(--teal);border:1px solid rgba(56,196,144,.2)}
+.badge-watch{background:rgba(232,200,122,.08);color:var(--amber);border:1px solid rgba(232,200,122,.2)}
+.badge-weak{background:rgba(224,92,58,.08);color:var(--red);border:1px solid rgba(224,92,58,.2)}
+.vc-score-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.vc-score-num{font-family:var(--hero);font-size:2.6rem;line-height:1;min-width:52px}
+.score-strong{color:var(--teal)}.score-watch{color:var(--amber)}.score-weak{color:var(--red)}
+.vc-score-right{flex:1}
+.vc-score-track{height:4px;background:rgba(160,20,120,.12);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.vc-score-fill{height:100%;border-radius:2px}
+.fill-strong{background:linear-gradient(90deg,var(--cobalt),var(--teal))}
+.fill-watch{background:linear-gradient(90deg,var(--cobalt),var(--amber))}
+.fill-weak{background:linear-gradient(90deg,rgba(160,20,120,.5),var(--red))}
+.vc-vs-market{font-family:var(--mono);font-size:.58rem;color:var(--text-dim)}
+.vc-finding{font-size:.82rem;color:var(--text-mid);line-height:1.65;margin-bottom:14px}
+.vc-finding b{color:var(--text-cool);font-weight:500}
+.vc-metrics{display:flex;gap:0;border:1px solid rgba(160,20,120,.1);border-radius:8px;overflow:hidden;margin-top:4px}
+.vc-metric{flex:1;padding:10px 12px;border-right:1px solid rgba(160,20,120,.08);text-align:center}
+.vc-metric:last-child{border-right:none}
+.vc-metric-val{font-family:var(--mono);font-size:.88rem;font-weight:500;color:var(--text-cool);margin-bottom:2px}
+.vc-metric-lbl{font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim)}
+.sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:8px}
 .sw-trigger:hover{color:#E080C8}
 .sw-trigger svg{width:10px;height:10px;transition:transform .2s}
 .sw-trigger.open svg{transform:rotate(180deg)}
 .sw-panel{display:none;margin-top:10px;background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.15);border-radius:10px;padding:16px 18px}
 .sw-panel.open{display:block}
-.sw-row{display:grid;grid-template-columns:120px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid rgba(180,40,140,.06)}
+.sw-row{display:grid;grid-template-columns:130px 1fr;gap:8px;padding:5px 0;border-bottom:1px solid rgba(180,40,140,.06)}
 .sw-row:last-child{border-bottom:none}
 .sw-key{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;padding-top:2px}
 .sw-val{font-size:.82rem;color:#D8B8D0;line-height:1.6}
 .sw-val b{color:#EED8E8;font-weight:500}
 .sw-formula{font-family:var(--mono);font-size:.76rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
-.sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
-.sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
+
+/* HCI */
 .hci-wrap{margin:20px 0;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px;overflow:hidden}
 .hci-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;transition:background .15s}
 .hci-header:hover{background:rgba(180,40,140,.06)}
@@ -292,10 +254,71 @@ body{
 .hci-scenarios td.optimistic{color:#38C490}
 .hci-scenarios tr:last-child td{border-bottom:none}
 .hci-note{font-size:.7rem;color:rgba(208,96,176,.7);margin-top:8px;font-style:italic;text-align:center}
-.hci-decay{margin-top:14px;padding:12px 16px;background:rgba(224,92,58,.06);border:1px solid rgba(224,92,58,.2);border-radius:10px}
-.hci-decay-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#E05C3A;margin-bottom:6px}
-.hci-decay-text{font-size:.82rem;color:#D8B8D0;line-height:1.6}
-.hci-decay-val{color:#E05C3A;font-weight:500;font-family:var(--mono)}
+
+/* FORWARD PROJECTION */
+.proj-section{background:var(--bg2);border:1px solid rgba(224,184,48,.15);border-radius:16px;padding:28px 32px;margin-bottom:32px}
+.proj-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.proj-sub{font-size:.82rem;color:var(--text-dim);margin-bottom:20px;line-height:1.5}
+.proj-levers{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.proj-lever{display:flex;align-items:center;gap:12px;background:rgba(40,8,28,.5);border:1px solid rgba(160,20,120,.1);border-radius:8px;padding:12px 16px}
+.proj-lever-check{width:18px;height:18px;border-radius:4px;border:1px solid rgba(192,64,154,.3);cursor:pointer;flex-shrink:0;position:relative;transition:all .2s;background:transparent}
+.proj-lever-check.on{background:var(--cobalt);border-color:var(--cobalt)}
+.proj-lever-check.on::after{content:'';position:absolute;top:3px;left:6px;width:5px;height:9px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg)}
+.proj-lever-text{flex:1;font-size:.82rem;color:var(--text-mid)}
+.proj-lever-text b{color:var(--text-cool);font-weight:500}
+.proj-lever-val{font-family:var(--mono);font-size:.8rem;color:var(--teal);font-weight:500;white-space:nowrap}
+.proj-table{width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden}
+.proj-table th{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 16px;background:rgba(40,8,28,.7);color:var(--text-dim);text-align:center;border-bottom:1px solid rgba(160,20,120,.1)}
+.proj-table th.yours{color:var(--gold)}
+.proj-table td{padding:12px 16px;font-family:var(--mono);font-size:.84rem;text-align:center;border-bottom:1px solid rgba(160,20,120,.06);color:var(--text-dim)}
+.proj-table td.label{text-align:left;color:var(--text-mid);font-size:.78rem}
+.proj-table td.yours{color:var(--gold);font-weight:500}
+.proj-table tr:last-child td{border-bottom:none;font-weight:600}
+.proj-table tr:last-child td.yours{color:var(--gold);font-size:.92rem}
+
+/* COMPONENTS (kept for compatibility) */
+.components{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.comp-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;padding:24px;position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite;transition:border-color .2s}
+.comp-card:hover{border-color:rgba(210,80,170,.7)}
+.comp-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cobalt),transparent);opacity:.4}
+.comp-lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#D060B0;margin-bottom:10px}
+.comp-val{font-family:var(--mono);font-size:2rem;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+.comp-val.pos{color:var(--teal)}.comp-val.neg{color:var(--red)}.comp-val.flat{color:var(--gold)}
+.comp-bar{height:4px;background:rgba(160,20,120,.15);border-radius:2px;margin-bottom:12px;overflow:hidden}
+.comp-fill{height:100%;border-radius:2px}
+.comp-fill.pos{background:linear-gradient(90deg,var(--cobalt),var(--teal))}
+.comp-fill.neg{background:linear-gradient(90deg,var(--red),rgba(224,92,58,.4))}
+.comp-desc{font-size:.8rem;color:#C8D8F0;line-height:1.5}
+.comp-caveat{font-family:var(--mono);font-size:.6rem;color:rgba(210,80,170,.7);margin-top:8px;line-height:1.4;font-style:italic}
+
+/* STATEMENT */
+.statement{
+  padding:26px 30px;background:rgba(40,8,28,.5);
+  border:1px solid var(--cobalt-border);border-radius:14px;border-left:3px solid var(--cobalt);
+  position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite;
+}
+.statement::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#5A9AEB,var(--copper))}
+.stmt-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  background:linear-gradient(90deg,#5A9AEB,var(--copper));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.stmt-txt{font-style:italic;font-size:1.06rem;line-height:1.65;color:#D0E0F4}
+.stmt-txt b{color:var(--gold);font-style:normal}
+
+/* P5 BRIDGE */
+.p5-bridge{background:rgba(40,8,28,.4);border:1px solid var(--cobalt-border);border-radius:14px;padding:24px 28px;margin-bottom:32px;animation:hero-pulse 3s ease-in-out infinite}
+.p5-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;background:linear-gradient(90deg,#5A9AEB,var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px}
+.p5-row{display:flex;align-items:center;gap:0;border:1px solid rgba(160,20,120,.12);border-radius:10px;overflow:hidden}
+.p5-cell{flex:1;padding:14px 16px;border-right:1px solid rgba(160,20,120,.1);text-align:center}
+.p5-cell:last-child{border-right:none}
+.p5-cell.active{background:rgba(224,184,48,.06);border-color:rgba(224,184,48,.15)}
+.p5-cell .pc-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#C8D8F0;margin-bottom:4px}
+.p5-cell .pc-val{font-family:var(--mono);font-size:.9rem;font-weight:500;color:#C8D8F0}
+.p5-cell.active .pc-lbl{color:var(--gold)}
+.p5-cell.active .pc-val{color:var(--gold);font-size:1.0rem}
+.p5-note{font-size:.82rem;color:#C8D8F0;margin-top:12px;line-height:1.6}
+.p5-note b{color:var(--text-cool);font-weight:500}
+
+.err{background:var(--bg2);border:1px solid var(--red);border-radius:10px;padding:18px;color:var(--red);font-family:var(--mono);font-size:.82rem}
 .dl-section{margin:32px 0 16px;padding:24px 28px;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px}
 .dl-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .dl-icon{width:28px;height:28px;border-radius:6px;background:rgba(192,64,154,.15);border:1px solid rgba(192,64,154,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -311,16 +334,32 @@ body{
 .dl-btn svg{width:14px;height:14px;flex-shrink:0}
 .dl-note{font-size:.72rem;color:rgba(208,96,176,.7);margin-top:10px;font-style:italic}
 
-/* RESIZABLE SIDEBAR */
+:root{--sidebar:220px}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.2);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
+.sb-brand{display:block;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);overflow:hidden}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
+.sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
+.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
+.sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
+.sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(200,168,192,.7)}
+.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
+.sb-tools-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
+.sb-tool.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(200,168,192,.7)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:#D060B0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid rgba(180,40,140,.18)}
+.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:#D8B8D0;letter-spacing:.06em}
+.sb-by b{color:#E8C87A;font-weight:600;font-size:.72rem}
+.wrap{margin-left:var(--sidebar);padding-bottom:60px}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:24px 20px 60px}.hero-grid{grid-template-columns:1fr}.hero-divider{display:none}.tqp-num{font-size:5rem}.components{grid-template-columns:1fr}}
 .sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s;z-index:10}
 .sidebar-resize:hover,.sidebar-resize.dragging{background:rgba(192,64,154,.4)}
-
-
-/* DL SECTION INSIDE WRAP */
-.wrap .dl-section{margin-left:0;margin-right:0}
 .dl-section{clear:both}
-
-</style><script src="rf-report.js"></script>
+</style>
+<script src="rf-report.js"></script>
 <script src="rf-profile.js"></script>
 </head>
 <body>
@@ -351,7 +390,8 @@ body{
 </aside>
 <script>
 (function(){var s=new URLSearchParams(location.search).get('scenario')||'';if(!s)return;document.querySelectorAll('.sb-tool,.sb-item').forEach(function(a){var h=a.getAttribute('href');if(h&&h.indexOf('.html')>-1&&h.indexOf('#')<0)a.href=h.split('?')[0]+'?scenario='+encodeURIComponent(s);});})();
-</script><div class="wrap">
+</script>
+<div class="wrap">
 
 <div class="crumb">
   <a href="scenario-library.html">&larr; Library</a>
@@ -360,8 +400,8 @@ body{
     <a href="p1-tool.html" id="navP1">Value Ledger</a>
     <a href="p2-tool.html" class="active" id="navP2">Talent Premium</a>
     <a href="p3-tool.html" id="navP3">Org Vitals</a>
-    <a href="p4-tool.html" id="navP4">Human B/S</a>
-    <a href="p5-tool.html" id="navP5">Human P&L</a>
+    <a href="p4-tool.html" id="navP4">Human P&amp;L</a>
+    <a href="p5-tool.html" id="navP5">Balance Sheet</a>
   </div>
 </div>
 
@@ -371,26 +411,22 @@ body{
   <select id="scen"></select>
   <span class="scen-meta" id="meta"></span>
 </div>
-<div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p2')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Talent Quality Premium for current org conditions</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p2_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p2_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p2_body"><div style="font-size:.82rem;color:#C8A8C0;line-height:1.7;margin:14px 0 16px;padding:12px 14px;background:rgba(192,64,154,.04);border-radius:8px;border-left:2px solid rgba(192,64,154,.2)">
-<b style="color:#EED8E8;display:block;margin-bottom:4px">What is the Human Confidence Index?</b>
-Every number in Revenue Fluent is computed from real data. But data reflects the past, your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.
-</div>
-<div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p2_f0" onclick="hciTF('hci_p2',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p2_f1" onclick="hciTF('hci_p2',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p2_f2" onclick="hciTF('hci_p2',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p2_f3" onclick="hciTF('hci_p2',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p2_calc"></div><table class="hci-scenarios"><tbody id="hci_p2_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(208,96,176,.7);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
-  <div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div></div></div>
-<div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
-  <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a>
-  <a href="myorg.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="8" width="4" height="6" rx="1"/><rect x="6" y="5" width="4" height="9" rx="1"/><rect x="10" y="2" width="4" height="12" rx="1"/></svg>My Org</a>
-  <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a></span>
+
+<div class="hci-wrap"><div class="hci-header" onclick="hciToggle('hci_p2')"><div class="hci-left"><div class="hci-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v4M8 11v1"/></svg></div><div><div class="hci-title">Human Confidence Index</div><div class="hci-sub">Adjust Talent Premium for current org conditions</div></div></div><div style="display:flex;align-items:center;gap:14px"><div><div class="hci-coeff-display" id="hci_p2_coeff">0.70x</div><div class="hci-coeff-label">HCI Coefficient</div></div><svg class="hci-chevron" id="hci_p2_chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></div></div><div class="hci-body" id="hci_p2_body"><div style="font-size:.82rem;color:#C8A8C0;line-height:1.7;margin:14px 0 16px;padding:12px 14px;background:rgba(192,64,154,.04);border-radius:8px;border-left:2px solid rgba(192,64,154,.2)"><b style="color:#EED8E8;display:block;margin-bottom:4px">What is the Human Confidence Index?</b>Every number in Revenue Fluent is computed from real data. But data reflects the past. Your professional judgement reflects what is happening right now. The HCI is a named coefficient (0.70 to 1.30) that lets you apply that judgement to the base calculation. Answer four observable Yes/No questions. Your answers set the coefficient. The adjusted value is what you should present.</div><div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p2_f0" onclick="hciTF('hci_p2',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p2_f1" onclick="hciTF('hci_p2',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p2_f2" onclick="hciTF('hci_p2',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p2_f3" onclick="hciTF('hci_p2',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p2_calc"></div><table class="hci-scenarios"><tbody id="hci_p2_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(208,96,176,.7);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div><div class="hci-note">Conservative = HCI -0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div></div></div>
+
+<div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;align-items:center;justify-content:space-between;gap:12px">
+  <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a></span>
   <span id="userDataBadge" style="display:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#38C490;background:rgba(56,196,144,.1);border:1px solid rgba(56,196,144,.2);padding:3px 8px;border-radius:4px">Your Data Active</span>
 </div>
 <div id="profileContext" style="display:none"></div>
 <div id="app"></div>
+
 <div class="dl-section">
   <div class="dl-header">
     <div class="dl-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 12h12"/></svg></div>
     <div class="dl-title">Downloads</div>
   </div>
-  <div class="dl-sub"><b>Talent Premium Model</b>, Three-tab model, Performance Premium, Retention Quality Premium, Hiring Quality Premium.</div>
+  <div class="dl-sub"><b>Talent Premium Model</b> — Five verdict areas, three-component TQP, forward projection scenarios.</div>
   <div class="dl-buttons">
     <button class="dl-btn dl-btn-excel" onclick="downloadExcel('P2_Talent_Premium_RevenueFluent.xlsx')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 6l2 2-2 2M8 10h3"/></svg>
@@ -402,6 +438,7 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
 </div>
 
 </div>
+
 <script>
 function swToggle(btn){
   var p=document.getElementById(btn.getAttribute('data-panel'));
@@ -413,485 +450,511 @@ function swToggle(btn){
 }
 var _hci={};
 function hciToggle(id){var b=document.getElementById(id+'_body'),c=document.getElementById(id+'_chev');if(!b)return;var o=b.classList.contains('open');b.classList.toggle('open',!o);if(c)c.classList.toggle('open',!o);}
-function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);}
+function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);renderApp();}
 function _hciC(id){var s=_hci[id];if(!s)return 1;return Math.round((0.7+s.f.filter(Boolean).length*0.15)*100)/100;}
 function _hciFmt(sym,v){var a=Math.abs(v),sg=v<0?'-':'';if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';if(a>=1000)return sg+sym+Math.round(a/1000)+'K';return sg+sym+Math.round(a);}
-function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal, 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk, monitor closely.':'Significant risk, intervention recommended.')+'</div>';}}}
+function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' x 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted TQP</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}}
 function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:base||0,sym:sym||'$',decay:decay||null};_hciR(id);}
 function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
+function toggleLever(idx){
+  var levers=document.querySelectorAll('.proj-lever-check');
+  if(!levers[idx])return;
+  levers[idx].classList.toggle('on');
+  updateProjection();
+}
 </script>
 <script src="rf-data.js"></script>
-
 <script>
-// Inject user-uploaded scenario from sessionStorage
 (function(){
-  var raw = sessionStorage.getItem('rf_user_scenario');
-  if(!raw) return;
-  try {
-    var sc = JSON.parse(raw);
-    if(!window.RF_DATA) return;
-    // Add to RF_DATA
-    window.RF_DATA['Your Organisation'] = sc;
-    // Add to scenario dropdown
-    var sel = document.getElementById('scen');
-    if(sel) {
-      // Check if already there
-      var exists = false;
-      for(var i=0;i<sel.options.length;i++){
-        if(sel.options[i].value==='Your Organisation'){exists=true;break;}
-      }
-      if(!exists){
-        var opt = document.createElement('option');
-        opt.value = 'Your Organisation';
-        opt.textContent = 'Your Organisation ★';
-        opt.style.color = '#E0B830';
-        sel.insertBefore(opt, sel.firstChild);
-      }
-      // Auto-select if URL param says so
-      var urlSc = new URLSearchParams(location.search).get('scenario');
-      if(urlSc === 'Your Organisation') {
-        sel.value = 'Your Organisation';
-        sel.dispatchEvent(new Event('change'));
-      }
-    }
-  } catch(e) {}
+  var raw=sessionStorage.getItem('rf_user_scenario');
+  if(!raw)return;
+  try{
+    var ud=JSON.parse(raw);
+    if(ud&&ud.name&&ud.employees){RF.addScenario(ud);}
+  }catch(e){}
 })();
-</script>
-<script>
-(function(){
 
-var app = document.getElementById('app');
-if (!window.RF || !window.RF_DATA) {
-  app.innerHTML = '<div class="err">rf-data.js not found, keep it in the same folder.</div>';
-  return;
-}
+var _currentScenario='';
+var _verdictData=null;
 
-var sel = document.getElementById('scen');
-RF.list().forEach(function(n){
-  var o = document.createElement('option');
-  o.value = n; o.textContent = n; sel.appendChild(o);
-});
-var current = RF.current(); sel.value = current;
+// MARKET AVERAGES (pre-computed from all 15 scenarios)
+var MARKET_AVG={promo:85,mgr:62,hire:46,selRet:59,hipo:40};
 
-var HOOKS = {
-  'High-Growth Tech Startup':'The engineers you kept are worth more than the ones you hired.',
-  'Professional Services Firm':'Billing rates are set by the market. The premium above that is set by your people.',
-  'Enterprise Healthcare':'Clinical outcomes and people quality are the same equation.',
-  'Remote-First SaaS':'Distributed teams hide talent concentration. Until someone leaves.',
-  'Financial Services':'The analysts who stayed through the last cycle carry two years of deal memory.',
-  'Manufacturing Firm':'Floor expertise is not on any balance sheet. It should be.',
-  'Sales Organization':'Quota attainment is the floor. Talent Premium is what sits above it.',
-  'Consulting Firm':'The premium a client pays is really the premium your people carry.',
-  'Family Business':'Loyalty is not the same as quality. Sometimes it is. Often it is not.',
-  'MNC in Asia':'Multinational talent looks uniform on paper. The premium is never uniform.',
-  'Hospitality':'Guest experience is a human premium. It has always had a financial value.',
-  'Corporate America':'Tenure without performance is cost without return.',
-  'Government Agency':'Civil service does not mean average service. The premium proves it.',
-  'Higher Education':'Research output is a human premium measured in citations and grants.',
-  'Social Enterprise':'Mission attracts talent. Quality retains it. The two are not the same.'
+// Cohort groupings
+var COHORTS={
+  'High-Growth Tech Startup':'tech',
+  'Remote-First SaaS':'tech',
+  'Professional Services Firm':'consulting',
+  'Consulting Firm':'consulting',
+  'Enterprise Healthcare':'healthcare',
+  'Manufacturing Firm':'manufacturing',
+  'Family Business':'manufacturing',
+  'Corporate America':'manufacturing',
+  'MNC in Asia':'manufacturing',
+  'Financial Services':'finance',
+  'Sales Organization':'sales',
+  'Hospitality':'hospitality',
+  'Government Agency':'public',
+  'Higher Education':'public',
+  'Social Enterprise':'social'
 };
 
-function fmt(sym, n) {
-  var abs = Math.abs(n);
-  var sign = n < 0 ? '-' : '';
-  if (abs >= 10000000) return sign+sym+(abs/10000000).toFixed(2)+'Cr';
-  if (abs >= 100000)   return sign+sym+(abs/100000).toFixed(1)+'L';
-  if (abs >= 1000)     return sign+sym+Math.round(abs/1000)+'K';
-  return sign+sym+Math.round(abs);
+(function(){
+  var sel=document.getElementById('scen');
+  RF.list().forEach(function(n){
+    var o=document.createElement('option');o.value=n;o.textContent=n;sel.appendChild(o);
+  });
+  var param=new URLSearchParams(location.search).get('scenario')||'';
+  if(param&&RF.scenario(param))sel.value=param;
+  else sel.value=RF.list()[0]||'';
+  sel.addEventListener('change',function(){
+    var url=new URL(location.href);url.searchParams.set('scenario',this.value);history.replaceState(null,'',url);
+    renderApp();
+  });
+  renderApp();
+})();
+
+function fmt(sym,n){
+  var a=Math.abs(n),sg=n<0?'-':'';
+  if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}
+  if(sym==='¥'||sym==='JPY'){if(a>=1e8)return sg+sym+(a/1e8).toFixed(2)+'億';if(a>=1e4)return sg+sym+(a/1e4).toFixed(1)+'万';return sg+sym+Math.round(a);}
+  if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';
+  if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';
+  if(a>=1000)return sg+sym+Math.round(a/1000)+'K';
+  return sg+sym+Math.round(a);
 }
 
-function fmtSigned(sym, n) {
-  return (n >= 0 ? '+' : '') + fmt(sym, n);
-}
+function computeVerdicts(name){
+  var s=RF.scenario(name);if(!s)return null;
+  var emps=s.employees,sym=s.symbol||'$';
+  var totalComp=emps.reduce(function(a,e){return a+e.salary;},0);
 
-function computeTQP(name) {
-  var s = RF.scenario(name); if (!s) return null;
-  var emps = s.employees, sym = s.symbol;
-  var gradePerfMap = {};
-  emps.forEach(function(e){
-    if (!gradePerfMap[e.grade]) gradePerfMap[e.grade] = [];
-    gradePerfMap[e.grade].push(e.perfScore);
+  var gradePerfMap={};
+  emps.forEach(function(e){if(!gradePerfMap[e.grade])gradePerfMap[e.grade]=[];gradePerfMap[e.grade].push(e.perf);});
+  var gradeBench={};
+  Object.keys(gradePerfMap).forEach(function(g){gradeBench[g]=gradePerfMap[g].reduce(function(a,b){return a+b;},0)/gradePerfMap[g].length;});
+
+  // TQP components
+  var perfSurplus=emps.reduce(function(a,e){return a+(e.perf-gradeBench[e.grade])*e.salary;},0);
+  var keepers=emps.filter(function(e){return['Star','High Performer','High Potential'].indexOf(e.placement)>=0;});
+  var retPremium=keepers.reduce(function(a,e){var s2=e.perf-gradeBench[e.grade];var rc=e.salary*1.5;return a+(s2>0?s2*e.salary*0.5+rc*0.1:0);},0);
+  var recentHires=emps.filter(function(e){return e.tenure<=1;});
+  var hiringPremium=recentHires.reduce(function(a,e){var s2=e.perf-gradeBench[e.grade];return a+(s2>0?s2*e.salary:0);},0);
+  var perfPremium=Math.round(perfSurplus);
+  var retP=Math.round(retPremium);
+  var hireP=Math.round(hiringPremium);
+  var tqp=perfPremium+retP+hireP;
+
+  // V1: Promotion Accuracy
+  var stars=emps.filter(function(e){return e.placement==='Star';});
+  var starsAboveMid=stars.filter(function(e){return e.perf>=gradeBench[e.grade];}).length;
+  var promoScore=stars.length>0?Math.round((starsAboveMid/stars.length)*100):50;
+  var gradeMismatches=stars.length-starsAboveMid;
+
+  // V2: Manager Quality
+  var managerSet={};
+  emps.forEach(function(e){if(e.manager)managerSet[e.manager]=true;});
+  var managers=emps.filter(function(e){return managerSet[e.name];});
+  var mgrBelowTeam=0;
+  managers.forEach(function(mgr){
+    var reports=emps.filter(function(e){return e.manager===mgr.name;});
+    if(!reports.length)return;
+    var teamAvg=reports.reduce(function(a,e){return a+e.perf;},0)/reports.length;
+    if(mgr.perf<teamAvg)mgrBelowTeam++;
   });
-  var gradeBench = {};
-  Object.keys(gradePerfMap).forEach(function(g){
-    gradeBench[g] = gradePerfMap[g].reduce(function(a,b){return a+b;},0) / gradePerfMap[g].length;
-  });
-  var totalComp = emps.reduce(function(a,e){return a+e.salary;},0);
+  var mgrScore=managers.length>0?Math.round(((managers.length-mgrBelowTeam)/managers.length)*100):70;
+  var starMgrRatio=managers.length>0?(stars.length/managers.length).toFixed(1):'N/A';
 
-  // Performance Premium
-  var perfSurplus = emps.reduce(function(a,e){
-    return a + (e.perfScore - gradeBench[e.grade]) * e.salary;
-  },0);
-  var perfPremium = Math.round(perfSurplus);
+  // V3: Hiring Quality
+  var aboveBench=recentHires.filter(function(e){return e.perf>gradeBench[e.grade];}).length;
+  var hireScore=recentHires.length>0?Math.round((aboveBench/recentHires.length)*100):60;
+  var earlyIncon=recentHires.filter(function(e){return e.placement==='Inconsistent Performer';}).length;
 
-  // Retention Quality Premium
-  var keepers = emps.filter(function(e){
-    return ['Star','High Performer','High Potential'].indexOf(e.placement) >= 0;
-  });
-  var retPremium = Math.round(keepers.reduce(function(a,e){
-    var surplus = e.perfScore - gradeBench[e.grade];
-    var replaceCost = e.salary * 1.5;
-    return a + (surplus > 0 ? surplus * e.salary * 0.5 + replaceCost * 0.1 : 0);
-  },0));
+  // V4: Selective Retention
+  var inconsistent=emps.filter(function(e){return e.placement==='Inconsistent Performer';});
+  var starTenure=stars.length>0?stars.reduce(function(a,e){return a+e.tenure;},0)/stars.length:0;
+  var inconTenure=inconsistent.length>0?inconsistent.reduce(function(a,e){return a+e.tenure;},0)/inconsistent.length:0;
+  var selRetScore;
+  if(inconsistent.length===0)selRetScore=85;
+  else if(starTenure>=inconTenure)selRetScore=Math.min(95,Math.round(60+(starTenure-inconTenure)*5));
+  else selRetScore=Math.max(20,Math.round(60-(inconTenure-starTenure)*5));
 
-  // Hiring Quality Premium
-  var recentHires = emps.filter(function(e){ return e.tenure <= 1; });
-  var hiringPremium = Math.round(recentHires.reduce(function(a,e){
-    var surplus = e.perfScore - gradeBench[e.grade];
-    return a + (surplus > 0 ? surplus * e.salary : 0);
-  },0));
+  // V5: HiPo Identification
+  var hipos=emps.filter(function(e){return e.placement==='High Potential';});
+  var hipoRatio=hipos.length/emps.length;
+  var starRatio=stars.length/emps.length;
+  var hipoScore=starRatio>0?Math.min(95,Math.round((hipoRatio/Math.max(starRatio,0.1))*70)):Math.round(hipoRatio*200);
 
-  var tqp = perfPremium + retPremium + hiringPremium;
-  var tqpRatio = totalComp > 0 ? tqp / totalComp : 0;
+  // Market TQP avg (same currency)
+  var allTQPs=RF.list().map(function(n){
+    var sc=RF.scenario(n);if(!sc||sc.symbol!==sym)return null;
+    var eg=sc.employees,gm={};
+    eg.forEach(function(e){if(!gm[e.grade])gm[e.grade]=[];gm[e.grade].push(e.perf);});
+    var gb={};Object.keys(gm).forEach(function(g){gb[g]=gm[g].reduce(function(a,b){return a+b;},0)/gm[g].length;});
+    var ps=eg.reduce(function(a,e){return a+(e.perf-gb[e.grade])*e.salary;},0);
+    var kp=eg.filter(function(e){return['Star','High Performer','High Potential'].indexOf(e.placement)>=0;});
+    var rp=kp.reduce(function(a,e){var s2=e.perf-gb[e.grade];var rc=e.salary*1.5;return a+(s2>0?s2*e.salary*0.5+rc*0.1:0);},0);
+    var rh=eg.filter(function(e){return e.tenure<=1;});
+    var hp=rh.reduce(function(a,e){var s2=e.perf-gb[e.grade];return a+(s2>0?s2*e.salary:0);},0);
+    return Math.round(ps+rp+hp);
+  }).filter(function(v){return v!==null;});
+  var marketTQP=allTQPs.length>0?Math.round(allTQPs.reduce(function(a,b){return a+b;},0)/allTQPs.length):tqp;
 
-  return {
-    sym: sym, tqp: tqp, totalComp: totalComp,
-    tqpRatio: tqpRatio,
-    perfPremium: perfPremium,
-    retPremium: retPremium,
-    hiringPremium: hiringPremium,
-    employeeCount: s.employeeCount
+  return{
+    name,sym,tqp,totalComp,marketTQP,
+    perfPremium,retP,hireP,
+    employeeCount:emps.length,
+    stars:stars.length,hipos:hipos.length,inconsistent:inconsistent.length,
+    managers:managers.length,mgrBelowTeam,starMgrRatio,
+    recentHires:recentHires.length,aboveBench,earlyIncon,
+    starTenure:parseFloat(starTenure.toFixed(1)),
+    inconTenure:parseFloat(inconTenure.toFixed(1)),
+    gradeMismatches,
+    promoScore,mgrScore,hireScore,selRetScore,hipoScore,
+    overallScore:Math.round((promoScore+mgrScore+hireScore+selRetScore+hipoScore)/5)
   };
 }
 
-function barWidth(val, max) {
-  if (max === 0) return 0;
-  return Math.min(Math.abs(val) / Math.abs(max) * 100, 100);
+function verdictClass(score){return score>=70?'strong':score>=50?'watch':'weak';}
+function badgeClass(score){return score>=70?'badge-strong':score>=50?'badge-watch':'badge-weak';}
+function badgeLabel(score){return score>=70?'Strong':score>=50?'Watch':'Weak';}
+function fillClass(score){return score>=70?'fill-strong':score>=50?'fill-watch':'fill-weak';}
+function scoreClass(score){return score>=70?'score-strong':score>=50?'score-watch':'score-weak';}
+function vsMarket(score,avg){
+  var diff=score-avg;
+  if(Math.abs(diff)<5)return '<span style="color:var(--text-dim)">At market avg ('+avg+')</span>';
+  if(diff>0)return '<span style="color:var(--teal)">+'+diff+' vs market avg ('+avg+')</span>';
+  return '<span style="color:var(--red)">'+diff+' vs market avg ('+avg+')</span>';
 }
 
-function stmtText(sym, tqp, ratio, perfP, retP, hireP) {
-  var dominant = [
-    ['Performance Premium', perfP],
-    ['Retention Quality Premium', retP],
-    ['Hiring Quality Premium', hireP]
-  ].sort(function(a,b){ return b[1]-a[1]; })[0];
-
-  if (tqp <= 0)
-    return 'This organisation is generating <b>no Talent Quality Premium</b>, the workforce is performing at or below the grade baseline for its cost. The salary bill is being paid. The premium above that baseline is not materialising. This is the gap that should concern the board, not the headcount.';
-  if (ratio < 0.15)
-    return 'A <b>thin Talent Quality Premium of '+fmt(sym,tqp)+'</b>, real, but fragile. The org is generating above-baseline output, but the margin is narrow. One bad hiring quarter or a Star departure could erase it. The <b>'+dominant[0]+'</b> is carrying most of the weight at <b>'+fmt(sym,dominant[1])+'</b>.';
-  return 'This organisation is generating a <b>Talent Quality Premium of '+fmt(sym,tqp)+'</b>, the financial value of having better-than-average people at the same cost. The <b>'+dominant[0]+'</b> is the primary driver at <b>'+fmt(sym,dominant[1])+'</b>. This premium is your Human Gross Margin contribution. It belongs in the board presentation.';
+function projectionValue(d,leverIdx,hciCoeff){
+  // Each lever adds a % uplift to TQP base
+  var uplifts=[
+    d.mgrScore<70?Math.round(d.tqp*0.12):0,  // Fix manager layer
+    d.hireScore<70?Math.round(d.tqp*0.08):0,  // Improve hiring quality
+    d.hipoScore<70?Math.round(d.tqp*0.06):0,  // Activate HiPo pipeline
+    d.promoScore<70?Math.round(d.tqp*0.05):0, // Promotion accuracy
+    d.selRetScore<70?Math.round(d.tqp*0.07):0 // Selective retention
+  ];
+  return uplifts[leverIdx]||0;
 }
 
-function render(name) {
-  var s = RF.scenario(name), sum = RF.summary(name);
-  if (!s || !sum) return;
-  var d = computeTQP(name);
-  var sym = d.sym;
+var _leverState=[false,false,false];
 
-  document.getElementById('meta').innerHTML =
-    '<b>'+s.employeeCount+'</b> people &middot; <b>'+sum.geo+'</b> &middot; comp base <b>'+fmt(sym,d.totalComp)+'</b>';
+function updateProjection(){
+  var d=_verdictData;if(!d)return;
+  var hci=_hciC('hci_p2');
+  var base=Math.round(d.tqp*hci);
+
+  // Get selected levers
+  var levers=document.querySelectorAll('.proj-lever-check');
+  var totalUplift=0;
+  levers.forEach(function(el,i){
+    if(el.classList.contains('on'))totalUplift+=parseInt(el.getAttribute('data-uplift')||0);
+  });
+
+  var cons=Math.round(base*0.85);
+  var optimistic=Math.round(base*1.15+totalUplift);
+  var projected=base+totalUplift;
+
+  var tb=document.getElementById('proj_body');
+  if(!tb)return;
+  tb.innerHTML=
+    '<tr><td class="label">Current TQP (base)</td><td>'+fmt(d.sym,cons)+'</td><td class="yours">'+fmt(d.sym,base)+'</td><td>'+fmt(d.sym,Math.round(base*1.15))+'</td></tr>'+
+    (totalUplift>0?'<tr><td class="label">Lever uplift</td><td style="color:var(--text-dim)">'+fmt(d.sym,Math.round(totalUplift*0.85))+'</td><td class="yours" style="color:var(--teal)">+'+fmt(d.sym,totalUplift)+'</td><td style="color:var(--teal)">+'+fmt(d.sym,Math.round(totalUplift*1.15))+'</td></tr>':'')+
+    '<tr style="border-top:1px solid rgba(224,184,48,.15)"><td class="label"><b>Projected TQP</b></td><td>'+fmt(d.sym,cons+Math.round(totalUplift*0.85))+'</td><td class="yours">'+fmt(d.sym,projected)+'</td><td>'+fmt(d.sym,optimistic)+'</td></tr>';
+}
+
+function renderApp(){
+  var name=document.getElementById('scen').value;
+  if(!name)return;
+  _currentScenario=name;
+  var s=RF.scenario(name),sum=RF.summary(name);
+  if(!s||!sum){document.getElementById('app').innerHTML='<div class="err">Scenario data not found.</div>';return;}
+
+  var d=computeVerdicts(name);
+  _verdictData=d;
+  var sym=d.sym;
+  var hci=_hciC('hci_p2');
+  var tqpAdj=Math.round(d.tqp*hci);
+
+  document.getElementById('meta').innerHTML='<b>'+s.employeeCount+'</b> people &middot; <b>'+sum.geo+'</b> &middot; comp base <b>'+fmt(sym,d.totalComp)+'</b>';
 
   ['navP1','navP2','navP3','navP4','navP5'].forEach(function(id,i){
-    var el = document.getElementById(id);
-    var files = ['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'];
-    if (el) el.href = files[i]+'?scenario='+encodeURIComponent(name);
+    var el=document.getElementById(id);
+    var files=['p1-tool.html','p2-tool.html','p3-tool.html','p4-tool.html','p5-tool.html'];
+    if(el)el.href=files[i]+'?scenario='+encodeURIComponent(name);
   });
 
-  var maxComp = Math.max(Math.abs(d.perfPremium), Math.abs(d.retPremium), Math.abs(d.hiringPremium));
-  var seen = false;
-  try { seen = !!localStorage.getItem('rf_tp_intro'); } catch(e){}
-  var isOpen = !seen;
+  // Update HCI base
+  if(_hci['hci_p2']){_hci['hci_p2'].base=d.tqp;_hci['hci_p2'].sym=sym;_hciR('hci_p2');}
 
-  var h = '';
+  // Story hooks per scenario
+  var hooks={
+    'High-Growth Tech Startup':'You hired fast. The question is whether you hired well.',
+    'Professional Services Firm':'Billing rates are set by the market. The premium above that is set by your people.',
+    'Enterprise Healthcare':'Every patient outcome is a human performance outcome. The numbers confirm it.',
+    'Remote-First SaaS':'Distributed teams hide talent concentration. Until someone leaves.',
+    'Financial Services':'In financial services, your people are the product. This is what they are worth.',
+    'Manufacturing Firm':'Floor expertise is not on any balance sheet. It should be.',
+    'Sales Organization':'The difference between target and quota is usually the quality of the people, not the size of the team.',
+    'Consulting Firm':'The premium a client pays is really the premium your people carry.',
+    'Family Business':'Tenure is not the same as performance. This organisation has both. And a gap between them.',
+    'MNC in Asia':'Multinational talent looks uniform on paper. The premium is never uniform.',
+    'Hospitality':'Guest experience is a human premium. It has always had a financial value.',
+    'Corporate America':'Tenure without performance is cost without return.',
+    'Government Agency':'Civil service does not mean average service. The premium proves it.',
+    'Higher Education':'Research output is a human premium measured in citations, grants, and the next generation.',
+    'Social Enterprise':'Mission attracts talent. Quality retains it. The two are not the same.'
+  };
+  var hook=hooks[name]||'Every organisation pays for people. Almost none know what they are getting back.';
 
-  // INTRO PANEL
-  h += '<div class="intro-panel" id="introPanel">'
-    +'<div class="intro-toggle'+(seen?' seen':'')+'" id="introToggle">'
-      +'<div class="intro-tl">'
-        +'<div class="intro-icon">?</div>'
-        +'<div><div class="intro-title">What is The Talent Premium?</div>'
-        +'<div class="intro-sub">Read this first, takes 2 minutes</div></div>'
-      +'</div>'
-      +'<div class="intro-chevron" id="introChev">'+(isOpen?'Hide &uarr;':'Show &darr;')+'</div>'
-    +'</div>'
-    +'<div class="intro-body'+(isOpen?' open':'')+'" id="introBody">'
-      +'<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div>'
-        +'<div class="intro-sec-txt">Every organisation pays for people. That is the cost side, salaries, benefits, hiring spend. It shows up on every P&L as people cost.<br><br>But here is what nobody has ever quantified: <b>the difference in output between the people you actually have, and the people you would have if you had hired average.</b><br><br>If you hired 50 average performers at the same salary bill, you would get a baseline output. Because your HR function hired, developed, and retained better-than-average people, you get a higher output at the same cost. That difference, the premium output over baseline, is the <b>Talent Quality Premium</b>.</div>'
-      +'</div>'
-      +'<div class="intro-sec"><div class="intro-sec-lbl">Why does this matter?</div>'
-        +'<div class="intro-sec-txt">In investment terms: if the market gives you a 1.0x return on every unit of people spend, and your org generates 1.4x because your people are genuinely better, that 0.4x IS the Talent Quality Premium. It is alpha. It is real. It has never been expressed as a financial concept before.</div>'
-        +'<div class="intro-story">A consulting firm had two teams of identical size and salary bill. One consistently closed 40% more engagements. The difference was not strategy, not tools, not process. It was the quality of the people in the room. That quality had a financial value, but nobody had ever filed it.<br><br><b>The Talent Premium is that filing. For the first time, your people quality has a number.</b></div>'
-      +'</div>'
-      +'<div class="intro-sec"><div class="intro-sec-lbl">Three components</div>'
-        +'<div class="intro-sec-txt">The headline number breaks into three sources of premium, <b>Performance</b> (are your people outperforming their grade baseline?), <b>Retention Quality</b> (are you keeping the right people, not just any people?), and <b>Hiring Quality</b> (are your new hires outperforming what a random market hire would deliver?).</div>'
-      +'</div>'
-      +'<div class="intro-transition">Below is this organisation\'s Talent Quality Premium, <b>computed from scenario data</b>. The number is what your people quality is worth, in currency, not scores.</div>'
-    +'</div>'
-    +'</div>';
+  // Verdict findings
+  function promoFinding(d){
+    if(d.stars===0)return'This organisation has <b>no Star-rated employees</b>. The Promotion Accuracy metric cannot generate a meaningful signal. The underlying problem is not promotion quality — it is that the talent to promote does not appear in the workforce.';
+    if(d.promoScore>=70)return'<b>'+d.starsAboveMid+' of '+d.stars+' Stars</b> sit at or above their grade performance midpoint. Promotions are landing on the right people. The organisation is not over-promoting or mis-grading at scale.'+(d.gradeMismatches>0?' '+d.gradeMismatches+' grade mismatch'+(d.gradeMismatches>1?'es':'')+' flagged.':'');
+    return'<b>'+d.gradeMismatches+' of '+d.stars+' Stars</b> are performing below their grade midpoint. This is the most costly and hardest-to-reverse mistake in talent management. A wrong promotion simultaneously puts the wrong person in a more powerful position and makes the vacated role harder to fill.';
+  }
+  function mgrFinding(d){
+    if(d.mgrBelowTeam===0)return'All '+d.managers+' managers in this organisation are performing at or above their direct report average. The management layer is not a drag on performance — it is a driver of it. Star-to-manager ratio: <b>'+d.starMgrRatio+'</b>.';
+    if(d.mgrBelowTeam<=2)return'<b>'+d.mgrBelowTeam+' manager'+(d.mgrBelowTeam>1?'s':'')+' of '+d.managers+'</b> are performing below their direct report average. The premium being generated by these teams exists despite, not because of, their managers. Star-to-manager ratio: <b>'+d.starMgrRatio+'</b>.';
+    return'<b>'+d.mgrBelowTeam+' of '+d.managers+' managers</b> are rated below their team average. This is a structural management problem, not individual underperformance. A team\'s performance variance is explained more by who manages it than any other single factor.';
+  }
+  function hireFinding(d){
+    if(d.recentHires===0)return'No employees hired within the last year appear in this scenario. Hiring quality cannot be assessed from recent data. The talent picture reflects the cumulative decisions of prior years.';
+    if(d.hireScore>=70)return'<b>'+d.aboveBench+' of '+d.recentHires+' recent hires</b> are outperforming their grade baseline. The recruiting function is not regressing to the mean. New hires are contributing to the premium, not diluting it.'+(d.earlyIncon>0?' '+d.earlyIncon+' early-tenure Inconsistent Performer flagged.':'');
+    return'<b>'+(d.recentHires-d.aboveBench)+' of '+d.recentHires+' recent hires</b> are performing at or below their grade baseline. The organisation is paying market salaries for below-market output in the talent it most recently chose. This is the signal that matters — hiring quality determines next year\'s performance, not this year\'s.';
+  }
+  function selRetFinding(d){
+    if(d.inconsistent===0)return'This organisation has <b>zero Inconsistent Performers</b>. The selective retention signal is strong — the people who remain are performing. This is the cleanest possible reading of this metric.';
+    if(d.selRetScore>=70)return'High performers carry an average tenure of <b>'+d.starTenure+' years</b> vs <b>'+d.inconTenure+' years</b> for Inconsistent Performers. The organisation is retaining the right people. Attrition, when it occurs, is removing underperformers — not Stars.';
+    return'Inconsistent Performers are staying longer (<b>'+d.inconTenure+' years avg</b>) than Stars (<b>'+d.starTenure+' years avg</b>). The organisation has an inverted retention profile. It is holding cost and losing value. This is the financially serious question — not the attrition rate, but who is leaving.';
+  }
+  function hipFinding(d){
+    if(d.hipos===0)return'This organisation has <b>no identified High Potentials</b>. The leadership pipeline is empty. The long-game failure of HiPo misidentification is silent — it does not show up on a P&L until 5-7 years later, when the leaders that should have been developed are not there.';
+    if(d.hipoScore>=70)return'<b>'+d.hipos+' High Potentials</b> identified, representing a healthy pipeline relative to current Stars ('+d.stars+'). The organisation is investing in its next generation of performance, not just managing today\'s.';
+    return'<b>'+d.hipos+' High Potentials</b> identified but the pipeline-to-Star ratio signals conversion risk. Identifying potential is the easy part. The harder question is whether these employees are in roles that will convert potential into performance. A HiPo pool that is not actively developed will self-select out within 18-24 months.';
+  }
 
-  // HUMACITY BAND, always visible
-  h += '<div class="humacity-band">'
-    +'<div class="hum-label">Built on Humacity</div>'
-    +'<div class="hum-text"><span class="hum-word">Humacity</span> is the fundamental quality of human capital in an organisation — every organisation has it, whether they measure it or not. <b>Most organisations pay for people. Almost none of them know what they are actually getting back.</b> The number below is the financial expression of your Humacity: what your people quality is worth, in currency, right now.</div>'
-    +'</div>';
+  // Lever uplifts (only show Watch/Weak levers)
+  var levers=[];
+  if(d.mgrScore<70)levers.push({label:'Upgrade manager layer — move '+d.mgrBelowTeam+' below-team manager'+(d.mgrBelowTeam>1?'s':'')+' to performance management',uplift:Math.round(d.tqp*0.12)});
+  if(d.hireScore<70&&d.recentHires>0)levers.push({label:'Raise hiring bar — target above-baseline performers in next 2 cohorts',uplift:Math.round(d.tqp*0.08)});
+  if(d.hipoScore<70)levers.push({label:'Activate HiPo pipeline — move identified potentials into stretch roles',uplift:Math.round(d.tqp*0.06)});
+  if(d.promoScore<70&&d.stars>0)levers.push({label:'Tighten promotion criteria — performance above grade midpoint as prerequisite',uplift:Math.round(d.tqp*0.05)});
+  if(d.selRetScore<70)levers.push({label:'Invert retention focus — prioritise Star retention over headcount retention',uplift:Math.round(d.tqp*0.07)});
+  if(levers.length===0)levers.push({label:'This organisation has no Watch or Weak verdict areas. Maintain current talent practices.',uplift:0});
+
+  var leversHtml=levers.map(function(l,i){
+    return'<div class="proj-lever"><div class="proj-lever-check'+(l.uplift>0?'':' on')+'" onclick="toggleLever(this)" data-uplift="'+l.uplift+'"></div><div class="proj-lever-text">'+l.label+'</div>'+(l.uplift>0?'<div class="proj-lever-val">+'+fmt(sym,l.uplift)+'</div>':'')+'</div>';
+  }).join('');
+
+  var tqpPct=d.marketTQP>0?Math.round((d.tqp/d.marketTQP)*100):100;
+  var bmYoursWidth=Math.min(100,tqpPct);
+  var bmMarketWidth=Math.round(100*(d.marketTQP/Math.max(d.tqp,d.marketTQP)));
+
+  // Intelligence statement
+  var dominant=[['Performance Premium',d.perfPremium],['Retention Premium',d.retP],['Hiring Premium',d.hireP]].sort(function(a,b){return b[1]-a[1];})[0];
+  var watchAreas=[
+    d.promoScore<70?'Promotion Accuracy':null,
+    d.mgrScore<70?'Manager Quality':null,
+    d.hireScore<70?'Hiring Quality':null,
+    d.selRetScore<70?'Selective Retention':null,
+    d.hipoScore<70?'HiPo Identification':null
+  ].filter(Boolean);
+
+  var stmtTxt='';
+  if(d.tqp<=0){
+    stmtTxt='This organisation is generating <b>no Talent Quality Premium</b>. The workforce is performing at or below the grade baseline for its cost. The salary bill is being paid. The premium above that baseline is not materialising. '+(watchAreas.length>0?'The verdict areas that need immediate attention: <b>'+watchAreas.join(', ')+'</b>.':'');
+  } else {
+    var aboveBelow=d.tqp>d.marketTQP?'above':'below';
+    var pctDiff=Math.abs(Math.round(((d.tqp-d.marketTQP)/d.marketTQP)*100));
+    stmtTxt='This organisation generates a <b>Talent Quality Premium of '+fmt(sym,Math.round(d.tqp*hci))+'</b> (HCI-adjusted), <b>'+pctDiff+'% '+aboveBelow+' the all-scenario market average</b>. '+(dominant[1]>0?'<b>'+dominant[0]+'</b> is the primary engine. ':'')+
+    (watchAreas.length>0?'The verdict areas flagged for attention are <b>'+watchAreas.join(', ')+'</b>. Addressing these represents a projected premium uplift of <b>'+fmt(sym,levers.reduce(function(a,l){return a+l.uplift;},0))+'</b> under Your Assessment scenario.':'All five verdict areas are reading Strong. This is a high-Humacity organisation. The premium reflects it.');
+  }
+
+  var h='';
+
+  // INTRO
+  var seen=false;try{seen=!!localStorage.getItem('rf_tp_intro');}catch(e){}
+  h+='<div class="intro-panel"><div class="intro-toggle'+(seen?' seen':'')+'" id="introToggle"><div class="intro-tl"><div class="intro-icon">?</div><div><div class="intro-title">What is The Talent Premium?</div><div class="intro-sub">Read this first, takes 2 minutes</div></div></div><div class="intro-chevron" id="introChev">'+(seen?'Show &darr;':'Hide &uarr;')+'</div></div>';
+  h+='<div class="intro-body'+(seen?'':' open')+'" id="introBody">';
+  h+='<div class="intro-sec"><div class="intro-sec-lbl">What is it?</div><div class="intro-sec-txt">Every organisation pays for people. That is the cost side — salaries, benefits, hiring spend. It shows up on every P&L as people cost.<br><br>What nobody has ever quantified: <b>the difference in output between the people you actually have, and the people you would have if you hired average.</b><br><br>If you hired 50 average performers at the same salary bill, you would get a baseline output. Because your HR function hired, developed, and retained better-than-average people, you get a higher output at the same cost. That difference is the <b>Talent Quality Premium</b>.</div></div>';
+  h+='<div class="intro-sec"><div class="intro-sec-lbl">The conviction problem</div><div class="intro-sec-txt">Most CHROs operate on conviction. They believe their talent decisions were right — they have to, it is how they function. But belief is not evidence. The Talent Premium asks one uncomfortable question: compared to what?<br><br><div class="intro-story">Two consulting firms had identical headcount and salary bills. One closed 40% more engagements per quarter. The difference was not tools, not process, not territory. It was the quality of the people in the room. That quality had a financial value. Nobody had ever filed it.<br><br><b>The Talent Premium is that filing.</b></div></div></div>';
+  h+='<div class="intro-sec"><div class="intro-sec-lbl">Five verdict areas, not one score</div><div class="intro-sec-txt">The headline TQP number tells you the premium exists. The five verdict areas tell you where it is coming from, where it is leaking, and what to fix. Promotion Accuracy, Manager Quality, Hiring Quality, Selective Retention, HiPo Identification — the five decisions with the most serious, most financially significant, most difficult-to-reverse consequences.</div></div>';
+  h+='<div class="intro-transition">Below is <b>'+name+'</b>\'s Talent Quality Premium and five verdict readings, computed from real data. The benchmark compares your org against all 15 scenarios in the Revenue Fluent dataset.</div></div></div>';
+
+  // HUMACITY BAND
+  h+='<div class="humacity-band"><div class="hum-label">Humacity Framework</div><div class="hum-text">The Talent Premium is the financial expression of <span class="hum-word">Humacity</span> — the measurable quality of human capital in an organisation. An organisation with a high Talent Premium is not just performing better today. <b>It is compounding an advantage that the balance sheet has never captured.</b> That advantage has always existed. For the first time, it has a number.</div></div>';
 
   // HERO
-  h += '<div class="hero" id="heroPanel">'
-    +'<div class="hero-grid">'
-      +'<div>'
-        +'<div class="tqp-lbl">Talent Quality Premium &middot; Q1 2026</div>'
-        +'<div class="tqp-num">'+fmt(sym,d.tqp)+'</div>'
-        +'<div class="tqp-desc">financial value of having better-than-average people at the same cost</div>'
-        +'<div class="tqp-ratio">'+sym+(d.tqpRatio*100).toFixed(1)+'% of comp base returned as quality premium</div>'
-      +'</div>'
-      +'<div class="hero-divider"></div>'
-      +'<div>'
-        +'<div class="story-rule"></div>'
-        +'<div class="hook">'+(HOOKS[name]||'The quality of your people has always had a financial value. Here it is.')+'</div>'
-        +'<div class="context">Three components compute this premium from real people and real salaries. <b>'+fmt(sym,d.retPremium)+'</b> from retention quality. <b>'+fmt(sym,d.perfPremium)+'</b> from performance. <b>'+fmt(sym,d.hiringPremium)+'</b> from hiring quality.</div>'
-      +'</div>'
-    +'</div>'
-    +'</div>';
+  h+='<div class="hero"><div class="hero-grid"><div>';
+  h+='<div class="tqp-lbl">Talent Quality Premium (HCI-adjusted)</div>';
+  h+='<div class="tqp-num" id="tqpHero">'+fmt(sym,tqpAdj)+'</div>';
+  h+='<div class="tqp-desc">The financial value of having better-than-average people at the same cost. Computed from <b>'+d.employeeCount+' employees</b> in this scenario.</div>';
+  h+='<div class="tqp-ratio">HCI '+(_hciC('hci_p2')).toFixed(2)+'x &middot; Base '+fmt(sym,d.tqp)+' &middot; Overall verdict score '+d.overallScore+'/100</div>';
+  h+='<button class="sw-trigger" data-panel="sw_tqp" onclick="swToggle(this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3"/><path d="M2 12h12"/></svg> Show workings</button>';
+  h+='<div class="sw-panel" id="sw_tqp"><div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><span class="sw-formula">TQP = Performance Premium + Retention Premium + Hiring Premium</span></div></div>';
+  h+='<div class="sw-row"><div class="sw-key">Performance</div><div class="sw-val">Each employee: (perf score - grade avg) x salary. Total surplus = <b>'+fmt(sym,d.perfPremium)+'</b></div></div>';
+  h+='<div class="sw-row"><div class="sw-key">Retention</div><div class="sw-val">Stars, HPs, HiPos above grade baseline: (surplus x salary x 0.5) + (replace cost x 0.1). Total = <b>'+fmt(sym,d.retP)+'</b></div></div>';
+  h+='<div class="sw-row"><div class="sw-key">Hiring</div><div class="sw-val">Recent hires (tenure <=1yr) above grade baseline: surplus x salary. Total = <b>'+fmt(sym,d.hireP)+'</b></div></div>';
+  h+='<div class="sw-row"><div class="sw-key">HCI Adjust</div><div class="sw-val">Base '+fmt(sym,d.tqp)+' x '+(_hciC('hci_p2')).toFixed(2)+' = <b>'+fmt(sym,tqpAdj)+'</b></div></div>';
+  h+='<div class="sw-row"><div class="sw-key">Data</div><div class="sw-val"><b>'+d.employeeCount+'</b> employees, rf-data.js v5.0, no illustrative figures</div></div></div>';
+  h+='</div><div class="hero-divider"></div><div><div class="story-rule"></div><div class="hook">'+hook+'</div>';
+  h+='<div class="context">Every organisation pays for people. Almost none know what they are actually getting back. The Talent Premium is that answer. In currency. Against a benchmark. Across five dimensions of talent quality.</div></div></div></div>';
 
-  // STATS
-  h += '<div class="stats">'
-    +'<div class="stat"><div class="sv '+(d.tqp>=0?'sv-teal':'sv-red')+'">'+fmt(sym,d.tqp)+'</div><div class="sl">Talent Quality Premium</div></div>'
-    +'<div class="stat"><div class="sv sv-gold">'+fmt(sym,d.retPremium)+'</div><div class="sl">Retention Premium</div></div>'
-    +'<div class="stat"><div class="sv sv-cobalt">'+fmt(sym,d.perfPremium)+'</div><div class="sl">Performance Premium</div></div>'
-    +'<div class="stat"><div class="sv sv-dim">'+fmt(sym,d.hiringPremium)+'</div><div class="sl">Hiring Premium</div></div>'
-    +'<div class="stat"><div class="sv sv-copper">'+d.employeeCount+'</div><div class="sl">People Measured</div></div>'
-    +'</div>';
+  // STATS BAR
+  h+='<div class="stats">';
+  h+='<div class="stat"><div class="sv sv-gold">'+d.stars+'</div><div class="sl">Stars</div></div>';
+  h+='<div class="stat"><div class="sv sv-teal">'+d.hipos+'</div><div class="sl">High Potentials</div></div>';
+  h+='<div class="stat"><div class="sv sv-cobalt">'+d.managers+'</div><div class="sl">Managers</div></div>';
+  h+='<div class="stat"><div class="sv sv-copper">'+d.inconsistent+'</div><div class="sl">Inconsistent</div></div>';
+  h+='<div class="stat"><div class="sv sv-dim">'+d.overallScore+'</div><div class="sl">Verdict score</div></div>';
+  h+='</div>';
 
-  // THREE COMPONENTS
-  h += '<div class="sec-head">'
-    +'<h2><span class="step">1</span> The three components</h2>'
-    +'<div class="sec-sub">Where the premium is generated, and where it is lost</div>'
-    +'</div>';
+  // BENCHMARK STRIP
+  h+='<div class="bm-section">';
+  h+='<div class="bm-title">Three-layer benchmark</div>';
+  h+='<div class="bm-sub">Your Talent Quality Premium against all organisations in the Revenue Fluent dataset using the same currency. Cohort benchmarking is available when you connect your own organisation data.</div>';
+  h+='<div class="bm-rows">';
+  h+='<div class="bm-row"><div class="bm-name"><b>Market average</b><br><span style="font-size:.6rem">All same-currency scenarios</span></div><div class="bm-track"><div class="bm-fill bm-fill-market" style="width:'+bmMarketWidth+'%"></div></div><div class="bm-val bm-val-market">'+fmt(sym,d.marketTQP)+'</div></div>';
+  h+='<div class="bm-row"><div class="bm-name"><b style="color:var(--teal)">Your organisation</b><br><span style="font-size:.6rem">'+name+'</span></div><div class="bm-track"><div class="bm-fill bm-fill-yours" style="width:'+bmYoursWidth+'%"></div></div><div class="bm-val bm-val-yours">'+fmt(sym,d.tqp)+'</div></div>';
+  h+='</div>';
+  h+='<div class="bm-coming"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg> Cohort benchmark (organisations like yours) — available with your own data</div>';
+  h+='</div>';
 
-  // Pre-compute Show Workings data
-  var gradeCount = Object.keys((function(){var m={};s.employees.forEach(function(e){m[e.grade]=1;});return m;})()).length;
-  var keeperCount = s.employees.filter(function(e){return ['Star','High Performer','High Potential'].indexOf(e.placement)>=0;}).length;
-  var recentCount = s.employees.filter(function(e){return e.tenure<=1;}).length;
+  // FIVE VERDICT AREAS
+  h+='<div class="sec-head"><h2><span class="step">V</span>Five Verdict Areas</h2></div>';
+  h+='<div class="verdict-grid">';
 
-  h += '<div class="components">'
+  // V1: Promotion Accuracy
+  var starsAboveMid=d.stars>0?Math.round((d.promoScore/100)*d.stars):0;
+  h+=verdictCard('Promotion Accuracy',d.promoScore,promoFinding(Object.assign({starsAboveMid:starsAboveMid},d)),'sw_v1',
+    [['Stars',d.stars],['Grade mismatches',d.gradeMismatches],['Vs market',vsMarket(d.promoScore,MARKET_AVG.promo)]],
+    [['Method','Stars at or above grade performance midpoint / total Stars'],['Stars above midpoint',starsAboveMid+' of '+d.stars],['Market avg score',MARKET_AVG.promo]]);
 
-    // Performance Premium
-    +'<div class="comp-card">'
-      +'<div class="comp-lbl">Performance Premium</div>'
-      +'<div class="comp-val '+(d.perfPremium>=0?'pos':'neg')+'">'+fmt(sym,d.perfPremium)+'</div>'
-      +'<div class="comp-bar"><div class="comp-fill '+(d.perfPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.perfPremium,maxComp)+'%"></div></div>'
-      +'<div class="comp-desc">Are your people outperforming their grade baseline? This measures the aggregate salary-weighted performance surplus across the entire organisation. Positive means your people are delivering above what their grade benchmark predicts.</div>'
-      +'<button class="sw-trigger" data-panel="sw_perf" onclick="swToggle(this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h10"/><path d="M12 10l2 2-2 2"/></svg>Show Workings</button>'
-      +'<div class="sw-panel" id="sw_perf">'
-        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><code class="sw-formula">Sum over all employees: (perfScore &minus; gradeAvg) &times; salary</code></div></div>'
-        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+d.employeeCount+'</b> employees across <b>'+gradeCount+'</b> grade levels. Grade average computed from all employees at that grade within this scenario.</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Logic</div><div class="sw-val">Each employee is compared to their own grade peers, not to the whole org. A surplus perfScore &times; their salary = their performance premium contribution. Negative means below grade average.</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val sw-result">'+fmt(sym,d.perfPremium)+'</div></div>'
-        +'<div class="sw-note">Sensitivity: a 0.1 shift in average perfScore across the org moves this figure by approximately '+fmt(sym,Math.round(d.totalComp*0.1))+'.</div>'
-      +'</div>'
-    +'</div>'
+  // V2: Manager Quality
+  h+=verdictCard('Manager Quality',d.mgrScore,mgrFinding(d),'sw_v2',
+    [['Managers',d.managers],['Below team avg',d.mgrBelowTeam],['Vs market',vsMarket(d.mgrScore,MARKET_AVG.mgr)]],
+    [['Method','Managers outperforming their direct report average / total managers'],['Below team',d.mgrBelowTeam+' of '+d.managers+' managers'],['Market avg score',MARKET_AVG.mgr]]);
 
-    // Retention Quality Premium
-    +'<div class="comp-card">'
-      +'<div class="comp-lbl">Retention Quality Premium</div>'
-      +'<div class="comp-val '+(d.retPremium>=0?'pos':'neg')+'">'+fmt(sym,d.retPremium)+'</div>'
-      +'<div class="comp-bar"><div class="comp-fill '+(d.retPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.retPremium,maxComp)+'%"></div></div>'
-      +'<div class="comp-desc">Are you retaining the right people, not just any people? This measures the financial value concentrated in your Stars, High Performers, and High Potentials who are still here. When they leave, this number falls.</div>'
-      +'<button class="sw-trigger" data-panel="sw_ret" onclick="swToggle(this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h10"/><path d="M12 10l2 2-2 2"/></svg>Show Workings</button>'
-      +'<div class="sw-panel" id="sw_ret">'
-        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><code class="sw-formula">For each keeper: (perfScore &minus; gradeAvg) &times; salary &times; 0.5 + replaceCost &times; 0.1</code><br><span style="font-size:.72rem;color:#C8A8C0">replaceCost = salary &times; 1.5. Applied only where perfScore &gt; gradeAvg.</span></div></div>'
-        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+keeperCount+'</b> employees classified as Star, High Performer, or High Potential in this scenario.</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Logic</div><div class="sw-val">Two signals combined: the performance surplus of each keeper (what they deliver above baseline) plus the avoided replacement cost premium (10% of 1.5x salary). The 0.5 multiplier reflects that only part of the performance surplus is directly attributable to retention vs. hiring.</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val sw-result">'+fmt(sym,d.retPremium)+'</div></div>'
-        +'<div class="sw-note">Sensitivity: losing one Star from this org reduces this figure by an estimated '+fmt(sym,Math.round(d.retPremium/Math.max(keeperCount,1)))+' on average.</div>'
-      +'</div>'
-    +'</div>'
+  // V3: Hiring Quality
+  h+=verdictCard('Hiring Quality',d.hireScore,hireFinding(d),'sw_v3',
+    [['Recent hires',d.recentHires],['Above baseline',d.aboveBench],['Vs market',vsMarket(d.hireScore,MARKET_AVG.hire)]],
+    [['Method','Recent hires (tenure <=1yr) above grade performance baseline / total recent hires'],['Above baseline',d.aboveBench+' of '+d.recentHires],['Market avg score',MARKET_AVG.hire]]);
 
-    // Hiring Quality Premium
-    +'<div class="comp-card">'
-      +'<div class="comp-lbl">Hiring Quality Premium</div>'
-      +'<div class="comp-val '+(d.hiringPremium>=0?'pos':'neg')+'">'+fmt(sym,d.hiringPremium)+'</div>'
-      +'<div class="comp-bar"><div class="comp-fill '+(d.hiringPremium>=0?'pos':'neg')+'" style="width:'+barWidth(d.hiringPremium,maxComp)+'%"></div></div>'
-      +'<div class="comp-desc">Are your recent hires outperforming what a random market hire would deliver? Measured from employees with under 1 year tenure against their grade benchmark.</div>'
-      +'<button class="sw-trigger" data-panel="sw_hire" onclick="swToggle(this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h10"/><path d="M12 10l2 2-2 2"/></svg>Show Workings</button>'
-      +'<div class="sw-panel" id="sw_hire">'
-        +'<div class="sw-row"><div class="sw-key">Formula</div><div class="sw-val"><code class="sw-formula">For each recent hire: (perfScore &minus; gradeAvg) &times; salary, where perfScore &gt; gradeAvg</code></div></div>'
-        +'<div class="sw-row"><div class="sw-key">Inputs</div><div class="sw-val"><b>'+recentCount+'</b> employees with tenure under 1 year in this scenario, measured against their grade average.</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Logic</div><div class="sw-val">Only surplus-generating hires contribute (perfScore above grade average). Hires below baseline are excluded from the premium but are a signal of hiring quality risk. The grade average benchmark is drawn from all employees at that grade, not just recent hires.</div></div>'
-        +'<div class="sw-row"><div class="sw-key">Result</div><div class="sw-val sw-result">'+fmt(sym,d.hiringPremium)+'</div></div>'
-        +'<div class="sw-note">Caveat: new hire performance is also influenced by onboarding quality and manager quality, not hiring decisions alone. This figure reflects combined effect.</div>'
-      +'</div>'
-      +'<div class="comp-caveat">Note: new hire performance is also influenced by onboarding quality and manager quality, not hiring decisions alone.</div>'
-    +'</div>'
+  // V4: Selective Retention
+  h+=verdictCard('Selective Retention',d.selRetScore,selRetFinding(d),'sw_v4',
+    [['Star avg tenure',d.starTenure+'yr'],['Inconsistent avg',d.inconTenure+'yr'],['Vs market',vsMarket(d.selRetScore,MARKET_AVG.selRet)]],
+    [['Method','Star avg tenure vs Inconsistent Performer avg tenure. Higher Star tenure = healthy selective retention.'],['Stars',d.stars+' avg '+d.starTenure+'yr'],['Inconsistent',d.inconsistent+' avg '+d.inconTenure+'yr'],['Market avg score',MARKET_AVG.selRet]]);
 
-    +'</div>';
+  // V5: HiPo Identification
+  h+=verdictCard('HiPo Identification',d.hipoScore,hipFinding(d),'sw_v5',
+    [['HiPos identified',d.hipos],['Star pipeline ratio',(d.stars>0?(d.hipos/d.stars).toFixed(1):0)+'x'],['Vs market',vsMarket(d.hipoScore,MARKET_AVG.hipo)]],
+    [['Method','HiPo count relative to current Star density. Assesses whether the talent pipeline is calibrated to sustain current performance.'],['HiPos',d.hipos+' ('+Math.round(d.hipos/d.employeeCount*100)+'% of org)'],['Market avg score',MARKET_AVG.hipo]]);
+
+  h+='</div>';
+
+  // FORWARD PROJECTION
+  h+='<div class="proj-section">';
+  h+='<div class="proj-title">Forward Projection</div>';
+  h+='<div class="proj-sub">Select the levers you plan to act on. The model shows projected TQP under Conservative, Your Assessment, and Optimistic scenarios. This is a scenario, not a forecast.</div>';
+  h+='<div class="proj-levers">'+leversHtml+'</div>';
+  h+='<table class="proj-table"><thead><tr><th style="text-align:left">Line</th><th>Conservative</th><th class="yours">Your Assessment</th><th>Optimistic</th></tr></thead><tbody id="proj_body"></tbody></table>';
+  h+='</div>';
+
+  // COMPONENTS (breakdown)
+  h+='<div class="sec-head" style="margin-top:32px"><h2><span class="step">3</span>Premium Breakdown</h2></div>';
+  var maxComp=Math.max(Math.abs(d.perfPremium),Math.abs(d.retP),Math.abs(d.hireP));
+  h+='<div class="components">';
+  h+=compCard('Performance Premium',d.perfPremium,sym,maxComp,'Employees outperforming their grade baseline — value of the output gap above average.','sw_p1_c','performance score above grade average x salary for each employee');
+  h+=compCard('Retention Premium',d.retP,sym,maxComp,'Stars, High Performers, HiPos retained — avoided replacement cost plus output premium.','sw_p1_c2','(surplus x salary x 0.5) + (replace cost x 0.1) for each above-baseline keeper');
+  h+=compCard('Hiring Premium',d.hireP,sym,maxComp,'New hires in the last 12 months performing above their grade baseline.','sw_p1_c3',d.recentHires+' recent hires, '+d.aboveBench+' above baseline. Surplus x salary.');
+  h+='</div>';
 
   // P5 BRIDGE
-  h += '<div class="sec-head">'
-    +'<h2><span class="step">2</span> Where this lives in your Human P&L</h2>'
-    +'<div class="sec-sub">The Talent Premium is your Human Gross Margin</div>'
-    +'</div>'
-    +'<div class="p5-bridge">'
-      +'<div class="p5-lbl">Connection to L5, The Human P&L</div>'
-      +'<div class="p5-row">'
-        +'<div class="p5-cell"><div class="pc-lbl">Human Revenue</div><div class="pc-val">from L1</div></div>'
-        +'<div class="p5-arrow">&minus;</div>'
-        +'<div class="p5-cell"><div class="pc-lbl">Human COGS</div><div class="pc-val">comp + hire + dev</div></div>'
-        +'<div class="p5-arrow">=</div>'
-        +'<div class="p5-cell active"><div class="pc-lbl">Human Gross Margin</div><div class="pc-val">'+fmt(sym,d.tqp)+'</div></div>'
-        +'<div class="p5-arrow">&minus;</div>'
-        +'<div class="p5-cell"><div class="pc-lbl">Human OpEx</div><div class="pc-val">HR function cost</div></div>'
-        +'<div class="p5-arrow">=</div>'
-        +'<div class="p5-cell"><div class="pc-lbl">Human Net Profit</div><div class="pc-val">L5 capstone</div></div>'
-      +'</div>'
-      +'<div class="p5-note">The Talent Quality Premium of <b>'+fmt(sym,d.tqp)+'</b> is the explanation for why your Human Gross Margin is what it is. High premium = wide margin. Low premium = thin margin. <b>This number belongs in your board presentation.</b></div>'
-    +'</div>';
+  h+='<div class="p5-bridge"><div class="p5-lbl">Feeds into Human P&L</div>';
+  h+='<div class="p5-row">';
+  h+='<div class="p5-cell"><div class="pc-lbl">Total Comp Base</div><div class="pc-val">'+fmt(sym,d.totalComp)+'</div></div>';
+  h+='<div class="p5-cell active"><div class="pc-lbl">Talent Quality Premium</div><div class="pc-val">'+fmt(sym,tqpAdj)+'</div></div>';
+  h+='<div class="p5-cell"><div class="pc-lbl">Human Gross Margin</div><div class="pc-val">'+Math.round((tqpAdj/Math.max(d.totalComp+tqpAdj,1))*100)+'%</div></div>';
+  h+='</div>';
+  h+='<div class="p5-note">The Talent Quality Premium flows directly into the <b>Performance Uplift</b> line of The Human P&L. It is the quality adjustment that converts headcount cost into human capital return.</div></div>';
 
   // INTELLIGENCE STATEMENT
-  h += '<div class="statement">'
-    +'<div class="stmt-lbl">Intelligence Statement</div>'
-    +'<div class="stmt-txt">'+stmtText(sym,d.tqp,d.tqpRatio,d.perfPremium,d.retPremium,d.hiringPremium)+'</div>'
-    +'</div>';
+  h+='<div class="statement"><div class="stmt-lbl">Intelligence Statement</div>';
+  h+='<div class="stmt-txt">'+stmtTxt+'</div></div>';
 
-  app.innerHTML = h;
+  document.getElementById('app').innerHTML=h;
 
-  // Wire intro toggle
-  document.getElementById('introToggle').addEventListener('click', function(){
-    var body = document.getElementById('introBody');
-    var chev = document.getElementById('introChev');
-    var tog  = document.getElementById('introToggle');
-    var open = body.classList.contains('open');
-    if (open) {
-      body.classList.remove('open');
-      chev.innerHTML = 'Show &darr;';
-      tog.classList.add('seen');
-      try { localStorage.setItem('rf_tp_intro','1'); } catch(e){}
-    } else {
-      body.classList.add('open');
-      chev.innerHTML = 'Hide &uarr;';
-      tog.classList.remove('seen');
-    }
-  });
-}
-
-sel.addEventListener('change', function(){
-  current = sel.value;
-  var u = new URL(location.href);
-  u.searchParams.set('scenario', current);
-  history.replaceState({}, '', u);
-  render(current);
-});
-
-render(current);
-
-})();
-</script>
-
-<script>
-(function(){
-  var origRender = typeof render === 'function' ? render : null;
-  function tryInitHCI(){
-    var sym = '$';
-    var sel = document.getElementById('scen');
-    if(sel && window.RF){
-      var s = RF.scenario(sel.value);
-      if(s) sym = s.symbol || '$';
-    }
-    var _hciBase = (typeof computeTQP === 'function' && window.RF) ? (computeTQP(document.getElementById('scen').value) || {tqp:0}).tqp || 0 : 0;
-    initHCI('hci_p2', _hciBase, sym, null);
+  // Init intro toggle
+  var it=document.getElementById('introToggle');
+  var ib=document.getElementById('introBody');
+  var ic=document.getElementById('introChev');
+  if(it&&ib&&ic){
+    it.addEventListener('click',function(){
+      var open=ib.classList.contains('open');
+      ib.classList.toggle('open',!open);
+      ic.innerHTML=open?'Show &darr;':'Hide &uarr;';
+      try{if(!open)localStorage.setItem('rf_tp_intro','1');}catch(e){}
+    });
   }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', tryInitHCI);
-  }else{tryInitHCI();}
-  // Re-init on scenario change
-  var sel = document.getElementById('scen');
-  if(sel){sel.addEventListener('change', function(){
-    var s = window.RF ? RF.scenario(sel.value) : null;
-    var sym = s ? (s.symbol || '$') : '$';
-    initHCI('hci_p2', 0, sym, null);
-  });}
-})();
-</script>
 
+  // Init HCI
+  try{
+    var saved=window.RFProfile&&RFProfile.getHCI?RFProfile.getHCI('hci_p2'):null;
+    initHCI('hci_p2',d.tqp,sym,null);
+    if(saved){_hci['hci_p2'].f=saved.f;_hciR('hci_p2');}
+  }catch(e){initHCI('hci_p2',d.tqp,sym,null);}
 
-
-<script>
-(function(){
-  var sidebar = document.querySelector('.sidebar');
-  var handle = document.querySelector('.sidebar-resize');
-  if(!sidebar || !handle) return;
-  var isDragging = false, startX = 0, startW = 0;
-  handle.addEventListener('mousedown', function(e){
-    isDragging = true;
-    startX = e.clientX;
-    startW = sidebar.offsetWidth;
-    handle.classList.add('dragging');
-    document.body.style.userSelect = 'none';
-    document.body.style.cursor = 'col-resize';
-  });
-  window.addEventListener('mousemove', function(e){
-    if(!isDragging) return;
-    var newW = Math.min(320, Math.max(160, startW + (e.clientX - startX)));
-    sidebar.style.width = newW + 'px';
-    document.querySelectorAll('.wrap').forEach(function(w){ w.style.marginLeft = newW + 'px'; });
-    document.documentElement.style.setProperty('--sidebar', newW + 'px');
-  });
-  window.addEventListener('mouseup', function(){
-    if(!isDragging) return;
-    isDragging = false;
-    handle.classList.remove('dragging');
-    document.body.style.userSelect = '';
-    document.body.style.cursor = '';
-  });
-})();
-</script>
-
-<script>
-function generatePDFP2() {
-  var sel = document.getElementById('scen');
-  if(!sel || !window.RF) return;
-  var d = computeTQP(sel.value);
-  if(!d) return;
-  RFReport.reportP2(sel.value, d);
+  // Init projection
+  updateProjection();
 }
-</script>
 
-<script>
-(function(){
-  var nudge = document.getElementById('uploadNudge');
-  var badge = document.getElementById('userDataBadge');
-  if(!nudge) return;
-  nudge.style.display = 'flex';
-  // Show badge if user data active
-  var sel = document.getElementById('scen');
-  function checkActive(){
-    if(sel && sel.value === 'Your Organisation'){
-      badge.style.display = 'inline';
-      nudge.style.background = 'rgba(56,196,144,.06)';
-      nudge.style.borderColor = 'rgba(56,196,144,.2)';
-    } else {
-      badge.style.display = 'none';
-      nudge.style.background = 'rgba(224,184,48,.06)';
-      nudge.style.borderColor = 'rgba(224,184,48,.15)';
-    }
-  }
-  if(sel) sel.addEventListener('change', checkActive);
-  checkActive();
-})();
-</script>
-<script>if(window.RFProfile){RFProfile.personaliseToolPage('p2');
-  if(window.RFProfile){RFProfile.gateToolPage();}RFProfile.injectSidebarBadge();
-  if(RFProfile.gateScenarioInTool) RFProfile.gateScenarioInTool();}</script>
-<script>
-// Sync HCI changes back to global
-(function(){
-  var origHciTF = window.hciTF;
-  window.hciTF = function(id, i){
-    if(origHciTF) origHciTF(id, i);
-    if(id === 'hci_p2' && window.RFProfile && window.RFProfile.syncHCIToGlobal) {
-      setTimeout(function(){ RFProfile.syncHCIToGlobal('hci_p2'); }, 50);
-    }
-  };
-})();
-</script>
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load', function(){
-    navigator.serviceWorker.register('/sw.js')
-      .then(function(reg){ console.log('SW registered'); })
-      .catch(function(err){ console.warn('SW error:', err); });
-  });
+function verdictCard(title,score,finding,swId,metrics,swData){
+  var cls=verdictClass(score);
+  var h='<div class="verdict-card '+cls+'">';
+  h+='<div class="vc-top"><div class="vc-name">'+title+'</div><div class="vc-badge '+badgeClass(score)+'">'+badgeLabel(score)+'</div></div>';
+  h+='<div class="vc-score-row">';
+  h+='<div class="vc-score-num '+scoreClass(score)+'">'+score+'</div>';
+  h+='<div class="vc-score-right"><div class="vc-score-track"><div class="vc-score-fill '+fillClass(score)+'" style="width:'+score+'%"></div></div>';
+  h+='<div class="vc-vs-market">'+metrics[2][1]+'</div></div></div>';
+  h+='<div class="vc-finding">'+finding+'</div>';
+  h+='<div class="vc-metrics">';
+  h+='<div class="vc-metric"><div class="vc-metric-val">'+metrics[0][1]+'</div><div class="vc-metric-lbl">'+metrics[0][0]+'</div></div>';
+  h+='<div class="vc-metric"><div class="vc-metric-val">'+metrics[1][1]+'</div><div class="vc-metric-lbl">'+metrics[1][0]+'</div></div>';
+  h+='</div>';
+  h+='<button class="sw-trigger" data-panel="'+swId+'" onclick="swToggle(this)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3"/><path d="M2 12h12"/></svg> Show workings</button>';
+  h+='<div class="sw-panel" id="'+swId+'">';
+  swData.forEach(function(r){h+='<div class="sw-row"><div class="sw-key">'+r[0]+'</div><div class="sw-val"><b>'+r[1]+'</b></div></div>';});
+  h+='</div></div>';
+  return h;
 }
+
+function compCard(label,val,sym,max,desc,swId,formula){
+  var cls=val>0?'pos':val<0?'neg':'flat';
+  var w=max>0?Math.round(Math.abs(val)/max*100):0;
+  return'<div class="comp-card"><div class="comp-lbl">'+label+'</div><div class="comp-val '+cls+'">'+fmt(sym,val)+'</div><div class="comp-bar"><div class="comp-fill '+cls+'" style="width:'+w+'%"></div></div><div class="comp-desc">'+desc+'</div><div class="comp-caveat">'+formula+'</div></div>';
+}
+
+function toggleLever(el){
+  el.classList.toggle('on');
+  updateProjection();
+}
+
+// Sidebar resize
+(function(){
+  var sb=document.getElementById('mainSidebar');
+  var rs=document.getElementById('sbResize');
+  if(!sb||!rs)return;
+  var dragging=false,startX=0,startW=0;
+  rs.addEventListener('mousedown',function(e){dragging=true;startX=e.clientX;startW=sb.offsetWidth;rs.classList.add('dragging');e.preventDefault();});
+  document.addEventListener('mousemove',function(e){if(!dragging)return;var w=Math.max(160,Math.min(340,startW+e.clientX-startX));sb.style.width=w+'px';document.documentElement.style.setProperty('--sidebar',w+'px');});
+  document.addEventListener('mouseup',function(){dragging=false;rs.classList.remove('dragging');});
+})();
+
+if(window.RFProfile&&RFProfile.gateScenarioInTool)RFProfile.gateScenarioInTool();
+if(window.RFProfile&&RFProfile.showUserDataBadge)RFProfile.showUserDataBadge();
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
 </script>
-</body></html>\
+</body></html>
