@@ -500,6 +500,8 @@ body::before{
   var mouse = {x: 0, y: 0};
   var PARTICLE_COUNT = 500;
   var sprites = [];
+  var dots, dotPositions, dotVelocities;
+  var DOT_COUNT = 0;
 
   // The symbols — Humacity's own language
   var SYMBOLS = [
@@ -606,6 +608,44 @@ body::before{
       resetSprite(data, true);
       sprites.push(data);
     }
+
+    // Dot particles — bright glowing points for density and shine
+    DOT_COUNT = 900;
+    dotPositions  = new Float32Array(DOT_COUNT * 3);
+    dotVelocities = new Float32Array(DOT_COUNT);
+    var dotColors = new Float32Array(DOT_COUNT * 3);
+    var dotPalette = [
+      [0.75, 0.25, 0.60],  // magenta
+      [0.88, 0.72, 0.19],  // gold
+      [0.22, 0.77, 0.56],  // teal
+      [0.93, 0.78, 0.48],  // copper warm
+      [0.95, 0.90, 0.88],  // warm white
+      [0.82, 0.47, 0.76],  // soft magenta
+    ];
+    for(var d = 0; d < DOT_COUNT; d++){
+      dotPositions[d*3]   = (Math.random()-0.5)*900;
+      dotPositions[d*3+1] = (Math.random()-0.5)*900;
+      dotPositions[d*3+2] = -950 + Math.random()*1200;
+      dotVelocities[d] = 1.5 + Math.random()*4;
+      var dc = dotPalette[Math.floor(Math.random()*dotPalette.length)];
+      dotColors[d*3]   = dc[0] + (Math.random()-.5)*.1;
+      dotColors[d*3+1] = dc[1] + (Math.random()-.5)*.1;
+      dotColors[d*3+2] = dc[2] + (Math.random()-.5)*.1;
+    }
+    var dotGeo = new THREE.BufferGeometry();
+    dotGeo.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3));
+    dotGeo.setAttribute('color',    new THREE.BufferAttribute(dotColors, 3));
+    var dotMat = new THREE.PointsMaterial({
+      size: 3.2,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.82,
+      sizeAttenuation: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    dots = new THREE.Points(dotGeo, dotMat);
+    scene.add(dots);
   }
 
   function animate(){
@@ -639,6 +679,20 @@ body::before{
         resetSprite(data, false);
       }
     });
+
+    // Animate dot particles
+    if(dotPositions){
+      for(var d = 0; d < DOT_COUNT; d++){
+        dotPositions[d*3+2] += dotVelocities[d];
+        if(dotPositions[d*3+2] > 500){
+          dotPositions[d*3]   = (Math.random()-0.5)*900;
+          dotPositions[d*3+1] = (Math.random()-0.5)*900;
+          dotPositions[d*3+2] = -950 + Math.random()*100;
+          dotVelocities[d] = 1.5 + Math.random()*4;
+        }
+      }
+      dots.geometry.attributes.position.needsUpdate = true;
+    }
 
     renderer.render(scene, camera);
   }
