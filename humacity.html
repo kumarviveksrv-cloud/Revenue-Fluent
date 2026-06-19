@@ -52,9 +52,11 @@ body::before{
 .nav-cta:hover{background:rgba(192,64,154,.25);border-color:var(--magenta)}
 .hero{
   min-height:100vh;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;text-align:center;padding:120px 48px 80px;
-  position:relative;z-index:1;overflow:hidden;
+  justify-content:center;text-align:center;padding:80px 0 60px;
+  position:relative;z-index:1;overflow:hidden;gap:0;
 }
+.hero-content{position:relative;z-index:2;margin-bottom:0}
+.hero-below{margin-top:20px}
 .hero-orb{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
 #orbCanvas{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(700px,90vw);height:min(700px,90vw);opacity:.92;z-index:1}
 .hero-content{position:relative;z-index:2}
@@ -175,27 +177,29 @@ body::before{
     <canvas id="orbCanvas"></canvas>
   </div>
   <div class="hero-content">
-  <div class="hero-eyebrow">A new concept for a very old problem</div>
   <div class="hero-word">Humacity</div>
-  <div class="hero-pronunciation">
+  </div>
+  <div class="hero-below" style="position:relative;z-index:2;text-align:center;padding:0 48px">
+  <div class="hero-eyebrow" style="margin-bottom:20px">A new concept for a very old problem</div>
+  <div class="hero-pronunciation" style="margin-bottom:20px">
     /hjuː&middot;<span>mas</span>&middot;ɪ&middot;ti/ &nbsp;&middot;&nbsp; noun
   </div>
-  <p class="hero-def">
+  <p class="hero-def" style="margin-bottom:24px">
     The <em>quality</em> of human capital in an organisation,<br>
     its vitality, capability, and financial contribution.<br>
     Not a score. Not a rating. <em>A state of being.</em>
   </p>
-  <div class="hero-etymology">
+  <div class="hero-etymology" style="margin-bottom:36px">
     <div class="etym-part"><span class="etym-word">humanus</span><span class="etym-meaning">(Latin: human)</span></div>
     <span class="etym-sep">+</span>
     <div class="etym-part"><span class="etym-word">-acity</span><span class="etym-meaning">(suffix: quality, state of)</span></div>
     <span class="etym-sep">=</span>
     <div class="etym-part"><span class="etym-word" style="color:var(--magenta-mid)">Humacity</span></div>
   </div>
-  </div>
-  <div class="scroll-hint" style="position:relative;z-index:2">
+  <div class="scroll-hint">
     <svg width="16" height="20" viewBox="0 0 16 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="1" width="6" height="10" rx="3"/><path d="M8 14v5M5 16l3 3 3-3"/></svg>
     Scroll to explore
+  </div>
   </div>
 </section>
 
@@ -500,8 +504,6 @@ body::before{
   var mouse = {x: 0, y: 0};
   var PARTICLE_COUNT = 500;
   var sprites = [];
-  var dots, dotPositions, dotVelocities;
-  var DOT_COUNT = 0;
 
   // The symbols — Humacity's own language
   var SYMBOLS = [
@@ -532,19 +534,17 @@ body::before{
   function makeSpriteTex(text, color){
     var c = document.createElement('canvas');
     var ctx = c.getContext('2d');
-    // Smaller, crisper font — feels like sparks not labels
     var fontSize = text.length > 8 ? 13 : text.length > 4 ? 16 : 20;
-    ctx.font = '600 ' + fontSize + 'px "DM Mono", monospace';
+    ctx.font = '700 ' + fontSize + 'px "DM Mono", monospace';
     var tw = ctx.measureText(text).width;
     c.width  = Math.ceil(tw) + 16;
     c.height = fontSize + 12;
-    ctx.font = '600 ' + fontSize + 'px "DM Mono", monospace';
+    ctx.font = '700 ' + fontSize + 'px "DM Mono", monospace';
     ctx.clearRect(0, 0, c.width, c.height);
-    // Strong multi-layer glow for luminosity
-    ctx.shadowColor = color;
-    ctx.shadowBlur  = 6;
+    // No shadow/glow — pure crisp bright text
+    ctx.shadowBlur  = 0;
     ctx.fillStyle   = color;
-    ctx.globalAlpha = 0.95;
+    ctx.globalAlpha = 1.0;
     ctx.fillText(text, 8, fontSize + 2);
     var tex = new THREE.CanvasTexture(c);
     return {tex: tex, aspect: c.width / c.height};
@@ -573,7 +573,7 @@ body::before{
       ? -900 + Math.random() * 700
       : -1000 + Math.random() * 100;
     data.speed   = 0.3 + Math.random() * 0.7;  // slow drift — readable
-    data.maxOpacity = 0.35 + Math.random() * 0.30;  // visible but not overpowering
+    data.maxOpacity = 0.70 + Math.random() * 0.30;  // bright, high contrast, no glow
     data.sprite.material.opacity = 0;
     data.fadeIn  = true;
   }
@@ -609,43 +609,6 @@ body::before{
       sprites.push(data);
     }
 
-    // Dot particles — bright glowing points for density and shine
-    DOT_COUNT = 900;
-    dotPositions  = new Float32Array(DOT_COUNT * 3);
-    dotVelocities = new Float32Array(DOT_COUNT);
-    var dotColors = new Float32Array(DOT_COUNT * 3);
-    var dotPalette = [
-      [0.75, 0.25, 0.60],  // magenta
-      [0.88, 0.72, 0.19],  // gold
-      [0.22, 0.77, 0.56],  // teal
-      [0.93, 0.78, 0.48],  // copper warm
-      [0.95, 0.90, 0.88],  // warm white
-      [0.82, 0.47, 0.76],  // soft magenta
-    ];
-    for(var d = 0; d < DOT_COUNT; d++){
-      dotPositions[d*3]   = (Math.random()-0.5)*900;
-      dotPositions[d*3+1] = (Math.random()-0.5)*900;
-      dotPositions[d*3+2] = -950 + Math.random()*1200;
-      dotVelocities[d] = 1.5 + Math.random()*4;
-      var dc = dotPalette[Math.floor(Math.random()*dotPalette.length)];
-      dotColors[d*3]   = dc[0] + (Math.random()-.5)*.1;
-      dotColors[d*3+1] = dc[1] + (Math.random()-.5)*.1;
-      dotColors[d*3+2] = dc[2] + (Math.random()-.5)*.1;
-    }
-    var dotGeo = new THREE.BufferGeometry();
-    dotGeo.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3));
-    dotGeo.setAttribute('color',    new THREE.BufferAttribute(dotColors, 3));
-    var dotMat = new THREE.PointsMaterial({
-      size: 3.2,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.82,
-      sizeAttenuation: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
-    dots = new THREE.Points(dotGeo, dotMat);
-    scene.add(dots);
   }
 
   function animate(){
@@ -679,20 +642,6 @@ body::before{
         resetSprite(data, false);
       }
     });
-
-    // Animate dot particles
-    if(dotPositions){
-      for(var d = 0; d < DOT_COUNT; d++){
-        dotPositions[d*3+2] += dotVelocities[d];
-        if(dotPositions[d*3+2] > 500){
-          dotPositions[d*3]   = (Math.random()-0.5)*900;
-          dotPositions[d*3+1] = (Math.random()-0.5)*900;
-          dotPositions[d*3+2] = -950 + Math.random()*100;
-          dotVelocities[d] = 1.5 + Math.random()*4;
-        }
-      }
-      dots.geometry.attributes.position.needsUpdate = true;
-    }
 
     renderer.render(scene, camera);
   }
