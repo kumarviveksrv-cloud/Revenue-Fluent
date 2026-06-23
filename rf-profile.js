@@ -524,8 +524,8 @@ function injectProBadge() {
   var badge = document.createElement('div');
   badge.id = 'proBadge';
   badge.style.cssText = 'padding:6px 18px 8px;display:flex;align-items:center;gap:8px';
-  badge.innerHTML = '<div style="width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#E0B830,#C48000);flex-shrink:0"></div>'
-    + '<div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(135deg,#E0B830,#C48000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PRO '+(tier==='india'?'India':'Global')+'</div>';
+  badge.innerHTML = '<div style="width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#F0EAE4,#C48000);flex-shrink:0"></div>'
+    + '<div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(135deg,#F0EAE4,#C48000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PRO '+(tier==='india'?'India':'Global')+'</div>';
   bottom.insertBefore(badge, bottom.firstChild);
 }
 

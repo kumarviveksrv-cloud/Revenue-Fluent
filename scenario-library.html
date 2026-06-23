@@ -20,8 +20,8 @@
 :root{
   --bg:#0A0608;--bg2:#100810;--bg3:#080408;
   --cobalt:#C0409A;--cobalt-dim:rgba(180,40,140,.08);--cobalt-border:rgba(180,40,140,.18);
-  --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
-  --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
+  --gold:#F0EAE4;--copper:#C4714A;--copper-lt:#D4936A;
+  --teal:#C4714A;--red:#E05C3A;--amber:#D4936A;
   --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
   --text-mute:rgba(180,40,140,.25);--border:rgba(180,40,140,.15);
   --sidebar:220px;
@@ -36,7 +36,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-right:1px solid var(--cobalt-border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
 .sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
 .sb-brand{display:block;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);overflow:hidden}
-.sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:#C4714A;flex-shrink:0}
 .sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
 .sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
 .sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
@@ -50,7 +50,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:#D060B0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
 .sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--cobalt-border)}
 .sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:#D8B8D0;letter-spacing:.06em}
-.sb-by b{color:#E8C87A;font-weight:600;font-size:.72rem}
+.sb-by b{color:#D4936A;font-weight:600;font-size:.72rem}
 
 /* MAIN */
 .wrap{margin-left:var(--sidebar);padding:40px 48px 80px;max-width:calc(1200px + var(--sidebar))}

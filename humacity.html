@@ -20,8 +20,8 @@
 :root{
   --bg:#0A0608;--bg2:#100810;
   --magenta:#C0409A;--magenta-mid:#D060B0;
-  --gold:#E0B830;--copper:#B87333;
-  --teal:#38C490;
+  --gold:#F0EAE4;--copper:#C4714A;
+  --teal:#C4714A;
   --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
   --border:rgba(192,64,154,.18);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--hero:'Bebas Neue',sans-serif;
@@ -68,7 +68,7 @@ body::before{
 .hero-content{position:relative;z-index:2}
 .hero-eyebrow{font-family:var(--mono);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:20px;display:flex;align-items:center;gap:12px;justify-content:center}
 .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:rgba(192,64,154,.3)}
-.hero-word{font-family:var(--hero);font-size:clamp(5rem,12vw,9rem);line-height:.9;letter-spacing:.04em;margin-bottom:16px;background:linear-gradient(135deg,#EED8E8 0%,#D060B0 40%,#E0B830 70%,#EED8E8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-word{font-family:var(--hero);font-size:clamp(5rem,12vw,9rem);line-height:.9;letter-spacing:.04em;margin-bottom:16px;background:linear-gradient(135deg,#EED8E8 0%,#D060B0 40%,#F0EAE4 70%,#EED8E8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-pronunciation{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--text-dim);margin-bottom:28px}
 .hero-pronunciation span{color:var(--magenta-mid)}
 .hero-def{font-size:clamp(1rem,2.2vw,1.3rem);color:var(--text-mid);line-height:1.7;max-width:620px;margin:0 auto 40px}
@@ -431,7 +431,7 @@ body::before{
   function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
   resize();window.addEventListener('resize',resize);
   document.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY;});
-  for(var i=0;i<5;i++){blobs.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.0003,vy:(Math.random()-.5)*.0002,r:200+Math.random()*300,hue:i%2===0?'192,64,154':'224,184,48',phase:Math.random()*Math.PI*2});}
+  for(var i=0;i<5;i++){blobs.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.0003,vy:(Math.random()-.5)*.0002,r:200+Math.random()*300,hue:i%2===0?'192,64,154':'240,234,228',phase:Math.random()*Math.PI*2});}
   for(var i=0;i<120;i++){particles.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.00015,vy:(Math.random()-.5)*.00015,size:Math.random()*1.5+.3,alpha:Math.random()*.4+.1,phase:Math.random()*Math.PI*2,speed:.005+Math.random()*.01});}
   var t=0;
   function draw(){
@@ -471,16 +471,16 @@ body::before{
   var wire=new THREE.Mesh(new THREE.SphereGeometry(.87,24,24),new THREE.MeshBasicMaterial({color:0xD060B0,wireframe:true,transparent:true,opacity:.09}));scene.add(wire);
   function makeRing(r,tube,color,opacity,rx,ry,rz){var m=new THREE.Mesh(new THREE.TorusGeometry(r,tube,8,160),new THREE.MeshBasicMaterial({color:color,transparent:true,opacity:opacity}));m.rotation.set(rx,ry,rz);scene.add(m);return m;}
   var ring1=makeRing(1.2,.005,0xC0409A,.5,Math.PI*.28,0,0);
-  var ring2=makeRing(1.38,.003,0xE0B830,.25,Math.PI*.5,0,Math.PI*.2);
+  var ring2=makeRing(1.38,.003,0xF0EAE4,.25,Math.PI*.5,0,Math.PI*.2);
   var ring3=makeRing(1.55,.002,0xD060B0,.15,Math.PI*.15,Math.PI*.1,0);
-  var ring4=makeRing(1.0,.004,0xE0B830,.3,Math.PI*.7,0,Math.PI*.4);
+  var ring4=makeRing(1.0,.004,0xF0EAE4,.3,Math.PI*.7,0,Math.PI*.4);
   function makeParticles(count,minR,maxR,color,size){var pos=new Float32Array(count*3);for(var i=0;i<count;i++){var phi=Math.acos(-1+(2*i)/count),theta=Math.sqrt(count*Math.PI)*phi+(Math.random()-.5)*.8,r=minR+Math.random()*(maxR-minR);pos[i*3]=r*Math.sin(phi)*Math.cos(theta);pos[i*3+1]=r*Math.sin(phi)*Math.sin(theta);pos[i*3+2]=r*Math.cos(phi);}var geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(pos,3));var pts=new THREE.Points(geo,new THREE.PointsMaterial({color:color,size:size,transparent:true,opacity:.7,sizeAttenuation:true}));scene.add(pts);return pts;}
   var cloud1=makeParticles(600,1.1,1.9,0xD060B0,.022);
-  var cloud2=makeParticles(200,.92,1.05,0xE0B830,.035);
+  var cloud2=makeParticles(200,.92,1.05,0xF0EAE4,.035);
   var cloud3=makeParticles(80,2.0,2.8,0xC0409A,.015);
   scene.add(new THREE.AmbientLight(0x180C14,4));
   var mLight=new THREE.PointLight(0xC0409A,4,10);mLight.position.set(2.5,2,2);scene.add(mLight);
-  var gLight=new THREE.PointLight(0xE0B830,2,10);gLight.position.set(-2,-1.5,1.5);scene.add(gLight);
+  var gLight=new THREE.PointLight(0xF0EAE4,2,10);gLight.position.set(-2,-1.5,1.5);scene.add(gLight);
   var bLight=new THREE.PointLight(0x6030AA,1.5,8);bLight.position.set(0,-2.5,-1);scene.add(bLight);
   var fLight=new THREE.PointLight(0xFF80D0,1.2,6);fLight.position.set(-1.5,1.5,2);scene.add(fLight);
   var mouseX=0,mouseY=0;
@@ -534,8 +534,8 @@ body::before{
 
   // Brand colours
   var COLORS = [
-    '#C0409A','#D060B0','#E0B830',
-    '#B87333','#E8C87A','#38C490',
+    '#C0409A','#D060B0','#F0EAE4',
+    '#C4714A','#D4936A','#C4714A',
     '#EED8E8','#D8B8D0',
   ];
 

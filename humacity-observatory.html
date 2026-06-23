@@ -17,7 +17,7 @@
 :root{
   --bg:#0A0608;--bg2:#100810;--bg3:#0D080C;
   --magenta:#C0409A;--magenta-mid:#D060B0;
-  --gold:#E0B830;--teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
+  --gold:#F0EAE4;--teal:#C4714A;--red:#E05C3A;--amber:#D4936A;
   --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
   --border:rgba(192,64,154,.15);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--hero:'Bebas Neue',sans-serif;
@@ -29,7 +29,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(10,6,8,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(192,64,154,.08)}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-dot{width:7px;height:7px;border-radius:50%;background:#B87333}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:#C4714A}
 .nav-wordmark{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
 .nav-links{display:flex;align-items:center;gap:24px}
 .nav-links a{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .15s}
@@ -62,7 +62,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 /* FINDING HERO NUMBER */
 .finding-hero{text-align:center;padding:40px 0 20px}
-.fh-number{font-family:var(--hero);font-size:clamp(5rem,14vw,10rem);line-height:.9;background:linear-gradient(135deg,#E0B830,#D060B0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fh-number{font-family:var(--hero);font-size:clamp(5rem,14vw,10rem);line-height:.9;background:linear-gradient(135deg,#F0EAE4,#D060B0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .fh-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(192,64,154,.5);margin-top:8px}
 .fh-caption{font-size:.95rem;color:var(--text-mid);max-width:480px;margin:12px auto 0;line-height:1.7}
 
@@ -75,8 +75,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .bar-fill{height:100%;border-radius:3px;transition:width .3s}
 .bar-fill.positive{background:linear-gradient(90deg,var(--magenta),rgba(208,96,176,.6))}
 .bar-fill.warning{background:linear-gradient(90deg,var(--red),rgba(224,92,58,.5))}
-.bar-fill.teal{background:linear-gradient(90deg,var(--teal),rgba(56,196,144,.5))}
-.bar-fill.amber{background:linear-gradient(90deg,var(--amber),rgba(232,200,122,.5))}
+.bar-fill.teal{background:linear-gradient(90deg,var(--teal),rgba(196,113,74,.5))}
+.bar-fill.amber{background:linear-gradient(90deg,var(--amber),rgba(212,147,106,.5))}
 .bar-value{font-family:var(--mono);font-size:.65rem;color:var(--text-mid)}
 
 /* FINDING CARD */
@@ -351,7 +351,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <h2 class="section-title">Remote-First SaaS is the only scenario with zero Inconsistent Performers.</h2>
   <p class="section-sub">Across 15 scenarios, 10 industries, and 750 employees, one organisational type maintains a clean performance distribution at every level of the hierarchy.</p>
 
-  <div class="finding-card" style="border-color:rgba(56,196,144,.25)">
+  <div class="finding-card" style="border-color:rgba(196,113,74,.25)">
     <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent)"></div>
     <div class="fc-label" style="color:var(--teal)">The outlier finding</div>
     <div class="fc-title">What Remote-First SaaS does differently: the Humacity reading</div>

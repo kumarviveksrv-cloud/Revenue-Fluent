@@ -22,8 +22,8 @@
   --cobalt:#C0409A;--cobalt-dim:rgba(160,20,120,.15);--cobalt-glow:rgba(160,20,120,.08);
   --cobalt-border:rgba(160,20,120,.18);
   --magenta:#C0409A;--magenta-mid:#D060B0;
-  --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
-  --teal:#38C490;--red:#E05C3A;--amber:#E8C87A;
+  --gold:#F0EAE4;--copper:#C4714A;--copper-lt:#D4936A;
+  --teal:#C4714A;--red:#E05C3A;--amber:#D4936A;
   --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
   --text-mute:rgba(200,168,192,.7);--border:rgba(160,20,120,.15);--border-hi:rgba(160,20,120,.3);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--serif:var(--font);
@@ -91,7 +91,7 @@ body{
 
 /* HERO */
 .hero{padding:40px 48px;margin-bottom:32px;background:linear-gradient(135deg,rgba(40,8,28,.8),rgba(4,6,14,.95));border:1px solid var(--cobalt-border);border-radius:20px;position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(224,184,48,.3),rgba(160,20,120,.5),transparent)}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(240,234,228,.3),rgba(160,20,120,.5),transparent)}
 .hero-inner{position:relative;z-index:1}
 .hero-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#D060B0;margin-bottom:12px}
 .hero-hook{font-style:italic;font-size:1.3rem;line-height:1.5;color:#EEF4FF;margin-bottom:12px}
@@ -131,7 +131,7 @@ body{
 .signal-btns{display:flex;gap:6px;flex-shrink:0}
 .sig-btn{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;padding:6px 14px;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-dim);transition:all .15s}
 .sig-btn:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
-.sig-btn.yes.active{background:rgba(56,196,144,.12);border-color:var(--teal);color:var(--teal)}
+.sig-btn.yes.active{background:rgba(196,113,74,.12);border-color:var(--teal);color:var(--teal)}
 .sig-btn.no.active{background:rgba(224,92,58,.12);border-color:var(--red);color:var(--red)}
 .signal-num{font-family:var(--mono);font-size:.62rem;color:var(--text-mute);flex-shrink:0;padding-top:2px;min-width:20px}
 
@@ -147,7 +147,7 @@ body{
 
 /* DNA TYPE CARD */
 .dna-card{padding:36px 40px;margin-bottom:28px;background:linear-gradient(135deg,rgba(40,8,28,.8),rgba(4,6,14,.95));border:1px solid var(--cobalt-border);border-radius:20px;position:relative;overflow:hidden;animation:hero-pulse 3s ease-in-out infinite}
-.dna-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(224,184,48,.3),rgba(160,20,120,.5),transparent)}
+.dna-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(160,20,120,.5),rgba(240,234,228,.3),rgba(160,20,120,.5),transparent)}
 .dna-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#D060B0;margin-bottom:8px}
 .dna-type{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;line-height:.9;letter-spacing:.02em;background:linear-gradient(135deg,#F0C840 0%,#D4900A 30%,#F5D060 60%,#C48000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
 .dna-desc{font-style:italic;font-size:1.08rem;color:#C8D8F0;line-height:1.6;margin-bottom:20px}
@@ -208,7 +208,7 @@ body{
 .sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid rgba(180,40,140,.2);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
 .sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
 .sb-brand{display:block;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);overflow:hidden}
-.sb-dot{width:7px;height:7px;border-radius:50%;background:#B87333;flex-shrink:0}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:#C4714A;flex-shrink:0}
 .sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
 .sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
 .sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
@@ -222,7 +222,7 @@ body{
 .sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:#D060B0;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
 .sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid rgba(180,40,140,.18)}
 .sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:#D8B8D0;letter-spacing:.06em}
-.sb-by b{color:#E8C87A;font-weight:600;font-size:.72rem}
+.sb-by b{color:#D4936A;font-weight:600;font-size:.72rem}
 .wrap{margin-left:var(--sidebar);padding-bottom:60px}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
 .sw-trigger{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#D060B0;cursor:pointer;border:none;background:none;padding:3px 0;transition:color .15s;margin-top:4px}
@@ -236,8 +236,8 @@ body{
 .sw-key{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;padding-top:2px}
 .sw-val{font-size:.82rem;color:#D8B8D0;line-height:1.6}
 .sw-val b{color:#EED8E8;font-weight:500}
-.sw-formula{font-family:var(--mono);font-size:.76rem;color:#E8C87A;background:rgba(232,200,122,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
-.sw-result{font-family:var(--mono);font-size:.8rem;color:#38C490;font-weight:500}
+.sw-formula{font-family:var(--mono);font-size:.76rem;color:#D4936A;background:rgba(212,147,106,.06);padding:4px 8px;border-radius:4px;display:block;margin-top:4px}
+.sw-result{font-family:var(--mono);font-size:.8rem;color:#C4714A;font-weight:500}
 .sw-note{font-size:.74rem;color:rgba(210,80,170,.45);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid rgba(180,40,140,.06)}
 .hci-wrap{margin:20px 0;background:rgba(40,8,28,.5);border:1px solid rgba(180,40,140,.2);border-radius:14px;overflow:hidden}
 .hci-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;cursor:pointer;transition:background .15s}
@@ -246,7 +246,7 @@ body{
 .hci-icon{width:28px;height:28px;border-radius:6px;background:rgba(192,64,154,.15);border:1px solid rgba(192,64,154,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .hci-title{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#D060B0;font-weight:500}
 .hci-sub{font-size:.76rem;color:#C8A8C0;margin-top:2px}
-.hci-coeff-display{font-family:var(--mono);font-size:1.1rem;font-weight:600;color:#E8C87A}
+.hci-coeff-display{font-family:var(--mono);font-size:1.1rem;font-weight:600;color:#D4936A}
 .hci-coeff-label{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:#C8A8C0;margin-top:2px;text-align:right}
 .hci-chevron{color:#D060B0;transition:transform .2s;flex-shrink:0}
 .hci-chevron.open{transform:rotate(180deg)}
@@ -255,26 +255,26 @@ body{
 .hci-factors{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px;margin-bottom:16px}
 .hci-factor{background:rgba(40,8,28,.6);border:1px solid rgba(180,40,140,.12);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;user-select:none}
 .hci-factor:hover{border-color:rgba(192,64,154,.3)}
-.hci-factor.yes{background:rgba(56,196,144,.08);border-color:rgba(56,196,144,.3)}
+.hci-factor.yes{background:rgba(196,113,74,.08);border-color:rgba(196,113,74,.3)}
 .hci-factor-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .hci-factor-name{font-size:.84rem;font-weight:600;color:#EED8E8}
 .hci-factor-toggle{width:36px;height:20px;border-radius:10px;background:rgba(180,40,140,.2);border:1px solid rgba(180,40,140,.3);position:relative;transition:all .2s;flex-shrink:0}
-.hci-factor.yes .hci-factor-toggle{background:rgba(56,196,144,.3);border-color:rgba(56,196,144,.5)}
+.hci-factor.yes .hci-factor-toggle{background:rgba(196,113,74,.3);border-color:rgba(196,113,74,.5)}
 .hci-factor-toggle::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#D060B0;transition:all .2s}
-.hci-factor.yes .hci-factor-toggle::after{left:19px;background:#38C490}
+.hci-factor.yes .hci-factor-toggle::after{left:19px;background:#C4714A}
 .hci-factor-desc{font-size:.74rem;color:#C8A8C0;line-height:1.5}
 .hci-calc{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(40,8,28,.4);border-radius:10px;margin-bottom:14px}
 .hci-calc-formula{font-family:var(--mono);font-size:.7rem;color:#C8A8C0;flex:1}
-.hci-calc-result{font-family:var(--mono);font-size:1.3rem;font-weight:600;color:#E8C87A;white-space:nowrap}
+.hci-calc-result{font-family:var(--mono);font-size:1.3rem;font-weight:600;color:#D4936A;white-space:nowrap}
 .hci-calc-result span{font-size:.56rem;color:#C8A8C0;display:block;text-align:right;letter-spacing:.1em;text-transform:uppercase}
 .hci-scenarios{width:100%;border-collapse:collapse}
 .hci-scenarios th{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;background:rgba(40,8,28,.6);color:#C8A8C0;text-align:left;border-bottom:1px solid rgba(180,40,140,.15)}
-.hci-scenarios th.yours{color:#E8C87A}
+.hci-scenarios th.yours{color:#D4936A}
 .hci-scenarios td{padding:8px 12px;font-family:var(--mono);font-size:.82rem;border-bottom:1px solid rgba(180,40,140,.06)}
 .hci-scenarios td.label{font-size:.74rem;color:#C8A8C0}
 .hci-scenarios td.conservative{color:#C8D8F0}
-.hci-scenarios td.yours{color:#E8C87A;font-weight:500}
-.hci-scenarios td.optimistic{color:#38C490}
+.hci-scenarios td.yours{color:#D4936A;font-weight:500}
+.hci-scenarios td.optimistic{color:#C4714A}
 .hci-scenarios tr:last-child td{border-bottom:none}
 .hci-note{font-size:.7rem;color:rgba(208,96,176,.7);margin-top:8px;font-style:italic;text-align:center}
 .hci-decay{margin-top:14px;padding:12px 16px;background:rgba(224,92,58,.06);border:1px solid rgba(224,92,58,.2);border-radius:10px}
@@ -289,10 +289,10 @@ body{
 .dl-sub b{color:#EED8E8}
 .dl-buttons{display:flex;gap:12px;flex-wrap:wrap}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border-radius:9px;cursor:pointer;border:none;font-weight:500;transition:all .2s}
-.dl-btn-excel{background:rgba(56,196,144,.1);color:#38C490;border:1px solid rgba(56,196,144,.25)}
-.dl-btn-excel:hover{background:rgba(56,196,144,.18);transform:translateY(-2px)}
-.dl-btn-pdf{background:rgba(224,184,48,.08);color:#E8C87A;border:1px solid rgba(224,184,48,.2)}
-.dl-btn-pdf:hover{background:rgba(224,184,48,.15);transform:translateY(-2px)}
+.dl-btn-excel{background:rgba(196,113,74,.1);color:#C4714A;border:1px solid rgba(196,113,74,.25)}
+.dl-btn-excel:hover{background:rgba(196,113,74,.18);transform:translateY(-2px)}
+.dl-btn-pdf{background:rgba(240,234,228,.08);color:#D4936A;border:1px solid rgba(240,234,228,.2)}
+.dl-btn-pdf:hover{background:rgba(240,234,228,.15);transform:translateY(-2px)}
 .dl-btn svg{width:14px;height:14px;flex-shrink:0}
 .dl-note{font-size:.72rem;color:rgba(208,96,176,.7);margin-top:10px;font-style:italic}
 
@@ -316,7 +316,7 @@ body{
 .rx-cards{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
 .rx-card{background:var(--bg2);border:1px solid rgba(192,64,154,.1);border-radius:14px;overflow:hidden;transition:border-color .2s}
 .rx-card.critical{border-color:rgba(224,92,58,.25)}
-.rx-card.warning{border-color:rgba(232,200,122,.2)}
+.rx-card.warning{border-color:rgba(212,147,106,.2)}
 .rx-card-header{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;cursor:pointer}
 .rx-card-header:hover{background:rgba(192,64,154,.03)}
 .rx-severity{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
@@ -342,13 +342,13 @@ body{
 .rx-owner span{color:var(--magenta-mid)}
 .rx-select-btn{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:7px;border:1px solid rgba(200,168,192,.7);background:rgba(192,64,154,.08);color:var(--magenta-mid);cursor:pointer;transition:all .15s}
 .rx-select-btn:hover{background:rgba(192,64,154,.18);border-color:var(--magenta)}
-.rx-select-btn.selected{background:rgba(56,196,144,.1);border-color:rgba(56,196,144,.3);color:var(--teal)}
+.rx-select-btn.selected{background:rgba(196,113,74,.1);border-color:rgba(196,113,74,.3);color:var(--teal)}
 /* SIMULATION */
 .rx-sim{background:var(--bg2);border:1px solid rgba(192,64,154,.2);border-radius:14px;padding:24px 28px;margin-top:8px;display:none}
 .rx-sim.show{display:block}
 .rx-sim-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
 .rx-sim-title{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--magenta-mid)}
-.rx-sim-count{font-family:var(--mono);font-size:.72rem;color:var(--teal);background:rgba(56,196,144,.08);border:1px solid rgba(56,196,144,.2);padding:3px 10px;border-radius:5px}
+.rx-sim-count{font-family:var(--mono);font-size:.72rem;color:var(--teal);background:rgba(196,113,74,.08);border:1px solid rgba(196,113,74,.2);padding:3px 10px;border-radius:5px}
 .rx-sim-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 @media(max-width:700px){.rx-sim-stats{grid-template-columns:repeat(2,1fr)}}
 .rx-sim-stat{background:rgba(40,8,28,.5);border:1px solid rgba(192,64,154,.08);border-radius:10px;padding:14px;text-align:center}
@@ -417,11 +417,11 @@ Every number in Revenue Fluent is computed from real data. But data reflects the
 </div>
 <div style="font-size:.84rem;color:#C8A8C0;line-height:1.65;margin-top:14px;margin-bottom:14px">Answer four observable questions. Your answers set the Human Confidence Index. <b style="color:#EED8E8">You are the author of the uncertainty.</b></div><div class="hci-factors"><div class="hci-factor" id="hci_p3_f0" onclick="hciTF('hci_p3',0)"><div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div></div><div class="hci-factor" id="hci_p3_f1" onclick="hciTF('hci_p3',1)"><div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div></div><div class="hci-factor" id="hci_p3_f2" onclick="hciTF('hci_p3',2)"><div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div></div><div class="hci-factor" id="hci_p3_f3" onclick="hciTF('hci_p3',3)"><div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div><div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div></div></div><div class="hci-calc" id="hci_p3_calc"></div><table class="hci-scenarios"><tbody id="hci_p3_scen"></tbody></table><div style="font-family:var(--mono);font-size:.58rem;color:rgba(208,96,176,.7);margin-bottom:8px;text-align:center">These settings apply to this tool only. <a href="profile.html" style="color:rgba(192,64,154,.6);text-decoration:none">Set globally in My Profile &rarr;</a></div>
   <div class="hci-note">Conservative = HCI −0.15 &middot; Your Assessment = your HCI &middot; Optimistic = HCI +0.15</div></div></div>
-<div id="uploadNudge" style="display:none;background:rgba(224,184,48,.06);border:1px solid rgba(224,184,48,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
-  <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#E8C87A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a>
+<div id="uploadNudge" style="display:none;background:rgba(240,234,228,.06);border:1px solid rgba(240,234,228,.15);border-radius:8px;padding:8px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+  <span style="font-size:.78rem;color:#C8A8C0">Running on a sample scenario. <a href="upload.html" style="color:#D4936A;text-decoration:none;font-weight:500">Upload your own data &rarr;</a>
   <a href="myorg.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="8" width="4" height="6" rx="1"/><rect x="6" y="5" width="4" height="9" rx="1"/><rect x="10" y="2" width="4" height="12" rx="1"/></svg>My Org</a>
   <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a></span>
-  <span id="userDataBadge" style="display:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#38C490;background:rgba(56,196,144,.1);border:1px solid rgba(56,196,144,.2);padding:3px 8px;border-radius:4px">Your Data Active</span>
+  <span id="userDataBadge" style="display:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#C4714A;background:rgba(196,113,74,.1);border:1px solid rgba(196,113,74,.2);padding:3px 8px;border-radius:4px">Your Data Active</span>
 </div>
 <div id="profileContext" style="display:none"></div>
 <div id="app"></div>
@@ -457,7 +457,7 @@ function hciToggle(id){var b=document.getElementById(id+'_body'),c=document.getE
 function hciTF(id,i){if(!_hci[id])return;_hci[id].f[i]=!_hci[id].f[i];_hciR(id);}
 function _hciC(id){var s=_hci[id];if(!s)return 1;return Math.round((0.7+s.f.filter(Boolean).length*0.15)*100)/100;}
 function _hciFmt(sym,v){var a=Math.abs(v),sg=v<0?'-':'';if(sym==='₹'){if(a>=1e7)return sg+sym+(a/1e7).toFixed(2)+'Cr';if(a>=1e5)return sg+sym+(a/1e5).toFixed(1)+'L';return sg+sym+Math.round(a/1000)+'K';}if(a>=1e9)return sg+sym+(a/1e9).toFixed(2)+'B';if(a>=1e6)return sg+sym+(a/1e6).toFixed(2)+'M';if(a>=1000)return sg+sym+Math.round(a/1000)+'K';return sg+sym+Math.round(a);}
-function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#E8C87A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#E8C87A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal, 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk, monitor closely.':'Significant risk, intervention recommended.')+'</div>';}}}
+function _hciR(id){var s=_hci[id];if(!s)return;var h=_hciC(id),yc=s.f.filter(Boolean).length;var el=document.getElementById(id+'_coeff');if(el)el.textContent=h.toFixed(2)+'x';s.f.forEach(function(v,i){var f=document.getElementById(id+'_f'+i);if(f)f.classList.toggle('yes',v);});var cl=document.getElementById(id+'_calc');if(cl)cl.innerHTML='<span class="hci-calc-formula">0.70 + ('+yc+' × 0.15) = <b style="color:#D4936A">'+h.toFixed(2)+'</b></span><div class="hci-calc-result">'+h.toFixed(2)+'x<span>HCI Coefficient</span></div>';var sc=document.getElementById(id+'_scen');if(sc){var c=s.base*(h-0.15),y=s.base*h,o=s.base*(h+0.15);sc.innerHTML='<tr><th>Scenario</th><th>HCI</th><th class="yours">Adjusted Value</th></tr><tr><td class="label">Conservative</td><td class="conservative">'+(h-0.15).toFixed(2)+'x</td><td class="conservative">'+_hciFmt(s.sym,c)+'</td></tr><tr><td class="label" style="color:#D4936A">Your Assessment</td><td class="yours">'+h.toFixed(2)+'x</td><td class="yours">'+_hciFmt(s.sym,y)+'</td></tr><tr><td class="label">Optimistic</td><td class="optimistic">'+(h+0.15).toFixed(2)+'x</td><td class="optimistic">'+_hciFmt(s.sym,o)+'</td></tr>';}if(s.decay){var d=document.getElementById(id+'_decay');if(d){var dp=Math.round((1.3-h)*20+8);d.innerHTML='<div class="hci-decay-label">⚠ Decay Signal, 6-Month Trajectory</div><div class="hci-decay-text">At current trajectory, <span class="hci-decay-val">'+s.decay+'</span> deteriorates by approximately <span class="hci-decay-val">'+dp+'%</span> over 6 months without intervention. '+(h>=1?'HCI suggests stable conditions.':h>=0.85?'Moderate risk, monitor closely.':'Significant risk, intervention recommended.')+'</div>';}}}
 function initHCI(id,base,sym,decay){_hci[id]={f:[false,false,false,false],base:base||0,sym:sym||'$',decay:decay||null};_hciR(id);}
 function downloadExcel(fn){var b=location.href.replace(/\/[^\/]*$/,'');var a=document.createElement('a');a.href=b+'/excel/'+fn;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);}
 </script>
@@ -728,7 +728,7 @@ function renderRxSim() {
 
   var dnaShiftHTML = '';
   if(projectedDNA && currentDNA && projectedDNAKey !== currentDNAKey) {
-    dnaShiftHTML = '<div style="margin-top:14px;background:rgba(56,196,144,.06);border:1px solid rgba(56,196,144,.18);border-radius:10px;padding:16px 18px">'
+    dnaShiftHTML = '<div style="margin-top:14px;background:rgba(196,113,74,.06);border:1px solid rgba(196,113,74,.18);border-radius:10px;padding:16px 18px">'
       + '<div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px">&#10230; Organisation DNA Shift, 6 Month Projection</div>'
       + '<div style="display:grid;grid-template-columns:1fr 24px 1fr;gap:12px;align-items:center;margin-bottom:10px">'
       +   '<div style="background:rgba(40,8,28,.6);border:1px solid rgba(192,64,154,.12);border-radius:8px;padding:12px 14px">'
@@ -736,7 +736,7 @@ function renderRxSim() {
       +     '<div style="font-size:.82rem;font-weight:600;color:var(--text-mid)">' + (currentDNA ? currentDNA.name : currentDNAKey) + '</div>'
       +   '</div>'
       +   '<div style="text-align:center;font-size:1rem;color:var(--teal)">&#8594;</div>'
-      +   '<div style="background:rgba(56,196,144,.06);border:1px solid rgba(56,196,144,.2);border-radius:8px;padding:12px 14px">'
+      +   '<div style="background:rgba(196,113,74,.06);border:1px solid rgba(196,113,74,.2);border-radius:8px;padding:12px 14px">'
       +     '<div style="font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:5px">Projected DNA</div>'
       +     '<div style="font-size:.82rem;font-weight:600;color:var(--teal)">' + projectedDNA.name + '</div>'
       +   '</div>'
@@ -744,7 +744,7 @@ function renderRxSim() {
       + '<div style="font-size:.78rem;color:var(--text-dim);line-height:1.6">' + projectedDNA.desc + '</div>'
       + '</div>';
   } else if(projectedDNA && projectedDNAKey === currentDNAKey) {
-    dnaShiftHTML = '<div style="margin-top:14px;background:rgba(232,200,122,.05);border:1px solid rgba(232,200,122,.15);border-radius:10px;padding:14px 18px">'
+    dnaShiftHTML = '<div style="margin-top:14px;background:rgba(212,147,106,.05);border:1px solid rgba(212,147,106,.15);border-radius:10px;padding:14px 18px">'
       + '<div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px">DNA Type, Maintained</div>'
       + '<div style="font-size:.78rem;color:var(--text-dim);line-height:1.6">These interventions strengthen your current DNA type without shifting it. Continued implementation over 12+ months may trigger a full shift.</div>'
       + '</div>';
@@ -778,7 +778,7 @@ function renderRxSim() {
         var opt = document.createElement('option');
         opt.value = 'Your Organisation';
         opt.textContent = 'Your Organisation ★';
-        opt.style.color = '#E0B830';
+        opt.style.color = '#F0EAE4';
         sel.insertBefore(opt, sel.firstChild);
       }
       // Auto-select if URL param says so
@@ -1415,12 +1415,12 @@ function generatePDFP3() {
   function checkActive(){
     if(sel && sel.value === 'Your Organisation'){
       badge.style.display = 'inline';
-      nudge.style.background = 'rgba(56,196,144,.06)';
-      nudge.style.borderColor = 'rgba(56,196,144,.2)';
+      nudge.style.background = 'rgba(196,113,74,.06)';
+      nudge.style.borderColor = 'rgba(196,113,74,.2)';
     } else {
       badge.style.display = 'none';
-      nudge.style.background = 'rgba(224,184,48,.06)';
-      nudge.style.borderColor = 'rgba(224,184,48,.15)';
+      nudge.style.background = 'rgba(240,234,228,.06)';
+      nudge.style.borderColor = 'rgba(240,234,228,.15)';
     }
   }
   if(sel) sel.addEventListener('change', checkActive);

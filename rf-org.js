@@ -106,7 +106,7 @@ var RFOrg = (function(){
   // Render a "data source" badge showing where values came from
   function sourceBadge(source){
     var labels = {org:'My Org', l1:'L1 Value Ledger', l4:'L4 Human P&L', scenario:'Scenario Data'};
-    var colors = {org:'#C0409A', l1:'#3A7ADB', l4:'#E0B830', scenario:'#38C490'};
+    var colors = {org:'#C0409A', l1:'#3A7ADB', l4:'#F0EAE4', scenario:'#C4714A'};
     var label = labels[source] || source;
     var color = colors[source] || '#9AB8D8';
     return '<span style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.52rem;color:'+color+';border:1px solid '+color+'44;border-radius:4px;padding:1px 6px;margin-left:6px">'+label+'</span>';

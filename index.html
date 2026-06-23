@@ -17,8 +17,8 @@
 :root{
   --bg:#0A0608;--bg2:#100810;--bg3:#080408;
   --cobalt:#C0409A;--cobalt-border:rgba(180,40,140,.18);--cobalt-dim:rgba(180,40,140,.08);
-  --gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
-  --teal:#38C490;--red:#E05C3A;
+  --gold:#F0EAE4;--copper:#C4714A;--copper-lt:#D4936A;
+  --teal:#C4714A;--red:#E05C3A;
   --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
   --border:rgba(180,40,140,.15);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--hero:'Bebas Neue',sans-serif;
@@ -46,7 +46,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .hero-eyebrow::before{content:'●';font-size:.38rem;color:var(--teal);animation:blink 2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .hero-headline{font-family:var(--font);font-size:clamp(2.8rem,5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-.025em;color:var(--text-cool);margin-bottom:20px}
-.hero-headline .gold{display:block;background:linear-gradient(135deg,#F0C840 0%,#D4900A 25%,#F5D060 55%,#C48000 80%,#E8C87A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-headline .gold{display:block;background:linear-gradient(135deg,#F0C840 0%,#D4900A 25%,#F5D060 55%,#C48000 80%,#D4936A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{font-size:1.05rem;color:var(--text-mid);line-height:1.75;max-width:520px;margin-bottom:32px}
 .hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
 .pill{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;padding:6px 14px;border-radius:20px;border:1px solid rgba(180,40,140,.2);color:#D8B8D0;background:rgba(180,40,140,.05);display:flex;align-items:center;gap:6px}
@@ -107,7 +107,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
 .price-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:16px;padding:28px;transition:all .2s}
 .price-card:hover{transform:translateY(-3px)}
-.price-card.featured{border-color:rgba(224,184,48,.3)}
+.price-card.featured{border-color:rgba(240,234,228,.3)}
 .pc-tier{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#D060B0;margin-bottom:10px}
 .pc-price{font-family:var(--hero);font-size:2.8rem;line-height:1;color:var(--text-cool);margin-bottom:4px}
 .price-card.featured .pc-price{background:linear-gradient(135deg,#F0C840,#D4900A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -392,16 +392,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 
   function ring(r,t,col,op,rx,ry,rz){var g=new THREE.TorusGeometry(r,t,8,160);var m=new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:op});var mesh=new THREE.Mesh(g,m);mesh.rotation.set(rx,ry,rz);scene.add(mesh);return mesh;}
   var r1=ring(1.1,.005,0xC0409A,.5,Math.PI*.28,0,0);
-  var r2=ring(1.25,.003,0xE0B830,.25,Math.PI*.5,0,Math.PI*.2);
+  var r2=ring(1.25,.003,0xF0EAE4,.25,Math.PI*.5,0,Math.PI*.2);
   var r3=ring(1.4,.002,0xD060B0,.15,Math.PI*.15,Math.PI*.1,0);
 
   function pts(n,mn,mx,col,sz){var pos=new Float32Array(n*3);for(var i=0;i<n;i++){var phi=Math.acos(-1+(2*i)/n);var theta=Math.sqrt(n*Math.PI)*phi+(Math.random()-.5)*.8;var r=mn+Math.random()*(mx-mn);pos[i*3]=r*Math.sin(phi)*Math.cos(theta);pos[i*3+1]=r*Math.sin(phi)*Math.sin(theta);pos[i*3+2]=r*Math.cos(phi);}var g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));var m=new THREE.PointsMaterial({color:col,size:sz,transparent:true,opacity:.7,sizeAttenuation:true});var p=new THREE.Points(g,m);scene.add(p);return p;}
   var c1=pts(500,1.1,1.8,0xD060B0,.022);
-  var c2=pts(150,.9,1.05,0xE0B830,.035);
+  var c2=pts(150,.9,1.05,0xF0EAE4,.035);
 
   scene.add(new THREE.AmbientLight(0x180C14,4));
   var ml=new THREE.PointLight(0xC0409A,4,10);ml.position.set(2.5,2,2);scene.add(ml);
-  var gl=new THREE.PointLight(0xE0B830,2,10);gl.position.set(-2,-1.5,1.5);scene.add(gl);
+  var gl=new THREE.PointLight(0xF0EAE4,2,10);gl.position.set(-2,-1.5,1.5);scene.add(gl);
 
   var mx=0,my=0;
   document.addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-.5)*1.2;my=(e.clientY/window.innerHeight-.5)*1.2;});
