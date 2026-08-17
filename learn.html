@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
 <meta charset="utf-8"/>
 <link rel="manifest" href="manifest.json"/>
-<meta name="theme-color" content="#0A0608"/>
+<meta name="theme-color" content="#050410"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -10,154 +13,97 @@
 <link rel="apple-touch-icon" href="favicon.png"/>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="shortcut icon" href="favicon.png"/>
-<link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <title>Learning Hub, Revenue Fluent</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0A0608;--bg2:#100810;--bg3:#180C14;
-  --magenta:#C0409A;--magenta-mid:#D060B0;
-  --gold:#F0EAE4;--copper:#C4714A;
-  --teal:#C4714A;--amber:#D4936A;--red:#E05C3A;
-  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
-  --border:rgba(192,64,154,.18);--border-lt:rgba(192,64,154,.08);
-  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
+  --bg:#050410;--bg2:#0d0b1e;--bg3:#11102a;
+  --cobalt:#6366f1;--cobalt-dim:rgba(99,102,241,.08);--cobalt-border:rgba(99,102,241,.18);
+  --gold:#c4b5fd;--copper:#6366f1;--copper-lt:#a5b4fc;
+  --teal:#6366f1;--red:#E05C3A;--amber:#a5b4fc;
+  --text:#f4f3ff;--text-cool:#f4f3ff;--text-mid:#a5b4fc;--text-dim:rgba(244,243,255,0.45);
+  --text-mute:rgba(99,102,241,.25);--border:rgba(99,102,241,.15);
   --sidebar:220px;
+  --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.025) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(99,102,241,.12) 0%,transparent 55%),linear-gradient(rgba(99,102,241,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.02) 1px,transparent 1px);
+  background-size:100% 100%,52px 52px,52px 52px;min-height:100vh;}
 
-/* SIDEBAR */
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
-.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
-.sb-brand{display:block;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);overflow:hidden}
-.sb-dot{width:7px;height:7px;border-radius:50%;background:#C4714A;flex-shrink:0}
-.sb-name{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#F8EEF4;font-weight:600}
-.sb-section{padding:4px 12px 4px;margin-top:10px;border-top:1px solid rgba(192,64,154,.1);font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
-.sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-item:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
-.sb-item.active{background:rgba(192,64,154,.12);color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
-.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
-.sb-tools-section{padding:4px 12px 4px;margin-top:10px;border-top:1px solid rgba(192,64,154,.1);font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
-.sb-tool{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-tool:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
-.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
-.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
-.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:var(--text-mid)}
-.sb-by b{color:var(--gold);font-weight:600}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(5,4,16,.95);backdrop-filter:blur(16px);border-right:1px solid var(--cobalt-border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(99,102,241,.3) transparent}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(99,102,241,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(99,102,241,.6)}
+.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,243,255,0.25)}
+.sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:rgba(244,243,255,0.45);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(99,102,241,.08);color:rgba(244,243,255,0.45);border-color:rgba(99,102,241,.18)}
+.sb-item.active{background:rgba(99,102,241,.12);color:#a5b4fc;border-color:rgba(99,102,241,.25)}
+.sb-tools-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,243,255,0.25)}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:rgba(244,243,255,0.45);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(99,102,241,.08);color:rgba(244,243,255,0.45);border-color:rgba(99,102,241,.18)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(99,102,241,.12);color:#a5b4fc;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--cobalt-border)}
+.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:rgba(244,243,255,0.45);letter-spacing:.06em}
+.sb-by b{color:#a5b4fc;font-weight:600;font-size:.72rem}
 .sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s}
-.sidebar-resize:hover{background:rgba(192,64,154,.4)}
+.sidebar-resize:hover{background:rgba(99,102,241,.4)}
 
-/* LAYOUT */
-.wrap{margin-left:var(--sidebar);position:relative;z-index:1}
-@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0}}
+.wrap{margin-left:var(--sidebar);padding:40px 48px 80px;max-width:calc(1100px + var(--sidebar))}
 
-/* HUB HERO */
-.hub-hero{padding:48px 48px 0;max-width:960px}
-.hub-eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta-mid);margin-bottom:12px}
-.hub-title{font-size:2.2rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:10px}
-.hub-sub{font-size:.95rem;color:var(--text-mid);line-height:1.7;max-width:580px;margin-bottom:32px}
+.eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:#a5b4fc;margin-bottom:12px}
+.page-title{font-size:2.2rem;font-weight:700;letter-spacing:-.02em;color:var(--text-cool);margin-bottom:8px}
+.lede{font-size:.96rem;color:rgba(244,243,255,0.45);max-width:580px;line-height:1.7;margin-bottom:32px}
 
-/* TAB BAR */
-.tab-bar{display:flex;gap:4px;padding:0 48px;border-bottom:1px solid var(--border-lt);margin-bottom:0;overflow-x:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
-.tab-bar::-webkit-scrollbar{display:none}
-.tab{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;cursor:pointer;color:var(--text-dim);border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}
-.tab:hover{color:var(--text-mid)}
-.tab.active{color:var(--magenta-mid);border-bottom-color:var(--magenta)}
+@keyframes card-glow{
+  0%,100%{box-shadow:0 0 0 1px rgba(99,102,241,.15),0 0 16px rgba(99,102,241,.06)}
+  50%{box-shadow:0 0 0 1px rgba(220,80,180,.3),0 0 28px rgba(99,102,241,.1)}
+}
 
-/* FILTER ROW */
-.filter-row{display:flex;align-items:center;gap:8px;padding:20px 48px;flex-wrap:wrap}
-.filter-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-right:4px}
-.filter-chip{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid var(--border-lt);color:var(--text-dim);cursor:pointer;transition:all .15s;background:none}
-.filter-chip:hover{border-color:var(--border);color:var(--text-mid)}
-.filter-chip.active{background:rgba(192,64,154,.12);border-color:rgba(192,64,154,.3);color:var(--magenta-mid)}
+/* FILTERS */
+.filters{margin-bottom:28px;display:flex;gap:6px;flex-wrap:wrap}
+.filter-chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--text-dim);background:var(--bg2);border:1px solid var(--border);padding:5px 12px;border-radius:999px;cursor:pointer;transition:all .15s}
+.filter-chip:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
+.filter-chip.on{background:rgba(99,102,241,.1);border-color:var(--cobalt);color:#a5b4fc}
 
 /* CONTENT GRID */
-.content-area{padding:0 48px 80px}
+.content-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:1100px){.content-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.content-grid{grid-template-columns:1fr}}
 
-/* FEATURED ARTICLE */
-.featured{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:36px 40px;margin-bottom:32px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--magenta),var(--magenta-mid),transparent)}
-.featured:hover{border-color:rgba(192,64,154,.35);transform:translateY(-2px);box-shadow:0 8px 40px rgba(192,64,154,.1)}
-.featured-tag{display:flex;align-items:center;gap:8px;margin-bottom:16px}
-.tag-pill{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;border:1px solid}
-.tag-type-article{color:#9AB8D8;border-color:rgba(154,184,216,.3)}
-.tag-type-case-study{color:var(--teal);border-color:rgba(196,113,74,.3)}
-.tag-type-glossary{color:var(--amber);border-color:rgba(212,147,106,.3)}
-.tag-type-white-paper{color:#D4A0E0;border-color:rgba(212,160,224,.3)}
-.tag-pillar{color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
-.tag-topic{color:var(--text-dim);border-color:var(--border-lt)}
-.featured-read-time{font-family:var(--mono);font-size:.58rem;color:var(--text-dim);margin-left:auto}
-.featured-title{font-size:1.5rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:10px}
-.featured-sub{font-size:.9rem;color:var(--text-mid);line-height:1.7;margin-bottom:20px;max-width:680px}
-.featured-hook{font-size:.88rem;color:var(--text-dim);line-height:1.7;font-style:italic;border-left:2px solid rgba(192,64,154,.3);padding-left:16px;margin-bottom:20px}
-.featured-read-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--magenta-mid);background:none;border:none;cursor:pointer;padding:0;transition:color .15s}
-.featured-read-btn:hover{color:var(--text)}
-.featured-read-btn svg{transition:transform .2s}
-.featured-read-btn:hover svg{transform:translateX(4px)}
+/* CONTENT CARD */
+.content-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;padding:0;overflow:hidden;display:flex;flex-direction:column;animation:card-glow 3s ease-in-out infinite;transition:transform .2s,border-color .2s}
+.content-card:hover{transform:translateY(-3px);border-color:rgba(99,102,241,.4)}
+.cc-top{padding:22px 22px 16px;flex:1}
+.cc-type{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.cc-type-badge{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:4px;font-weight:500}
+.badge-article{background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)}
+.badge-case{background:rgba(99,102,241,.1);color:#6366f1;border:1px solid rgba(99,102,241,.2)}
+.badge-whitepaper{background:rgba(90,154,235,.1);color:#a5b4fc;border:1px solid rgba(90,154,235,.2)}
+.badge-template{background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)}
+.cc-pillar{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
+.cc-title{font-size:.96rem;font-weight:600;color:#f4f3ff;line-height:1.3;margin-bottom:8px}
+.cc-desc{font-size:.8rem;color:rgba(244,243,255,0.25);line-height:1.6;margin-bottom:0}
+.cc-bottom{padding:14px 22px;border-top:1px solid rgba(99,102,241,.1);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cc-meta{font-family:var(--mono);font-size:.58rem;color:var(--text-dim)}
+.cc-cta{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;display:flex;align-items:center;gap:4px;transition:color .15s}
+.cc-cta:hover{color:#E080C8}
+.cc-locked{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.6rem;color:rgba(99,102,241,.4);letter-spacing:.06em}
 
-/* ARTICLE GRID */
-.article-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-bottom:32px}
-.article-card{background:var(--bg2);border:1px solid var(--border-lt);border-radius:14px;padding:24px;cursor:pointer;transition:all .2s;display:flex;flex-direction:column}
-.article-card:hover{border-color:var(--border);transform:translateY(-2px);box-shadow:0 6px 24px rgba(192,64,154,.08)}
-.ac-tags{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
-.ac-title{font-size:.95rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:8px}
-.ac-desc{font-size:.78rem;color:var(--text-dim);line-height:1.6;flex:1;margin-bottom:14px}
-.ac-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
-.ac-read-time{font-family:var(--mono);font-size:.58rem;color:var(--text-dim)}
-.ac-arrow{color:rgba(192,64,154,.4);transition:all .2s}
-.article-card:hover .ac-arrow{color:var(--magenta-mid);transform:translateX(3px)}
-.coming-soon-overlay{opacity:.5;pointer-events:none}
-.coming-soon-badge{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(192,64,154,.1);color:var(--magenta-mid);border:1px solid rgba(192,64,154,.2);padding:2px 8px;border-radius:3px;margin-left:auto}
+/* PRO GATE */
+.pro-gate{background:linear-gradient(135deg,rgba(13,11,30,.9),rgba(5,4,16,.95));border:1px solid rgba(99,102,241,.3);border-radius:14px;padding:28px 32px;margin-bottom:32px;text-align:center;animation:card-glow 3s ease-in-out infinite}
+.pro-gate-title{font-size:1.0rem;font-weight:600;color:#f4f3ff;margin-bottom:8px}
+.pro-gate-sub{font-size:.84rem;color:rgba(244,243,255,0.25);line-height:1.6;margin-bottom:18px}
+.pro-gate-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:11px 22px;border-radius:10px;background:#6366f1;color:#fff;text-decoration:none;transition:all .2s}
+.pro-gate-cta:hover{background:#6366f1;transform:translateY(-2px)}
 
-/* GLOSSARY */
-.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px}
-@media(max-width:700px){.glossary-grid{grid-template-columns:1fr}}
-.glossary-card{background:var(--bg2);border:1px solid var(--border-lt);border-radius:12px;padding:18px 20px}
-.gc-term{font-family:var(--mono);font-size:.78rem;font-weight:500;color:var(--magenta-mid);margin-bottom:4px}
-.gc-def{font-size:.82rem;color:var(--text-mid);line-height:1.6;margin-bottom:8px}
-.gc-example{font-family:var(--mono);font-size:.7rem;color:var(--text-dim);background:rgba(192,64,154,.04);border-left:2px solid rgba(192,64,154,.2);padding:6px 10px;border-radius:0 4px 4px 0;line-height:1.5}
-
-/* SECTION HEADER */
-.section-hdr{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;margin-top:8px}
-.section-hdr-title{font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--magenta-mid)}
-.section-hdr-count{font-family:var(--mono);font-size:.58rem;color:var(--text-dim)}
-
-/* ARTICLE READER */
-.reader-overlay{display:none;position:fixed;inset:0;background:rgba(10,6,8,.95);z-index:500;overflow-y:auto}
-.reader-overlay.open{display:block}
-.reader-inner{max-width:720px;margin:0 auto;padding:48px 32px 80px}
-.reader-close{position:fixed;top:20px;right:24px;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);background:rgba(192,64,154,.1);border:1px solid var(--border);border-radius:8px;padding:8px 16px;cursor:pointer;transition:all .15s;z-index:10}
-.reader-close:hover{color:var(--text);border-color:var(--magenta-mid)}
-.reader-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.reader-title{font-size:2rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:14px}
-.reader-byline{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--text-dim);margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border-lt)}
-.reader-body{font-size:.95rem;color:var(--text-mid);line-height:1.85}
-.reader-body h2{font-size:1.2rem;font-weight:600;color:var(--text);margin:36px 0 12px;line-height:1.3}
-.reader-body h3{font-size:1rem;font-weight:600;color:var(--text);margin:28px 0 10px}
-.reader-body p{margin-bottom:18px}
-.reader-body p:last-child{margin-bottom:0}
-.reader-body strong{color:var(--text);font-weight:600}
-.reader-body em{color:var(--text-mid);font-style:italic}
-.reader-body blockquote{border-left:3px solid var(--magenta);padding:12px 20px;margin:24px 0;background:rgba(192,64,154,.05);border-radius:0 8px 8px 0}
-.reader-body blockquote p{color:var(--text);font-size:1rem;margin-bottom:0;font-style:italic}
-.reader-body .stat-callout{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:24px 0;display:flex;align-items:center;gap:18px}
-.reader-body .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);line-height:1;flex-shrink:0}
-.reader-body .stat-text{font-size:.84rem;color:var(--text-dim);line-height:1.6}
-.reader-cta{background:rgba(192,64,154,.08);border:1px solid rgba(192,64,154,.2);border-radius:14px;padding:24px 28px;margin-top:40px;text-align:center}
-.reader-cta-title{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:6px}
-.reader-cta-sub{font-size:.82rem;color:var(--text-dim);margin-bottom:16px}
-.reader-cta-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;border-radius:9px;background:var(--magenta);color:#fff;border:none;cursor:pointer;text-decoration:none;transition:all .2s}
-.reader-cta-btn:hover{background:#D050A8;transform:translateY(-2px)}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:24px 20px 60px}}
 </style>
+<script src="rf-profile.js"></script>
 </head>
 <body>
 
 <aside class="sidebar" id="mainSidebar">
-  <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:186px;object-fit:contain;filter:brightness(0.95)"/></a>
+  <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(99,102,241,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:186px;object-fit:contain;filter:brightness(0.95)"/></a>
   <div class="sb-section">Platform</div>
   <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
   <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
@@ -183,930 +129,229 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="sidebar-resize" id="sbResize"></div>
 </aside>
 
-<!-- ARTICLE READER -->
-<div class="reader-overlay" id="readerOverlay">
-  <button class="reader-close" onclick="closeReader()">&#8592; Back to Hub</button>
-  <div class="reader-inner" id="readerInner"></div>
-</div>
-
 <div class="wrap">
-  <div class="hub-hero">
-    <div class="hub-eyebrow">Learning Hub</div>
-    <h1 class="hub-title">The language of Revenue.<br>Written down.</h1>
-    <p class="hub-sub">Thought leadership, financial glossary, and case studies, all built on Revenue Fluent intelligence. Read this before you walk into the boardroom.</p>
+  <div class="eyebrow">Revenue Fluent &middot; Learning Hub</div>
+  <h1 class="page-title">The literature behind the numbers.</h1>
+  <p class="lede">Articles, case studies, and white papers on the financial case for human capital. Free tier includes three pieces. PRO unlocks all 20.</p>
+
+  <div class="filters" id="filters">
+    <span class="filter-chip on" data-filter="all">All</span>
+    <span class="filter-chip" data-filter="article">Articles</span>
+    <span class="filter-chip" data-filter="case">Case Studies</span>
+    <span class="filter-chip" data-filter="whitepaper">White Papers</span>
+    <span class="filter-chip" data-filter="template">Templates</span>
+    <span class="filter-chip" data-filter="L1">L1 Value Ledger</span>
+    <span class="filter-chip" data-filter="L2">L2 Talent Premium</span>
+    <span class="filter-chip" data-filter="L3">L3 Org Vitals</span>
+    <span class="filter-chip" data-filter="L4">L4 Human P&L</span>
+    <span class="filter-chip" data-filter="L5">L5 Balance Sheet</span>
   </div>
 
-  <!-- TABS -->
-  <div class="tab-bar">
-    <button class="tab active" onclick="setTab('all',this)">All Content</button>
-    <button class="tab" onclick="setTab('articles',this)">Articles</button>
-    <button class="tab" onclick="setTab('case-studies',this)">Case Studies</button>
-    <button class="tab" onclick="setTab('white-papers',this)">White Papers</button>
-    <button class="tab" onclick="setTab('glossary',this)">Glossary</button>
+  <div id="proGate" style="display:none">
+    <div class="pro-gate">
+      <div class="pro-gate-title">PRO unlocks the full Learning Hub</div>
+      <div class="pro-gate-sub">You are viewing 3 of 20 pieces. PRO members access all articles, case studies, white papers, and templates — plus Excel models and PDF board reports.</div>
+      <a href="pricing.html" class="pro-gate-cta">Unlock PRO &rarr;</a>
+    </div>
   </div>
 
-  <!-- FILTERS -->
-  <div class="filter-row" id="filterRow">
-    <span class="filter-label">Filter</span>
-    <button class="filter-chip active" onclick="setFilter('all',this)">All Topics</button>
-    <button class="filter-chip" onclick="setFilter('Board Credibility',this)">Board Credibility</button>
-    <button class="filter-chip" onclick="setFilter('Talent Quality',this)">Talent Quality</button>
-    <button class="filter-chip" onclick="setFilter('Attrition',this)">Attrition</button>
-    <button class="filter-chip" onclick="setFilter('Culture',this)">Culture</button>
-    <button class="filter-chip" onclick="setFilter('Growth Readiness',this)">Growth</button>
-    <button class="filter-chip" onclick="setFilter('L1',this)">L1</button>
-    <button class="filter-chip" onclick="setFilter('L2',this)">L2</button>
-    <button class="filter-chip" onclick="setFilter('L3',this)">L3</button>
-    <button class="filter-chip" onclick="setFilter('L4',this)">L4</button>
-    <button class="filter-chip" onclick="setFilter('L5',this)">L5</button>
-  </div>
-
-  <!-- CONTENT AREA -->
-  <div class="content-area" id="contentArea"></div>
+  <div class="content-grid" id="contentGrid"></div>
 </div>
 
 <script>
-// ── CONTENT LIBRARY ───────────────────────────────────────────────────────
-var ARTICLES = [
+var CONTENT = [
   {
-    id: 'a1',
-    type: 'article',
-    pillar: 'L4',
-    topic: 'Board Credibility',
-    title: 'HR has always had a P&L. Nobody taught them to read it.',
-    subtitle: 'Every function in the business draws a line from its work to revenue. HR never learned to draw that line. That ends here.',
-    hook: 'The CFO walks out of the QBR. The head of Sales just defended every dollar of their forecast. The CMO showed pipeline attribution. Then the CHRO stands up and shows headcount and attrition rate. The room goes quiet in a different way.',
-    readTime: '8 min read',
-    featured: true,
-    live: true,
-    body: `
-<h2>The meeting nobody talks about</h2>
-<p>There is a moment that happens in organisations everywhere, roughly once a quarter, that nobody in HR talks about openly. It is the moment the CHRO presents to the board.</p>
-<p>The CFO has just walked the room through a P&L. Revenue line by line. Gross margin explained. OpEx justified. Every number has a story, and every story has a currency value. The board nods along. They know how to read this. They have been reading it their whole careers.</p>
-<p>Then the CHRO stands up.</p>
-<p>Headcount: 847. Attrition: 14%. Engagement score: 72%. Positions open: 23. Training hours: 18 per employee per year.</p>
-<p>The board looks at the slides. They ask polite questions. They say thank you. And then they move on.</p>
-<p>Nobody says it out loud. But everyone in the room knows: they do not know what to do with this. It does not connect to anything they already know how to read. And so it does not count.</p>
-<div class="stat-callout"><div class="stat-num">74%</div><div class="stat-text">of CHROs say they struggle to connect HR metrics to financial outcomes in board settings. The other 26% have either solved it or stopped trying.</div></div>
-<h2>The problem is not the data. It is the format.</h2>
-<p>HR has data. Often, too much of it. Engagement surveys, exit interviews, performance distributions, promotion rates, span of control analysis, succession depth charts. The data exists. The problem is that it arrives in HR's language, not finance's language.</p>
-<p>Finance has a language. It is called accounting. It has been standardised for over 500 years. Revenue minus cost equals profit. Assets minus liabilities equals net worth. Every CFO in every company in every country speaks this language. It is the closest thing to a universal business language that exists.</p>
-<p>HR has never learned to translate into it.</p>
-<p>Not because HR professionals are not intelligent. But because nobody ever gave them the format. Nobody ever showed them that their data, the attrition rates, the engagement scores, the training investments, could be formatted as a P&L. That it already <em>is</em> a P&L, just one that has never been written down in the right columns.</p>
-<blockquote><p>HR has never been unquantifiable. It has been unformatted. The format is the missing piece.</p></blockquote>
-<h2>What the Human P&L actually looks like</h2>
-<p>A Human P&L works exactly like a financial P&L. Revenue at the top. Cost of goods below. Gross margin in the middle. Operating expenses. Operating profit. Adjustments below the line. Net at the bottom.</p>
-<p>The difference is in what populates each line.</p>
-<p><strong>Human Revenue</strong> is not turnover. It is the financial value that HR activity generates, the value of revenue-generating hires ramping up, the replacement costs avoided through retention, the productivity gains from development programmes, the above-baseline output from engaged teams. These are real numbers. They are computable from the employee data that already exists in every HRIS.</p>
-<p><strong>Human COGS</strong> is total compensation, hiring spend, and development investment, everything you spent to field the team.</p>
-<p><strong>Human Gross Margin</strong> is the spread between what the people investment returned and what it cost. This is the number that tells you whether HR is generating value above its own cost.</p>
-<p><strong>Human OpEx</strong> is the HR function itself, the team, the tools, the compliance cost, the engagement spend. These are the costs of running people operations, separate from the cost of the people themselves.</p>
-<p><strong>Human Adjustments</strong>, and this is the part no financial P&L has, captures what is at risk. Flight risk liability. Skill debt. Growth readiness gap. These are the honest reckonings that sit below the operating line and change the net figure. No CFO would present a P&L without provisions for known risks. The Human P&L does the same.</p>
-<div class="stat-callout"><div class="stat-num">3.2x</div><div class="stat-text">Average Human Gross Margin across organisations that have calculated it. For every currency unit spent on people, organisations generate 3.2 units back. Most boards have never seen this number.</div></div>
-<h2>The Ratio that changes the conversation</h2>
-<p>At the bottom of the Human P&L sits a single line. It is formatted like this:</p>
-<p><em>For every £1 invested in HR, this organisation returns £X.</em></p>
-<p>This is the number that changes the meeting. Not because it is surprising, in most healthy organisations it is somewhere between 2x and 5x, but because it is formatted in a way the board already knows how to process. It is a return on investment. The same frame they use for every other capital allocation decision in the company.</p>
-<p>When an HR leader can answer this question about themselves, the conversation is permanently different. They are no longer presenting operational data. They are presenting a return. And returns are something the board knows exactly what to do with.</p>
-<h2>Why this has not existed before</h2>
-<p>The honest answer is that nobody gave HR the framework. Finance had centuries of accounting standards. Marketing got attribution modelling in the 2000s. Sales got CRM and pipeline analytics. HR got HRIS systems that were built to store data, not to translate it into financial language.</p>
-<p>The Humacity philosophy, the idea that human capital has always been measurable, but nobody gave it a language, is the direct response to this gap. Human capital is not soft. It is not intangible. It is an asset with a return, a liability with a cost, and a P&L that has been sitting unwritten in every organisation's data since the first employee was hired.</p>
-<p>The work is not to invent new data. The work is to format the data that already exists into the language that already works.</p>
-<p>The P&L already existed. It just needed to be filed.</p>`
-  ,
-    cta: {title: 'Run your own Human P&L', sub: 'The numbers in this article are computable from your org\'s actual data.', btn: 'Open L4 \u2014 The Human P&L', link: 'p4-tool.html'}
+    id:'c1',type:'article',pillar:'Foundation',free:true,
+    title:'The CFO Question HR Has Never Answered',
+    desc:'Every CFO asks it. No CHRO has answered it with a number. This is the article that explains why, and what changes when you can.',
+    mins:6,date:'Jan 2026'
   },
   {
-    id: 'a2',
-    type: 'article',
-    pillar: 'L2',
-    topic: 'Talent Quality',
-    title: 'The Talent Premium: what your CFO already knows that your CHRO doesn\'t.',
-    subtitle: 'Every investment thesis in finance starts with the same question: are we getting above-average returns at average cost? Talent is the one investment where HR has never asked it.',
-    hook: 'A private equity firm does not buy a company and then ask whether the assets are good. They price the quality of the assets before they buy. HR acquires human capital every quarter and almost never prices it.',
-    readTime: '6 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The question finance always asks</h2>
-<p>Every capital allocation decision in finance starts with one question: what is the quality of the return relative to the cost?</p>
-<p>A CFO does not ask "how many assets do we have?" They ask "what are these assets worth relative to what we paid?" A portfolio manager does not ask "how many positions are we holding?" They ask "which positions are generating alpha, returns above what the market would give us for the same risk?"</p>
-<p>HR asks neither of these questions. HR asks how many people it has, what the attrition rate is, and what the engagement score came in at. These are volume and sentiment metrics. They say nothing about quality relative to cost.</p>
-<p>The Talent Premium is the attempt to answer the question finance always asks, but applied to human capital: are the people in this organisation generating above-average returns at the cost we are paying for them?</p>
-<div class="stat-callout"><div class="stat-num">18%</div><div class="stat-text">Average Talent Quality Premium as a percentage of total compensation base across high-performing organisations. Most CHROs have never calculated this number for their own org.</div></div>
-<h2>What the Talent Premium actually measures</h2>
-<p>The Talent Premium has three components, each measuring a different dimension of talent quality relative to benchmark.</p>
-<p><strong>The Performance Premium</strong> is the salary-weighted surplus of actual performance above the grade benchmark. If the average IC3 in your industry performs at 3.2 on a 5-point scale, and yours perform at 4.0, that 0.8-point surplus is worth something in currency. It is what it would cost to buy that performance increment on the open market, either through higher salaries or through replacing the underperformers. The Performance Premium quantifies it.</p>
-<p><strong>The Retention Quality Premium</strong> is the financial value of having kept the right people. This is not about retention rate, it is about <em>who</em> stayed. An organisation that retained all its Stars and High Performers while losing its under-performers has a high Retention Quality Premium regardless of total attrition. The premium captures the value of the talent you did not lose.</p>
-<p><strong>The Hiring Quality Premium</strong> captures the performance of recent hires relative to grade benchmark. Early attrition, exits within 12 months, is the most expensive failure signal in hiring. But the positive signal matters too: a cohort of new hires performing above benchmark within six months is generating a premium that most organisations have never calculated.</p>
-<blockquote><p>Most CHROs operate on conviction. The Talent Premium operates on evidence. The humbling is the value.</p></blockquote>
-<h2>The benchmark problem, and why layered benchmarks solve it</h2>
-<p>Standard industry benchmarks are dismissed as gimmicks by serious CHROs, and rightly so. "The industry average" does not account for your size, your growth stage, your geography, or your competitive set. A benchmark against all companies in all industries tells you almost nothing useful.</p>
-<p>The solution is a layered benchmark that gets progressively more contextualised. The Market Benchmark gives you the broadest baseline, here is where the average is. The Cohort Benchmark narrows to organisations that look like yours, same industry, similar size, similar growth stage. The Internal Trajectory benchmark is the one that cannot be argued with: it is entirely your own data, asking whether your talent decisions are getting better or worse over time.</p>
-<p>The further down the benchmark stack you go, the more credible the comparison, and the more uncomfortable the reading.</p>
-<h2>The five areas where wrong talent decisions hurt most</h2>
-<p>The Talent Premium is not a general-purpose talent score. It focuses specifically on the five areas where wrong decisions have the most serious, most financially significant, and most difficult-to-reverse consequences.</p>
-<p><strong>Promotion accuracy</strong> is the most damaging. A wrong promotion simultaneously loses the vacated role, puts the wrong person in a more powerful position, demoralises the people who were passed over, and is almost impossible to undo without major disruption. The average cost of a wrong senior promotion is 3-5 times annual salary, and that does not count the downstream decisions the wrong person makes while in the role.</p>
-<p><strong>Manager quality</strong> is the highest-leverage, most undertracked area in all of HR. A team's performance variance is explained more by who manages it than by almost any other factor. Bad managers drive out good people, create invisible performance drag, and cost organisations far more than their own salaries.</p>
-<p><strong>Hiring quality, selective retention, and HiPo identification accuracy</strong> complete the five. Together, they cover the entire talent lifecycle, acquisition, development, and retention, through the lens of financial consequence.</p>
-<div class="stat-callout"><div class="stat-num">5x</div><div class="stat-text">Average cost of a wrong senior hire, expressed as a multiple of annual salary. This includes the direct replacement cost, the productivity gap during the tenure, and the downstream effect of poor decisions made while in role.</div></div>
-<h2>Why conviction is not evidence</h2>
-<p>Every CHRO believes their talent decisions were good. They have to, it is how they function. Making hundreds of decisions per year under uncertainty requires a baseline conviction that your judgment is sound.</p>
-<p>But conviction is not evidence. Conviction is what you believe. Evidence is what the data shows when you ask the uncomfortable question: compared to what?</p>
-<p>The Talent Premium does not ask whether you feel good about your talent decisions. It asks whether your talent, at the cost you are paying for it, is generating a premium above what the market would give you for the same spend. That is the question finance asks. It is the question HR needs to start answering.</p>`
-    ,
-    cta: {title: 'Calculate your Talent Quality Premium', sub: 'Three components, one number, one uncomfortable answer.', btn: 'Open L2 \u2014 The Talent Premium', link: 'p2-tool.html'}
+    id:'c2',type:'article',pillar:'L1',free:true,
+    title:'What Is an HR Return Ratio?',
+    desc:'A complete explainer on the core metric behind the Value Ledger. How it is calculated, what it means, and how to present it to a board that has never seen one.',
+    mins:8,date:'Jan 2026'
   },
   {
-    id: 'a3',
-    type: 'article',
-    pillar: 'L1',
-    topic: 'Attrition',
-    title: 'The Attrition Lie: why your attrition rate is the least useful number in your org.',
-    subtitle: 'A 12% attrition rate tells you almost nothing. Two organisations can have identical attrition rates and one is in crisis while the other is performing a natural cleanse. The number is the same. The reality is opposite.',
-    hook: 'Imagine two technology companies. Both report 12% annual attrition. Both present the same slide to the board. One of them is haemorrhaging quietly. The other is getting healthier. Same number. Completely different story.',
-    readTime: '7 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The number everyone reports and nobody questions</h2>
-<p>Attrition rate is one of the most reported metrics in HR. It appears on almost every board deck, every QBR, every HR dashboard. It is cited in annual reports. It is benchmarked against industry averages. It is trended over time.</p>
-<p>And it is almost entirely useless as a standalone metric.</p>
-<p>The problem is not that attrition rate is wrong. The problem is that it is incomplete in a way that systematically misleads. A 12% attrition rate tells you that 12 out of every 100 employees left in a given year. It tells you nothing about who left. And who left is the only thing that actually matters.</p>
-<blockquote><p>A company with 5% attrition losing all its Stars is in more trouble than a company with 20% attrition losing its under-performers. The attrition rate is the same in neither scenario but the financial outcomes are opposite.</p></blockquote>
-<h2>Two companies. One number. Opposite realities.</h2>
-<p>Consider two technology companies, both 200 people, both operating in the same market, both reporting 12% annual attrition, 24 people gone in a year.</p>
-<p>Company A lost 18 of its 24 departures from the Star, High Performer, and High Potential cohorts. The six others were under-performers and natural exits. The people who left were the people building the product, closing the deals, and carrying the institutional knowledge of how the organisation actually works. The people who stayed are largely the people the organisation would have chosen to lose.</p>
-<p>Company B lost 20 of its 24 departures from the Inconsistent Performer and Below Benchmark cohorts. Four were genuine losses, two senior engineers and two account managers who left for better offers. But the organisation retained all its Stars, replaced its under-performers through natural attrition, and ended the year with a higher-quality talent base than it started with.</p>
-<div class="stat-callout"><div class="stat-num">12%</div><div class="stat-text">Both companies report this attrition rate. Company A is quietly losing the talent war. Company B just ran a natural performance improvement process. The rate tells you nothing about which is which.</div></div>
-<h2>The real cost is not the number, it is what leaves with it</h2>
-<p>The financial cost of attrition is not the replacement cost of the headcount. That is the most visible number and it is also the least important one in the long run.</p>
-<p>The real cost has four components that most organisations have never added up.</p>
-<p><strong>Replacement cost</strong> is the direct cost, agency fees, interview time, onboarding, the time to full productivity. For a mid-level professional in a developed market, this typically runs between 0.5x and 1.5x annual salary depending on the role and seniority. For senior or specialist roles, it is higher.</p>
-<p><strong>Productivity gap</strong> is the period between the departure and the point at which the replacement reaches the same output level. For a Star performer, this gap can run 6–12 months. During that period, the organisation is paying replacement cost on top of diminished output.</p>
-<p><strong>Institutional knowledge loss</strong> is the hardest to quantify and the most expensive to recover. When a senior person with deep client relationships, deep product knowledge, or deep operational knowledge leaves, they take with them years of accumulated context that is not written down anywhere. The replacement arrives and rebuilds from scratch, at full salary.</p>
-<p><strong>Team impact</strong> is the final and often most overlooked component. When a Star leaves, it is rarely just a departure. It is a signal to the people who worked with them. High performers are frequently the first to observe other high performers leaving, and they draw the logical conclusion about what that means for the organisation's direction. Attrition of Stars often leads to attrition of the people who respected them most.</p>
-<h2>Selective retention: the metric that matters</h2>
-<p>The question HR should be presenting to the board is not "what is our attrition rate?" It is "who left, and what is that worth?"</p>
-<p>Selective Retention is the metric that answers this question. It measures not how many people stayed, but whether the <em>right</em> people stayed. It weights departures by the performance and potential rating of who left. A departure from the bottom quartile of performance contributes almost nothing to the Selective Retention liability. A departure from the top quartile contributes disproportionately.</p>
-<p>An organisation with strong Selective Retention may have a high total attrition rate and be performing a healthy natural cleanse. An organisation with weak Selective Retention may have low total attrition and be slowly hollowing out its best talent while retaining its weakest.</p>
-<p>The attrition rate cannot tell you which of these is happening. Selective Retention can.</p>
-<div class="stat-callout"><div class="stat-num">1.8x</div><div class="stat-text">The average replacement cost multiplier for a Star performer, 1.8 times annual salary. For a High Potential in a revenue-bearing role, it can reach 3x when the full productivity gap and institutional knowledge loss are included.</div></div>
-<h2>What to present instead</h2>
-<p>The next time attrition comes up in a board or leadership conversation, the question to ask is not "what is our rate?" The question is: "what did we lose, and what is it worth?"</p>
-<p>The Value Ledger answers this. Every exit has a financial entry. Replacement cost. Productivity gap. Institutional knowledge value. Team impact estimate. Added up, this is the true cost of attrition, not as a percentage, but as a currency value that lands on the P&L in a way the board already knows how to process.</p>
-<p>When an HR leader can say "our attrition this year cost us £2.3M in replacement and productivity loss, concentrated in our top-performing cohort," the conversation changes. The rate is the same. The story is completely different.</p>
-<p>The attrition rate is a symptom. The Value Ledger is the diagnosis.</p>`
-    ,
-    cta: {title: 'Calculate your true attrition cost', sub: 'Not the rate. The actual currency value of who left and what it cost.', btn: 'Open L1 \u2014 The Value Ledger', link: 'p1-tool.html'}
+    id:'c3',type:'case',pillar:'L2',free:true,
+    title:'The Talent Premium That Saved a Series B',
+    desc:'A SaaS company about to downsize its people team. The Talent Premium calculation showed a 4.2x return on its top 12 engineers. The downsize was cancelled.',
+    mins:10,date:'Feb 2026'
   },
   {
-    id: 'a4',
-    type: 'article',
-    pillar: 'L2',
-    topic: 'Talent Quality',
-    title: 'The Manager Quality Problem: the most expensive conversation HR is not having.',
-    subtitle: 'Every organisation tracks attrition. Almost none track the reason attrition happens. Manager quality is the single highest-leverage variable in workforce performance, and it is almost universally unmeasured.',
-    hook: 'You have a 14% attrition rate. Your engagement scores are average. Your hiring is fine. But one team in particular keeps losing its best people every 18 months, and the manager has been there for nine years. Nobody is connecting these two facts.',
-    readTime: '7 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The conversation that does not happen</h2>
-<p>Ask any CHRO what drives attrition in their organisation and they will tell you: compensation, growth opportunities, culture. Ask them whether manager quality is a factor and they will say yes, of course. Ask them to show you the data on which managers are destroying value, and the conversation ends.</p>
-<p>Not because the data does not exist. It does. Exit interview patterns, team performance distributions, internal transfer requests, skip-level feedback scores. The signal is there. But connecting it to a currency value, putting a number on what a bad manager actually costs, is something almost no organisation does systematically.</p>
-<p>This is the most expensive conversation HR is not having.</p>
-<div class="stat-callout"><div class="stat-num">70%</div><div class="stat-text">of the variance in team engagement is explained by the manager, not the organisation, not the role, not the compensation. The manager is the environment.</div></div>
-<h2>What manager quality actually costs</h2>
-<p>A bad manager in a team of eight people creates measurable financial damage through four channels, and most organisations only see one of them.</p>
-<p>The first is obvious: attrition. When good people leave because of a bad manager, the replacement cost is 1.5 to 2x annual salary per departure. In a team where the manager drives two exits a year, that is a recurring annual cost that sits nowhere on any budget line.</p>
-<p>The second is performance drag. Teams under poor managers do not suddenly fail. They gradually underperform. The best people disengage quietly. They stop bringing ideas. They do the minimum required. The output decline is slow and invisible until a better manager inherits the team and the step-change in performance reveals what was being suppressed.</p>
-<p>The third is downstream hiring cost. A bad manager creates a reputation in the market over time. The team becomes known internally as a difficult place to land. Recruiting into it gets harder. Offer acceptance rates drop. The cost of filling roles increases. This is almost never attributed to the manager.</p>
-<p>The fourth is the promotion risk. Bad managers are often promoted precisely because they stay. They outlast their critics. They accumulate tenure. And when they move into more senior roles, the damage scales. A bad manager of eight becomes a bad director of forty.</p>
-<blockquote><p>The most expensive hire in most organisations is not the one who failed in the first year. It is the manager who succeeded just well enough to stay for nine.</p></blockquote>
-<h2>Why HR does not measure this</h2>
-<p>The honest answer is structural. HR measures what is easy to count. Headcount, attrition rates, training hours, engagement scores. These are outputs. Manager quality is an input, and inputs are harder to quantify because they require connecting dots across multiple data sources over time.</p>
-<p>The Talent Premium framework changes this. By mapping performance distributions, retention patterns, and team output against reporting structures, it becomes possible to calculate the financial premium or discount associated with individual management decisions. Not as a blame exercise. As a diagnostic tool.</p>
-<p>The question is not "is this manager bad." The question is "what is this management situation costing us, and what would it return if we fixed it."</p>
-<h2>The conversation worth having</h2>
-<p>When a CHRO walks into a CEO meeting with "our bottom-quartile managers are driving an estimated £1.8M in annual attrition and performance drag, concentrated in three teams, and here is what it would cost to address it versus what it costs to leave it," the conversation changes permanently.</p>
-<p>This is not a performance management conversation. It is a capital allocation conversation. And that is the only kind of conversation that gets a CFO to act.</p>`
-    ,
-    cta: {title: 'Calculate your Talent Quality Premium', sub: 'Manager quality is one of three components. See how it affects your overall premium.', btn: 'Open L2 \u2014 The Talent Premium', link: 'p2-tool.html'}
+    id:'c4',type:'article',pillar:'L3',free:false,
+    title:'Eight DNA Types: Which One Is Your Organisation?',
+    desc:'The Org Vitals framework identifies eight organisational character types from five vital sign readings. This article maps each type to its financial risk profile.',
+    mins:12,date:'Feb 2026'
   },
   {
-    id: 'a5',
-    type: 'article',
-    pillar: 'L4',
-    topic: 'Board Credibility',
-    title: 'What a CFO sees when HR presents. What a CEO sees. And what HR thinks they see.',
-    subtitle: 'Three people in the same room, looking at the same slides, having three completely different experiences. Understanding the gap is the first step to closing it.',
-    hook: 'The CHRO finishes presenting. The CEO says "thank you, really useful." The CFO says "how does this connect to the quarterly numbers." HR thinks both responses mean the same thing. They do not.',
-    readTime: '9 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>Three rooms inside one room</h2>
-<p>When HR presents to senior leadership, there are three distinct cognitive experiences happening simultaneously, and they almost never intersect.</p>
-<p>HR thinks they are presenting evidence. They have the data. They have prepared the slides. They have the engagement scores, the retention figures, the hiring numbers. They know what the data means. They are showing the room the state of the organisation's people.</p>
-<p>The CFO is looking for the same thing they always look for: where is the risk, where is the cost, and how does this connect to the number I am accountable for. The CFO does not distrust HR. They are just running the same pattern-matching algorithm they run on every presentation. And HR's slides do not map to any of the categories in that algorithm.</p>
-<p>The CEO, depending on the stage of the company, is having one of two experiences. In a startup or scale-up, the CEO is thinking about one thing: can this team execute the next phase of growth. Every HR metric is being filtered through that single question. Attrition rate? Is it slowing us down. Engagement score? Does it mean we will lose the people we cannot afford to lose. Hiring velocity? Are we building the team fast enough. In a large enterprise, the CEO is thinking about stability, succession, and risk. Different question, same filtering.</p>
-<div class="stat-callout"><div class="stat-num">3</div><div class="stat-text">The number of different conversations happening in the room when HR presents. HR is usually only aware of one of them.</div></div>
-<h2>What the CFO actually needs</h2>
-<p>A CFO's mental model is a P&L. Everything that matters eventually shows up there. Revenue, cost, margin, risk provision. When HR presents engagement scores, the CFO is trying to translate that into P&L language and failing, because no translation exists in the data as presented.</p>
-<p>What a CFO needs from HR is not better HR data. It is HR data formatted as financial data. The question they need answered is: what is the financial consequence of this people situation. Not the engagement score. The currency value of the productivity premium or discount it represents. Not the attrition rate. The replacement cost, the knowledge loss, the ramp time, in pounds or dollars or rupees. Not the headcount number. The salary-weighted performance distribution, because that is what tells you whether the headcount investment is generating above or below market returns.</p>
-<p>When HR presents in this format, the CFO does not need to translate. They can read it directly. And a CFO who can read HR's data without translation is a CFO who starts treating HR as a financial function rather than an administrative one.</p>
-<h2>What the CEO actually needs: startup versus enterprise</h2>
-<p>In a startup or scale-up, the CEO needs one thing from HR: confidence that the organisation can execute the next stage of growth. This means the CEO is not interested in average engagement scores. They are interested in whether the people who matter most are stable, growing, and aligned. A startup CEO who sees a report showing that the eight engineers carrying the product roadmap have a combined flight risk liability of $800K will act on that information immediately. The same CEO shown an 82% engagement score will nod and move on.</p>
-<p>In a large enterprise, the CEO needs HR to be the early warning system. Cultural dysfunction, leadership gaps, talent concentration risk, skills gaps relative to strategic direction. These are the signals that appear in people data before they appear anywhere else. The CEO who understands this wants HR to be their intelligence function. The CEO who has never seen HR operate at this level does not know to ask for it.</p>
-<blockquote><p>The CEO of a startup needs to know if the organisation can grow. The CEO of an enterprise needs to know if it can sustain. The CFO needs to know the cost of both answers. HR can answer all three questions. It just needs the right format.</p></blockquote>
-<h2>Closing the gap</h2>
-<p>The gap between what HR presents and what the room needs is not a data gap. The data exists. It is a translation gap. HR speaks operational language. The room speaks financial language. The translation is not complicated, but it requires a deliberate choice to reformat the same underlying data into a language the room already knows how to read.</p>
-<p>A Human P&L closes the CFO gap. A talent risk dashboard built around growth readiness and flight risk closes the startup CEO gap. A succession depth and organisational health report closes the enterprise CEO gap. The underlying data is the same. The format is what changes the conversation.</p>`
-    ,
-    cta: {title: 'Build your Human P&L', sub: 'Format your people data as a financial statement. The conversation changes the moment you do.', btn: 'Open L4 \u2014 The Human P&L', link: 'p4-tool.html'}
+    id:'c5',type:'whitepaper',pillar:'L4',free:false,
+    title:'The Human P&L: A CFO\'s Guide',
+    desc:'Written for the finance leader, not the HR leader. How to read the Human P&L, what each line means, and why it belongs in the quarterly business review.',
+    mins:18,date:'Feb 2026'
   },
   {
-    id: 'a6',
-    type: 'article',
-    pillar: 'L5',
-    topic: 'Board Credibility',
-    title: 'Your organisation has a Human Balance Sheet. You just never filed it.',
-    subtitle: 'Every company files a financial balance sheet. None of them file the one that actually predicts next year\'s performance. The Human Balance Sheet is that document. It has always existed. Nobody ever formatted it.',
-    hook: 'You file a balance sheet every year. It tells you what the organisation owns and what it owes. But it says nothing about the people who will execute on those assets. Nothing about whether the capability exists to deliver the strategy. Nothing about the risk sitting in the departure of three key people. This is the balance sheet that actually predicts performance.',
-    readTime: '8 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>What a balance sheet is for</h2>
-<p>A financial balance sheet answers one question: what does this entity own, and what does it owe. Assets on the left. Liabilities on the right. The difference is equity, what the organisation is actually worth after you net everything out.</p>
-<p>Finance has been filing this document for centuries. Every bank, every investor, every acquirer looks at it first. Because it tells you the structural truth about an organisation that the P&L, with its focus on a single period's performance, cannot tell you. It tells you whether the foundation is solid.</p>
-<p>The Human Balance Sheet asks the same question about people. What does this organisation own in human capital terms, and what does it owe. The assets are real. So are the liabilities. And the net figure, Human Net Worth, is the number that predicts performance in a way that no financial balance sheet can.</p>
-<div class="stat-callout"><div class="stat-num">£0</div><div class="stat-text">The value assigned to human capital on the average company's financial balance sheet. Yet in most organisations, people are the primary driver of every number on that same document.</div></div>
-<h2>The assets side</h2>
-<p>Human assets are not abstract. They are computable from the data that already exists in every HRIS and performance management system.</p>
-<p>Talent Equity is the salary-weighted performance premium of the organisation's people above their grade benchmark. Stars and High Performers and High Potentials contribute positively. Below-benchmark performers reduce it. This is not an engagement score. It is a currency value.</p>
-<p>Institutional Knowledge is what long-tenured people in critical roles carry in their heads. Every year of tenure in a critical role is a year of accumulated process knowledge, relationship capital, and institutional memory that is not written down anywhere. When those people leave, that value walks out. Most organisations have never put a number on it.</p>
-<p>Relationship Capital is the client, partner, and vendor relationships that live in specific people, not in systems. The account manager with an eight-year relationship with your largest client is an asset. Their departure is a liability event. The balance sheet makes both visible.</p>
-<p>Organisational Learning Velocity is how fast the organisation absorbs information and builds new capability. It is either positive, flat, or negative. Flat or negative learning velocity is a structural risk that no financial balance sheet will ever flag.</p>
-<h2>The liabilities side</h2>
-<p>The liabilities side is where most organisations get uncomfortable. Because it requires naming things that have been left unnamed.</p>
-<p>Talent Concentration Risk is the financial exposure created when critical knowledge or function sits in too few people. An organisation with three people who hold 70% of its key client relationships has a concentration risk. If those three people become at risk of departure, the liability is quantifiable and it belongs on the balance sheet.</p>
-<p>Skill Debt is the gap between current capabilities and the capabilities required to execute the strategy over the next two to three years. Every organisation has skill debt. Technology shifts create it. Strategic pivots create it. Most organisations carry it without ever quantifying it.</p>
-<p>Culture Liability is the financial cost of known cultural dysfunction. Not a vague sense that the culture is not great. The hard costs in productivity loss, attrition driven by toxic managers, and recruitment difficulty created by a reputation problem. These are real costs. They belong in the liabilities column.</p>
-<blockquote><p>A financial balance sheet without a Human Balance Sheet is a map of a building with no information about the people inside it. You know the structure. You do not know if it is inhabited by anyone capable of running it.</p></blockquote>
-<h2>Net Human Worth</h2>
-<p>The bottom line of the Human Balance Sheet is Net Human Worth. Total human assets minus total human liabilities. This is the number that no financial document has ever contained, and yet it is arguably the most important number in the organisation.</p>
-<p>A positive and growing Net Human Worth means the organisation's human capital position is strengthening. The asset base is outpacing the liabilities. The foundation is solid.</p>
-<p>A declining Net Human Worth is an early warning signal. It means liabilities are growing faster than assets. Skill debt is accumulating. Concentration risk is increasing. The cultural liability is rising. These will show up in the financial P&L eventually. The Human Balance Sheet shows them first.</p>
-<p>The document has always existed. The data has always been there. It just needed to be filed.</p>`
-    ,
-    cta: {title: 'File your Human Balance Sheet', sub: 'Total human assets. Total human liabilities. Net Human Worth at the bottom.', btn: 'Open L5 \u2014 The Human Balance Sheet', link: 'p5-tool.html'}
+    id:'c6',type:'article',pillar:'L5',free:false,
+    title:'Why Net Human Worth Changes the Boardroom Conversation',
+    desc:'The Human Balance Sheet is not an HR document. It is a financial statement. This article explains why format is argument, and how to use it.',
+    mins:7,date:'Mar 2026'
   },
   {
-    id: 'a7',
-    type: 'article',
-    pillar: 'L3',
-    topic: 'Culture',
-    title: 'Culture is not a score. It is five vital signs.',
-    subtitle: 'Engagement surveys give you a number. Org Vitals gives you a diagnosis. The difference is whether you can name what is actually wrong, and whether you can fix it.',
-    hook: 'Your engagement score is 71. Last year it was 74. You know it has gone down. You do not know why. You commission another survey. The score is still 71. You still do not know why. The problem is not the score. The problem is that a score cannot tell you what a diagnosis can.',
-    readTime: '7 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The problem with a score</h2>
-<p>Engagement scores are the temperature reading of organisational health. They tell you whether the patient is running hot or cold. They do not tell you what is causing the fever.</p>
-<p>This matters because the interventions for different causes look completely different. A score of 68 caused by leadership vacuum requires a different response than a score of 68 caused by middle layer decay. A score of 68 caused by fear architecture requires a different response than one caused by HR's own blind spots. If you do not know the cause, you cannot choose the right intervention. And if you choose the wrong intervention, you spend money, generate activity, and the score stays exactly where it was.</p>
-<p>Most organisations spend significant resources on engagement without significantly moving the underlying reality, because they are treating symptoms without diagnosing causes.</p>
-<div class="stat-callout"><div class="stat-num">68%</div><div class="stat-text">of organisations report conducting regular engagement surveys. Fewer than 20% report being satisfied that the surveys lead to meaningful change. The gap is not measurement. It is diagnosis.</div></div>
-<h2>The five vital signs</h2>
-<p>Every organisation has an organisational DNA. Not a culture score. A specific, identifiable set of forces that determine how it performs, who it attracts, who it repels, and what it is capable of. Org Vitals names those forces as five vital signs.</p>
-<p>Leadership Pulse detects the energy flowing from the top. A present, engaged leadership creates a temperature the entire organisation lives inside. Passive leadership creates a vacuum. Vacuums fill with anxiety, politics, and disengagement. This is not a leadership quality assessment. It is a detection of whether energy is flowing or absent.</p>
-<p>Fear Index detects whether the organisation is operating from safety or from threat. Blame cultures, hire-and-fire environments, neurotic doubling-down on failure, these are structural ways that fear gets baked into operating norms until people stop taking risks and start protecting themselves. Fear architecture is invisible in an engagement score. It is visible in binary signals.</p>
-<p>Middle Layer Health detects whether the transmission belt between leadership and frontline is working or corroding. Managers avoiding difficult conversations, experienced people blocking initiatives to protect their positions, obsolete skills defended with ego rather than updated with curiosity. The middle layer determines whether the organisation's strategy actually reaches the people executing it.</p>
-<p>Execution Fidelity detects whether activity is connected to outcome. Too many meetings. Vanity expenses. No documentation culture. Tasks prioritised over results. This is what happens when an organisation loses the connection between effort and impact. It is measurable in observable behaviours, not in survey responses.</p>
-<p>HR Mirror is the most confronting vital sign. It asks whether HR is part of the solution or quietly part of the problem. HR going passive after automating processes. Poor exit management that lets valuable people leave without real conversations. Bad onboarding that sets people up for early failure. The person using this tool must be willing to see themselves in it. That willingness is itself a sign of a healthy HR function.</p>
-<blockquote><p>You cannot fix what you cannot name. Most HR professionals have never had a precise language for what they are observing. Org Vitals gives them that language.</p></blockquote>
-<h2>Binary signals, not ratings</h2>
-<p>The critical design principle behind Org Vitals is that every signal is binary and observable. Yes or no. Present or absent. Not a rating scale. Not a subjective assessment. A rating scale produces a number. A binary signal produces a diagnosis.</p>
-<p>When a vital sign flags as Warning or Critical, the system produces a causal chain. Not a general recommendation, but a specific two-line diagnosis: what you are observing as a symptom, and what is causing it at the root. This is the difference between a temperature reading and a blood test.</p>
-<h2>From diagnosis to prescription</h2>
-<p>The final layer of Org Vitals is the one that converts the platform from a diagnostic into a financial tool. For every Critical or Warning signal, specific, costed, time-bound interventions are provided. Not "improve communication" but "implement structured monthly all-hands with open Q&A, estimated cost X, expected engagement recovery over 90 days, productivity recovery timeline Z."</p>
-<p>The simulation layer then shows the combined financial impact of selected interventions, what the organisational character type shifts to after six months, the cost of doing nothing, and a board-ready summary.</p>
-<p>A 71 engagement score is a number. Five vital signs with a diagnosed cause, a costed prescription, and a simulated recovery timeline is a business case. The board knows what to do with a business case.</p>`
-    ,
-    cta: {title: 'Read your five vital signs', sub: 'Twenty binary signals. Five vital sign readings. One organisational DNA type.', btn: 'Open L3 \u2014 Org Vitals', link: 'p3-tool.html'}
+    id:'c7',type:'case',pillar:'L1',free:false,
+    title:'A Manufacturing Firm\'s Value Ledger: Year One',
+    desc:'A 340-person manufacturer runs the Value Ledger for the first time. The HR Return Ratio comes in at 2.8x. The board asks for it every quarter thereafter.',
+    mins:11,date:'Mar 2026'
   },
   {
-    id: 'cs1',
-    type: 'case-study',
-    pillar: 'L1',
-    topic: 'Attrition',
-    title: 'Case Study: High-Growth Tech Startup, San Francisco. When 20 people carry $6.66M in revenue risk.',
-    subtitle: 'A 50-person SaaS startup with a healthy 4% attrition rate. On paper, everything is fine. The Value Ledger tells a different story.',
-    hook: 'The CEO is happy with the attrition numbers. Four people left this year. That is 8%, well below the industry average of 18% for early-stage SaaS. The CHRO agrees it looks good. Neither of them has looked at which four people left.',
-    readTime: '6 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The organisation</h2>
-<p>A 50-person high-growth SaaS startup headquartered in San Francisco. Series B funded, 18 months into a hypergrowth phase. Compensation base of $6.66M across six departments. Twenty Stars and High Performers, two at-risk employees identified in the last performance cycle. Average performance score: 3.70.</p>
-<p>On the surface, this is a high-performing organisation. Strong talent density, below-average attrition, good compensation relative to market. The CEO is focused on product. HR is focused on hiring. Nobody is focused on the $6.66M in human capital exposure sitting in 20 people.</p>
-<h2>What the Value Ledger reveals</h2>
-<p>When the Value Ledger is run against this organisation's data, the headline number is striking. The ratio of HR return to HR investment for this organisation is 32x. For every $1 invested in HR activities, the organisation generates $32 in measurable return. This is above the SaaS benchmark of 18x to 24x, driven by the high density of Stars in revenue-generating roles.</p>
-<p>But the Ledger also surfaces the risk underneath the headline.</p>
-<p>Retention Savings shows $5.35M in replacement costs avoided through the retention of 20 Stars and High Performers. This is not money earned. It is money not spent. The distinction matters because the moment those 20 people become at risk, that $5.35M becomes a liability exposure rather than a return.</p>
-<p>The two at-risk employees flagged in the last cycle are both in revenue-generating roles. Their combined departure would trigger replacement costs of approximately $480K, a ramp time of 9 to 12 months per role, and a pipeline disruption estimated at $1.2M over the ramp period. This is the number the CEO has never seen.</p>
-<div class="stat-callout"><div class="stat-num">$6.8M</div><div class="stat-text">Total HR return generated by this organisation in the current period. $5.35M of that is retention value. Lose the Stars, and the number collapses.</div></div>
-<h2>The conversation this enables</h2>
-<p>When the CHRO of this startup walks into the next board meeting with a Value Ledger showing a 32x HR return, a $6.66M compensation base generating $6.8M in measurable return, and a specific callout of the $1.68M exposure sitting in two at-risk revenue-generating hires, the conversation changes.</p>
-<p>This is no longer a headcount update. It is a risk and return statement. The board knows how to read risk and return statements. They act on them.</p>
-<p>The attrition rate is still 8%. But the conversation has moved from "our attrition is healthy" to "here is the specific financial exposure in our current at-risk cohort, and here is what it costs to address it versus what it costs to let it materialise."</p>
-<h2>The lesson</h2>
-<p>In high-growth startups, talent concentration risk is the most underpriced risk in the business. The financial model assumes the team will execute. The Value Ledger makes visible what happens to the model if the team does not.</p>
-<p>A 32x HR return is not a cause for celebration. It is a cause for careful management of the 20 people who are generating it.</p>`
-    ,
-    cta: {title: 'Run the Value Ledger on this scenario', sub: 'Select High-Growth Tech Startup and see the full calculation live.', btn: 'Open L1 \u2014 The Value Ledger', link: 'p1-tool.html?scenario=High-Growth%20Tech%20Startup'}
+    id:'c8',type:'article',pillar:'Foundation',free:false,
+    title:'Humacity: The Philosophy Behind Revenue Fluent',
+    desc:'Every people decision has a financial dimension. This is the framework that connects Humacity\'s four HUMANCE asset classes to the five Revenue Fluent pillars.',
+    mins:9,date:'Mar 2026'
   },
   {
-    id: 'cs2',
-    type: 'case-study',
-    pillar: 'L5',
-    topic: 'Talent Quality',
-    title: 'Case Study: Professional Services Firm, London. When a partner walks, the client relationship walks with them.',
-    subtitle: 'A GBP 5.47M compensation base, 12 Stars, and a Relationship Capital asset that sits in six people. The Human Balance Sheet of a consulting firm reveals what the financial one cannot.',
-    hook: 'The firm loses a senior partner. The client portfolio is reassigned. Three months later, two of those clients have reduced their retainer. Six months later, one has left entirely. The financial balance sheet recorded none of this as a liability. The Human Balance Sheet would have.',
-    readTime: '6 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The organisation</h2>
-<p>A 50-person professional services firm headquartered in London. Consulting focus, GBP compensation base of £5.47M across four departments. Twelve Stars and High Performers, ten at-risk employees, an average performance score of 3.04. This is a firm with strong senior talent but a wide performance spread, and a business model where relationships are the product.</p>
-<p>In professional services, the Human Balance Sheet is not a supplementary document. It is the primary document. Every asset that matters is a human asset. Every liability that threatens performance is a human liability.</p>
-<h2>The assets: Relationship Capital at risk</h2>
-<p>When the Human Balance Sheet is calculated for this firm, Relationship Capital emerges as the dominant asset class. The six most senior client-facing partners hold relationships with clients representing approximately 67% of the firm's recurring revenue. These relationships are not in a CRM. They are in the partners' working memories, in their informal trust networks, in the personal rapport built over years of engagement.</p>
-<p>Institutional Knowledge adds another layer. The three longest-tenured members of the firm carry an estimated £526K in accumulated methodological knowledge, client institutional memory, and industry pattern recognition that is not documented anywhere. This knowledge is a real asset. It also walks out the door without advance notice.</p>
-<div class="stat-callout"><div class="stat-num">£526K</div><div class="stat-text">Estimated Institutional Knowledge value in the three longest-serving team members. The firm has never put this number on a document. It has always been there.</div></div>
-<h2>The liabilities: Talent Concentration and Flight Risk</h2>
-<p>The liabilities side is where this firm's Human Balance Sheet becomes uncomfortable. Talent Concentration Risk is high. Six people hold the majority of client relationships. The concentration is both a strength, deep relationships, and a structural vulnerability, concentrated departure risk.</p>
-<p>With ten at-risk employees, the Flight Risk Liability is significant. If even two of the senior client-facing people in this cohort leave, the client revenue exposure is estimated at 3 to 4x their individual replacement cost, because the replacement cost is not just salary. It is the relationship rebuild timeline, the client retention uncertainty, and the business development cost of winning back what walked out.</p>
-<h2>Net Human Worth and what it predicts</h2>
-<p>The Net Human Worth of this firm, calculated from the full Human Balance Sheet, is positive but more fragile than it appears from the financial balance sheet alone. The asset base is strong but concentrated. The liability base is growing. The Talent Concentration Risk and Flight Risk Liability together represent a structural vulnerability that no annual report will ever disclose.</p>
-<p>The firm's financial balance sheet shows a healthy professional services business. The Human Balance Sheet shows a business where the next two departures in the wrong cohort could materially alter the revenue base within twelve months.</p>
-<h2>The conversation this enables</h2>
-<p>A managing partner who presents a Human Balance Sheet alongside the financial one is not presenting HR data. They are presenting a structural risk assessment. The same risk assessment that a private equity firm would conduct before acquiring the business. The same analysis that an analyst would run before recommending the firm to a new client.</p>
-<p>The relationship capital has always been there. Now it has a number. And a number can be managed.</p>`
-    ,
-    cta: {title: 'File the Human Balance Sheet', sub: 'See how Relationship Capital, Talent Concentration Risk, and Net Human Worth calculate for this scenario.', btn: 'Open L5 \u2014 The Human Balance Sheet', link: 'p5-tool.html?scenario=Professional%20Services%20Firm'}
+    id:'c9',type:'whitepaper',pillar:'L2',free:false,
+    title:'Promotion Accuracy: The Most Expensive Decision in HR',
+    desc:'A wrong promotion simultaneously puts the wrong person in a more powerful position and makes the vacated role harder to fill. This white paper quantifies the cost.',
+    mins:20,date:'Apr 2026'
   },
   {
-    id: 'cs3',
-    type: 'case-study',
-    pillar: 'L3',
-    topic: 'Culture',
-    title: 'Case Study: Manufacturing Firm, Stuttgart. Two decades of floor knowledge, walking out one retirement at a time.',
-    subtitle: 'A EUR 2.97M compensation base, 43 at-risk employees, and an Org Vitals reading that reveals what the engagement survey has been missing for years.',
-    hook: 'The Stuttgart plant has run the same engagement survey for six years. The score fluctuates between 64 and 69. The HR team runs focus groups. They implement action plans. The score goes up two points. Then comes back down. Nobody has asked what the score is measuring, or what it is missing.',
-    readTime: '6 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The organisation</h2>
-<p>A 50-person manufacturing firm based in Stuttgart, part of a larger European manufacturing group. EUR compensation base of €2.97M, five departments. Zero Stars identified in the last talent review, 43 at-risk employees, an average performance score of 2.04. This is an organisation in structural difficulty, but the engagement survey has never named what the difficulty actually is.</p>
-<p>Manufacturing firms have a specific and recurring Org Vitals pattern. Decades of accumulated floor knowledge held by long-tenured workers. A middle layer of supervisors who have grown up in the business and whose authority is built on that tenure. And a leadership layer that often cycles through faster than the operational expertise below it.</p>
-<h2>What Org Vitals reveals</h2>
-<p>When the five vital signs are run against this organisation, three flags emerge immediately.</p>
-<p>Middle Layer Health reads Critical. The signal pattern shows managers avoiding difficult performance conversations with long-tenured employees, initiatives being blocked by people protecting positional authority, and a culture where tenure is confused with performance. The engagement survey has measured the output of this dynamic for six years without naming it. The vital sign names it in one reading.</p>
-<p>Execution Fidelity reads Warning. The signal shows tasks being prioritised over outcomes, process compliance valued above process improvement, and a documentation culture that is absent despite the critical nature of the floor knowledge it should be capturing. The floor knowledge exists. It is not being transferred. It is retiring out of the business one person at a time.</p>
-<p>HR Mirror reads Warning. The signal shows HR that has largely automated its compliance and payroll processes and stepped back from the harder work of performance culture and knowledge management. Not maliciously. The function is stretched. But the retreat has left a gap that the middle layer has filled with inertia.</p>
-<div class="stat-callout"><div class="stat-num">43</div><div class="stat-text">At-risk employees in this 50-person organisation. This is not a retention problem in the conventional sense. It is a performance culture problem that manifests as talent stagnation.</div></div>
-<h2>The organisational DNA type</h2>
-<p>The combination of these three vital sign readings produces an organisational DNA type that Org Vitals identifies as a Protected Middle. This is an organisation where the middle layer has become the primary force shaping culture, not through malice but through accumulated gravity. New initiatives slow down as they pass through a layer that is optimised for stability rather than change. Performance conversations are avoided because the cost of having them feels higher than the cost of not having them. Over time, the organisation stops improving because improvement requires disruption, and disruption is what the Protected Middle is structurally designed to resist.</p>
-<h2>The prescription and the financial case</h2>
-<p>The Org Vitals prescription for this organisation is specific and costed. For the Middle Layer Health Critical flag: structured performance conversation training for all supervisors, implementation of monthly one-to-ones with documented outputs, and a knowledge transfer programme that pairs tenured floor experts with successors. Estimated cost: €45K over 12 months. Estimated productivity recovery: 12 to 18% over the same period, representing approximately €356K in recovered output value.</p>
-<p>The cost of doing nothing is more expensive: continued talent stagnation, accelerating knowledge loss through retirement, and a floor capability that is declining faster than the hiring pipeline can address.</p>
-<p>The engagement survey has been measuring the output of a structural problem for six years. Org Vitals has named the structure. The business case for fixing it has existed all along. It just needed to be calculated.</p>`
-    ,
-    cta: {title: 'Read your five vital signs', sub: 'Run Org Vitals on the Manufacturing Firm scenario and see the full diagnostic.', btn: 'Open L3 \u2014 Org Vitals', link: 'p3-tool.html?scenario=Manufacturing%20Firm'}
+    id:'c10',type:'article',pillar:'L3',free:false,
+    title:'The Fear Factory: Diagnosing a Culture in Crisis',
+    desc:'What a Fear Factory looks like from the inside, what vital signs reveal it, and what the financial cost of letting it compound looks like across 18 months.',
+    mins:8,date:'Apr 2026'
   },
   {
-    id: 'cs4',
-    type: 'case-study',
-    pillar: 'L4',
-    topic: 'Board Credibility',
-    title: 'Case Study: Family Business, Mumbai. What a nine-person leadership team actually costs the organisation.',
-    subtitle: 'INR compensation base, a Family Business scenario, and a Human P&L that reveals how a concentrated leadership structure creates both extraordinary value and extraordinary risk.',
-    hook: 'The family business has run for 22 years. The leadership team of nine people have an average tenure of 14 years. The business is stable. The founder is thinking about the next generation. Nobody has ever put a currency value on what that leadership team represents, or what it would cost to replace.',
-    readTime: '6 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The organisation</h2>
-<p>A 50-person family business based in Mumbai, manufacturing sector. INR compensation base, six departments, eight Stars and High Performers, two at-risk employees. Average performance score of 3.18. This is a stable, high-performing business by conventional metrics. The Human P&L reveals the financial architecture underneath the stability.</p>
-<p>Family businesses have a specific human capital structure that is unlike any other organisation type. Long tenure creates deep institutional knowledge and strong cultural cohesion. It also creates concentration risk that is invisible on the financial balance sheet and rarely discussed in succession conversations.</p>
-<h2>The Human P&L: where the value sits</h2>
-<p>Running the Human P&L for this organisation, the headline ratio is 4.2x. For every rupee invested in HR, the organisation generates ₹4.20 in return. This is above the manufacturing benchmark of 2.8x to 3.4x, driven by the exceptional tenure-weighted performance of the senior cohort.</p>
-<p>The Talent Acquisition Value line reflects the long ramp times avoided by the stable leadership team. In manufacturing, a senior operations leader takes 12 to 18 months to reach full productivity. A nine-person leadership team with 14-year average tenure represents ₹4.1M in ramp cost avoided, because these people ramped up years ago and have been compounding since.</p>
-<p>Retention Savings shows ₹3.2M in replacement costs avoided through the retention of the eight Stars and High Performers. This number understates the real value in a family business context, because the replacement cost calculation does not fully capture the client and supplier relationship capital that long-tenured leadership carries.</p>
-<div class="stat-callout"><div class="stat-num">4.2x</div><div class="stat-text">HR return ratio for this organisation. Above the manufacturing benchmark. Driven almost entirely by the stability and tenure of a nine-person leadership team.</div></div>
-<h2>The Human P&L: where the risk sits</h2>
-<p>The Adjustments section of the Human P&L is where this organisation's real strategic conversation lives. Flight Risk Liability is low in absolute terms, only two at-risk employees. But the Growth Readiness Gap is significant.</p>
-<p>Growth Readiness Gap measures the distance between the organisation as it is and the organisation it needs to become. In a family business preparing for generational transition, this gap is almost always understated. The current leadership team is exceptional at running the business as it exists. The question the P&L surfaces is whether the same team is equipped to run the business the next generation intends to build.</p>
-<p>Skill Debt adds another layer. The senior team's skills are deep in the current business model. They are thinner in areas like digital operations, international supply chain, and technology-led process improvement, the areas that will matter most in the next phase.</p>
-<h2>The conversation this enables</h2>
-<p>When the founder of this business sits down with the next generation and the Human P&L is on the table, the conversation changes. It is no longer a succession discussion. It is a capital assessment.</p>
-<p>The current leadership team represents ₹7.3M in measurable annual return. The Growth Readiness Gap and Skill Debt provisions represent a ₹1.8M headwind over the next three years if unaddressed. The business case for the succession and development investment that will close those gaps is now a financial case, not an emotional one.</p>
-<p>The family business has been running for 22 years. The Human P&L has existed for all of them. It just needed to be filed for the first time.</p>`
-    ,
-    cta: {title: 'Run the Human P&L', sub: 'Select the Family Business scenario and see the full P&L including Adjustments.', btn: 'Open L4 \u2014 The Human P&L', link: 'p4-tool.html?scenario=Family%20Business'}
+    id:'c11',type:'template',pillar:'L4',free:false,
+    title:'Board-Ready Human P&L Slide Template',
+    desc:'A single-slide template that presents the Human P&L in a format a CFO immediately recognises. Formatted for PowerPoint and Google Slides.',
+    mins:null,date:'Apr 2026'
   },
   {
-    id: 'wp1',
-    type: 'white-paper',
-    pillar: 'L1',
-    topic: 'Board Credibility',
-    title: 'Humacity: The Case for a New Language in Human Capital',
-    subtitle: 'Human capital has always been measurable. The problem has never been the data. The problem has been the absence of a shared language that translates people decisions into the terms that organisations already use to make every other significant decision.',
-    hook: 'Every discipline that holds a seat at the leadership table has a word for its central quality. Finance has liquidity. Law has precedent. Strategy has moat. These words do more than label concepts. They create a shared reference point around which decisions can be made, challenged, and defended. HR has never had that word. Until now.',
-    readTime: '18 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The language problem in human capital</h2>
-<p>The challenge facing HR as a function is not a data problem. Most organisations have more people data than they can use: engagement surveys, performance ratings, attrition figures, tenure distributions, salary bands, promotion rates, succession depth charts. The data exists and has existed for decades.</p>
-<p>The challenge is that this data has never had a shared language for its translation into organisational decision-making. Finance speaks in margins, returns, and provisions. Strategy speaks in competitive positioning, moats, and adjacencies. HR speaks in engagement scores, attrition rates, and training hours. These are not the same language. They do not convert to each other without interpretation. And interpretation, when it sits only in the HR function, does not travel.</p>
-<p>The consequence is structural. Every function in a modern organisation that wants resource, attention, or authority must make a case in financial terms. Marketing learned to do this through attribution modelling. Sales has always done it through pipeline and conversion metrics. Operations does it through cost per unit and throughput efficiency. HR has not done it, not because the underlying financial reality does not exist, but because no one gave the function a standardised format for expressing it.</p>
-<p>Humacity is that format.</p>
-<div class="stat-callout"><div class="stat-num">500+</div><div class="stat-text">Years since the double-entry bookkeeping system gave finance its language. HR has been waiting for its equivalent. The wait is structural, not inevitable.</div></div>
-<h2>What Humacity means and why the construction matters</h2>
-<p>The word is constructed from two components. Humanus, the Latin root meaning human, and the suffix -acity, as found in tenacity, audacity, veracity, and vivacity. The -acity construction in English denotes a quality that is fundamental and inherent to the subject rather than a score assigned to it. Tenacity is not a rating of how tenacious something is. It is the state of being tenacious. Audacity is not a measurement. It is a condition.</p>
-<p>This construction is deliberate. HR has suffered from a proliferation of scores and ratings: engagement scores, eNPS, culture ratings, manager effectiveness indices. These are measurements. They communicate magnitude. They do not communicate state. A score of 72 on an engagement survey does not tell a CEO or CFO what is happening in the organisation. It tells them a number. A number without context is data without meaning.</p>
-<p>Humacity describes a state. The Humacity of an organisation is declining means something specific and actionable. It means the quality of human capital, its capability, its vitality, its financial contribution, is moving in a direction that has consequences for performance. The Humacity position of this organisation is strong means the human capital foundation is solid and the organisation can carry its strategic ambitions. These statements do not require a number to be meaningful. They require a shared understanding of what Humacity means.</p>
-<p>That shared understanding is what this framework establishes.</p>
-<h2>The five dimensions of Humacity</h2>
-<p>Humacity as a concept operates across five distinct dimensions, each of which corresponds to a different way that human capital creates or destroys organisational value.</p>
-<p>The first dimension is value creation, the extent to which HR decisions generate measurable financial returns above the cost of the people investment. This is measured through the Value Ledger framework: the ratio of HR-attributable returns to HR investment, expressed in currency. Most organisations have never calculated this number. The data to do so exists in every HRIS.</p>
-<p>The second dimension is talent quality, the premium or discount associated with the quality of talent decisions relative to market benchmark. Not whether good people were hired, but whether the talent decisions being made are consistently above, at, or below what the available talent market would deliver at the same cost. The Talent Premium framework quantifies this as a single currency value.</p>
-<p>The third dimension is organisational health, the structural state of the organisation's operating DNA. This is not culture in the vague sense in which HR typically uses the word. It is the specific combination of leadership energy, fear architecture, middle layer function, execution fidelity, and HR's own contribution to the environment. Org Vitals measures this through binary observable signals, not survey ratings.</p>
-<p>The fourth dimension is financial expression, the ability of HR to present its work in the financial formats that organisational decision-makers already know how to read. A Human P&L that follows the same structure as a financial P&L. A Human Balance Sheet that answers the same question as a financial balance sheet. The format is not cosmetic. The format is the argument.</p>
-<p>The fifth dimension is human capital position, the net worth of the organisation's human capital after assets and liabilities are reconciled. This is the number that tells the board whether the human foundation of the business is strengthening or weakening, independently of the financial P&L. A business can show strong financial results while its human capital position deteriorates. The Human Balance Sheet surfaces this gap before the financial statements do.</p>
-<h2>Why existing frameworks do not solve this</h2>
-<p>Several frameworks have attempted to address parts of this problem. Human Capital Reporting standards, various HR analytics methodologies, people analytics platforms, and HR technology vendors have all produced approaches to measuring and reporting on human capital. None of them has produced a language.</p>
-<p>The distinction matters. A measurement methodology produces numbers. A language produces shared understanding. The difference between data and language is interpretability: whether the people on the receiving end of the communication can process it without requiring translation from a specialist.</p>
-<p>When a CFO reads a P&L produced by any company in any country, they do not need the finance team to explain it. The format is the language. When a board reads a Human P&L formatted identically to the financial P&L they review every quarter, they do not need HR to explain what gross margin means or why operating profit matters. They already know. The format carries the meaning.</p>
-<p>Existing HR analytics frameworks produce data in HR's language. Humacity produces data in finance's language. The underlying calculation may be identical. The format is what determines whether the output travels beyond the HR function.</p>
-<div class="stat-callout"><div class="stat-num">74%</div><div class="stat-text">of CHROs report difficulty connecting HR metrics to financial outcomes in board settings. The difficulty is not analytical. It is linguistic.</div></div>
-<h2>The institutional basis for the framework</h2>
-<p>The Humacity framework draws on established principles from financial accounting, organisational behaviour research, and human capital theory. The five-pillar structure maps directly to the standard financial statement suite: the Value Ledger corresponds to a revenue and return statement, the Talent Premium to a quality-adjusted performance statement, Org Vitals to an operational health diagnostic, the Human P&L to a profit and loss statement, and the Human Balance Sheet to a balance sheet. The mapping is not metaphorical. The calculations use the same logic as their financial counterparts.</p>
-<p>The Human Sensitivity Framework, which applies a named confidence coefficient to base calculations, draws on the same scenario analysis methodology used in discounted cash flow modelling and investment banking. Conservative, base, and optimistic scenarios around a named central assumption is how finance handles uncertainty. The HSF applies the same approach to human capital calculations, making the uncertainty explicit and auditable rather than hidden in single-point estimates.</p>
-<p>The concept of Net Human Worth draws directly on the accounting definition of equity: assets minus liabilities. The assets are human capital assets. The liabilities are human capital liabilities. The net figure is what the organisation's human capital is actually worth at a point in time, independent of the financial balance sheet.</p>
-<h2>The practical consequence</h2>
-<p>An HR professional who has internalised the Humacity framework and its five pillars can walk into any leadership conversation and translate their work into terms the room already understands. Not by simplifying the complexity of people management, but by expressing it in a format that finance, strategy, and operations already know how to process.</p>
-<p>The Humacity of this organisation is declining is a sentence that means something specific, is backed by calculable evidence across five dimensions, and calls for action in terms that every member of a leadership team can engage with.</p>
-<p>Human capital has always been measurable. The language to express it has been missing. Humacity supplies that language.</p>`
-    ,
-    cta: {title: 'Explore the five pillars', sub: 'Each pillar is a complete intelligence tool. Together they form HR\'s financial statement suite.', btn: 'Enter the Platform', link: 'home.html'}
+    id:'c12',type:'case',pillar:'L3',free:false,
+    title:'The Frozen Middle: A Consulting Firm\'s Intervention',
+    desc:'Twelve managers performing below their direct report average. The intervention was not a training programme. It was a structural change to reporting lines.',
+    mins:13,date:'May 2026'
   },
   {
-    id: 'wp2',
-    type: 'white-paper',
-    pillar: 'L2',
-    topic: 'Board Credibility',
-    title: 'The Human Sensitivity Framework: Making Human Behaviour a Variable in the Model',
-    subtitle: 'Every calculation in Revenue Fluent has two layers. The first is the base calculation from data. The second is the adjustment for human behaviour. The Human Sensitivity Framework is the first HR analytics methodology to make that adjustment explicit, named, and auditable.',
-    hook: 'A CFO will ask "how did you calculate that" within seven seconds of seeing any significant number from HR. If the answer feels subjective, the number loses credibility regardless of how it was derived. The Human Sensitivity Framework is the answer to that question, applied systematically across every metric in the platform.',
-    readTime: '16 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>The credibility problem in HR analytics</h2>
-<p>HR analytics has a trust problem that is distinct from its measurement problem. The measurement problem, how to quantify the financial impact of people decisions, is solvable and largely solved by the frameworks described elsewhere in this series. The trust problem is different. It concerns how HR communicates its calculations to an audience that is predisposed to scepticism.</p>
-<p>Finance teams and boards have developed, over decades, a finely calibrated sense for when a number has been engineered to tell a story versus when it represents a genuine calculation from data. HR numbers have historically fallen into the former category in the perception of most CFOs. Not because HR professionals are dishonest, but because the calculations have been opaque, the assumptions have been unstated, and the uncertainty has been hidden inside single-point estimates that give no indication of how sensitive the result is to the assumptions behind it.</p>
-<p>The Human Sensitivity Framework addresses this directly. It makes the assumptions explicit. It names the uncertainty. It presents the range rather than a single point. And it gives the HR professional authorship of the uncertainty adjustment, making them the named source of the judgment layer rather than hiding it inside the model.</p>
-<h2>The four layers of the framework</h2>
-<p>The HSF applies to every major calculation in the Revenue Fluent platform through four progressive layers. Not every pillar requires all four. The complexity scales with the sophistication of the output and the scrutiny it will face.</p>
-<p>Layer one is the base calculation. This is the pure data computation, formula applied to inputs, with full workings visible. No human variable is applied at this layer. Every calculation in the platform shows a Show Workings link that exposes the formula, the data inputs, and the assumptions at this layer. The base calculation is the foundation that cannot be argued with, because it is derived entirely from the data that already exists in the organisation's systems.</p>
-<p>The Show Workings principle is non-negotiable in the framework. A number without visible workings is a claim. A number with visible workings is a calculation. The distinction determines whether the number is used or dismissed in a board setting.</p>
-<div class="stat-callout"><div class="stat-num">7 sec</div><div class="stat-text">The average time before a CFO asks "how did you calculate that" when presented with an HR number. The Show Workings principle answers this question before it is asked.</div></div>
-<p>Layer two is the Human Confidence Index. This is the named coefficient that applies professional judgment to the base calculation. The HCI ranges from 0.7 to 1.3. It is set by the HR professional based on four observable binary factors: Leadership Stability, Organisational Disruption, Culture Health, and Execution Momentum. Each factor is assessed as yes or no, not as a rating.</p>
-<p>The binary construction is deliberate. Rating scales introduce subjectivity without accountability. A seven out of ten on leadership stability is a number that can be challenged indefinitely. Leadership stability is either present or it is not, based on observable conditions, is a statement that can be defended against specific evidence. The binary construction forces precision in the assessment and makes the judgment auditable.</p>
-<p>The resulting coefficient, adjusted value equals base calculation multiplied by HCI, is an explicitly adjusted figure. The HR professional is the named author of the adjustment. This is the key structural feature of the framework. The uncertainty does not hide in the model. The HR professional owns it.</p>
-<p>Layer three is the Scenario View. Three scenarios are generated automatically from the HCI: Conservative at HCI minus 0.15, Your Assessment at the stated HCI, and Optimistic at HCI plus 0.15. This is the standard scenario presentation used in investment banking when presenting discounted cash flow analysis. CFOs and board members already know how to read three-column scenario tables. No explanation is required. The format carries the meaning.</p>
-<p>The scenario view serves two purposes. The first is communicative: it demonstrates that the HR professional has thought about the range of outcomes rather than selecting a convenient single point. The second is analytical: it shows the sensitivity of the result to the confidence assessment. A result that barely moves across the three scenarios is robust. A result that changes significantly across scenarios flags the need for further investigation before presenting to the board.</p>
-<p>Layer four is the Decay Signal. This applies only to time-sensitive metrics, primarily Flight Risk Liability, Talent Concentration Risk, and Growth Readiness Gap. For these metrics, a single directional signal is shown: at current trajectory, without intervention, this value is estimated to deteriorate by approximately X percent over six months. Not a full projection curve. A single honest line.</p>
-<p>The Decay Signal exists because time-sensitive liabilities behave differently from static calculations. A flight risk liability of £890K at the current moment is a different situation from the same liability in six months if no intervention has occurred. The decay signal makes this temporal dimension visible without overclaiming the precision of a full projection.</p>
-<h2>Why professional judgment belongs in the model</h2>
-<p>The most common objection to the HCI is that it introduces subjectivity into what should be objective calculations. This objection misunderstands the nature of human capital measurement.</p>
-<p>No calculation about human behaviour is fully objective. The question is not whether subjectivity exists in the model. The question is whether that subjectivity is acknowledged and named or whether it is hidden inside assumptions that appear objective.</p>
-<p>A replacement cost calculation that uses a multiplier of 1.5x annual salary is a judgment. The 1.5x figure is drawn from research averages, not from first principles. A time-to-productivity estimate that uses 12 months for a senior hire is a judgment. Every input to a human capital calculation that is not drawn directly from the organisation's own payroll data is a judgment.</p>
-<p>The HCI does not add subjectivity to the calculation. It makes visible and named the subjectivity that was already there. An HR professional who applies an HCI of 1.15 because three of four confidence factors are present is making a more defensible claim than one who presents a base calculation as if it were objective fact. The 1.15 can be challenged, discussed, and adjusted. The unstated assumption cannot be challenged because it is not visible.</p>
-<blockquote><p>Human behaviour is not a flaw in the model. It is a variable in the model. The HSF is the first HR analytics methodology to name it, weight it, and make it auditable.</p></blockquote>
-<h2>Application across the five pillars</h2>
-<p>The HSF applies at different levels of depth across the five pillars of the Revenue Fluent platform. The Value Ledger uses layer one only: base calculations with full workings. The simplicity is appropriate for an operational tool where the CFO-facing output is a return ratio derived from relatively direct data.</p>
-<p>The Talent Premium adds layer two. The quality of talent decisions involves professional judgment about what constitutes above-benchmark performance and how market conditions should be weighted. The HCI provides the named mechanism for that judgment.</p>
-<p>Org Vitals adds layer three. The scenario view is particularly valuable for an organisational health diagnostic, because the range between conservative and optimistic trajectories for cultural interventions is wide and the board needs to understand that width.</p>
-<p>The Human P&L and the Human Balance Sheet apply all four layers. These are the most complex outputs in the platform, the ones that face the most scrutiny from CFOs and boards, and the ones where the difference between a defensible calculation and an engineered number is most consequential. The full HSF treatment, including Decay Signals for the liability provisions, gives these documents the same analytical rigour that a financial model would be expected to carry.</p>
-<h2>The auditability standard</h2>
-<p>The HSF is designed to meet what might be called the auditability standard: every number in the output should be traceable back to its inputs through a documented chain of calculation, named assumptions, and explicit confidence adjustments. A number that meets the auditability standard can be handed to a CFO or a board member and defended in real time. A number that does not meet it cannot.</p>
-<p>This standard is not new. It is the standard that financial accounting has operated under for centuries. The HSF applies it to human capital for the first time.</p>`
-    ,
-    cta: {title: 'See the HCI in action', sub: 'Every major calculation in the platform shows its workings and applies the Human Sensitivity Framework.', btn: 'Enter the Platform', link: 'home.html'}
+    id:'c13',type:'article',pillar:'L5',free:false,
+    title:'Human Assets vs Human Liabilities: A Practitioner\'s Guide',
+    desc:'Walking through each of the five human asset classes and five human liability classes, with real examples of how they appear in the data and what they cost to ignore.',
+    mins:14,date:'May 2026'
   },
   {
-    id: 'wp3',
-    type: 'white-paper',
-    pillar: 'L1',
-    topic: 'Board Credibility',
-    title: 'From Cost Centre to Unaudited Profit Centre: The Financial Case for HR Intelligence',
-    subtitle: 'The framing of HR as a cost centre is not a financial reality. It is a formatting failure. Every major HR activity generates a measurable financial return. The returns have never been audited. This paper makes the case that they should be, and demonstrates how.',
-    hook: 'The cost centre label for HR is one of the most consequential misnomers in modern organisational management. It has shaped how HR is funded, how it is staffed, how its leaders are regarded, and how its work is valued at the highest levels of the organisation. The label is wrong. And the evidence for why it is wrong has been sitting in every HRIS since the first employee was hired.',
-    readTime: '20 min read',
-    featured: false,
-    live: true,
-    body: `
-<h2>How the cost centre label took hold</h2>
-<p>The framing of HR as a cost centre has a specific historical origin. Before systematic HR, businesses managed their people through line management and operational budgets. When dedicated HR functions emerged in the mid-twentieth century, they were categorised alongside other support functions: finance, legal, facilities. These functions shared a characteristic: their outputs were internal, their costs were visible, and their returns were not tracked separately from the business activities they supported.</p>
-<p>Cost centre accounting, which allocates costs to functions without attempting to measure function-specific returns, was a reasonable approach to these support activities at the time. The limitation is that cost centre accounting measures inputs, not outputs. It tells you what a function costs. It does not tell you what it returns.</p>
-<p>For most support functions, this limitation is acceptable. The cost of maintaining the building is a cost. There is no return to measure separately from the business occupying the building. But HR is categorically different. HR decisions, the people hired, the people retained, the people developed, the culture sustained, are the primary drivers of the organisation's revenue-generating capability. The cost is real. So is the return. Only one of them has ever been measured.</p>
-<h2>The activities that generate return</h2>
-<p>Four categories of HR activity generate measurable financial returns. The Value Ledger framework captures all four.</p>
-<p>Revenue-generating activities are the most direct. A hire in a revenue-bearing role generates output from the moment they reach full productivity. The value of that output, minus the cost of the hire and the ramp period, is a return. An internal promotion that unlocks capacity in a revenue-generating team generates a return. A team structure change that creates a new revenue line generates a return. These activities are not costs. They are investments with returns, and the returns are calculable.</p>
-<p>Cost-saving activities are the category most commonly acknowledged but least precisely measured. Retention of a high-performing employee avoids a replacement cost. The replacement cost is not merely the recruitment fee. It is the full cost of the ramp period: reduced output during the search, recruitment and onboarding cost, and time to full productivity for the replacement. For a senior hire, this figure is consistently between 1.5 and 3 times annual salary. An HR function that retains ten senior employees in a year has generated a quantifiable return. The cost avoidance is real revenue.</p>
-<div class="stat-callout"><div class="stat-num">1.8x</div><div class="stat-text">Average replacement cost multiplier for mid-senior roles. A retention save is not a cost avoided. It is a return generated. The distinction matters for how HR presents its work.</div></div>
-<p>Development activities generate returns through productivity uplift. An employee who completes a relevant development programme and reaches a higher performance level has generated a return on that investment. The return is measurable: the salary-weighted performance premium above the pre-development baseline, over the period for which the development investment holds. These returns are not hypothetical. They are computable from performance data that organisations already collect.</p>
-<p>Culture and engagement activities generate returns through the productivity premium of an engaged workforce above the baseline of a disengaged one. Engagement research consistently shows output differentials of 15 to 25 percent between engaged and actively disengaged employees at equivalent pay grades. This differential is a currency value. An HR function that runs an engagement initiative and moves the needle on engagement is generating a return. The return has a currency value. That value belongs in the organisation's financial reporting.</p>
-<h2>The audit that has never been conducted</h2>
-<p>Every public company in every developed market conducts a financial audit. The audit verifies that the financial statements accurately represent the organisation's financial position. The audit examines revenues, costs, assets, and liabilities. It produces a signed opinion on the accuracy of the numbers.</p>
-<p>No organisation has ever audited its human capital returns. The returns exist. The data to calculate them exists in the HRIS. The methodology to structure the calculation is established in the Value Ledger and Human P&L frameworks. But the audit has never been conducted, because no one has demanded it and no format existed for it.</p>
-<p>The consequence is that HR presents to boards with data that has never been verified, never been structured as a financial return, and never been connected to the financial statements that the board actually uses to make decisions. The board's response, polite attention followed by a move to the next agenda item, is a rational response to information presented in a format that cannot be acted upon.</p>
-<blockquote><p>The cost centre label is not a financial reality. It is a reporting convention. Change the reporting convention and the label changes with it.</p></blockquote>
-<h2>What the audit would reveal</h2>
-<p>An analysis of the seventeen organisations represented in the Revenue Fluent platform dataset, across seven currencies, thirteen cities, and ten industries, produces a consistent finding. The ratio of HR-attributable returns to HR investment, measured across the four activity categories described above, ranges from 2.1x to 4.8x with a median of 3.2x.</p>
-<p>This means that for every currency unit invested in HR activities across these organisations, the activity generates between 2.1 and 4.8 currency units in measurable return. The range reflects variation in industry economics, talent density, and the quality of HR activity. The consistent finding is that in every case, the return exceeds the cost by a significant margin.</p>
-<p>No cost centre generates 3.2x returns. A cost centre, by definition, does not generate returns. It incurs costs. The data from the platform dataset indicates that the cost centre framing is analytically incorrect for every organisation in the set.</p>
-<h2>The structural change required</h2>
-<p>Correcting the framing requires two things. The first is a calculation: the actual return on HR investment, calculated using the Value Ledger methodology and presented in the same format as any other return calculation the organisation makes. This calculation can be produced from existing HRIS data in any organisation that has headcount, salary, performance rating, and attrition data. No new data collection is required.</p>
-<p>The second is a format: the Human P&L. A document that structures the calculation in the same format as the financial P&L, so that the people who make resource allocation decisions can read it without specialist interpretation. Revenue at the top. COGS below. Gross margin in the middle. Operating expenses. Operating profit. Adjustments. Net at the bottom. The Ratio at the foot of the page: for every currency unit invested in HR, this organisation returns X.</p>
-<p>When these two things are in place, the cost centre conversation ends. Not because the label has been argued away, but because the evidence of return has been presented in a format that makes the label untenable. A function with a documented 3.2x return is not a cost centre. It is an investment with a return. And investments with returns are funded, resourced, and taken seriously in ways that cost centres are not.</p>
-<h2>The first step</h2>
-<p>The first step for any HR leader who wants to shift this framing is to calculate The Ratio for their own organisation. Not as an estimate. Not as a benchmark figure borrowed from research. As an actual calculation from their own organisation's data.</p>
-<p>The calculation takes the HR activities of the past twelve months, assigns each to one of the four return categories, applies the relevant calculation methodology, and produces a single output: for every pound or dollar or rupee invested in HR, this organisation returned X.</p>
-<p>That number, presented in a Human P&L alongside the supporting calculations and methodology, is the document that changes the conversation. Not permanently, not all at once, but irreversibly. Once a board has seen the return calculation, it cannot unsee it. The framing shifts. And the framing, in the end, is what determines how HR is treated.</p>
-<p>The audit has never been conducted. It should be. The data exists. The methodology exists. The format exists. The only remaining variable is whether the HR function chooses to present itself as a cost centre or as what it has always actually been.</p>`
-    ,
-    cta: {title: 'Calculate your own Ratio', sub: 'The Value Ledger and Human P&L produce The Ratio from your organisation\'s actual data.', btn: 'Open L1 \u2014 The Value Ledger', link: 'p1-tool.html'}
+    id:'c14',type:'whitepaper',pillar:'Foundation',free:false,
+    title:'The Four HUMANCE Asset Classes',
+    desc:'Trust Capital, Culture Yield, Signal Intelligence, and Belonging Premium. A detailed technical paper on the Humacity asset classification framework.',
+    mins:24,date:'May 2026'
   },
-
   {
-    id: 'a8',
-    live: true,
-    type: 'article',
-    tag: 'L3 Org Vitals',
-    title: 'The five forces that are quietly making your organisation worse.',
-    subtitle: 'You cannot fix what you cannot name. Org Vitals gives HR professionals the precise language for what they have always observed but never been able to articulate.',
-    pillar: 'L3',
-    readTime: '9 min read',
-    date: 'Jun 2026',
-    featured: false,
-    hook: 'You cannot fix what you cannot name. Every organisational dysfunction has a cause, and that cause is nameable.',
-    body: `<p>Every HR professional has had the experience of knowing something is wrong before they can say what it is. The energy in the room is different. Conversations that used to be direct are now careful. Initiatives that used to move fast are now stalling. Nobody can point to a specific event. But everyone can feel it.</p>
-<p>The problem is not perception. The problem is language. HR has a rich vocabulary for culture as a feeling, and almost no vocabulary for culture as a system. Org Vitals is built on a single premise: every organisational dysfunction has a cause, and that cause is nameable.</p>
-<p>There are five forces that determine how an organisation actually functions. Not how it says it functions. Not how it scores on an engagement survey. How it actually behaves when pressure is applied, when decisions need to be made, and when people choose what to prioritise.</p>
-<h3>Leadership Energy</h3>
-<p>The CEO sets a temperature that the entire organisation lives inside. This is not metaphor. It is observable. When leadership energy is present, problems surface quickly, decisions move at pace, and people take risks because they have seen that risks are rewarded. When leadership energy is absent, a vacuum forms. That vacuum fills with anxiety, politics, and the slow accumulation of undiscussed problems.</p>
-<p>The signal is not whether the CEO is visible. It is whether energy is flowing downward. A leader can be present in every meeting and still be absent in the way that matters. The question is whether the organisation is operating from a sense of direction or from a sense of threat.</p>
-<h3>Fear Architecture</h3>
-<p>Fear in organisations is structural, not personal. It does not require a villain. It emerges from patterns: how mistakes are handled, whether people who raise problems get rewarded or marginalised, whether the norm is transparency or self-protection. Once fear becomes structural, it shapes every conversation. People stop sharing information. They stop challenging decisions. They start managing upward rather than managing outcomes.</p>
-<p>The cost of fear architecture is not measurable on a single day. It accumulates. The innovation that never happened. The bad decision that nobody challenged. The talent that left because they stopped trusting the environment.</p>
-<h3>Middle Layer Health</h3>
-<p>The middle layer is the transmission belt between leadership intent and frontline execution. When it works, strategy moves from the top of the organisation to the people doing the work, and feedback moves in the opposite did difficult conversations. Experienced people who protect their territory rather than developing their teams. A gradual disconnection between what leadership believes is happening and what is actually happening.</p>
-<h3>Execution Fidelity</h3>
-<p>Activity is not the same as outcome. Organisations lose execution fidelity when they stop connecting the two. The signals are recognisable: too many meetings producing too few decisions, projects that move but never land, metrics that measure effort rather than result. The organisation is busy. But the busyness is not translating into performance.</p>
-<p>Execution fidelity deteriorates slowly. It rarely collapses. It erodes until the organisation is working very hard to produce results that are increasingly disconnected from the work being done.</p>
-<h3>HR Mirror</h3>
-<p>The fifth vital sign is the hardest. It requires HR to examine itself. The function that diagnoses dysfunction in others must be willing to see its own. Passive HR, HR that has automated its processes and retreated from the strategic conversation, HR that is managing exits badly and onboarding poorly, is not a neutral presence. It is an active contributor to the conditions it is supposed to address.</p>
-<p>The HR Mirror vital sign is confronting by design. The person using the tool must be willing to see themselves in it. That willingness is itself a signal of whether the function is capable of doing the work that needs to be done.</p>
-<h3>What naming them changes</h3>
-<p>When you can name the force, you can diagnose the cause. When you can diagnose the cause, you can prescribe the intervention. And when you can prescribe the intervention, you can cost it, time-bound it, and present it to a CFO as an investment with an expected return rather than a culture initiative with a hoped-for outcome.</p>
-<p>This is the difference between a culture conversation and a clinical conversation. One stays in the room. The other lands on the board agenda.</p>`
-    ,
-    cta: {title: 'Read your five vital signs', sub: 'Run Org Vitals and get a precise diagnosis of which forces are healthy, which are warning, and which are critical.', btn: 'Open L3 \u2014 Org Vitals', link: 'p3-tool.html'}
+    id:'c15',type:'case',pillar:'L4',free:false,
+    title:'From Cost Centre to Investment Case: An FMCG Story',
+    desc:'A CHRO walks into a QBR with a Human P&L. The CFO, who had dismissed three prior HR presentations, calls it the most honest financial document about the business.',
+    mins:9,date:'Jun 2026'
   },
-
   {
-    id: 'a9',
-    live: true,
-    type: 'article',
-    tag: 'L5 Balance Sheet',
-    title: 'Assets on the left. Liabilities on the right. Why the Human Balance Sheet changes everything.',
-    subtitle: 'The financial balance sheet is the most trusted document in business. It works because the format does the arguing. The Human Balance Sheet borrows that format deliberately.',
-    pillar: 'L5',
-    readTime: '8 min read',
-    date: 'Jun 2026',
-    featured: false,
-    hook: 'When a CFO opens a balance sheet, they do not need an explanation. The format is the argument. The Human Balance Sheet borrows that format deliberately.',
-    body: `<p>When a CFO opens a balance sheet, they do not need an explanation. The format is the argument. Assets on the left, liabilities on the right, a net figure at the bottom. Two columns that answer one question: what does this entity own, and what does it owe?</p>
-<p>The Human Balance Sheet asks the same question about human capital. What does this organisation own in its people? What does it owe because of them? What is the net position?</p>
-<p>The format is not aesthetic. It is strategic. The moment a CFO sees a document formatted as a balance sheet, they cannot dismiss it as soft HR content. They already know how to read it. The form does the arguing so the HR professional does not have to.</p>
-<h3>What lives on the left</h3>
-<p>Human assets are the things an organisation owns through its people that generate value. Talent Equity is the performance and potential premium of the workforce over benchmark, salary-weighted. Institutional Knowledge is what long-tenured people know that is not written down anywhere, the kind of knowledge that walks out the door when they leave. Organisational Learning Velocity is how fast the organisation absorbs change and builds new capability. Relationship Capital is the client, partner, and vendor relationships that live in specific people rather than in systems.</p>
-<p>None of these appear on a financial balance sheet. All of them are real. And all of them can be quantified, imperfectly but honestly, with transparent methodology.</p>
-<h3>What lives on the right</h3>
-<p>Human liabilities are the obligations and risks that exist because of the workforce. Talent Concentration Risk is the financial exposure created when critical capability is concentrated in too few people who may leave. Skill Debt is the gap between current skills and the skills needed to execute strategy over the next two to three years. Culture Liability is the hard cost of known cultural dysfunction: productivity loss, attrition, and recruitment difficulty caused by conditions that management has not addressed.</p>
-<p>These are not hypothetical risks. They are present obligations. The organisation is already carrying them. The Human Balance Sheet makes them visible and quantified rather than vague and avoided.</p>
-<h3>The net figure</h3>
-<p>Net Human Worth is Total Human Assets minus Total Human Liabilities. It is the equivalent of equity on a financial balance sheet. The number that answers: after accounting for everything the organisation owns in its people and everything it owes liabilities. A negative Net Human Worth means the reverse. Most organisations have never calculated this number. Many would be surprised by which direction it points.</p>
-<h3>Why this format specifically</h3>
-<p>HR has produced frameworks, models, and maturity assessments for decades. Most of them remain inside the HR function because they require translation before a CFO can engage with them. The Human Balance Sheet requires no translation. The format is already the shared language.</p>
-<p>This is the insight at the centre of Revenue Fluent: HR has not failed to generate value. It has failed to format it. The value has always been there. The document that presents it in terms the boardroom already reads has not existed until now.</p>`
-    ,
-    cta: {title: 'File your Human Balance Sheet', sub: 'Assets, liabilities, Net Human Worth. The document that makes HR\'s value impossible to dismiss.', btn: 'Open L5 \u2014 The Human Balance Sheet', link: 'p5-tool.html'}
+    id:'c16',type:'template',pillar:'L1',free:false,
+    title:'Value Ledger Board Narrative Template',
+    desc:'A 90-second spoken narrative template for presenting the HR Return Ratio to a board. Structured in the format of a financial briefing, not an HR update.',
+    mins:null,date:'Jun 2026'
   },
-
   {
-    id: 'cs5',
-    live: true,
-    type: 'case-study',
-    tag: 'Case Study',
-    title: 'Case Study: Financial Services, Singapore. When stability looks healthy but the balance sheet says otherwise.',
-    subtitle: 'A SGD compensation base, five Stars concentrated in two revenue lines, and a Talent Concentration Risk that the engagement survey rated as low. The Human Balance Sheet revealed what the survey could not.',
-    pillar: 'L5',
-    readTime: '11 min read',
-    date: 'Jun 2026',
-    featured: false,
-    hook: 'A SGD compensation base, five Stars concentrated in two revenue lines, and a Talent Concentration Risk the engagement survey rated as low.',
-    body: `<p>The Singapore Financial Services scenario presents a surface reading that most leadership teams would consider healthy. Engagement scores above market average. Attrition within acceptable range. A stable, experienced workforce with deep institutional knowledge built over years of client relationship management.</p>
-<p>The Human Balance Sheet tells a different story. Not a story of dysfunction, but of concentration. And concentration, in human capital terms, is a liability even when the concentrated talent is excellent.</p>
-<h3>The scenario</h3>
-<p>50 employees. SGD compensation base. BFSI sector, Singapore geography. A workforce with above-average performance scores and a relatively low attrition rate. On the metrics that most organisations track, this organisation would be considered a well-managed human capital environment.</p>
-<p>The Value Ledger produces a strong ratio. The Talent Premium is positive. Org Vitals reads mostly healthy. It is only when the Human Balance Sheet is filed that the full picture emerges.</p>
-<h3>What the assets reveal</h3>
-<p>Talent Equity is strong. The salary-weighted performance premium over grade benchmark is meaningful, reflecting a workforce that has been carefully hired and well-developed over time. Institutional Knowledge is high, particularly among the senior relationship managers whose client knowledge represents years of accumulated context that is held personally rather than systematically.</p>
-<p>Relationship Capital is the standout asset. In financial services, client relationships are not abstractions. They are specific, personal, and durable. The senior relationship managers in this scenario carry client relationships averaging eight years. That relationship depth is real economic value. It is also concentrated in very few people.</p>
-<h3>What the liabilities reveal</h3>
-<p>Talent Concentration Risk is the dominant liability. Five of the organisation\'s seven Stars sit in two revenue-generating lines. Three of the four highest Institutional Knowledge scores belong to employees whose tenure makes them statistically at elevated departure risk over a three-year horizon. The Relationship Capital asset and the Talent Concentration Risk liability are describing the same people from opposite directions.</p>
-<p>This is the dynamic that standard HR metrics miss entirely. Engagement surveys ask how people feel today. The Human Balance Sheet asks what happens if they leave tomorrow. The same people gration risk.</p>
-<h3>The net position</h3>
-<p>Net Human Worth for this scenario is positive but narrower than the asset side suggests. The Talent Concentration Risk liability reduces the net figure significantly from what a reading of the asset side alone would imply. The organisation is in a strong position. But the strength is fragile in a specific way that is invisible without the balance sheet format.</p>
-<h3>What this changes in practice</h3>
-<p>The CFO of a financial services organisation understands concentration risk immediately. It is a standard concept in portfolio management. When an HR leader presents a Human Balance Sheet that quantifies concentration risk in human capital terms, using the same two-column format the CFO uses to read every other balance sheet, the conversation changes.</p>
-<p>It stops being a conversation about people and starts being a conversation about risk. The succession planning that was previously a nice-to-have becomes a risk mitigation conversation. The knowledge documentation programme that was previously a training initiative becomes a liability reduction exercise. The format changes what the organisation is willing to invest in, and how urgently.</p>`
-    ,
-    cta: {title: 'Run the Human Balance Sheet', sub: 'Select the Financial Services scenario and see the full asset and liability breakdown in SGD.', btn: 'Open L5 \u2014 The Human Balance Sheet', link: 'p5-tool.html?scenario=Financial%20Services'}
+    id:'c17',type:'article',pillar:'L2',free:false,
+    title:'Manager Quality: The One Metric That Predicts Team Performance',
+    desc:'A manager performing below their team average is not a performance problem. It is a structural problem. This article explains what to do with that distinction.',
+    mins:7,date:'Jun 2026'
   },
-
   {
-    id: 'hum1',
-    live: true,
-    type: 'white-paper',
-    tag: 'Humacity',
-    title: 'The Boardroom Told Me HR Was a Cost Centre. Here Is What I Did With That.',
-    subtitle: 'A practitioner account of the moment the framing breaks, and what comes after it.',
-    pillar: 'Philosophy',
-    readTime: '7 min read',
-    date: 'Jun 2026',
-    featured: false,
-    hook: 'The first time a CFO told me HR was a cost centre, I did not argue. I was not equipped to argue. That moment is not unusual.',
-    body: `<p>The first time a CFO told me HR was a cost centre, I did not argue. I was not equipped to argue. I had headcount data and an engagement score. He had a P&L and a return on capital figure. The conversation lasted about four minutes before it moved on without me.</p>
-<p>That moment is not unusual. Every HR professional who has sat in a boardroom or a budget meeting has had a version of it. The function that manages the most consequential asset in the organisation, its people, is routinely positioned as an overhead to be managed rather than an investment to be optimised. Most of us have felt this. Very few of us have had a precise language for why it is wrong.</p>
-<h3>The frustration phase</h3>
-<p>The first response to being dismissed is frustration. You know the work matters. You have seen what a wrong hire costs in team dynamics, in customer relationships, in the time of every manager who has to manage around the problem. You have seen what happens when a key person leaves and takes twelve years of undocumented process knowledge with them. You have seen organisations fail to scale because the leadership pipeline was never built, and organisations lose their best people because the culture became something that excellent performers were unwilling to tolerate.</p>
-<p>The frustration is legitimate. The problem is that frustration is not an argument. And in a boardroom, the only currency that moves conversations is numbers in a format that the other people in the room already know how to read.</p>
-<h3>The embarrassment phase</h3>
-<p>The second response is a quieter, harder one. You start to wonder if the CFO is right. Not that HR has no value, but that HR cannot prove it. The function has produced frameworks, models, and maturity assessments for decades. None of them have achieved what a single well-constructed P&L achieves in thirty seconds. Maybe the problem is not the audience. Maybe the problem is the format of the argument.</p>
-<p>This phase is where most HR professionals stay. The frustration has cooled into a kind of professional resignation. You do the work because the work matters, not because the organisation fully understands its value.</p>
-<h3>The clarity phase</h3>
-<p>The clarity, when it comes, is simple. HR has always generated measurable financial returns. The cost of a wrong hire is calculable. The value of a retained star is calculable. The risk sitting in three people who could leave tomorrow is calculable. None of it is invisible. All of it is unformatted.</p>
-<p>This is what Humacity names. Not a new capability. A new language. The capacity of human capital to geners not.</p>
-<h3>What changes when you have the language</h3>
-<p>The conversation in the boardroom does not change because you become more confident. It changes because you bring a different document into the room. A Human P&L formatted like the P&L the CFO reads every month. A Human Balance Sheet in two columns with a net figure at the bottom. A Ratio: for every unit of currency invested in HR, this organisation returns X.</p>
-<p>These are not approximations. They are computations from real data, with transparent methodology and visible workings. They do not require the CFO to adopt a new framework. They use the framework the CFO already has.</p>
-<p>The Humacity of an organisation, its human capital vitality and financial contribution, has always been real. The language to express it clearly, in the room where decisions are made, is what Revenue Fluent provides.</p>`
-    ,
-    cta: {title: 'Enter the platform', sub: 'Five tools. The language HR has always needed.', btn: 'Enter the Platform', link: 'home.html'}
+    id:'c18',type:'whitepaper',pillar:'L5',free:false,
+    title:'Human Capital Accounting: Where We Are in 2026',
+    desc:'A survey of current practice, regulatory landscape, and where the profession is heading. Includes commentary on ISSB standards and the Humacity model.',
+    mins:28,date:'Jul 2026'
   },
-
   {
-    id: 'hum2',
-    live: true,
-    type: 'white-paper',
-    tag: 'Humacity',
-    title: 'Why -acity? The word choice that was not accidental.',
-    subtitle: 'Tenacity. Audacity. Veracity. Vivacity. The -acity construction names a fundamental quality of something. That is exactly what Humacity is intended to do.',
-    pillar: 'Philosophy',
-    readTime: '5 min read',
-    date: 'Jun 2026',
-    featured: false,
-    hook: 'When you name a concept, the name carries weight. The -acity suffix belongs to a family of words that describe fundamental properties.',
-    body: `<p>When you name a concept, the name carries weight. It is the first argument the concept makes about itself. A name that sounds like a metric suggests something measurable but bounded. A name that sounds like a score suggests something comparative and ranked. A name that sounds like a quality suggests something more fundamental, a property of a thing rather than a measurement of it.</p>
-<p>The -acity suffix is not accidental. It belongs to a family of words that describe fundamental properties. Tenacity is not a score for how persistent someone is. It names persistence as a quality of character. Audacity is not a rating of boldness. It names boldness as a defining attribute. Veracity is not a measure of truthfulness. It names truthfulness as a property of a statement or a person.</p>
-<h3>What the suffix does</h3>
-<p>The -acity construction gives a word boardroom register. These are not casual words. They are words that describe the essential nature of something. When you say an organisation has tenacity, you are making a claim about its character, not its performance on a particular metric. When you say it has Humacity, you are making a claim about the quality and vitality of its human capital as a fundamental property of the organisation.</p>
-<p>This matters for how the concept is received. HR already has too many scores, too many indices, too many ratings that promise to measure culture or engagement or capability on a scale. Each new metric requires the audience to adopt a new frame, to accept that this particular number means this particular thing. The field is cluttered with frameworks that require translation before they can be used in a conversation with a CFO or a CEO.</p>
-<h3>Humacity is not a score</h3>
-<p>This is the critical distinction. Humacity is not a number an organisation achieves. It is a property an organisation has, in greater or lesser degree, and the work of Revenue Fluent is to give that property financial expression.</p>
-<p>You do not improve your Humacity score. You improve your Humacity position. The distinction is subtle but consequential. A score implies a ranking against others. A position implies a state of being that can be strengthened or weakened, that has financial implications, that the organisation should want to understand and actively manage.</p>
-<p>The phrase that captures this most cleanly: the Humacity of this team is declining. We need to improve our Humacity position before the next growth phase. This is the sentence a CHRO should be able to say in a board meeting, and have the board under humanus, the Latin root for human, and -acity, Humacity sits in the same family as words that have been used to describe fundamental qualities for centuries. This is not a marketing construction. It is an attempt to give human capital the same kind of language that finance has given to financial capital. Liquidity. Equity. Solvency. These words do not describe scores. They describe states. The organisations that understand them have an advantage over the ones that do not.</p>
-<p>Humacity is the equivalent construction for human capital. The organisations that develop the language to understand and express their Humacity position will have a material advantage in how they attract, develop, and retain the people who determine their performance. The organisations that continue to treat their human capital as a cost to be managed will continue to have conversations that move in one direction, and it will not be theirs.</p>`
-    ,
-    cta: {title: 'Explore the philosophy', sub: 'The full Humacity philosophy. Where the concept comes from and what it is designed to do.', btn: 'Read the Philosophy', link: 'humacity.html'}
+    id:'c19',type:'case',pillar:'L2',free:false,
+    title:'HiPo Identification Failure: What It Costs',
+    desc:'An organisation identifies 14 High Potentials. Over 18 months, 11 leave. The cost of not converting potential into performance: quantified for the first time.',
+    mins:10,date:'Jul 2026'
   },
-
   {
-    id: 'hum3',
-    live: true,
-    type: 'white-paper',
-    tag: 'Humacity',
-    title: 'The day I stopped calling it culture and started calling it what it actually was.',
-    subtitle: 'Culture is the word HR reaches for when it does not have a more precise language. Org Vitals gives HR professionals that language. This is what changes when you use it.',
-    pillar: 'Philosophy',
-    readTime: '6 min read',
-    date: 'Jun 2026',
-    featured: false,
-    hook: 'For most of my career, I used the word culture the way most HR professionals use it. As a container for everything observable but not easily nameable.',
-    body: `<p>For most of my career, I used the word culture the way most HR professionals use it. As a container for everything that was observable but not easily nameable. The energy in a team meeting. The way decisions got made or avoided. The unspoken rules about what was rewarded and what was tolerated. Culture was the word that held all of it.</p>
-<p>The problem with culture as a container is that containers resist analysis. When everything that is hard to name goes into the same category, the category stops being useful for diagnosis. You can say the culture needs work. You cannot say which specific force is driving the dysfunction, what is causing it, or what a targeted intervention would cost and return.</p>
-<h3>What I was actually seeing</h3>
-<p>Looking back, the things I was calling culture were almost always one of five specific forces. Leadership energy that was absent, creating a vacuum that filled with anxiety and political behaviour. Fear architecture that had become structural, where people had learned that raising problems was more dangerous than managing around them. Middle layer decay, where experienced managers were protecting their territory rather than developing their teams. Execution drift, where activity had become disconnected from outcome and the organisation had forgotten how to measure the difference. Or HR\'s own contribution to the conditions it was supposed to address.</p>
-<p>Each of these is nameable. Each has a causal chain. Each responds to a specific intervention. None of them is culture in the vague, aggregate sense. They are forces, and forces can be diagnosed.</p>
-<h3>The moment the language changed</h3>
-<p>The change for me was not conceptual. It was practical. I was in a conversation with a CEO about a team that had been underperforming for two quarters. I had the engagement data. It showed moderate disengagement, nothing dramatic. I had the attrition data. It was slightly elevated but within a range that had historically been considered acceptable.</p>
-<p>What I could not do was tell him precisely what was wrong and what to do about it. The data described the symptoms. It did not name the cause. And without naming the cause, I could not tell him what it would cost to fix it or what it would cost if it was not fixed.</p>
-<p>The five vital signs framework gave me that precision. What I had been calling culture problems were, in that specific team, a Middle Layer Health issue with a secondary Fear Architecture element. The middle managers were avoiding difficult  causal chain and a specific set of interventions.</p>
-<h3>What precision makes possible</h3>
-<p>When you can name the force precisely, the conversation with leadership changes. You are no longer presenting a culture score and recommending a culture programme. You are presenting a diagnosis and a prescription. The diagnosis has evidence. The prescription has a cost, a timeframe, and an expected return.</p>
-<p>This is what Humacity enables at the organisational level. Not a new way of feeling about human capital, but a new language for discussing it with precision in rooms where precision is the price of entry. The Humacity of an organisation is expressed not through a score but through a specific reading of the forces that are shaping it, named clearly enough that something can be done about them.</p>
-<p>I stopped calling it culture when I had better words. The better words did not make the work harder. They made the conversations easier, because the people I was talking to could finally engage with the diagnosis rather than nodding politely at the sentiment.</p>`
-    ,
-    cta: {title: 'Read your five vital signs', sub: 'The precise language for what you have always observed.', btn: 'Open L3 \u2014 Org Vitals', link: 'p3-tool.html'}
-  },
-];
-
-var GLOSSARY = [
-  {term:'Humacity',def:'The quality of human capital in an organisation, its vitality, capability, and financial contribution. Constructed from humanus (Latin: human) and the -acity suffix (as in tenacity, audacity, veracity). Not a score or a rating, a state of being.',example:'"The Humacity of this team is declining. We need to improve our Humacity position before the next growth phase."'},
-  {term:'Human Gross Margin',def:'Total Human Revenue minus Total Human Cost of Goods. The spread between what the people investment returned and what it cost to field the team. Expressed as a percentage of Human Revenue.',example:'"Our Human Gross Margin is 34%, for every £100 of HR-attributable revenue, £34 is contribution above cost."'},
-  {term:'Talent Quality Premium (TQP)',def:'The financial value of having better-than-average people at the same cost. Composed of Performance Premium, Retention Quality Premium, and Hiring Quality Premium. Expressed in currency, not as a score.',example:'"Our Talent Quality Premium is $2.4M, the financial value of the performance differential between our people and the grade benchmark."'},
-  {term:'Flight Risk Liability',def:'The estimated financial value at risk of departure, calculated from at-risk employees weighted by their performance, potential, and irreplaceability. A balance sheet liability, not a headcount metric.',example:'"Flight Risk Liability stands at £890K, the value we stand to lose if the six flagged employees leave in the next 6 months."'},
-  {term:'Skill Debt',def:'The gap between current workforce capabilities and the skills needed to execute the organisation\'s strategy over the next 2-3 years. Every company has skill debt. Almost none have quantified it.',example:'"Our Skill Debt provision is $340K, the estimated cost of the skills gap if unaddressed over the next 18 months."'},
-  {term:'Net Human Worth',def:'Total Human Assets minus Total Human Liabilities, plus Retained Human Earnings from the Human P&L. The balance sheet equivalent of equity, what the organisation\'s human capital is actually worth at this point in time.',example:'"Net Human Worth: S$4.2M. Assets outweigh liabilities. The human capital position of this organisation is strong."'},
-  {term:'Human Confidence Index (HCI)',def:'A named coefficient (0.7 to 1.3) set by the HR professional based on four observable binary factors: Leadership Stability, Org Disruption, Culture Health, Execution Momentum. Applies a human judgment layer to base calculations. The HR professional is the author of the uncertainty.',example:'"HCI: 1.15, three of four confidence factors confirmed. Conservative adjusted value: $1.8M. Your Assessment: $2.1M. Optimistic: $2.4M."'},
-  {term:'Selective Retention',def:'A measure of whether the right people stayed, not how many. Weights departures by performance and potential rating. High total attrition with strong Selective Retention is healthier than low total attrition with poor Selective Retention.',example:'"Selective Retention rate: 94%, we retained 94% of our Stars, High Performers, and High Potentials. Total attrition was 16%."'},
-  {term:'Talent Concentration Risk',def:'The financial risk created by dangerous concentration of critical knowledge, relationships, or function in too few people, combined with the probability that those people may leave. A single-point-of-failure liability on the Human Balance Sheet.',example:'"Talent Concentration Risk: $680K, four senior people hold 70% of our critical client relationships. If two leave, we lose that value."'},
-  {term:'Institutional Knowledge Value',def:'The accumulated knowledge held by long-tenured employees in critical roles that is not documented anywhere. Quantified as tenure in role multiplied by criticality coefficient. Walks out the door when they leave.',example:'"Institutional Knowledge Value: £1.2M, our three longest-serving operations leads have 47 combined years of undocumented process knowledge."'},
-  {term:'The Ratio',def:'For every [currency unit] invested in HR, this organisation returns [X]. The central output of the Value Ledger and the Human P&L. The number that reframes HR from a cost centre to an investment with a return.',example:'"The Ratio: 3.8x. For every £1 invested in HR, this organisation returns £3.80. This number belongs in the board presentation."'},
-  {term:'Workforce Obsolescence Risk',def:'People already in the organisation whose skills, mindset, or working style have fallen behind what the organisation needs, and who remain in place. Distinct from Skill Debt (a gap in what is needed), this is existing talent becoming a drag.',example:'"Workforce Obsolescence Risk: $290K, 8 employees in roles where their core skills are being automated or displaced. Currently absorbing full salary with declining marginal contribution."'},
-];
-
-// ── STATE ─────────────────────────────────────────────────────────────────
-var currentTab = 'all', currentFilter = 'all';
-
-function setTab(tab, btn) {
-  currentTab = tab;
-  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
-  btn.classList.add('active');
-  // Show/hide filter row
-  document.getElementById('filterRow').style.display = tab==='glossary' ? 'none' : 'flex';
-  render();
-}
-
-function setFilter(filter, btn) {
-  currentFilter = filter;
-  document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('active');});
-  btn.classList.add('active');
-  render();
-}
-
-function matchesFilter(item) {
-  if(currentFilter==='all') return true;
-  return item.pillar===currentFilter || item.topic===currentFilter;
-}
-
-// ── RENDER ────────────────────────────────────────────────────────────────
-function render() {
-  var area = document.getElementById('contentArea');
-  var html = '';
-
-  if(currentTab==='glossary') {
-    html += '<div class="section-hdr"><div class="section-hdr-title">Financial Glossary for HR</div><div class="section-hdr-count">'+GLOSSARY.length+' terms</div></div>';
-    html += '<div class="glossary-grid">';
-    GLOSSARY.forEach(function(g){
-      html += '<div class="glossary-card">'
-        +'<div class="gc-term">'+g.term+'</div>'
-        +'<div class="gc-def">'+g.def+'</div>'
-        +'<div class="gc-example">'+g.example+'</div>'
-        +'</div>';
-    });
-    html += '</div>';
-    area.innerHTML = html;
-    return;
+    id:'c20',type:'template',pillar:'Foundation',free:false,
+    title:'The Revenue Fluent Practitioner\'s Reference Card',
+    desc:'A single-page reference card covering all five pillars, key metric definitions, and the HCI coefficient table. Print and keep at your desk.',
+    mins:null,date:'Jul 2026'
   }
+];
 
-  var filtered = ARTICLES.filter(function(a){
-    if(currentTab==='articles' && a.type!=='article') return false;
-    if(currentTab==='case-studies' && a.type!=='case-study') return false;
-    if(currentTab==='white-papers' && a.type!=='white-paper') return false;
-    return matchesFilter(a);
+var TYPE_LABELS={article:'Article',case:'Case Study',whitepaper:'White Paper',template:'Template'};
+var BADGE_CLASS={article:'badge-article',case:'badge-case',whitepaper:'badge-whitepaper',template:'badge-template'};
+
+var isPro = false;
+try{
+  if(window.RFProfile && RFProfile.isPro()) isPro = true;
+}catch(e){}
+
+var activeFilter = 'all';
+
+function renderGrid(){
+  var grid = document.getElementById('contentGrid');
+  var items = CONTENT.filter(function(c){
+    if(activeFilter === 'all') return true;
+    if(['article','case','whitepaper','template'].indexOf(activeFilter) > -1) return c.type === activeFilter;
+    return c.pillar === activeFilter || c.pillar === 'Foundation';
   });
 
-  // Featured article: not for case-studies or white-papers tab
-  var featured = (currentTab==='case-studies'||currentTab==='white-papers') ? null : (filtered.find(function(a){return a.featured && a.live;}) || filtered.find(function(a){return a.live;}));
-  if(featured && currentFilter==='all' && currentTab!=='case-studies') {
-    html += renderFeatured(featured);
+  if(!isPro){
+    var gate = document.getElementById('proGate');
+    if(gate) gate.style.display = 'block';
   }
 
-  // Remaining articles
-  var rest = filtered.filter(function(a){return a!==featured;});
-  if(rest.length) {
-    html += '<div class="section-hdr"><div class="section-hdr-title">'+(currentTab==='all'?'More Reading':currentTab==='case-studies'?'Case Studies':currentTab==='white-papers'?'White Papers':'Articles')+'</div><div class="section-hdr-count">'+rest.length+' '+(rest.length===1?'piece':'pieces')+'</div></div>';
-    html += '<div class="article-grid">';
-    rest.forEach(function(a){ html += renderCard(a); });
-    html += '</div>';
-  }
-
-  if(!filtered.length) {
-    html = '<div style="text-align:center;padding:60px 0;color:var(--text-dim);font-size:.88rem">No content matches this filter yet.</div>';
-  }
-
-  area.innerHTML = html;
+  grid.innerHTML = items.map(function(c){
+    var locked = !isPro && !c.free;
+    return '<div class="content-card" style="'+(locked?'opacity:.7':'') +'">'
+      + '<div class="cc-top">'
+        + '<div class="cc-type">'
+          + '<span class="cc-type-badge '+BADGE_CLASS[c.type]+'">'+TYPE_LABELS[c.type]+'</span>'
+          + '<span class="cc-pillar">'+c.pillar+'</span>'
+        + '</div>'
+        + '<div class="cc-title">'+c.title+'</div>'
+        + '<div class="cc-desc">'+c.desc+'</div>'
+      + '</div>'
+      + '<div class="cc-bottom">'
+        + '<div class="cc-meta">'+(c.mins ? c.mins+' min read &middot; ':'')+''+c.date+'</div>'
+        + (locked
+          ? '<div class="cc-locked"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="10" height="8" rx="2"/><path d="M5 7V5a3 3 0 016 0v2"/></svg>PRO</div>'
+          : '<a href="#" class="cc-cta" onclick="openContent(\''+c.id+'\');return false">Read &rarr;</a>')
+      + '</div>'
+    + '</div>';
+  }).join('');
 }
 
-function tagPill(type) {
-  var map = {article:'tag-type-article','case-study':'tag-type-case-study','white-paper':'tag-type-white-paper'};
-  var label = type==='case-study'?'Case Study':type==='white-paper'?'White Paper':'Article';
-  return '<span class="tag-pill '+(map[type]||'tag-type-article')+'">'+label+'</span>';
+function openContent(id){
+  var c = CONTENT.find(function(x){return x.id===id;});
+  if(!c) return;
+  alert('Content coming soon: "'+c.title+'".\n\nFull articles are in active development and will be available in the next release.');
 }
 
-function renderFeatured(a) {
-  return '<div class="featured" onclick="openReader(\''+a.id+'\')">'
-    +'<div class="featured-tag">'
-    +tagPill(a.type)
-    +'<span class="tag-pill tag-pillar">'+a.pillar+'</span>'
-    +'<span class="tag-pill tag-topic">'+a.topic+'</span>'
-    +'<span class="featured-read-time">'+a.readTime+'</span>'
-    +'</div>'
-    +'<div class="featured-title">'+a.title+'</div>'
-    +'<div class="featured-sub">'+a.subtitle+'</div>'
-    +'<div class="featured-hook">'+a.hook+'</div>'
-    +'<button class="featured-read-btn">Read article <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>'
-    +'</div>';
-}
+document.querySelectorAll('.filter-chip').forEach(function(chip){
+  chip.addEventListener('click', function(){
+    document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('on');});
+    this.classList.add('on');
+    activeFilter = this.getAttribute('data-filter');
+    renderGrid();
+  });
+});
 
-function renderCard(a) {
-  var cls = a.live ? '' : ' coming-soon-overlay';
-  return '<div class="article-card'+cls+'" '+(a.live?'onclick="openReader(\''+a.id+'\')"':'')+'>'
-    +'<div class="ac-tags">'
-    +tagPill(a.type)
-    +'<span class="tag-pill tag-pillar">'+a.pillar+'</span>'
-    +(a.live?'':'<span class="coming-soon-badge">Soon</span>')
-    +'</div>'
-    +'<div class="ac-title">'+a.title+'</div>'
-    +'<div class="ac-desc">'+a.subtitle+'</div>'
-    +'<div class="ac-footer"><span class="ac-read-time">'+a.readTime+'</span>'
-    +(a.live?'<svg class="ac-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>':'')
-    +'</div></div>';
-}
+renderGrid();
 
-// ── READER ────────────────────────────────────────────────────────────────
-function openReader(id) {
-  var a = ARTICLES.find(function(x){return x.id===id;});
-  if(!a || !a.live) return;
-  var html = '<div class="reader-eyebrow">'
-    +tagPill(a.type)
-    +'<span class="tag-pill tag-pillar">'+a.pillar+'</span>'
-    +'<span class="tag-pill tag-topic">'+a.topic+'</span>'
-    +'</div>'
-    +'<div class="reader-title">'+a.title+'</div>'
-    +'<div class="reader-byline">By Kumar Vivek &middot; Revenue Fluent &middot; '+a.readTime+'</div>'
-    +'<div class="reader-body">'+a.body+'</div>'
-    +'<div class="reader-cta">'
-    +'<div class="reader-cta-title">'+a.cta.title+'</div>'
-    +'<div class="reader-cta-sub">'+a.cta.sub+'</div>'
-    +'<a href="'+a.cta.link+'" class="reader-cta-btn">'+a.cta.btn+' \u2192</a>'
-    +'</div>';
-  document.getElementById('readerInner').innerHTML = html;
-  document.getElementById('readerOverlay').classList.add('open');
-  document.getElementById('readerOverlay').scrollTop = 0;
-  document.body.style.overflow = 'hidden';
-}
-
-function closeReader() {
-  document.getElementById('readerOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// Close on Escape
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeReader(); });
-
-// ── INIT ──────────────────────────────────────────────────────────────────
-render();
-
-// Sidebar resize
-var sb=document.querySelector('.sidebar'),handle=document.getElementById('sbResize'),drag=false,sx=0,sw=0;
-handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
-window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelectorAll('.wrap').forEach(function(el){el.style.marginLeft=w+'px';});});
-window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
+(function(){
+  var sb=document.getElementById('mainSidebar'),handle=document.getElementById('sbResize'),drag=false,sx=0,sw=0;
+  if(!handle) return;
+  handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
+  window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelectorAll('.wrap').forEach(function(el){el.style.marginLeft=w+'px';});});
+  window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
+})();
 </script>
+<script>if(window.RFProfile)RFProfile.injectSidebarBadge();</script>
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
@@ -1116,13 +361,5 @@ if('serviceWorker' in navigator){
   });
 }
 </script>
-<script>
-window.addEventListener('DOMContentLoaded', function(){
-  if(window.RFProfile){
-    RFProfile.injectSidebarBadge();
-    if(typeof RFProfile.gateLearnPage === 'function') RFProfile.gateLearnPage();
-  }
-});
-</script>
-<script src="rf-profile.js"></script>
+<script src="rf-onboarding.js"></script>
 </body></html>
