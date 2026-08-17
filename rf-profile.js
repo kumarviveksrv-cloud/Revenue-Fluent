@@ -61,19 +61,19 @@ function injectSidebarBadge() {
   badge.id = 'profileBadge';
   badge.style.cssText = 'padding:8px 18px 4px;display:flex;align-items:center;gap:8px;cursor:pointer;';
   badge.innerHTML =
-    '<div style="width:7px;height:7px;border-radius:50%;background:#C0409A;flex-shrink:0"></div>'
+    '<div style="width:7px;height:7px;border-radius:50%;background:#6366f1;flex-shrink:0"></div>'
     + '<div style="flex:1">'
-    +   '<div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#D060B0">'+ roleShort +'</div>'
+    +   '<div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#a5b4fc">'+ roleShort +'</div>'
     +   '<div style="font-family:var(--mono);font-size:.58rem;color:#C8A8C0;margin-top:1px">'+ (p.context || '') +'</div>'
     + '</div>'
-    + '<div id="profileEditBtn" title="Edit profile" style="font-size:.6rem;color:rgba(192,64,154,.35);transition:color .15s;padding:2px 4px;border-radius:3px">&#9998;</div>';
+    + '<div id="profileEditBtn" title="Edit profile" style="font-size:.6rem;color:rgba(99,102,241,.35);transition:color .15s;padding:2px 4px;border-radius:3px">&#9998;</div>';
   badge.addEventListener('mouseenter', function(){
     var btn = document.getElementById('profileEditBtn');
-    if(btn) btn.style.color = 'rgba(192,64,154,.7)';
+    if(btn) btn.style.color = 'rgba(99,102,241,.7)';
   });
   badge.addEventListener('mouseleave', function(){
     var btn = document.getElementById('profileEditBtn');
-    if(btn) btn.style.color = 'rgba(192,64,154,.35)';
+    if(btn) btn.style.color = 'rgba(99,102,241,.35)';
   });
   badge.addEventListener('click', function(){
     window.location.href = 'profile.html?reset=1';
@@ -90,7 +90,7 @@ function personaliseHome() {
   if(!p) {
     container.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">'
-      + '<div style="font-size:.88rem;color:#C8A8C0">No profile set. <a href="profile.html" style="color:#D060B0;text-decoration:none;font-weight:500">Set up your practitioner profile &rarr;</a></div>'
+      + '<div style="font-size:.88rem;color:#C8A8C0">No profile set. <a href="profile.html" style="color:#a5b4fc;text-decoration:none;font-weight:500">Set up your practitioner profile &rarr;</a></div>'
       + '</div>';
     return;
   }
@@ -118,23 +118,23 @@ function personaliseHome() {
   var challengeLine = challengeLines[p.challenge] || '';
 
   container.innerHTML =
-    '<div style="background:rgba(192,64,154,.05);border:1px solid rgba(192,64,154,.15);border-radius:14px;padding:20px 24px;">'
+    '<div style="background:rgba(99,102,241,.05);border:1px solid rgba(99,102,241,.15);border-radius:14px;padding:20px 24px;">'
     + '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">'
     +   '<div style="flex:1">'
-    +     '<div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#D060B0;margin-bottom:6px">Your Practitioner Profile</div>'
+    +     '<div style="font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#a5b4fc;margin-bottom:6px">Your Practitioner Profile</div>'
     +     '<div style="font-size:.95rem;font-weight:600;color:#EED8E8;margin-bottom:6px">'+welcome+'</div>'
     +     '<div style="font-size:.82rem;color:#C8A8C0;line-height:1.6;margin-bottom:14px">'+challengeLine+'</div>'
     +     '<a href="'+rec.file+'?scenario='+encodeURIComponent(p.recommendedScenario)+'" '
     +       'style="display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;'
-    +       'padding:9px 18px;border-radius:8px;background:rgba(192,64,154,.15);color:#D060B0;border:1px solid rgba(192,64,154,.25);text-decoration:none;transition:all .2s">'
+    +       'padding:9px 18px;border-radius:8px;background:rgba(99,102,241,.15);color:#a5b4fc;border:1px solid rgba(99,102,241,.25);text-decoration:none;transition:all .2s">'
     +       '<span>'+rec.pillar+' &mdash; '+rec.name+'</span>'
     +       '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>'
     +     '</a>'
     +   '</div>'
     +   '<div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0">'
-    +     '<div style="font-family:var(--mono);font-size:.62rem;background:rgba(192,64,154,.12);color:#D060B0;padding:4px 10px;border-radius:5px;border:1px solid rgba(192,64,154,.2)">'+getRoleShort()+'</div>'
+    +     '<div style="font-family:var(--mono);font-size:.62rem;background:rgba(99,102,241,.12);color:#a5b4fc;padding:4px 10px;border-radius:5px;border:1px solid rgba(99,102,241,.2)">'+getRoleShort()+'</div>'
     +     '<div style="font-family:var(--mono);font-size:.58rem;color:#C8A8C0">'+p.context+'</div>'
-    +     '<button onclick="window.location.href=\'profile.html?reset=1\'" style="font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(192,64,154,.4);background:none;border:none;cursor:pointer;padding:4px 0;transition:color .15s" onmouseover="this.style.color=\'rgba(192,64,154,.7)\'" onmouseout="this.style.color=\'rgba(192,64,154,.4)\'">Edit profile</button>'
+    +     '<button onclick="window.location.href=\'profile.html?reset=1\'" style="font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(99,102,241,.4);background:none;border:none;cursor:pointer;padding:4px 0;transition:color .15s" onmouseover="this.style.color=\'rgba(99,102,241,.7)\'" onmouseout="this.style.color=\'rgba(99,102,241,.4)\'">Edit profile</button>'
     +   '</div>'
     + '</div>'
     + '</div>';
@@ -187,8 +187,8 @@ function personaliseToolPage(pillarId) {
   if(!text) { container.style.display = 'none'; return; }
 
   container.innerHTML =
-    '<div style="background:rgba(192,64,154,.05);border-left:3px solid rgba(192,64,154,.4);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px">'
-    + '<div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#D060B0;white-space:nowrap;padding-top:2px">'+getRoleShort()+'</div>'
+    '<div style="background:rgba(99,102,241,.05);border-left:3px solid rgba(99,102,241,.4);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px">'
+    + '<div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#a5b4fc;white-space:nowrap;padding-top:2px">'+getRoleShort()+'</div>'
     + '<div style="font-size:.8rem;color:#C8A8C0;line-height:1.6">'+text+'</div>'
     + '</div>';
   container.style.display = 'block';
@@ -209,7 +209,7 @@ function gateToolPage() {
     // Add PRO badge next to button
     var badge = document.createElement('a');
     badge.href = 'pricing.html';
-    badge.style.cssText = 'font-family:var(--mono,monospace);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.1);border:1px solid rgba(192,64,154,.25);padding:2px 7px;border-radius:4px;text-decoration:none;margin-left:6px;vertical-align:middle';
+    badge.style.cssText = 'font-family:var(--mono,monospace);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:#6366f1;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);padding:2px 7px;border-radius:4px;text-decoration:none;margin-left:6px;vertical-align:middle';
     badge.textContent = 'PRO';
     el.parentNode.insertBefore(badge, el.nextSibling);
   });
@@ -223,19 +223,19 @@ function gateToolPage() {
     hciWrap.appendChild(hciWidget);
     hciWidget.style.cssText += ';filter:blur(3px);pointer-events:none;user-select:none';
     var hciOverlay = document.createElement('div');
-    hciOverlay.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,6,8,.8);border-radius:12px;z-index:10;gap:10px;cursor:pointer';
-    hciOverlay.innerHTML = '<div style="font-family:var(--mono,monospace);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.12);border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px">PRO Feature</div>'
+    hciOverlay.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(5,4,16,.8);border-radius:12px;z-index:10;gap:10px;cursor:pointer';
+    hciOverlay.innerHTML = '<div style="font-family:var(--mono,monospace);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#6366f1;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px">PRO Feature</div>'
       + '<div style="font-family:var(--mono,monospace);font-size:.72rem;color:#C8A8C0;text-align:center;padding:0 24px">The Human Confidence Index adjusts outputs based on your professional judgement.</div>'
-      + '<a href="pricing.html" style="font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:5px 14px;border-radius:6px;margin-top:4px">Upgrade to PRO</a>';
+      + '<a href="pricing.html" style="font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;border:1px solid rgba(99,102,241,.3);padding:5px 14px;border-radius:6px;margin-top:4px">Upgrade to PRO</a>';
     hciWrap.appendChild(hciOverlay);
   }
 
   // Gate profile context strip — replace style
   var profileCtx = document.getElementById('profileContext');
   if(profileCtx) {
-    profileCtx.innerHTML = '<div style="background:rgba(192,64,154,.04);border-left:3px solid rgba(192,64,154,.3);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">'
+    profileCtx.innerHTML = '<div style="background:rgba(99,102,241,.04);border-left:3px solid rgba(99,102,241,.3);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">'
       + '<div style="font-family:var(--mono,monospace);font-size:.75rem;color:#9070A0">Upgrade to PRO to personalise your experience based on your role and challenge.</div>'
-      + '<a href="pricing.html" style="font-family:var(--mono,monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;white-space:nowrap;border:1px solid rgba(192,64,154,.25);padding:3px 10px;border-radius:4px;flex-shrink:0">Upgrade &rarr;</a>'
+      + '<a href="pricing.html" style="font-family:var(--mono,monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;white-space:nowrap;border:1px solid rgba(99,102,241,.25);padding:3px 10px;border-radius:4px;flex-shrink:0">Upgrade &rarr;</a>'
       + '</div>';
     profileCtx.style.display = 'block';
   }
@@ -258,29 +258,29 @@ function injectMobileNav() {
   var style=document.createElement('style');
   style.textContent=
     '#rf-mobile-nav{position:fixed;bottom:0;left:0;right:0;z-index:9000;'
-    +'background:rgba(10,6,8,.97);backdrop-filter:blur(20px);'
-    +'border-top:1px solid rgba(192,64,154,.25);'
+    +'background:rgba(5,4,16,.97);backdrop-filter:blur(20px);'
+    +'border-top:1px solid rgba(99,102,241,.25);'
     +'display:flex;align-items:stretch;height:60px;'
     +'padding-bottom:env(safe-area-inset-bottom,0px);}'
     +'.rf-mn-item{flex:1;display:flex;flex-direction:column;align-items:center;'
     +'justify-content:center;gap:3px;text-decoration:none;'
     +'color:rgba(200,168,192,.45);transition:color .15s;'
     +'border:none;background:none;cursor:pointer;padding:6px 2px 0;}'
-    +'.rf-mn-item:active,.rf-mn-item.rf-mn-active{color:#C0409A}'
+    +'.rf-mn-item:active,.rf-mn-item.rf-mn-active{color:#6366f1}'
     +'.rf-mn-icon{width:20px;height:20px;display:block;}'
     +'.rf-mn-label{font-size:9px;letter-spacing:.05em;text-transform:uppercase;'
     +'font-family:"DM Mono",monospace;line-height:1;margin-top:2px;display:block;}'
     +'#rf-more-drawer{position:fixed;bottom:60px;left:0;right:0;z-index:8999;'
-    +'background:rgba(10,6,8,.98);backdrop-filter:blur(20px);'
-    +'border-top:1px solid rgba(192,64,154,.25);'
+    +'background:rgba(5,4,16,.98);backdrop-filter:blur(20px);'
+    +'border-top:1px solid rgba(99,102,241,.25);'
     +'transform:translateY(110%);transition:transform .22s ease;}'
     +'#rf-more-drawer.rf-open{transform:translateY(0);}'
     +'.rf-di{display:flex;align-items:center;gap:14px;padding:15px 28px;'
     +'text-decoration:none;color:rgba(200,168,192,.7);'
-    +'border-bottom:1px solid rgba(192,64,154,.08);'
+    +'border-bottom:1px solid rgba(99,102,241,.08);'
     +'font-family:"Sora",sans-serif;font-size:14px;}'
     +'.rf-di:last-child{border-bottom:none}'
-    +'.rf-di.rf-da{color:#C0409A}'
+    +'.rf-di.rf-da{color:#6366f1}'
     +'.rf-di svg{width:18px;height:18px;opacity:.7;flex-shrink:0;}'
     +'#rf-backdrop{display:none;position:fixed;inset:0;z-index:8998;'
     +'background:rgba(0,0,0,.45);}';
@@ -338,7 +338,7 @@ function injectMobileNav() {
       if(btn)btn.style.color='';
     } else {
       d.classList.add('rf-open');b.style.display='block';
-      if(btn)btn.style.color='#C0409A';
+      if(btn)btn.style.color='#6366f1';
     }
   };
   window.rfCloseDrawer=function(){
@@ -473,10 +473,10 @@ function applyProGate(el, style, label) {
   if(style === 'blur') {
     el.style.cssText += ';filter:blur(4px);pointer-events:none;user-select:none;position:relative';
     var overlay = document.createElement('div');
-    overlay.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,6,8,.75);border-radius:inherit;cursor:pointer;z-index:10;gap:8px';
-    overlay.innerHTML = '<div style="font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.12);border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px">PRO</div>'
+    overlay.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(5,4,16,.75);border-radius:inherit;cursor:pointer;z-index:10;gap:8px';
+    overlay.innerHTML = '<div style="font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#6366f1;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px">PRO</div>'
       + '<div style="font-family:var(--mono,monospace);font-size:.65rem;color:#C8A8C0;text-align:center;padding:0 16px">'+label+'</div>'
-      + '<a href="pricing.html" style="font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px;margin-top:4px">Upgrade to PRO</a>';
+      + '<a href="pricing.html" style="font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px;margin-top:4px">Upgrade to PRO</a>';
     var wrapper = document.createElement('div');
     wrapper.style.cssText = 'position:relative;display:contents';
     el.parentNode.insertBefore(wrapper, el);
@@ -489,16 +489,16 @@ function applyProGate(el, style, label) {
   if(style === 'lock') {
     el.style.cssText += ';opacity:.4;pointer-events:none;position:relative';
     var lockBadge = document.createElement('span');
-    lockBadge.style.cssText = 'display:inline-flex;align-items:center;gap:4px;font-family:var(--mono,monospace);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.12);border:1px solid rgba(192,64,154,.25);padding:2px 8px;border-radius:4px;margin-left:8px;cursor:pointer;vertical-align:middle';
+    lockBadge.style.cssText = 'display:inline-flex;align-items:center;gap:4px;font-family:var(--mono,monospace);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#6366f1;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);padding:2px 8px;border-radius:4px;margin-left:8px;cursor:pointer;vertical-align:middle';
     lockBadge.innerHTML = '&#128274; PRO';
     lockBadge.onclick = function(){ window.location.href='pricing.html'; };
     el.parentNode.insertBefore(lockBadge, el.nextSibling);
   }
 
   if(style === 'replace') {
-    el.innerHTML = '<div style="background:rgba(192,64,154,.06);border:1px solid rgba(192,64,154,.18);border-left:3px solid rgba(192,64,154,.5);border-radius:0 8px 8px 0;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px">'
+    el.innerHTML = '<div style="background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.18);border-left:3px solid rgba(99,102,241,.5);border-radius:0 8px 8px 0;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px">'
       + '<div style="font-family:var(--mono,monospace);font-size:.78rem;color:#C8A8C0">'+label+'</div>'
-      + '<a href="pricing.html" style="font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;white-space:nowrap;border:1px solid rgba(192,64,154,.3);padding:3px 10px;border-radius:4px;flex-shrink:0">Upgrade &rarr;</a>'
+      + '<a href="pricing.html" style="font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;white-space:nowrap;border:1px solid rgba(99,102,241,.3);padding:3px 10px;border-radius:4px;flex-shrink:0">Upgrade &rarr;</a>'
       + '</div>';
     el.style.display = 'block';
   }
@@ -524,8 +524,8 @@ function injectProBadge() {
   var badge = document.createElement('div');
   badge.id = 'proBadge';
   badge.style.cssText = 'padding:6px 18px 8px;display:flex;align-items:center;gap:8px';
-  badge.innerHTML = '<div style="width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#F0EAE4,#C48000);flex-shrink:0"></div>'
-    + '<div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(135deg,#F0EAE4,#C48000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PRO '+(tier==='india'?'India':'Global')+'</div>';
+  badge.innerHTML = '<div style="width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#f4f3ff,#6366f1);flex-shrink:0"></div>'
+    + '<div style="font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(135deg,#f4f3ff,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PRO '+(tier==='india'?'India':'Global')+'</div>';
   bottom.insertBefore(badge, bottom.firstChild);
 }
 
@@ -589,14 +589,14 @@ function gateScenarioInTool() {
 
     var ov = document.createElement('div');
     ov.id = 'scenGateOverlay';
-    ov.style.cssText = 'position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(10,6,8,.92);backdrop-filter:blur(8px);';
-    ov.innerHTML = '<div style="background:#100810;border:1px solid rgba(192,64,154,.3);border-radius:16px;padding:48px 40px;text-align:center;max-width:480px;width:90%;">'
-      + '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.1);border:1px solid rgba(192,64,154,.25);padding:4px 14px;border-radius:4px;display:inline-block;margin-bottom:20px">PRO Scenario</div>'
+    ov.style.cssText = 'position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(5,4,16,.92);backdrop-filter:blur(8px);';
+    ov.innerHTML = '<div style="background:#0d0b1e;border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:48px 40px;text-align:center;max-width:480px;width:90%;">'
+      + '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#6366f1;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.25);padding:4px 14px;border-radius:4px;display:inline-block;margin-bottom:20px">PRO Scenario</div>'
       + '<h2 style="font-size:1.3rem;font-weight:700;color:#E8E6E0;margin-bottom:10px">'+name+'</h2>'
       + '<p style="font-size:.85rem;color:#B8C8E8;line-height:1.7;margin-bottom:8px">This scenario is available on Revenue Fluent PRO. Free users can explore 3 scenarios: High-Growth Tech Startup, Professional Services Firm, and Family Business.</p>'
       + '<p style="font-size:.8rem;color:#9AB8D8;margin-bottom:24px">PRO unlocks all 15 scenarios across 10 industries, 7 currencies, and 13 cities.</p>'
-      + '<a href="pricing.html" style="display:inline-block;background:#C0409A;color:#fff;font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:12px 28px;border-radius:8px;margin-bottom:14px">Upgrade to PRO</a>'
-      + '<br><button onclick="document.getElementById(\'scenGateOverlay\').remove();document.getElementById(\'scen\').value=\'High-Growth Tech Startup\';document.getElementById(\'scen\').dispatchEvent(new Event(\'change\'));" style="background:none;border:none;font-family:var(--mono,\'DM Mono\',monospace);font-size:.6rem;color:rgba(192,64,154,.5);cursor:pointer;text-decoration:underline;margin-top:4px">Switch to a free scenario</button>'
+      + '<a href="pricing.html" style="display:inline-block;background:#6366f1;color:#fff;font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:12px 28px;border-radius:8px;margin-bottom:14px">Upgrade to PRO</a>'
+      + '<br><button onclick="document.getElementById(\'scenGateOverlay\').remove();document.getElementById(\'scen\').value=\'High-Growth Tech Startup\';document.getElementById(\'scen\').dispatchEvent(new Event(\'change\'));" style="background:none;border:none;font-family:var(--mono,\'DM Mono\',monospace);font-size:.6rem;color:rgba(99,102,241,.5);cursor:pointer;text-decoration:underline;margin-top:4px">Switch to a free scenario</button>'
       + '</div>';
     document.body.appendChild(ov);
 
@@ -607,7 +607,7 @@ function gateScenarioInTool() {
         var optFree = FREE.some(function(f){ return opt.value === f || opt.value.indexOf(f) === 0; });
         if(!optFree && opt.value !== 'Your Organisation') {
           opt.textContent = opt.value + ' 🔒';
-          opt.style.color = 'rgba(192,64,154,.4)';
+          opt.style.color = 'rgba(99,102,241,.4)';
         }
       });
     }
@@ -649,10 +649,10 @@ function gateScenarioLibrary() {
         });
         // PRO overlay
         var ov = document.createElement('div');
-        ov.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,6,8,.82);gap:8px;cursor:pointer;z-index:5;border-radius:inherit;';
-        ov.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.12);border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px">PRO Scenario</div>'
+        ov.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(5,4,16,.82);gap:8px;cursor:pointer;z-index:5;border-radius:inherit;';
+        ov.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:#6366f1;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px">PRO Scenario</div>'
           + '<div style="font-size:.75rem;color:#C8A8C0;text-align:center;padding:0 20px;font-family:var(--mono,\'DM Mono\',monospace)">'+name+'</div>'
-          + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px;margin-top:2px">Unlock with PRO</a>';
+          + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px;margin-top:2px">Unlock with PRO</a>';
         ov.addEventListener('click', function(e){ e.stopPropagation(); window.location.href='pricing.html'; });
         card.appendChild(ov);
         // Block card click
@@ -671,9 +671,9 @@ function gateScenarioLibrary() {
     if(!gridEl || document.getElementById('scenFreeNotice')) return;
     var notice = document.createElement('div');
     notice.id = 'scenFreeNotice';
-    notice.style.cssText = 'background:rgba(192,64,154,.07);border:1px solid rgba(192,64,154,.2);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;';
-    notice.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;color:#C8A8C0"><b style="color:#C0409A">3 of 15 scenarios</b> available on Free. PRO unlocks all 15.</div>'
-      + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px;white-space:nowrap">Upgrade to PRO</a>';
+    notice.style.cssText = 'background:rgba(99,102,241,.07);border:1px solid rgba(99,102,241,.2);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;';
+    notice.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;color:#C8A8C0"><b style="color:#6366f1">3 of 15 scenarios</b> available on Free. PRO unlocks all 15.</div>'
+      + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px;white-space:nowrap">Upgrade to PRO</a>';
     gridEl.parentNode.insertBefore(notice, gridEl);
   }, 300);
 }
@@ -701,9 +701,9 @@ function gateLearnPage() {
         el.style.userSelect = 'none';
       });
       var ov = document.createElement('div');
-      ov.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,6,8,.8);gap:8px;border-radius:inherit;z-index:5;';
-      ov.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:#C0409A;background:rgba(192,64,154,.12);border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px">PRO Article</div>'
-        + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px">Unlock with PRO</a>';
+      ov.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(5,4,16,.8);gap:8px;border-radius:inherit;z-index:5;';
+      ov.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:#6366f1;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px">PRO Article</div>'
+        + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px">Unlock with PRO</a>';
       card.appendChild(ov);
       card.addEventListener('click', function(e){ if(!isPro()) window.location.href='pricing.html'; });
     });
@@ -713,9 +713,9 @@ function gateLearnPage() {
     if(grid && !document.getElementById('learnFreeNotice')){
       var notice = document.createElement('div');
       notice.id = 'learnFreeNotice';
-      notice.style.cssText = 'background:rgba(192,64,154,.07);border:1px solid rgba(192,64,154,.2);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;';
-      notice.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;color:#C8A8C0"><b style="color:#C0409A">3 of 20 articles</b> available on Free. PRO unlocks all 20 including white papers and case studies.</div>'
-        + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#D060B0;text-decoration:none;border:1px solid rgba(192,64,154,.3);padding:4px 12px;border-radius:4px;white-space:nowrap">Upgrade to PRO</a>';
+      notice.style.cssText = 'background:rgba(99,102,241,.07);border:1px solid rgba(99,102,241,.2);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;';
+      notice.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.68rem;color:#C8A8C0"><b style="color:#6366f1">3 of 20 articles</b> available on Free. PRO unlocks all 20 including white papers and case studies.</div>'
+        + '<a href="pricing.html" style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#a5b4fc;text-decoration:none;border:1px solid rgba(99,102,241,.3);padding:4px 12px;border-radius:4px;white-space:nowrap">Upgrade to PRO</a>';
       grid.parentNode.insertBefore(notice, grid);
     }
   }, 400);
@@ -734,12 +734,12 @@ function gateMyOrgPage() {
   if(saveBanner) saveBanner.style.display = 'none';
 
   var gate = document.createElement('div');
-  gate.style.cssText = 'background:var(--bg2,#100810);border:1px solid rgba(192,64,154,.25);border-radius:16px;padding:48px 40px;text-align:center;max-width:520px;margin:0 auto;';
-  gate.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#C0409A;margin-bottom:16px">PRO Feature</div>'
+  gate.style.cssText = 'background:var(--bg2,#0d0b1e);border:1px solid rgba(99,102,241,.25);border-radius:16px;padding:48px 40px;text-align:center;max-width:520px;margin:0 auto;';
+  gate.innerHTML = '<div style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#6366f1;margin-bottom:16px">PRO Feature</div>'
     + '<h2 style="font-size:1.4rem;font-weight:700;color:#E8E6E0;margin-bottom:12px">My Org</h2>'
     + '<p style="font-size:.88rem;color:#B8C8E8;line-height:1.7;margin-bottom:12px">Enter your organisation\'s financial data once. Every tool reads from it. L1 outputs flow into L4. L4 net profit flows into L5.</p>'
     + '<p style="font-size:.82rem;color:#9AB8D8;line-height:1.7;margin-bottom:24px">My Org is the shared assumptions layer that makes the five pillars a connected financial suite rather than five standalone tools.</p>'
-    + '<a href="pricing.html" style="display:inline-block;background:#C0409A;color:#fff;font-family:var(--mono,\'DM Mono\',monospace);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:12px 28px;border-radius:8px;">Upgrade to PRO</a>'
-    + '<div style="margin-top:14px;font-size:.75rem;color:rgba(192,64,154,.5);font-family:var(--mono,\'DM Mono\',monospace)">Cancel any time</div>';
+    + '<a href="pricing.html" style="display:inline-block;background:#6366f1;color:#fff;font-family:var(--mono,\'DM Mono\',monospace);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:12px 28px;border-radius:8px;">Upgrade to PRO</a>'
+    + '<div style="margin-top:14px;font-size:.75rem;color:rgba(99,102,241,.5);font-family:var(--mono,\'DM Mono\',monospace)">Cancel any time</div>';
   main.appendChild(gate);
 }
