@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <link rel="manifest" href="manifest.json"/>
-<meta name="theme-color" content="#0A0608"/>
+<meta name="theme-color" content="#050410"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -14,35 +14,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0A0608;--bg2:#100810;
-  --magenta:#C0409A;--magenta-mid:#D060B0;
-  --gold:#F0EAE4;--copper:#C4714A;
-  --teal:#C4714A;--amber:#D4936A;--red:#E05C3A;
-  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
-  --border:rgba(192,64,154,.18);--border-lt:rgba(192,64,154,.08);
+  --bg:#050410;--bg2:#0d0b1e;
+  --magenta:#6366f1;--magenta-mid:#a5b4fc;
+  --gold:#c4b5fd;--copper:#6366f1;
+  --teal:#6366f1;--amber:#a5b4fc;--red:#E05C3A;
+  --text:#f4f3ff;--text-mid:rgba(244,243,255,0.45);--text-dim:rgba(244,243,255,0.25);
+  --border:rgba(99,102,241,.18);--border-lt:rgba(99,102,241,.08);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
   --sidebar:220px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
-.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
-.sb-brand{display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18)}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(99,102,241,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(5,4,16,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(99,102,241,.3) transparent}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(99,102,241,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(99,102,241,.6)}
+.sb-brand{display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(99,102,241,.18)}
 .sb-brand img{width:100%;height:auto;max-width:186px;object-fit:contain;filter:brightness(0.95)}
-.sb-section{padding:4px 12px 4px;margin-top:10px;border-top:1px solid rgba(192,64,154,.1);font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-section{padding:4px 12px 4px;margin-top:10px;border-top:1px solid rgba(99,102,241,.1);font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
 .sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-item:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
-.sb-item.active{background:rgba(192,64,154,.12);color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
+.sb-item:hover{background:rgba(99,102,241,.08);color:var(--text);border-color:var(--border)}
+.sb-item.active{background:rgba(99,102,241,.12);color:var(--magenta-mid);border-color:rgba(99,102,241,.25)}
 .sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
 .sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-tool:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
-.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-tool:hover{background:rgba(99,102,241,.08);color:var(--text);border-color:var(--border)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(99,102,241,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
 .sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
 .sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:var(--text-mid)}
 .sb-by b{color:var(--gold);font-weight:600}
 .sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s}
-.sidebar-resize:hover{background:rgba(192,64,154,.4)}
+.sidebar-resize:hover{background:rgba(99,102,241,.4)}
 .wrap{margin-left:var(--sidebar);padding:48px 64px 80px;max-width:900px;position:relative;z-index:1}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:32px 24px}}
 .crumb{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:32px;display:flex;align-items:center;gap:8px}
@@ -55,7 +55,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .doc-body p{font-size:.88rem;color:var(--text-mid);line-height:1.8;margin-bottom:14px}
 .doc-body ul{list-style:none;margin-bottom:14px;padding-left:0}
 .doc-body ul li{font-size:.88rem;color:var(--text-mid);line-height:1.8;padding:4px 0 4px 20px;position:relative}
-.doc-body ul li::before{content:'·';position:absolute;left:0;color:rgba(192,64,154,.4)}
+.doc-body ul li::before{content:'·';position:absolute;left:0;color:rgba(99,102,241,.4)}
 .doc-body strong{color:var(--text);font-weight:600}
 .doc-body a{color:var(--magenta-mid);text-decoration:none}
 .doc-body a:hover{text-decoration:underline}
@@ -95,7 +95,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </aside>
 
 <div class="wrap">
-  <div class="crumb"><a href="home.html">&larr; Home</a><span style="color:rgba(192,64,154,.3)">/</span>Terms of Service</div>
+  <div class="crumb"><a href="home.html">&larr; Home</a><span style="color:rgba(99,102,241,.3)">/</span>Terms of Service</div>
 
   <div class="doc-eyebrow">Legal</div>
   <h1 class="doc-title">Terms of Service</h1>
