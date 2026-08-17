@@ -46,7 +46,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .hero-eyebrow::before{content:'●';font-size:.38rem;color:var(--teal);animation:blink 2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .hero-headline{font-family:var(--font);font-size:clamp(2.8rem,5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-.025em;color:var(--text-cool);margin-bottom:20px}
-.hero-headline .gold{display:block;background:linear-gradient(135deg,#F0C840 0%,#D4900A 25%,#F5D060 55%,#C48000 80%,#D4936A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-headline .gold{display:block;background:linear-gradient(135deg,#f4f3ff 0%,#c4b5fd 50%,#6366f1 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{font-size:1.05rem;color:var(--text-mid);line-height:1.75;max-width:520px;margin-bottom:32px}
 .hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
 .pill{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;padding:6px 14px;border-radius:20px;border:1px solid rgba(99,102,241,0.2);color:rgba(244,243,255,0.45);background:rgba(99,102,241,0.05);display:flex;align-items:center;gap:6px}
@@ -96,10 +96,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
 .data-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;padding:22px}
 .dc-val{font-family:var(--hero);font-size:2.8rem;line-height:1;margin-bottom:6px}
-.dc-val.gold{background:linear-gradient(135deg,#F0C840,#D4900A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dc-val.gold{color:#c4b5fd}
 .dc-val.cobalt{color:#a5b4fc}
-.dc-val.teal{color:var(--teal)}
-.dc-val.copper{color:var(--copper-lt)}
+.dc-val.teal{color:#a5b4fc}
+.dc-val.copper{color:#a5b4fc}
 .dc-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,243,255,0.45);margin-bottom:4px}
 .dc-desc{font-size:.78rem;color:rgba(99,102,241,0.5)}
 
@@ -110,7 +110,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .price-card.featured{border-color:rgba(240,234,228,.3)}
 .pc-tier{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#a5b4fc;margin-bottom:10px}
 .pc-price{font-family:var(--hero);font-size:2.8rem;line-height:1;color:var(--text-cool);margin-bottom:4px}
-.price-card.featured .pc-price{background:linear-gradient(135deg,#F0C840,#D4900A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.price-card.featured .pc-price{color:#c4b5fd;-webkit-text-fill-color:#c4b5fd;background:none}
 .pc-per{font-family:var(--mono);font-size:.68rem;color:rgba(244,243,255,0.45);margin-bottom:16px}
 .pc-features{list-style:none;margin-bottom:20px}
 .pc-features li{font-size:.84rem;color:rgba(244,243,255,0.45);padding:5px 0;border-bottom:1px solid rgba(99,102,241,0.06);display:flex;align-items:center;gap:8px}
