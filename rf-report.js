@@ -58,18 +58,18 @@ var _RF_REPORT_CSS = `/* REVENUE FLUENT — BOARD REPORT PRINT STYLESHEET */
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap');
 
 :root{
-  --bg:#0A0608;--bg2:#180C14;--bg3:#220E1A;
-  --magenta:#C0409A;--gold:#E0B830;--copper:#B87333;--copper-lt:#E8C87A;
+  --bg:#050410;--bg2:#0d0b1e;--bg3:#11102a;
+  --magenta:#6366f1;--gold:#c4b5fd;--copper:#6366f1;--copper-lt:#c4b5fd;
   --teal:#38C490;--red:#E05C3A;
   --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
-  --border:rgba(192,64,154,.2);
+  --border:rgba(99,102,241,.2);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;--hero:'Bebas Neue',sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  background:#fff;color:#1A0818;
+  background:#fff;color:#0d0b1e;
   font-family:'Sora',sans-serif;font-size:10pt;line-height:1.5;
   -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
@@ -89,33 +89,33 @@ body{
 }
 
 @media screen{
-  body{background:#f0e8ec;padding:20px}
-  .report-page{box-shadow:0 4px 40px rgba(192,64,154,.15);margin:0 auto 40px}
+  body{background:#eef2ff;padding:20px}
+  .report-page{box-shadow:0 4px 40px rgba(99,102,241,.15);margin:0 auto 40px}
 }
 
 /* HEADER */
 .rpt-header{
   display:flex;align-items:flex-start;justify-content:space-between;
-  padding-bottom:8mm;border-bottom:2px solid #C0409A;margin-bottom:7mm;
+  padding-bottom:8mm;border-bottom:2px solid #6366f1;margin-bottom:7mm;
 }
 .rpt-brand{display:flex;align-items:center;gap:8px}
-.rpt-brand-dot{width:10px;height:10px;border-radius:50%;background:#B87333;flex-shrink:0}
-.rpt-brand-name{font-family:'DM Mono',monospace;font-size:9pt;letter-spacing:.14em;text-transform:uppercase;color:#1A0818;font-weight:500}
-.rpt-brand-tag{font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:#C0409A;margin-top:3px}
+.rpt-brand-dot{width:10px;height:10px;border-radius:50%;background:#6366f1;flex-shrink:0}
+.rpt-brand-name{font-family:'DM Mono',monospace;font-size:9pt;letter-spacing:.14em;text-transform:uppercase;color:#0d0b1e;font-weight:500}
+.rpt-brand-tag{font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:#6366f1;margin-top:3px}
 .rpt-meta{text-align:right}
-.rpt-meta-pillar{font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.14em;text-transform:uppercase;color:#C0409A;margin-bottom:3px}
-.rpt-meta-scenario{font-size:9pt;font-weight:600;color:#1A0818;margin-bottom:2px}
-.rpt-meta-detail{font-family:'DM Mono',monospace;font-size:7pt;color:#6A3858;letter-spacing:.06em}
+.rpt-meta-pillar{font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.14em;text-transform:uppercase;color:#6366f1;margin-bottom:3px}
+.rpt-meta-scenario{font-size:9pt;font-weight:600;color:#0d0b1e;margin-bottom:2px}
+.rpt-meta-detail{font-family:'DM Mono',monospace;font-size:7pt;color:#475569;letter-spacing:.06em}
 
 /* HERO NUMBER */
 .rpt-hero{
-  background:linear-gradient(135deg,#1A0818,#0A0608);
+  background:linear-gradient(135deg,#0d0b1e,#050410);
   border-radius:8px;padding:7mm 10mm;margin-bottom:6mm;
-  border-left:4px solid #C0409A;
+  border-left:4px solid #6366f1;
   -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
-.rpt-hero-label{font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.18em;text-transform:uppercase;color:#C0409A;margin-bottom:3mm}
-.rpt-hero-num{font-family:'Bebas Neue',sans-serif;font-size:36pt;line-height:1;color:#E0B830;letter-spacing:.02em;margin-bottom:2mm}
+.rpt-hero-label{font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.18em;text-transform:uppercase;color:#6366f1;margin-bottom:3mm}
+.rpt-hero-num{font-family:'Bebas Neue',sans-serif;font-size:36pt;line-height:1;color:#c4b5fd;letter-spacing:.02em;margin-bottom:2mm}
 .rpt-hero-sub{font-size:9pt;color:#D8B8D0;line-height:1.4}
 .rpt-hero-sub b{color:#EED8E8}
 
@@ -123,83 +123,83 @@ body{
 .rpt-section{margin-bottom:5mm}
 .rpt-section-title{
   font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.18em;text-transform:uppercase;
-  color:#C0409A;padding-bottom:2mm;border-bottom:1px solid rgba(192,64,154,.2);margin-bottom:3mm;
+  color:#6366f1;padding-bottom:2mm;border-bottom:1px solid rgba(99,102,241,.2);margin-bottom:3mm;
 }
 
 /* TABLE */
 .rpt-table{width:100%;border-collapse:collapse;font-size:8.5pt;margin-bottom:4mm}
 .rpt-table th{
   font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.1em;text-transform:uppercase;
-  background:#1A0818;color:#C0409A;padding:3mm 3mm;text-align:left;
+  background:#0d0b1e;color:#6366f1;padding:3mm 3mm;text-align:left;
   -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
 .rpt-table th.right{text-align:right}
-.rpt-table td{padding:2.5mm 3mm;border-bottom:1px solid rgba(192,64,154,.08);color:#1A0818;vertical-align:top}
+.rpt-table td{padding:2.5mm 3mm;border-bottom:1px solid rgba(99,102,241,.08);color:#0d0b1e;vertical-align:top}
 .rpt-table td.right{text-align:right;font-family:'DM Mono',monospace;font-size:8pt}
-.rpt-table td.label{font-weight:500;color:#1A0818}
+.rpt-table td.label{font-weight:500;color:#0d0b1e}
 .rpt-table td.pos{color:#1A7A5A;font-family:'DM Mono',monospace;font-weight:600}
 .rpt-table td.neg{color:#B03020;font-family:'DM Mono',monospace;font-weight:600}
-.rpt-table td.gold{color:#8A6010;font-family:'DM Mono',monospace;font-weight:600}
-.rpt-table td.muted{color:#6A3858;font-size:8pt}
-.rpt-table tr.total td{background:#F8EEF4;font-weight:700;border-bottom:2px solid rgba(192,64,154,.3);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-.rpt-table tr.section-head td{background:#F0E0EC;font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:#8A2070;padding:2mm 3mm;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-.rpt-table tr.net td{background:#1A0818;color:#E0B830;font-family:'DM Mono',monospace;font-size:10pt;font-weight:700;border:none;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-.rpt-table tr.net td.right{color:#E0B830}
+.rpt-table td.gold{color:#4338ca;font-family:'DM Mono',monospace;font-weight:600}
+.rpt-table td.muted{color:#475569;font-size:8pt}
+.rpt-table tr.total td{background:#f4f3ff;font-weight:700;border-bottom:2px solid rgba(99,102,241,.3);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.rpt-table tr.section-head td{background:#ede9fe;font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:#4338ca;padding:2mm 3mm;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.rpt-table tr.net td{background:#0d0b1e;color:#c4b5fd;font-family:'DM Mono',monospace;font-size:10pt;font-weight:700;border:none;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.rpt-table tr.net td.right{color:#c4b5fd}
 .rpt-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:6.5pt;letter-spacing:.06em;text-transform:uppercase;padding:1px 5px;border-radius:3px;border:1px solid}
 
 /* INTELLIGENCE STATEMENT */
 .rpt-statement{
-  background:#F8EEF4;border-left:3px solid #C0409A;border-radius:4px;
+  background:#f4f3ff;border-left:3px solid #6366f1;border-radius:4px;
   padding:4mm 5mm;margin-bottom:5mm;
   -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
-.rpt-statement-label{font-family:'DM Mono',monospace;font-size:6.5pt;letter-spacing:.16em;text-transform:uppercase;color:#C0409A;margin-bottom:2mm}
-.rpt-statement-text{font-size:9pt;color:#1A0818;line-height:1.6}
-.rpt-statement-text b{color:#8A2070}
+.rpt-statement-label{font-family:'DM Mono',monospace;font-size:6.5pt;letter-spacing:.16em;text-transform:uppercase;color:#6366f1;margin-bottom:2mm}
+.rpt-statement-text{font-size:9pt;color:#0d0b1e;line-height:1.6}
+.rpt-statement-text b{color:#4338ca}
 
 /* TWO COLUMN BALANCE SHEET */
 .rpt-bs-cols{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin-bottom:4mm}
 .rpt-bs-col-head{font-family:'DM Mono',monospace;font-size:7pt;letter-spacing:.14em;text-transform:uppercase;padding:2mm 3mm;margin-bottom:2mm;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
 .rpt-bs-col-head.assets{background:#0A2018;color:#38C490}
 .rpt-bs-col-head.liabs{background:#200808;color:#E05C3A}
-.rpt-bs-row{display:flex;justify-content:space-between;align-items:flex-start;padding:2mm 3mm;border-bottom:1px solid rgba(192,64,154,.08);gap:8px}
-.rpt-bs-row-label{font-size:8.5pt;color:#1A0818;font-weight:500}
-.rpt-bs-row-desc{font-size:7pt;color:#6A3858;line-height:1.3;margin-top:1px}
+.rpt-bs-row{display:flex;justify-content:space-between;align-items:flex-start;padding:2mm 3mm;border-bottom:1px solid rgba(99,102,241,.08);gap:8px}
+.rpt-bs-row-label{font-size:8.5pt;color:#0d0b1e;font-weight:500}
+.rpt-bs-row-desc{font-size:7pt;color:#475569;line-height:1.3;margin-top:1px}
 .rpt-bs-row-val{font-family:'DM Mono',monospace;font-size:8.5pt;font-weight:600;white-space:nowrap}
 .rpt-bs-row-val.pos{color:#1A7A5A}
 .rpt-bs-row-val.neg{color:#B03020}
 
 /* STAT ROW */
 .rpt-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-bottom:5mm}
-.rpt-stat{background:#F8EEF4;border-radius:4px;padding:3mm;text-align:center;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-.rpt-stat-val{font-family:'DM Mono',monospace;font-size:14pt;font-weight:600;color:#8A2070;line-height:1}
-.rpt-stat-lbl{font-family:'DM Mono',monospace;font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:#6A3858;margin-top:1mm}
+.rpt-stat{background:#f4f3ff;border-radius:4px;padding:3mm;text-align:center;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.rpt-stat-val{font-family:'DM Mono',monospace;font-size:14pt;font-weight:600;color:#4338ca;line-height:1}
+.rpt-stat-lbl{font-family:'DM Mono',monospace;font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:#475569;margin-top:1mm}
 
 /* FOOTER */
 .rpt-footer{
   position:absolute;bottom:8mm;left:14mm;right:14mm;
   display:flex;justify-content:space-between;align-items:center;
-  padding-top:3mm;border-top:1px solid rgba(192,64,154,.2);
+  padding-top:3mm;border-top:1px solid rgba(99,102,241,.2);
 }
-.rpt-footer-left{font-family:'DM Mono',monospace;font-size:6.5pt;color:#6A3858;letter-spacing:.06em}
-.rpt-footer-right{font-family:'DM Mono',monospace;font-size:6.5pt;color:#6A3858}
+.rpt-footer-left{font-family:'DM Mono',monospace;font-size:6.5pt;color:#475569;letter-spacing:.06em}
+.rpt-footer-right{font-family:'DM Mono',monospace;font-size:6.5pt;color:#475569}
 
 /* PRINT BUTTON */
 .print-btn{
   position:fixed;bottom:24px;right:24px;
-  background:#C0409A;color:#fff;border:none;cursor:pointer;
+  background:#6366f1;color:#fff;border:none;cursor:pointer;
   font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
   padding:12px 24px;border-radius:9px;font-weight:500;
-  box-shadow:0 4px 20px rgba(192,64,154,.4);transition:all .2s;z-index:1000;
+  box-shadow:0 4px 20px rgba(99,102,241,.4);transition:all .2s;z-index:1000;
 }
-.print-btn:hover{background:#D050A8;transform:translateY(-2px)}
+.print-btn:hover{background:#818cf8;transform:translateY(-2px)}
 .close-btn{
   position:fixed;bottom:24px;right:180px;
-  background:rgba(192,64,154,.1);color:#C0409A;border:1px solid rgba(192,64,154,.3);cursor:pointer;
+  background:rgba(99,102,241,.1);color:#6366f1;border:1px solid rgba(99,102,241,.3);cursor:pointer;
   font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
   padding:12px 20px;border-radius:9px;transition:all .2s;z-index:1000;
 }
-.close-btn:hover{background:rgba(192,64,154,.2)}
+.close-btn:hover{background:rgba(99,102,241,.2)}
 `;
 
 function openReport(title, body) {
@@ -229,11 +229,11 @@ function reportP1(scenarioName, entries, sym, totalReturn, hrInvestment, ratio) 
     var net = e.ret - e.cost;
     var tagColour = {
       'Revenue-Generating':'#1A7A5A','Cost-Saving':'#5A9020',
-      'Development':'#2070A0','Culture & Engagement':'#8A2070','Risk & Compliance':'#8A3010'
-    }[e.category] || '#6A3858';
+      'Development':'#2070A0','Culture & Engagement':'#4338ca','Risk & Compliance':'#8A3010'
+    }[e.category] || '#475569';
     return '<tr>'
       + '<td class="muted">' + e.date + '</td>'
-      + '<td class="label">' + e.action + '<br><span style="font-size:7pt;color:#6A3858">' + e.note + '</span></td>'
+      + '<td class="label">' + e.action + '<br><span style="font-size:7pt;color:#475569">' + e.note + '</span></td>'
       + '<td style="text-align:center"><span class="rpt-tag" style="color:' + tagColour + ';border-color:' + tagColour + '">' + e.category + '</span></td>'
       + '<td class="right">' + fmt(sym, e.cost) + '</td>'
       + '<td class="right pos">' + fmt(sym, e.ret) + '</td>'
@@ -324,9 +324,9 @@ function reportP3(scenarioName, vitals, dnaType) {
   var s = RF.scenario(scenarioName), sum = RF.summary(scenarioName);
   var detail = s.employeeCount + ' people &middot; ' + sum.geo;
 
-  var verdictColor = {'HEALTHY':'#1A7A5A','WARNING':'#8A6010','CRITICAL':'#B03020'};
+  var verdictColor = {'HEALTHY':'#1A7A5A','WARNING':'#4338ca','CRITICAL':'#B03020'};
   var rows = vitals.map(function(v){
-    var col = verdictColor[v.verdict] || '#6A3858';
+    var col = verdictColor[v.verdict] || '#475569';
     return '<tr>'
       + '<td class="label">' + v.name + '</td>'
       + '<td class="muted" style="font-size:8pt">' + v.sub + '</td>'
@@ -477,7 +477,7 @@ function reportP5(scenarioName, d) {
     +       bsRow('Org Learning Velocity', 'Emerging talent pipeline value', d.orgLearning, true)
     +       bsRow('Relationship Capital', 'Revenue-dept client relationship value', d.relCapital, true)
     +       bsRow('Culture Asset', 'Long-tenure engagement premium', d.cultureAsset, true)
-    +       '<div class="rpt-bs-row" style="background:#F0E0EC;font-weight:700;margin-top:2mm">'
+    +       '<div class="rpt-bs-row" style="background:#ede9fe;font-weight:700;margin-top:2mm">'
     +         '<div class="rpt-bs-row-label">= TOTAL HUMAN ASSETS</div>'
     +         '<div class="rpt-bs-row-val pos">' + fmt(sym,d.totalAssets) + '</div>'
     +       '</div>'
@@ -489,16 +489,16 @@ function reportP5(scenarioName, d) {
     +       bsRow('Growth Readiness Gap', 'Cost of unpreparedness for next stage', d.growthGap, false)
     +       bsRow('Culture Liability', 'Financial cost of known dysfunction', d.cultureLiab, false)
     +       bsRow('Workforce Obsolescence Risk', 'Tenured staff below grade benchmark', d.workforceObs, false)
-    +       '<div class="rpt-bs-row" style="background:#F0E0EC;font-weight:700;margin-top:2mm">'
+    +       '<div class="rpt-bs-row" style="background:#ede9fe;font-weight:700;margin-top:2mm">'
     +         '<div class="rpt-bs-row-label">= TOTAL HUMAN LIABILITIES</div>'
     +         '<div class="rpt-bs-row-val neg">' + fmt(sym,d.totalLiabilities) + '</div>'
     +       '</div>'
     +     '</div>'
     +   '</div>'
-    +   '<div style="background:#1A0818;color:#E8C87A;font-family:\'DM Mono\',monospace;font-size:8pt;padding:3mm 4mm;border-radius:4px;display:flex;justify-content:space-between;margin-top:2mm">'
+    +   '<div style="background:#0d0b1e;color:#c4b5fd;font-family:\'DM Mono\',monospace;font-size:8pt;padding:3mm 4mm;border-radius:4px;display:flex;justify-content:space-between;margin-top:2mm">'
     +     '<span>Retained Human Earnings (from Human P&L, L4)</span><span>' + fmt(sym,d.retainedEarnings) + '</span>'
     +   '</div>'
-    +   '<div style="background:#0A0608;color:#E0B830;font-family:\'DM Mono\',monospace;font-size:11pt;font-weight:700;padding:4mm 5mm;border-radius:4px;display:flex;justify-content:space-between;margin-top:2mm">'
+    +   '<div style="background:#050410;color:#c4b5fd;font-family:\'DM Mono\',monospace;font-size:11pt;font-weight:700;padding:4mm 5mm;border-radius:4px;display:flex;justify-content:space-between;margin-top:2mm">'
     +     '<span>NET HUMAN WORTH</span><span>' + fmt(sym,d.netHumanWorth) + '</span>'
     +   '</div>'
     + '</div>'
