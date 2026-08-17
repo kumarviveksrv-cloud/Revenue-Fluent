@@ -1,103 +1,126 @@
 <!DOCTYPE html>
 <html lang="en"><head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
 <meta charset="utf-8"/>
 <link rel="manifest" href="manifest.json"/>
-<meta name="theme-color" content="#0A0608"/>
+<meta name="theme-color" content="#050410"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Revenue Fluent"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
 <link rel="icon" type="image/png" href="favicon.png"/>
+<link rel="shortcut icon" href="favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Org — Revenue Fluent</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<title>My Org, Revenue Fluent</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0A0608;--bg2:#100810;--bg3:#080408;
-  --cobalt:#C0409A;--cobalt-border:rgba(180,40,140,.18);--cobalt-dim:rgba(180,40,140,.08);
-  --gold:#F0EAE4;--copper:#C4714A;--copper-lt:#D4936A;
-  --teal:#C4714A;--red:#E05C3A;--amber:#D4936A;
-  --text:#E8E6E0;--text-cool:#DCE8F8;--text-mid:#B8C8E8;--text-dim:#9AB8D8;
-  --text-mute:rgba(180,40,140,.25);--border:rgba(180,40,140,.15);
+  --bg:#050410;--bg2:#0d0b1e;--bg3:#11102a;
+  --cobalt:#6366f1;--cobalt-dim:rgba(99,102,241,.08);--cobalt-border:rgba(99,102,241,.18);
+  --gold:#c4b5fd;--copper:#6366f1;--copper-lt:#a5b4fc;
+  --teal:#6366f1;--red:#E05C3A;--amber:#a5b4fc;
+  --text:#f4f3ff;--text-cool:#f4f3ff;--text-mid:#a5b4fc;--text-dim:rgba(244,243,255,0.45);
+  --border:rgba(99,102,241,.15);
   --sidebar:220px;
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
-  --serif:'Playfair Display',serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;
-  background-image:radial-gradient(ellipse 70% 40% at 60% 0%,rgba(160,20,110,.12) 0%,transparent 55%),linear-gradient(rgba(160,20,120,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.02) 1px,transparent 1px);
+  background-image:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(99,102,241,.12) 0%,transparent 55%),linear-gradient(rgba(99,102,241,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.02) 1px,transparent 1px);
   background-size:100% 100%,52px 52px,52px 52px;min-height:100vh;}
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-right:1px solid var(--cobalt-border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
-.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
-.sb-logo{padding:16px 14px 12px;border-bottom:1px solid var(--cobalt-border);margin-bottom:6px}
-.sb-logo img{width:100%;max-width:186px;max-height:52px;object-fit:contain;filter:brightness(0.9);mix-blend-mode:lighten}
-.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#C8A8C0}
-.sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:#D8B8D0;font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-item:hover{background:rgba(180,40,140,.08);color:#EED8E8;border-color:rgba(180,40,140,.18)}
-.sb-item.active{background:rgba(192,64,154,.12);color:#D060B0;border-color:rgba(192,64,154,.25)}
-.sidebar-resize{width:4px;position:absolute;right:0;top:0;bottom:0;cursor:col-resize;background:transparent;transition:background .15s}
-.sidebar-resize:hover{background:rgba(192,64,154,.3)}
-.main{margin-left:var(--sidebar);min-height:100vh;padding:40px 48px 80px}
-.page-header{margin-bottom:36px}
-.page-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cobalt);margin-bottom:10px}
-.page-title{font-size:1.8rem;font-weight:700;color:var(--text-cool);margin-bottom:8px}
-.page-sub{font-size:.9rem;color:var(--text-mid);max-width:560px;line-height:1.7}
 
-/* Save banner */
-.save-banner{display:none;align-items:center;gap:10px;background:rgba(196,113,74,.1);border:1px solid rgba(196,113,74,.3);border-radius:8px;padding:10px 16px;margin-bottom:24px;font-size:.82rem;color:var(--teal)}
-.save-banner.show{display:flex}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(5,4,16,.95);backdrop-filter:blur(16px);border-right:1px solid var(--cobalt-border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(99,102,241,.3) transparent}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(99,102,241,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(99,102,241,.6)}
+.sb-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,243,255,0.25)}
+.sb-item{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:rgba(244,243,255,0.45);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-item:hover{background:rgba(99,102,241,.08);color:rgba(244,243,255,0.45);border-color:rgba(99,102,241,.18)}
+.sb-item.active{background:rgba(99,102,241,.12);color:#a5b4fc;border-color:rgba(99,102,241,.25)}
+.sb-tools-section{padding:14px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,243,255,0.25)}
+.sb-tool{display:flex;align-items:center;gap:9px;padding:7px 14px;margin:1px 6px;border-radius:7px;text-decoration:none;color:rgba(244,243,255,0.45);font-size:.8rem;transition:all .15s;border:1px solid transparent}
+.sb-tool:hover{background:rgba(99,102,241,.08);color:rgba(244,243,255,0.45);border-color:rgba(99,102,241,.18)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(99,102,241,.12);color:#a5b4fc;width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--cobalt-border)}
+.sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:rgba(244,243,255,0.45);letter-spacing:.06em}
+.sb-by b{color:#a5b4fc;font-weight:600;font-size:.72rem}
+.sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s}
+.sidebar-resize:hover{background:rgba(99,102,241,.4)}
 
-/* Cards */
-.section-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;padding:28px;margin-bottom:20px}
-.section-card-title{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px}
-.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.field-grid.single{grid-template-columns:1fr}
-.field-wrap{display:flex;flex-direction:column;gap:6px}
-.field-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
-.field-input{background:rgba(180,40,140,.06);border:1px solid var(--cobalt-border);border-radius:7px;padding:10px 14px;color:var(--text);font-family:var(--font);font-size:.9rem;font-weight:400;transition:all .15s;width:100%}
-.field-input:focus{outline:none;border-color:var(--cobalt);background:rgba(192,64,154,.1)}
-.field-input::placeholder{color:var(--text-dim);opacity:.6}
-select.field-input{cursor:pointer}
-.field-note{font-size:.72rem;color:var(--text-dim);opacity:.8}
-.auto-field{background:rgba(196,113,74,.06);border:1px solid rgba(196,113,74,.2);border-radius:7px;padding:10px 14px;color:var(--teal);font-family:var(--mono);font-size:.85rem;font-weight:400}
+.wrap{margin-left:var(--sidebar);padding:40px 48px 80px;max-width:calc(860px + var(--sidebar))}
+@media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:24px 20px 60px}}
 
-/* Flow preview */
-.flow-section{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;padding:28px;margin-bottom:20px}
-.flow-title{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px}
-.flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center}
-.flow-pill{background:rgba(192,64,154,.1);border:1px solid rgba(192,64,154,.25);border-radius:8px;padding:10px 12px;text-align:center}
-.flow-pill-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt);margin-bottom:4px}
-.flow-pill-name{font-size:.75rem;font-weight:600;color:var(--text-cool)}
-.flow-arrow{text-align:center;color:var(--cobalt);font-size:1rem;opacity:.6}
-.flow-note{font-size:.75rem;color:var(--text-mid);margin-top:14px;line-height:1.6}
+.eyebrow{font-family:var(--mono);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:#a5b4fc;margin-bottom:12px}
+.page-title{font-size:2rem;font-weight:700;letter-spacing:-.02em;color:var(--text-cool);margin-bottom:8px}
+.lede{font-size:.9rem;color:rgba(244,243,255,0.45);max-width:560px;line-height:1.7;margin-bottom:32px}
 
-/* Status row */
-.status-row{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--cobalt-border)}
-.status-dot{width:7px;height:7px;border-radius:50%}
-.status-dot.set{background:var(--teal)}
-.status-dot.unset{background:var(--amber)}
-.status-label{font-size:.78rem;color:var(--text-mid)}
-
-/* Save button */
-.btn-save{background:var(--cobalt);color:#fff;border:none;border-radius:8px;padding:11px 28px;font-family:var(--font);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s;letter-spacing:.02em}
-.btn-save:hover{background:#D060B0;transform:translateY(-1px)}
-.btn-save:active{transform:translateY(0)}
-.btn-clear{background:transparent;color:var(--text-dim);border:1px solid var(--cobalt-border);border-radius:8px;padding:11px 20px;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:all .15s;margin-left:10px}
-.btn-clear:hover{border-color:var(--cobalt);color:var(--text)}
-.btn-row{display:flex;align-items:center;margin-top:24px}
-
-@media(max-width:760px){
-  .sidebar{display:none}.main{margin-left:0;padding:24px 20px 100px}
-  .field-grid{grid-template-columns:1fr}
-  .flow-grid{grid-template-columns:1fr}
-  .flow-arrow{transform:rotate(90deg)}
+@keyframes card-glow{
+  0%,100%{box-shadow:0 0 0 1px rgba(99,102,241,.15),0 0 16px rgba(99,102,241,.06)}
+  50%{box-shadow:0 0 0 1px rgba(220,80,180,.3),0 0 28px rgba(99,102,241,.1)}
 }
+
+.save-bar{display:flex;align-items:center;gap:16px;padding:14px 20px;background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:12px;margin-bottom:28px;animation:card-glow 3s ease-in-out infinite;flex-wrap:wrap}
+.save-dot{width:10px;height:10px;border-radius:50%;background:rgba(244,243,255,0.25);flex-shrink:0}
+.save-dot.saved{background:var(--teal)}
+.save-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,243,255,0.25);flex:1}
+.save-btn{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:8px;background:var(--cobalt);color:#fff;border:none;cursor:pointer;transition:all .15s;white-space:nowrap}
+.save-btn:hover{background:#6366f1}
+.clear-btn{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:8px;background:transparent;color:rgba(224,92,58,.6);border:1px solid rgba(224,92,58,.2);cursor:pointer;transition:all .15s;white-space:nowrap}
+.clear-btn:hover{border-color:rgba(224,92,58,.5);color:#E05C3A}
+
+.section-card{background:var(--bg2);border:1px solid var(--cobalt-border);border-radius:14px;padding:24px 28px;margin-bottom:16px;animation:card-glow 3s ease-in-out infinite}
+.sc-title{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#a5b4fc;margin-bottom:4px}
+.sc-question{font-size:.96rem;font-weight:500;color:var(--text-cool);margin-bottom:16px;line-height:1.4}
+.sc-sub{font-size:.8rem;color:rgba(244,243,255,0.25);line-height:1.6;margin-bottom:16px}
+
+/* INPUT STYLES */
+.field-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,243,255,0.25)}
+.field-input{background:rgba(13,11,30,.4);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:var(--font);font-size:.9rem;transition:border-color .15s;width:100%}
+.field-input:focus{outline:none;border-color:rgba(99,102,241,.5)}
+.field-input::placeholder{color:rgba(99,102,241,.3)}
+select.field-input{cursor:pointer}
+select.field-input option{background:#0d0b1e}
+
+/* OPTION CHIPS */
+.option-chips{display:flex;flex-wrap:wrap;gap:8px}
+.opt-chip{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;padding:7px 14px;border-radius:8px;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;transition:all .15s;user-select:none}
+.opt-chip:hover{border-color:var(--cobalt-border);color:var(--text-mid)}
+.opt-chip.on{background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.5);color:#a5b4fc}
+
+/* TWO COLUMN */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.two-col{grid-template-columns:1fr}}
+
+/* PREVIEW STRIP */
+.preview-strip{background:rgba(13,11,30,.5);border:1px solid rgba(99,102,241,.12);border-radius:10px;padding:14px 18px;margin-top:8px;display:flex;flex-wrap:wrap;gap:16px}
+.prev-item{display:flex;flex-direction:column;gap:2px}
+.prev-val{font-family:var(--mono);font-size:.88rem;font-weight:500;color:var(--gold)}
+.prev-key{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,243,255,0.25)}
+
+/* HCI GLOBAL */
+.hci-factors{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.hci-factor{background:rgba(13,11,30,.4);border:1px solid rgba(99,102,241,.12);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;user-select:none}
+.hci-factor:hover{border-color:rgba(99,102,241,.3)}
+.hci-factor.yes{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.3)}
+.hci-factor-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.hci-factor-name{font-size:.84rem;font-weight:600;color:#f4f3ff}
+.hci-factor-toggle{width:36px;height:20px;border-radius:10px;background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.3);position:relative;transition:all .2s;flex-shrink:0}
+.hci-factor.yes .hci-factor-toggle{background:rgba(99,102,241,.3);border-color:rgba(99,102,241,.5)}
+.hci-factor-toggle::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#a5b4fc;transition:all .2s}
+.hci-factor.yes .hci-factor-toggle::after{left:19px;background:#6366f1}
+.hci-factor-desc{font-size:.74rem;color:rgba(244,243,255,0.25);line-height:1.5}
+.hci-result{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(13,11,30,.4);border-radius:10px;margin-top:14px}
+.hci-coeff{font-family:var(--mono);font-size:1.6rem;font-weight:600;color:#a5b4fc;flex-shrink:0}
+.hci-formula{font-family:var(--mono);font-size:.7rem;color:rgba(244,243,255,0.25);line-height:1.5}
 </style>
+<script src="rf-profile.js"></script>
 </head>
 <body>
+
 <aside class="sidebar" id="mainSidebar">
-  <div class="sb-logo"><img src="logo.png" alt="Revenue Fluent"/></div>
+  <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(99,102,241,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:186px;object-fit:contain;filter:brightness(0.95)"/></a>
   <div class="sb-section">Platform</div>
   <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
   <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
@@ -106,335 +129,329 @@ select.field-input{cursor:pointer}
   <a href="profile.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>My Profile</a>
   <a href="downloads.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v8M5 7l3 3 3-3M2 13h12"/></svg>Downloads</a>
   <a href="learn.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3zM5 3V1M11 3V1M2 7h12"/></svg>Learning Hub</a>
-  <div class="sb-section">The Five Pillars</div>
-  <a href="p1-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L1</div>Value Ledger</a>
-  <a href="p2-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L2</div>Talent Premium</a>
-  <a href="p3-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L3</div>Org Vitals</a>
-  <a href="p4-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L4</div>Human P&amp;L</a>
-  <a href="p5-tool.html" class="sb-item"><div style="font-family:var(--mono);font-size:.6rem;color:var(--cobalt);min-width:16px">L5</div>Balance Sheet</a>
+  <div class="sb-tools-section">The Five Pillars</div>
+  <a href="p1-tool.html" class="sb-tool"><div class="sb-tool-num">L1</div>Value Ledger</a>
+  <a href="p2-tool.html" class="sb-tool"><div class="sb-tool-num">L2</div>Talent Premium</a>
+  <a href="p3-tool.html" class="sb-tool"><div class="sb-tool-num">L3</div>Org Vitals</a>
+  <a href="p4-tool.html" class="sb-tool"><div class="sb-tool-num">L4</div>Human P&amp;L</a>
+  <a href="p5-tool.html" class="sb-tool"><div class="sb-tool-num">L5</div>Balance Sheet</a>
   <div class="sb-section">Philosophy</div>
-  <a href="humacity.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1"/></svg>Humacity</a>
+  <a href="humacity.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 2a4 4 0 010 8 4 4 0 010-8zm0 1v3l2 1"/></svg>Humacity</a>
   <div class="sb-section">Legal</div>
   <a href="privacy.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5 2v4c0 3-2 5-5 6C5 13 3 11 3 8V4l5-2z"/></svg>Privacy Policy</a>
   <a href="terms.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1zM5 6h6M5 9h6M5 12h4"/></svg>Terms of Service</a>
   <div class="sb-section">More</div>
   <a href="pricing.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>Pricing</a>
+  <div class="sb-bottom"><div class="sb-by">by <b>Kumar Vivek</b></div></div>
   <div class="sidebar-resize" id="sbResize"></div>
 </aside>
 
-<div class="main">
-  <div class="page-header">
-    <div class="page-eyebrow">Shared Foundation</div>
-    <h1 class="page-title">My Org</h1>
-    <p class="page-sub">Enter your organisation's core data once. Every tool reads from it. The calculations never change, only the numbers they work with.</p>
+<div class="wrap">
+  <div class="eyebrow">Revenue Fluent &middot; My Org</div>
+  <h1 class="page-title">Your organisation's context.</h1>
+  <p class="lede">Set your org details once. Every tool applies them automatically. Stored on your device only.</p>
+
+  <div class="save-bar">
+    <div class="save-dot" id="saveDot"></div>
+    <div class="save-label" id="saveLabel">No org data saved — enter your details below</div>
+    <button class="save-btn" onclick="saveOrg()">Save Org Settings</button>
+    <button class="clear-btn" onclick="clearOrg()">Clear</button>
   </div>
 
-  <div class="save-banner" id="saveBanner">
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l3 3 7-7"/></svg>
-    Saved. All five tools will now use your org data.
-  </div>
-
-  <!-- Core Identity -->
+  <!-- ORG BASICS -->
   <div class="section-card">
-    <div class="section-card-title">Organisation Identity</div>
-    <div class="field-grid">
-      <div class="field-wrap">
-        <label class="field-label">Organisation Name</label>
+    <div class="sc-title">Organisation Basics</div>
+    <div class="sc-question">Tell us about your organisation</div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Organisation Name</div>
         <input class="field-input" id="orgName" type="text" placeholder="e.g. Acme Corp" autocomplete="off"/>
       </div>
-      <div class="field-wrap">
-        <label class="field-label">Financial Year</label>
-        <input class="field-input" id="orgYear" type="text" placeholder="e.g. FY2026" autocomplete="off"/>
-      </div>
-      <div class="field-wrap">
-        <label class="field-label">Sector</label>
-        <select class="field-input" id="orgSector">
-          <option value="">Select sector</option>
-          <option value="SaaS">SaaS / Tech</option>
-          <option value="Consulting">Consulting / Professional Services</option>
-          <option value="BFSI">BFSI / Financial Services</option>
-          <option value="Healthcare">Healthcare</option>
-          <option value="Manufacturing">Manufacturing</option>
-          <option value="Sales">Sales Organisation</option>
-          <option value="Hospitality">Hospitality</option>
-          <option value="Public Sector">Public Sector</option>
-          <option value="NGO">NGO / Social Enterprise</option>
-          <option value="Academia">Academia / Education</option>
-          <option value="Other">Other</option>
+      <div class="field-group">
+        <div class="field-label">Industry</div>
+        <select class="field-input" id="orgIndustry">
+          <option value="">Select industry</option>
+          <option>SaaS / Tech</option>
+          <option>BFSI (Banking, Financial Services, Insurance)</option>
+          <option>Healthcare</option>
+          <option>Manufacturing</option>
+          <option>Consulting / Professional Services</option>
+          <option>Hospitality / Retail</option>
+          <option>Government / Public Sector</option>
+          <option>NGO / Social Enterprise</option>
+          <option>Education</option>
+          <option>Other</option>
         </select>
       </div>
-      <div class="field-wrap">
-        <label class="field-label">Growth Stage</label>
-        <select class="field-input" id="orgStage">
-          <option value="">Select stage</option>
-          <option value="Startup">Startup (under 50 people)</option>
-          <option value="Scale-up">Scale-up (50-250 people)</option>
-          <option value="Mid-Market">Mid-Market (250-1000 people)</option>
-          <option value="Enterprise">Enterprise (1000+ people)</option>
-          <option value="Public Sector">Public / Institutional</option>
+      <div class="field-group">
+        <div class="field-label">Headquarters / Primary Location</div>
+        <input class="field-input" id="orgCity" type="text" placeholder="e.g. Mumbai, India" autocomplete="off"/>
+      </div>
+      <div class="field-group">
+        <div class="field-label">Primary Currency</div>
+        <select class="field-input" id="orgCurrency">
+          <option value="">Select currency</option>
+          <option value="INR">₹ INR — Indian Rupee</option>
+          <option value="USD">$ USD — US Dollar</option>
+          <option value="GBP">£ GBP — British Pound</option>
+          <option value="EUR">€ EUR — Euro</option>
+          <option value="SGD">S$ SGD — Singapore Dollar</option>
+          <option value="AED">AED — UAE Dirham</option>
+          <option value="JPY">¥ JPY — Japanese Yen</option>
         </select>
       </div>
     </div>
   </div>
 
-  <!-- Financial Inputs -->
+  <!-- ORG SIZE -->
   <div class="section-card">
-    <div class="section-card-title">Financial Foundation</div>
-    <div class="field-grid">
-      <div class="field-wrap">
-        <label class="field-label">Currency</label>
-        <select class="field-input" id="orgCurrency">
-          <option value="INR">₹ Indian Rupee (INR)</option>
-          <option value="USD">$ US Dollar (USD)</option>
-          <option value="GBP">£ British Pound (GBP)</option>
-          <option value="EUR">€ Euro (EUR)</option>
-          <option value="SGD">S$ Singapore Dollar (SGD)</option>
-          <option value="JPY">¥ Japanese Yen (JPY)</option>
-          <option value="AED">AED UAE Dirham (AED)</option>
-        </select>
-      </div>
-      <div class="field-wrap">
-        <label class="field-label">Total Headcount</label>
+    <div class="sc-title">Organisation Size</div>
+    <div class="sc-question">Headcount and compensation</div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Total Headcount</div>
         <input class="field-input" id="orgHeadcount" type="number" placeholder="e.g. 250" min="1"/>
       </div>
-      <div class="field-wrap">
-        <label class="field-label">Total Annual Compensation Base</label>
-        <input class="field-input" id="orgCompBase" type="number" placeholder="e.g. 125000000" min="0"/>
-        <span class="field-note" id="compBaseNote"></span>
+      <div class="field-group">
+        <div class="field-label">Total Annual Comp Base (approx.)</div>
+        <input class="field-input" id="orgTotalComp" type="number" placeholder="e.g. 25000000"/>
       </div>
-      <div class="field-wrap">
-        <label class="field-label">Average Annual Salary (auto-calculated)</label>
-        <div class="auto-field" id="avgSalaryDisplay">Enter headcount and comp base above</div>
-        <span class="field-note">Headcount / Comp base. Updates automatically.</span>
+      <div class="field-group">
+        <div class="field-label">Number of Departments</div>
+        <input class="field-input" id="orgDepts" type="number" placeholder="e.g. 8" min="1"/>
       </div>
+      <div class="field-group">
+        <div class="field-label">Number of Managers</div>
+        <input class="field-input" id="orgManagers" type="number" placeholder="e.g. 32" min="0"/>
+      </div>
+    </div>
+    <div id="compPreview" style="display:none" class="preview-strip">
+      <div class="prev-item"><div class="prev-val" id="prevHeadcount">—</div><div class="prev-key">Headcount</div></div>
+      <div class="prev-item"><div class="prev-val" id="prevComp">—</div><div class="prev-key">Total Comp Base</div></div>
+      <div class="prev-item"><div class="prev-val" id="prevAvgSal">—</div><div class="prev-key">Avg Salary</div></div>
+      <div class="prev-item"><div class="prev-val" id="prevMgrRatio">—</div><div class="prev-key">Mgr Ratio</div></div>
     </div>
   </div>
 
-  <!-- HR Function Inputs -->
+  <!-- TALENT SNAPSHOT -->
   <div class="section-card">
-    <div class="section-card-title">HR Function Benchmarks</div>
-    <div class="field-grid">
-      <div class="field-wrap">
-        <label class="field-label">HR Team Size</label>
-        <input class="field-input" id="orgHRSize" type="number" placeholder="e.g. 8" min="1"/>
-        <span class="field-note">Number of people in the HR function</span>
+    <div class="sc-title">Talent Snapshot (Optional)</div>
+    <div class="sc-question">High-level talent composition</div>
+    <div class="sc-sub">Used to pre-set benchmarks in L2 Talent Premium. Leave blank if unknown.</div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">Stars / High Performers (count)</div>
+        <input class="field-input" id="orgStars" type="number" placeholder="e.g. 18" min="0"/>
       </div>
-      <div class="field-wrap">
-        <label class="field-label">Annual HR Function Cost</label>
-        <input class="field-input" id="orgHRCost" type="number" placeholder="Leave blank to auto-estimate (4% of comp base)"/>
-        <span class="field-note">HR salaries + tools + systems. Blank = 4% of comp base.</span>
+      <div class="field-group">
+        <div class="field-label">Inconsistent Performers (count)</div>
+        <input class="field-input" id="orgAtRisk" type="number" placeholder="e.g. 12" min="0"/>
       </div>
-      <div class="field-wrap">
-        <label class="field-label">Annual Learning &amp; Development Budget</label>
-        <input class="field-input" id="orgLDBudget" type="number" placeholder="Leave blank to auto-estimate"/>
-        <span class="field-note">Training, coaching, certifications. Blank = 1% of comp base.</span>
+      <div class="field-group">
+        <div class="field-label">Recent Hires (last 12 months)</div>
+        <input class="field-input" id="orgRecentHires" type="number" placeholder="e.g. 34" min="0"/>
       </div>
-      <div class="field-wrap">
-        <label class="field-label">Annual Recruitment Spend</label>
-        <input class="field-input" id="orgRecSpend" type="number" placeholder="Leave blank to auto-estimate"/>
-        <span class="field-note">Agency fees, job boards, onboarding. Blank = 2.5% of comp base.</span>
+      <div class="field-group">
+        <div class="field-label">Average Tenure (years)</div>
+        <input class="field-input" id="orgAvgTenure" type="number" step="0.1" placeholder="e.g. 3.4" min="0"/>
       </div>
     </div>
   </div>
 
-  <!-- Cross-tool flow preview -->
-  <div class="flow-section">
-    <div class="flow-title">How your data flows across the five pillars</div>
-    <div class="flow-grid">
-      <div class="flow-pill">
-        <div class="flow-pill-label">L1</div>
-        <div class="flow-pill-name">Value Ledger</div>
+  <!-- HR FUNCTION -->
+  <div class="section-card">
+    <div class="sc-title">HR Function</div>
+    <div class="sc-question">Your HR team context</div>
+    <div class="two-col">
+      <div class="field-group">
+        <div class="field-label">HR Team Size</div>
+        <input class="field-input" id="orgHRSize" type="number" placeholder="e.g. 6" min="0"/>
       </div>
-      <div class="flow-arrow">&#8594;</div>
-      <div class="flow-pill">
-        <div class="flow-pill-label">L2 + L3</div>
-        <div class="flow-pill-name">Talent Premium &amp; Org Vitals</div>
-      </div>
-      <div class="flow-arrow">&#8594;</div>
-      <div class="flow-pill">
-        <div class="flow-pill-label">L4</div>
-        <div class="flow-pill-name">Human P&amp;L</div>
+      <div class="field-group">
+        <div class="field-label">Annual HR Budget (approx.)</div>
+        <input class="field-input" id="orgHRBudget" type="number" placeholder="e.g. 1200000"/>
       </div>
     </div>
-    <div class="flow-grid" style="margin-top:8px">
-      <div></div><div></div><div></div>
-      <div class="flow-arrow" style="transform:rotate(90deg)">&#8594;</div>
-      <div></div>
-    </div>
-    <div class="flow-grid">
-      <div></div><div></div><div></div>
-      <div class="flow-pill" style="border-color:rgba(240,234,228,.3);background:rgba(240,234,228,.08)">
-        <div class="flow-pill-label" style="color:var(--gold)">L5</div>
-        <div class="flow-pill-name">Human Balance Sheet</div>
+    <div class="field-group" style="margin-top:4px">
+      <div class="field-label">Primary HR Priorities (select all that apply)</div>
+      <div class="option-chips" id="orgPriorities">
+        <span class="opt-chip" data-p="retention">Retention</span>
+        <span class="opt-chip" data-p="talent">Talent Quality</span>
+        <span class="opt-chip" data-p="culture">Culture</span>
+        <span class="opt-chip" data-p="board">Board Credibility</span>
+        <span class="opt-chip" data-p="leadership">Leadership Dev</span>
+        <span class="opt-chip" data-p="hiring">Hiring Quality</span>
+        <span class="opt-chip" data-p="dei">DEI</span>
+        <span class="opt-chip" data-p="digital">HR Digital</span>
       </div>
-      <div></div>
     </div>
-    <p class="flow-note">Your org assumptions pre-populate every tool. L1 outputs (total return, The Ratio) feed L4. L4 net profit feeds L5 as Retained Human Earnings. One set of numbers. Five consistent views.</p>
   </div>
 
-  <!-- Status -->
-  <div class="section-card" id="statusCard">
-    <div class="section-card-title">Current Status</div>
-    <div id="statusRows"></div>
+  <!-- GLOBAL HCI -->
+  <div class="section-card">
+    <div class="sc-title">Global HCI Setting</div>
+    <div class="sc-question">Human Confidence Index — your default coefficient across all tools</div>
+    <div class="sc-sub">This sets your starting HCI across all five pillars. You can override it tool-by-tool from within each tool.</div>
+    <div class="hci-factors">
+      <div class="hci-factor" id="hci_f0" onclick="toggleHCI(0)">
+        <div class="hci-factor-top"><div class="hci-factor-name">Leadership Stability</div><div class="hci-factor-toggle"></div></div>
+        <div class="hci-factor-desc">Is leadership stable, present, and actively engaged right now?</div>
+      </div>
+      <div class="hci-factor" id="hci_f1" onclick="toggleHCI(1)">
+        <div class="hci-factor-top"><div class="hci-factor-name">Org Disruption Free</div><div class="hci-factor-toggle"></div></div>
+        <div class="hci-factor-desc">Is the org free from major disruption, restructure, M&A, or layoffs?</div>
+      </div>
+      <div class="hci-factor" id="hci_f2" onclick="toggleHCI(2)">
+        <div class="hci-factor-top"><div class="hci-factor-name">Culture Health</div><div class="hci-factor-toggle"></div></div>
+        <div class="hci-factor-desc">Is the culture broadly functional and not in crisis?</div>
+      </div>
+      <div class="hci-factor" id="hci_f3" onclick="toggleHCI(3)">
+        <div class="hci-factor-top"><div class="hci-factor-name">Execution Momentum</div><div class="hci-factor-toggle"></div></div>
+        <div class="hci-factor-desc">Is the org executing well against its current strategic priorities?</div>
+      </div>
+    </div>
+    <div class="hci-result">
+      <div class="hci-coeff" id="hciCoeff">0.70x</div>
+      <div class="hci-formula" id="hciFormula">0.70 + (0 × 0.15) = 0.70<br>Each YES adds 0.15. Maximum 1.30x.</div>
+    </div>
   </div>
 
-  <div class="btn-row">
-    <button class="btn-save" onclick="saveOrg()">Save My Org</button>
-    <button class="btn-clear" onclick="clearOrg()">Clear All</button>
+  <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
+    <button class="save-btn" style="padding:12px 28px;font-size:.72rem" onclick="saveOrg()">Save Org Settings</button>
+    <a href="home.html" style="font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;border-radius:8px;border:1px solid var(--border);color:var(--text-dim);text-decoration:none;transition:all .15s" onmouseover="this.style.borderColor='rgba(99,102,241,.35)'" onmouseout="this.style.borderColor='rgba(99,102,241,.15)'">Back to Platform &rarr;</a>
   </div>
 </div>
 
 <script>
-var CURRENCIES = {INR:'₹',USD:'$',GBP:'£',EUR:'€',SGD:'S$',JPY:'¥',AED:'AED '};
-var ORG_KEY = 'rf_org_data';
+var hciFactors = [false,false,false,false];
+var orgPriorities = [];
 
-function getOrg(){
-  try{ var r=localStorage.getItem(ORG_KEY); return r?JSON.parse(r):{}; }catch(e){return {};}
-}
-
-function fmt(n){
-  if(!n||isNaN(n)) return '';
-  if(n>=10000000) return (n/10000000).toFixed(1)+'Cr';
-  if(n>=100000)   return (n/100000).toFixed(1)+'L';
-  return Number(n).toLocaleString('en-IN');
-}
-
-function updateAvgSalary(){
-  var hc = parseFloat(document.getElementById('orgHeadcount').value)||0;
-  var cb = parseFloat(document.getElementById('orgCompBase').value)||0;
-  var cur = document.getElementById('orgCurrency').value;
-  var sym = CURRENCIES[cur]||cur+' ';
-  var el = document.getElementById('avgSalaryDisplay');
-  var note = document.getElementById('compBaseNote');
-  if(hc>0&&cb>0){
-    var avg = Math.round(cb/hc);
-    el.textContent = sym+fmt(avg)+' per year';
-    note.textContent = sym+fmt(cb)+' total';
-  } else {
-    el.textContent = 'Enter headcount and comp base above';
-    note.textContent = '';
+// Load saved
+try {
+  var raw = localStorage.getItem('rf_myorg');
+  if (raw) {
+    var d = JSON.parse(raw);
+    var fields = ['orgName','orgIndustry','orgCity','orgCurrency','orgHeadcount','orgTotalComp','orgDepts','orgManagers','orgStars','orgAtRisk','orgRecentHires','orgAvgTenure','orgHRSize','orgHRBudget'];
+    fields.forEach(function(f){
+      var el = document.getElementById(f);
+      if (el && d[f] !== undefined) el.value = d[f];
+    });
+    if (d.hciFactors) {
+      hciFactors = d.hciFactors;
+      hciFactors.forEach(function(v,i){ if(v) document.getElementById('hci_f'+i).classList.add('yes'); });
+    }
+    if (d.priorities) {
+      orgPriorities = d.priorities;
+      orgPriorities.forEach(function(p){
+        var chip = document.querySelector('.opt-chip[data-p="'+p+'"]');
+        if (chip) chip.classList.add('on');
+      });
+    }
+    updateHCI();
+    updatePreview();
+    setSaveStatus(true);
   }
-}
+} catch(e){}
 
-function loadFromProfile(){
-  try{
-    var p = localStorage.getItem('rf_practitioner_profile');
-    if(!p) return;
-    var profile = JSON.parse(p);
-    var org = getOrg();
-    // Only pre-fill if My Org hasn't been saved yet
-    if(Object.keys(org).length > 0) return;
-    // Map orgSize from profile to stage
-    var sizeMap = {'2-20':'Startup','20-100':'Startup','100-250':'Scale-up','250-500':'Mid-Market','500-1000':'Mid-Market','1000-5000':'Enterprise','5000+':'Enterprise'};
-    // Map context from profile to stage
-    var contextMap = {'Startup':'Scale-up','Mid-Market':'Mid-Market','Enterprise':'Enterprise','Public Sector':'Public Sector'};
-    if(profile.orgSize && sizeMap[profile.orgSize]){
-      var stageEl = document.getElementById('orgStage');
-      stageEl.value = sizeMap[profile.orgSize];
-    }
-    if(profile.context && contextMap[profile.context]){
-      // Only override if not already set from orgSize
-      var stageEl = document.getElementById('orgStage');
-      if(!stageEl.value) stageEl.value = contextMap[profile.context];
-    }
-  }catch(e){}
-}
-
-function loadForm(){
-  var org = getOrg();
-  var fields = ['orgName','orgYear','orgSector','orgStage','orgCurrency','orgHeadcount','orgCompBase','orgHRSize','orgHRCost','orgLDBudget','orgRecSpend'];
-  fields.forEach(function(id){
-    var el = document.getElementById(id);
-    if(el && org[id] !== undefined && org[id] !== null && org[id] !== ''){
-      el.value = org[id];
-    }
+// Priority chips
+document.querySelectorAll('.opt-chip').forEach(function(chip){
+  chip.addEventListener('click', function(){
+    var p = this.getAttribute('data-p');
+    var idx = orgPriorities.indexOf(p);
+    if (idx > -1) { orgPriorities.splice(idx,1); this.classList.remove('on'); }
+    else { orgPriorities.push(p); this.classList.add('on'); }
   });
-  updateAvgSalary();
-  renderStatus(org);
-  // If no org saved yet, try to pre-fill from profile
-  if(Object.keys(org).length === 0) loadFromProfile();
+});
+
+// Live preview
+['orgHeadcount','orgTotalComp','orgManagers'].forEach(function(id){
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('input', updatePreview);
+});
+
+function updatePreview(){
+  var hc = parseInt(document.getElementById('orgHeadcount').value)||0;
+  var tc = parseInt(document.getElementById('orgTotalComp').value)||0;
+  var mg = parseInt(document.getElementById('orgManagers').value)||0;
+  var cur = document.getElementById('orgCurrency').value||'';
+  var sym = cur==='INR'?'₹':cur==='GBP'?'£':cur==='EUR'?'€':cur==='SGD'?'S$':cur==='JPY'?'¥':'$';
+  var preview = document.getElementById('compPreview');
+  if (!hc && !tc) { if(preview) preview.style.display='none'; return; }
+  if (preview) preview.style.display='flex';
+  function fmtC(n){var a=Math.abs(n);if(cur==='INR'){if(a>=10000000)return sym+(a/10000000).toFixed(2)+'Cr';if(a>=100000)return sym+(a/100000).toFixed(1)+'L';return sym+Math.round(a/1000)+'K';}if(a>=1000000000)return sym+(a/1000000000).toFixed(2)+'B';if(a>=1000000)return sym+(a/1000000).toFixed(2)+'M';if(a>=1000)return sym+Math.round(a/1000)+'K';return sym+Math.round(a);}
+  document.getElementById('prevHeadcount').textContent = hc ? hc.toLocaleString() : '—';
+  document.getElementById('prevComp').textContent = tc ? fmtC(tc) : '—';
+  document.getElementById('prevAvgSal').textContent = (hc && tc) ? fmtC(Math.round(tc/hc)) : '—';
+  document.getElementById('prevMgrRatio').textContent = (hc && mg) ? '1:'+Math.round(hc/mg) : '—';
 }
 
-function renderStatus(org){
-  var checks = [
-    {key:'orgName',     label:'Organisation name'},
-    {key:'orgCurrency', label:'Currency'},
-    {key:'orgHeadcount',label:'Headcount'},
-    {key:'orgCompBase', label:'Compensation base'},
-    {key:'orgYear',     label:'Financial year'},
-    {key:'orgSector',   label:'Sector'},
-  ];
-  var html = checks.map(function(c){
-    var set = !!(org[c.key] && org[c.key] !== '');
-    return '<div class="status-row"><div class="status-dot '+(set?'set':'unset')+'"></div><span class="status-label">'+c.label+(set?' — set':' — not set yet')+'</span></div>';
-  }).join('');
-  document.getElementById('statusRows').innerHTML = html;
+document.getElementById('orgCurrency').addEventListener('change', updatePreview);
+
+function toggleHCI(i){
+  hciFactors[i] = !hciFactors[i];
+  document.getElementById('hci_f'+i).classList.toggle('yes', hciFactors[i]);
+  updateHCI();
+}
+
+function updateHCI(){
+  var y = hciFactors.filter(Boolean).length;
+  var coeff = Math.round((0.7+y*0.15)*100)/100;
+  document.getElementById('hciCoeff').textContent = coeff.toFixed(2)+'x';
+  document.getElementById('hciFormula').innerHTML = '0.70 + ('+y+' &times; 0.15) = '+coeff.toFixed(2)+'<br>Each YES adds 0.15. Maximum 1.30x.';
+}
+
+function setSaveStatus(saved){
+  var dot = document.getElementById('saveDot');
+  var label = document.getElementById('saveLabel');
+  if (dot) dot.className = 'save-dot'+(saved?' saved':'');
+  if (label) label.textContent = saved ? 'Org settings saved — applied across all five pillars' : 'Unsaved changes';
 }
 
 function saveOrg(){
-  var org = {
-    orgName:     document.getElementById('orgName').value.trim(),
-    orgYear:     document.getElementById('orgYear').value.trim(),
-    orgSector:   document.getElementById('orgSector').value,
-    orgStage:    document.getElementById('orgStage').value,
-    orgCurrency: document.getElementById('orgCurrency').value,
-    orgHeadcount:parseFloat(document.getElementById('orgHeadcount').value)||0,
-    orgCompBase: parseFloat(document.getElementById('orgCompBase').value)||0,
-    orgHRSize:   parseFloat(document.getElementById('orgHRSize').value)||0,
-    orgHRCost:   parseFloat(document.getElementById('orgHRCost').value)||0,
-    orgLDBudget: parseFloat(document.getElementById('orgLDBudget').value)||0,
-    orgRecSpend: parseFloat(document.getElementById('orgRecSpend').value)||0,
-    savedAt:     new Date().toISOString()
-  };
-  // Auto-calculate derived fields
-  org.orgAvgSalary = org.orgHeadcount>0 ? Math.round(org.orgCompBase/org.orgHeadcount) : 0;
-  org.orgHRCostCalc = org.orgHRCost > 0 ? org.orgHRCost : Math.round(org.orgCompBase*0.04);
-  org.orgLDBudgetCalc = org.orgLDBudget > 0 ? org.orgLDBudget : Math.round(org.orgCompBase*0.01);
-  org.orgRecSpendCalc = org.orgRecSpend > 0 ? org.orgRecSpend : Math.round(org.orgCompBase*0.025);
-  org.currencySymbol = CURRENCIES[org.orgCurrency]||org.orgCurrency+' ';
-  try{ localStorage.setItem(ORG_KEY, JSON.stringify(org)); }catch(e){}
-  var banner = document.getElementById('saveBanner');
-  banner.classList.add('show');
-  setTimeout(function(){ banner.classList.remove('show'); }, 3500);
-  renderStatus(org);
+  var fields = ['orgName','orgIndustry','orgCity','orgCurrency','orgHeadcount','orgTotalComp','orgDepts','orgManagers','orgStars','orgAtRisk','orgRecentHires','orgAvgTenure','orgHRSize','orgHRBudget'];
+  var data = {};
+  fields.forEach(function(f){
+    var el = document.getElementById(f);
+    if (el) data[f] = el.value;
+  });
+  data.hciFactors = hciFactors.slice();
+  data.hciGlobal = Math.round((0.7+hciFactors.filter(Boolean).length*0.15)*100)/100;
+  data.priorities = orgPriorities.slice();
+  data.savedAt = new Date().toISOString();
+  try {
+    localStorage.setItem('rf_myorg', JSON.stringify(data));
+    setSaveStatus(true);
+    var label = document.getElementById('saveLabel');
+    if (label) { label.textContent = 'Saved. Settings applied across all five pillars.'; label.style.color='#6366f1'; setTimeout(function(){label.style.color='';setSaveStatus(true);},2000); }
+  } catch(e) { alert('Could not save. localStorage may be disabled.'); }
 }
 
 function clearOrg(){
-  if(!confirm('Clear all My Org data? This will not affect your Practitioner Profile.')) return;
-  try{ localStorage.removeItem(ORG_KEY); }catch(e){}
-  var fields = ['orgName','orgYear','orgHeadcount','orgCompBase','orgHRSize','orgHRCost','orgLDBudget','orgRecSpend'];
-  fields.forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
-  document.getElementById('orgSector').value='';
-  document.getElementById('orgStage').value='';
-  document.getElementById('orgCurrency').value='INR';
-  document.getElementById('avgSalaryDisplay').textContent='Enter headcount and comp base above';
-  document.getElementById('compBaseNote').textContent='';
-  renderStatus({});
+  if (!confirm('Clear all org settings?')) return;
+  try { localStorage.removeItem('rf_myorg'); } catch(e){}
+  ['orgName','orgIndustry','orgCity','orgCurrency','orgHeadcount','orgTotalComp','orgDepts','orgManagers','orgStars','orgAtRisk','orgRecentHires','orgAvgTenure','orgHRSize','orgHRBudget'].forEach(function(f){
+    var el = document.getElementById(f); if(el) el.value='';
+  });
+  hciFactors = [false,false,false,false];
+  document.querySelectorAll('.hci-factor.yes').forEach(function(f){f.classList.remove('yes');});
+  orgPriorities = [];
+  document.querySelectorAll('.opt-chip.on').forEach(function(c){c.classList.remove('on');});
+  updateHCI();
+  var preview = document.getElementById('compPreview');
+  if (preview) preview.style.display='none';
+  setSaveStatus(false);
 }
 
-// Live update avg salary
-document.getElementById('orgHeadcount').addEventListener('input', updateAvgSalary);
-document.getElementById('orgCompBase').addEventListener('input', updateAvgSalary);
-document.getElementById('orgCurrency').addEventListener('change', updateAvgSalary);
-
 // Sidebar resize
-var sb=document.getElementById('mainSidebar'),handle=document.getElementById('sbResize'),drag=false,sx=0,sw=0;
-handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
-window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelector('.main').style.marginLeft=w+'px';});
-window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
-
-loadForm();
+(function(){
+  var sb=document.getElementById('mainSidebar'),handle=document.getElementById('sbResize'),drag=false,sx=0,sw=0;
+  if(!handle)return;
+  handle.addEventListener('mousedown',function(e){drag=true;sx=e.clientX;sw=sb.offsetWidth;document.body.style.userSelect='none';});
+  window.addEventListener('mousemove',function(e){if(!drag)return;var w=Math.min(320,Math.max(160,sw+(e.clientX-sx)));sb.style.width=w+'px';document.querySelectorAll('.wrap').forEach(function(el){el.style.marginLeft=w+'px';});});
+  window.addEventListener('mouseup',function(){if(drag){drag=false;document.body.style.userSelect='';}});
+})();
 </script>
-<script src="rf-profile.js"></script>
-<script>
-// Gate My Org for free users
-document.addEventListener('DOMContentLoaded', function(){
-  if(window.RFProfile){
-    if(typeof RFProfile.gateMyOrgPage === 'function') RFProfile.gateMyOrgPage();
-    if(typeof RFProfile.injectSidebarBadge === 'function') RFProfile.injectSidebarBadge();
-  }
-});
-</script>
+<script>if(window.RFProfile)RFProfile.injectSidebarBadge();</script>
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
@@ -443,5 +460,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 <script src="rf-onboarding.js"></script>
-</body>
-</html>
+</body></html>
