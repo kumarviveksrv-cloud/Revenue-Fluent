@@ -49,13 +49,13 @@ var RFOrg = (function(){
         : s+Number(org.orgCompBase).toLocaleString('en-IN');
     var strip = document.createElement('div');
     strip.id = 'orgStrip';
-    strip.style.cssText = 'background:rgba(192,64,154,.07);border:1px solid rgba(192,64,154,.2);border-radius:8px;padding:9px 16px;margin-bottom:18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;';
-    strip.innerHTML = '<span style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:#C0409A">My Org</span>'
+    strip.style.cssText = 'background:rgba(99,102,241,.07);border:1px solid rgba(99,102,241,.2);border-radius:8px;padding:9px 16px;margin-bottom:18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;';
+    strip.innerHTML = '<span style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:#6366f1">My Org</span>'
       +'<span style="font-size:.8rem;color:#E8E6E0;font-weight:600">'+org.orgName+'</span>'
       +(org.orgHeadcount?'<span style="font-size:.75rem;color:#B8C8E8">'+org.orgHeadcount+' people</span>':'')
       +(org.orgCompBase?'<span style="font-size:.75rem;color:#B8C8E8">'+compFmt+' comp base</span>':'')
       +(org.orgYear?'<span style="font-size:.75rem;color:#9AB8D8">'+org.orgYear+'</span>':'')
-      +'<a href="myorg.html" style="margin-left:auto;font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;color:#C0409A;text-decoration:none;opacity:.7">Edit &#8599;</a>';
+      +'<a href="myorg.html" style="margin-left:auto;font-family:var(--mono,\'DM Mono\',monospace);font-size:.55rem;color:#6366f1;text-decoration:none;opacity:.7">Edit &#8599;</a>';
     container.insertBefore(strip, container.firstChild);
   }
 
@@ -106,7 +106,7 @@ var RFOrg = (function(){
   // Render a "data source" badge showing where values came from
   function sourceBadge(source){
     var labels = {org:'My Org', l1:'L1 Value Ledger', l4:'L4 Human P&L', scenario:'Scenario Data'};
-    var colors = {org:'#C0409A', l1:'#3A7ADB', l4:'#F0EAE4', scenario:'#C4714A'};
+    var colors = {org:'#6366f1', l1:'#3A7ADB', l4:'#f4f3ff', scenario:'#6366f1'};
     var label = labels[source] || source;
     var color = colors[source] || '#9AB8D8';
     return '<span style="font-family:var(--mono,\'DM Mono\',monospace);font-size:.52rem;color:'+color+';border:1px solid '+color+'44;border-radius:4px;padding:1px 6px;margin-left:6px">'+label+'</span>';
