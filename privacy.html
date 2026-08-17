@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <link rel="manifest" href="manifest.json"/>
-<meta name="theme-color" content="#C0409A"/>
+<meta name="theme-color" content="#050410"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -15,37 +15,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0A0608;--bg2:#100810;
-  --magenta:#C0409A;--magenta-mid:#D060B0;
-  --gold:#F0EAE4;--copper:#C4714A;
-  --teal:#C4714A;--red:#E05C3A;
-  --text:#EED8E8;--text-mid:#D8B8D0;--text-dim:#C8A8C0;
-  --border:rgba(192,64,154,.18);--border-lt:rgba(192,64,154,.08);
+  --bg:#050410;--bg2:#0d0b1e;
+  --magenta:#6366f1;--magenta-mid:#a5b4fc;
+  --gold:#c4b5fd;--copper:#6366f1;
+  --teal:#6366f1;--red:#E05C3A;
+  --text:#f4f3ff;--text-mid:rgba(244,243,255,0.45);--text-dim:rgba(244,243,255,0.25);
+  --border:rgba(99,102,241,.18);--border-lt:rgba(99,102,241,.08);
   --font:'Sora',sans-serif;--mono:'DM Mono',monospace;
   --sidebar:220px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--font)}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(160,20,120,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(160,20,120,.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(99,102,241,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
 
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(10,6,8,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,64,154,.3) transparent}
-.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(192,64,154,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(192,64,154,.6)}
-.sb-brand{display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18)}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:rgba(5,4,16,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;padding:0 0 20px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(99,102,241,.3) transparent}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(99,102,241,.3);border-radius:3px}.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(99,102,241,.6)}
+.sb-brand{display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(99,102,241,.18)}
 .sb-brand img{width:100%;height:auto;max-width:176px;object-fit:contain;mix-blend-mode:lighten;filter:brightness(0.95)}
-.sb-section{padding:4px 12px 4px;margin-top:10px;border-top:1px solid rgba(192,64,154,.1);font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.sb-section{padding:4px 12px 4px;margin-top:10px;border-top:1px solid rgba(99,102,241,.1);font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
 .sb-item{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-item:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
-.sb-item.active{background:rgba(192,64,154,.12);color:var(--magenta-mid);border-color:rgba(192,64,154,.25)}
+.sb-item:hover{background:rgba(99,102,241,.08);color:var(--text);border-color:var(--border)}
+.sb-item.active{background:rgba(99,102,241,.12);color:var(--magenta-mid);border-color:rgba(99,102,241,.25)}
 .sb-tools-section{padding:10px 12px 5px;font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
 .sb-tool{display:flex;align-items:center;gap:9px;padding:8px 14px;margin:1px 7px;border-radius:7px;text-decoration:none;color:var(--text-mid);font-size:.8rem;transition:all .15s;border:1px solid transparent}
-.sb-tool:hover{background:rgba(192,64,154,.08);color:var(--text);border-color:var(--border)}
-.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(192,64,154,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
-.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(192,64,154,.2);color:#D878BC;padding:2px 5px;border-radius:3px}
+.sb-tool:hover{background:rgba(99,102,241,.08);color:var(--text);border-color:var(--border)}
+.sb-tool-num{font-family:var(--mono);font-size:.52rem;background:rgba(99,102,241,.12);color:var(--magenta-mid);width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.sb-badge{margin-left:auto;font-family:var(--mono);font-size:.5rem;background:rgba(99,102,241,.2);color:#c4b5fd;padding:2px 5px;border-radius:3px}
 .sb-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
 .sb-by{padding:10px 18px;font-family:var(--mono);font-size:.68rem;color:var(--text-mid)}
 .sb-by b{color:var(--gold);font-weight:600}
 .sidebar-resize{position:absolute;top:0;right:0;bottom:0;width:5px;cursor:col-resize;background:transparent;transition:background .15s}
-.sidebar-resize:hover{background:rgba(192,64,154,.4)}
+.sidebar-resize:hover{background:rgba(99,102,241,.4)}
 
 .wrap{margin-left:var(--sidebar);padding:48px 64px 80px;max-width:900px;position:relative;z-index:1}
 @media(max-width:760px){.sidebar{display:none}.wrap{margin-left:0;padding:32px 24px}}
@@ -61,14 +61,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .doc-body p{font-size:.88rem;color:var(--text-mid);line-height:1.8;margin-bottom:14px}
 .doc-body ul{list-style:none;margin-bottom:14px;padding-left:0}
 .doc-body ul li{font-size:.88rem;color:var(--text-mid);line-height:1.8;padding:4px 0 4px 20px;position:relative}
-.doc-body ul li::before{content:',';position:absolute;left:0;color:rgba(192,64,154,.4)}
+.doc-body ul li::before{content:',';position:absolute;left:0;color:rgba(99,102,241,.4)}
 .doc-body strong{color:var(--text);font-weight:600}
 .doc-body a{color:var(--magenta-mid);text-decoration:none}
 .doc-body a:hover{text-decoration:underline}
 
-.highlight-box{background:rgba(196,113,74,.06);border:1px solid rgba(196,113,74,.2);border-radius:12px;padding:18px 22px;margin:20px 0}
+.highlight-box{background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:18px 22px;margin:20px 0}
 .highlight-box p{color:var(--text);margin-bottom:0;font-weight:500}
-.highlight-box.warning{background:rgba(212,147,106,.06);border-color:rgba(212,147,106,.2)}
+.highlight-box.warning{background:rgba(99,102,241,.06);border-color:rgba(99,102,241,.2)}
 .highlight-box.warning p{color:var(--amber)}
 
 .toc{background:var(--bg2);border:1px solid var(--border-lt);border-radius:12px;padding:20px 24px;margin-bottom:32px}
@@ -80,7 +80,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <body>
 
 <aside class="sidebar" id="mainSidebar">
-  <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(192,64,154,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:176px;object-fit:contain;mix-blend-mode:lighten;filter:brightness(0.95)"/></a>
+  <a href="index.html" class="sb-brand" style="display:flex;align-items:center;justify-content:center;padding:16px 14px;min-height:80px;text-decoration:none;flex-shrink:0;border-bottom:1px solid rgba(99,102,241,.18);"><img src="logo.png" alt="Revenue Fluent" style="width:100%;height:auto;max-width:176px;object-fit:contain;mix-blend-mode:lighten;filter:brightness(0.95)"/></a>
   <div class="sb-section">Platform</div>
   <a href="home.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>Home</a>
   <a href="scenario-library.html" class="sb-item"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>Scenario Library</a>
@@ -107,7 +107,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </aside>
 
 <div class="wrap">
-  <div class="crumb"><a href="home.html">&larr; Home</a><span style="color:rgba(192,64,154,.3)">/</span>Privacy Policy</div>
+  <div class="crumb"><a href="home.html">&larr; Home</a><span style="color:rgba(99,102,241,.3)">/</span>Privacy Policy</div>
 
   <div class="doc-eyebrow">Legal</div>
   <h1 class="doc-title">Privacy Policy</h1>
@@ -198,7 +198,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <li><strong>Lawful purpose:</strong> Profile preferences stored in localStorage are used solely to personalise your experience on the Platform</li>
       <li><strong>Data minimisation:</strong> We store only what is necessary for the stated purpose. We store no personal data whatsoever on our infrastructure</li>
       <li><strong>Consent:</strong> Before uploading employee data, users must provide explicit consent acknowledging their responsibility for the data</li>
-      <li><strong>Right to erasure:</strong> You can delete all locally stored preferences at any time via My Profile → Clear Profile, or by clearing browser localStorage</li>
+      <li><strong>Right to erasure:</strong> You can delete all locally stored preferences at any time via My Profile &rarr; Clear Profile, or by clearing browser localStorage</li>
       <li><strong>No cross-border transfer:</strong> Since no data is transmitted to any server, cross-border transfer does not apply</li>
     </ul>
     <p>If you are uploading personal data of Indian citizens as part of your CSV upload, you, as the data fiduciary, are responsible for compliance with the DPDP Act in respect of that data.</p>
@@ -211,7 +211,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <p>Regardless of jurisdiction, you have the following rights in respect of data stored locally on your device:</p>
     <ul>
       <li><strong>Right to access:</strong> Your profile preferences are visible in My Profile at any time</li>
-      <li><strong>Right to erasure:</strong> Delete all preferences via My Profile → Clear Profile</li>
+      <li><strong>Right to erasure:</strong> Delete all preferences via My Profile &rarr; Clear Profile</li>
       <li><strong>Right to data portability:</strong> Your preferences are stored in standard JSON format in your browser's localStorage</li>
       <li><strong>Right to withdraw consent:</strong> Close the browser tab to permanently delete any uploaded session data</li>
     </ul>
