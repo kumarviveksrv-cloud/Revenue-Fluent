@@ -1,7 +1,7 @@
 // Revenue Fluent — Service Worker
 // Version: 2026-08-17
 // Enables offline access and PWA install
-const CACHE_NAME = 'revenue-fluent-v17';
+const CACHE_NAME = 'revenue-fluent-v18';
 const CORE_FILES = [
   '/',
   '/index.html',
