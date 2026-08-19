@@ -614,7 +614,7 @@ const RF = {
     let html = `
       <div class="sidebar">
         <a href="landing.html" class="sb-brand">
-          <div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>
+          <img src="favicon.png" width="28" height="28" style="border-radius:7px;flex-shrink:0" alt="RF"/><div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>
         </a>
         <div style="flex:1;overflow-y:auto;padding:0.5rem 0">`;
 
@@ -774,7 +774,7 @@ const RF = {
         var isSidebar = brand.classList.contains('sb-brand');
         brand.removeAttribute('style');
         if (isSidebar) {
-          brand.innerHTML = '<div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>';
+          brand.innerHTML = '<img src="favicon.png" width="28" height="28" style="border-radius:7px;flex-shrink:0" alt="RF"/><div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>';
         } else {
           brand.innerHTML = '<div class="tb-wordmark"><span class="tb-virorah">VIRORAH</span><div class="tb-product">Revenue <em>Fluent</em></div></div>';
         }
