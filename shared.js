@@ -133,6 +133,10 @@ const RF = {
       line-height: 1.1;
     }
     .sb-product em { font-weight: 300; font-style: italic; color: var(--accent2); }
+    .tb-wordmark { display: flex; flex-direction: column; gap: 4px; }
+    .tb-virorah { font-family: var(--font-mono); font-size: 0.46rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(165,180,252,0.42); }
+    .tb-product { font-family: var(--font-head); font-size: 1rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; line-height: 1.1; }
+    .tb-product em { font-weight: 300; font-style: italic; color: var(--accent2); }
 
     .sb-section {
       font-family: var(--font-mono); font-size: 0.55rem;
@@ -762,11 +766,19 @@ const RF = {
 // Auto-replace logo.png with clean wordmark on all pages
 (function() {
   function fixLogo() {
-    document.querySelectorAll('.sb-brand img').forEach(function(img) {
-      var brand = img.closest('.sb-brand');
-      if (!brand) return;
-      brand.removeAttribute('style');
-      brand.innerHTML = '<div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent<\/em><\/div><\/div>';
+    // Fix sidebar logos (.sb-brand) and topbar logos (.tb-brand)
+    ['.sb-brand img', '.tb-brand img'].forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(img) {
+        var brand = img.closest('.sb-brand, .tb-brand');
+        if (!brand) return;
+        var isSidebar = brand.classList.contains('sb-brand');
+        brand.removeAttribute('style');
+        if (isSidebar) {
+          brand.innerHTML = '<div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>';
+        } else {
+          brand.innerHTML = '<div class="tb-wordmark"><span class="tb-virorah">VIRORAH</span><div class="tb-product">Revenue <em>Fluent</em></div></div>';
+        }
+      });
     });
   }
   if (document.readyState === 'loading') {
