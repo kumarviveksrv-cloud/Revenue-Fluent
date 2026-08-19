@@ -114,21 +114,22 @@ const RF = {
     .sidebar::-webkit-scrollbar { width: 0; }
 
     .sb-brand {
-      display: flex; align-items: center; gap: 10px;
-      padding: 1.1rem 1.25rem;
+      display: flex; align-items: center; gap: 12px;
+      padding: 1.3rem 1.25rem;
       border-bottom: 1px solid var(--border);
       text-decoration: none;
+      min-height: 80px;
     }
     .sb-wordmark {
       display: flex; flex-direction: column; gap: 3px;
     }
     .sb-virorah {
-      font-family: var(--font-mono); font-size: 0.46rem;
-      letter-spacing: 0.35em; text-transform: uppercase;
-      color: rgba(165,180,252,0.42);
+      font-family: var(--font-mono); font-size: 0.54rem;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: rgba(165,180,252,0.5);
     }
     .sb-product {
-      font-family: var(--font-head); font-size: 0.88rem;
+      font-family: var(--font-head); font-size: 1.02rem;
       font-weight: 800; color: var(--text); letter-spacing: -0.02em;
       line-height: 1.1;
     }
@@ -614,7 +615,7 @@ const RF = {
     let html = `
       <div class="sidebar">
         <a href="landing.html" class="sb-brand">
-          <img src="favicon.png" width="28" height="28" style="border-radius:7px;flex-shrink:0" alt="RF"/><div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>
+          <img src="favicon.png" width="40" height="40" style="border-radius:9px;flex-shrink:0;display:block" alt="RF"/><div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>
         </a>
         <div style="flex:1;overflow-y:auto;padding:0.5rem 0">`;
 
@@ -763,27 +764,29 @@ const RF = {
 
 };
 
-// Auto-replace logo.png with clean wordmark on all pages
+// ── BRAND INJECTOR — single source of truth for all pages ──────────────
+// Change brand here once. Every page using shared.js updates automatically.
 (function() {
-  function fixLogo() {
-    // Fix sidebar logos (.sb-brand) and topbar logos (.tb-brand)
-    ['.sb-brand img', '.tb-brand img'].forEach(function(sel) {
-      document.querySelectorAll(sel).forEach(function(img) {
-        var brand = img.closest('.sb-brand, .tb-brand');
-        if (!brand) return;
-        var isSidebar = brand.classList.contains('sb-brand');
-        brand.removeAttribute('style');
-        if (isSidebar) {
-          brand.innerHTML = '<img src="favicon.png" width="28" height="28" style="border-radius:7px;flex-shrink:0" alt="RF"/><div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>';
-        } else {
-          brand.innerHTML = '<div class="tb-wordmark"><span class="tb-virorah">VIRORAH</span><div class="tb-product">Revenue <em>Fluent</em></div></div>';
-        }
-      });
+  var BRAND_ICON_SIZE = 40;
+  var BRAND_ICON_RADIUS = 9;
+
+  function injectBrand() {
+    // Sidebar brand (.sb-brand) — all platform pages
+    document.querySelectorAll('.sb-brand').forEach(function(el) {
+      el.style.cssText = '';
+      el.innerHTML =
+        '<img src="favicon.png" width="' + BRAND_ICON_SIZE + '" height="' + BRAND_ICON_SIZE + '" ' +
+        'style="border-radius:' + BRAND_ICON_RADIUS + 'px;flex-shrink:0;display:block" alt="RF"/>' +
+        '<div class="sb-wordmark">' +
+          '<span class="sb-virorah">VIRORAH</span>' +
+          '<div class="sb-product">Revenue <em>Fluent</em></div>' +
+        '</div>';
     });
   }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fixLogo);
+    document.addEventListener('DOMContentLoaded', injectBrand);
   } else {
-    fixLogo();
+    injectBrand();
   }
 })();
