@@ -119,23 +119,20 @@ const RF = {
       border-bottom: 1px solid var(--border);
       text-decoration: none;
     }
-    .sb-logo {
-      width: 28px; height: 28px; border-radius: 7px;
-      background: var(--accent-dim); border: 1px solid var(--border-accent);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+    .sb-wordmark {
+      display: flex; flex-direction: column; gap: 3px;
     }
-    .sb-logo-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent2);
-      animation: logoPulse 2.5s ease-in-out infinite;
+    .sb-virorah {
+      font-family: var(--font-mono); font-size: 0.46rem;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: rgba(165,180,252,0.42);
     }
-    @keyframes logoPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
-    .sb-brand-text {
-      font-family: var(--font-head); font-weight: 800;
-      font-size: 0.9rem; color: var(--text); letter-spacing: -0.02em;
+    .sb-product {
+      font-family: var(--font-head); font-size: 0.88rem;
+      font-weight: 800; color: var(--text); letter-spacing: -0.02em;
+      line-height: 1.1;
     }
-    .sb-brand-text em { font-weight: 300; font-style: italic; color: var(--accent2); }
+    .sb-product em { font-weight: 300; font-style: italic; color: var(--accent2); }
 
     .sb-section {
       font-family: var(--font-mono); font-size: 0.55rem;
@@ -613,8 +610,7 @@ const RF = {
     let html = `
       <div class="sidebar">
         <a href="landing.html" class="sb-brand">
-          <div class="sb-logo"><div class="sb-logo-dot"></div></div>
-          <div class="sb-brand-text">Revenue<em>Fluent</em></div>
+          <div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent</em></div></div>
         </a>
         <div style="flex:1;overflow-y:auto;padding:0.5rem 0">`;
 
@@ -762,3 +758,20 @@ const RF = {
   },
 
 };
+
+// Auto-replace logo.png with clean wordmark on all pages
+(function() {
+  function fixLogo() {
+    document.querySelectorAll('.sb-brand img').forEach(function(img) {
+      var brand = img.closest('.sb-brand');
+      if (!brand) return;
+      brand.removeAttribute('style');
+      brand.innerHTML = '<div class="sb-wordmark"><span class="sb-virorah">VIRORAH</span><div class="sb-product">Revenue <em>Fluent<\/em><\/div><\/div>';
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixLogo);
+  } else {
+    fixLogo();
+  }
+})();
