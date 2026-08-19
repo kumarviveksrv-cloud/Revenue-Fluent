@@ -764,26 +764,20 @@ const RF = {
 
 };
 
-// ── BRAND INJECTOR — single source of truth for all pages ──────────────
-// Change brand here once. Every page using shared.js updates automatically.
+// ── BRAND INJECTOR — single source of truth ─────────────────────────────
 (function() {
-  var BRAND_ICON_SIZE = 40;
-  var BRAND_ICON_RADIUS = 9;
-
   function injectBrand() {
-    // Sidebar brand (.sb-brand) — all platform pages
     document.querySelectorAll('.sb-brand').forEach(function(el) {
-      el.style.cssText = '';
+      el.style.cssText = 'display:flex;align-items:center;gap:14px;padding:20px 18px;border-bottom:1px solid rgba(99,102,241,0.15);text-decoration:none;min-height:84px;box-sizing:border-box';
       el.innerHTML =
-        '<img src="favicon.png" width="' + BRAND_ICON_SIZE + '" height="' + BRAND_ICON_SIZE + '" ' +
-        'style="border-radius:' + BRAND_ICON_RADIUS + 'px;flex-shrink:0;display:block" alt="RF"/>' +
-        '<div class="sb-wordmark">' +
-          '<span class="sb-virorah">VIRORAH</span>' +
-          '<div class="sb-product">Revenue <em>Fluent</em></div>' +
+        '<img src="favicon.png" width="44" height="44" ' +
+        'style="border-radius:10px;flex-shrink:0;display:block;min-width:44px" alt="RF"/>' +
+        '<div style="display:flex;flex-direction:column;gap:3px">' +
+          '<span style="font-family:var(--font-mono,monospace);font-size:0.54rem;letter-spacing:0.32em;text-transform:uppercase;color:rgba(165,180,252,0.5);line-height:1">VIRORAH</span>' +
+          '<div style="font-family:var(--font-head,sans-serif);font-size:1.05rem;font-weight:800;color:#f4f3ff;letter-spacing:-0.02em;line-height:1.1">Revenue <em style="font-weight:300;font-style:italic;color:#c4b5fd">Fluent</em></div>' +
         '</div>';
     });
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', injectBrand);
   } else {
